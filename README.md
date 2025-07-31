@@ -1,1 +1,1 @@
-# SQL-Exchnage
+# SQL-Exchange
