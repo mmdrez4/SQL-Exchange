@@ -1,0 +1,469 @@
+## Example
+
+# Source schema
+{
+    "db_id": "address",
+    "schema": "PRAGMA foreign_keys=OFF;\nBEGIN TRANSACTION;\nCREATE TABLE CBSA\n(\n    CBSA      INTEGER\n            primary key,\n    CBSA_name TEXT,\n    CBSA_type TEXT\n);\nCREATE TABLE state\n(\n    abbreviation TEXT\n            primary key,\n    name         TEXT\n);\nCREATE TABLE congress\n(\n    cognress_rep_id TEXT\n            primary key,\n    first_name      TEXT,\n    last_name       TEXT,\n    CID             TEXT,\n    party           TEXT,\n    state           TEXT,\n    abbreviation    TEXT,\n    House           TEXT,\n    District        INTEGER,\n    land_area       REAL,\n    foreign key (abbreviation) references state(abbreviation)\n);\nCREATE TABLE zip_data\n(\n    zip_code                         INTEGER\n            primary key,\n    city                             TEXT,\n    state                            TEXT,\n    multi_county                     TEXT,\n    type                             TEXT,\n    organization                     TEXT,\n    time_zone                        TEXT,\n    daylight_savings                 TEXT,\n    latitude                         REAL,\n    longitude                        REAL,\n    elevation                        INTEGER,\n    state_fips                       INTEGER,\n    county_fips                      INTEGER,\n    region                           TEXT,\n    division                         TEXT,\n    population_2020                  INTEGER,\n    population_2010                  INTEGER,\n    households                       INTEGER,\n    avg_house_value                  INTEGER,\n    avg_income_per_household         INTEGER,\n    persons_per_household            REAL,\n    white_population                 INTEGER,\n    black_population                 INTEGER,\n    hispanic_population              INTEGER,\n    asian_population                 INTEGER,\n    american_indian_population       INTEGER,\n    hawaiian_population              INTEGER,\n    other_population                 INTEGER,\n    male_population                  INTEGER,\n    female_population                INTEGER,\n    median_age                       REAL,\n    male_median_age                  REAL,\n    female_median_age                REAL,\n    residential_mailboxes            INTEGER,\n    business_mailboxes               INTEGER,\n    total_delivery_receptacles       INTEGER,\n    businesses                       INTEGER,\n    \"1st_quarter_payroll\"            INTEGER,\n    annual_payroll                   INTEGER,\n    employees                        INTEGER,\n    water_area                       REAL,\n    land_area                        REAL,\n    single_family_delivery_units     INTEGER,\n    multi_family_delivery_units      INTEGER,\n    total_beneficiaries              INTEGER,\n    retired_workers                  INTEGER,\n    disabled_workers                 INTEGER,\n    parents_and_widowed              INTEGER,\n    spouses                          INTEGER,\n    children                         INTEGER,\n    over_65                          INTEGER,\n    monthly_benefits_all             INTEGER,\n    monthly_benefits_retired_workers INTEGER,\n    monthly_benefits_widowed         INTEGER,\n    CBSA                             INTEGER,\n    foreign key (state) references state(abbreviation),\n    foreign key (CBSA) references CBSA(CBSA)\n);\nCREATE TABLE alias\n(\n    zip_code INTEGER\n            primary key,\n    alias    TEXT,\n    foreign key (zip_code) references zip_data(zip_code)\n);\nCREATE TABLE area_code\n(\n    zip_code  INTEGER,\n    area_code INTEGER,\n    primary key (zip_code, area_code),\n    foreign key (zip_code) references zip_data(zip_code)\n);\nCREATE TABLE avoid\n(\n    zip_code  INTEGER,\n    bad_alias TEXT,\n    primary key (zip_code, bad_alias),\n    foreign key (zip_code) references zip_data(zip_code)\n);\nCREATE TABLE country\n(\n    zip_code INTEGER,\n    county   TEXT,\n    state    TEXT,\n    primary key (zip_code, county),\n    foreign key (zip_code) references zip_data(zip_code),\n    foreign key (state) references state(abbreviation)\n);\nCREATE TABLE zip_congress\n(\n    zip_code INTEGER,\n    district TEXT,\n    primary key (zip_code, district),\n    foreign key (district) references congress(cognress_rep_id),\n    foreign key (zip_code) references zip_data(zip_code)\n);\nCOMMIT;\n"
+}
+
+# Target schema
+{
+    "db_id": "card_games_2"
+    "schema": "CREATE TABLE \"cards\"\n(\n    id                      INTEGER           not null\n        primary key autoincrement,\n    artist                  TEXT,\n    asciiName               TEXT,\n    availability            TEXT,\n    borderColor             TEXT,\n    cardKingdomFoilId       TEXT,\n    cardKingdomId           TEXT,\n    colorIdentity           TEXT,\n    colorIndicator          TEXT,\n    colors                  TEXT,\n    convertedManaCost       REAL,\n    duelDeck                TEXT,\n    edhrecRank              INTEGER,\n    faceConvertedManaCost   REAL,\n    faceName                TEXT,\n    flavorName              TEXT,\n    flavorText              TEXT,\n    frameEffects            TEXT,\n    frameVersion            TEXT,\n    hand                    TEXT,\n    hasAlternativeDeckLimit INTEGER default 0 not null,\n    hasContentWarning       INTEGER default 0 not null,\n    hasFoil                 INTEGER default 0 not null,\n    hasNonFoil              INTEGER default 0 not null,\n    isAlternative           INTEGER default 0 not null,\n    isFullArt               INTEGER default 0 not null,\n    isOnlineOnly            INTEGER default 0 not null,\n    isOversized             INTEGER default 0 not null,\n    isPromo                 INTEGER default 0 not null,\n    isReprint               INTEGER default 0 not null,\n    isReserved              INTEGER default 0 not null,\n    isStarter               INTEGER default 0 not null,\n    isStorySpotlight        INTEGER default 0 not null,\n    isTextless              INTEGER default 0 not null,\n    isTimeshifted           INTEGER default 0 not null,\n    keywords                TEXT,\n    layout                  TEXT,\n    leadershipSkills        TEXT,\n    life                    TEXT,\n    loyalty                 TEXT,\n    manaCost                TEXT,\n    mcmId                   TEXT,\n    mcmMetaId               TEXT,\n    mtgArenaId              TEXT,\n    mtgjsonV4Id             TEXT,\n    mtgoFoilId              TEXT,\n    mtgoId                  TEXT,\n    multiverseId            TEXT,\n    name                    TEXT,\n    number                  TEXT,\n    originalReleaseDate     TEXT,\n    originalText            TEXT,\n    originalType            TEXT,\n    otherFaceIds            TEXT,\n    power                   TEXT,\n    printings               TEXT,\n    promoTypes              TEXT,\n    purchaseUrls            TEXT,\n    rarity                  TEXT,\n    scryfallId              TEXT,\n    scryfallIllustrationId  TEXT,\n    scryfallOracleId        TEXT,\n    setCode                 TEXT,\n    side                    TEXT,\n    subtypes                TEXT,\n    supertypes              TEXT,\n    tcgplayerProductId      TEXT,\n    text                    TEXT,\n    toughness               TEXT,\n    type                    TEXT,\n    types                   TEXT,\n    uuid                    TEXT              not null\n        unique,\n    variations              TEXT,\n    watermark               TEXT\n);\nCREATE TABLE \"foreign_data\"\n(\n    id           INTEGER not null\n        primary key autoincrement,\n    flavorText   TEXT,\n    language     TEXT,\n    multiverseid INTEGER,\n    name         TEXT,\n    text         TEXT,\n    type         TEXT,\n    uuid         TEXT\n        references cards (uuid)\n);\nCREATE TABLE \"legalities\"\n(\n    id     INTEGER not null\n        primary key autoincrement,\n    format TEXT,\n    status TEXT,\n    uuid   TEXT\n        references cards (uuid)\n            on update cascade on delete cascade\n);\nCREATE TABLE \"rulings\"\n(\n    id   INTEGER not null\n        primary key autoincrement,\n    date DATE,\n    text,\n    uuid TEXT\n        references cards (uuid)\n            on update cascade on delete cascade\n);\nCREATE TABLE rulings_dg_tmp\n(\n    id   INTEGER not null\n        primary key autoincrement,\n    date DATE,\n    text TEXT,\n    uuid TEXT\n        references cards (uuid)\n            on update cascade on delete cascade\n);\nCREATE TABLE \"set_translations\"\n(\n    id          INTEGER not null\n        primary key autoincrement,\n    language    TEXT,\n    setCode     TEXT\n        references sets (code)\n            on update cascade on delete cascade,\n    translation TEXT\n);\nCREATE TABLE \"sets\"\n(\n    id               INTEGER           not null\n        primary key autoincrement,\n    baseSetSize      INTEGER,\n    block            TEXT,\n    booster          TEXT,\n    code             TEXT              not null\n        unique,\n    isFoilOnly       INTEGER default 0 not null,\n    isForeignOnly    INTEGER default 0 not null,\n    isNonFoilOnly    INTEGER default 0 not null,\n    isOnlineOnly     INTEGER default 0 not null,\n    isPartialPreview INTEGER default 0 not null,\n    keyruneCode      TEXT,\n    mcmId            INTEGER,\n    mcmIdExtras      INTEGER,\n    mcmName          TEXT,\n    mtgoCode         TEXT,\n    name             TEXT,\n    parentCode       TEXT,\n    releaseDate      DATE,\n    tcgplayerGroupId INTEGER,\n    totalSetSize     INTEGER,\n    type             TEXT\n);\n"
+}
+
+# Target sample data
+{
+    "sqlite_sequence": [
+        [
+            "rulings",
+            87769
+        ],
+        [
+            "rulings_dg_tmp",
+            87769
+        ],
+        [
+            "legalities",
+            427907
+        ]
+    ],
+    "cards": [
+        [
+            44061,
+            "Greg Staples",
+            null,
+            "paper",
+            "white",
+            null,
+            null,
+            "W",
+            null,
+            "W",
+            3.0,
+            null,
+            4631,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "2003",
+            null,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            "Double strike,Flying",
+            "normal",
+            null,
+            null,
+            null,
+            "{1}{W}{W}",
+            null,
+            null,
+            null,
+            "8e9b9390-6da5-563d-8ad0-fb899b01943f",
+            null,
+            null,
+            null,
+            "Skyhunter Skirmisher",
+            "L3",
+            null,
+            null,
+            null,
+            null,
+            "1",
+            "10E,5DN,C14,MB1,MM2,PS11,PSAL",
+            "mediainsert",
+            null,
+            "uncommon",
+            "1035040e-d625-4c05-8f1e-85f95449cd5c",
+            "f0a4967c-79da-4260-9c0f-ee8729ead611",
+            "0c07d09e-e127-4573-b827-6c50246f7a31",
+            "PSAL",
+            null,
+            "Cat,Knight",
+            null,
+            null,
+            "Flying, double strike",
+            "1",
+            "Creature \u2014 Cat Knight",
+            "Creature",
+            "3a232eac-60f8-5c11-bd1a-6edcdae29a42",
+            "d8d72825-7776-5595-9b94-7649e43d5cdb",
+            null
+        ],
+        [
+            2557,
+            "John Matson",
+            null,
+            "paper",
+            "white",
+            null,
+            "11398",
+            "U",
+            null,
+            "U",
+            2.0,
+            null,
+            18717,
+            null,
+            null,
+            null,
+            "\"Come one, come all! this rock shall fly From its firm base as soon as I.\"\n\u2014Sir Walter Scott, \"The Lady of the Lake\"",
+            null,
+            "1997",
+            null,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            null,
+            "normal",
+            null,
+            null,
+            null,
+            "{1}{U}",
+            "9504",
+            "6245",
+            null,
+            "f8dbe8cd-ff0e-577b-9e7f-84a168707040",
+            null,
+            null,
+            "3954",
+            "Updraft",
+            "133",
+            null,
+            "Target creature gains flying until end of turn.\nDraw a card at the beginning of the next turn.",
+            "Instant",
+            null,
+            null,
+            "5ED,ICE",
+            null,
+            "{'cardKingdom': 'https://mtgjson.com/links/43d0cf463a3158d7', 'cardmarket': 'https://mtgjson.com/links/a32d6812b3d6de96', 'tcgplayer': 'https://mtgjson.com/links/c8d9eafa4d40095a'}",
+            "common",
+            "7b4c1316-d6df-4bc4-9bfe-0458ff7c2908",
+            "d8c44ecd-26d8-485e-8cd4-51cc8abf30ce",
+            "ff0d5cbe-99d3-4d3b-9a5b-80223fc18869",
+            "5ED",
+            null,
+            null,
+            null,
+            "2422",
+            "Target creature gains flying until end of turn.\nDraw a card at the beginning of the next turn's upkeep.",
+            null,
+            "Instant",
+            "Instant",
+            "cefd17e8-1b4f-5b9d-9aca-e7ce079b0f72",
+            null,
+            null
+        ],
+        [
+            1980,
+            "Richard Thomas",
+            null,
+            "paper",
+            "white",
+            null,
+            "10344",
+            "U",
+            null,
+            "U",
+            3.0,
+            null,
+            14892,
+            null,
+            null,
+            null,
+            "A deafening roar arose as the fury of an enormous vertical river supplanted our serenity. Eddies turned into whirling geysers, leveling everything in their path.",
+            null,
+            "1993",
+            null,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            "Defender",
+            "normal",
+            null,
+            null,
+            null,
+            "{1}{U}{U}",
+            "5948",
+            "6498",
+            null,
+            "f405b8e8-afe9-5ceb-881f-887372a7019f",
+            null,
+            null,
+            "2197",
+            "Wall of Water",
+            "114",
+            null,
+            "ooU +1/+0 until end of turn",
+            "Summon - Wall",
+            null,
+            "0",
+            "2ED,3ED,4BB,4ED,CED,CEI,FBB,LEA,LEB,SUM",
+            null,
+            "{'cardKingdom': 'https://mtgjson.com/links/3291d34227d2d851', 'cardmarket': 'https://mtgjson.com/links/3107674b2acb38d6', 'tcgplayer': 'https://mtgjson.com/links/29822188b1647064'}",
+            "uncommon",
+            "78028eda-61b0-408c-b3fc-adc968d39b47",
+            "53cddf38-8063-48ed-a532-43592382542b",
+            "608cc65c-f99a-4ca3-be24-190d2556b411",
+            "4ED",
+            null,
+            "Wall",
+            null,
+            "1987",
+            "Defender (This creature can't attack.)\n{U}: Wall of Water gets +1/+0 until end of turn.",
+            "5",
+            "Creature \u2014 Wall",
+            "Creature",
+            "f24fc8c9-1f57-55d6-a246-61ba0cddb097",
+            null,
+            null
+        ]
+    ],
+    "foreign_data": [
+        [
+            69766,
+            "\"Esta aura amea\u00e7a a pureza da sua alma. Liberar-se dela n\u00e3o ser\u00e1 f\u00e1cil para nenhum de n\u00f3s. Se estiver pronto, podemos come\u00e7ar.\"",
+            "Portuguese (Brazil)",
+            123549,
+            "Absolvedora Haazda",
+            "{T}, Sacrifique Absolvedora Haazda: Destrua a Aura alvo.",
+            "Criatura \u2014 Cl\u00e9rigo Humano",
+            "7847de2e-431d-5223-ab05-755b319a6191"
+        ],
+        [
+            90268,
+            "",
+            "Chinese Simplified",
+            145185,
+            "\u7eba\u5165\u5e7b\u68a6",
+            "\u5c06\u76ee\u6807\u751f\u7269\u7f6e\u4e8e\u5176\u62e5\u6709\u8005\u7684\u724c\u5e93\u9876\uff0c\u7136\u540e\u8bba\u547d2\u3002 \uff08\u68c0\u89c6\u4efb\u4e00\u5bf9\u624b\u724c\u5e93\u9876\u7684\u4e24\u5f20\u724c\uff0c\u7136\u540e\u5c06\u5176\u4e2d\u4efb\u610f\u6570\u91cf\u7684\u724c\u4ee5\u4efb\u610f\u987a\u5e8f\u7f6e\u4e8e\u8be5\u724c\u624b\u7684\u724c\u5e93\u5e95\uff0c\u5176\u4f59\u5219\u4ee5\u4efb\u610f\u987a\u5e8f\u7f6e\u4e8e\u8be5\u724c\u5e93\u9876\u3002\uff09",
+            "\u77ac\u95f4",
+            "03009531-9577-5d8a-9c97-e1a6fad472aa"
+        ],
+        [
+            60388,
+            "Una luz de esperanza en tiempos oscuros.",
+            "Spanish",
+            498580,
+            "Farol del vidente",
+            "{T}: Agrega {C}.\n{2}, {T}: Adivina 1. (Mira la primera carta de tu biblioteca. Puedes poner esa carta en el fondo de tu biblioteca.)",
+            "Artefacto",
+            "d2bab3b4-c3c6-597a-9bf6-9446f1aca0ee"
+        ]
+    ],
+    "legalities": [
+        [
+            158298,
+            "duel",
+            "Legal",
+            "82883729-c917-531a-8dd2-e692fdecc4f3"
+        ],
+        [
+            399899,
+            "historic",
+            "Legal",
+            "1641319c-2d2c-5367-a615-173b7259efcd"
+        ],
+        [
+            373578,
+            "vintage",
+            "Legal",
+            "2ff18fd6-55b2-522a-92e0-d9bba571f0ef"
+        ]
+    ],
+    "rulings": [
+        [
+            18668,
+            "2015-11-04",
+            "The tokens created by the myriad ability enter the battlefield tapped even though they\u2019ll have vigilance.",
+            "565ef6ef-cb4a-5a26-a7fc-a11bcff679a3"
+        ],
+        [
+            49148,
+            "2011-09-22",
+            "The choice of creature type is made as Adaptive Automaton enters the battlefield. Players can\u2019t respond to this choice. The bonus starts applying immediately.",
+            "c91df096-3f31-5066-8470-3ba20d3e080c"
+        ],
+        [
+            87408,
+            "2017-03-14",
+            "Some spells instruct you to sacrifice a creature as an additional cost to cast that spell. If you sacrifice Wort to pay that cost, that spell won\u2019t have conspire at the moment it becomes cast, so conspire won\u2019t trigger, even if you tapped two creatures.",
+            "c6306a2a-5399-535a-bdfe-679f84013388"
+        ]
+    ],
+    "sets": [
+        [
+            416,
+            6,
+            "Zendikar",
+            null,
+            "PROE",
+            0,
+            0,
+            0,
+            0,
+            0,
+            "ROE",
+            null,
+            null,
+            null,
+            null,
+            "Rise of the Eldrazi Promos",
+            "ROE",
+            "2010-04-23",
+            null,
+            6,
+            "promo"
+        ],
+        [
+            196,
+            1,
+            null,
+            null,
+            "L16",
+            1,
+            0,
+            0,
+            0,
+            0,
+            "DEFAULT",
+            null,
+            null,
+            null,
+            null,
+            "League Tokens 2016",
+            null,
+            "2016-01-01",
+            null,
+            1,
+            "token"
+        ],
+        [
+            532,
+            325,
+            null,
+            "{'default': {'boosters': [{'contents': {'common': 10, 'rareMythic': 1, 'special': 1, 'uncommon': 3}, 'weight': 9}, {'contents': {'common': 10, 'foil': 1, 'rareMythic': 1, 'uncommon': 3}, 'weight': 471}], 'boostersTotalWeight': 480, 'sheets': {'common': {'",
+            "VMA",
+            0,
+            0,
+            0,
+            1,
+            0,
+            "VMA",
+            null,
+            null,
+            null,
+            "VMA",
+            "Vintage Masters",
+            null,
+            "2014-06-16",
+            null,
+            325,
+            "masters"
+        ]
+    ],
+    "set_translations": [
+        [
+            1110,
+            "Spanish",
+            "USG",
+            null
+        ],
+        [
+            853,
+            "French",
+            "OGW",
+            "Le serment des Sentinelles"
+        ],
+        [
+            820,
+            "Spanish",
+            "MMQ",
+            null
+        ]
+    ],
+    "rulings_dg_tmp": [
+        [
+            54166,
+            "2014-11-24",
+            "Frontier Mastodon\u2019s ferocious ability checks if you control a creature with power 4 or greater as Frontier Mastodon enters the battlefield. Because Frontier Mastodon isn\u2019t on the battlefield at this time, it won\u2019t count itself.",
+            "5e9a67af-c299-5362-9944-8278721b1be3"
+        ],
+        [
+            83060,
+            "2020-09-25",
+            "The converted mana cost of a modal double-faced card is based on the characteristics of the face that\u2019s being considered. On the stack and battlefield, consider whichever face is up. In all other zones, consider only the front face. This is different than",
+            "edf09c06-1174-5ba5-b1bb-c8b779a1eff9"
+        ],
+        [
+            67789,
+            "2021-02-05",
+            "If an effect allows you to play a specific modal double-faced card, you may cast it as a spell or play it as a land, as determined by which face you choose to play. If an effect allows you to cast (rather than \u201cplay\u201d) a specific modal double-faced card, y",
+            "f3b8d58e-cd41-585f-86a6-00fd74b6ea38"
+        ]
+    ]
+}
+
+# Source query:
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the total number of households in Arecibo county?",
+        "query": "SELECT SUM(T1.households) FROM zip_data AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code WHERE T2.county = 'ARECIBO'"
+    }
+]
+
+# Output
+[
+    {
+        "source_dataset": "bird_training",
+        "source_db_id": "address",
+        "source_query": "SELECT SUM(T1.households) FROM zip_data AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code WHERE T2.county = 'ARECIBO'",
+        "source_question": "What is the total number of households in Arecibo county?",
+        "tables_columns_replacement": "SELECT SUM(T1.column) FROM table1 AS T1 INNER JOIN table2 AS T2 ON T1.column2 = T2.column2 WHERE T2.column3 = constant_value",
+        "thought": "thought here",
+        "target_db_id": "card_games_2",
+        "target_query": "SELECT SUM(T1.convertedManaCost) FROM cards AS T1 INNER JOIN sets AS T2 ON T1.setCode = T2.code WHERE T2.name = 'Rise of the Eldrazi Promos'",
+        "target_question": "What is the total converted mana cost of all cards in the 'Rise of the Eldrazi Promos' set?"
+    }
+]

@@ -1,0 +1,80 @@
+## Example:
+
+# Source schema
+"CREATE TABLE \"cards\"\n(\n    id                      INTEGER           not null\n        primary key autoincrement,\n    artist                  TEXT,\n    asciiName               TEXT,\n    availability            TEXT,\n    borderColor             TEXT,\n    cardKingdomFoilId       TEXT,\n    cardKingdomId           TEXT,\n    colorIdentity           TEXT,\n    colorIndicator          TEXT,\n    colors                  TEXT,\n    convertedManaCost       REAL,\n    duelDeck                TEXT,\n    edhrecRank              INTEGER,\n    faceConvertedManaCost   REAL,\n    faceName                TEXT,\n    flavorName              TEXT,\n    flavorText              TEXT,\n    frameEffects            TEXT,\n    frameVersion            TEXT,\n    hand                    TEXT,\n    hasAlternativeDeckLimit INTEGER default 0 not null,\n    hasContentWarning       INTEGER default 0 not null,\n    hasFoil                 INTEGER default 0 not null,\n    hasNonFoil              INTEGER default 0 not null,\n    isAlternative           INTEGER default 0 not null,\n    isFullArt               INTEGER default 0 not null,\n    isOnlineOnly            INTEGER default 0 not null,\n    isOversized             INTEGER default 0 not null,\n    isPromo                 INTEGER default 0 not null,\n    isReprint               INTEGER default 0 not null,\n    isReserved              INTEGER default 0 not null,\n    isStarter               INTEGER default 0 not null,\n    isStorySpotlight        INTEGER default 0 not null,\n    isTextless              INTEGER default 0 not null,\n    isTimeshifted           INTEGER default 0 not null,\n    keywords                TEXT,\n    layout                  TEXT,\n    leadershipSkills        TEXT,\n    life                    TEXT,\n    loyalty                 TEXT,\n    manaCost                TEXT,\n    mcmId                   TEXT,\n    mcmMetaId               TEXT,\n    mtgArenaId              TEXT,\n    mtgjsonV4Id             TEXT,\n    mtgoFoilId              TEXT,\n    mtgoId                  TEXT,\n    multiverseId            TEXT,\n    name                    TEXT,\n    number                  TEXT,\n    originalReleaseDate     TEXT,\n    originalText            TEXT,\n    originalType            TEXT,\n    otherFaceIds            TEXT,\n    power                   TEXT,\n    printings               TEXT,\n    promoTypes              TEXT,\n    purchaseUrls            TEXT,\n    rarity                  TEXT,\n    scryfallId              TEXT,\n    scryfallIllustrationId  TEXT,\n    scryfallOracleId        TEXT,\n    setCode                 TEXT,\n    side                    TEXT,\n    subtypes                TEXT,\n    supertypes              TEXT,\n    tcgplayerProductId      TEXT,\n    text                    TEXT,\n    toughness               TEXT,\n    type                    TEXT,\n    types                   TEXT,\n    uuid                    TEXT              not null\n        unique,\n    variations              TEXT,\n    watermark               TEXT\n);\nCREATE TABLE \"foreign_data\"\n(\n    id           INTEGER not null\n        primary key autoincrement,\n    flavorText   TEXT,\n    language     TEXT,\n    multiverseid INTEGER,\n    name         TEXT,\n    text         TEXT,\n    type         TEXT,\n    uuid         TEXT\n        references cards (uuid)\n);\nCREATE TABLE \"legalities\"\n(\n    id     INTEGER not null\n        primary key autoincrement,\n    format TEXT,\n    status TEXT,\n    uuid   TEXT\n        references cards (uuid)\n            on update cascade on delete cascade\n);\nCREATE TABLE \"rulings\"\n(\n    id   INTEGER not null\n        primary key autoincrement,\n    date DATE,\n    text TEXT,\n    uuid TEXT\n        references cards (uuid)\n            on update cascade on delete cascade\n);\nCREATE TABLE \"set_translations\"\n(\n    id          INTEGER not null\n        primary key autoincrement,\n    language    TEXT,\n    setCode     TEXT\n        references sets (code)\n            on update cascade on delete cascade,\n    translation TEXT\n);\nCREATE TABLE \"sets\"\n(\n    id               INTEGER           not null\n        primary key autoincrement,\n    baseSetSize      INTEGER,\n    block            TEXT,\n    booster          TEXT,\n    code             TEXT              not null\n        unique,\n    isFoilOnly       INTEGER default 0 not null,\n    isForeignOnly    INTEGER default 0 not null,\n    isNonFoilOnly    INTEGER default 0 not null,\n    isOnlineOnly     INTEGER default 0 not null,\n    isPartialPreview INTEGER default 0 not null,\n    keyruneCode      TEXT,\n    mcmId            INTEGER,\n    mcmIdExtras      INTEGER,\n    mcmName          TEXT,\n    mtgoCode         TEXT,\n    name             TEXT,\n    parentCode       TEXT,\n    releaseDate      DATE,\n    tcgplayerGroupId INTEGER,\n    totalSetSize     INTEGER,\n    type             TEXT\n);\n"
+
+
+# Input pairs
+[
+    {        
+        "nl_question": "What is the percentage of foreign data entries relative to multiverseid for the 'Vintage Masters' set?",
+	 "sql_query": "SELECT CAST(T2.id AS REAL) * 100 / T2.multiverseid FROM sets AS T1 INNER JOIN foreign_data AS T2 ON T1.id = T2.id WHERE T1.name = 'Vintage Masters'"
+    },
+    {        
+        "nl_question": "What are the MTG Arena ID and MTG JSON V4 ID of the card with MCM ID 636?"
+	 "sql_query": "SELECT T2.mtgArenaId, T2.mtgjsonV4Id FROM cards AS T1 INNER JOIN sets AS T2 ON T1.mcmId = T2.id WHERE T1.mcmId = 636"
+    },
+    {        
+        "nl_question": "What is the zip code associated with the card 'Mana Drain' illustrated by Raymond Swanland?",
+	"sql_query": "SELECT T2.zip_code FROM cards AS T1 INNER JOIN foreign_data AS T2 ON T1.mtgjsonV4Id = T2.uuid WHERE T1.artist = 'Raymond Swanland' AND T1.name = 'Mana Drain'",
+    },
+    {        
+        "nl_question": "What are the artists and names of cards in the 'Vintage Masters' set?",
+        "sql_query": "SELECT T3.artist, T3.name FROM sets AS T1 INNER JOIN cards AS T2 ON T1.code = T2.setCode INNER JOIN cards AS T3 ON T2.uuid = T3.uuid WHERE T1.name = 'Vintage Masters'",
+    },
+]
+
+
+
+# Output
+[
+    {
+        "nl_question": "What is the percentage of foreign data entries relative to multiverseid for the 'Vintage Masters' set?",
+        "sql_query": "SELECT CAST(T2.id AS REAL) * 100 / T2.multiverseid FROM sets AS T1 INNER JOIN foreign_data AS T2 ON T1.id = T2.id WHERE T1.name = 'Vintage Masters'",
+        "clarity_and_alignment_of_NL": {
+            "thought_process": "The NL question asks for the percentage of 'foreign data entries' relative to 'multiverseid' for a specific set. However, the schema does not define 'foreign data entries' as a countable metric, making the intent ambiguous. It is unclear whether the user wants the total count of foreign data entries or some other metric. The relationship between 'id' in 'foreign_data' and 'multiverseid' is also unclear. The question may be misaligned with the available schema fields.",
+            "is_clear_and_meaningful": "maybe"
+        },
+        "correctness_of_query": {
+            "thought_process": "The SQL query attempts to compute a percentage by dividing 'id' by 'multiverseid', but 'id' is an auto-increment field and does not represent a count of foreign data entries. Additionally, the join condition T1.id = T2.id is incorrect since 'foreign_data' references 'cards' via 'uuid', not 'sets'. This results in incorrect data retrieval and invalid percentage computation.",
+            "is_correct_mapping": "no"
+        }
+    },
+    {
+        "nl_question": "What are the MTG Arena ID and MTG JSON V4 ID of the card with MCM ID 636?",
+        "sql_query": "SELECT T2.mtgArenaId, T2.mtgjsonV4Id FROM cards AS T1 INNER JOIN sets AS T2 ON T1.mcmId = T2.id WHERE T1.mcmId = 636",
+        "clarity_and_alignment_of_NL": {
+            "thought_process": "The question is clear in requesting the 'MTG Arena ID' and 'MTG JSON V4 ID' for a card with a specific 'MCM ID'. The schema defines 'mcmId' in the 'cards' table, and 'mtgArenaId' and 'mtgjsonV4Id' are also attributes of 'cards'. The query should focus on retrieving these values directly from 'cards' rather than joining with 'sets', which is unrelated. While the question is meaningful, its mapping to the schema is incorrect.",
+            "is_clear_and_meaningful": "yes"
+        },
+        "correctness_of_query": {
+            "thought_process": "The SQL query incorrectly joins 'cards' with 'sets' on 'mcmId = id', whereas 'mcmId' belongs to 'cards' and does not relate to 'sets'. Instead, a simple 'SELECT mtgArenaId, mtgjsonV4Id FROM cards WHERE mcmId = 636' would be correct. The current join introduces incorrect logic and potentially incorrect results. Thus, the SQL query does not correctly map the NL question.",
+            "is_correct_mapping": "no"
+        }
+    },
+    {
+        "nl_question": "What is the zip code associated with the card 'Mana Drain' illustrated by Raymond Swanland?",
+        "sql_query": "SELECT T2.zip_code FROM cards AS T1 INNER JOIN foreign_data AS T2 ON T1.mtgjsonV4Id = T2.uuid WHERE T1.artist = 'Raymond Swanland' AND T1.name = 'Mana Drain'",
+        "clarity_and_alignment_of_NL": {
+            "thought_process": "The NL question asks for a 'zip code' related to a specific card and artist. However, the provided schema does not include any column named 'zip_code'. Without this field in any table, the question does not align with the schema. This makes it unclear and unanswerable with the given database structure.",
+            "is_clear_and_meaningful": "no"
+        },
+        "correctness_of_query": {
+            "thought_process": "The SQL query references a 'zip_code' column, which does not exist in the schema. Additionally, the join condition uses 'mtgjsonV4Id = uuid', but 'mtgjsonV4Id' is not necessarily related to 'foreign_data'. Even if the zip code existed, the query structure would need revision. Due to referencing a nonexistent column, the query is invalid.",
+            "is_correct_mapping": "no"
+        }
+    },
+    {
+        "nl_question": "What are the artists and names of cards in the 'Vintage Masters' set?",
+        "sql_query": "SELECT T3.artist, T3.name FROM sets AS T1 INNER JOIN cards AS T2 ON T1.code = T2.setCode INNER JOIN cards AS T3 ON T2.uuid = T3.uuid WHERE T1.name = 'Vintage Masters'",
+        "clarity_and_alignment_of_NL": {
+            "thought_process": "The NL question asks for 'artists' and 'names' of cards belonging to the 'Vintage Masters' set. The schema provides a 'name' and 'artist' field in the 'cards' table, and the relationship between 'sets' and 'cards' is correctly established via 'setCode'. The question is well-aligned with the schema and clear.",
+            "is_clear_and_meaningful": "yes"
+        },
+        "correctness_of_query": {
+            "thought_process": "The SQL query correctly joins 'sets' and 'cards' using 'setCode', the additional join on 'T2.uuid = T3.uuid' is unnecessary, however the query retrieves the correct data so this unnecessary join does not matter.",
+            "is_correct_mapping": "yes"
+        }
+    }
+]
+
