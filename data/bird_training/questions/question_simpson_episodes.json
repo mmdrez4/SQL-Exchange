@@ -1,0 +1,1262 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Which crew member of the simpson 20s is the oldest?",
+        "query": "SELECT name FROM Person WHERE birthdate IS NOT NULL ORDER BY birthdate ASC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What's the nickname for Dan Castellaneta?",
+        "query": "SELECT nickname FROM Person WHERE name = 'Dan Castellaneta';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Among the crew members of the simpson 20s born in the New York city, how many of them were born after the year 1970?",
+        "query": "SELECT COUNT(name) FROM Person WHERE birth_region = 'New York' AND SUBSTR(birthdate, 1, 4) > '1970';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "In which country was the winner of the Outstanding Voice-Over Performance award of 2009 born?",
+        "query": "SELECT T1.birth_country FROM Person AS T1 INNER JOIN Award AS T2 ON T1.name = T2.person WHERE T2.award = 'Outstanding Voice-Over Performance' AND T2.year = 2009 AND T2.result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Please list the names of all the awards won by the crew member whose nickname is Doofus.",
+        "query": "SELECT T2.award FROM Person AS T1 INNER JOIN Award AS T2 ON T1.name = T2.person WHERE T1.nickname = 'Doofus' AND T2.result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many crew members who were born in the USA were nominated for the Outstanding Animated Program (For Programming Less Than One Hour) award in 2009?",
+        "query": "SELECT COUNT(*) FROM Person AS T1 INNER JOIN Award AS T2 ON T1.name = T2.person WHERE T1.birth_country = 'USA' AND T2.result = 'Nominee' AND T2.award = 'Outstanding Animated Program (For Programming Less Than One Hour)' AND T2.year = 2009;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Which character won the Outstanding Voice-Over Performance award in 2009?",
+        "query": "SELECT DISTINCT T1.character FROM Character_Award AS T1 INNER JOIN Award AS T2 ON T1.award_id = T2.award_id WHERE T2.award = 'Outstanding Voice-Over Performance' AND T2.year = 2009 AND T2.result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Please list all the keywords of the episode Lost Verizon.",
+        "query": "SELECT T2.keyword FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Lost Verizon';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many keywords does the episode that was aired on 2008/10/19 have?",
+        "query": "SELECT COUNT(T2.keyword) FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.air_date = '2008-10-19';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What's the rating of the episode in which Dan Castellaneta won the Outstanding Voice-Over Performance award in 2009?",
+        "query": "SELECT T2.rating FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T1.award = 'Outstanding Voice-Over Performance' AND SUBSTR(T1.year, 1, 4) = '2009' AND T1.person = 'Dan Castellaneta';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many 7-star votes in star score did the episode Lost Verizon have?",
+        "query": "SELECT COUNT(*) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.title = 'Lost Verizon' AND T2.stars = 7;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many stars did most of the voters give in star score for the episode Lost Verizon?",
+        "query": "SELECT T2.stars FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.title = 'Lost Verizon' ORDER BY T2.votes DESC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Please list the titles of the episodes that have over 200 voters voting a 10 in star score.",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T2.votes > 200 AND T2.stars = 10;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many episodes aired in the year 2009 have over 15% of voters giving 10 stars in star score?",
+        "query": "SELECT COUNT(*) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE SUBSTR(T1.air_date, 1, 4) = '2009' AND T2.stars = 10 AND T2.percent > 15;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What's the title of the episode that got the most 7-star votes in star score?",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T2.stars = 7 ORDER BY T2.votes DESC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many stars on average does the episode Lost Verizon have?",
+        "query": "SELECT CAST(SUM(T2.votes * T2.stars) AS REAL) / SUM(T2.votes) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.title = 'Lost Verizon';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the percentage of Primetime Emmy nominated episodes with a rating over 7 to all the episodes that have a rating over 7?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.award_category = 'Primetime Emmy' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T2.rating > 7 AND T1.result = 'Nominee';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Name the title of the episode where Pamela Hayden voiced the character 'Ruthie.'",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T2.person = 'Pamela Hayden' AND T2.role = 'Ruthie';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List down all the roles of Matt Groening on the episode titled 'In the Name of the Grandfather' along with the episode number and series number.",
+        "query": "SELECT T2.role, T1.episode, T1.number_in_series FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T2.person = 'Matt Groening' AND T1.title = 'In the Name of the Grandfather';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Write down the title and summary of the episode with the keyword 'eviction.'",
+        "query": "SELECT T1.title, T1.summary FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T2.keyword = 'eviction';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the average number of stars received by the episode titled 'Wedding for Disaster.'",
+        "query": "SELECT AVG(T2.stars) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.title = 'Wedding for Disaster';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Write the title and all the keywords of the episode that was aired on 3/22/2009.",
+        "query": "SELECT T1.title, T2.keyword FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.air_date = '2009-03-22';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the birth name of the person who voiced 'Helen Lovejoy?'",
+        "query": "SELECT DISTINCT T1.birth_name FROM Person AS T1 INNER JOIN Credit AS T2 ON T1.name = T2.person WHERE T2.role = 'Helen Lovejoy';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the percentage ratio between uncredited and credited roles on the episode that won the 2017 Jupiter Award for Best International TV Series? Please include the title of the episode and the names of the persons who were uncredited alongside their role in that episode.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.credited = 'false' THEN 1 END) AS REAL) * 100 / SUM(CASE WHEN T2.credited = 'true' THEN 1 END), T3.title, T2.person FROM Award AS T1 INNER JOIN Credit AS T2 ON T2.episode_id = T1.episode_id INNER JOIN Episode AS T3 ON T1.episode_id = T3.episode_id WHERE SUBSTR(T1.year, 1, 4) = '2017' AND T1.award_category = 'Jupiter Award' AND T1.award = 'Best International TV Series' AND T1.result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many episodes have more than 1000 votes?",
+        "query": "SELECT COUNT(episode_id) FROM Episode WHERE votes > 1000;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many persons were born in New York, USA?",
+        "query": "SELECT COUNT(name) FROM Person WHERE birth_place = 'New York City' AND birth_country = 'USA';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List the name of all awards along with the award category, nominated by Marc Wilmore.",
+        "query": "SELECT award_id, award_category FROM Award WHERE person = 'Marc Wilmore';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many crew have their own nickname? List their full name along with the nickname.",
+        "query": "SELECT COUNT(name) FROM Person WHERE nickname IS NOT NULL;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Find the average height for each person.",
+        "query": "SELECT AVG(height_meters) FROM Person;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Calculate the difference between the highest votes for episode and the lowest votes for episode.",
+        "query": "SELECT MAX(votes) - MIN(votes) FROM Vote;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List the name character awarded for the Outstanding Voice-Over Performance award in 2009.",
+        "query": "SELECT T2.character FROM Award AS T1 INNER JOIN Character_Award AS T2 ON T1.award_id = T2.award_id WHERE T1.year = 2009 AND T1.award = 'Outstanding Voice-Over Performance';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Among the person nominated for the Comedy Series Award in 2009, how many of them were born in California?",
+        "query": "SELECT COUNT(*) FROM Person AS T1 INNER JOIN Award AS T2 ON T1.name = T2.person WHERE T2.year = 2009 AND T2.award = 'Comedy Series' AND T1.birth_region = 'California';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the title of episode that won the Best International TV Series Award in 2017?",
+        "query": "SELECT T2.title FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE SUBSTR(T1.year, 1, 4) = '2017' AND T1.award = 'Best International TV Series' AND T1.result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List the name of persons who were not included in the credit for the 'How the Test Was Won' episode.",
+        "query": "SELECT T2.person FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'How the Test Was Won' AND T2.credited = 'false';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the title of episode that has a keyword of 'riot' and 'cake'?",
+        "query": "SELECT DISTINCT T1.title FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T2.keyword IN ('riot', 'cake');"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Which episode has the most vote for 10 stars rating?",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T2.stars = 10 ORDER BY T1.votes DESC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Name all the person who involved in the making of simpson 20s episode that aired between October to November.",
+        "query": "SELECT DISTINCT T2.person FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE SUBSTR(T1.air_date, 6, 2) BETWEEN '10' AND '11';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "State the name of director for the 'Treehouse of Horror XIX' episode.",
+        "query": "SELECT T2.person FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Treehouse of Horror XIX' AND T2.role = 'director';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Based on the credits, state how many roles were played in the 5th episode of simpson 20.",
+        "query": "SELECT COUNT(DISTINCT T2.role) FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T1.episode = 5;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List all the keyword for 'Take My Life, Please' episode.",
+        "query": "SELECT T2.keyword FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Take My Life, Please';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Among the episode that get more than 950 votes, how many of the episodes were nominated for the 'Outstanding Voice-Over Performance Award in 2009'? Find the percentage of the episodes.",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.award = 'Outstanding Voice-Over Performance' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.episode_id) FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T2.votes > 950 AND T1.year = 2009;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the ratio between the 5 stars votes for 'No Loan Again, Naturally' episode and 'Coming to Homerica' episode?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.title = 'No Loan Again, Naturally' THEN T1.votes ELSE 0 END) AS REAL) / SUM(CASE WHEN T1.title = 'Coming to Homerica' THEN T1.votes ELSE 0 END) AS ratio FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T2.stars = 5;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many times was Ian Maxtone-Graham nominated for an award in Writers Guild of America, USA?",
+        "query": "SELECT COUNT(award_id) FROM Award WHERE person = 'Ian Maxtone-Graham' AND organization = 'Writers Guild of America, USA' AND result = 'Nominee';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the name of the person that has the highest number of nominated award but didn't win?",
+        "query": "SELECT person FROM Award WHERE result = 'Nominee' GROUP BY person ORDER BY COUNT(person) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the title of the episode that received the lowest rating?",
+        "query": "SELECT title FROM Episode ORDER BY rating LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What year did the Simpsons receive its first ever award for Favorite Animated Comedy in People's Choice Award?",
+        "query": "SELECT year FROM Award WHERE result = 'Winner' AND award = 'Favorite Animated Comedy' ORDER BY year DESC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many episodes was Dell Hake not included in the credit list?",
+        "query": "SELECT COUNT(*) FROM Credit WHERE person = 'Dell Hake' AND credited = 'false';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How old was the awardee when he/she won the first-ever award for Outstanding Voice-Over Performance in Primetime Emmy Awards?",
+        "query": "SELECT T2.year - CAST(SUBSTR(T1.birthdate, 1, 4) AS int) AS age FROM Person AS T1 INNER JOIN Award AS T2 ON T1.name = T2.person WHERE T2.award = 'Outstanding Voice-Over Performance' AND T2.organization = 'Primetime Emmy Awards' AND T2.result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What character did Dan Castellaneta play that won him an award for Outstanding Voice-Over Performance in 2009 in the Primetime Emmy Awards?",
+        "query": "SELECT DISTINCT T2.character FROM Award AS T1 INNER JOIN Character_Award AS T2 ON T1.award_id = T2.award_id WHERE T1.person = 'Dan Castellaneta' AND T1.award = 'Outstanding Voice-Over Performance' AND T1.organization = 'Primetime Emmy Awards' AND T1.year = 2009;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Among the episodes aired on April of 2009, how many episodes won an award?",
+        "query": "SELECT COUNT(T1.episode_id) FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE SUBSTR(T1.year, 1, 4) = '2009' AND T2.air_date LIKE '2009-04%';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the birth place of the cast or crew member who won the Best Voice-Over Performance in Online Film & Television Association in 2009?",
+        "query": "SELECT T1.birth_place FROM Person AS T1 INNER JOIN Award AS T2 ON T1.name = T2.person WHERE T2.award = 'Best Voice-Over Performance' AND T2.organization = 'Online Film & Television Association' AND T2.year = 2009;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many 10 star votes did the top 4 episodes with the highest rating received?",
+        "query": "SELECT SUM(T1.votes) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T2.stars = 10 ORDER BY T1.rating DESC LIMIT 4;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "In \"No Loan Again, Naturally\", how many stars received votes of no more than 50?",
+        "query": "SELECT COUNT(*) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.title = 'No Loan Again, Naturally' AND T2.votes < 50;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many award winners are from the USA?",
+        "query": "SELECT COUNT(*) FROM Person AS T1 INNER JOIN Award AS T2 ON T1.name = T2.person WHERE T1.birth_country = 'USA' AND T2.result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "In Season 20 Episode 11, how many times was Doofus included in the credit list?",
+        "query": "SELECT COUNT(*) FROM Person AS T1 INNER JOIN Credit AS T2 ON T1.name = T2.person WHERE T1.nickname = 'Doofus' AND T2.credited = 'true' AND T2.episode_id = 'S20-E11';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What was the first award won by the cast or crew member of the show? Give the name of the person who won the said award.",
+        "query": "SELECT T2.award, T1.name FROM Person AS T1 INNER JOIN Award AS T2 ON T1.name = T2.person WHERE T2.result = 'Winner' ORDER BY T2.year LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "In \"Sex, Pies and Idiot Scrapes\", how many percentage of votes did the 9 star score has?",
+        "query": "SELECT T2.percent FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.title = 'Sex, Pies and Idiot Scrapes' AND T2.stars = 9;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List the award name and persons who won the award in 2009.",
+        "query": "SELECT award, person FROM Award WHERE result = 'Winner' AND SUBSTR(year, 1, 4) = '2009';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Among the casts who were born in Los Angeles, describe the name and birth date of who have 1.8 m and above in height.",
+        "query": "SELECT name, birthdate FROM Person WHERE birth_place = 'Los Angeles' AND height_meters >= 1.8;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Provide the episode number, title and rating of which were aired in October, 2008.",
+        "query": "SELECT episode, title, rating FROM Episode WHERE SUBSTR(air_date, 1, 7) LIKE '2008-10%';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Write down the award ID, award name and winner for character named \"Homer simpson 20\".",
+        "query": "SELECT T1.award_id, T1.award, T1.person FROM Award AS T1 INNER JOIN Character_Award AS T2 ON T1.award_id = T2.award_id WHERE T2.character = 'Homer Simpson' AND T1.result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List down the award name, result, credit category and credited status of the \"Billy Kimball\".",
+        "query": "SELECT DISTINCT T1.award, T1.result, T2.category, T2.credited FROM Award AS T1 INNER JOIN Credit AS T2 ON T2.episode_id = T1.episode_id WHERE T2.person = 'Billy Kimball';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Name the person, award, organization, result and credited status of the assistant director in S20-E13.",
+        "query": "SELECT T1.person, T1.award, T1.organization, T1.result, T2.credited FROM Award AS T1 INNER JOIN Credit AS T2 ON T2.episode_id = T1.episode_id WHERE T2.episode_id = 'S20-E13' AND T2.role = 'assistant director';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Describe the birth country, height and person name who were not included in credit list with category of casting.",
+        "query": "SELECT T1.birth_country, T1.height_meters, T1.name FROM Person AS T1 INNER JOIN Credit AS T2 ON T1.name = T2.person WHERE T2.category = 'Cast' AND T2.credited = 'false';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List the nominee, keywords and episode ID of the title \"The Good, the Sad and the Drugly\".",
+        "query": "SELECT T3.person, T1.keyword, T1.episode_id FROM Keyword AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Award AS T3 ON T2.episode_id = T3.episode_id WHERE T2.title = 'The Good, the Sad and the Drugly' AND T3.result = 'Nominee';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the voting numbers and percentage of the best rating scale of the episode which had keyword of \"arab stereotype\"?",
+        "query": "SELECT T2.votes, T2.percent FROM Keyword AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id WHERE T1.keyword = 'arab stereotype' AND T2.stars = 10;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "For the episode who won the award held by Jupiter Award, describe award name, aired date and rating of that episode.",
+        "query": "SELECT T1.award, T2.air_date, T2.rating FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T1.organization = 'Jupiter Award' AND T1.result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Mention the episode ID, title and any three keywords of the episode which get the most number of votes in star classification of worst.",
+        "query": "SELECT DISTINCT T3.episode_id, T2.title, T1.keyword FROM Keyword AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Vote AS T3 ON T2.episode_id = T3.episode_id WHERE T3.stars = 1 ORDER BY T3.votes DESC LIMIT 3;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Among the episodes with excellent rating which were aired in 2008, describe the title, episode's image, award name and person who were nominated.",
+        "query": "SELECT T2.title, T2.episode_image, T1.award, T1.person FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T2.rating BETWEEN 7 AND 10 AND SUBSTR(T2.air_date, 1, 4) = '2008' AND T1.result = 'Nominee';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Describe the award title, person and character name of the award ID 326.",
+        "query": "SELECT DISTINCT T1.award, T1.person, T2.character FROM Award AS T1 INNER JOIN Character_Award AS T2 ON T1.award_id = T2.award_id WHERE T2.award_id = 326;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Describe name, birth country, role in episode and age in 2022 of the oldest crew member..",
+        "query": "SELECT T1.name, T1.birth_place, T2.role, 2022 - CAST(SUBSTR(T1.birthdate, 1, 4) AS int) AS age FROM Person AS T1 INNER JOIN Credit AS T2 ON T1.name = T2.person WHERE T1.birthdate IS NOT NULL ORDER BY T1.birthdate LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Provide the number of credits, category, role and birthplace of the crew member who was born in North Korea.",
+        "query": "SELECT DISTINCT T2.credited, T2.category, T2.role, T1.birth_place FROM Person AS T1 INNER JOIN Credit AS T2 ON T1.name = T2.person WHERE T1.birth_country = 'North Korea';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Find the winning rate of award in 2010. Describe the winner name, award name, episode title and role of the winner in that episode.",
+        "query": "SELECT T3.rate, T4.person, T4.award, T5.title, T4.role FROM ( SELECT CAST(SUM(CASE WHEN T1.result = 'Winner' THEN 1 ELSE 0 END) AS REAL) / SUM(CASE WHEN T1.result IN ('Winner', 'Nominee') THEN 1 ELSE 0 END) AS rate , T1.person, T1.award, T2.title, T1.role FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE SUBSTR(T1.year, 1, 4) = '2010' ) AS T3 INNER JOIN Award AS T4 INNER JOIN Episode AS T5 ON T4.episode_id = T5.episode_id WHERE T4.year = 2010 AND T4.result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Name the title of the episode that received the highest star score and the highest number of votes.",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id ORDER BY T2.stars DESC, T2.votes DESC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the total number of awards won by The simpson 20s: Season 20?",
+        "query": "SELECT COUNT(award_id) FROM Award WHERE result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Name the title of the episode that was nominated for Emmy's Outstanding Animated Program 21 times.",
+        "query": "SELECT T2.title FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T1.organization = 'Primetime Emmy Awards' AND T1.award = 'Outstanding Animated Program (For Programming Less Than One Hour)' AND T1.result = 'Nominee' GROUP BY T1.episode_id HAVING COUNT(T1.episode_id) = 21;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the average number of stars assigned to The simpson 20s: S20-E12? What is the said episode all about?",
+        "query": "SELECT AVG(T2.stars), T1.summary FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.episode_id = 'S20-E12';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Name the performer who won Emmy Award for Outstanding Voice-Over Performance by playing Homer simpson 20.",
+        "query": "SELECT T1.person FROM Award AS T1 INNER JOIN Character_Award AS T2 ON T1.award_id = T2.award_id WHERE T2.character = 'Homer simpson 20' AND T1.organization = 'Primetime Emmy Awards' AND T1.award = 'Outstanding Voice-Over Performance' AND T1.result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the birth name of Al Jean and his role in creating The simpson 20s: Season 20?",
+        "query": "SELECT DISTINCT T1.birth_name, T2.role FROM Person AS T1 INNER JOIN Credit AS T2 ON T1.name = T2.person WHERE T1.name = 'Al Jean';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many nominations have Billy Kimball received in 2010 for The simpson 20s: Season 20?",
+        "query": "SELECT COUNT(award_id) FROM Award WHERE person = 'Billy Kimball' AND SUBSTR(year, 1, 4) = '2010' AND result = 'Nominee';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List all keywords associated with the episode 'Take My Life, Please'.",
+        "query": "SELECT T2.keyword FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Take My Life, Please';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Indicate the name and category of the most recent award received by the show.",
+        "query": "SELECT award, award_category FROM Award WHERE result = 'Winner' ORDER BY year DESC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is The simpson 20s: Season 20 average awards winning rate?",
+        "query": "SELECT CAST(SUM(CASE WHEN result = 'Winner' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(award) AS rate FROM Award;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many episodes were aired between October and November 2008?",
+        "query": "SELECT COUNT(episode_id) FROM Episode WHERE air_date LIKE '2008-10%' OR air_date LIKE '2008-11%';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Among episodes aired in 2009, which episode has received the worst response based on the rating.",
+        "query": "SELECT episode_id FROM Episode WHERE air_date LIKE '2009%' ORDER BY rating LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List the categories for which Bonita Pietila was given credit and her role in creating the episodes.",
+        "query": "SELECT DISTINCT category, role FROM Credit WHERE person = 'Bonita Pietila';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Who from The simpson 20s: Season 20 cast and crew was born in October 29, 1957 in Chicago, Illinois?",
+        "query": "SELECT name FROM Person WHERE birthdate = '1957-10-29' AND birth_place = 'Chicago' AND birth_region = 'Illinois';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Who produced The simpson 20s: Season 20?",
+        "query": "SELECT DISTINCT person FROM Credit WHERE role = 'producer';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How old was composer of the show when he was nominated for Emmy's Outstanding Music Composition for a Series in 2009. Indicate his full name as well.",
+        "query": "SELECT T1.year - T2.birthdate AS ageIn2009, T2.name FROM Award AS T1 INNER JOIN Person AS T2 ON T1.person = T2.name WHERE T1.role = 'composer' AND T1.organization = 'Primetime Emmy Awards' AND T1.award = 'Outstanding Music Composition for a Series (Original Dramatic Score)' AND T1.result = 'Nominee' AND T1.year = 2009;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Which episode of The simpson 20s: Season 20 has received the most nominations? Indicate the title.",
+        "query": "SELECT T2.title FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id GROUP BY T1.episode_id ORDER BY COUNT(*) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Please indicate the birthplace of the crew which name is Dan Castellaneta.",
+        "query": "SELECT birth_place FROM Person WHERE name = 'Dan Castellaneta';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many crews were born in the USA?",
+        "query": "SELECT COUNT(name) FROM Person WHERE birth_country = 'USA';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Please list the name of crew that were born before 1970.",
+        "query": "SELECT name FROM Person WHERE SUBSTR(birthdate, 1, 4) < '1970';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Name of the crew that were born in California, USA between 1958 and 1969.",
+        "query": "SELECT name FROM Person WHERE SUBSTR(birthdate, 1, 4) = '1958' AND birth_place = 'California' AND birth_country = 'USA';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Which episode ids are rated 5 stars and have more than 100 votes?",
+        "query": "SELECT episode_id FROM Vote WHERE stars = 5 AND votes > 100;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Please indicate the keywords of the title \"Double, Double, Boy in Trouble\".",
+        "query": "SELECT T2.keyword FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Double, Double, Boy in Trouble';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Among episodes from 10 to 20, which episode has more than 200 votes?",
+        "query": "SELECT DISTINCT T1.episode FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.episode BETWEEN 10 AND 20 AND T2.votes > 200;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Please indicate the keywords of the episode that won the Primetime Emmy Award category.",
+        "query": "SELECT T2.keyword FROM Award AS T1 INNER JOIN Keyword AS T2 ON T2.episode_id = T1.episode_id WHERE T1.award_category = 'Primetime Emmy';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Who is the recipient of the Primetime Emmy Award with the most votes?",
+        "query": "SELECT T1.person FROM Award AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.award_category = 'Primetime Emmy' ORDER BY T2.votes DESC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Which episode id did award Outstanding Animated Program (For Programming Less Than One Hour) with an episode star score of 10?",
+        "query": "SELECT DISTINCT T1.episode_id FROM Award AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.award = 'Outstanding Animated Program (For Programming Less Than One Hour)' AND T2.stars = 10;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Please give the name of the director who achieved the Outstanding Animated Program (For Programming Less Than One Hour) award whose episode title is \"No Loan Again, Naturally\".",
+        "query": "SELECT T1.person FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T1.role = 'director' AND T1.award = 'Outstanding Animated Program (For Programming Less Than One Hour)' AND T2.title = 'No Loan Again, Naturally';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Please indicate which writer has an episode star score greater than 5 in 2009.",
+        "query": "SELECT T1.person FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE SUBSTR(T1.year, 1, 4) = '2009' AND T1.role = 'writer' AND T2.votes > 5;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many WGA Award (TV) award recipients were born in the USA from 2009 to 2010?",
+        "query": "SELECT COUNT(*) FROM Person AS T1 INNER JOIN Award AS T2 ON T1.name = T2.person WHERE T2.award_category = 'WGA Award (TV)' AND T1.birth_country = 'USA' AND T2.year BETWEEN 2009 AND 2010;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Which episode did the composer win for Outstanding Music Composition for a Series (Original Dramatic Score) with more than 200 votes?",
+        "query": "SELECT DISTINCT T1.episode_id FROM Award AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.role = 'composer' AND T1.award = 'Outstanding Music Composition for a Series (Original Dramatic Score)' AND T2.votes > 200;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "The person named Al Jean achieved the Primetime Emmy Award category in 2009, which episode did AI Jean achieve?",
+        "query": "SELECT T2.episode_id FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE SUBSTR(T1.year, 1, 4) = '2009' AND T1.person = 'Al Jean' AND T1.award_category = 'Primetime Emmy';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How much more votes for episode 1 than for episode 5?",
+        "query": "SELECT SUM(CASE WHEN T1.episode = 1 THEN T2.votes ELSE 0 END) - SUM(CASE WHEN T1.episode = 5 THEN T2.votes ELSE 0 END) AS diff FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What award did the character Homer simpson 20 achieve in 2009?",
+        "query": "SELECT DISTINCT T1.award FROM Award AS T1 INNER JOIN Character_Award AS T2 ON T1.award_id = T2.award_id WHERE T1.year = 2009 AND T2.character = 'Homer Simpson';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many episodes have won the award for Outstanding Animated Program (Programming Under One Hour) with less than 100 votes? Calculate the percentage of episodes with less than 100 votes out of total episodes.",
+        "query": "SELECT SUM(CASE WHEN T2.votes < 100 THEN 1 ELSE 0 END) AS num , CAST(SUM(CASE WHEN T2.votes < 100 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM Award AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Episode AS T3 ON T1.episode_id = T3.episode_id WHERE T1.award = 'Outstanding Animated Program (For Programming Less Than One Hour)';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many recipients of the Primetime Emmy Award category that were born in the USA? Find the percentage of Americans in the total number of the country.",
+        "query": "SELECT SUM(CASE WHEN T1.birth_country = 'USA' THEN 1 ELSE 0 END) AS num , CAST(SUM(CASE WHEN T1.birth_country = 'USA' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM Person AS T1 INNER JOIN Award AS T2 ON T1.name = T2.person WHERE T2.award_category = 'Primetime Emmy' AND T2.person = 'Dan Castellaneta';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Please list two people who are the nominees for the \"Outstanding Voice-Over Performance\" award for season 20.",
+        "query": "SELECT person FROM Award WHERE result = 'Nominee' AND award = 'Outstanding Voice-Over Performance' AND episode_id LIKE 'S20%' LIMIT 2;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many executive producers are the nominees for the award of \"Outstanding Animated Program (For Programming Less Than One Hour)\"?",
+        "query": "SELECT COUNT(*) FROM Award WHERE role = 'executive producer' AND result = 'Nominee' AND award = 'Outstanding Animated Program (For Programming Less Than One Hour)';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "In the crew, who was born in 1962 in California?",
+        "query": "SELECT name FROM Person WHERE SUBSTR(birthdate, 1, 4) = '1962' AND birth_region = 'California';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many of the crew members who are taller than 1.70m were born in Canada?",
+        "query": "SELECT COUNT(name) FROM Person WHERE height_meters > 1.70 AND birth_country = 'Canada';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many people were considered as prospective recipients of the \"Animation\" award?",
+        "query": "SELECT COUNT(*) FROM Award WHERE award = 'Animation' AND result = 'Nominee';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Please list any three episodes that have an excellent rating.",
+        "query": "SELECT title FROM Episode WHERE rating BETWEEN 7 AND 10 LIMIT 3;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What are the top five most popular episodes?",
+        "query": "SELECT episode_id FROM Episode ORDER BY votes DESC LIMIT 5;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Please list the three episodes with the highest number of votes for the worst star rating.",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T2.stars = ( SELECT MIN(stars) FROM Vote ) ORDER BY T2.votes DESC LIMIT 3;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What was the character that Dan Castellaneta did the voice over for and was awarded?",
+        "query": "SELECT DISTINCT T2.character FROM Award AS T1 INNER JOIN Character_Award AS T2 ON T1.award_id = T2.award_id WHERE T1.award LIKE '%Voice-Over%' AND T1.person = 'Dan Castellaneta';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Please list all of the episodes that aired in 2008 that have the highest number of votes for the maximum star rating.",
+        "query": "SELECT T1.episode_id FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE SUBSTR(T1.air_date, 1, 4) = '2008' ORDER BY T2.votes DESC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What are the keywords of the episode \"Take My Life, Please\"?",
+        "query": "SELECT T2.keyword FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Take My Life, Please';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Please provide any two episodes' names that have the same keyword of \"1930s to 2020s\".",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T2.keyword = '1930s to 2020s' LIMIT 2;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "In 2010, which episode did Joel H. Cohen win an award for?",
+        "query": "SELECT T2.title FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE SUBSTR(T1.year, 1, 4) = '2010' AND T1.person = 'Joel H. Cohen';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many votes of 5-star did the episode \"Lisa the Drama Queen\" receive?",
+        "query": "SELECT SUM(T2.votes) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.title = 'Lisa the Drama Queen' AND T2.stars = 5;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the number of votes for 10-star for the episode that has the keyword \"reference to the fantastic four\"?",
+        "query": "SELECT T2.votes FROM Keyword AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id WHERE T2.stars = 10 AND T1.keyword = 'reference to the fantastic four';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the difference between the number of votes for 1-star vs. 10-star for the episode \"The Burns and the Bees\"?",
+        "query": "SELECT SUM(CASE WHEN T2.stars = 10 THEN T2.votes ELSE 0 END) - SUM(CASE WHEN T2.stars = 1 THEN T2.votes ELSE 0 END) AS Difference FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.title = 'The Burns and the Bees';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What are the keywords of the least popular episode?",
+        "query": "SELECT T2.keyword FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id ORDER BY T1.votes LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What are the episodes that have the average rating with more than 20 of 2-star votes?",
+        "query": "SELECT DISTINCT T1.episode_id FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T2.stars = 2 AND T2.votes > 20 AND T1.rating > 5.0 AND T1.rating <= 7.0;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Which episode has the largest number of votes?",
+        "query": "SELECT episode FROM Episode WHERE votes = ( SELECT MAX(votes) FROM Episode );"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Who is the oldest among all the casts and crews?",
+        "query": "SELECT name FROM Person ORDER BY birthdate ASC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What are the episodes Oscar Cervantes is credited with?",
+        "query": "SELECT episode_id FROM Credit WHERE person = 'Oscar Cervantes' AND credited = 'true';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What are the roles of the cast and crew from countries other than the USA?",
+        "query": "SELECT T2.role FROM Person AS T1 INNER JOIN Credit AS T2 ON T1.name = T2.person WHERE T1.birth_country != 'USA';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many 1 star ratings are there in the worst rated episode of the season?",
+        "query": "SELECT COUNT(*) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T2.stars = 1 ORDER BY T1.rating LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Which character did the \"Outstanding Voice-Over Performance\" winner voice?",
+        "query": "SELECT DISTINCT T2.character FROM Award AS T1 INNER JOIN Character_Award AS T2 ON T1.award_id = T2.award_id WHERE T1.award = 'Outstanding Voice-Over Performance' AND T1.result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the summary of the episode in which Emily Blunt is featured in?",
+        "query": "SELECT T1.summary FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T2.person = 'Emily Blunt';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Who did \"The Tiny Canadian\" play as in the show?",
+        "query": "SELECT T2.role FROM Person AS T1 INNER JOIN Credit AS T2 ON T1.name = T2.person WHERE T1.nickname = 'The Tiny Canadian';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Among the episodes with an award nominee or winner, which has the highest percent of 5 star votes?",
+        "query": "SELECT T1.episode_id FROM Award AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T2.stars = 5 ORDER BY T2.percent DESC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the credited cast for the episode \"In the Name of the Grandfather\"?",
+        "query": "SELECT DISTINCT T2.person FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'In the Name of the Grandfather' AND T2.category = 'Cast' AND T2.credited = 'true';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List all of the award winners' birth dates.",
+        "query": "SELECT T1.birthdate FROM Person AS T1 INNER JOIN Award AS T2 ON T1.name = T2.person WHERE T2.result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Who is the writer for the episode with the most 10 star votes?",
+        "query": "SELECT T1.person FROM Credit AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id WHERE T1.role = 'Writer' AND T2.stars = 10 GROUP BY T1.person ORDER BY COUNT(*) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What award did the episode that aired on 11/30/2008 win?",
+        "query": "SELECT T1.award FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T1.result = 'Winner' AND T2.air_date = '2008-11-30';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List all of the information about the music department's casts and crews.",
+        "query": "SELECT DISTINCT person, name, birthdate, birth_name, birth_place , birth_region, birth_country, height_meters, nickname FROM Person AS T1 INNER JOIN Credit AS T2 ON T1.name = T2.person WHERE T2.category = 'Music Department';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What are the keywords for episode 426 of the series?",
+        "query": "SELECT T2.keyword FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.number_in_series = 426;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What are the titles of the episodes that have received more 7-star votes than the season average?",
+        "query": "SELECT DISTINCT T1.episode_id FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T2.stars = 7 AND T2.votes > 0.7 * ( SELECT CAST(COUNT(votes) AS REAL) / COUNT(CASE WHEN stars = 7 THEN 1 ELSE 0 END) FROM Vote );"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What percentage of votes are from the nominated episodes?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.result = 'Nominee' THEN T2.votes ELSE 0 END) AS REAL) * 100 / SUM(T2.votes) FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List down person's name who has nickname.",
+        "query": "SELECT name FROM Person WHERE nickname IS NOT NULL;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Which country has the tallest person in the crew?",
+        "query": "SELECT birth_country FROM Person ORDER BY height_meters DESC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the average height of people from USA?",
+        "query": "SELECT AVG(height_meters) FROM Person WHERE birth_country = 'USA';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Calculate the percentage of people who were born after 1970 and from California.",
+        "query": "SELECT CAST(SUM(CASE WHEN birth_region = 'California' AND SUBSTR(birthdate, 1, 4) > '1970' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(birthdate) FROM Person;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many people were not born in Connecticut, USA?",
+        "query": "SELECT COUNT(name) FROM Person WHERE birth_region != 'Connecticut' AND birth_country != 'USA';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List down the title of episode S20-E1, S20-E2 & S20-E3.",
+        "query": "SELECT title FROM Episode WHERE episode_id IN ('S20-E1', 'S20-E2', 'S20-E3');"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Write down the website address which stores the episode image of episode 5.",
+        "query": "SELECT episode_image FROM Episode WHERE episode = 5;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "State the number of votes for episode with rating of 7 and above.",
+        "query": "SELECT votes FROM Episode WHERE rating > 7;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many title's crew members are working from Casting Department?",
+        "query": "SELECT COUNT(*) FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T2.category = 'Casting Department';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many additional timers were born in USA?",
+        "query": "SELECT COUNT(*) FROM Person AS T1 INNER JOIN Credit AS T2 ON T1.name = T2.person WHERE T2.role = 'additional timer' AND T1.birth_country = 'USA';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many people who were born after 1970 are animation executive producer?",
+        "query": "SELECT COUNT(*) FROM Person AS T1 INNER JOIN Credit AS T2 ON T1.name = T2.person WHERE STRFTIME(T1.birthdate) > '1970' AND T2.role = 'animation executive producer';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Write down the summary of episode whereby it has crew members that are not included in the credit list.",
+        "query": "SELECT T1.summary FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T2.credited = 'false';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List down the rating of episodes that were produced by Jason Bikowski.",
+        "query": "SELECT T1.rating FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T2.person = 'Jason Bikowski';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the average heights of crew members from Animation Department?",
+        "query": "SELECT AVG(T1.height_meters) FROM Person AS T1 INNER JOIN Credit AS T2 ON T1.name = T2.person WHERE T2.category = 'Animation Department';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the character that won the award in Primetime Emmy 2009?",
+        "query": "SELECT DISTINCT T2.character FROM Award AS T1 INNER JOIN Character_Award AS T2 ON T1.award_id = T2.award_id WHERE T1.award_category = 'Primetime Emmy' AND T1.year = 2009 AND T1.result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What are the characters that were nominated for Primetime Emmy Award from 2009 to 2010 but did not win?",
+        "query": "SELECT T2.character FROM Award AS T1 INNER JOIN Character_Award AS T2 ON T1.award_id = T2.award_id WHERE T1.award_category = 'Primetime Emmy' AND T1.year BETWEEN 2009 AND 2010 AND T1.result != 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Calculate the total votes of episodes that Adam Kuhlman had involved.",
+        "query": "SELECT SUM(T1.votes) FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T2.person = 'Adam Kuhlman';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List down the keyword and crew member's name for episode id S20-E1.",
+        "query": "SELECT T1.keyword, T2.person FROM Keyword AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T1.episode_id = 'S20-E1';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the keyword for episodes with stars score of 10 at 30% and above?",
+        "query": "SELECT T1.keyword FROM Keyword AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id WHERE T2.stars = 10 AND T2.percent > 29;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the percentage of star score 5 that was collected by title \"Sex, Pies and Idiot Scrapes\"?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.stars = 5 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.title = 'Sex, Pies and Idiot Scrapes';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Please check is \"limbo dancing\" the keyword for title \"Dangerous Curves\"?",
+        "query": "SELECT CASE WHEN T2.Keyword = 'limbo dancing' THEN 'Yes' ELSE 'No' END AS result FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Dangerous Curves';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Which title is the winner of Best International TV Series in 2017?",
+        "query": "SELECT T2.title FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T1.award = 'Best International TV Series' AND SUBSTR(T1.year, 1, 4) = '2017';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Write down all the keywords for winner of \"WGA Award (TV)\" award.",
+        "query": "SELECT T2.keyword FROM Award AS T1 INNER JOIN Keyword AS T2 ON T2.episode_id = T1.episode_id WHERE T1.award_category = 'WGA Award (TV)';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "State the birth place of co-executive producer for nominee of \"Outstanding Animated Program (For Programming Less Than One Hour)\" award.",
+        "query": "SELECT T1.birth_place FROM Person AS T1 INNER JOIN Award AS T2 ON T1.name = T2.person WHERE T2.award = 'Outstanding Animated Program (For Programming Less Than One Hour)' AND T2.role = 'co-executive producer';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Sum up the votes from star 1 to 5 for all of the contestants in Blimp Award.",
+        "query": "SELECT T2.stars, SUM(T2.stars) FROM Award AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.award_category = 'Blimp Award' AND T2.stars BETWEEN 1 AND 5 GROUP BY T2.stars;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Calculate the total rating of winners in OFTA Television Award and WGA Award (TV).",
+        "query": "SELECT SUM(T2.rating) FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T1.award_category IN ('Jupiter Award ', 'WGA Award (TV)');"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Out of the rating of 6.8 scored by title \"No Loan Again, Naturally\", how many percent of it consists of scores 5 to 10?",
+        "query": "SELECT SUM(T2.percent) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.title = 'No Loan Again, Naturally' AND T1.rating = 6.8 AND T2.stars BETWEEN 5 AND 10;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many episodes have the star score greater than 8?",
+        "query": "SELECT COUNT(DISTINCT episode_id) FROM Vote WHERE stars > 8;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Which episode has the highest number of vote of the star score?",
+        "query": "SELECT episode_id FROM Vote ORDER BY votes DESC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many episodes have the keyword \"2d animation\"?",
+        "query": "SELECT COUNT(episode_id) FROM Keyword WHERE keyword = '2d animation';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Name the organization which hold the award id 328.",
+        "query": "SELECT organization FROM Award WHERE award_id = 328;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many awards had been held in 2009?",
+        "query": "SELECT COUNT(award_id) FROM Award WHERE SUBSTR(year, 1, 4) = '2009';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many awards classified as \"Primetime Emmy\" category?",
+        "query": "SELECT COUNT(award_id) FROM Award WHERE award_category = 'Primetime Emmy';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List out the birth name of crews who are co-executive producer and higher than 1.60 meters.",
+        "query": "SELECT T1.birth_name FROM Person AS T1 INNER JOIN Award AS T2 ON T1.name = T2.person WHERE T2.role = 'co-executive producer' AND T1.height_meters > 1.60;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Calculate the percentage of the nominees who were born in USA.",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.birth_country = 'USA' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM Person AS T1 INNER JOIN Award AS T2 ON T1.name = T2.person WHERE T2.result = 'Nominee';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Calculate the percentage of the winners who are higher than 1.75 meters.",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.height_meters > 1.75 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM Person AS T1 INNER JOIN Award AS T2 ON T1.name = T2.person WHERE T2.result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List out the title of episodes which have star score of 2.",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T2.stars = 2;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List out the star scores of episode which has title of \"How the Test Was Won\".",
+        "query": "SELECT T2.stars FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.title = 'How the Test Was Won';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Among the episodes which have star score greater than 5, how many episodes have air date in 2008?",
+        "query": "SELECT COUNT(DISTINCT T2.episode_id) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE strftime('%Y', T1.air_date) = '2008' AND T2.stars > 5;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List out the names of the awarded character in the awards held in 2009.",
+        "query": "SELECT T2.character FROM Award AS T1 INNER JOIN Character_Award AS T2 ON T1.award_id = T2.award_id WHERE T1.year = 2009;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Which are the years that character Mr. Burns won an award?",
+        "query": "SELECT DISTINCT T1.year FROM Award AS T1 INNER JOIN Character_Award AS T2 ON T1.award_id = T2.award_id WHERE T2.character = 'Mr. Burns';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the awarded category that the awarded character Lenny won?",
+        "query": "SELECT DISTINCT T1.award_category FROM Award AS T1 INNER JOIN Character_Award AS T2 ON T1.award_id = T2.award_id WHERE T2.character = 'Lenny';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the name of actor who took the role Smithers?",
+        "query": "SELECT DISTINCT T1.person FROM Award AS T1 INNER JOIN Character_Award AS T2 ON T1.award_id = T2.award_id WHERE T2.character = 'Smithers';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What are the keywords of the episode which has title as Dangerous Curves?",
+        "query": "SELECT T2.keyword FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Dangerous Curves';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What are the keywords of the episodes which have the air date in 2008?",
+        "query": "SELECT T2.keyword FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE SUBSTR(T1.air_date, 1, 4) = '2008';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Among the episodes which have star score less than 8, how many episodes were aired in 2009?",
+        "query": "SELECT COUNT(DISTINCT T2.episode_id) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE strftime('%Y', T1.air_date) = '2009' AND T2.stars < 8;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "State the birth name of crews who are director and have birth country in South Korea.",
+        "query": "SELECT T1.birth_name FROM Person AS T1 INNER JOIN Award AS T2 ON T1.name = T2.person WHERE T2.role = 'director' AND T1.birth_country = 'South Korea';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "How many awards did simpson 20 won in 2009?",
+        "query": "SELECT COUNT(award_id) FROM Award WHERE SUBSTR(year, 1, 4) = '2009' AND result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the total number of episode with a rating below 7?",
+        "query": "SELECT COUNT(episode_id) FROM Episode WHERE rating < 7;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List down the names of person born in California, USA.",
+        "query": "SELECT name FROM Person WHERE birth_region = 'California' AND birth_country = 'USA';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "In between the episode 5 and10 of season 2, how many of them are credited for casting?",
+        "query": "SELECT COUNT(credited) FROM Credit WHERE episode_id IN ( 'S20-E5',  'S20-E6',  'S20-E7',  'S20-E8',  'S20-E9',  'S20-E10' ) AND credited = 'true' AND role = 'casting';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the episode ID that received 2 stars and 9 votes?",
+        "query": "SELECT episode_id FROM Vote WHERE stars = 2 AND votes = 9;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Give the title of the episode won in Primetime Emmy Awards 2009.",
+        "query": "SELECT T2.title FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T1.organization = 'Primetime Emmy Awards' AND T1.year = 2009 AND T1.result = 'Winner';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List down the episode ID of episodes aired in 2008 with 5 stars and below.",
+        "query": "SELECT DISTINCT T1.episode_id FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE SUBSTR(T1.air_date, 1, 4) = '2008' AND T2.stars < 5;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Among the episode with highest votes, what is the category credited to Carlton Batten?",
+        "query": "SELECT T2.category FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T2.person = 'Carlton Batten' AND T2.credited = 'true' ORDER BY T1.votes DESC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Among the episodes aired in 2008 with votes ranges from 920 to 950, list their percent.",
+        "query": "SELECT T2.percent FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE SUBSTR(T1.air_date, 1, 4) = '2008' AND T1.votes BETWEEN 950 AND 960;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List the episode ID and title of episode where casting was credited to Bonita Pietila.",
+        "query": "SELECT T1.episode_id, T1.title FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T2.credited = 'true' AND T2.person = 'Bonita Pietila' AND T2.role = 'casting';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "In episode nominated in Annie Awards, how many of the episodes have a percent greater than 6?",
+        "query": "SELECT COUNT(*) FROM Award AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T1.organization = 'Annie Awards' AND T1.result = 'Nominee' AND T2.percent > 6;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the title of episode nominated for WGA Award (TV) with votes greater than 1000?",
+        "query": "SELECT DISTINCT T2.title FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T2.votes > 1000 AND T1.award_category = 'WGA Award (TV)' AND T1.result = 'Nominee';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "Among the people in Animation Department, who are credited for additional time in the episode titled by \"How the Test Was Won\"?",
+        "query": "SELECT T2.person FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'How the Test Was Won' AND T2.role = 'additional timer' AND T2.credited = 'true' AND T2.category = 'Animation Department';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List the stars of episodes aired in November 2008.",
+        "query": "SELECT T2.stars FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE SUBSTR(T1.air_date, 1, 7) = '2008-11';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "What is the title of episode with 5 stars and nominated for Prism Award which is aired on April 19, 2009?",
+        "query": "SELECT T3.title FROM Award AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Episode AS T3 ON T1.episode_id = T3.episode_id WHERE T3.air_date = '2009-04-19' AND T1.award_category = 'Prism Award' AND T2.stars = 5 AND T1.result = 'Nominee';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "In episode with the highest votes, list the category of awards it is nominated for.",
+        "query": "SELECT T1.award_category FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T1.result = 'Nominee' ORDER BY T2.votes DESC LIMIT 1;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "In episodes aired in 2009, how many of them are credited to Sam Im for additional timer?",
+        "query": "SELECT COUNT(*) FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T2.credited = 'true' AND T2.person = 'Sam Im' AND SUBSTR(T1.air_date, 1, 4) = '2009' AND T2.role = 'additional timer';"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "List the title of the episode with stars greater than the 70% of average stars of all episodes.",
+        "query": "SELECT DISTINCT T1.title FROM Episode AS T1 INNER JOIN Vote AS T2 ON T2.episode_id = T1.episode_id WHERE T2.stars > 0.7 * ( SELECT AVG(stars) FROM Vote );"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "simpson_episodes",
+        "question": "In year 2009, what is the percentage of the episode titled by \"Gone Maggie Gone\" being nominated?",
+        "query": "SELECT CAST((SUM(CASE WHEN T1.result = 'Nominee' THEN 1 ELSE 0 END) - SUM(CASE WHEN T1.result = 'Winner' THEN 1 ELSE 0 END)) AS REAL) * 100 / COUNT(T1.result) FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T2.title = 'Gone Maggie Gone' AND T1.year = 2009;"
+    }
+]

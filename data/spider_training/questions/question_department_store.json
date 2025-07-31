@@ -1,0 +1,530 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the ids of the top three products that were purchased in the largest amount?",
+        "query": "SELECT product_id FROM product_suppliers ORDER BY total_amount_purchased DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Give the ids of the three products purchased in the largest amounts.",
+        "query": "SELECT product_id FROM product_suppliers ORDER BY total_amount_purchased DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the product id and product type of the cheapest product?",
+        "query": "SELECT product_id ,  product_type_code FROM products ORDER BY product_price LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Give the id and product type of the product with the lowest price.",
+        "query": "SELECT product_id ,  product_type_code FROM products ORDER BY product_price LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Find the number of different product types.",
+        "query": "SELECT count(DISTINCT product_type_code) FROM products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Count the number of distinct product types.",
+        "query": "SELECT count(DISTINCT product_type_code) FROM products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the address of customer 10.",
+        "query": "SELECT T1.address_details FROM addresses AS T1 JOIN customer_addresses AS T2 ON T1.address_id  =  T2.address_id WHERE T2.customer_id  =  10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What is the address for the customer with id 10?",
+        "query": "SELECT T1.address_details FROM addresses AS T1 JOIN customer_addresses AS T2 ON T1.address_id  =  T2.address_id WHERE T2.customer_id  =  10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the staff ids and genders of all staffs whose job title is Department Manager?",
+        "query": "SELECT T1.staff_id ,  T1.staff_gender FROM staff AS T1 JOIN staff_department_assignments AS T2 ON T1.staff_id  =  T2.staff_id WHERE T2.job_title_code  =  \"Department Manager\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the staff ids and genders for any staff with the title Department Manager.",
+        "query": "SELECT T1.staff_id ,  T1.staff_gender FROM staff AS T1 JOIN staff_department_assignments AS T2 ON T1.staff_id  =  T2.staff_id WHERE T2.job_title_code  =  \"Department Manager\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "For each payment method, return how many customers use it.",
+        "query": "SELECT payment_method_code ,  count(*) FROM customers GROUP BY payment_method_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "How many customers use each payment method?",
+        "query": "SELECT payment_method_code ,  count(*) FROM customers GROUP BY payment_method_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What is the id of the product that was ordered the most often?",
+        "query": "SELECT product_id FROM order_items GROUP BY product_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Give the product id for the product that was ordered most frequently.",
+        "query": "SELECT product_id FROM order_items GROUP BY product_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the name, phone number and email address of the customer who made the largest number of orders?",
+        "query": "SELECT T1.customer_name ,  T1.customer_phone ,  T1.customer_email FROM customers AS T1 JOIN customer_orders AS T2 ON T1.customer_id  =  T2.customer_id GROUP BY T2.customer_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the name, phone number and email address for the customer with the most orders.",
+        "query": "SELECT T1.customer_name ,  T1.customer_phone ,  T1.customer_email FROM customers AS T1 JOIN customer_orders AS T2 ON T1.customer_id  =  T2.customer_id GROUP BY T2.customer_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What is the average price for each type of product?",
+        "query": "SELECT product_type_code ,  avg(product_price) FROM products GROUP BY product_type_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the average price for each product type.",
+        "query": "SELECT product_type_code ,  avg(product_price) FROM products GROUP BY product_type_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "How many department stores does the store chain South have?",
+        "query": "SELECT count(*) FROM department_stores AS T1 JOIN department_store_chain AS T2 ON T1.dept_store_chain_id  =  T2.dept_store_chain_id WHERE T2.dept_store_chain_name  =  \"South\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Count the number of stores the chain South has.",
+        "query": "SELECT count(*) FROM department_stores AS T1 JOIN department_store_chain AS T2 ON T1.dept_store_chain_id  =  T2.dept_store_chain_id WHERE T2.dept_store_chain_name  =  \"South\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What is the name and job title of the staff who was assigned the latest?",
+        "query": "SELECT T1.staff_name ,  T2.job_title_code FROM staff AS T1 JOIN staff_department_assignments AS T2 ON T1.staff_id  =  T2.staff_id ORDER BY T2.date_assigned_to DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the name and job title of the staff with the latest date assigned.",
+        "query": "SELECT T1.staff_name ,  T2.job_title_code FROM staff AS T1 JOIN staff_department_assignments AS T2 ON T1.staff_id  =  T2.staff_id ORDER BY T2.date_assigned_to DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Give me the product type, name and price for all the products supplied by supplier id 3.",
+        "query": "SELECT T2.product_type_code ,  T2.product_name ,  T2.product_price FROM product_suppliers AS T1 JOIN products AS T2 ON T1.product_id  =  T2.product_id WHERE T1.supplier_id  =  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the product type, name, and price for products supplied by supplier 3.",
+        "query": "SELECT T2.product_type_code ,  T2.product_name ,  T2.product_price FROM product_suppliers AS T1 JOIN products AS T2 ON T1.product_id  =  T2.product_id WHERE T1.supplier_id  =  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the distinct name of customers whose order status is Pending, in the order of customer id.",
+        "query": "SELECT DISTINCT T1.customer_name FROM customers AS T1 JOIN customer_orders AS T2 ON T1.customer_id  =  T2.customer_id WHERE T2.order_status_code  =  \"Pending\" ORDER BY T2.customer_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the distinct names of customers with an order status of Pending, sorted by customer id?",
+        "query": "SELECT DISTINCT T1.customer_name FROM customers AS T1 JOIN customer_orders AS T2 ON T1.customer_id  =  T2.customer_id WHERE T2.order_status_code  =  \"Pending\" ORDER BY T2.customer_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Find the name and address of the customers who have both New and Pending orders.",
+        "query": "SELECT T1.customer_name ,  T1.customer_address FROM customers AS T1 JOIN customer_orders AS T2 ON T1.customer_id  =  T2.customer_id WHERE T2.order_status_code  =  \"New\" INTERSECT SELECT T1.customer_name ,  T1.customer_address FROM customers AS T1 JOIN customer_orders AS T2 ON T1.customer_id  =  T2.customer_id WHERE T2.order_status_code  =  \"Pending\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the names and addressed of customers who have both New and Pending orders?",
+        "query": "SELECT T1.customer_name ,  T1.customer_address FROM customers AS T1 JOIN customer_orders AS T2 ON T1.customer_id  =  T2.customer_id WHERE T2.order_status_code  =  \"New\" INTERSECT SELECT T1.customer_name ,  T1.customer_address FROM customers AS T1 JOIN customer_orders AS T2 ON T1.customer_id  =  T2.customer_id WHERE T2.order_status_code  =  \"Pending\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return ids of all the products that are supplied by supplier id 2 and are more expensive than the average price of all products.",
+        "query": "SELECT T1.product_id FROM product_suppliers AS T1 JOIN products AS T2 ON T1.product_id  =  T2.product_id WHERE T1.supplier_id  =  2 AND T2.product_price  >  (SELECT avg(product_price) FROM products)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the ids of products from the supplier with id 2, which are more expensive than the average price across all products?",
+        "query": "SELECT T1.product_id FROM product_suppliers AS T1 JOIN products AS T2 ON T1.product_id  =  T2.product_id WHERE T1.supplier_id  =  2 AND T2.product_price  >  (SELECT avg(product_price) FROM products)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What is the id and name of the department store that has both marketing and managing department?",
+        "query": "SELECT T2.dept_store_id ,  T2.store_name FROM departments AS T1 JOIN department_stores AS T2 ON T1.dept_store_id  =  T2.dept_store_id WHERE T1.department_name  =  \"marketing\" INTERSECT SELECT T2.dept_store_id ,  T2.store_name FROM departments AS T1 JOIN department_stores AS T2 ON T1.dept_store_id  =  T2.dept_store_id WHERE T1.department_name  =  \"managing\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the ids and names of department stores with both marketing and managing departments?",
+        "query": "SELECT T2.dept_store_id ,  T2.store_name FROM departments AS T1 JOIN department_stores AS T2 ON T1.dept_store_id  =  T2.dept_store_id WHERE T1.department_name  =  \"marketing\" INTERSECT SELECT T2.dept_store_id ,  T2.store_name FROM departments AS T1 JOIN department_stores AS T2 ON T1.dept_store_id  =  T2.dept_store_id WHERE T1.department_name  =  \"managing\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the ids of the two department store chains with the largest number of department stores?",
+        "query": "SELECT dept_store_chain_id FROM department_stores GROUP BY dept_store_chain_id ORDER BY count(*) DESC LIMIT 2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the ids of the two department store chains with the most department stores.",
+        "query": "SELECT dept_store_chain_id FROM department_stores GROUP BY dept_store_chain_id ORDER BY count(*) DESC LIMIT 2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What is the id of the department with the least number of staff?",
+        "query": "SELECT department_id FROM staff_department_assignments GROUP BY department_id ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the id of the department with the fewest staff assignments.",
+        "query": "SELECT department_id FROM staff_department_assignments GROUP BY department_id ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "For each product type, return the maximum and minimum price.",
+        "query": "SELECT product_type_code ,  max(product_price) ,  min(product_price) FROM products GROUP BY product_type_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the maximum and minimum product prices for each product type?",
+        "query": "SELECT product_type_code ,  max(product_price) ,  min(product_price) FROM products GROUP BY product_type_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Find the product type whose average price is higher than the average price of all products.",
+        "query": "SELECT product_type_code FROM products GROUP BY product_type_code HAVING avg(product_price)  >  (SELECT avg(product_price) FROM products)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What is the code of the product type with an average price higher than the average price of all products?",
+        "query": "SELECT product_type_code FROM products GROUP BY product_type_code HAVING avg(product_price)  >  (SELECT avg(product_price) FROM products)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Find the id and name of the staff who has been assigned for the shortest period.",
+        "query": "SELECT T1.staff_id ,  T1.staff_name FROM staff AS T1 JOIN Staff_Department_Assignments AS T2 ON T1.staff_id  =  T2.staff_id ORDER BY date_assigned_to - date_assigned_from LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What is the id and name of the staff who has been assigned for the least amount of time?",
+        "query": "SELECT T1.staff_id ,  T1.staff_name FROM staff AS T1 JOIN Staff_Department_Assignments AS T2 ON T1.staff_id  =  T2.staff_id ORDER BY date_assigned_to - date_assigned_from LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the names and ids of all products whose price is between 600 and 700.",
+        "query": "SELECT product_name ,  product_id FROM products WHERE product_price BETWEEN 600 AND 700"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the names and ids of products costing between 600 and 700?",
+        "query": "SELECT product_name ,  product_id FROM products WHERE product_price BETWEEN 600 AND 700"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Find the ids of all distinct customers who made order after some orders that were Cancelled.",
+        "query": "SELECT DISTINCT customer_id FROM Customer_Orders WHERE order_date  >  (SELECT min(order_date) FROM Customer_Orders WHERE order_status_code  =  \"Cancelled\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the distinct ids of customers who made an order after any order that was Cancelled?",
+        "query": "SELECT DISTINCT customer_id FROM Customer_Orders WHERE order_date  >  (SELECT min(order_date) FROM Customer_Orders WHERE order_status_code  =  \"Cancelled\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What is id of the staff who had a Staff Department Assignment earlier than any Clerical Staff?",
+        "query": "SELECT staff_id FROM Staff_Department_Assignments WHERE date_assigned_to  <  (SELECT max(date_assigned_to) FROM Staff_Department_Assignments WHERE job_title_code  =  'Clerical Staff')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the id of the staff whose Staff Department Assignment was earlier than that of any Clerical Staff.",
+        "query": "SELECT staff_id FROM Staff_Department_Assignments WHERE date_assigned_to  <  (SELECT max(date_assigned_to) FROM Staff_Department_Assignments WHERE job_title_code  =  'Clerical Staff')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the names and ids of customers whose address contains TN?",
+        "query": "SELECT customer_name ,  customer_id FROM customers WHERE customer_address LIKE \"%TN%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the names and ids of customers who have TN in their address.",
+        "query": "SELECT customer_name ,  customer_id FROM customers WHERE customer_address LIKE \"%TN%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the name and gender of the staff who was assigned in 2016.",
+        "query": "SELECT T1.staff_name ,  T1.staff_gender FROM staff AS T1 JOIN staff_department_assignments AS T2 ON T1.staff_id  =  T2.staff_id WHERE T2.date_assigned_from LIKE \"2016%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the names and genders of staff who were assigned in 2016?",
+        "query": "SELECT T1.staff_name ,  T1.staff_gender FROM staff AS T1 JOIN staff_department_assignments AS T2 ON T1.staff_id  =  T2.staff_id WHERE T2.date_assigned_from LIKE \"2016%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "List the name of staff who has been assigned multiple jobs.",
+        "query": "SELECT T1.staff_name FROM staff AS T1 JOIN staff_department_assignments AS T2 ON T1.staff_id  =  T2.staff_id GROUP BY T2.staff_id HAVING COUNT (*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the names of staff who have been assigned multiple jobs?",
+        "query": "SELECT T1.staff_name FROM staff AS T1 JOIN staff_department_assignments AS T2 ON T1.staff_id  =  T2.staff_id GROUP BY T2.staff_id HAVING COUNT (*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "List the name and phone number of all suppliers in the alphabetical order of their addresses.",
+        "query": "SELECT T1.supplier_name ,  T1.supplier_phone FROM Suppliers AS T1 JOIN supplier_addresses AS T2 ON T1.supplier_id  =  T2.supplier_id JOIN addresses AS T3 ON T2.address_id  =  T3.address_id ORDER BY T3.address_details"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the names and phone numbers for all suppliers, sorted in alphabetical order of their addressed?",
+        "query": "SELECT T1.supplier_name ,  T1.supplier_phone FROM Suppliers AS T1 JOIN supplier_addresses AS T2 ON T1.supplier_id  =  T2.supplier_id JOIN addresses AS T3 ON T2.address_id  =  T3.address_id ORDER BY T3.address_details"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the phone numbers of all customers and suppliers.",
+        "query": "SELECT customer_phone FROM customers UNION SELECT supplier_phone FROM suppliers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the phone numbers for all customers and suppliers.",
+        "query": "SELECT customer_phone FROM customers UNION SELECT supplier_phone FROM suppliers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the ids of all products that were ordered more than three times or supplied more than 80000.",
+        "query": "SELECT product_id FROM Order_Items GROUP BY product_id HAVING count(*)  >  3 UNION SELECT product_id FROM Product_Suppliers GROUP BY product_id HAVING sum(total_amount_purchased)  >  80000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the ids of all products that were either ordered more than 3 times or have a cumulative amount purchased of above 80000?",
+        "query": "SELECT product_id FROM Order_Items GROUP BY product_id HAVING count(*)  >  3 UNION SELECT product_id FROM Product_Suppliers GROUP BY product_id HAVING sum(total_amount_purchased)  >  80000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are id and name of the products whose price is lower than 600 or higher than 900?",
+        "query": "SELECT product_id ,  product_name FROM products WHERE product_price  <  600 OR product_price  >  900"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Give the ids and names of products with price lower than 600 or higher than 900.",
+        "query": "SELECT product_id ,  product_name FROM products WHERE product_price  <  600 OR product_price  >  900"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Find the id of suppliers whose average amount purchased for each product is above 50000 or below 30000.",
+        "query": "SELECT supplier_id FROM Product_Suppliers GROUP BY supplier_id HAVING avg(total_amount_purchased)  >  50000 OR avg(total_amount_purchased)  <  30000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the ids of suppliers which have an average amount purchased of above 50000 or below 30000?",
+        "query": "SELECT supplier_id FROM Product_Suppliers GROUP BY supplier_id HAVING avg(total_amount_purchased)  >  50000 OR avg(total_amount_purchased)  <  30000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the average amount purchased and value purchased for the supplier who supplies the most products.",
+        "query": "SELECT avg(total_amount_purchased) ,  avg(total_value_purchased) FROM Product_Suppliers WHERE supplier_id  =  (SELECT supplier_id FROM Product_Suppliers GROUP BY supplier_id ORDER BY count(*) DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the average total amount purchased and total value purchased for the supplier who supplies the greatest number of products.",
+        "query": "SELECT avg(total_amount_purchased) ,  avg(total_value_purchased) FROM Product_Suppliers WHERE supplier_id  =  (SELECT supplier_id FROM Product_Suppliers GROUP BY supplier_id ORDER BY count(*) DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What is the largest and smallest customer codes?",
+        "query": "SELECT max(customer_code) ,  min(customer_code) FROM Customers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Return the maximum and minimum customer codes.",
+        "query": "SELECT max(customer_code) ,  min(customer_code) FROM Customers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "List the names of all the distinct customers who bought a keyboard.",
+        "query": "SELECT DISTINCT T1.customer_name FROM customers AS T1 JOIN customer_orders AS T2 ON T1.customer_id  =  T2.customer_id JOIN order_items AS T3 ON T2.order_id  =  T3.order_id JOIN products AS T4 ON T3.product_id  =  T4.product_id WHERE T4.product_name  =  \"keyboard\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the distinct names of customers who have purchased a keyboard?",
+        "query": "SELECT DISTINCT T1.customer_name FROM customers AS T1 JOIN customer_orders AS T2 ON T1.customer_id  =  T2.customer_id JOIN order_items AS T3 ON T2.order_id  =  T3.order_id JOIN products AS T4 ON T3.product_id  =  T4.product_id WHERE T4.product_name  =  \"keyboard\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "List the names and phone numbers of all the distinct suppliers who supply red jeans.",
+        "query": "SELECT DISTINCT T1.supplier_name ,  T1.supplier_phone FROM suppliers AS T1 JOIN product_suppliers AS T2 ON T1.supplier_id  =  T2.supplier_id JOIN products AS T3 ON T2.product_id  =  T3.product_id WHERE T3.product_name  =  \"red jeans\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the distinct names and phone numbers for suppliers who have red jeans?",
+        "query": "SELECT DISTINCT T1.supplier_name ,  T1.supplier_phone FROM suppliers AS T1 JOIN product_suppliers AS T2 ON T1.supplier_id  =  T2.supplier_id JOIN products AS T3 ON T2.product_id  =  T3.product_id WHERE T3.product_name  =  \"red jeans\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the highest and lowest prices of products, grouped by and alphabetically ordered by product type?",
+        "query": "SELECT max(product_price) ,  min(product_price) ,  product_type_code FROM products GROUP BY product_type_code ORDER BY product_type_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Give the maximum and minimum product prices for each product type, grouped and ordered by product type.",
+        "query": "SELECT max(product_price) ,  min(product_price) ,  product_type_code FROM products GROUP BY product_type_code ORDER BY product_type_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "List the order id, customer id for orders in Cancelled status, ordered by their order dates.",
+        "query": "SELECT order_id ,  customer_id FROM customer_orders WHERE order_status_code  =   \"Cancelled\" ORDER BY order_date"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the order ids and customer ids for orders that have been Cancelled, sorted by their order dates?",
+        "query": "SELECT order_id ,  customer_id FROM customer_orders WHERE order_status_code  =   \"Cancelled\" ORDER BY order_date"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Find the names of products that were bought by at least two distinct customers.",
+        "query": "SELECT DISTINCT T3.product_name FROM customer_orders AS T1 JOIN order_items AS T2 ON T1.order_id  =  T2.order_id JOIN products AS T3 ON T2.product_id  =  T3.product_id GROUP BY T3.product_id HAVING COUNT (DISTINCT T1.customer_id)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the distinct names of products purchased by at least two different customers?",
+        "query": "SELECT DISTINCT T3.product_name FROM customer_orders AS T1 JOIN order_items AS T2 ON T1.order_id  =  T2.order_id JOIN products AS T3 ON T2.product_id  =  T3.product_id GROUP BY T3.product_id HAVING COUNT (DISTINCT T1.customer_id)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Find the names of customers who have bought by at least three distinct products.",
+        "query": "SELECT DISTINCT T1.customer_name FROM customers AS T1 JOIN customer_orders AS T2 ON T1.customer_id  =  T2.customer_id JOIN order_items AS T3 ON T2.order_id  =  T3.order_id GROUP BY T1.customer_id HAVING COUNT (DISTINCT T3.product_id)  >=  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the distinct names of customers who have purchased at least three different products?",
+        "query": "SELECT DISTINCT T1.customer_name FROM customers AS T1 JOIN customer_orders AS T2 ON T1.customer_id  =  T2.customer_id JOIN order_items AS T3 ON T2.order_id  =  T3.order_id GROUP BY T1.customer_id HAVING COUNT (DISTINCT T3.product_id)  >=  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Find the name and gender of the staff who has been assigned the job of Sales Person but never Clerical Staff.",
+        "query": "SELECT T1.staff_name ,  T1.staff_gender FROM staff AS T1 JOIN Staff_Department_Assignments AS T2 ON T1.staff_id  =  T2.staff_id WHERE T2.job_title_code  =  \"Sales Person\" EXCEPT SELECT T1.staff_name ,  T1.staff_gender FROM staff AS T1 JOIN Staff_Department_Assignments AS T2 ON T1.staff_id  =  T2.staff_id WHERE T2.job_title_code  =  \"Clerical Staff\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the names and genders of staff who have held the title Sales Person, but never Clerical Staff?",
+        "query": "SELECT T1.staff_name ,  T1.staff_gender FROM staff AS T1 JOIN Staff_Department_Assignments AS T2 ON T1.staff_id  =  T2.staff_id WHERE T2.job_title_code  =  \"Sales Person\" EXCEPT SELECT T1.staff_name ,  T1.staff_gender FROM staff AS T1 JOIN Staff_Department_Assignments AS T2 ON T1.staff_id  =  T2.staff_id WHERE T2.job_title_code  =  \"Clerical Staff\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Find the id and name of customers whose address contains WY state and do not use credit card for payment.",
+        "query": "SELECT customer_id ,  customer_name FROM customers WHERE customer_address LIKE \"%WY%\" AND payment_method_code != \"Credit Card\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What are the ids and names of customers with addressed that contain WY and who do not use a credit card for payment?",
+        "query": "SELECT customer_id ,  customer_name FROM customers WHERE customer_address LIKE \"%WY%\" AND payment_method_code != \"Credit Card\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Find the average price of all product clothes.",
+        "query": "SELECT avg(product_price) FROM products WHERE product_type_code  =  'Clothes'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What is the average price of clothes?",
+        "query": "SELECT avg(product_price) FROM products WHERE product_type_code  =  'Clothes'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "Find the name of the most expensive hardware product.",
+        "query": "SELECT product_name FROM products WHERE product_type_code  =  'Hardware' ORDER BY product_price DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "department_store",
+        "question": "What is the name of the hardware product with the greatest price?",
+        "query": "SELECT product_name FROM products WHERE product_type_code  =  'Hardware' ORDER BY product_price DESC LIMIT 1"
+    }
+]

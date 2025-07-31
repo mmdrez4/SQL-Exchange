@@ -1,0 +1,350 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "How many countries are there in total?",
+        "query": "SELECT count(*) FROM country"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Count the number of countries.",
+        "query": "SELECT count(*) FROM country"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show the country name and capital of all countries.",
+        "query": "SELECT Country_name ,  Capital FROM country"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "What are the names and capitals of each country?",
+        "query": "SELECT Country_name ,  Capital FROM country"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show all official native languages that contain the word \"English\".",
+        "query": "SELECT Official_native_language FROM country WHERE Official_native_language LIKE \"%English%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "What are the official native languages that contain the string \"English\".",
+        "query": "SELECT Official_native_language FROM country WHERE Official_native_language LIKE \"%English%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show all distinct positions of matches.",
+        "query": "SELECT DISTINCT POSITION FROM match_season"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "What are the different positions for match season?",
+        "query": "SELECT DISTINCT POSITION FROM match_season"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show the players from college UCLA.",
+        "query": "SELECT Player FROM match_season WHERE College  =  \"UCLA\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Who are the players from UCLA?",
+        "query": "SELECT Player FROM match_season WHERE College  =  \"UCLA\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show the distinct position of players from college UCLA or Duke.",
+        "query": "SELECT DISTINCT POSITION FROM match_season WHERE College  =  \"UCLA\" OR College  =  \"Duke\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "What are the different positions of players from UCLA or Duke colleges?",
+        "query": "SELECT DISTINCT POSITION FROM match_season WHERE College  =  \"UCLA\" OR College  =  \"Duke\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show the draft pick numbers and draft classes of players whose positions are defenders.",
+        "query": "SELECT Draft_Pick_Number ,  Draft_Class FROM match_season WHERE POSITION  =  \"Defender\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "What are the draft pick numbers and draft classes for players who play the Defender position?",
+        "query": "SELECT Draft_Pick_Number ,  Draft_Class FROM match_season WHERE POSITION  =  \"Defender\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "How many distinct teams are involved in match seasons?",
+        "query": "SELECT count(DISTINCT Team) FROM match_season"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Count the number of different teams involved in match season.",
+        "query": "SELECT count(DISTINCT Team) FROM match_season"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show the players and the years played.",
+        "query": "SELECT Player ,  Years_Played FROM player"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Who are the different players and how many years has each played?",
+        "query": "SELECT Player ,  Years_Played FROM player"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show all team names.",
+        "query": "SELECT Name FROM Team"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "What are the names of all teams?",
+        "query": "SELECT Name FROM Team"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show the season, the player, and the name of the country that player belongs to.",
+        "query": "SELECT T2.Season ,  T2.Player ,  T1.Country_name FROM country AS T1 JOIN match_season AS T2 ON T1.Country_id  =  T2.Country"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "For each player, what are their name, season, and country that they belong to?",
+        "query": "SELECT T2.Season ,  T2.Player ,  T1.Country_name FROM country AS T1 JOIN match_season AS T2 ON T1.Country_id  =  T2.Country"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Which players are from Indonesia?",
+        "query": "SELECT T2.Player FROM country AS T1 JOIN match_season AS T2 ON T1.Country_id  =  T2.Country WHERE T1.Country_name  =  \"Indonesia\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Who are the players from Indonesia?",
+        "query": "SELECT T2.Player FROM country AS T1 JOIN match_season AS T2 ON T1.Country_id  =  T2.Country WHERE T1.Country_name  =  \"Indonesia\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "What are the distinct positions of the players from a country whose capital is Dublin?",
+        "query": "SELECT DISTINCT T2.Position FROM country AS T1 JOIN match_season AS T2 ON T1.Country_id  =  T2.Country WHERE T1.Capital  =  \"Dublin\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Give the different positions of players who play for the country with the capital Dublin.",
+        "query": "SELECT DISTINCT T2.Position FROM country AS T1 JOIN match_season AS T2 ON T1.Country_id  =  T2.Country WHERE T1.Capital  =  \"Dublin\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "What are the official languages of the countries of players from Maryland or Duke college?",
+        "query": "SELECT T1.Official_native_language FROM country AS T1 JOIN match_season AS T2 ON T1.Country_id  =  T2.Country WHERE T2.College  =  \"Maryland\" OR T2.College  =  \"Duke\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Return the official native languages of countries who have players from Maryland or Duke colleges.",
+        "query": "SELECT T1.Official_native_language FROM country AS T1 JOIN match_season AS T2 ON T1.Country_id  =  T2.Country WHERE T2.College  =  \"Maryland\" OR T2.College  =  \"Duke\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "How many distinct official languages are there among countries of players whose positions are defenders.",
+        "query": "SELECT count(DISTINCT T1.Official_native_language) FROM country AS T1 JOIN match_season AS T2 ON T1.Country_id  =  T2.Country WHERE T2.Position  =  \"Defender\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Count the number of different official languages corresponding to countries that players who play Defender are from.",
+        "query": "SELECT count(DISTINCT T1.Official_native_language) FROM country AS T1 JOIN match_season AS T2 ON T1.Country_id  =  T2.Country WHERE T2.Position  =  \"Defender\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show the season, the player, and the name of the team that players belong to.",
+        "query": "SELECT T1.Season ,  T1.Player ,  T2.Name FROM match_season AS T1 JOIN team AS T2 ON T1.Team  =  T2.Team_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Who are the different players, what season do they play in, and what is the name of the team they are on?",
+        "query": "SELECT T1.Season ,  T1.Player ,  T2.Name FROM match_season AS T1 JOIN team AS T2 ON T1.Team  =  T2.Team_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show the positions of the players from the team with name \"Ryley Goldner\".",
+        "query": "SELECT T1.Position FROM match_season AS T1 JOIN team AS T2 ON T1.Team  =  T2.Team_id WHERE T2.Name  =  \"Ryley Goldner\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Return the positions of players on the team Ryley Goldner.",
+        "query": "SELECT T1.Position FROM match_season AS T1 JOIN team AS T2 ON T1.Team  =  T2.Team_id WHERE T2.Name  =  \"Ryley Goldner\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "How many distinct colleges are associated with players from the team with name \"Columbus Crew\".",
+        "query": "SELECT count(DISTINCT T1.College) FROM match_season AS T1 JOIN team AS T2 ON T1.Team  =  T2.Team_id WHERE T2.Name  =  \"Columbus Crew\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Count the number of different colleges that players who play for Columbus Crew are from.",
+        "query": "SELECT count(DISTINCT T1.College) FROM match_season AS T1 JOIN team AS T2 ON T1.Team  =  T2.Team_id WHERE T2.Name  =  \"Columbus Crew\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show the players and years played for players from team \"Columbus Crew\".",
+        "query": "SELECT T1.Player , T1.Years_Played FROM player AS T1 JOIN team AS T2 ON T1.Team  =  T2.Team_id WHERE T2.Name  =  \"Columbus Crew\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "What are the players who played for Columbus Crew, and how many years did each play for?",
+        "query": "SELECT T1.Player , T1.Years_Played FROM player AS T1 JOIN team AS T2 ON T1.Team  =  T2.Team_id WHERE T2.Name  =  \"Columbus Crew\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show the position of players and the corresponding number of players.",
+        "query": "SELECT POSITION ,  COUNT(*) FROM match_season GROUP BY POSITION"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "How many players played each position?",
+        "query": "SELECT POSITION ,  COUNT(*) FROM match_season GROUP BY POSITION"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show the country names and the corresponding number of players.",
+        "query": "SELECT Country_name ,  COUNT(*) FROM country AS T1 JOIN match_season AS T2 ON T1.Country_id  =  T2.Country GROUP BY T1.Country_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "How many players are from each country?",
+        "query": "SELECT Country_name ,  COUNT(*) FROM country AS T1 JOIN match_season AS T2 ON T1.Country_id  =  T2.Country GROUP BY T1.Country_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Return all players sorted by college in ascending alphabetical order.",
+        "query": "SELECT player FROM match_season ORDER BY College ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "What are all the players who played in match season, sorted by college in ascending alphabetical order?",
+        "query": "SELECT player FROM match_season ORDER BY College ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show the most common position of players in match seasons.",
+        "query": "SELECT POSITION FROM match_season GROUP BY POSITION ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "What is the position that is most common among players in match seasons?",
+        "query": "SELECT POSITION FROM match_season GROUP BY POSITION ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show the top 3 most common colleges of players in match seasons.",
+        "query": "SELECT College FROM match_season GROUP BY College ORDER BY count(*) DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "What are the three colleges from which the most players are from?",
+        "query": "SELECT College FROM match_season GROUP BY College ORDER BY count(*) DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show the name of colleges that have at least two players.",
+        "query": "SELECT College FROM match_season GROUP BY College HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "What are the names of all colleges that have two or more players?",
+        "query": "SELECT College FROM match_season GROUP BY College HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Show the name of colleges that have at least two players in descending alphabetical order.",
+        "query": "SELECT College FROM match_season GROUP BY College HAVING count(*)  >=  2 ORDER BY College DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "What are the names of colleges that have two or more players, listed in descending alphabetical order?",
+        "query": "SELECT College FROM match_season GROUP BY College HAVING count(*)  >=  2 ORDER BY College DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "What are the names of teams that do no have match season record?",
+        "query": "SELECT Name FROM team WHERE Team_id NOT IN (SELECT Team FROM match_season)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Return the names of teams that have no match season record.",
+        "query": "SELECT Name FROM team WHERE Team_id NOT IN (SELECT Team FROM match_season)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "What are the names of countries that have both players with position forward and players with position defender?",
+        "query": "SELECT T1.Country_name FROM country AS T1 JOIN match_season AS T2 ON T1.Country_id  =  T2.Country WHERE T2.Position  =  \"Forward\" INTERSECT SELECT T1.Country_name FROM country AS T1 JOIN match_season AS T2 ON T1.Country_id  =  T2.Country WHERE T2.Position  =  \"Defender\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Return the names of countries that have players that play the Forward position, as well as players who play the Defender position.",
+        "query": "SELECT T1.Country_name FROM country AS T1 JOIN match_season AS T2 ON T1.Country_id  =  T2.Country WHERE T2.Position  =  \"Forward\" INTERSECT SELECT T1.Country_name FROM country AS T1 JOIN match_season AS T2 ON T1.Country_id  =  T2.Country WHERE T2.Position  =  \"Defender\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Which college have both players with position midfielder and players with position defender?",
+        "query": "SELECT College FROM match_season WHERE POSITION  =  \"Midfielder\" INTERSECT SELECT College FROM match_season WHERE POSITION  =  \"Defender\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "match_season",
+        "question": "Return the colleges that have players who play the Midfielder position, as well as players who play the Defender position.",
+        "query": "SELECT College FROM match_season WHERE POSITION  =  \"Midfielder\" INTERSECT SELECT College FROM match_season WHERE POSITION  =  \"Defender\""
+    }
+]

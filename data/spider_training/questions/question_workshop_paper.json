@@ -1,0 +1,182 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "How many submissions are there?",
+        "query": "SELECT count(*) FROM submission"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Count the number of submissions.",
+        "query": "SELECT count(*) FROM submission"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "List the authors of submissions in ascending order of scores.",
+        "query": "SELECT Author FROM submission ORDER BY Scores ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Find the author for each submission and list them in ascending order of submission score.",
+        "query": "SELECT Author FROM submission ORDER BY Scores ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "What are the authors of submissions and their colleges?",
+        "query": "SELECT Author ,  College FROM submission"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "For each submission, show the author and their affiliated college.",
+        "query": "SELECT Author ,  College FROM submission"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Show the names of authors from college \"Florida\" or \"Temple\"",
+        "query": "SELECT Author FROM submission WHERE College  =  \"Florida\" OR College  =  \"Temple\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Which authors with submissions are from college \"Florida\" or \"Temple\"?",
+        "query": "SELECT Author FROM submission WHERE College  =  \"Florida\" OR College  =  \"Temple\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "What is the average score of submissions?",
+        "query": "SELECT avg(Scores) FROM submission"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Compute the average score of submissions.",
+        "query": "SELECT avg(Scores) FROM submission"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "What is the author of the submission with the highest score?",
+        "query": "SELECT Author FROM submission ORDER BY Scores DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Find the author who achieved the highest score in a submission.",
+        "query": "SELECT Author FROM submission ORDER BY Scores DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Show different colleges along with the number of authors of submission from each college.",
+        "query": "SELECT College ,  COUNT(*) FROM submission GROUP BY College"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "For each college, return the college name and the count of authors with submissions from that college.",
+        "query": "SELECT College ,  COUNT(*) FROM submission GROUP BY College"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Show the most common college of authors of submissions.",
+        "query": "SELECT College FROM submission GROUP BY College ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Which college has the most authors with submissions?",
+        "query": "SELECT College FROM submission GROUP BY College ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Show the colleges that have both authors with submission score larger than 90 and authors with submission score smaller than 80.",
+        "query": "SELECT College FROM submission WHERE Scores  >  90 INTERSECT SELECT College FROM submission WHERE Scores  <  80"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Which colleges have both authors with submission score above 90 and authors with submission score below 80?",
+        "query": "SELECT College FROM submission WHERE Scores  >  90 INTERSECT SELECT College FROM submission WHERE Scores  <  80"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Show the authors of submissions and the acceptance results of their submissions.",
+        "query": "SELECT T2.Author ,  T1.Result FROM acceptance AS T1 JOIN submission AS T2 ON T1.Submission_ID  =  T2.Submission_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "For each submission, find its author and acceptance result.",
+        "query": "SELECT T2.Author ,  T1.Result FROM acceptance AS T1 JOIN submission AS T2 ON T1.Submission_ID  =  T2.Submission_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Show the result of the submission with the highest score.",
+        "query": "SELECT T1.Result FROM acceptance AS T1 JOIN submission AS T2 ON T1.Submission_ID  =  T2.Submission_ID ORDER BY T2.Scores DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Which submission received the highest score in acceptance result. Show me the result.",
+        "query": "SELECT T1.Result FROM acceptance AS T1 JOIN submission AS T2 ON T1.Submission_ID  =  T2.Submission_ID ORDER BY T2.Scores DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Show each author and the number of workshops they submitted to.",
+        "query": "SELECT T2.Author ,  COUNT(DISTINCT T1.workshop_id) FROM acceptance AS T1 JOIN submission AS T2 ON T1.Submission_ID  =  T2.Submission_ID GROUP BY T2.Author"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "How many workshops did each author submit to? Return the author name and the number of workshops.",
+        "query": "SELECT T2.Author ,  COUNT(DISTINCT T1.workshop_id) FROM acceptance AS T1 JOIN submission AS T2 ON T1.Submission_ID  =  T2.Submission_ID GROUP BY T2.Author"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Show the authors who have submissions to more than one workshop.",
+        "query": "SELECT T2.Author FROM acceptance AS T1 JOIN submission AS T2 ON T1.Submission_ID  =  T2.Submission_ID GROUP BY T2.Author HAVING COUNT(DISTINCT T1.workshop_id)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Which authors have submitted to more than one workshop?",
+        "query": "SELECT T2.Author FROM acceptance AS T1 JOIN submission AS T2 ON T1.Submission_ID  =  T2.Submission_ID GROUP BY T2.Author HAVING COUNT(DISTINCT T1.workshop_id)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Show the date and venue of each workshop in ascending alphabetical order of the venue.",
+        "query": "SELECT Date ,  Venue FROM workshop ORDER BY Venue"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Sort the each workshop in alphabetical order of the venue. Return the date and venue of each workshop.",
+        "query": "SELECT Date ,  Venue FROM workshop ORDER BY Venue"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "List the authors who do not have submission to any workshop.",
+        "query": "SELECT Author FROM submission WHERE Submission_ID NOT IN (SELECT Submission_ID FROM acceptance)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "workshop_paper",
+        "question": "Which authors did not submit to any workshop?",
+        "query": "SELECT Author FROM submission WHERE Submission_ID NOT IN (SELECT Submission_ID FROM acceptance)"
+    }
+]

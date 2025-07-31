@@ -1,0 +1,92 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "solvency_ii",
+        "question": "How many products are there?",
+        "query": "SELECT count(*) FROM Products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "solvency_ii",
+        "question": "List the name of products in ascending order of price.",
+        "query": "SELECT Product_Name FROM Products ORDER BY Product_Price ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "solvency_ii",
+        "question": "What are the names and type codes of products?",
+        "query": "SELECT Product_Name ,  Product_Type_Code FROM Products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "solvency_ii",
+        "question": "Show the prices of the products named \"Dining\" or \"Trading Policy\".",
+        "query": "SELECT Product_Price FROM Products WHERE Product_Name  =  \"Dining\" OR Product_Name  =  \"Trading Policy\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "solvency_ii",
+        "question": "What is the average price for products?",
+        "query": "SELECT avg(Product_Price) FROM Products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "solvency_ii",
+        "question": "What is the name of the product with the highest price?",
+        "query": "SELECT Product_Name FROM Products ORDER BY Product_Price DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "solvency_ii",
+        "question": "Show different type codes of products and the number of products with each type code.",
+        "query": "SELECT Product_Type_Code ,  COUNT(*) FROM Products GROUP BY Product_Type_Code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "solvency_ii",
+        "question": "Show the most common type code across products.",
+        "query": "SELECT Product_Type_Code FROM Products GROUP BY Product_Type_Code ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "solvency_ii",
+        "question": "Show the product type codes that have at least two products.",
+        "query": "SELECT Product_Type_Code FROM Products GROUP BY Product_Type_Code HAVING COUNT(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "solvency_ii",
+        "question": "Show the product type codes that have both products with price higher than 4500 and products with price lower than 3000.",
+        "query": "SELECT Product_Type_Code FROM Products WHERE Product_Price  >  4500 INTERSECT SELECT Product_Type_Code FROM Products WHERE Product_Price  <  3000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "solvency_ii",
+        "question": "Show the names of products and the number of events they are in.",
+        "query": "SELECT T1.Product_Name ,  COUNT(*) FROM Products AS T1 JOIN Products_in_Events AS T2 ON T1.Product_ID  =  T2.Product_ID GROUP BY T1.Product_Name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "solvency_ii",
+        "question": "Show the names of products and the number of events they are in, sorted by the number of events in descending order.",
+        "query": "SELECT T1.Product_Name ,  COUNT(*) FROM Products AS T1 JOIN Products_in_Events AS T2 ON T1.Product_ID  =  T2.Product_ID GROUP BY T1.Product_Name ORDER BY COUNT(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "solvency_ii",
+        "question": "Show the names of products that are in at least two events.",
+        "query": "SELECT T1.Product_Name FROM Products AS T1 JOIN Products_in_Events AS T2 ON T1.Product_ID  =  T2.Product_ID GROUP BY T1.Product_Name HAVING COUNT(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "solvency_ii",
+        "question": "Show the names of products that are in at least two events in ascending alphabetical order of product name.",
+        "query": "SELECT T1.Product_Name FROM Products AS T1 JOIN Products_in_Events AS T2 ON T1.Product_ID  =  T2.Product_ID GROUP BY T1.Product_Name HAVING COUNT(*)  >=  2 ORDER BY T1.Product_Name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "solvency_ii",
+        "question": "List the names of products that are not in any event.",
+        "query": "SELECT Product_Name FROM Products WHERE Product_ID NOT IN (SELECT Product_ID FROM Products_in_Events)"
+    }
+]

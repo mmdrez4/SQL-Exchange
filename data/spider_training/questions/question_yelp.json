@@ -1,0 +1,668 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "List all the businesses with more than 4.5 stars",
+        "query": "SELECT name FROM business WHERE rating  >  4.5;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "List all businesses with rating 3.5",
+        "query": "SELECT name FROM business WHERE rating  =  3.5;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "List all user ids with name Michelle",
+        "query": "SELECT user_id FROM USER WHERE name  =  \"Michelle\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all states in which there is a Whataburger",
+        "query": "SELECT state FROM business WHERE name  =  \"Whataburger\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all cities in which there is a restaurant called \" MGM Grand Buffet \"",
+        "query": "SELECT t1.city FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.name  =  \"MGM Grand Buffet\" AND t2.category_name  =  \"category_category_name0\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find the cities of businesses rated below 1.5",
+        "query": "SELECT city FROM business WHERE rating  <  1.5;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all cities which has a \" Taj Mahal \" .",
+        "query": "SELECT city FROM business WHERE name  =  \"Taj Mahal\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "List all the reviews which rated a business less than 1",
+        "query": "SELECT text FROM review WHERE rating  <  1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "List all the restaurant rated more than 3.5",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.rating  >  3.5 AND t2.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "find all cities which has a \" Taj Mahal \" restaurant",
+        "query": "SELECT t1.city FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.name  =  \"Taj Mahal\" AND t2.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "list all the reviews by Niloofar",
+        "query": "SELECT t1.text FROM USER AS t2 JOIN review AS t1 ON t2.user_id  =  t1.user_id WHERE t2.name  =  \"Niloofar\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "list all the businesses which have a review by Niloofar",
+        "query": "SELECT t1.name FROM review AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN USER AS t3 ON t3.user_id  =  t2.user_id WHERE t3.name  =  \"Niloofar\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "list all the businesses which Niloofar rated 5",
+        "query": "SELECT t1.name FROM review AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN USER AS t3 ON t3.user_id  =  t2.user_id WHERE t2.rating  =  5 AND t3.name  =  \"Niloofar\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "List all the reviews by Michelle for Italian restaurant",
+        "query": "SELECT t4.text FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN category AS t3 ON t3.business_id  =  t1.business_id JOIN review AS t4 ON t4.business_id  =  t1.business_id JOIN USER AS t5 ON t5.user_id  =  t4.user_id WHERE t2.category_name  =  \"Italian\" AND t3.category_name  =  \"category_category_name1\" AND t5.name  =  \"Michelle\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "find the number of reviews written for \" Cafe Zinho \" restaurant in Texas",
+        "query": "SELECT COUNT ( DISTINCT t3.text ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN review AS t3 ON t3.business_id  =  t1.business_id WHERE t1.name  =  \"Cafe Zinho\" AND t1.state  =  \"Texas\" AND t2.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "List all 5 star Italian restaurant",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN category AS t3 ON t3.business_id  =  t1.business_id WHERE t1.rating  =  5 AND t2.category_name  =  \"Italian\" AND t3.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "List all the neighbourhoods with Italian restaurant in Madison",
+        "query": "SELECT t1.neighbourhood_name FROM category AS t3 JOIN business AS t2 ON t3.business_id  =  t2.business_id JOIN category AS t4 ON t4.business_id  =  t2.business_id JOIN neighbourhood AS t1 ON t1.business_id  =  t2.business_id WHERE t2.city  =  \"Madison\" AND t3.category_name  =  \"Italian\" AND t4.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "List all the neighbourhoods with Italian restaurant rated less than 2.5 in Madison",
+        "query": "SELECT t1.neighbourhood_name FROM category AS t3 JOIN business AS t2 ON t3.business_id  =  t2.business_id JOIN category AS t4 ON t4.business_id  =  t2.business_id JOIN neighbourhood AS t1 ON t1.business_id  =  t2.business_id WHERE t2.city  =  \"Madison\" AND t2.rating  <  2.5 AND t3.category_name  =  \"Italian\" AND t4.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "find all the restaurant in Pennsylvania",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.state  =  \"Pennsylvania\" AND t2.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "List all businesses that are restaurant in Pennsylvania .",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.state  =  \"Pennsylvania\" AND t2.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all the reviews for all Pet Groomers with more than 100 reviews",
+        "query": "SELECT t3.text FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN review AS t3 ON t3.business_id  =  t1.business_id WHERE t1.review_count  >  100 AND t2.category_name  =  \"Pet Groomers\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "What are all the breweries in \" Los Angeles \" ?",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.city  =  \"Los Angeles\" AND t2.category_name  =  \"breweries\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all breweries in Los Angeles",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.city  =  \"Los Angeles\" AND t2.category_name  =  \"breweries\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all breweries in \" Los Angeles \"",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.city  =  \"Los Angeles\" AND t2.category_name  =  \"breweries\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all users who reviewed restaurant \" Mesa Grill \"",
+        "query": "SELECT t4.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN review AS t3 ON t3.business_id  =  t1.business_id JOIN USER AS t4 ON t4.user_id  =  t3.user_id WHERE t1.name  =  \"Mesa Grill\" AND t2.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "List the addresses of all Walmart in \" Los Angeles \"",
+        "query": "SELECT full_address FROM business WHERE city  =  \"Los Angeles\" AND name  =  \"Walmart\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all restaurant reviewed by Patrick in \" Dallas \"",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN review AS t3 ON t3.business_id  =  t1.business_id JOIN USER AS t4 ON t4.user_id  =  t3.user_id WHERE t1.city  =  \"Dallas\" AND t2.category_name  =  \"restaurant\" AND t4.name  =  \"Patrick\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Which restaurant in Dallas were reviewed by user Patrick ?",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN review AS t3 ON t3.business_id  =  t1.business_id JOIN USER AS t4 ON t4.user_id  =  t3.user_id WHERE t1.city  =  \"Dallas\" AND t2.category_name  =  \"restaurant\" AND t4.name  =  \"Patrick\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all Bars reviewed by Patrick",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN review AS t3 ON t3.business_id  =  t1.business_id JOIN USER AS t4 ON t4.user_id  =  t3.user_id WHERE t2.category_name  =  \"Bars\" AND t4.name  =  \"Patrick\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all Bars reviewed by Patrick with at least 3 stars",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN review AS t3 ON t3.business_id  =  t1.business_id JOIN USER AS t4 ON t4.user_id  =  t3.user_id WHERE t1.rating  >=  3 AND t2.category_name  =  \"Bars\" AND t4.name  =  \"Patrick\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all users who have written tips for \" Barrio Cafe \" in 2015",
+        "query": "SELECT t3.name FROM tip AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN USER AS t3 ON t3.user_id  =  t2.user_id WHERE t1.name  =  \"Barrio Cafe\" AND t2.year  =  2015;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all businesses in Texas with a rating below 2",
+        "query": "SELECT name FROM business WHERE rating  <  2 AND state  =  \"Texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all restaurant Seafood in Los Angeles",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN category AS t3 ON t3.business_id  =  t1.business_id WHERE t1.city  =  \"Los Angeles\" AND t2.category_name  =  \"Seafood\" AND t3.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "List all the Seafood restaurant in \" Los Angeles \"",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN category AS t3 ON t3.business_id  =  t1.business_id WHERE t1.city  =  \"Los Angeles\" AND t2.category_name  =  \"Seafood\" AND t3.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all restaurant that serve Seafood in \" Los Angeles \"",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN category AS t3 ON t3.business_id  =  t1.business_id WHERE t1.city  =  \"Los Angeles\" AND t2.category_name  =  \"Seafood\" AND t3.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all reviews by Patrick with a rating above 4",
+        "query": "SELECT t1.text FROM USER AS t2 JOIN review AS t1 ON t2.user_id  =  t1.user_id WHERE t1.rating  >  4 AND t2.name  =  \"Patrick\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all Apple Store in \" Los Angeles \"",
+        "query": "SELECT business_id FROM business WHERE city  =  \"Los Angeles\" AND name  =  \"Apple Store\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all Dallas restaurant with a rating above 4.5",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.city  =  \"Dallas\" AND t1.rating  >  4.5 AND t2.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "What neighbourhood is restaurant \" Flat Top Grill \" in ?",
+        "query": "SELECT t1.neighbourhood_name FROM category AS t3 JOIN business AS t2 ON t3.business_id  =  t2.business_id JOIN neighbourhood AS t1 ON t1.business_id  =  t2.business_id WHERE t2.name  =  \"Flat Top Grill\" AND t3.category_name  =  \"category_category_name0\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all tips about \" Vintner Grill \" that received more than 9 likes",
+        "query": "SELECT t2.text FROM tip AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.name  =  \"Vintner Grill\" AND t2.likes  >  9;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all reviews about \" Kabob Palace \" in year 2014",
+        "query": "SELECT t2.text FROM review AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.name  =  \"Kabob Palace\" AND t2.year  =  2014;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all users who have written tips about businesses in Dallas",
+        "query": "SELECT t3.name FROM tip AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN USER AS t3 ON t3.user_id  =  t2.user_id WHERE t1.city  =  \"Dallas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all cities in Texas in which there is a restaurant called \" MGM Grand Buffet \"",
+        "query": "SELECT t1.city FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.name  =  \"MGM Grand Buffet\" AND t1.state  =  \"Texas\" AND t2.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find the users who have given tips on Pet Groomers",
+        "query": "SELECT t4.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN tip AS t3 ON t3.business_id  =  t1.business_id JOIN USER AS t4 ON t4.user_id  =  t3.user_id WHERE t2.category_name  =  \"Pet Groomers\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all tips for \" Cafe Zinho \" in Texas .",
+        "query": "SELECT t2.text FROM tip AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.name  =  \"Cafe Zinho\" AND t1.state  =  \"Texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "List all users who reviewed businesses that are restaurant .",
+        "query": "SELECT t4.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN review AS t3 ON t3.business_id  =  t1.business_id JOIN USER AS t4 ON t4.user_id  =  t3.user_id WHERE t2.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "List all tips for \" Cafe Zinho \" in Pennsylvania in 2010 .",
+        "query": "SELECT t2.text FROM tip AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.name  =  \"Cafe Zinho\" AND t1.state  =  \"Pennsylvania\" AND t2.year  =  2010;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "List all users who reviewed businesses that are restaurant in 2010 .",
+        "query": "SELECT t4.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN review AS t3 ON t3.business_id  =  t1.business_id JOIN USER AS t4 ON t4.user_id  =  t3.user_id WHERE t2.category_name  =  \"restaurant\" AND t3.year  =  2010;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all the tips from a user who has written a review in 2012",
+        "query": "SELECT t2.text FROM USER AS t3 JOIN review AS t1 ON t3.user_id  =  t1.user_id JOIN tip AS t2 ON t3.user_id  =  t2.user_id WHERE t1.year  =  2012;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all reviews for businesses rated 2.5",
+        "query": "SELECT t2.text FROM review AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.rating  =  2.5;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "find the number of escape games in Madison",
+        "query": "SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.city  =  \"Madison\" AND t2.category_name  =  \"escape games\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "What is the number of escape games in Madison",
+        "query": "SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.city  =  \"Madison\" AND t2.category_name  =  \"escape games\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many escape games exist in Madison",
+        "query": "SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.city  =  \"Madison\" AND t2.category_name  =  \"escape games\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "What is the number of escape games in \" Madison \" ?",
+        "query": "SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.city  =  \"Madison\" AND t2.category_name  =  \"escape games\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many escape games are there in Madison ?",
+        "query": "SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.city  =  \"Madison\" AND t2.category_name  =  \"escape games\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "find the number of restaurant rated more than 3.5",
+        "query": "SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.rating  >  3.5 AND t2.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "find the total checkins in Moroccan restaurant in \" Los Angeles \"",
+        "query": "SELECT SUM ( t4.count ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN category AS t3 ON t3.business_id  =  t1.business_id JOIN checkin AS t4 ON t4.business_id  =  t1.business_id WHERE t1.city  =  \"Los Angeles\" AND t2.category_name  =  \"restaurant\" AND t3.category_name  =  \"Moroccan\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "find the total checkins in Moroccan restaurant in \" Los Angeles \" on Friday",
+        "query": "SELECT SUM ( t4.count ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN category AS t3 ON t3.business_id  =  t1.business_id JOIN checkin AS t4 ON t4.business_id  =  t1.business_id WHERE t1.city  =  \"Los Angeles\" AND t2.category_name  =  \"Moroccan\" AND t3.category_name  =  \"restaurant\" AND t4.day  =  \"Friday\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "find the total checkins in Moroccan restaurant in \" Los Angeles \" per day",
+        "query": "SELECT t4.day  ,  SUM ( t4.count ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN category AS t3 ON t3.business_id  =  t1.business_id JOIN checkin AS t4 ON t4.business_id  =  t1.business_id WHERE t1.city  =  \"Los Angeles\" AND t2.category_name  =  \"Moroccan\" AND t3.category_name  =  \"restaurant\" GROUP BY t4.day;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "find the total checkins in Italian Delis in each state on Sunday",
+        "query": "SELECT t1.state  ,  SUM ( t4.count ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN category AS t3 ON t3.business_id  =  t1.business_id JOIN checkin AS t4 ON t4.business_id  =  t1.business_id WHERE t2.category_name  =  \"Italian\" AND t3.category_name  =  \"Delis\" AND t4.day  =  \"Sunday\" GROUP BY t1.state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many reviews has Niloofar written in 2015",
+        "query": "SELECT COUNT ( DISTINCT t1.text ) FROM USER AS t2 JOIN review AS t1 ON t2.user_id  =  t1.user_id WHERE t1.year  =  2015 AND t2.name  =  \"Niloofar\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "what is the average rating given in Michelle reviews",
+        "query": "SELECT AVG ( t1.rating ) FROM USER AS t2 JOIN review AS t1 ON t2.user_id  =  t1.user_id WHERE t2.name  =  \"Michelle\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "What is the number of checkins for \" Cafe Zinho \" on Friday",
+        "query": "SELECT t2.count FROM checkin AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.name  =  \"Cafe Zinho\" AND t2.day  =  \"Friday\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "how many users reviewed \" Sushi Too \" in Pittsburgh",
+        "query": "SELECT COUNT ( DISTINCT t3.name ) FROM review AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN USER AS t3 ON t3.user_id  =  t2.user_id WHERE t1.city  =  \"Pittsburgh\" AND t1.name  =  \"Sushi Too\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "What is the number of restaurant in Pittsburgh rated 4.5",
+        "query": "SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.city  =  \"Pittsburgh\" AND t1.rating  =  4.5 AND t2.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many tips have been written in 2015",
+        "query": "SELECT COUNT ( DISTINCT text ) FROM tip WHERE YEAR  =  2015;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "What is the total likes on tips from Niloofar",
+        "query": "SELECT SUM ( t1.likes ) FROM USER AS t2 JOIN tip AS t1 ON t2.user_id  =  t1.user_id WHERE t2.name  =  \"Niloofar\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "What is the total likes on tips about \" Cafe Zinho \"",
+        "query": "SELECT SUM ( t2.likes ) FROM tip AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.name  =  \"Cafe Zinho\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "What is the total likes on tips from Niloofar about \" Cafe Zinho \"",
+        "query": "SELECT SUM ( t2.likes ) FROM tip AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN USER AS t3 ON t3.user_id  =  t2.user_id WHERE t1.name  =  \"Cafe Zinho\" AND t3.name  =  \"Niloofar\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many tips has Michelle written in 2010",
+        "query": "SELECT COUNT ( DISTINCT t1.text ) FROM USER AS t2 JOIN tip AS t1 ON t2.user_id  =  t1.user_id WHERE t1.year  =  2010 AND t2.name  =  \"Michelle\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Return me the number of tips that are written by Michelle in 2010 .",
+        "query": "SELECT COUNT ( DISTINCT t1.text ) FROM USER AS t2 JOIN tip AS t1 ON t2.user_id  =  t1.user_id WHERE t1.year  =  2010 AND t2.name  =  \"Michelle\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many tips has Michelle written in April",
+        "query": "SELECT COUNT ( DISTINCT t1.text ) FROM USER AS t2 JOIN tip AS t1 ON t2.user_id  =  t1.user_id WHERE t1.month  =  \"April\" AND t2.name  =  \"Michelle\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "what is the number of restaurant in Texas",
+        "query": "SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.state  =  \"Texas\" AND t2.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many Bars in \" Dallas \" have a rating above 3.5 ?",
+        "query": "SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.city  =  \"Dallas\" AND t1.rating  >  3.5 AND t2.category_name  =  \"Bars\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many Bars in Dallas have a rating above 3.5 ?",
+        "query": "SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.city  =  \"Dallas\" AND t1.rating  >  3.5 AND t2.category_name  =  \"Bars\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many people reviewed the restaurant \" Texas de Brazil \" in Dallas Texas ?",
+        "query": "SELECT COUNT ( DISTINCT t4.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN review AS t3 ON t3.business_id  =  t1.business_id JOIN USER AS t4 ON t4.user_id  =  t3.user_id WHERE t1.city  =  \"Dallas\" AND t1.name  =  \"Texas de Brazil\" AND t1.state  =  \"Texas\" AND t2.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many people reviewed \" Bistro Di Napoli \" in 2015 ?",
+        "query": "SELECT COUNT ( DISTINCT t3.name ) FROM review AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN USER AS t3 ON t3.user_id  =  t2.user_id WHERE t1.name  =  \"Bistro Di Napoli\" AND t2.year  =  2015;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many restaurant are there in the Hazelwood district of Dallas ?",
+        "query": "SELECT COUNT ( DISTINCT t1.name ) FROM category AS t3 JOIN business AS t1 ON t3.business_id  =  t1.business_id JOIN neighbourhood AS t2 ON t2.business_id  =  t1.business_id WHERE t1.city  =  \"Dallas\" AND t3.category_name  =  \"restaurant\" AND t2.neighbourhood_name  =  \"Hazelwood\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many Starbucks are there in Dallas Texas ?",
+        "query": "SELECT COUNT ( DISTINCT business_id ) FROM business WHERE city  =  \"Dallas\" AND name  =  \"Starbucks\" AND state  =  \"Texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many reviews does \" Acacia Cafe \" have ?",
+        "query": "SELECT review_count FROM business WHERE name  =  \"Acacia Cafe\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find the average number of checkins in restaurant \" Barrio Cafe \" per day",
+        "query": "SELECT AVG ( t3.count )  ,  t3.day FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN checkin AS t3 ON t3.business_id  =  t1.business_id WHERE t1.name  =  \"Barrio Cafe\" AND t2.category_name  =  \"restaurant\" GROUP BY t3.day;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many businesses are there in the \" Stone Meadows \" neighbourhood in Madison ?",
+        "query": "SELECT COUNT ( DISTINCT t1.name ) FROM neighbourhood AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.city  =  \"Madison\" AND t2.neighbourhood_name  =  \"Stone Meadows\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many reviews has Adrienne written ?",
+        "query": "SELECT COUNT ( DISTINCT t1.text ) FROM USER AS t2 JOIN review AS t1 ON t2.user_id  =  t1.user_id WHERE t2.name  =  \"Adrienne\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many reviews has Michelle written in March 2014 ?",
+        "query": "SELECT COUNT ( DISTINCT t1.text ) FROM USER AS t2 JOIN review AS t1 ON t2.user_id  =  t1.user_id WHERE t1.month  =  \"March\" AND t1.year  =  2014 AND t2.name  =  \"Michelle\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many businesses has Michelle reviewed in 2010 ?",
+        "query": "SELECT COUNT ( DISTINCT t1.name ) FROM review AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN USER AS t3 ON t3.user_id  =  t2.user_id WHERE t2.year  =  2010 AND t3.name  =  \"Michelle\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many businesses in \" San Diego \" has Christine reviewed in 2010 ?",
+        "query": "SELECT COUNT ( DISTINCT t1.name ) FROM review AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN USER AS t3 ON t3.user_id  =  t2.user_id WHERE t1.city  =  \"San Diego\" AND t2.year  =  2010 AND t3.name  =  \"Christine\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many Target are there in \" Los Angeles \" ?",
+        "query": "SELECT COUNT ( DISTINCT business_id ) FROM business WHERE city  =  \"Los Angeles\" AND name  =  \"Target\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many users have reviewed Irish Pub in Dallas ?",
+        "query": "SELECT COUNT ( DISTINCT t4.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN review AS t3 ON t3.business_id  =  t1.business_id JOIN USER AS t4 ON t4.user_id  =  t3.user_id WHERE t1.city  =  \"Dallas\" AND t2.category_name  =  \"Irish Pub\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "What is the average rating of reviews written in year 2014 ?",
+        "query": "SELECT AVG ( rating ) FROM review WHERE YEAR  =  2014;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many people reviewed restaurant \" Vintner Grill \" in 2010 ?",
+        "query": "SELECT COUNT ( DISTINCT t4.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN review AS t3 ON t3.business_id  =  t1.business_id JOIN USER AS t4 ON t4.user_id  =  t3.user_id WHERE t1.name  =  \"Vintner Grill\" AND t2.category_name  =  \"category_category_name0\" AND t3.year  =  2010;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find the number of reviews on businesses located in \" South Summerlin \" neighbourhood",
+        "query": "SELECT COUNT ( DISTINCT t3.text ) FROM neighbourhood AS t1 JOIN business AS t2 ON t1.business_id  =  t2.business_id JOIN review AS t3 ON t3.business_id  =  t2.business_id WHERE t1.neighbourhood_name  =  \"South Summerlin\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find the number of users called Michelle",
+        "query": "SELECT COUNT ( DISTINCT name ) FROM USER WHERE name  =  \"Michelle\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Return me the number of businesses that are restaurant .",
+        "query": "SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t2.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Return me the number of cities that has \" Panda Express \" .",
+        "query": "SELECT COUNT ( DISTINCT city ) FROM business WHERE name  =  \"Panda Express\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Return me the number of tips that are written by Michelle .",
+        "query": "SELECT COUNT ( DISTINCT t1.text ) FROM USER AS t2 JOIN tip AS t1 ON t2.user_id  =  t1.user_id WHERE t2.name  =  \"Michelle\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find the total checkins in \" Brighton Heights \" neighbourhood",
+        "query": "SELECT SUM ( t3.count ) FROM checkin AS t3 JOIN business AS t1 ON t3.business_id  =  t1.business_id JOIN neighbourhood AS t2 ON t2.business_id  =  t1.business_id WHERE t2.neighbourhood_name  =  \"Brighton Heights\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find the total number of reviews written in March",
+        "query": "SELECT COUNT ( DISTINCT text ) FROM review WHERE MONTH  =  \"March\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find the number of tips written in each month",
+        "query": "SELECT COUNT ( DISTINCT text )  ,  MONTH FROM tip GROUP BY MONTH;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many neighbourhoods have a business with rating 5 in Madison ?",
+        "query": "SELECT COUNT ( DISTINCT t1.neighbourhood_name ) FROM neighbourhood AS t1 JOIN business AS t2 ON t1.business_id  =  t2.business_id WHERE t2.city  =  \"Madison\" AND t2.rating  =  5;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Give me all the Moroccan restaurant in Texas",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN category AS t3 ON t3.business_id  =  t1.business_id WHERE t1.state  =  \"Texas\" AND t2.category_name  =  \"Moroccan\" AND t3.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "which business has the most number of checkins",
+        "query": "SELECT t1.name FROM checkin AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id GROUP BY t1.name ORDER BY SUM ( t2.count ) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "which neighbourhood has the most number of businesses in Madison",
+        "query": "SELECT t1.neighbourhood_name FROM neighbourhood AS t1 JOIN business AS t2 ON t1.business_id  =  t2.business_id WHERE t2.city  =  \"Madison\" GROUP BY t1.neighbourhood_name ORDER BY COUNT ( DISTINCT t2.name ) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all Mexican restaurant in Dallas with at least 3.5 stars",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN category AS t3 ON t3.business_id  =  t1.business_id WHERE t1.city  =  \"Dallas\" AND t1.rating  >  3.5 AND t2.category_name  =  \"Mexican\" AND t3.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all Mexican restaurant in Dallas with a rating above 3.5",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN category AS t3 ON t3.business_id  =  t1.business_id WHERE t1.city  =  \"Dallas\" AND t1.rating  >  3.5 AND t2.category_name  =  \"Mexican\" AND t3.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all restaurant with Valet Service in Dallas Texas",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN category AS t3 ON t3.business_id  =  t1.business_id WHERE t1.city  =  \"Dallas\" AND t1.state  =  \"Texas\" AND t2.category_name  =  \"Valet Service\" AND t3.category_name  =  \"restaurant\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all Italian restaurant in the Meadowood neighbourhood of Madison",
+        "query": "SELECT t1.name FROM category AS t3 JOIN business AS t1 ON t3.business_id  =  t1.business_id JOIN category AS t4 ON t4.business_id  =  t1.business_id JOIN neighbourhood AS t2 ON t2.business_id  =  t1.business_id WHERE t1.city  =  \"Madison\" AND t3.category_name  =  \"Italian\" AND t4.category_name  =  \"restaurant\" AND t2.neighbourhood_name  =  \"Meadowood\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find all Bars in \" Los Angeles \" with at least 30 reviews and average rating above 3 stars",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t1.city  =  \"Los Angeles\" AND t1.rating  >  3 AND t1.review_count  >  30 AND t2.category_name  =  \"Bars\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "How many Egyptian restaurant are there in Edinburgh ?",
+        "query": "SELECT COUNT ( DISTINCT t1.name ) FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id JOIN category AS t3 ON t3.business_id  =  t1.business_id WHERE t1.city  =  \"Edinburgh\" AND t2.category_name  =  \"restaurant\" AND t3.category_name  =  \"Egyptian\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find users whose average review rating is below 3",
+        "query": "SELECT t2.name FROM USER AS t2 JOIN review AS t1 ON t2.user_id  =  t1.user_id GROUP BY t2.name HAVING AVG ( t1.rating )  <  3;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find the business with the most number of reviews in April",
+        "query": "SELECT t1.name FROM review AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id WHERE t2.month  =  \"April\" GROUP BY t1.name ORDER BY COUNT ( DISTINCT t2.text ) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "yelp",
+        "question": "Find the business which has the most number of categories",
+        "query": "SELECT t1.name FROM category AS t2 JOIN business AS t1 ON t2.business_id  =  t1.business_id GROUP BY t1.name ORDER BY COUNT ( DISTINCT t2.category_name ) DESC LIMIT 1;"
+    }
+]

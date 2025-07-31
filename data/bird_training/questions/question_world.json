@@ -1,0 +1,596 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Which country has the shortest life expectancy?",
+        "query": "SELECT Name FROM Country ORDER BY LifeExpectancy LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List any five countries which use English as an official language.",
+        "query": "SELECT T1.Name FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = 'English' AND T2.IsOfficial = 'T' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Calculate the average population per city in Karnataka district.",
+        "query": "SELECT AVG(Population) FROM City WHERE District = 'Karnataka' GROUP BY ID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List the languages used in the USA.",
+        "query": "SELECT Language FROM CountryLanguage WHERE CountryCode = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "How many countries use Portuguese?",
+        "query": "SELECT SUM(CASE WHEN Language = 'Portuguese' THEN 1 ELSE 0 END) FROM CountryLanguage"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "How many cities are there in England?",
+        "query": "SELECT COUNT(ID) FROM City WHERE District = 'England'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "How many cities are there in the country with the largest surface area?",
+        "query": "SELECT T2.ID FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode WHERE T1.SurfaceArea = ( SELECT MAX(SurfaceArea) FROM Country )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the capital city and population of San Marino?",
+        "query": "SELECT T1.Capital, T2.Population FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = 'San Marino'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List the languages used in Turkmenistan.",
+        "query": "SELECT T2.Language FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = 'Turkmenistan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Provide the name, capital city and its official language of the country with the highest life expectancy.",
+        "query": "SELECT T1.Name, T1.Capital, T2.Language FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode INNER JOIN City AS T3 ON T1.Code = T3.CountryCode WHERE T2.IsOfficial = 'T' ORDER BY T1.LifeExpectancy DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List the countries and their official languages in Antarctica.",
+        "query": "SELECT T1.Name, T2.Language FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Continent = 'Antarctica' AND T2.IsOfficial = 'T'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List any five countries which use English as an official language.",
+        "query": "SELECT T1.Name FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = 'English' AND T2.IsOfficial = 'T' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Among the languages used in Baltic Countries, provide the languages which are used by over 80%.\n\n",
+        "query": "SELECT T2.Language FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Region = 'Baltic Countries' AND T2.Percentage > 80"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Among the languages used in Baltic Countries, provide the languages which are used by over 80%.",
+        "query": "SELECT T2.Language FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Region = 'Baltic Countries' AND T2.Percentage > 80"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Provide the name, located country, and life expectancy of the most populated city",
+        "query": "SELECT T2.Name, T1.Code, T1.LifeExpectancy FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode ORDER BY T2.Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Describe the capital city and languages used in the country with the shortest life expectancy.",
+        "query": "SELECT T1.Capital, T2.Language FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode INNER JOIN City AS T3 ON T1.Code = T3.CountryCode ORDER BY T1.LifeExpectancy LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Provide the country, population, capital city, and official language of the country with the smallest surface area.",
+        "query": "SELECT T1.Name, T1.Population, T1.Capital, T2.Language FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode INNER JOIN City AS T3 ON T1.Code = T3.CountryCode WHERE T2.IsOfficial = 'T' ORDER BY T1.SurfaceArea LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "How many percent of countries in North America use English?",
+        "query": "SELECT CAST(SUM(IIF(T2.Language = 'English', 1, 0)) AS REAL) * 100 / COUNT(T1.Code) FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List the district name of the city with the smallest population.",
+        "query": "SELECT District FROM City ORDER BY Population LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "In which continent does the country with the smallest surface area belongs?",
+        "query": "SELECT Continent FROM Country ORDER BY SurfaceArea LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Who is the head of the state where the most crowded city belongs?",
+        "query": "SELECT T1.HeadOfState FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode ORDER BY T2.Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Among the countries that officially use the English language, what country has the highest capital?",
+        "query": "SELECT T1.Code FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = 'English' AND T2.IsOfficial = 'T' ORDER BY T1.Capital DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List down the cities that belong to the country with a life expectancy of 66.4.",
+        "query": "SELECT T2.Name FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode WHERE T1.LifeExpectancy = 66.4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Give the head of the state of the country with the lowest percentage use of English as their language.",
+        "query": "SELECT T1.HeadOfState FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = 'English' ORDER BY T2.Percentage LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the surface area of the country where Sutton Coldfield city belongs?",
+        "query": "SELECT T1.SurfaceArea FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode WHERE T2.Name = 'Sutton Coldfield'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List down the languages of the countries that have population below 8000.",
+        "query": "SELECT T2.Language FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Population < 8000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What are the official languages used in Belgium?",
+        "query": "SELECT T2.Language FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = 'Belgium' AND T2.IsOfficial = 'T'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Give the cities and district names that belong to the country with Hajastan as its local name.",
+        "query": "SELECT T2.Name, T2.District FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode WHERE T1.LocalName = 'Hajastan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "How many languages are used in Cyprus?",
+        "query": "SELECT SUM(CASE WHEN T1.Name = 'Cyprus' THEN 1 ELSE 0 END) FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Provide the language used by the people of Belize.",
+        "query": "SELECT T2.Language FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = 'Belize'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List down the districts belong to the country headed by Adolf Ogi.",
+        "query": "SELECT T2.District FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode WHERE T1.HeadOfState = 'Adolf Ogi'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Who is the head of the country where Santa Catarina district belongs?",
+        "query": "SELECT T1.HeadOfState FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode WHERE T2.District = 'Santa Catarina'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Among the countries that have GNP greater than 1500, what is the percentage of the countries have English as its language?",
+        "query": "SELECT CAST(SUM(IIF(T2.Language = 'English', 1, 0)) AS REAL) * 100 / COUNT(T1.Code) FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.GNP > 1500"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "In English speaking countries, provide the difference between the number of countries with republic and constitutional monarchy as its government form.",
+        "query": "SELECT COUNT(T1.GovernmentForm = 'Republic') - COUNT(T1.GovernmentForm = 'ConstitutionalMonarchy') FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = 'English'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What country declared its independence in 1994?",
+        "query": "SELECT Name FROM Country WHERE IndepYear = 1994"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List all the countries in Asia.",
+        "query": "SELECT Name FROM Country WHERE Continent = 'Asia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What country in Asia has the largest gross national product(GNP)?",
+        "query": "SELECT Name FROM Country WHERE Continent = 'Asia' ORDER BY GNP DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "How many cities are in the Philippines?",
+        "query": "SELECT COUNT(ID) FROM City WHERE Name = 'PHL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the local name of Ukraine that they are also known for?",
+        "query": "SELECT LocalName FROM Country WHERE Name = 'Ukraine'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "How many countries have Socialistic Republic form of government?",
+        "query": "SELECT COUNT(Code) FROM Country WHERE GovernmentForm = 'Socialistic Republic'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the official language of China?",
+        "query": "SELECT T2.Language FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = 'China' AND T2.IsOfficial = 'T'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "How many percent of the population of China used Chinese as their language?",
+        "query": "SELECT T2.Percentage FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = 'China' AND T2.Language = 'Chinese'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the form of government that the city of Manila has?",
+        "query": "SELECT T1.GovernmentForm FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode WHERE T2.Name = 'Manila'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the capital city of the Philippines?",
+        "query": "SELECT T1.Capital FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = 'Philipiines'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List all the languages used in Europe.",
+        "query": "SELECT T2.Language FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Continent = 'Europe'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Who is the head of state of the country where the city of Pyongyang is under?",
+        "query": "SELECT T1.HeadOfState FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode WHERE T2.Name = 'Pyongyang'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "How many unofficial languages are used in Italy?",
+        "query": "SELECT SUM(CASE WHEN T2.IsOfficial = 'F' THEN 1 ELSE 0 END) FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = 'Italy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What city in Russia has the least population?",
+        "query": "SELECT T2.Name FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = 'Russian Federation' ORDER BY T2.Population ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List all the cities in the country where there is high life expectancy at birth.",
+        "query": "SELECT T2.Name FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode ORDER BY T1.LifeExpectancy DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List all the official and unofficial languages used by the country that declared its independence in 1830.",
+        "query": "SELECT T2.Language, T2.IsOfficial FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.IndepYear = 1830 GROUP BY T2.Language, T2.IsOfficial"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the capital city of the country with largest population?",
+        "query": "SELECT T1.Capital FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode ORDER BY T1.Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List all the countries in the continent of Asia that use English as their unofficial language.",
+        "query": "SELECT T1.Name FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Continent = 'Asia' AND T2.IsOfficial = 'F' GROUP BY T1.Name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Calculate the average GNP of all countries that use Arabic language.",
+        "query": "SELECT AVG(T1.GNP) FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = 'Arabic'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Calculate the percentage of the surface area of all countries that uses Chinese as one of their languages.",
+        "query": "SELECT CAST(SUM(IIF(T2.Language = 'Chinese', T1.SurfaceArea, 0)) AS REAL) * 100 / SUM(T1.SurfaceArea) FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Which country has the smallest surface area?",
+        "query": "SELECT Name FROM Country ORDER BY SurfaceArea ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Write down the name of the largest population country.",
+        "query": "SELECT Name FROM Country ORDER BY Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the language of the smallest population country?",
+        "query": "SELECT T2.Language FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode ORDER BY T1.Population ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List down the name of countries whereby English is their official language.",
+        "query": "SELECT T1.Name FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = 'English' AND T2.IsOfficial = 'T'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List down the official language of the countries which declared independence after 1990,",
+        "query": "SELECT T1.Name, T2.Language FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.IndepYear > 1990 AND T2.IsOfficial = 'T'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the percentage of English used in Australia?",
+        "query": "SELECT T2.Percentage FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = 'Australia' AND T2.Language = 'English'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List down languages used in Malaysia.",
+        "query": "SELECT T2.Language FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = 'Malaysia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Which country has the most crowded city in the world?",
+        "query": "SELECT T1.Name FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode ORDER BY T2.Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the life expectancy of residents in the most crowded city?",
+        "query": "SELECT T2.LifeExpectancy FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code ORDER BY T1.Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the GNP of the least crowded city in the world?",
+        "query": "SELECT T2.GNP FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code ORDER BY T1.Population ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Within the 5 most crowded cities in the world, which country has the most languages used?",
+        "query": "SELECT Name FROM ( SELECT T1.Name, T2.Language FROM City AS T1 INNER JOIN CountryLanguage AS T2 ON T1.CountryCode = T2.CountryCode GROUP BY T1.Name, T1.Population, T2.Language ORDER BY T1.Population DESC ) AS T3 GROUP BY t3.Name ORDER BY COUNT(Language) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Which country has the smallest surface area and the most crowded city?",
+        "query": "SELECT T2.Name FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code ORDER BY T1.Population DESC, T2.SurfaceArea DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List down all cities of China.",
+        "query": "SELECT T1.Name FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T2.Name = 'China'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What are the cities for country called \"\u00c2\u00b4Uman\" in local name.",
+        "query": "SELECT T1.Name FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T2.LocalName = '\u00c2\u00b4Uman'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the average life expentancy of countries that speak Arabic?",
+        "query": "SELECT AVG(T1.LifeExpectancy) FROM Country AS T1 INNER JOIN CountryLanguage AS T2 ON T1.Code = T2.CountryCode WHERE T2.Language = 'Arabic'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the GNP growth rate by the country of Shanghai?",
+        "query": "SELECT CAST((T1.GNP - T1.GNPOld) AS REAL) / T1.GNPOld FROM Country AS T1 INNER JOIN City AS T2 ON T1.Code = T2.CountryCode WHERE T2.Name = 'Shanghai'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the district of Zaanstad?",
+        "query": "SELECT District FROM City WHERE name = 'Zaanstad'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What city has the highest population?",
+        "query": "SELECT Name FROM City ORDER BY Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Provide the district of the city with a population of 201843.",
+        "query": "SELECT District FROM City WHERE population = 201843"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What country has the largest surface area?",
+        "query": "SELECT Name FROM Country ORDER BY SurfaceArea DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "How many countries have a life expectancy of 75.1?",
+        "query": "SELECT COUNT(*) FROM Country WHERE LifeExpectancy = 75.1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the year of independence of Brunei?",
+        "query": "SELECT IndepYear FROM Country WHERE Name = 'Brunei'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "How many countries have no GNP?",
+        "query": "SELECT COUNT(*) FROM Country WHERE GNP = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the average surface area of all countries?",
+        "query": "SELECT AVG(SurfaceArea) FROM Country"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "How many languages are there in the country where Tocantins district belongs?",
+        "query": "SELECT COUNT(DISTINCT T2.Language) FROM City AS T1 INNER JOIN CountryLanguage AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.District = 'Tocantins'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What are the districts that belong to the country with the largest surface area?",
+        "query": "SELECT T1.District FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T2.Name = ( SELECT Name FROM Country ORDER BY SurfaceArea DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "How many cities are there in the country ruled by Kostis Stefanopoulos?",
+        "query": "SELECT COUNT(DISTINCT T1.Name) FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T2.HeadOfState = 'Kostis Stefanopoulos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What are the official languages used in Greece?",
+        "query": "SELECT T1.Language FROM CountryLanguage AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T1.IsOfficial = 'T' AND T2.name = 'Greece'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Give the population of the country where Queimados city belongs.",
+        "query": "SELECT T2.Population FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T1.Name = 'Queimados'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What are the official languages of the country where you can find the city with the least population?",
+        "query": "SELECT T2.Language FROM City AS T1 INNER JOIN CountryLanguage AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.IsOfficial = 'T' ORDER BY T1.Population ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the surface area and GNP of the country where Namibe district belongs?",
+        "query": "SELECT T2.SurfaceArea, T2.GNP FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T1.District = 'Namibe'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List the names of the country that officially uses English as their language.",
+        "query": "SELECT T2.Name FROM CountryLanguage AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T1.IsOfficial = 'T' AND T1.Language = 'English'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What are the districts that belong to the country with the lowest surface area?",
+        "query": "SELECT T1.District FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code ORDER BY T2.SurfaceArea ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List down the country names of countries that have a GNP lower than 1000 and have Dutch as their language.",
+        "query": "SELECT T2.Name FROM CountryLanguage AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T2.GNP < 1000 AND T1.IsOfficial = 'T' AND T1.Language = 'Dutch'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the GNP of the country where district \"Entre Rios\" belongs?",
+        "query": "SELECT T2.GNP FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T1.District = 'Entre Rios' LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the local name of the country where \"The Valley\" city belongs?",
+        "query": "SELECT T2.LocalName FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T1.Name = 'The Valley'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List down the cities belongs to the country that has surface area greater than 7000000.",
+        "query": "SELECT T2.Name, T1.Name FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T2.SurfaceArea > 7000000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the life expectancy of the countries that uses Japanese as their language?",
+        "query": "SELECT AVG(T2.LifeExpectancy) FROM CountryLanguage AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T1.Language = 'Japanese'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "How many cities are there in the country with the surface area of 652090?",
+        "query": "SELECT T2.Name, COUNT(T1.Name) FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T2.SurfaceArea = 652090 GROUP BY T2.Name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "List down the languages of countries with an independence year between 1980 to 1995.",
+        "query": "SELECT T2.Name, T1.Language FROM CountryLanguage AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T2.IndepYear BETWEEN 1980 AND 1995"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "What is the life expectancy of the people living in Calama city?",
+        "query": "SELECT T2.LifeExpectancy FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T1.Name = 'Calama'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Provide the language used in the country ruled by Pierre Buyoya.",
+        "query": "SELECT T1.Language FROM CountryLanguage AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T2.HeadOfState = 'Pierre Buyoya'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "In countries with constitutional monarchy, what is the percentage of cities located in the district of England?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.District = 'England' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T2.GovernmentForm = 'Constitutional Monarchy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Among the cities with a population between 140000 and 150000, list the country that has life expectancy greater than 80% life expectancy of all countries.",
+        "query": "SELECT T2.Name FROM City AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T1.Population BETWEEN 140000 AND 150000 GROUP BY T2.Name, LifeExpectancy HAVING LifeExpectancy < ( SELECT AVG(LifeExpectancy) FROM Country ) * 0.8"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world",
+        "question": "Among the countries that use Italian as their language, what is the percentage of republic countries?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.GovernmentForm = 'Republic' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM CountryLanguage AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.Code WHERE T1.Language = 'Italian'"
+    }
+]

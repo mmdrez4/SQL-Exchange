@@ -1,0 +1,602 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the name of dorms only for female (F gender).",
+        "query": "SELECT dorm_name FROM dorm WHERE gender  =  'F'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What are the names of the all-female dorms?",
+        "query": "SELECT dorm_name FROM dorm WHERE gender  =  'F'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the name of dorms that can accommodate more than 300 students.",
+        "query": "SELECT dorm_name FROM dorm WHERE student_capacity  >  300"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What are the names of all the dorms that can accomdate more than 300 students?",
+        "query": "SELECT dorm_name FROM dorm WHERE student_capacity  >  300"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many female students (sex is F) whose age is below 25?",
+        "query": "SELECT count(*) FROM student WHERE sex  =  'F' AND age  <  25"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many girl students who are younger than 25?",
+        "query": "SELECT count(*) FROM student WHERE sex  =  'F' AND age  <  25"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the first name of students who is older than 20.",
+        "query": "SELECT fname FROM student WHERE age  >  20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What are the first names of all students who are older than 20?",
+        "query": "SELECT fname FROM student WHERE age  >  20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the first name of students living in city PHL whose age is between 20 and 25.",
+        "query": "SELECT fname FROM student WHERE city_code  =  'PHL' AND age BETWEEN 20 AND 25"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the first name of the students who are in age 20 to 25 and living in PHL city?",
+        "query": "SELECT fname FROM student WHERE city_code  =  'PHL' AND age BETWEEN 20 AND 25"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many dorms are there?",
+        "query": "SELECT count(*) FROM dorm"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many dorms are in the database?",
+        "query": "SELECT count(*) FROM dorm"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the number of distinct amenities.",
+        "query": "SELECT count(*) FROM dorm_amenity"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many diffrent dorm amenities are there?",
+        "query": "SELECT count(*) FROM dorm_amenity"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the total capacity of all dorms.",
+        "query": "SELECT sum(student_capacity) FROM dorm"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the total student capacity of all dorms?",
+        "query": "SELECT sum(student_capacity) FROM dorm"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many students are there?",
+        "query": "SELECT count(*) FROM student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many students exist?",
+        "query": "SELECT count(*) FROM student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the average age of all students living in the each city.",
+        "query": "SELECT avg(age) ,  city_code FROM student GROUP BY city_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the average age for each city and what are those cities?",
+        "query": "SELECT avg(age) ,  city_code FROM student GROUP BY city_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the average and total capacity of dorms for the students with gender X.",
+        "query": "SELECT avg(student_capacity) ,  sum(student_capacity) FROM dorm WHERE gender  =  'X'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the average and total capacity for all dorms who are of gender X?",
+        "query": "SELECT avg(student_capacity) ,  sum(student_capacity) FROM dorm WHERE gender  =  'X'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the number of dorms that have some amenity.",
+        "query": "SELECT count(DISTINCT dormid) FROM has_amenity"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many dorms have amenities?",
+        "query": "SELECT count(DISTINCT dormid) FROM has_amenity"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the name of dorms that do not have any amenity",
+        "query": "SELECT dorm_name FROM dorm WHERE dormid NOT IN (SELECT dormid FROM has_amenity)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What are the names of all the dorms that don't have any amenities?",
+        "query": "SELECT dorm_name FROM dorm WHERE dormid NOT IN (SELECT dormid FROM has_amenity)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the number of distinct gender for dorms.",
+        "query": "SELECT count(DISTINCT gender) FROM dorm"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many different genders are there in the dorms?",
+        "query": "SELECT count(DISTINCT gender) FROM dorm"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the capacity and gender type of the dorm whose name has substring \u2018Donor\u2019.",
+        "query": "SELECT student_capacity ,  gender FROM dorm WHERE dorm_name LIKE '%Donor%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the student capacity and type of gender for the dorm whose name as the phrase Donor in it?",
+        "query": "SELECT student_capacity ,  gender FROM dorm WHERE dorm_name LIKE '%Donor%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the name and gender type of the dorms whose capacity is greater than 300 or less than 100.",
+        "query": "SELECT dorm_name ,  gender FROM dorm WHERE student_capacity  >  300 OR student_capacity  <  100"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What are the names and types of the dorms that have a capacity greater than 300 or less than 100?",
+        "query": "SELECT dorm_name ,  gender FROM dorm WHERE student_capacity  >  300 OR student_capacity  <  100"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the numbers of different majors and cities.",
+        "query": "SELECT count(DISTINCT major) ,  count(DISTINCT city_code) FROM student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many different majors are there and how many different city codes are there for each student?",
+        "query": "SELECT count(DISTINCT major) ,  count(DISTINCT city_code) FROM student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the name of dorms which have both TV Lounge and Study Room as amenities.",
+        "query": "SELECT T1.dorm_name FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid WHERE T3.amenity_name  =  'TV Lounge' INTERSECT SELECT T1.dorm_name FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid WHERE T3.amenity_name  =  'Study Room'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the name of the dorm with both a TV Lounge and Study Room listed as amenities?",
+        "query": "SELECT T1.dorm_name FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid WHERE T3.amenity_name  =  'TV Lounge' INTERSECT SELECT T1.dorm_name FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid WHERE T3.amenity_name  =  'Study Room'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the name of dorms which have TV Lounge but no Study Room as amenity.",
+        "query": "SELECT T1.dorm_name FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid WHERE T3.amenity_name  =  'TV Lounge' EXCEPT SELECT T1.dorm_name FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid WHERE T3.amenity_name  =  'Study Room'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the name of each dorm that has a TV Lounge but no study rooms?",
+        "query": "SELECT T1.dorm_name FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid WHERE T3.amenity_name  =  'TV Lounge' EXCEPT SELECT T1.dorm_name FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid WHERE T3.amenity_name  =  'Study Room'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the last name of students who is either female (sex is F) and living in the city of code BAL or male (sex is M) and in age of below 20.",
+        "query": "SELECT lname FROM student WHERE sex  =  'F' AND city_code  =  'BAL' UNION SELECT lname FROM student WHERE sex  =  'M' AND age  <  20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the last name of every student who is either female or living in a city with the code BAL or male and under 20?",
+        "query": "SELECT lname FROM student WHERE sex  =  'F' AND city_code  =  'BAL' UNION SELECT lname FROM student WHERE sex  =  'M' AND age  <  20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the name of the dorm with the largest capacity.",
+        "query": "SELECT dorm_name FROM dorm ORDER BY student_capacity DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What are the names of the dorm with the largest capacity?",
+        "query": "SELECT dorm_name FROM dorm ORDER BY student_capacity DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "List in alphabetic order all different amenities.",
+        "query": "SELECT amenity_name FROM dorm_amenity ORDER BY amenity_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What are the different dorm amenity names in alphabetical order?",
+        "query": "SELECT amenity_name FROM dorm_amenity ORDER BY amenity_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the code of city where most of students are living in.",
+        "query": "SELECT city_code FROM student GROUP BY city_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the code of the city with the most students?",
+        "query": "SELECT city_code FROM student GROUP BY city_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the first and last name of students whose age is younger than the average age.",
+        "query": "SELECT fname ,  lname FROM student WHERE age  <  (SELECT avg(age) FROM student)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the first and last name of all students who are younger than average?",
+        "query": "SELECT fname ,  lname FROM student WHERE age  <  (SELECT avg(age) FROM student)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "List the first and last name of students who are not living in the city with code HKG, and sorted the results by their ages.",
+        "query": "SELECT fname ,  lname FROM student WHERE city_code != 'HKG' ORDER BY age"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What are the first and last names of all students who are not living in the city HKG and order the results by age?",
+        "query": "SELECT fname ,  lname FROM student WHERE city_code != 'HKG' ORDER BY age"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "List name of all amenities which Anonymous Donor Hall has, and sort the results in alphabetic order.",
+        "query": "SELECT T1.amenity_name FROM dorm_amenity AS T1 JOIN has_amenity AS T2 ON T2.amenid  =  T1.amenid JOIN dorm AS T3 ON T2.dormid  =  T3.dormid WHERE T3.dorm_name  =  'Anonymous Donor Hall' ORDER BY T1.amenity_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What are the amenities in alphabetical order that Anonymous Donor Hall has?",
+        "query": "SELECT T1.amenity_name FROM dorm_amenity AS T1 JOIN has_amenity AS T2 ON T2.amenid  =  T1.amenid JOIN dorm AS T3 ON T2.dormid  =  T3.dormid WHERE T3.dorm_name  =  'Anonymous Donor Hall' ORDER BY T1.amenity_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the number of dorms and total capacity for each gender.",
+        "query": "SELECT count(*) ,  sum(student_capacity) ,  gender FROM dorm GROUP BY gender"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many dorms are there and what is the total capacity for each gender?",
+        "query": "SELECT count(*) ,  sum(student_capacity) ,  gender FROM dorm GROUP BY gender"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the average and oldest age for students with different sex.",
+        "query": "SELECT avg(age) ,  max(age) ,  sex FROM student GROUP BY sex"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the average and oldest age for each gender of student?",
+        "query": "SELECT avg(age) ,  max(age) ,  sex FROM student GROUP BY sex"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the number of students in each major.",
+        "query": "SELECT count(*) ,  major FROM student GROUP BY major"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many students are there in each major?",
+        "query": "SELECT count(*) ,  major FROM student GROUP BY major"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the number and average age of students living in each city.",
+        "query": "SELECT count(*) ,  avg(age) ,  city_code FROM student GROUP BY city_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many students live in each city and what are their average ages?",
+        "query": "SELECT count(*) ,  avg(age) ,  city_code FROM student GROUP BY city_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the average age and number of male students (with sex M) from each city.",
+        "query": "SELECT count(*) ,  avg(age) ,  city_code FROM student WHERE sex  =  'M' GROUP BY city_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the average age and how many male students are there in each city?",
+        "query": "SELECT count(*) ,  avg(age) ,  city_code FROM student WHERE sex  =  'M' GROUP BY city_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the number of students for the cities where have more than one student.",
+        "query": "SELECT count(*) ,  city_code FROM student GROUP BY city_code HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many students are from each city, and which cities have more than one cities?",
+        "query": "SELECT count(*) ,  city_code FROM student GROUP BY city_code HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the first and last name of students who are not in the largest major.",
+        "query": "SELECT fname ,  lname FROM student WHERE major != (SELECT major FROM student GROUP BY major ORDER BY count(*) DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the first and last name of the students who are not in the largest major?",
+        "query": "SELECT fname ,  lname FROM student WHERE major != (SELECT major FROM student GROUP BY major ORDER BY count(*) DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the number of students whose age is older than the average age for each gender.",
+        "query": "SELECT count(*) ,  sex FROM student WHERE age  >  (SELECT avg(age) FROM student) GROUP BY sex"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many students are older than average for each gender?",
+        "query": "SELECT count(*) ,  sex FROM student WHERE age  >  (SELECT avg(age) FROM student) GROUP BY sex"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the average age of students living in each dorm and the name of dorm.",
+        "query": "SELECT avg(T1.age) ,  T3.dorm_name FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid JOIN dorm AS T3 ON T3.dormid  =  T2.dormid GROUP BY T3.dorm_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the average age for each dorm and what are the names of each dorm?",
+        "query": "SELECT avg(T1.age) ,  T3.dorm_name FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid JOIN dorm AS T3 ON T3.dormid  =  T2.dormid GROUP BY T3.dorm_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the number of amenities for each of the dorms that can accommodate more than 100 students.",
+        "query": "SELECT count(*) ,  T1.dormid FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid WHERE T1.student_capacity  >  100 GROUP BY T1.dormid"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "For each dorm, how many amenities does it have?",
+        "query": "SELECT count(*) ,  T1.dormid FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid WHERE T1.student_capacity  >  100 GROUP BY T1.dormid"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the number of students who is older than 20 in each dorm.",
+        "query": "SELECT count(*) ,  T3.dorm_name FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid JOIN dorm AS T3 ON T3.dormid  =  T2.dormid WHERE T1.age  >  20 GROUP BY T3.dorm_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many students are older than 20 in each dorm?",
+        "query": "SELECT count(*) ,  T3.dorm_name FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid JOIN dorm AS T3 ON T3.dormid  =  T2.dormid WHERE T1.age  >  20 GROUP BY T3.dorm_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the first name of students who are living in the Smith Hall.",
+        "query": "SELECT T1.fname FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid JOIN dorm AS T3 ON T3.dormid  =  T2.dormid WHERE T3.dorm_name  =  'Smith Hall'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What are the first names of all students in Smith Hall?",
+        "query": "SELECT T1.fname FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid JOIN dorm AS T3 ON T3.dormid  =  T2.dormid WHERE T3.dorm_name  =  'Smith Hall'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the average age of students who are living in the dorm with the largest capacity.",
+        "query": "SELECT avg(T1.age) FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid JOIN dorm AS T3 ON T3.dormid  =  T2.dormid WHERE T3.student_capacity  =  (SELECT max(student_capacity) FROM dorm)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the average age of students who are living in the dorm with the largest capacity?",
+        "query": "SELECT avg(T1.age) FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid JOIN dorm AS T3 ON T3.dormid  =  T2.dormid WHERE T3.student_capacity  =  (SELECT max(student_capacity) FROM dorm)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the total number of students living in the male dorm (with gender M).",
+        "query": "SELECT count(*) FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid JOIN dorm AS T3 ON T3.dormid  =  T2.dormid WHERE T3.gender  =  'M'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What are the total number of students who are living in a male dorm?",
+        "query": "SELECT count(*) FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid JOIN dorm AS T3 ON T3.dormid  =  T2.dormid WHERE T3.gender  =  'M'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the number of female students (with F sex) living in Smith Hall",
+        "query": "SELECT count(*) FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid JOIN dorm AS T3 ON T3.dormid  =  T2.dormid WHERE T3.dorm_name  =  'Smith Hall' AND T1.sex  =  'F'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "How many female students live in Smith Hall?",
+        "query": "SELECT count(*) FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid JOIN dorm AS T3 ON T3.dormid  =  T2.dormid WHERE T3.dorm_name  =  'Smith Hall' AND T1.sex  =  'F'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the name of amenities Smith Hall dorm have.",
+        "query": "SELECT T3.amenity_name FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid WHERE T1.dorm_name  =  'Smith Hall'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What are the names of the amenities that Smith Hall has?",
+        "query": "SELECT T3.amenity_name FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid WHERE T1.dorm_name  =  'Smith Hall'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the name of amenities Smith Hall dorm have. ordered the results by amenity names.",
+        "query": "SELECT T3.amenity_name FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid WHERE T1.dorm_name  =  'Smith Hall' ORDER BY T3.amenity_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What amenities does Smith Hall have in alphabetical order?",
+        "query": "SELECT T3.amenity_name FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid WHERE T1.dorm_name  =  'Smith Hall' ORDER BY T3.amenity_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the name of amenity that is most common in all dorms.",
+        "query": "SELECT T1.amenity_name FROM dorm_amenity AS T1 JOIN has_amenity AS T2 ON T1.amenid  =  T2.amenid GROUP BY T2.amenid ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the most common amenity in the dorms?",
+        "query": "SELECT T1.amenity_name FROM dorm_amenity AS T1 JOIN has_amenity AS T2 ON T1.amenid  =  T2.amenid GROUP BY T2.amenid ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the first name of students who are living in the dorm that has most number of amenities.",
+        "query": "SELECT T1.fname FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid WHERE T2.dormid IN (SELECT T2.dormid FROM dorm AS T3 JOIN has_amenity AS T4 ON T3.dormid  =  T4.dormid JOIN dorm_amenity AS T5 ON T4.amenid  =  T5.amenid GROUP BY T3.dormid ORDER BY count(*) DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What are the first names of all students who live in the dorm with the most amenities?",
+        "query": "SELECT T1.fname FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid WHERE T2.dormid IN (SELECT T2.dormid FROM dorm AS T3 JOIN has_amenity AS T4 ON T3.dormid  =  T4.dormid JOIN dorm_amenity AS T5 ON T4.amenid  =  T5.amenid GROUP BY T3.dormid ORDER BY count(*) DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the name and capacity of the dorm with least number of amenities.",
+        "query": "SELECT T1.dorm_name ,  T1.student_capacity FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid GROUP BY T2.dormid ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the name and capacity of the dorm with the fewest amount of amenities?",
+        "query": "SELECT T1.dorm_name ,  T1.student_capacity FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid GROUP BY T2.dormid ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the name of dorms that do not have amenity TV Lounge.",
+        "query": "SELECT dorm_name FROM dorm EXCEPT SELECT T1.dorm_name FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid WHERE T3.amenity_name  =  'TV Lounge'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What are the names of the dorm that does not have a TV Lounge?",
+        "query": "SELECT dorm_name FROM dorm EXCEPT SELECT T1.dorm_name FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid WHERE T3.amenity_name  =  'TV Lounge'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the first and last name of students who are living in the dorms that have amenity TV Lounge.",
+        "query": "SELECT T1.fname ,  T1.lname FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid WHERE T2.dormid IN (SELECT T3.dormid FROM has_amenity AS T3 JOIN dorm_amenity AS T4 ON T3.amenid  =  T4.amenid WHERE T4.amenity_name  =  'TV Lounge')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What are the first and last names of all students who are living in a dorm with a TV Lounge?",
+        "query": "SELECT T1.fname ,  T1.lname FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid WHERE T2.dormid IN (SELECT T3.dormid FROM has_amenity AS T3 JOIN dorm_amenity AS T4 ON T3.amenid  =  T4.amenid WHERE T4.amenity_name  =  'TV Lounge')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the first name and age of students who are living in the dorms that do not have amenity TV Lounge.",
+        "query": "SELECT T1.fname ,  T1.age FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid WHERE T2.dormid NOT IN (SELECT T3.dormid FROM has_amenity AS T3 JOIN dorm_amenity AS T4 ON T3.amenid  =  T4.amenid WHERE T4.amenity_name  =  'TV Lounge')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What is the first name and age of every student who lives in a dorm with a TV Lounge?",
+        "query": "SELECT T1.fname ,  T1.age FROM student AS T1 JOIN lives_in AS T2 ON T1.stuid  =  T2.stuid WHERE T2.dormid NOT IN (SELECT T3.dormid FROM has_amenity AS T3 JOIN dorm_amenity AS T4 ON T3.amenid  =  T4.amenid WHERE T4.amenity_name  =  'TV Lounge')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "Find the name of amenities of the dorm where the student with last name Smith is living in.",
+        "query": "SELECT T3.amenity_name FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid JOIN lives_in AS T4 ON T4.dormid  =  T1.dormid JOIN student AS T5 ON T5.stuid  =  T4.stuid WHERE T5.lname  =  'Smith'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "dorm_1",
+        "question": "What are the amenities in the dorm that a student who has the last name of Smith lives in?",
+        "query": "SELECT T3.amenity_name FROM dorm AS T1 JOIN has_amenity AS T2 ON T1.dormid  =  T2.dormid JOIN dorm_amenity AS T3 ON T2.amenid  =  T3.amenid JOIN lives_in AS T4 ON T4.dormid  =  T1.dormid JOIN student AS T5 ON T5.stuid  =  T4.stuid WHERE T5.lname  =  'Smith'"
+    }
+]

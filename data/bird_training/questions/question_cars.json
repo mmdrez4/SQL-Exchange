@@ -1,0 +1,506 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Among the cars with 8 cylinders, what is the name of the one that's the most expensive?",
+        "query": "SELECT T1.car_name FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T1.cylinders = 8 ORDER BY T2.price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Among the cars over 3000lbs, how many of them cost less than $30000?",
+        "query": "SELECT COUNT(T1.car_name) FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T1.weight > 3000 AND T2.price < 30000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the acceleration of the most expensive car?",
+        "query": "SELECT T1.acceleration FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID ORDER BY T2.price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "How much US dollars does a Ford Torino cost?",
+        "query": "SELECT T2.price FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T1.car_name = 'ford torino'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What was the origin country of the car model ford torino produced in 1970?",
+        "query": "SELECT T3.country FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country WHERE T1.car_name = 'ford torino' AND T2.model_year = 1970"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Among the car models introduced in the market in 1970, how many of them have the USA as their origin country?",
+        "query": "SELECT COUNT(*) FROM production AS T1 INNER JOIN country AS T2 ON T1.country = T2.origin WHERE T1.model_year = 1970 AND T2.country = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Please list the names of all the car models whose origin country is the USA.",
+        "query": "SELECT DISTINCT T1.car_name FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T2.country = T3.origin WHERE T3.country = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Please list the names of the top 3 most expensive cars.",
+        "query": "SELECT T1.car_name FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID ORDER BY T2.price DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Please list all the years in which the car model Chevrolet Impala was introduced in the market.",
+        "query": "SELECT DISTINCT T1.model_year FROM production AS T1 INNER JOIN data AS T2 ON T1.ID = T2.ID WHERE T2.car_name = 'chevrolet impala'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Among the cars with an acceleration of over 10 miles per squared hour, how many of them cost more than $20000 and less than $30000?",
+        "query": "SELECT COUNT(*) FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T1.acceleration > 10 AND T2.price BETWEEN 20000 AND 30000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Please list the weights of all the cars with the price over $40000.",
+        "query": "SELECT T1.weight FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T2.price > 40000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the maximum acceleration of a car with price over $40000?",
+        "query": "SELECT MAX(T1.acceleration) FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T2.price > 40000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the average price of cars with 8 cylinders?",
+        "query": "SELECT AVG(T2.price) FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T1.cylinders = 8"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the maximum sweep volume of a car that costs less than $30000?",
+        "query": "SELECT MAX(T1.displacement / T1.cylinders) FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T2.price < 30000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "How many cars in the database are originated from Europe?",
+        "query": "SELECT COUNT(*) FROM production AS T1 INNER JOIN country AS T2 ON T1.country = T2.origin WHERE T2.country = 'Europe'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Show the origin country of Chevrolet Malibu.",
+        "query": "SELECT T3.country FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country WHERE T1.car_name = 'chevrolet malibu'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What are the miles per gallon of the most expensive car?",
+        "query": "SELECT T1.mpg FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID ORDER BY T2.price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Tell the origin country of car no.382.",
+        "query": "SELECT DISTINCT T2.country FROM production AS T1 INNER JOIN country AS T2 ON T1.country = T2.origin WHERE T1.ID = 382"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Which is the origin country of the $44274.40748 car?",
+        "query": "SELECT T3.country FROM price AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country WHERE T1.price = 44274.40748"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "How much is the Volkswagen Dasher with 14.1 mph acceleration?",
+        "query": "SELECT T2.price FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T1.car_name = 'volkswagen dasher' AND T1.acceleration = '14.1'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Provide the engine displacement status of the $37443.85589 car.",
+        "query": "SELECT T1.displacement FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T2.price = '37443.85589'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "When was the $32650.65157 car introduced to the market? State the year.",
+        "query": "SELECT T1.model FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T2.price = '32650.65157'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Provide the price of the only Toyota Corona hardtop in the database.",
+        "query": "SELECT T2.price FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T1.car_name = 'toyota corona hardtop'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "How many cylinders does the cheapest car have?",
+        "query": "SELECT T1.cylinders FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID ORDER BY price ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Which car in the database provides the best crash protection based on its weight? How much is it?",
+        "query": "SELECT T1.ID, T2.price FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID ORDER BY T1.weight DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "State the origin country of the fastest car in the database.",
+        "query": "SELECT T3.country FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country ORDER BY T1.horsepower DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the percentage of Japanese cars in the database?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.country = 'Japan' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM production AS T1 INNER JOIN country AS T2 ON T1.country = T2.origin"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Calculate the swept volume of the $34538.97449 car.",
+        "query": "SELECT T1.displacement / T1.cylinders FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T2.price = 34538.97449"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the name of the most expensive car?",
+        "query": "SELECT T1.car_name FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID ORDER BY T2.price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "How many cars were released in the USA in 1981?",
+        "query": "SELECT COUNT(*) FROM production AS T1 INNER JOIN country AS T2 ON T1.country = T2.origin WHERE T2.country = 'USA' AND T1.model_year = 1981"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "How much is the car with the highest sweep volume?",
+        "query": "SELECT T2.price FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID ORDER BY T1.displacement / T1.cylinders DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the fastest car made by Japan?",
+        "query": "SELECT T1.car_name FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country WHERE T3.country = 'Japan' ORDER BY T1.horsepower DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "How many times was Ford Maverick introduced to the market?",
+        "query": "SELECT COUNT(T2.model_year) FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID WHERE T1.car_name = 'ford maverick'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Which country produced the most fuel-efficient car?",
+        "query": "SELECT T3.country FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country ORDER BY T1.mpg DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Which Dodge car is the cheapest?",
+        "query": "SELECT T1.car_name FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T1.car_name LIKE 'dodge%' ORDER BY T2.price ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the name of the most expensive car that was produced by the USA?",
+        "query": "SELECT T4.car_name FROM price AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country INNER JOIN data AS T4 ON T4.ID = T1.ID WHERE T3.country = 'USA' ORDER BY T1.price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Among the cars with an engine displacement of no less than 400 cubic millimeter, how many cars cost at least 30,000?",
+        "query": "SELECT COUNT(*) FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T1.displacement > 400 AND T2.price > 30000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Which year did Europe produce the most cars?",
+        "query": "SELECT T1.model_year FROM production AS T1 INNER JOIN country AS T2 ON T1.country = T2.origin WHERE T2.country = 'Europe' GROUP BY T1.model_year ORDER BY COUNT(T1.model_year) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "How much is the Peugeot 505s Turbo Diesel?",
+        "query": "SELECT T2.price FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T1.car_name = 'peugeot 505s turbo diesel'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the miles per square hour of the cheapest car produced by the USA?",
+        "query": "SELECT T4.acceleration FROM price AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country INNER JOIN data AS T4 ON T4.ID = T1.ID WHERE T3.country = 'USA' ORDER BY T1.price ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Which country produced the highest number of cars? Calculate the annual average number of cars that the said country produced from the very start to the present.",
+        "query": "SELECT T2.country, CAST(COUNT(T1.ID) AS REAL) / COUNT(DISTINCT T1.model_year) FROM production AS T1 INNER JOIN country AS T2 ON T1.country = T2.origin GROUP BY T2.country ORDER BY COUNT(T2.country) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the percentage of cars that was produced by Japan among those that have a sweep volume of no less than 30?",
+        "query": "SELECT CAST(SUM(CASE WHEN T3.country = 'Japan' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country WHERE T1.displacement / T1.cylinders > 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "List the name of the cars with model year 1975.",
+        "query": "SELECT T1.car_name FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID WHERE T2.model_year = 1975"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Calculate the average price of cars from Europe.",
+        "query": "SELECT AVG(T1.price) FROM price AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country WHERE T3.country = 'Europe'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the price of the car ID 15?",
+        "query": "SELECT T2.price FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T1.ID = 15"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "How many of the cars from Japan weighed less than 3000?",
+        "query": "SELECT COUNT(*) FROM price AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country INNER JOIN data AS T4 ON T4.ID = T1.ID WHERE T3.country = 'Japan' AND T4.weight < 3000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Among the cars produced in year 1973, how many of the cars have horsepower less than 100?",
+        "query": "SELECT COUNT(*) FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID WHERE T2.model_year = 1973 AND T1.horsepower < 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Provide the ID of cars from Japan worth greater than 35000 and have an acceleration of 14.",
+        "query": "SELECT T4.ID FROM price AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country INNER JOIN data AS T4 ON T4.ID = T1.ID WHERE T3.country = 'Japan' AND T1.price > 3500 AND T4.acceleration = 14"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Give the model year of the heaviest car.",
+        "query": "SELECT T2.model_year FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID ORDER BY T1.weight DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the horsepower and model year of the car named Subaru Dl?",
+        "query": "SELECT T1.horsepower, T2.model_year FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID WHERE T1.car_name = 'subaru dl'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Among the cars originated from Japan, what is the name of the car with the highest price?",
+        "query": "SELECT T4.car_name FROM price AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country INNER JOIN data AS T4 ON T4.ID = T1.ID WHERE T3.country = 'Japan' ORDER BY T1.price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What are the names of the cars worth 20000?",
+        "query": "SELECT T1.car_name FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T2.price = 20000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "How many cars worth greater than 40000 were from the USA?",
+        "query": "SELECT COUNT(*) FROM price AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country WHERE T3.country = 'USA' AND T1.price > 40000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Provide the price and country origin of the car named Ford Maverick.",
+        "query": "SELECT DISTINCT T1.price, T3.country FROM price AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country INNER JOIN data AS T4 ON T4.ID = T1.ID WHERE T4.car_name = 'ford maverick'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "List the car's name with a price worth greater than 85% of the average price of all cars.",
+        "query": "SELECT T1.car_name FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T2.price * 100 > ( SELECT AVG(price) * 85 FROM price )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Calculate the difference between the number of cars that has a horsepower of 130 with the model year 1970 and model year 1976",
+        "query": "SELECT SUM(CASE WHEN T2.model_year = 1970 THEN 1 ELSE 0 END) - SUM(CASE WHEN T2.model_year = 1976 THEN 1 ELSE 0 END) FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID WHERE T1.horsepower = 130"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Among the cars from Asia, list the IDs of cars that were introduced in 1979.",
+        "query": "SELECT T1.ID FROM production AS T1 INNER JOIN country AS T2 ON T1.country = T2.origin WHERE T2.country = 'Japan' AND T1.model_year = 1979"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Which country produced the car with the lowest mileage per gallon?",
+        "query": "SELECT T3.country FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country ORDER BY T1.mpg ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Provide the name, model, sweep volume, and introduced year of the car with the best crash protection.",
+        "query": "SELECT T1.car_name, T1.model, T1.displacement / T1.cylinders, T2.model_year FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID ORDER BY T1.weight DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Among the cars introduced in 1977, provide the names and the horse powers of cars from Europe.",
+        "query": "SELECT T1.car_name, T1.horsepower FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country WHERE T2.model_year = 1977 AND T3.country = 'Europe'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Provide the name and model of the car with the highest price.",
+        "query": "SELECT T1.car_name, T1.model FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID ORDER BY T2.price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the price of a Chevrolet Bel Air?",
+        "query": "SELECT T2.price FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T1.car_name = 'chevrolet bel air'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the average price per car produced in Japan?",
+        "query": "SELECT AVG(T1.price) FROM price AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country WHERE T3.country = 'Japan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Which country produced the car with the lowest price?",
+        "query": "SELECT T3.country FROM price AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country ORDER BY T1.price ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Among the cars produced in 1975, provide IDs, names, and producing countries of the cars with the maximum number of cylinders.",
+        "query": "SELECT T1.ID, T1.car_name, T3.country FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country WHERE T2.model_year = 1975 ORDER BY T1.cylinders DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Which car is the cheapest? Provide its acceleration, number of cylinders, and producing year.",
+        "query": "SELECT T1.acceleration, T1.cylinders, T2.model_year FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN price AS T3 ON T3.ID = T2.ID ORDER BY T3.price ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "List the names and prices of the cars with model 82 and mileage per gallon of greater than 30.",
+        "query": "SELECT T2.car_name, T1.price FROM price AS T1 INNER JOIN data AS T2 ON T1.ID = T2.ID WHERE T2.model = 82 AND T2.mpg > 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "How many models of Ford Maverick were produced?",
+        "query": "SELECT COUNT(DISTINCT T2.model_year) FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID WHERE T1.car_name = 'ford maverick'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Calculate the percentage of cars that belong to the USA.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.country = 'USA' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM production AS T1 INNER JOIN country AS T2 ON T1.country = T2.origin"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Calculate the average production rate per year from 1971 to 1980. Among them, name the cars with a weight of fewer than 1800 lbs.",
+        "query": "SELECT CAST(COUNT(T1.ID) AS REAL) / 9 FROM production AS T1 INNER JOIN data AS T2 ON T2.ID = T1.ID WHERE T1.model_year BETWEEN 1971 AND 1980 UNION ALL SELECT DISTINCT T2.car_name FROM production AS T1 INNER JOIN data AS T2 ON T2.ID = T1.ID WHERE T1.model_year BETWEEN 1971 AND 1980 AND T2.weight < 1800"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the average price of model 70 cars?",
+        "query": "SELECT AVG(T2.price) FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T1.model = 70"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the price of Chevrolet Vega 2300?",
+        "query": "SELECT T2.price FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID WHERE T1.car_name = 'chevrolet vega 2300'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Which country does Chevy C20 come from?",
+        "query": "SELECT T3.country FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country WHERE T1.car_name = 'chevy c20'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "List the price of Ford cars from model 1970 to 1980.",
+        "query": "SELECT DISTINCT T3.price FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN price AS T3 ON T3.ID = T2.ID WHERE T1.car_name LIKE 'ford%' AND T2.model_year BETWEEN 1970 AND 1980"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Which is the most fuel efficient car in 1975?",
+        "query": "SELECT T1.car_name FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID WHERE T2.model_year = '1975' ORDER BY T1.mpg DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Which car consumes fuel the most and has the highest price?",
+        "query": "SELECT T1.car_name FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID ORDER BY T1.mpg DESC, T2.price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "How many American cars have an acceleration time of less than 12 seconds?",
+        "query": "SELECT COUNT(*) FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country WHERE T3.country = 'USA' AND T1.acceleration < 12"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "How many Japanese cars weigh more than 2000 lbs?",
+        "query": "SELECT COUNT(*) FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country WHERE T3.country = 'Japan' AND T1.weight > 2000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "List the name of the most expensive car.",
+        "query": "SELECT T1.car_name FROM data AS T1 INNER JOIN price AS T2 ON T1.ID = T2.ID ORDER BY T2.price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What years did the Buick Skylark 320 get in production?",
+        "query": "SELECT T2.model_year FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID WHERE T1.car_name = 'buick skylark 320'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Which country produced the most expensive car in 1970?",
+        "query": "SELECT T3.country FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country INNER JOIN price AS T4 ON T4.ID = T1.ID WHERE T2.model_year = 1970 ORDER BY T4.price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "How many cars with horsepower greater than 200 were produced in 1975?",
+        "query": "SELECT COUNT(T2.model_year) FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID WHERE T1.horsepower > 200 AND T2.model_year = 1975"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "Calculate the percentage of American cars among all cars.",
+        "query": "SELECT CAST(SUM(CASE WHEN T3.country = 'USA' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cars",
+        "question": "What is the average weight of Japanese cars with 4 cylinders that were produced from 1975 to 1980?",
+        "query": "SELECT AVG(T1.weight) FROM data AS T1 INNER JOIN production AS T2 ON T1.ID = T2.ID INNER JOIN country AS T3 ON T3.origin = T2.country WHERE T2.model_year BETWEEN 1975 AND 1980 AND T1.cylinders = 4 AND T3.country = 'Japan'"
+    }
+]

@@ -1,0 +1,242 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "How many counties are there?",
+        "query": "SELECT count(*) FROM county_public_safety"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "Count the number of countries.",
+        "query": "SELECT count(*) FROM county_public_safety"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "List the names of counties in descending order of population.",
+        "query": "SELECT Name FROM county_public_safety ORDER BY Population DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "What are the names of the counties of public safety, ordered by population descending?",
+        "query": "SELECT Name FROM county_public_safety ORDER BY Population DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "List the distinct police forces of counties whose location is not on east side.",
+        "query": "SELECT DISTINCT Police_force FROM county_public_safety WHERE LOCATION != \"East\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "What are the different police forces of counties that are not located in the East?",
+        "query": "SELECT DISTINCT Police_force FROM county_public_safety WHERE LOCATION != \"East\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "What are the minimum and maximum crime rate of counties?",
+        "query": "SELECT min(Crime_rate) ,  max(Crime_rate) FROM county_public_safety"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "Return the minimum and maximum crime rates across all counties.",
+        "query": "SELECT min(Crime_rate) ,  max(Crime_rate) FROM county_public_safety"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "Show the crime rates of counties in ascending order of number of police officers.",
+        "query": "SELECT Crime_rate FROM county_public_safety ORDER BY Police_officers ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "What are the crime rates of counties sorted by number of offices ascending?",
+        "query": "SELECT Crime_rate FROM county_public_safety ORDER BY Police_officers ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "What are the names of cities in ascending alphabetical order?",
+        "query": "SELECT Name FROM city ORDER BY Name ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "Return the names of cities, ordered alphabetically.",
+        "query": "SELECT Name FROM city ORDER BY Name ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "What are the percentage of hispanics in cities with the black percentage higher than 10?",
+        "query": "SELECT Hispanic FROM city WHERE Black  >  10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "Return the hispanic percentage for cities in which the black percentage is greater than 10.",
+        "query": "SELECT Hispanic FROM city WHERE Black  >  10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "List the name of the county with the largest population.",
+        "query": "SELECT Name FROM county_public_safety ORDER BY Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "What is the name of the county with the greatest population?",
+        "query": "SELECT Name FROM county_public_safety ORDER BY Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "List the names of the city with the top 5 white percentages.",
+        "query": "SELECT Name FROM city ORDER BY White DESC LIMIT 5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "What are the names of the five cities with the greatest proportion of white people?",
+        "query": "SELECT Name FROM city ORDER BY White DESC LIMIT 5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "Show names of cities and names of counties they are in.",
+        "query": "SELECT T1.Name ,  T2.Name FROM city AS T1 JOIN county_public_safety AS T2 ON T1.County_ID  =  T2.County_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "What are the names of cities, as well as the names of the counties they correspond to?",
+        "query": "SELECT T1.Name ,  T2.Name FROM city AS T1 JOIN county_public_safety AS T2 ON T1.County_ID  =  T2.County_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "Show white percentages of cities and the crime rates of counties they are in.",
+        "query": "SELECT T1.White ,  T2.Crime_rate FROM city AS T1 JOIN county_public_safety AS T2 ON T1.County_ID  =  T2.County_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "What are the white percentages of cities, and the corresponding crime rates of the counties they correspond to?",
+        "query": "SELECT T1.White ,  T2.Crime_rate FROM city AS T1 JOIN county_public_safety AS T2 ON T1.County_ID  =  T2.County_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "Show the name of cities in the county that has the largest number of police officers.",
+        "query": "SELECT name FROM city WHERE county_ID  =  (SELECT county_ID FROM county_public_safety ORDER BY Police_officers DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "What are the names of cities that are in the county with the most police officers?",
+        "query": "SELECT name FROM city WHERE county_ID  =  (SELECT county_ID FROM county_public_safety ORDER BY Police_officers DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "Show the number of cities in counties that have a population more than 20000.",
+        "query": "SELECT count(*) FROM city WHERE county_ID IN (SELECT county_ID FROM county_public_safety WHERE population  >  20000)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "How many cities are in counties that have populations of over 20000?",
+        "query": "SELECT count(*) FROM city WHERE county_ID IN (SELECT county_ID FROM county_public_safety WHERE population  >  20000)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "Show the crime rate of counties with a city having white percentage more than 90.",
+        "query": "SELECT T2.Crime_rate FROM city AS T1 JOIN county_public_safety AS T2 ON T1.County_ID  =  T2.County_ID WHERE T1.White  >  90"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "What are the crime rates of counties that contain cities that have white percentages of over 90?",
+        "query": "SELECT T2.Crime_rate FROM city AS T1 JOIN county_public_safety AS T2 ON T1.County_ID  =  T2.County_ID WHERE T1.White  >  90"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "Please show the police forces and the number of counties with each police force.",
+        "query": "SELECT Police_force ,  COUNT(*) FROM county_public_safety GROUP BY Police_force"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "How many counties correspond to each police force?",
+        "query": "SELECT Police_force ,  COUNT(*) FROM county_public_safety GROUP BY Police_force"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "What is the location shared by most counties?",
+        "query": "SELECT LOCATION FROM county_public_safety GROUP BY LOCATION ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "Which location has the most corresponding counties?",
+        "query": "SELECT LOCATION FROM county_public_safety GROUP BY LOCATION ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "List the names of counties that do not have any cities.",
+        "query": "SELECT Name FROM county_public_safety WHERE County_ID NOT IN (SELECT County_ID FROM city)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "What are the names of counties that do not contain any cities?",
+        "query": "SELECT Name FROM county_public_safety WHERE County_ID NOT IN (SELECT County_ID FROM city)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "Show the police force shared by counties with location on the east and west.",
+        "query": "SELECT Police_force FROM county_public_safety WHERE LOCATION  =  \"East\" INTERSECT SELECT Police_force FROM county_public_safety WHERE LOCATION  =  \"West\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "Which police forces operate in both counties that are located in the East and in the West?",
+        "query": "SELECT Police_force FROM county_public_safety WHERE LOCATION  =  \"East\" INTERSECT SELECT Police_force FROM county_public_safety WHERE LOCATION  =  \"West\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "Show the names of cities in counties that have a crime rate less than 100.",
+        "query": "SELECT name FROM city WHERE county_id IN (SELECT county_id FROM county_public_safety WHERE Crime_rate  <  100)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "What are the names of cities that are in counties that have a crime rate below 100?",
+        "query": "SELECT name FROM city WHERE county_id IN (SELECT county_id FROM county_public_safety WHERE Crime_rate  <  100)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "Show the case burden of counties in descending order of population.",
+        "query": "SELECT Case_burden FROM county_public_safety ORDER BY Population DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "county_public_safety",
+        "question": "What are the case burdens of counties, ordered descending by population?",
+        "query": "SELECT Case_burden FROM county_public_safety ORDER BY Population DESC"
+    }
+]

@@ -1,0 +1,986 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the number of professors in accounting department.",
+        "query": "SELECT count(*) FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE DEPT_NAME  =  \"Accounting\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many professors are in the accounting dept?",
+        "query": "SELECT count(*) FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE DEPT_NAME  =  \"Accounting\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many professors are teaching class with code ACCT-211?",
+        "query": "SELECT count(DISTINCT PROF_NUM) FROM CLASS WHERE CRS_CODE  =  \"ACCT-211\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many professors teach a class with the code ACCT-211?",
+        "query": "SELECT count(DISTINCT PROF_NUM) FROM CLASS WHERE CRS_CODE  =  \"ACCT-211\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the first and last name of the professor in biology department?",
+        "query": "SELECT T3.EMP_FNAME ,  T3.EMP_LNAME FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code JOIN employee AS T3 ON T1.EMP_NUM  =  T3.EMP_NUM WHERE DEPT_NAME  =  \"Biology\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first and last name of all biology professors?",
+        "query": "SELECT T3.EMP_FNAME ,  T3.EMP_LNAME FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code JOIN employee AS T3 ON T1.EMP_NUM  =  T3.EMP_NUM WHERE DEPT_NAME  =  \"Biology\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names and date of birth of professors teaching course ACCT-211?",
+        "query": "SELECT DISTINCT T1.EMP_FNAME ,  T1.EMP_DOB FROM employee AS T1 JOIN CLASS AS T2 ON T1.EMP_NUM  =  T2.PROF_NUM WHERE CRS_CODE  =  \"ACCT-211\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names and birthdates of the professors in charge of ACCT-211?",
+        "query": "SELECT DISTINCT T1.EMP_FNAME ,  T1.EMP_DOB FROM employee AS T1 JOIN CLASS AS T2 ON T1.EMP_NUM  =  T2.PROF_NUM WHERE CRS_CODE  =  \"ACCT-211\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many classes are professor whose last name is Graztevski has?",
+        "query": "SELECT count(*) FROM employee AS T1 JOIN CLASS AS T2 ON T1.EMP_NUM  =  T2.PROF_NUM WHERE T1.EMP_LNAME  =  'Graztevski'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many classes does the professor whose last name is Graztevski teach?",
+        "query": "SELECT count(*) FROM employee AS T1 JOIN CLASS AS T2 ON T1.EMP_NUM  =  T2.PROF_NUM WHERE T1.EMP_LNAME  =  'Graztevski'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the code of the school where the accounting department belongs to?",
+        "query": "SELECT school_code FROM department WHERE dept_name  =  \"Accounting\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the school code of the accounting department?",
+        "query": "SELECT school_code FROM department WHERE dept_name  =  \"Accounting\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many credits does course CIS-220 have, and what its description?",
+        "query": "SELECT crs_credit ,  crs_description FROM course WHERE crs_code  =  'CIS-220'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the description for the CIS-220 and how many credits does it have?",
+        "query": "SELECT crs_credit ,  crs_description FROM course WHERE crs_code  =  'CIS-220'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "what is the address of history department?",
+        "query": "SELECT dept_address FROM department WHERE dept_name  =  'History'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Where is the history department?",
+        "query": "SELECT dept_address FROM department WHERE dept_name  =  'History'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many different locations does the school with code BUS has?",
+        "query": "SELECT count(DISTINCT dept_address) FROM department WHERE school_code  =  'BUS'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the different locations of the school with the code BUS?",
+        "query": "SELECT count(DISTINCT dept_address) FROM department WHERE school_code  =  'BUS'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many different locations does each school have?",
+        "query": "SELECT count(DISTINCT dept_address) ,  school_code FROM department GROUP BY school_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Count different addresses of each school.",
+        "query": "SELECT count(DISTINCT dept_address) ,  school_code FROM department GROUP BY school_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the description and credit for the course QM-261?",
+        "query": "SELECT crs_credit ,  crs_description FROM course WHERE crs_code  =  'QM-261'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the course description and number of credits for QM-261?",
+        "query": "SELECT crs_credit ,  crs_description FROM course WHERE crs_code  =  'QM-261'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the number of departments in each school.",
+        "query": "SELECT count(DISTINCT dept_name) ,  school_code FROM department GROUP BY school_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many departments are in each school?",
+        "query": "SELECT count(DISTINCT dept_name) ,  school_code FROM department GROUP BY school_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the number of different departments in each school whose number of different departments is less than 5.",
+        "query": "SELECT count(DISTINCT dept_name) ,  school_code FROM department GROUP BY school_code HAVING count(DISTINCT dept_name)  <  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many different departments are there in each school that has less than 5 apartments?",
+        "query": "SELECT count(DISTINCT dept_name) ,  school_code FROM department GROUP BY school_code HAVING count(DISTINCT dept_name)  <  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many sections does each course has?",
+        "query": "SELECT count(*) ,  crs_code FROM CLASS GROUP BY crs_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many sections does each course have?",
+        "query": "SELECT count(*) ,  crs_code FROM CLASS GROUP BY crs_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the total credit does each department offer?",
+        "query": "SELECT sum(crs_credit) ,  dept_code FROM course GROUP BY dept_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many credits does the department offer?",
+        "query": "SELECT sum(crs_credit) ,  dept_code FROM course GROUP BY dept_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the number of classes offered for all class rooms that held at least 2 classes.",
+        "query": "SELECT count(*) ,  class_room FROM CLASS GROUP BY class_room HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "For each classroom with at least 2 classes, how many classes are offered?",
+        "query": "SELECT count(*) ,  class_room FROM CLASS GROUP BY class_room HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the number of classes in each department.",
+        "query": "SELECT count(*) ,  dept_code FROM CLASS AS T1 JOIN course AS T2 ON T1.crs_code  =  T2.crs_code GROUP BY dept_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many classes are held in each department?",
+        "query": "SELECT count(*) ,  dept_code FROM CLASS AS T1 JOIN course AS T2 ON T1.crs_code  =  T2.crs_code GROUP BY dept_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the number of classes in each school.",
+        "query": "SELECT count(*) ,  T3.school_code FROM CLASS AS T1 JOIN course AS T2 ON T1.crs_code  =  T2.crs_code JOIN department AS T3 ON T2.dept_code  =  T3.dept_code GROUP BY T3.school_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many classes exist for each school?",
+        "query": "SELECT count(*) ,  T3.school_code FROM CLASS AS T1 JOIN course AS T2 ON T1.crs_code  =  T2.crs_code JOIN department AS T3 ON T2.dept_code  =  T3.dept_code GROUP BY T3.school_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the number of professors for different school?",
+        "query": "SELECT count(*) ,  T1.school_code FROM department AS T1 JOIN professor AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.school_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many different professors are there for the different schools?",
+        "query": "SELECT count(*) ,  T1.school_code FROM department AS T1 JOIN professor AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.school_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the count and code of the job has most employees.",
+        "query": "SELECT emp_jobcode ,  count(*) FROM employee GROUP BY emp_jobcode ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the count and code of the job with the most employee?",
+        "query": "SELECT emp_jobcode ,  count(*) FROM employee GROUP BY emp_jobcode ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Which school has the smallest amount of professors?",
+        "query": "SELECT T1.school_code FROM department AS T1 JOIN professor AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.school_code ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Which school has the fewest professors?",
+        "query": "SELECT T1.school_code FROM department AS T1 JOIN professor AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.school_code ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the number of professors with a Ph.D. degree in each department.",
+        "query": "SELECT count(*) ,  dept_code FROM professor WHERE prof_high_degree  =  'Ph.D.' GROUP BY dept_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many professors have a Ph.D. in each department?",
+        "query": "SELECT count(*) ,  dept_code FROM professor WHERE prof_high_degree  =  'Ph.D.' GROUP BY dept_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the number of students for each department.",
+        "query": "SELECT count(*) ,  dept_code FROM student GROUP BY dept_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many students are in each department?",
+        "query": "SELECT count(*) ,  dept_code FROM student GROUP BY dept_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the total number of hours have done for all students in each department.",
+        "query": "SELECT sum(stu_hrs) ,  dept_code FROM student GROUP BY dept_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many hours do the students spend studying in each department?",
+        "query": "SELECT sum(stu_hrs) ,  dept_code FROM student GROUP BY dept_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the max, average, and minimum gpa of all students in each department.",
+        "query": "SELECT max(stu_gpa) ,  avg(stu_gpa) ,  min(stu_gpa) ,  dept_code FROM student GROUP BY dept_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the highest, lowest, and average student GPA for every department?",
+        "query": "SELECT max(stu_gpa) ,  avg(stu_gpa) ,  min(stu_gpa) ,  dept_code FROM student GROUP BY dept_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the name and the average gpa of department whose students have the highest average gpa?",
+        "query": "SELECT T2.dept_name ,  avg(T1.stu_gpa) FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY avg(T1.stu_gpa) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Which department has the highest average student GPA, and what is the average gpa?",
+        "query": "SELECT T2.dept_name ,  avg(T1.stu_gpa) FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY avg(T1.stu_gpa) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "how many schools exist in total?",
+        "query": "SELECT count(DISTINCT school_code) FROM department"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many schools are there in the department?",
+        "query": "SELECT count(DISTINCT school_code) FROM department"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many different classes are there?",
+        "query": "SELECT count(DISTINCT class_code) FROM CLASS"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many unique classes are offered?",
+        "query": "SELECT count(DISTINCT class_code) FROM CLASS"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many courses are offered?",
+        "query": "SELECT count(DISTINCT crs_code) FROM CLASS"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the number of different course codes?",
+        "query": "SELECT count(DISTINCT crs_code) FROM CLASS"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many departments does the college has?",
+        "query": "SELECT count(DISTINCT dept_name) FROM department"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many different departments are there?",
+        "query": "SELECT count(DISTINCT dept_name) FROM department"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many courses are offered by the Computer Info. Systems department?",
+        "query": "SELECT count(*) FROM department AS T1 JOIN course AS T2 ON T1.dept_code  =  T2.dept_code WHERE dept_name  =  \"Computer Info. Systems\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many courses does the department of Computer Information Systmes offer?",
+        "query": "SELECT count(*) FROM department AS T1 JOIN course AS T2 ON T1.dept_code  =  T2.dept_code WHERE dept_name  =  \"Computer Info. Systems\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many sections does course ACCT-211 has?",
+        "query": "SELECT count(DISTINCT class_section) FROM CLASS WHERE crs_code  =  'ACCT-211'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the number of different class sections offered in the course ACCT-211?",
+        "query": "SELECT count(DISTINCT class_section) FROM CLASS WHERE crs_code  =  'ACCT-211'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the total credits of all classes offered by each department.",
+        "query": "SELECT sum(T1.crs_credit) ,  T1.dept_code FROM course AS T1 JOIN CLASS AS T2 ON T1.crs_code  =  T2.crs_code GROUP BY T1.dept_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the total number of credits offered by each department?",
+        "query": "SELECT sum(T1.crs_credit) ,  T1.dept_code FROM course AS T1 JOIN CLASS AS T2 ON T1.crs_code  =  T2.crs_code GROUP BY T1.dept_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the name of the department that offers the largest number of credits of all classes.",
+        "query": "SELECT T3.dept_name FROM course AS T1 JOIN CLASS AS T2 ON T1.crs_code  =  T2.crs_code JOIN department AS T3 ON T1.dept_code  =  T3.dept_code GROUP BY T1.dept_code ORDER BY sum(T1.crs_credit) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Which department offers the most credits all together?",
+        "query": "SELECT T3.dept_name FROM course AS T1 JOIN CLASS AS T2 ON T1.crs_code  =  T2.crs_code JOIN department AS T3 ON T1.dept_code  =  T3.dept_code GROUP BY T1.dept_code ORDER BY sum(T1.crs_credit) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many students enrolled in class ACCT-211?",
+        "query": "SELECT count(*) FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code WHERE T1.crs_code  =  'ACCT-211'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the total number of students enrolled in ACCT-211?",
+        "query": "SELECT count(*) FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code WHERE T1.crs_code  =  'ACCT-211'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the first name of each student enrolled in class ACCT-211?",
+        "query": "SELECT T3.stu_fname FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T2.stu_num  =  T3.stu_num WHERE T1.crs_code  =  'ACCT-211'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names of all students in course ACCT-211?",
+        "query": "SELECT T3.stu_fname FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T2.stu_num  =  T3.stu_num WHERE T1.crs_code  =  'ACCT-211'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the first name of students enrolled in class ACCT-211 and got grade C?",
+        "query": "SELECT T3.stu_fname FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T2.stu_num  =  T3.stu_num WHERE T1.crs_code  =  'ACCT-211' AND T2.enroll_grade  =  'C'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names of all students who took ACCT-211 and received a C?",
+        "query": "SELECT T3.stu_fname FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T2.stu_num  =  T3.stu_num WHERE T1.crs_code  =  'ACCT-211' AND T2.enroll_grade  =  'C'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the total number of employees.",
+        "query": "SELECT count(*) FROM employee"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many employees are there all together?",
+        "query": "SELECT count(*) FROM employee"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many professors do have a Ph.D. degree?",
+        "query": "SELECT count(*) FROM professor WHERE prof_high_degree  =  'Ph.D.'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the total number of professors with a Ph.D. ?",
+        "query": "SELECT count(*) FROM professor WHERE prof_high_degree  =  'Ph.D.'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many students are enrolled in the class taught by some professor from the accounting department?",
+        "query": "SELECT count(*) FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN department AS T4 ON T3.dept_code  =  T4.dept_code WHERE T4.dept_name  =  'Accounting'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many students are enrolled in some classes that are taught by an accounting professor?",
+        "query": "SELECT count(*) FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN department AS T4 ON T3.dept_code  =  T4.dept_code WHERE T4.dept_name  =  'Accounting'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the name of the department that has the largest number of students enrolled?",
+        "query": "SELECT T4.dept_name FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN department AS T4 ON T3.dept_code  =  T4.dept_code GROUP BY T3.dept_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the name of the department with the most students enrolled?",
+        "query": "SELECT T4.dept_name FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN department AS T4 ON T3.dept_code  =  T4.dept_code GROUP BY T3.dept_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "list names of all departments ordered by their names.",
+        "query": "SELECT dept_name FROM department ORDER BY dept_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the names of all departments in alphabetical order?",
+        "query": "SELECT dept_name FROM department ORDER BY dept_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "List the codes of all courses that take place in room KLR209.",
+        "query": "SELECT class_code FROM CLASS WHERE class_room  =  'KLR209'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the codes of all the courses that are located in room KLR209?",
+        "query": "SELECT class_code FROM CLASS WHERE class_room  =  'KLR209'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "List the first name of all employees with job code PROF ordered by their date of birth.",
+        "query": "SELECT emp_fname FROM employee WHERE emp_jobcode  =  'PROF' ORDER BY emp_dob"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names of all employees that are professors ordered by date of birth?",
+        "query": "SELECT emp_fname FROM employee WHERE emp_jobcode  =  'PROF' ORDER BY emp_dob"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the first names and offices of all professors sorted by alphabetical order of their first name.",
+        "query": "SELECT T2.emp_fname ,  T1.prof_office FROM professor AS T1 JOIN employee AS T2 ON T1.emp_num  =  T2.emp_num ORDER BY T2.emp_fname"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names and office locations for all professors sorted alphabetically by first name?",
+        "query": "SELECT T2.emp_fname ,  T1.prof_office FROM professor AS T1 JOIN employee AS T2 ON T1.emp_num  =  T2.emp_num ORDER BY T2.emp_fname"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the first and last name of the oldest employee?",
+        "query": "SELECT emp_fname ,  emp_lname FROM employee ORDER BY emp_dob LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first and last names of the employee with the earliest date of birth?",
+        "query": "SELECT emp_fname ,  emp_lname FROM employee ORDER BY emp_dob LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the first, last name, gpa of the youngest one among students whose GPA is above 3?",
+        "query": "SELECT stu_fname ,  stu_lname ,  stu_gpa FROM student WHERE stu_gpa  >  3 ORDER BY stu_dob DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the first and last name of the youngest student with a GPA above 3, and what is their GPA?",
+        "query": "SELECT stu_fname ,  stu_lname ,  stu_gpa FROM student WHERE stu_gpa  >  3 ORDER BY stu_dob DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the first name of students who got grade C in any class?",
+        "query": "SELECT DISTINCT stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num WHERE enroll_grade  =  'C'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names of all students who got a grade C in a class?",
+        "query": "SELECT DISTINCT stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num WHERE enroll_grade  =  'C'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the name of department where has the smallest number of professors?",
+        "query": "SELECT T2.dept_name FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the name of the department with the fewest professors?",
+        "query": "SELECT T2.dept_name FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the name of department where has the largest number of professors with a Ph.D. degree?",
+        "query": "SELECT T2.dept_name ,  T1.dept_code FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE T1.prof_high_degree  =  'Ph.D.' GROUP BY T1.dept_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Which department has the most professors with a Ph.D.?",
+        "query": "SELECT T2.dept_name ,  T1.dept_code FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE T1.prof_high_degree  =  'Ph.D.' GROUP BY T1.dept_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names of the professors who do not teach a class.",
+        "query": "SELECT emp_fname FROM employee WHERE emp_jobcode  =  'PROF' EXCEPT SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names of all professors not teaching any classes?",
+        "query": "SELECT emp_fname FROM employee WHERE emp_jobcode  =  'PROF' EXCEPT SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the first names of the professors from the history department who do not teach a class.",
+        "query": "SELECT T1.emp_fname FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T2.dept_code  =  T3.dept_code WHERE T3.dept_name  =  'History' EXCEPT SELECT T4.emp_fname FROM employee AS T4 JOIN CLASS AS T5 ON T4.emp_num  =  T5.prof_num"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names of all history professors who do not teach?",
+        "query": "SELECT T1.emp_fname FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T2.dept_code  =  T3.dept_code WHERE T3.dept_name  =  'History' EXCEPT SELECT T4.emp_fname FROM employee AS T4 JOIN CLASS AS T5 ON T4.emp_num  =  T5.prof_num"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the last name and office of the professor from the history department?",
+        "query": "SELECT T1.emp_lname ,  T2.prof_office FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T2.dept_code  =  T3.dept_code WHERE T3.dept_name  =  'History'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the last name and office of all history professors?",
+        "query": "SELECT T1.emp_lname ,  T2.prof_office FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T2.dept_code  =  T3.dept_code WHERE T3.dept_name  =  'History'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is department name and office for the professor whose last name is Heffington?",
+        "query": "SELECT T3.dept_name  ,  T2.prof_office FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T2.dept_code  =  T3.dept_code WHERE T1.emp_lname  =  'Heffington'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the name of the department and office location for the professor with the last name of Heffington?",
+        "query": "SELECT T3.dept_name  ,  T2.prof_office FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T2.dept_code  =  T3.dept_code WHERE T1.emp_lname  =  'Heffington'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the last name and hire date of the professor who is in office DRE 102.",
+        "query": "SELECT T1.emp_lname ,  T1.emp_hiredate FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num WHERE T2.prof_office  =  'DRE 102'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the last name of the professor whose office is located in DRE 102, and when were they hired?",
+        "query": "SELECT T1.emp_lname ,  T1.emp_hiredate FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num WHERE T2.prof_office  =  'DRE 102'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the code of the course which the student whose last name is Smithson took?",
+        "query": "SELECT T1.crs_code FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T3.stu_num  =  T2.stu_num WHERE T3.stu_lname  =  'Smithson'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the course codes for every class that the student with the last name Smithson took?",
+        "query": "SELECT T1.crs_code FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T3.stu_num  =  T2.stu_num WHERE T3.stu_lname  =  'Smithson'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the description and credit of the course which the student whose last name is Smithson took?",
+        "query": "SELECT T4.crs_description ,  T4.crs_credit FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T3.stu_num  =  T2.stu_num JOIN course AS T4 ON T4.crs_code  =  T1.crs_code WHERE T3.stu_lname  =  'Smithson'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many credits is the course that the student with the last name Smithson took, and what is its description?",
+        "query": "SELECT T4.crs_description ,  T4.crs_credit FROM CLASS AS T1 JOIN enroll AS T2 ON T1.class_code  =  T2.class_code JOIN student AS T3 ON T3.stu_num  =  T2.stu_num JOIN course AS T4 ON T4.crs_code  =  T1.crs_code WHERE T3.stu_lname  =  'Smithson'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many professors who has a either Ph.D. or MA degree?",
+        "query": "SELECT count(*) FROM professor WHERE prof_high_degree  =  'Ph.D.' OR prof_high_degree  =  'MA'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many professors attained either Ph.D. or Masters degrees?",
+        "query": "SELECT count(*) FROM professor WHERE prof_high_degree  =  'Ph.D.' OR prof_high_degree  =  'MA'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "How many professors who are from either Accounting or Biology department?",
+        "query": "SELECT count(*) FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE T2.dept_name  =  'Accounting' OR T2.dept_name  =  'Biology'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the number of professors who are in the Accounting or Biology departments?",
+        "query": "SELECT count(*) FROM professor AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE T2.dept_name  =  'Accounting' OR T2.dept_name  =  'Biology'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the first name of the professor who is teaching two courses with code CIS-220 and QM-261.",
+        "query": "SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num WHERE crs_code  =  'CIS-220' INTERSECT SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num WHERE crs_code  =  'QM-261'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the first name of the professor who is teaching CIS-220 and QM-261?",
+        "query": "SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num WHERE crs_code  =  'CIS-220' INTERSECT SELECT T1.emp_fname FROM employee AS T1 JOIN CLASS AS T2 ON T1.emp_num  =  T2.prof_num WHERE crs_code  =  'QM-261'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the first name of student who is taking classes from accounting and Computer Info. Systems departments",
+        "query": "SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code JOIN course AS T4 ON T3.crs_code  =  T4.crs_code JOIN department AS T5 ON T5.dept_code  =  T4.dept_code WHERE T5.dept_name  =  'Accounting' INTERSECT SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code JOIN course AS T4 ON T3.crs_code  =  T4.crs_code JOIN department AS T5 ON T5.dept_code  =  T4.dept_code WHERE T5.dept_name  =  'Computer Info. Systems'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names of all students taking accoutning and Computer Information Systems classes?",
+        "query": "SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code JOIN course AS T4 ON T3.crs_code  =  T4.crs_code JOIN department AS T5 ON T5.dept_code  =  T4.dept_code WHERE T5.dept_name  =  'Accounting' INTERSECT SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code JOIN course AS T4 ON T3.crs_code  =  T4.crs_code JOIN department AS T5 ON T5.dept_code  =  T4.dept_code WHERE T5.dept_name  =  'Computer Info. Systems'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the average gpa of the students enrolled in the course with code ACCT-211?",
+        "query": "SELECT avg(T2.stu_gpa) FROM enroll AS T1 JOIN student AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T1.class_code  =  T3.class_code WHERE T3.crs_code  =  'ACCT-211'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the average GPA of students taking ACCT-211?",
+        "query": "SELECT avg(T2.stu_gpa) FROM enroll AS T1 JOIN student AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T1.class_code  =  T3.class_code WHERE T3.crs_code  =  'ACCT-211'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the first name, gpa and phone number of the top 5 students with highest gpa?",
+        "query": "SELECT stu_gpa ,  stu_phone ,  stu_fname FROM student ORDER BY stu_gpa DESC LIMIT 5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the first name, GPA, and phone number of the students with the top 5 GPAs?",
+        "query": "SELECT stu_gpa ,  stu_phone ,  stu_fname FROM student ORDER BY stu_gpa DESC LIMIT 5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the department name of the students with lowest gpa belongs to?",
+        "query": "SELECT T2.dept_name FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code ORDER BY stu_gpa LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the name of the department with the student that has the lowest GPA?",
+        "query": "SELECT T2.dept_name FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code ORDER BY stu_gpa LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the first name and gpa of the students whose gpa is lower than the average gpa of all students.",
+        "query": "SELECT stu_fname ,  stu_gpa FROM student WHERE stu_gpa  <  (SELECT avg(stu_gpa) FROM student)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the first name and GPA of every student that has a GPA lower than average?",
+        "query": "SELECT stu_fname ,  stu_gpa FROM student WHERE stu_gpa  <  (SELECT avg(stu_gpa) FROM student)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the name and address of the department that has the highest number of students.",
+        "query": "SELECT T2.dept_name ,  T2.dept_address FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the name and address of the department with the most students?",
+        "query": "SELECT T2.dept_name ,  T2.dept_address FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the name, address, number of students in the departments that have the top 3 highest number of students.",
+        "query": "SELECT T2.dept_name ,  T2.dept_address ,  count(*) FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY count(*) DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the name, address, and number of students in the departments that have the 3 most students?",
+        "query": "SELECT T2.dept_name ,  T2.dept_address ,  count(*) FROM student AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code GROUP BY T1.dept_code ORDER BY count(*) DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the first name and office of the professor who is in the history department and has a Ph.D. degree.",
+        "query": "SELECT T1.emp_fname ,  T2.prof_office FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T3.dept_code  =  T2.dept_code WHERE T3.dept_name  =  'History' AND T2.prof_high_degree  =  'Ph.D.'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names and office of the professors who are in the history department and have a Ph.D?",
+        "query": "SELECT T1.emp_fname ,  T2.prof_office FROM employee AS T1 JOIN professor AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T3.dept_code  =  T2.dept_code WHERE T3.dept_name  =  'History' AND T2.prof_high_degree  =  'Ph.D.'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the first names of all instructors who have taught some course and the course code.",
+        "query": "SELECT T2.emp_fname ,  T1.crs_code FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names of all teachers who have taught a course and the corresponding course codes?",
+        "query": "SELECT T2.emp_fname ,  T1.crs_code FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the first names of all instructors who have taught some course and the course description.",
+        "query": "SELECT T2.emp_fname ,  T3.crs_description FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN course AS T3 ON T1.crs_code  =  T3.crs_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names of all teachers who have taught a course and the corresponding descriptions?",
+        "query": "SELECT T2.emp_fname ,  T3.crs_description FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN course AS T3 ON T1.crs_code  =  T3.crs_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the first names and offices of all instructors who have taught some course and also find the course description.",
+        "query": "SELECT T2.emp_fname ,  T4.prof_office ,  T3.crs_description FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN professor AS T4 ON T2.emp_num  =  T4.emp_num"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names, office locations of all lecturers who have taught some course?",
+        "query": "SELECT T2.emp_fname ,  T4.prof_office ,  T3.crs_description FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN professor AS T4 ON T2.emp_num  =  T4.emp_num"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the first names and offices of all instructors who have taught some course and the course description and the department name.",
+        "query": "SELECT T2.emp_fname ,  T4.prof_office ,  T3.crs_description ,  T5.dept_name FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN professor AS T4 ON T2.emp_num  =  T4.emp_num JOIN department AS T5 ON T4.dept_code  =  T5.dept_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names, office locations, and departments of all instructors, and also what are the descriptions of the courses they teach?",
+        "query": "SELECT T2.emp_fname ,  T4.prof_office ,  T3.crs_description ,  T5.dept_name FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN course AS T3 ON T1.crs_code  =  T3.crs_code JOIN professor AS T4 ON T2.emp_num  =  T4.emp_num JOIN department AS T5 ON T4.dept_code  =  T5.dept_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find names of all students who took some course and the course description.",
+        "query": "SELECT T1.stu_fname ,  T1.stu_lname ,  T4.crs_description FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code JOIN course AS T4 ON T3.crs_code  =  T4.crs_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the names of all students who took a class and the corresponding course descriptions?",
+        "query": "SELECT T1.stu_fname ,  T1.stu_lname ,  T4.crs_description FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code JOIN course AS T4 ON T3.crs_code  =  T4.crs_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find names of all students who took some course and got A or C.",
+        "query": "SELECT T1.stu_fname ,  T1.stu_lname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num WHERE T2.enroll_grade  =  'C' OR T2.enroll_grade  =  'A'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the names of all students taking a course who received an A or C?",
+        "query": "SELECT T1.stu_fname ,  T1.stu_lname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num WHERE T2.enroll_grade  =  'C' OR T2.enroll_grade  =  'A'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the first names of all professors in the Accounting department who is teaching some course and the class room.",
+        "query": "SELECT T2.emp_fname ,  T1.class_room FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN professor AS T3 ON T2.emp_num  =  T3.emp_num JOIN department AS T4 ON T4.dept_code  =  T3.dept_code WHERE T4.dept_name  =  'Accounting'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names of all Accounting professors who teach and what are the classrooms of the courses they teach?",
+        "query": "SELECT T2.emp_fname ,  T1.class_room FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN professor AS T3 ON T2.emp_num  =  T3.emp_num JOIN department AS T4 ON T4.dept_code  =  T3.dept_code WHERE T4.dept_name  =  'Accounting'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the first names and degree of all professors who are teaching some class in Computer Info. Systems department.",
+        "query": "SELECT DISTINCT T2.emp_fname ,  T3.prof_high_degree FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN professor AS T3 ON T2.emp_num  =  T3.emp_num JOIN department AS T4 ON T4.dept_code  =  T3.dept_code WHERE T4.dept_name  =  'Computer Info. Systems'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the different first names and highest degree attained for professors teaching in the Computer Information Systems department?",
+        "query": "SELECT DISTINCT T2.emp_fname ,  T3.prof_high_degree FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num JOIN professor AS T3 ON T2.emp_num  =  T3.emp_num JOIN department AS T4 ON T4.dept_code  =  T3.dept_code WHERE T4.dept_name  =  'Computer Info. Systems'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the last name of the student who got a grade A in the class with code 10018.",
+        "query": "SELECT T1.stu_lname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num WHERE T2.enroll_grade  =  'A' AND T2.class_code  =  10018"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the last name of the student who received an A in the class with the code 10018?",
+        "query": "SELECT T1.stu_lname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num WHERE T2.enroll_grade  =  'A' AND T2.class_code  =  10018"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the first name and office of history professor who did not get a Ph.D. degree.",
+        "query": "SELECT T2.emp_fname ,  T1.prof_office FROM professor AS T1 JOIN employee AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T1.dept_code  =  T3.dept_code WHERE T3.dept_name  =  'History' AND T1.prof_high_degree != 'Ph.D.'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names and offices of history professors who don't have Ph.D.s?",
+        "query": "SELECT T2.emp_fname ,  T1.prof_office FROM professor AS T1 JOIN employee AS T2 ON T1.emp_num  =  T2.emp_num JOIN department AS T3 ON T1.dept_code  =  T3.dept_code WHERE T3.dept_name  =  'History' AND T1.prof_high_degree != 'Ph.D.'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the first names of professors who are teaching more than one class.",
+        "query": "SELECT T2.emp_fname FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num GROUP BY T1.prof_num HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names of all professors who teach more than one class?",
+        "query": "SELECT T2.emp_fname FROM CLASS AS T1 JOIN employee AS T2 ON T1.prof_num  =  T2.emp_num GROUP BY T1.prof_num HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the first names of students who took exactly one class.",
+        "query": "SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num GROUP BY T2.stu_num HAVING count(*)  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What are the first names of student who only took one course?",
+        "query": "SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num GROUP BY T2.stu_num HAVING count(*)  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "Find the name of department that offers the class whose description has the word \"Statistics\".",
+        "query": "SELECT T2.dept_name FROM course AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE T1.crs_description LIKE '%Statistics%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the name of the department that offers a course that has a description including the word \"Statistics\"?",
+        "query": "SELECT T2.dept_name FROM course AS T1 JOIN department AS T2 ON T1.dept_code  =  T2.dept_code WHERE T1.crs_description LIKE '%Statistics%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the first name of the student whose last name starting with the letter S and is taking ACCT-211 class?",
+        "query": "SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code WHERE T3.crs_code  =  'ACCT-211' AND T1.stu_lname LIKE 'S%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_1",
+        "question": "What is the first name of the student whose last name starts with the letter S and is taking ACCT-211?",
+        "query": "SELECT T1.stu_fname FROM student AS T1 JOIN enroll AS T2 ON T1.stu_num  =  T2.stu_num JOIN CLASS AS T3 ON T2.class_code  =  T3.class_code WHERE T3.crs_code  =  'ACCT-211' AND T1.stu_lname LIKE 'S%'"
+    }
+]

@@ -1,0 +1,482 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Who is the founder of Sony?",
+        "query": "SELECT founder FROM manufacturers WHERE name  =  'Sony'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Return the founder of Sony.",
+        "query": "SELECT founder FROM manufacturers WHERE name  =  'Sony'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Where is the headquarter of the company founded by James?",
+        "query": "SELECT headquarter FROM manufacturers WHERE founder  =  'James'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What is the headquarter of the company whose founder is James?",
+        "query": "SELECT headquarter FROM manufacturers WHERE founder  =  'James'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find all manufacturers' names and their headquarters, sorted by the ones with highest revenue first.",
+        "query": "SELECT name ,  headquarter FROM manufacturers ORDER BY revenue DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the names and headquarters of all manufacturers, ordered by revenue descending?",
+        "query": "SELECT name ,  headquarter FROM manufacturers ORDER BY revenue DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the average, maximum and total revenues of all companies?",
+        "query": "SELECT avg(revenue) ,  max(revenue) ,  sum(revenue) FROM manufacturers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Return the average, maximum, and total revenues across all manufacturers.",
+        "query": "SELECT avg(revenue) ,  max(revenue) ,  sum(revenue) FROM manufacturers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "How many companies were created by Andy?",
+        "query": "SELECT count(*) FROM manufacturers WHERE founder  =  'Andy'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Return the number of companies created by Andy.",
+        "query": "SELECT count(*) FROM manufacturers WHERE founder  =  'Andy'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the total revenue created by the companies whose headquarter is located at Austin.",
+        "query": "SELECT sum(revenue) FROM manufacturers WHERE headquarter  =  'Austin'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What is the sum of revenue from companies with headquarters in Austin?",
+        "query": "SELECT sum(revenue) FROM manufacturers WHERE headquarter  =  'Austin'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the different cities listed?",
+        "query": "SELECT DISTINCT headquarter FROM manufacturers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Give the distinct headquarters of manufacturers.",
+        "query": "SELECT DISTINCT headquarter FROM manufacturers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the number of manufactures that are based in Tokyo or Beijing.",
+        "query": "SELECT count(*) FROM manufacturers WHERE headquarter  =  'Tokyo' OR headquarter  =  'Beijing'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "How many manufacturers have headquarters in either Tokyo or Beijing?",
+        "query": "SELECT count(*) FROM manufacturers WHERE headquarter  =  'Tokyo' OR headquarter  =  'Beijing'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the founder of the company whose name begins with the letter 'S'.",
+        "query": "SELECT founder FROM manufacturers WHERE name LIKE 'S%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Who is the founders of companies whose first letter is S?",
+        "query": "SELECT founder FROM manufacturers WHERE name LIKE 'S%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the name of companies whose revenue is between 100 and 150.",
+        "query": "SELECT name FROM manufacturers WHERE revenue BETWEEN 100 AND 150"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the names of companies with revenue between 100 and 150?",
+        "query": "SELECT name FROM manufacturers WHERE revenue BETWEEN 100 AND 150"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What is the total revenue of all companies whose main office is at Tokyo or Taiwan?",
+        "query": "SELECT sum(revenue) FROM manufacturers WHERE Headquarter  =  'Tokyo' OR Headquarter  =  'Taiwan'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Return the total revenue of companies with headquarters in Tokyo or Taiwan.",
+        "query": "SELECT sum(revenue) FROM manufacturers WHERE Headquarter  =  'Tokyo' OR Headquarter  =  'Taiwan'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the name of product that is produced by both companies Creative Labs and Sony.",
+        "query": "SELECT T1.name FROM products AS T1 JOIN manufacturers AS T2 ON T1.Manufacturer  =  T2.code WHERE T2.name  =  'Creative Labs' INTERSECT SELECT T1.name FROM products AS T1 JOIN manufacturers AS T2 ON T1.Manufacturer  =  T2.code WHERE T2.name  =  'Sony'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the names of products produced by both Creative Labs and Sony?",
+        "query": "SELECT T1.name FROM products AS T1 JOIN manufacturers AS T2 ON T1.Manufacturer  =  T2.code WHERE T2.name  =  'Creative Labs' INTERSECT SELECT T1.name FROM products AS T1 JOIN manufacturers AS T2 ON T1.Manufacturer  =  T2.code WHERE T2.name  =  'Sony'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the name, headquarter and founder of the manufacturer that has the highest revenue.",
+        "query": "SELECT name ,  headquarter ,  founder FROM manufacturers ORDER BY revenue DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the names, headquarters and founders of the company with the highest revenue?",
+        "query": "SELECT name ,  headquarter ,  founder FROM manufacturers ORDER BY revenue DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the name, headquarter and revenue of all manufacturers sorted by their revenue in the descending order.",
+        "query": "SELECT name ,  headquarter ,  revenue FROM manufacturers ORDER BY revenue DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the names, headquarters and revenues for manufacturers, sorted by revenue descending?",
+        "query": "SELECT name ,  headquarter ,  revenue FROM manufacturers ORDER BY revenue DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the name of companies whose revenue is greater than the average revenue of all companies.",
+        "query": "SELECT name FROM manufacturers WHERE revenue  >  (SELECT avg(revenue) FROM manufacturers)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the names of manufacturers with revenue greater than the average of all revenues?",
+        "query": "SELECT name FROM manufacturers WHERE revenue  >  (SELECT avg(revenue) FROM manufacturers)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the name of companies whose revenue is smaller than the revenue of all companies based in Austin.",
+        "query": "SELECT name FROM manufacturers WHERE revenue  <  (SELECT min(revenue) FROM manufacturers WHERE headquarter  =  'Austin')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the names of companies with revenue less than the lowest revenue of any manufacturer in Austin?",
+        "query": "SELECT name FROM manufacturers WHERE revenue  <  (SELECT min(revenue) FROM manufacturers WHERE headquarter  =  'Austin')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the total revenue of companies whose revenue is larger than the revenue of some companies based in Austin.",
+        "query": "SELECT sum(revenue) FROM manufacturers WHERE revenue  >  (SELECT min(revenue) FROM manufacturers WHERE headquarter  =  'Austin')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What is the total revenue of companies with revenue greater than the lowest revenue of any manufacturer in Austin?",
+        "query": "SELECT sum(revenue) FROM manufacturers WHERE revenue  >  (SELECT min(revenue) FROM manufacturers WHERE headquarter  =  'Austin')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the total revenue of companies of each founder.",
+        "query": "SELECT sum(revenue) ,  founder FROM manufacturers GROUP BY founder"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What is the total revenue of companies started by founder?",
+        "query": "SELECT sum(revenue) ,  founder FROM manufacturers GROUP BY founder"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the name and revenue of the company that earns the highest revenue in each city.",
+        "query": "SELECT name ,  max(revenue) ,  Headquarter FROM manufacturers GROUP BY Headquarter"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the names and revenues of the companies with the highest revenues in each headquarter city?",
+        "query": "SELECT name ,  max(revenue) ,  Headquarter FROM manufacturers GROUP BY Headquarter"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the total revenue for each manufacturer.",
+        "query": "SELECT sum(revenue) ,  name FROM manufacturers GROUP BY name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What is the total revenue of each manufacturer?",
+        "query": "SELECT sum(revenue) ,  name FROM manufacturers GROUP BY name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the average prices of all products from each manufacture, and list each company's name.",
+        "query": "SELECT avg(T1.price) ,  T2.name FROM products AS T1 JOIN manufacturers AS T2 ON T1.Manufacturer  =  T2.code GROUP BY T2.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the average prices of products for each manufacturer?",
+        "query": "SELECT avg(T1.price) ,  T2.name FROM products AS T1 JOIN manufacturers AS T2 ON T1.Manufacturer  =  T2.code GROUP BY T2.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the number of different products that are produced by companies at different headquarter cities.",
+        "query": "SELECT count(DISTINCT T1.name) ,  T2.Headquarter FROM products AS T1 JOIN manufacturers AS T2 ON T1.Manufacturer  =  T2.code GROUP BY T2.Headquarter"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "How many different products are produced in each headquarter city?",
+        "query": "SELECT count(DISTINCT T1.name) ,  T2.Headquarter FROM products AS T1 JOIN manufacturers AS T2 ON T1.Manufacturer  =  T2.code GROUP BY T2.Headquarter"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find number of products which Sony does not make.",
+        "query": "SELECT count(DISTINCT name) FROM products WHERE name NOT IN (SELECT T1.name FROM products AS T1 JOIN manufacturers AS T2 ON T1.Manufacturer  =  T2.code WHERE T2.name  =  'Sony')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "How many products are not made by Sony?",
+        "query": "SELECT count(DISTINCT name) FROM products WHERE name NOT IN (SELECT T1.name FROM products AS T1 JOIN manufacturers AS T2 ON T1.Manufacturer  =  T2.code WHERE T2.name  =  'Sony')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the name of companies that do not make DVD drive.",
+        "query": "SELECT name FROM manufacturers EXCEPT SELECT T2.name FROM products AS T1 JOIN manufacturers AS T2 ON T1.Manufacturer  =  T2.code WHERE T1.name  =  'DVD drive'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the names of companies that do not make DVD drives?",
+        "query": "SELECT name FROM manufacturers EXCEPT SELECT T2.name FROM products AS T1 JOIN manufacturers AS T2 ON T1.Manufacturer  =  T2.code WHERE T1.name  =  'DVD drive'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find the number of products for each manufacturer, showing the name of each company.",
+        "query": "SELECT count(*) ,  T2.name FROM products AS T1 JOIN manufacturers AS T2 ON T1.Manufacturer  =  T2.code GROUP BY T2.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "How many products are there for each manufacturer?",
+        "query": "SELECT count(*) ,  T2.name FROM products AS T1 JOIN manufacturers AS T2 ON T1.Manufacturer  =  T2.code GROUP BY T2.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Select the names of all the products in the store.",
+        "query": "SELECT Name FROM Products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the names of all products?",
+        "query": "SELECT Name FROM Products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Select the names and the prices of all the products in the store.",
+        "query": "SELECT name ,  price FROM products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the names and prices of all products in the store?",
+        "query": "SELECT name ,  price FROM products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Select the name of the products with a price less than or equal to $200.",
+        "query": "SELECT name FROM products WHERE price  <=  200"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the names of products with price at most 200?",
+        "query": "SELECT name FROM products WHERE price  <=  200"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Find all information of all the products with a price between $60 and $120.",
+        "query": "SELECT * FROM products WHERE price BETWEEN 60 AND 120"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What is all the information of all the products that have a price between 60 and 120?",
+        "query": "SELECT * FROM products WHERE price BETWEEN 60 AND 120"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Compute the average price of all the products.",
+        "query": "SELECT avg(price) FROM products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What is the average price across all products?",
+        "query": "SELECT avg(price) FROM products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Compute the average price of all products with manufacturer code equal to 2.",
+        "query": "SELECT avg(price) FROM products WHERE Manufacturer  =  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What is the average price of products with manufacturer codes equal to 2?",
+        "query": "SELECT avg(price) FROM products WHERE Manufacturer  =  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Compute the number of products with a price larger than or equal to $180.",
+        "query": "SELECT count(*) FROM products WHERE price >= 180"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "How many products have prices of at least 180?",
+        "query": "SELECT count(*) FROM products WHERE price >= 180"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Select the name and price of all products with a price larger than or equal to $180, and sort first by price (in descending order), and then by name  (in ascending order).",
+        "query": "SELECT name ,  price FROM products WHERE price  >=  180 ORDER BY price DESC ,  name ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the names and prices of products that cost at least 180, sorted by price decreasing and name ascending?",
+        "query": "SELECT name ,  price FROM products WHERE price  >=  180 ORDER BY price DESC ,  name ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Select all the data from the products and each product's manufacturer.",
+        "query": "SELECT * FROM products AS T1 JOIN Manufacturers AS T2 ON T1.manufacturer  =  T2.code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What is all the product data, as well as  each product's manufacturer?",
+        "query": "SELECT * FROM products AS T1 JOIN Manufacturers AS T2 ON T1.manufacturer  =  T2.code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Select the average price of each manufacturer's products, showing only the manufacturer's code.",
+        "query": "SELECT AVG(Price) ,  Manufacturer FROM Products GROUP BY Manufacturer"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the average prices of products, grouped by manufacturer code?",
+        "query": "SELECT AVG(Price) ,  Manufacturer FROM Products GROUP BY Manufacturer"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Select the average price of each manufacturer's products, showing the manufacturer's name.",
+        "query": "SELECT avg(T1.Price) ,  T2.name FROM products AS T1 JOIN Manufacturers AS T2 ON T1.manufacturer  =  T2.code GROUP BY T2.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the average prices of products, grouped by manufacturer name?",
+        "query": "SELECT avg(T1.Price) ,  T2.name FROM products AS T1 JOIN Manufacturers AS T2 ON T1.manufacturer  =  T2.code GROUP BY T2.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Select the names of manufacturer whose products have an average price higher than or equal to $150.",
+        "query": "SELECT avg(T1.Price) ,  T2.name FROM products AS T1 JOIN Manufacturers AS T2 ON T1.manufacturer  =  T2.code GROUP BY T2.name HAVING avg(T1.price) >= 150"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the names and average prices of products for manufacturers whose products cost on average 150 or more?",
+        "query": "SELECT avg(T1.Price) ,  T2.name FROM products AS T1 JOIN Manufacturers AS T2 ON T1.manufacturer  =  T2.code GROUP BY T2.name HAVING avg(T1.price) >= 150"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Select the name and price of the cheapest product.",
+        "query": "SELECT name ,  price FROM Products ORDER BY price ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What is the name and price of the cheapest product?",
+        "query": "SELECT name ,  price FROM Products ORDER BY price ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Select the name of each manufacturer along with the name and price of its most expensive product.",
+        "query": "SELECT T1.Name ,  max(T1.Price) ,  T2.name FROM products AS T1 JOIN Manufacturers AS T2 ON T1.manufacturer  =  T2.code GROUP BY T2.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "For each manufacturer name, what are the names and prices of their most expensive product?",
+        "query": "SELECT T1.Name ,  max(T1.Price) ,  T2.name FROM products AS T1 JOIN Manufacturers AS T2 ON T1.manufacturer  =  T2.code GROUP BY T2.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "Select the code of the product that is cheapest in each product category.",
+        "query": "SELECT code ,  name ,  min(price) FROM products GROUP BY name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufactory_1",
+        "question": "What are the codes and names of the cheapest products in each category?",
+        "query": "SELECT code ,  name ,  min(price) FROM products GROUP BY name"
+    }
+]

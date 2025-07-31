@@ -1,0 +1,356 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Which employee has the highest salary? Please give his or her full name.",
+        "query": "SELECT firstname, lastname FROM employee ORDER BY salary DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "How many emplyees have a good job performance?",
+        "query": "SELECT COUNT(*) FROM employee WHERE performance = 'Good'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Please list the social security numbers of the male employees with a salary of over $70,000 a year.",
+        "query": "SELECT ssn FROM employee WHERE gender = 'M' AND CAST(REPLACE(SUBSTR(salary, 4), ',', '') AS REAL) > 70000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "What is the required education for the position of regional manager?",
+        "query": "SELECT educationrequired FROM position WHERE positiontitle = 'Regional Manager'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Which position has a lower minimum salary, Account Representative or Trainee?",
+        "query": "SELECT positiontitle FROM position WHERE positiontitle = 'Account Representative' OR positiontitle = 'Trainee' ORDER BY minsalary ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "In which city's office does Sandy Adams work at?",
+        "query": "SELECT T2.locationcity FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID WHERE T1.lastname = 'Adams' AND T1.firstname = 'Sandy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Among the employees working at the office in New York, how many of them have a good job performance?",
+        "query": "SELECT COUNT(*) FROM employee AS T1 INNER JOIN location AS T2  ON T1.locationID = T2.locationID WHERE T2.state = 'NY' AND T1.performance = 'Good'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "What is the office phone number of the location at which Sandy Adams works?",
+        "query": "SELECT T2.officephone FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID WHERE T1.lastname = 'Adams' AND T1.firstname = 'Sandy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "How many male employees work at the address 450 Peachtree Rd?",
+        "query": "SELECT COUNT(*) FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID WHERE T2.address = '450 Peachtree Rd' AND T1.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "How many employees work as an Account Representative?",
+        "query": "SELECT COUNT(*) FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T2.positiontitle = 'Account Representative'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "How much higher is James Johnson's salary from the minimum salary of his title?",
+        "query": "SELECT CAST(REPLACE(SUBSTR(T1.salary, 4), ',', '') AS REAL) - CAST(REPLACE(SUBSTR(T2.minsalary, 4), ',', '') AS REAL) AS diff FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T1.lastname = 'Johnson' AND T1.firstname = 'James'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Among the employees who are Trainees, how many of them work in New York?",
+        "query": "SELECT COUNT(*) FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID INNER JOIN position AS T3  ON T3.positionID = T1.positionID WHERE T3.positiontitle = 'Trainee' AND T2.state = 'NY'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Please list the full names of the employees who are working as a Trainee.",
+        "query": "SELECT T1.firstname, T1.lastname FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T2.positiontitle = 'Trainee'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Which employee's job position requires a higher education level, Jose Rodriguez or Sandy Adams?",
+        "query": "SELECT T1.firstname, T1.lastname FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE (T1.lastname = 'Adams' AND T1.firstname = 'Sandy') OR (T1.lastname = 'Rodriguez' AND T1.firstname = 'Jose') ORDER BY T2.educationrequired DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Please list the zip codes of the offices where all the male employees with a good job performance work at.",
+        "query": "SELECT T2.zipcode FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID WHERE T1.gender = 'M' AND T1.performance = 'Good'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Please list the social security numbers of all the employees who work in California.",
+        "query": "SELECT T1.ssn FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID WHERE T2.state = 'CA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Among the employees who work as a Trainee, how many of them have a salary of over &20,000 a year?",
+        "query": "SELECT COUNT(*) FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE CAST(REPLACE(SUBSTR(T1.salary, 4), ',', '') AS REAL) > 20000 AND T2.positiontitle = 'Trainee'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "What is the average salary of the employees who work as a Trainee?",
+        "query": "SELECT AVG(CAST(REPLACE(SUBSTR(T1.salary, 4), ',', '') AS REAL)) AS avg FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T2.positiontitle = 'Trainee'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "By what percentage is the average salary of Trainees higher than the minimum salary of this postion?",
+        "query": "SELECT 100 * (AVG(CAST(REPLACE(SUBSTR(T1.salary, 4), ',', '') AS REAL)) - CAST(REPLACE(SUBSTR(T2.minsalary, 4), ',', '') AS REAL)) / CAST(REPLACE(SUBSTR(T2.minsalary, 4), ',', '') AS REAL) AS per FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T2.positiontitle = 'Trainee'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Give the number of female employees.",
+        "query": "SELECT COUNT(*) FROM employee WHERE gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "State the name of the city where Jose Rodriguez works.",
+        "query": "SELECT T2.locationcity FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID WHERE T1.firstname = 'Jose' AND T1.lastname = 'Rodriguez'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "In which state does Emily Wood work?",
+        "query": "SELECT T2.state FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID WHERE T1.firstname = 'Emily' AND T1.lastname = 'Wood'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "What is the education required for David Whitehead to reach his current position?",
+        "query": "SELECT T2.educationrequired FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T1.firstname = 'David' AND T1.lastname = 'Whitehead' AND T1.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "How many employees are there in the \"Miami\" office?",
+        "query": "SELECT COUNT(*) FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID WHERE T2.locationcity = 'Miami'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Who is the highest paid employee in \"Boston\"? Give the full name.",
+        "query": "SELECT T1.firstname, T1.lastname FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID WHERE T2.locationcity = 'Boston' ORDER BY T1.salary DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Who is the employee in \u201cNew York City\u201d with a good performance? Give the social security number of the employee.",
+        "query": "SELECT T1.firstname, T1.lastname, T1.ssn FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID WHERE T2.locationcity = 'New York City' AND T1.performance = 'Good'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "How many \"account representatives\" are there in Chicago with a good performance?",
+        "query": "SELECT COUNT(*) FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID INNER JOIN position AS T3  ON T3.positionID = T1.positionID WHERE T3.positiontitle = 'Account Representative' AND T2.locationcity = 'Chicago' AND T1.performance = 'Good'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "What is Kenneth Charles's position title?",
+        "query": "SELECT T2.positiontitle FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T1.firstname = 'Kenneth' AND T1.lastname = 'Charles'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Give the full address of the office of the highest paid manager.",
+        "query": "SELECT T2.address FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID INNER JOIN position AS T3  ON T3.positionID = T1.positionID WHERE T3.positiontitle = 'Manager' ORDER BY T1.salary DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "What is the max salary for 'Tracy Coulter' if he/she stays on his/her position?",
+        "query": "SELECT T2.maxsalary FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T1.firstname = 'Tracy' AND T1.lastname = 'Coulter'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "If Jose Rodriguez tried his best, how many percentage can his salary raise without changing his position?",
+        "query": "SELECT 100 * (CAST(REPLACE(SUBSTR(T2.maxsalary, 4), ',', '') AS REAL) - CAST(REPLACE(SUBSTR(T1.salary, 4), ',', '') AS REAL)) / CAST(REPLACE(SUBSTR(T1.salary, 4), ',', '') AS REAL) AS per FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T1.firstname = 'Jose' AND T1.lastname = 'Rodriguez'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "How many employees whose performance is poor have a salary of over $50,000 per year?",
+        "query": "SELECT COUNT(*) FROM employee WHERE performance = 'Poor' AND CAST(REPLACE(SUBSTR(salary, 4), ',', '') AS REAL) > 50000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Who is the employee with the highest salary? Specify his/her full name.",
+        "query": "SELECT firstname, lastname FROM employee WHERE CAST(REPLACE(SUBSTR(salary, 4), ',', '') AS REAL) = ( SELECT MAX(CAST(REPLACE(SUBSTR(salary, 4), ',', '') AS REAL)) FROM employee )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "How many positions have a maximum salary of no more than US$1000,000?",
+        "query": "SELECT COUNT(*) FROM position WHERE CAST(REPLACE(SUBSTR(maxsalary, 4), ',', '') AS REAL) < 100000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "How much is the salary of the first ever employee that was hired?",
+        "query": "SELECT salary FROM employee ORDER BY hiredate ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "How much is the minimum salary given to the position with the most complex work?",
+        "query": "SELECT minsalary FROM position ORDER BY educationrequired DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "What is the full office location address where most of the employees work at?",
+        "query": "SELECT T2.address, T2.locationcity, T2.state, T2.zipcode FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID GROUP BY T2.address, T2.locationcity, T2.state, T2.zipcode ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "What is the average salary of all employees with a 2 year degree position?",
+        "query": "SELECT AVG(CAST(REPLACE(SUBSTR(T1.salary, 4), ',', '') AS REAL)) FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T2.educationrequired = '2 year degree'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "How many male Regional Managers are there?",
+        "query": "SELECT COUNT(*) FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T2.positiontitle = 'Regional Manager' AND T1.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Which position has the highest amount of poor performing employees?",
+        "query": "SELECT T2.positiontitle FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T1.performance = 'Poor' GROUP BY T2.positiontitle ORDER BY COUNT(T2.positiontitle) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Which position has the highest number of female employees with a 2 year degree?",
+        "query": "SELECT T2.positiontitle FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T2.educationrequired = '2 year degree' AND T1.gender = 'F' GROUP BY T2.positiontitle ORDER BY COUNT(T2.positiontitle) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "How many Account Representatives are there in Illinois with satisfying performance?",
+        "query": "SELECT COUNT(*) FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID INNER JOIN position AS T3  ON T3.positionID = T1.positionID WHERE T3.positiontitle = 'Account Representative' AND T1.performance = 'Good' AND T2.state = 'IL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "What is the average salary of the worst performing managers?",
+        "query": "SELECT AVG(CAST(REPLACE(SUBSTR(T1.salary, 4), ',', '') AS REAL)) FROM employee AS T1 INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T1.performance = 'Poor' AND T2.positiontitle = 'Manager'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "In which state can you find the highest amount of good performing Account Representatives?",
+        "query": "SELECT T2.state FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID INNER JOIN position AS T3  ON T3.positionID = T1.positionID WHERE T3.positiontitle = 'Account Representative' AND T1.performance = 'Good' GROUP BY T2.state ORDER BY COUNT(T2.state) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Mention the employee's full name and performance status who got the lowest in salary per year.",
+        "query": "SELECT firstname, lastname, performance FROM employee ORDER BY salary ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "List the location cities in the Western states.",
+        "query": "SELECT locationcity FROM location WHERE state IN ('CO', 'UT', 'CA')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Which city and address has zip code of above 90000?",
+        "query": "SELECT locationcity, address FROM location WHERE zipcode > 90000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Which positions are suitable with 4 years degree education?",
+        "query": "SELECT positiontitle FROM position WHERE educationrequired = '4 year degree'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "What is the maximum salary of position \"Trainer\"?",
+        "query": "SELECT maxsalary FROM position WHERE positiontitle = 'Trainee'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "List the full name and social security number of the account representative with average performance.",
+        "query": "SELECT T1.firstname, T1.lastname, T1.ssn FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T1.performance = 'Average'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "When was Emily Wood hired? Mention her position and salary.",
+        "query": "SELECT T1.hiredate, T2.positiontitle, T1.salary FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T1.firstname = 'Emily' AND T1.lastname = 'Wood'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "What are the maximum and minimum salary range and position title of Bill Marlin?",
+        "query": "SELECT T2.maxsalary, T2.minsalary, T2.positiontitle FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T1.firstname = 'Bill' AND T1.lastname = 'Marlin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "List the full names, gender and positions who's location is in New York city.",
+        "query": "SELECT T1.firstname, T1.lastname, T1.gender, T3.positiontitle FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID INNER JOIN position AS T3  ON T3.positionID = T1.positionID WHERE T2.locationcity = 'New York City'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Mention the full name, hired date and performance status of the employee whose location is in Utah state.",
+        "query": "SELECT T1.firstname, T1.lastname, T1.hiredate, T1.performance FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID WHERE T2.state = 'UT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Among the employees with poor performance, provide the managers' full names, location city, address and its zip code.",
+        "query": "SELECT T1.firstname, T1.lastname, T2.locationcity, T2.address, T2.zipcode FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID INNER JOIN position AS T3  ON T3.positionID = T1.positionID WHERE T3.positiontitle = 'Manager' AND T1.performance = 'Poor'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "What is the education required to be account representative? Mention account representative full name and salary who got poor in performance status.",
+        "query": "SELECT T2.educationrequired, T1.firstname, T1.lastname, T1.salary FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID WHERE T1.performance = 'Poor' AND T2.positiontitle = 'Account Representative'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Write down the full name, performance status and located city of the employee who's social security number is \"767-74-7373\".",
+        "query": "SELECT T1.firstname, T1.lastname, T2.state, T2.locationcity FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID WHERE T1.ssn = '767-74-7373'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Describe the employees' full name, positions, located city and office phone number within Colorado state.",
+        "query": "SELECT T1.firstname, T1.lastname, T3.positiontitle, T2.locationcity, T2.officephone FROM employee AS T1  INNER JOIN location AS T2  ON T1.locationID = T2.locationID INNER JOIN position AS T3  ON T3.positionID = T1.positionID WHERE T2.state = 'CO'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "human_resources",
+        "question": "Calculate the monthly average salary of the employee with highest salary. Mention his name, position title and location city.",
+        "query": "SELECT SUM(CAST(REPLACE(SUBSTR(T1.salary, 4), ',', '') AS REAL)) / 12 AS avg, T1.firstname, T1.lastname , T2.positiontitle, T3.locationcity FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID INNER JOIN location AS T3  ON T1.locationID = T3.locationID WHERE CAST(REPLACE(SUBSTR(T1.salary, 4), ',', '') AS REAL) = ( SELECT MAX(CAST(REPLACE(SUBSTR(T1.salary, 4), ',', '') AS REAL)) FROM employee AS T1  INNER JOIN position AS T2  ON T1.positionID = T2.positionID INNER JOIN location AS T3  ON T1.locationID = T3.locationID )"
+    }
+]

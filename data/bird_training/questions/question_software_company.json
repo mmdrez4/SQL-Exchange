@@ -1,0 +1,452 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "How many customers have never married?",
+        "query": "SELECT COUNT(ID) FROM Customers WHERE MARITAL_STATUS = 'Never-married'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Among all the customers, how many of them are teenagers?",
+        "query": "SELECT COUNT(ID) FROM Customers WHERE age >= 13 AND age <= 19"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Please list the occupations of the customers with an education level of 11.",
+        "query": "SELECT DISTINCT OCCUPATION FROM Customers WHERE EDUCATIONNUM = 11"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Of the first 60,000 customers' responses to the incentive mailing sent by the marketing department, how many of them are considered a true response?",
+        "query": "SELECT COUNT(REFID) custmoer_number FROM Mailings1_2 WHERE RESPONSE = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Among the customers over 30, how many of them are Machine-op-inspcts?",
+        "query": "SELECT COUNT(ID) FROM Customers WHERE OCCUPATION = 'Machine-op-inspct' AND age > 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "How many female customers have an education level of over 11?",
+        "query": "SELECT COUNT(ID) FROM Customers WHERE EDUCATIONNUM > 11 AND SEX = 'Female'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Of the first 60,000 customers who sent a true response to the incentive mailing sent by the marketing department, how many of them are female?",
+        "query": "SELECT COUNT(T1.ID) FROM Customers AS T1 INNER JOIN Mailings1_2 AS T2 ON T1.ID = T2.REFID WHERE T1.SEX = 'Female' AND T2.RESPONSE = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Please list the occupations of the customers over 40 and have sent a true response to the incentive mailing sent by the marketing department.",
+        "query": "SELECT DISTINCT T1.OCCUPATION FROM Customers AS T1 INNER JOIN Mailings1_2 AS T2 ON T1.ID = T2.REFID WHERE T1.age > 40 AND T2.RESPONSE = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Among the male customers, how many of them come from a place with over 30,000 inhabitants?",
+        "query": "SELECT COUNT(T1.GEOID) FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.SEX = 'Male' AND T2.INHABITANTS_K > 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "How many customers are from the place with the highest average income per month?",
+        "query": "SELECT COUNT(T1.ID) FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID ORDER BY T2.INCOME_K DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Among the customers from a place with more than 20,000 and less than 30,000 inhabitants, how many of them are Machine-op-inspcts?",
+        "query": "SELECT COUNT(T1.GEOID) FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.OCCUPATION = 'Machine-op-inspct' AND T2.INHABITANTS_K > 20 AND T2.INHABITANTS_K < 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Which customer come from a place with more inhabitants, customer no.0 or customer no.1?",
+        "query": "SELECT T1.ID FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.ID = 0 OR T1.ID = 1 ORDER BY INHABITANTS_K DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Of the first 60,000 customers who sent a true response to the incentive mailing sent by the marketing department, how many of them are from a place with more than 30,000 inhabitants?",
+        "query": "SELECT COUNT(T1.ID) FROM Customers AS T1 INNER JOIN Mailings1_2 AS T2 ON T1.ID = T2.REFID INNER JOIN Demog AS T3 ON T1.GEOID = T3.GEOID WHERE T3.INHABITANTS_K > 30 AND T2.RESPONSE = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Of the first 60,000 customers who sent a true response to the incentive mailing sent by the marketing department, how many of them are divorced males?",
+        "query": "SELECT COUNT(T1.ID) FROM Customers AS T1 INNER JOIN Mailings1_2 AS T2 ON T1.ID = T2.REFID WHERE T1.SEX = 'Male' AND T1.MARITAL_STATUS = 'Divorced' AND T2.RESPONSE = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "How many of the first 60,000 customers from the place with the highest average income per month have sent a true response to the incentive mailing sent by the marketing department?",
+        "query": "SELECT COUNT(T1.ID) FROM Customers AS T1 INNER JOIN Mailings1_2 AS T2 ON T1.ID = T2.REFID INNER JOIN Demog AS T3 ON T1.GEOID = T3.GEOID WHERE T2.RESPONSE = 'true' ORDER BY T3.INCOME_K DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What is the number of inhabitants of the place the most customers are from?",
+        "query": "SELECT DISTINCT T2.INHABITANTS_K FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID ORDER BY T2.INHABITANTS_K DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Among the customers who come from the place with 25746 inhabitants, how many of them are male?",
+        "query": "SELECT COUNT(T1.ID) FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T2.INHABITANTS_K = 25.746 AND T1.SEX = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Of the first 60,000 customers who sent a true response to the incentive mailing sent by the marketing department, how many of them are teenagers?",
+        "query": "SELECT COUNT(T1.ID) FROM Customers AS T1 INNER JOIN Mailings1_2 AS T2 ON T1.ID = T2.REFID WHERE T1.age >= 13 AND T1.age <= 19 AND T2.RESPONSE = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What is the average education level of customers from the place with the highest average income per month?",
+        "query": "SELECT AVG(T1.EDUCATIONNUM) FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID ORDER BY T2.INCOME_K DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What is the average age of first 60,000 customers who sent a true response to the incentive mailing sent by the marketing department?",
+        "query": "SELECT AVG(T1.age) FROM Customers AS T1 INNER JOIN Mailings1_2 AS T2 ON T1.ID = T2.REFID WHERE T2.RESPONSE = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "How many of the customers are male?",
+        "query": "SELECT COUNT(ID) FROM Customers WHERE SEX = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "List down the customer's geographic identifier who are handlers or cleaners.",
+        "query": "SELECT GEOID FROM Customers WHERE OCCUPATION = 'Handlers-cleaners'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What is the total number of customers with an age below 30?",
+        "query": "SELECT COUNT(ID) FROM Customers WHERE age < 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "List down the geographic identifier with an income that ranges from 2100 to 2500.",
+        "query": "SELECT GEOID FROM Demog WHERE INCOME_K >= 2100 AND INCOME_K <= 2500"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "In geographic identifier from 20 to 50, how many of them has a number of inhabitants below 20?",
+        "query": "SELECT COUNT(GEOID) FROM Demog WHERE INHABITANTS_K < 20 AND GEOID >= 20 AND GEOID <= 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What is the number of inhabitants and income of geographic identifier 239?",
+        "query": "SELECT INHABITANTS_K FROM Demog WHERE GEOID = 239"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Give the level of education and occupation of customers ages from 20 to 35 with an income K of 2000 and below.",
+        "query": "SELECT T1.EDUCATIONNUM, T1.OCCUPATION FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T2.INCOME_K < 2000 AND T1.age >= 20 AND T1.age <= 35"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "List down the number of inhabitants of customers with a divorced marital status and older than 50 years old.",
+        "query": "SELECT COUNT(T1.ID) FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.MARITAL_STATUS = 'Divorced' AND T1.age < 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What is the geographic identifier and income of the oldest customer?",
+        "query": "SELECT T1.GEOID, T2.INCOME_K FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID ORDER BY T1.age DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Among the male customers with an level of education of 4 and below, list their income K.",
+        "query": "SELECT INCOME_K FROM Demog WHERE GEOID IN ( SELECT GEOID FROM Customers WHERE EDUCATIONNUM < 4 AND SEX = 'Male' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "List the occupation and income of male customers with an level of education of 4 to 6.",
+        "query": "SELECT T1.OCCUPATION, T2.INCOME_K FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.EDUCATIONNUM >= 4 AND T1.EDUCATIONNUM <= 6 AND T1.SEX = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "In widowed male customers ages from 40 to 60, how many of them has an income ranges from 3000 and above?",
+        "query": "SELECT COUNT(T1.ID) FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.age >= 40 AND T1.age <= 60 AND T1.MARITAL_STATUS = 'Widowed' AND T1.SEX = 'Male' AND T2.INCOME_K >= 2000 AND T2.INCOME_K <= 3000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What is the occupation of customers within number of inhabitants ranges of 30 to 40?",
+        "query": "SELECT DISTINCT T1.OCCUPATION FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T2.INHABITANTS_K >= 30 AND T2.INHABITANTS_K <= 40"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Among the widowed female customers, give the income of those who has an level of education of 5 and below.",
+        "query": "SELECT INCOME_K FROM Demog WHERE GEOID IN ( SELECT GEOID FROM Customers WHERE EDUCATIONNUM < 5 AND SEX = 'Female' AND MARITAL_STATUS = 'Widowed' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "List the marital status of customers within the age of 40 to 60 that has the highest income among the group.",
+        "query": "SELECT T1.MARITAL_STATUS FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.age >= 40 AND T1.age <= 60 ORDER BY T2.INCOME_K DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What is the number of inhabitants of male customers ages from 20 to 30 years old who are farming or fishing?",
+        "query": "SELECT T2.INHABITANTS_K FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.OCCUPATION = 'Farming-fishing' AND T1.SEX = 'Male' AND T1.age >= 20 AND T1.age <= 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Among the customers with a marital status of married-civ-spouse, list the number of inhabitants and age of those who are machine-op-inspct.",
+        "query": "SELECT T2.INHABITANTS_K FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.OCCUPATION = 'Farming-fishing' AND T1.SEX = 'Male' AND T1.age >= 20 AND T1.age <= 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "In female customers ages from 50 to 60, how many of them has an number of inhabitants ranges from 19 to 24?",
+        "query": "SELECT COUNT(T1.ID) FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.SEX = 'Female' AND T1.age >= 50 AND T1.age <= 60 AND T2.INHABITANTS_K >= 19 AND T2.INHABITANTS_K <= 24"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "List the income and number of inhabitants of customers with an age greater than the 80% of average age of all customers?",
+        "query": "SELECT T2.INCOME_K, T2.INHABITANTS_K FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID GROUP BY T2.INCOME_K, T2.INHABITANTS_K HAVING T1.age > 0.8 * AVG(T1.age)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "In customers with marital status of never married, what is the percentage of customers with income of 2500 and above?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.INCOME_K > 2500 THEN 1.0 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.MARITAL_STATUS = 'Never-married'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Find and list the id and geographic ID of the elderly customers with an education level below 3.",
+        "query": "SELECT ID, GEOID FROM Customers WHERE EDUCATIONNUM < 3 AND age > 65"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "List the geographic id of places where the income is above average.",
+        "query": "SELECT AVG(INCOME_K) FROM Demog"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Calculate the number of customers who did not respond in February of 2007.",
+        "query": "SELECT COUNT(REFID) custmoer_number FROM Mailings1_2 WHERE RESPONSE = 'false' AND REF_DATE BETWEEN '2007-02-01' AND '2007-02-28'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "How many teenagers are working as Machine-op-inspct?",
+        "query": "SELECT COUNT(ID) teenager_number FROM Customers WHERE OCCUPATION = 'Machine-op-inspct' AND age >= 13 AND age <= 19"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Of customers who provide other services, how many are from places where inhabitants are more than 20000?",
+        "query": "SELECT COUNT(T2.GEOID) FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.OCCUPATION = 'Other-service' AND T2.INHABITANTS_K > 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Among the male customer in their twenties, how many are from places where the average income is more than 3000?",
+        "query": "SELECT COUNT(T2.GEOID) FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.SEX = 'Male' AND T2.INCOME_K > 3000 AND T1.age >= 20 AND T1.age <= 29"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What percentage of elderly customers who are never married in the place with geographic ID 24?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.MARITAL_STATUS = 'never married' THEN 1.0 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.GEOID = 24"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Among the customers with an average income per inhabitant above 3000, what percentage are in their eighties?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.age BETWEEN 80 AND 89 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.ID) FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T2.INCOME_K > 3000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "How many of the customer's reference ID that has a TRUE response?",
+        "query": "SELECT COUNT(REFID) FROM Mailings1_2 WHERE RESPONSE = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "List down the customer's reference ID with true response.",
+        "query": "SELECT REFID FROM Mailings1_2 WHERE RESPONSE = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What is the total number of widowed customers with an age below 50?",
+        "query": "SELECT COUNT(ID) FROM Customers WHERE MARITAL_STATUS = 'Widowed' AND age < 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "List down the geographic identifier with an number of inhabitants less than 30.",
+        "query": "SELECT GEOID FROM Demog WHERE INHABITANTS_K < 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "In geographic identifier from 10 to 30, how many of them has an income below 2000?",
+        "query": "SELECT COUNT(GEOID) FROM Demog WHERE INCOME_K < 2000 AND GEOID >= 10 AND GEOID <= 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What is the marital status of the customer ages 62 with an level of education of 7?",
+        "query": "SELECT DISTINCT MARITAL_STATUS FROM Customers WHERE EDUCATIONNUM = 7 AND age = 62"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "List down the number of inhabitants of customers with a widowed marital status and false response .",
+        "query": "SELECT COUNT(T1.ID) FROM Customers AS T1 INNER JOIN Mailings1_2 AS T2 ON T1.ID = T2.REFID INNER JOIN Demog AS T3 ON T1.GEOID = T3.GEOID WHERE T1.MARITAL_STATUS = 'Widowed' AND T2.RESPONSE = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What is the response and number of inhabitants of the oldest female customer?",
+        "query": "SELECT T2.RESPONSE, T3.INHABITANTS_K FROM Customers AS T1 INNER JOIN Mailings1_2 AS T2 ON T1.ID = T2.REFID INNER JOIN Demog AS T3 ON T1.GEOID = T3.GEOID WHERE T1.SEX = 'Female' ORDER BY T1.age DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Among the female customers with an level of education of 3 and below, list their income.",
+        "query": "SELECT INCOME_K FROM Demog WHERE GEOID IN ( SELECT GEOID FROM Customers WHERE EDUCATIONNUM < 3 AND SEX = 'Female' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "List the level of education and income of customers ages from 30 to 55 with a true response.",
+        "query": "SELECT T1.EDUCATIONNUM, T3.INCOME_K FROM Customers AS T1 INNER JOIN Mailings1_2 AS T2 ON T1.ID = T2.REFID INNER JOIN Demog AS T3 ON T1.GEOID = T3.GEOID WHERE T1.age >= 30 AND T1.age <= 55 AND T2.RESPONSE = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "In male customers ages from 30 to 50, how many of them has an income ranges from 2000 to 2300?",
+        "query": "SELECT COUNT(T1.ID) FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.SEX = 'Male' AND T1.age >= 30 AND T1.age <= 50 AND T2.INCOME_K >= 2000 AND T2.INCOME_K <= 2300"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "List the educationnum and response of customers within the age of 20 to 30 that has the highest number of inhabitants among the group.",
+        "query": "SELECT T1.EDUCATIONNUM, T2.RESPONSE FROM Customers AS T1 INNER JOIN Mailings1_2 AS T2 ON T1.ID = T2.REFID INNER JOIN Demog AS T3 ON T1.GEOID = T3.GEOID WHERE T1.age >= 20 AND T1.age <= 30 ORDER BY T3.INHABITANTS_K DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What is the income of female customers ages from 30 to 55 years old and has an occupation of machine-op-inspct?",
+        "query": "SELECT T2.INCOME_K FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.SEX = 'Female' AND T1.age >= 30 AND T1.age <= 55 AND T1.OCCUPATION = 'Machine-op-inspct'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "List the marital status and response of female customers with an level of education of 8 and above.",
+        "query": "SELECT DISTINCT T1.MARITAL_STATUS, T2.RESPONSE FROM Customers AS T1 INNER JOIN Mailings1_2 AS T2 ON T1.ID = T2.REFID WHERE T1.EDUCATIONNUM > 8 AND T1.SEX = 'Female'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What is the age of female customers within the number of inhabitants below 30?",
+        "query": "SELECT age FROM Customers WHERE GEOID IN ( SELECT GEOID FROM Demog WHERE INHABITANTS_K < 30 ) AND SEX = 'Female'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Among the divorced male customers, give the income and response of those who has an level of education of 6 and above.",
+        "query": "SELECT DISTINCT T3.INCOME_K, T2.RESPONSE FROM Customers AS T1 INNER JOIN Mailings1_2 AS T2 ON T1.ID = T2.REFID INNER JOIN Demog AS T3 ON T1.GEOID = T3.GEOID WHERE T1.EDUCATIONNUM > 6 AND T1.SEX = 'Male' AND T1.MARITAL_STATUS = 'Divorced'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What is the occupation and response of female customers within the number of inhabitants range of 20 to 25?",
+        "query": "SELECT DISTINCT T1.OCCUPATION, T2.RESPONSE FROM Customers AS T1 INNER JOIN Mailings1_2 AS T2 ON T1.ID = T2.REFID INNER JOIN Demog AS T3 ON T1.GEOID = T3.GEOID WHERE T1.SEX = 'Female' AND T3.INHABITANTS_K >= 20 AND T3.INHABITANTS_K <= 25"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "In male customers with an occupation handlers or cleaners, what is the percentage of customers with a true response?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.RESPONSE = 'true' THEN 1.0 ELSE 0 END) AS REAL) * 100 / COUNT(T2.REFID) FROM Customers AS T1 INNER JOIN Mailings1_2 AS T2 ON T1.ID = T2.REFID WHERE T1.OCCUPATION = 'Handlers-cleaners' AND T1.SEX = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "List the income and number of inhabitants of customers with a reference ID greater than the 50% of average of number of false response?",
+        "query": "SELECT T2.INCOME_K, T2.INHABITANTS_K FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID INNER JOIN Mailings1_2 AS T3 ON T1.ID = T3.REFID WHERE T3.REFID > ( SELECT 0.5 * COUNT(CASE WHEN RESPONSE = 'false' THEN 1 ELSE NULL END) / COUNT(RESPONSE) FROM Mailings1_2 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What is the ratio of male and female among the age of teenager when the education is above 10?",
+        "query": "SELECT CAST(SUM(CASE WHEN SEX = 'Male' THEN 1 ELSE 0 END) AS REAL) / SUM(CASE WHEN SEX = 'Female' THEN 1 ELSE 0 END) FROM Customers WHERE age BETWEEN 13 AND 19 AND EDUCATIONNUM > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "What is the geographic ID and total income per year when the average income is above 3300 dollar.",
+        "query": "SELECT GEOID, INHABITANTS_K * INCOME_K * 12 FROM Demog WHERE INCOME_K > 3300"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Point out the greater one between the number of actual responding and not responding to mailing.",
+        "query": "SELECT RESPONSE FROM Mailings1_2 GROUP BY RESPONSE ORDER BY COUNT(RESPONSE) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Find out the yearly income of geographic ID when the customer is female and occupation as sales.",
+        "query": "SELECT T2.INHABITANTS_K * T2.INCOME_K * 12 FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.SEX = 'Female' AND T1.OCCUPATION = 'Sales'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Among the geographic ID which has 33.658K of inhabitants, describe the education, occupation and age of female widow.",
+        "query": "SELECT T1.EDUCATIONNUM, T1.OCCUPATION, T1.age FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T2.INHABITANTS_K = 33.658 AND T1.SEX = 'Female' AND T1.MARITAL_STATUS = 'Widowed'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Find the response status to customer whose geographic ID of 134.",
+        "query": "SELECT T2.RESPONSE FROM Customers AS T1 INNER JOIN mailings3 AS T2 ON T1.ID = T2.REFID WHERE T1.GEOID = 134"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Describe the average income per month and yearly income of the geographic ID in which customer of ID \"209556\" and \"290135\".",
+        "query": "SELECT T2.INCOME_K, T2.INHABITANTS_K * T2.INCOME_K * 12 FROM Customers AS T1 INNER JOIN Demog AS T2 ON T1.GEOID = T2.GEOID WHERE T1.ID = 209556 OR T1.ID = 290135"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "software_company",
+        "question": "Among the reference ID of under 10 who got response by marketing department, compare their education status.",
+        "query": "SELECT T1.EDUCATIONNUM FROM Customers AS T1 INNER JOIN Mailings1_2 AS T2 ON T1.ID = T2.REFID WHERE T2.REFID < 10 AND T2.RESPONSE = 'true'"
+    }
+]

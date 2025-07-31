@@ -1,0 +1,272 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "What is the release title of the single that was released by Ron Hunt in 1979 that was downloaded 239 times?",
+        "query": "SELECT groupName FROM torrents WHERE artist LIKE 'ron hunt & ronnie g & the sm crew' AND groupYear = 1979 AND releaseType LIKE 'single' AND totalSnatched = 239"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "How many times was the album released by blowfly in 1980 downloaded?",
+        "query": "SELECT totalSnatched FROM torrents WHERE artist LIKE 'blowfly' AND groupYear = 1980"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "What is the tag of the album with the highest amount of downloads?",
+        "query": "SELECT T2.tag FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T1.releaseType = 'album' ORDER BY T1.totalSnatched DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "What are the top 5 tags with the highest amount of downloads?",
+        "query": "SELECT T2.tag FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T1.releaseType = 'album' ORDER BY T1.totalSnatched DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "What is the release title of the single under the \"funk\" tag that was released the oldest?",
+        "query": "SELECT T1.groupName FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T2.tag LIKE 'funk' AND T1.releaseType = 'single' ORDER BY T1.groupYear LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Name all the release titles of the \"ep's\" under the alternative tag.",
+        "query": "SELECT T1.groupName FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T2.tag LIKE 'alternative' AND T1.releaseType = 'ep'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "What are the tags of the top 5 least downloaded live albums?",
+        "query": "SELECT T2.tag FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T1.releaseType = 'album' ORDER BY T1.totalSnatched LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "What is the tag and the artist of the most downloaded single?",
+        "query": "SELECT T2.tag, T1.artist FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T1.releaseType = 'single' ORDER BY T1.totalSnatched DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "How many releases are tagged \"1980s\"?",
+        "query": "SELECT COUNT(id) FROM tags WHERE tag LIKE '1980s'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "How many times has the release \"city funk\" been downloaded?",
+        "query": "SELECT totalSnatched FROM torrents WHERE groupName LIKE 'city funk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Please list the releases that have been downloaded for more than 20000 times.",
+        "query": "SELECT groupName FROM torrents WHERE totalSnatched > 20000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "What are the tags of the release \"sugarhill gang\"?",
+        "query": "SELECT T2.tag FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T1.groupName = 'sugarhill gang'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "How many tags does the release \"city funk\" have\uff1f",
+        "query": "SELECT COUNT(T2.tag) FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T1.groupName = 'city funk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Please list the titles of all the releases with the tag \"1980s\".",
+        "query": "SELECT T1.groupName FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T2.tag = '1980s'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Among the releases with the tag \"1980s\", which one of them is the most downloaded? Please give its title.",
+        "query": "SELECT T1.groupName FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T2.tag = '1980s' ORDER BY T1.totalSnatched DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "How many releases by the artist michael jackson are tagged \"pop\"?",
+        "query": "SELECT COUNT(T1.groupName) FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T2.tag = 'pop' AND T1.artist = 'michael jackson'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Among the releases that were released in 2000, how many of them were released as an album and tagged \"pop\"?",
+        "query": "SELECT COUNT(T1.groupName) FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T2.tag = 'pop' AND T1.releaseType = 'album' AND T1.groupYear = 2000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "What are the average download times for the a release tagged \"1980s\"?",
+        "query": "SELECT CAST(SUM(T1.totalSnatched) AS REAL) / COUNT(T2.tag) FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T2.tag = '1980s'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Name the title of the top three releases with the highest number of downloads.",
+        "query": "SELECT groupName FROM torrents ORDER BY totalSnatched DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Provide the name of the artist who released his or her Single-Table in 2012 with the highest number of downloads. Name the Single-Table title as well.",
+        "query": "SELECT artist, groupName FROM torrents WHERE groupYear = 2012 AND releaseType LIKE 'Single' ORDER BY totalSnatched DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "How many albums and Single-Tables were released by the artist named '50 cent' between 2010 and 2015?",
+        "query": "SELECT COUNT(id), ( SELECT COUNT(id) FROM torrents WHERE groupYear BETWEEN 2010 AND 2015 AND artist LIKE '50 cent' AND releaseType LIKE 'album' ) FROM torrents WHERE groupYear BETWEEN 2010 AND 2015 AND artist LIKE '50 cent' AND releaseType LIKE 'Single'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "An American rapper '2Pac' released his first solo album in 1991, how many years have passed until his next album was released?",
+        "query": "SELECT ( SELECT groupYear FROM torrents WHERE artist LIKE '2Pac' AND releaseType LIKE 'album' ORDER BY groupYear LIMIT 1, 1 ) - groupYear FROM torrents WHERE artist LIKE '2Pac' AND releaseType LIKE 'album' AND groupYear = 1991"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Find the average number of downloads for Single-Tables released by '2Pac' between 2001 and 2013.",
+        "query": "SELECT AVG(totalSnatched) FROM torrents WHERE artist LIKE '2Pac' AND releaseType LIKE 'Single' AND groupYear BETWEEN 2001 AND 2013"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Provide the title, release year and the tag associated with the live album that has the highest number of downloads?",
+        "query": "SELECT T1.groupName, T1.groupYear, T2.tag FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T1.releaseType = 'live album' ORDER BY T1.totalSnatched DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Provide the name of artists who released at least two bootlegs in 2016.",
+        "query": "SELECT artist FROM torrents WHERE groupYear = 2016 AND releaseType LIKE 'bootleg' GROUP BY artist HAVING COUNT(releaseType) > 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Which artist released singles between 1980 to 1982?",
+        "query": "SELECT artist FROM torrents WHERE groupYear BETWEEN 1980 AND 1982 AND releaseType LIKE 'single'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Indicates groups with id from 10 to 20 with singles downloaded at least 20.",
+        "query": "SELECT groupName FROM torrents WHERE totalSnatched >= 20 AND releaseType LIKE 'single' AND id BETWEEN 10 AND 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Among the artists from 1980 to 1982. Which artist was tagged as \"disco\"?",
+        "query": "SELECT T1.artist FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T2.tag = 'disco' AND T1.groupYear BETWEEN 1980 AND 1982"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Provide the name of artists who had no more than 100 downloads and are tagged \"funk\" in 1980.",
+        "query": "SELECT T1.artist FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T2.tag = 'funk' AND T1.groupYear = 1980 AND T1.totalSnatched <= 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Which artist has released the most singles with the tag \"soul\"?",
+        "query": "SELECT T1.artist FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T2.tag = 'soul' AND T1.releaseType = 'single' GROUP BY T1.artist ORDER BY COUNT(T1.releaseType) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Among the artists with the id from 10 to 30. Which artist released the product with the tag \"funk\" in 1980?",
+        "query": "SELECT T1.artist FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T2.tag = 'funk' AND T1.groupYear = 1980 AND T1.id BETWEEN 10 AND 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "List the group name has the most downloaded that have released jazz genres from 1982 or later.",
+        "query": "SELECT T1.groupName FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T2.tag = 'jazz' AND T1.groupYear >= 1982 ORDER BY T1.totalSnatched DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Which artist has id \"16\"? Provide her or his tag genre.",
+        "query": "SELECT T2.tag FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T1.id = 16"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Among id from 10 to 50. Which artist tagged as \"new.york\" has the most downloads?",
+        "query": "SELECT T1.artist FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T1.id BETWEEN 10 AND 50 AND T2.tag LIKE 'new.york' ORDER BY T1.totalSnatched DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "List the name of artists who have released albums and mixtape from 1980 to 1985 in \"dance\" genre.",
+        "query": "SELECT COUNT(T1.artist) FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T2.tag = 'dance' AND T1.groupYear BETWEEN 1980 AND 1985 AND T1.releaseType LIKE 'album' OR T1.releaseType LIKE 'mixtape'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "How many singles were released between 1979 and 1981 labeled as \"soul\"?",
+        "query": "SELECT COUNT(T2.tag) FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T2.tag = 'soul' AND T1.groupYear BETWEEN 1979 AND 1981 AND T1.releaseType LIKE 'single'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "How many singles were released in 1979?",
+        "query": "SELECT COUNT(releaseType) FROM torrents WHERE releaseType LIKE 'single' AND groupYear = 1979"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "In 1980, how many singles were released by sugar daddy?",
+        "query": "SELECT COUNT(releaseType) FROM torrents WHERE artist LIKE 'sugar daddy' AND releaseType LIKE 'Single' AND groupYear = 1980"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "How many christmas albums were released in 2004?",
+        "query": "SELECT COUNT(T1.id) FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T2.tag = 'christmas' AND T1.groupYear = 2004 AND T1.releaseType LIKE 'album'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Please list all tags of kurtis blow from 2000 to 2010.",
+        "query": "SELECT T2.tag FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T1.groupYear BETWEEN 2000 AND 2010 AND T1.artist LIKE 'kurtis blow'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Which album title and tag that millie jackson released in 1980?",
+        "query": "SELECT T1.groupName, T2.tag FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T1.groupYear = 1980 AND T1.artist LIKE 'millie jackson' AND T1.releaseType LIKE 'album'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Please list all release titles whose tag is jazz in 2005.",
+        "query": "SELECT T1.groupName FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T1.groupYear = 2005 AND T2.tag LIKE 'jazz'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "From 1980 to 2000, which artist had the most disco releases?",
+        "query": "SELECT T1.artist FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T1.groupYear BETWEEN 1980 AND 2000 AND T2.tag LIKE 'disco' GROUP BY T1.artist ORDER BY COUNT(T2.tag) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "Which artists have released singles with the tag 1970s?",
+        "query": "SELECT T1.artist FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T1.releaseType = 'single' AND T2.tag LIKE '1970s'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_tracker",
+        "question": "From 1979 to 1982, what was the percentage of united.states albums out of total albums were released?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.tag LIKE 'united.states' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.releaseType) FROM torrents AS T1 INNER JOIN tags AS T2 ON T1.id = T2.id WHERE T1.groupYear BETWEEN 1979 AND 1982 AND T1.releaseType LIKE 'album'"
+    }
+]

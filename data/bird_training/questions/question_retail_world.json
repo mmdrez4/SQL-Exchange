@@ -1,0 +1,2240 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many employees have obtained a doctorate?",
+        "query": "SELECT COUNT(EmployeeID) FROM Employees WHERE TitleOfCourtesy = 'Dr.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "To whom does Nancy Davolio report? Please give that employee's full name.",
+        "query": "SELECT FirstName, LastName FROM Employees WHERE EmployeeID = ( SELECT ReportsTo FROM Employees WHERE LastName = 'Davolio' AND FirstName = 'Nancy' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which phone number should I call if I want to reach Nancy Davolio's home?",
+        "query": "SELECT HomePhone FROM Employees WHERE LastName = 'Davolio' AND FirstName = 'Nancy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many employees have Andrew Fuller as their direct supervisor?",
+        "query": "SELECT COUNT(EmployeeID) FROM Employees WHERE ReportsTo = ( SELECT EmployeeID FROM Employees WHERE LastName = 'Fuller' AND FirstName = 'Andrew' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which employee has the highest salary? Please give his or her full name.",
+        "query": "SELECT FirstName, LastName FROM Employees WHERE Salary = ( SELECT MAX(Salary) FROM Employees )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How much higher is the salary of Andrew Fuller than that of Nancy Davolio?",
+        "query": "SELECT ( SELECT Salary FROM Employees WHERE LastName = 'Fuller' AND FirstName = 'Andrew' ) - ( SELECT Salary FROM Employees WHERE LastName = 'Davolio' AND FirstName = 'Nancy' ) AS RESULT"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Among the employees working as Sales Representatives, how many of them are located in the UK?",
+        "query": "SELECT COUNT(Country) FROM Employees WHERE Title = 'Sales Representative' AND Country = 'UK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which employee is in charge of the sales in Hollis? Please give the employee's full name.",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T3.TerritoryDescription = 'Hollis'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "The sales of how many territories is Nancy Davolio in charge of?",
+        "query": "SELECT COUNT(T2.TerritoryID) FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.FirstName = 'Nancy' AND T1.LastName = 'Davolio'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please list the names of all the territories whose sales are taken in charge by Nancy Davolio.",
+        "query": "SELECT T3.TerritoryDescription FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T1.FirstName = 'Nancy' AND T1.LastName = 'Davolio'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "The sales of how many territories in total do the employees in London take charge of?",
+        "query": "SELECT COUNT(T2.TerritoryID) FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.City = 'London'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please list the territories whose sales are taken in charge by the employees who report to Andrew Fuller.",
+        "query": "SELECT T3.TerritoryDescription FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T1.ReportsTo = ( SELECT EmployeeID FROM Employees WHERE FirstName = 'Andrew' AND LastName = 'Fuller' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many employees in the UK takes charge of the sales in over 4 territories?",
+        "query": "SELECT COUNT(COUNTEID) FROM ( SELECT T1.EmployeeID AS COUNTEID FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.Country = 'UK' GROUP BY T1.EmployeeID HAVING COUNT(T2.TerritoryID) > 4 ) T1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many territories are there in the Eastern Region?",
+        "query": "SELECT COUNT(T1.TerritoryID) FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T2.RegionDescription = 'Eastern'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please list all the territories in the Eastern Region.",
+        "query": "SELECT DISTINCT T1.TerritoryDescription FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T2.RegionDescription = 'Eastern'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many employees in total are in charge of the sales in the Eastern Region?",
+        "query": "SELECT COUNT(T.EmployeeID) FROM ( SELECT T3.EmployeeID FROM Region AS T1 INNER JOIN Territories AS T2 ON T1.RegionID = T2.RegionID INNER JOIN EmployeeTerritories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T1.RegionDescription = 'Eastern' GROUP BY T3.EmployeeID ) T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please list the home phone numbers of the employees who are in charge of the sales in the territories in the Eastern Region.",
+        "query": "SELECT T1.HomePhone FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID INNER JOIN Region AS T4 ON T3.RegionID = T4.RegionID WHERE T4.RegionDescription = 'Eastern ' GROUP BY T1.HomePhone"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many more territories are there in than Eastern Region than in the Southern Region?",
+        "query": "SELECT ( SELECT COUNT(T1.TerritoryID) FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T2.RegionDescription = 'Eastern' ) - ( SELECT COUNT(T1.TerritoryID) FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T2.RegionDescription = 'Southern' ) AS Calu"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please list the names of all the products ordered in order no. 10248.",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T2.OrderID = 10248"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the quantity of Ikura ordered in order no. 10273?",
+        "query": "SELECT T2.Quantity FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T2.OrderID = 10273 AND T1.ProductName = 'Ikura'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the total price of Ikura ordered in order no. 10273?",
+        "query": "SELECT T2.UnitPrice * T2.Quantity FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T2.OrderID = 10273 AND T1.ProductName = 'Ikura'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the total production of the product that is ordered in the highest quantity in order no. 10248?",
+        "query": "SELECT T1.UnitsInStock + T1.UnitsOnOrder FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T2.OrderID = 10248 ORDER BY T2.Quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Of all the products ordered in order no. 10248, which product has the highest user satisfaction?",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T2.OrderID = 10248 ORDER BY T1.ReorderLevel DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many orders have asked for the product Tofu?",
+        "query": "SELECT COUNT(T2.OrderID) FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ProductName = 'Tofu'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please list the IDs of the orders with a product whose production is not continuous.",
+        "query": "SELECT T2.OrderID FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Discontinued = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Of all the orders that have ordered Ikura, how many of them enjoys a unit price that's lower than its standard unit price?",
+        "query": "SELECT COUNT(T2.OrderID) FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ProductName = 'Ikura' AND T2.UnitPrice < T1.UnitPrice"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the name of the supplier company for Aniseed Syrup?",
+        "query": "SELECT T2.CompanyName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.ProductName = 'Aniseed Syrup'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please list the names of all the products whose supplier is in Japan.",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.Country = 'Japan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please list the phone numbers of the suppliers of the products that have a higher units on order than units in stock.",
+        "query": "SELECT DISTINCT T2.Phone FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.UnitsInStock < T1.UnitsOnOrder"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Among the products that are no longer in continuous production, how many of them have their supplier in the USA?",
+        "query": "SELECT COUNT(T1.Discontinued) FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.Country = 'USA' AND T1.Discontinued = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Who is the supplier of the product with the highest unit price?",
+        "query": "SELECT T2.CompanyName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.UnitPrice = ( SELECT MAX(UnitPrice) FROM Products )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the average salary of the employees who takes charge of the sales of over 4 territories?",
+        "query": "SELECT AVG(T1.Salary) FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID GROUP BY T1.EmployeeID HAVING COUNT(T2.TerritoryID) > 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How much lower in percentage is the unit price of Ikura in order no. 10273 than its standard unit price?",
+        "query": "SELECT CAST((T1.UnitPrice - T2.UnitPrice) AS REAL) * 100 / T1.UnitPrice FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T2.OrderID = 10273 AND T1.ProductName = 'Ikura'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the average quantity of Ikura ordered in one order?",
+        "query": "SELECT CAST(SUM(T2.Quantity) AS REAL) / COUNT(T2.OrderID) FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ProductName = 'Ikura'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Among the products ordered in order no. 10248, which product has the biggest ratio of units on order to units in stock?",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T2.OrderID = 10248 ORDER BY T1.UnitsOnOrder / T1.UnitsInStock DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Give the full name of the youngest employee.",
+        "query": "SELECT FirstName, LastName FROM Employees WHERE BirthDate = ( SELECT MAX(BirthDate) FROM Employees )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Who is the newest hired employee? Give the full name.",
+        "query": "SELECT FirstName, LastName FROM Employees WHERE HireDate = ( SELECT MAX(HireDate) FROM Employees )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Provide the number of orders that were handled by Michael Suyama.",
+        "query": "SELECT COUNT(T2.OrderID) FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.FirstName = 'Michael' AND T1.LastName = 'Suyama'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Give the name of the territory where Mr. Robert King works.",
+        "query": "SELECT T3.TerritoryDescription FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T1.TitleOfCourtesy = 'Mr.' AND T1.FirstName = 'Robert' AND T1.LastName = 'King'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which territory does Ms. Laura Callahan's direct supervisor work in? Give the name of the territory.",
+        "query": "SELECT T3.TerritoryDescription FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T1.EmployeeID = ( SELECT ReportsTo FROM Employees WHERE TitleOfCourtesy = 'Ms.' AND FirstName = 'Laura' AND LastName = 'Callahan' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Who is in charge of the \"Santa Monica\" territory? Give the full name.",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T3.TerritoryDescription = 'Santa Monica'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Give the home phone number of the employee who is in charge of \"Savannah\" territory.",
+        "query": "SELECT T1.HomePhone FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T3.TerritoryDescription = 'Savannah'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "For the order from \"HILAA\" on 1997/12/25, what was the total quantity of the products in that order?",
+        "query": "SELECT SUM(T2.Quantity) FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID WHERE T1.CustomerID = 'HILAA' AND T1.OrderDate LIKE '1997-12-25%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "For the order paying the highest freight, how many kinds of products does it contain?",
+        "query": "SELECT COUNT(T2.ProductID) FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID WHERE T1.Freight = ( SELECT MAX(Freight) FROM Orders ) GROUP BY T1.OrderID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Tell the name of the shipper company for the order No.10585.",
+        "query": "SELECT T2.CompanyName FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T1.OrderID = 10585"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Give the number of orders that were shipped by \"Federal Shipping\".",
+        "query": "SELECT COUNT(T1.OrderID) FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T2.CompanyName = 'Federal Shipping'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many kinds of products are there in the the category of \"dairy products\"?",
+        "query": "SELECT COUNT(T1.ProductID) FROM Products AS T1 INNER JOIN Categories AS T2 ON T1.CategoryID = T2.CategoryID WHERE T2.CategoryName = 'Dairy Products'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which category does \"tofu\" belong to?",
+        "query": "SELECT T2.CategoryName FROM Products AS T1 INNER JOIN Categories AS T2 ON T1.CategoryID = T2.CategoryID WHERE T1.ProductName = 'Tofu'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the total production of the products from the supplier \u201cEscargots Nouveaux\u201d?",
+        "query": "SELECT SUM(T1.UnitsInStock + T1.UnitsOnOrder) FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Escargots Nouveaux'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Give the reorder level for the products from the supplier \"Nord-Ost-Fisch Handelsgesellschaft mbH\".",
+        "query": "SELECT T1.ReorderLevel FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Nord-Ost-Fisch Handelsgesellschaft mbH'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many kinds of products are supplied by \"Karkki Oy\" company?",
+        "query": "SELECT COUNT(T1.ProductID) FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Karkki Oy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Give the contact name of the supplier for the product \"Gudbrandsdalsost\".",
+        "query": "SELECT T2.ContactName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.ProductName = 'Gudbrandsdalsost'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Tell the country name of the supplier for \"Scottish Longbreads\".",
+        "query": "SELECT T2.Country FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.ProductName = 'Scottish Longbreads'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Give the number of territories in the \"Northern\" region.",
+        "query": "SELECT COUNT(T1.TerritoryID) FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T2.RegionDescription = 'Northern'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which region is \"Columbia\" in?",
+        "query": "SELECT T2.RegionDescription FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T1.TerritoryDescription = 'Columbia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "For the orders of Customer \"WHITC\", what is the percentage of the orders were fulfilled with shipper company \"United Package\"?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.CompanyName = 'United Package' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T1.OrderID) FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T1.CustomerID = 'WHITC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many percent more orders were fulfilled with shipper company \"United Package\" than with \"Speedy Express\"?",
+        "query": "SELECT CAST((COUNT(CASE WHEN T2.CompanyName = 'United Package' THEN 1 ELSE NULL END) - COUNT(CASE WHEN T2.CompanyName = 'Speedy Express' THEN 1 ELSE NULL END)) AS REAL) * 100 / COUNT(CASE WHEN T2.CompanyName = 'Speedy Express' THEN 1 ELSE NULL END) FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many times is the number of territories in \"Eastern Region\" than \"Southern Region\"?",
+        "query": "SELECT CAST(( SELECT COUNT(T1.TerritoryID) FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T2.RegionDescription = 'Eastern' ) AS REAL) / ( SELECT COUNT(T1.TerritoryID) FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T2.RegionDescription = 'Southern' ) AS Calu"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many customers are there in the country with the highest number of customers?",
+        "query": "SELECT COUNT(CustomerID) FROM Customers GROUP BY Country ORDER BY COUNT(CustomerID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the order ids of the orders with freight of over 800?",
+        "query": "SELECT OrderID FROM Orders WHERE Freight > 800"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the Island Trading customer's complete address?",
+        "query": "SELECT Address, City, Region, Country, PostalCode FROM Customers WHERE CompanyName = 'Island Trading'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the most expensive product?",
+        "query": "SELECT ProductName FROM Products WHERE UnitPrice = ( SELECT MAX(UnitPrice) FROM Products )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many suppliers are there in the United States of America?",
+        "query": "SELECT COUNT(SupplierID) FROM Suppliers WHERE Country = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which product have the highest user satisfaction?",
+        "query": "SELECT ProductName FROM Products WHERE ReorderLevel = ( SELECT MAX(ReorderLevel) FROM Products )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the full name of the employee with the highest salary?",
+        "query": "SELECT FirstName, LastName FROM Employees WHERE Salary = ( SELECT MAX(Salary) FROM Employees )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the names of the products that were discountinued?",
+        "query": "SELECT ProductName FROM Products WHERE Discontinued = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the average salary of sales representatives in the United Kingdom?",
+        "query": "SELECT AVG(Salary) FROM Employees WHERE Title = 'Sales Representative' AND Country = 'UK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the most widely used shipping company in the United States of America?",
+        "query": "SELECT T2.CompanyName FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T1.ShipCountry = 'USA' GROUP BY T2.CompanyName ORDER BY COUNT(T2.CompanyName) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many products were supplied by Pavlova, Ltd.?",
+        "query": "SELECT COUNT(T1.ProductName) FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Pavlova, Ltd.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many orders were shipped to GREAL via United Package?",
+        "query": "SELECT COUNT(T1.OrderID) FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T1.CustomerID = 'GREAL' AND T2.CompanyName = 'United Package'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the names of the suppliers whose products have the highest user satisfaction?",
+        "query": "SELECT DISTINCT T2.CompanyName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.ReorderLevel = ( SELECT MAX(ReorderLevel) FROM Products )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "In total, how many orders were shipped via United Package?",
+        "query": "SELECT COUNT(T1.OrderID) FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T2.CompanyName = 'United Package'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many suppliers in Australia whose products were discontinued?",
+        "query": "SELECT COUNT(T1.Discontinued) FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.Discontinued = 1 AND T2.Country = 'Australia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How much is the total purchase price, including freight, of the top 2 most expensive products?",
+        "query": "SELECT T2.UnitPrice * T2.Quantity + T1.Freight FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID ORDER BY T2.UnitPrice * T2.Quantity + T1.Freight DESC LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the name of the supplier that supplies the most products to the company?",
+        "query": "SELECT T1.SupplierID FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID GROUP BY T1.SupplierID ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the names of the products that were ordered that have a unit price of no more than 5?",
+        "query": "SELECT DISTINCT T1.ProductName FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T2.UnitPrice < 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the title of the employee with the highest number of territories in charge?",
+        "query": "SELECT T1.Title FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID GROUP BY T1.Title ORDER BY COUNT(T2.TerritoryID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the most ordered products by customers?",
+        "query": "SELECT T1.ProductID FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID GROUP BY T1.ProductID ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which territories is the employee with a doctorate in charge of? List all of the territory descriptions.",
+        "query": "SELECT T3.TerritoryDescription FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T1.TitleOfCourtesy = 'Dr.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the territory descriptions of territories in the Eastern region?",
+        "query": "SELECT DISTINCT T1.TerritoryDescription FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T2.RegionDescription = 'Eastern' ORDER BY T1.TerritoryDescription"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the average number of territories do each sales representative is in charge of?",
+        "query": "SELECT CAST(COUNT(T2.TerritoryID) AS REAL) / COUNT(DISTINCT T1.EmployeeID) FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.Title = 'Sales Representative'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Among the beverages, which product has the highest customer satisfaction?",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN Categories AS T2 ON T1.CategoryID = T2.CategoryID WHERE T2.CategoryName = 'Beverages' ORDER BY T1.ReorderLevel DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the full name of the employee who handled the highest amount of orders?",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID GROUP BY T1.FirstName, T1.LastName ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many products were ordered in the order with the highest freight?",
+        "query": "SELECT COUNT(T2.ProductID) FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID GROUP BY T2.ProductID ORDER BY COUNT(T1.Freight) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Among the seafood products, which product have the highest total production of the production?",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN Categories AS T2 ON T1.CategoryID = T2.CategoryID WHERE T2.CategoryName = 'Seafood' ORDER BY T1.UnitsInStock + T1.UnitsOnOrder DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the difference in salary of the top 2 employees with the highest number of territories in charge?",
+        "query": "SELECT MAX(Salary) - MIN(Salary) FROM ( SELECT T1.Salary FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID GROUP BY T1.EmployeeID, T1.Salary ORDER BY COUNT(T2.TerritoryID) DESC LIMIT 2 ) T1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the average price of products with more than fifty units in stock?",
+        "query": "SELECT SUM(UnitPrice) / COUNT(UnitPrice) FROM Products WHERE UnitsInStock > 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List the company names of customers from the city with the most customers.",
+        "query": "SELECT CompanyName FROM `Customer and Suppliers by City` WHERE CITY = ( SELECT City FROM `Customer and Suppliers by City` GROUP BY City ORDER BY COUNT(Relationship) DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Find and list the company name, company contact name, and contact title of customers from Madrid.",
+        "query": "SELECT CompanyName, ContactName, ContactTitle FROM Customers WHERE City = 'Madrid'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Give the full name and contact number of employees in descending order of age.",
+        "query": "SELECT FirstName, LastName, HomePhone FROM Employees ORDER BY BirthDate DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Calculate the average price of products shipped to the UK.",
+        "query": "SELECT AVG(UnitPrice) AS avg FROM Invoices WHERE Country = 'UK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Among all the orders, which products sold for the most amount?",
+        "query": "SELECT ProductID FROM `Order Details` GROUP BY ProductID ORDER BY SUM(Quantity) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List the name, address, and phone number of companies that supply products for more than thirty dollars per unit.",
+        "query": "SELECT T2.CompanyName, T2.Address, T2.Phone FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.UnitPrice > 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Among the customers, list customers' company names and addresses who paid more than average in freight.",
+        "query": "SELECT DISTINCT T1.CompanyName, T1.Address FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.Freight > ( SELECT AVG(Freight) FROM Orders )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Find and list the full name of employees who are from the territory, Wilton.",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T3.TerritoryDescription = 'Wilton'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List the names of non-US suppliers that have discontinued.",
+        "query": "SELECT DISTINCT T2.CompanyName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.Discontinued = 1 AND T2.Country != 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List the top five most costly products in 1998.",
+        "query": "SELECT T3.ProductName FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID INNER JOIN Products AS T3 ON T2.ProductID = T3.ProductID WHERE T1.OrderDate LIKE '1998%' ORDER BY T3.UnitPrice + T1.Freight DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Of the customers who are from Canada, how many used Federal Shipping?",
+        "query": "SELECT COUNT(T3.CustomerID) FROM Shippers AS T1 INNER JOIN Orders AS T2 ON T1.ShipperID = T2.ShipVia INNER JOIN Customers AS T3 ON T2.CustomerID = T3.CustomerID WHERE T2.ShipName = 'Federal Shipping'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List the name of the top ten most ordered product's names in descending order of the number of orders.",
+        "query": "SELECT T3.ProductName FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID INNER JOIN Products AS T3 ON T2.ProductID = T3.ProductID GROUP BY T3.ProductName ORDER BY COUNT(*) DESC LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which supplier supplies the most amount of products?",
+        "query": "SELECT T2.CompanyName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID GROUP BY T2.SupplierID, T2.CompanyName ORDER BY COUNT(T1.ProductName) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please list the full name and region of each employee in alphabetical order.",
+        "query": "SELECT DISTINCT T1.FirstName, T1.LastName, T4.RegionDescription FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID INNER JOIN Region AS T4 ON T3.RegionID = T4.RegionID ORDER BY T1.FirstName"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which employee handled the most amount of orders in 1996? Give the full name, title, and address of this employee.",
+        "query": "SELECT FirstName, LastName, Title, address FROM Employees WHERE EmployeeID = ( SELECT T1.EmployeeID FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T2.OrderDate BETWEEN '1996-01-01 00:00:00' AND '1997-01-01 00:00:00' GROUP BY T1.EmployeeID ORDER BY COUNT(T2.OrderID) DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What was the average unit price of products shipped via United Package in 1997?",
+        "query": "SELECT AVG(T2.UnitPrice) FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID INNER JOIN Shippers AS T3 ON T1.ShipVia = T3.ShipperID WHERE T1.OrderDate LIKE '1997%' AND T3.CompanyName = 'United Package'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Calculate the percentage of shipping done through Speedy Express.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.CompanyName = 'Speedy Express' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T1.ShipVia) FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Indicate the courtesy title of the 3 employees who have the lowest salary.",
+        "query": "SELECT TitleOfCourtesy FROM Employees ORDER BY Salary LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the last name of the employees who must report to the Vice President of Sales?",
+        "query": "SELECT LastName FROM Employees WHERE ReportsTo = ( SELECT EmployeeID FROM Employees WHERE Title = 'Vice President, Sales' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the highest total price paid for an order?",
+        "query": "SELECT UnitPrice * Quantity * (1 - Discount) AS THETOP FROM `Order Details` ORDER BY UnitPrice * Quantity * (1 - Discount) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which 3 products are produced in greater quantity?",
+        "query": "SELECT ProductName FROM Products ORDER BY UnitsInStock + UnitsOnOrder DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Of the 10 products with the highest unit price, identify by their ID the ones that have generated the least satisfaction.",
+        "query": "SELECT ProductID FROM Products ORDER BY ReorderLevel ASC, UnitPrice DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many non-discontinued products are there in the dairy category?",
+        "query": "SELECT COUNT(T1.CategoryID) FROM Categories AS T1 INNER JOIN Products AS T2 ON T1.CategoryID = T2.CategoryID WHERE T1.CategoryName = 'Dairy Products' AND T2.Discontinued = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What territories is the Inside Sales Coordinator in charge of?",
+        "query": "SELECT T3.TerritoryDescription FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T1.Title = 'Inside Sales Coordinator'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Indicate the name of the companies that have freighted products for a value greater than 2,000,000.",
+        "query": "SELECT T1.CompanyName FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.Freight > 2000000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Through which companies have products been shipped the most times to the city of Aachen?",
+        "query": "SELECT T2.CompanyName FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T1.ShipCity = 'Aachen' GROUP BY T2.CompanyName ORDER BY COUNT(T1.ShipVia) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List the full name of all employees who work in the Northern region.",
+        "query": "SELECT DISTINCT T1.FirstName, T1.LastName FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID INNER JOIN Region AS T4 ON T3.RegionID = T4.RegionID WHERE T4.RegionDescription = 'Northern'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the name of the contact person of the Pavlova supplier company?",
+        "query": "SELECT T2.ContactName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.ProductName = 'Pavlova'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Indicate the name of the products that have been shipped to the city of Paris.",
+        "query": "SELECT T3.ProductName FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID INNER JOIN Products AS T3 ON T2.ProductID = T3.ProductID WHERE T1.ShipCity = 'Paris'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What product is the least shipped to the postal code 28023?",
+        "query": "SELECT T4.ProductName FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN `Order Details` AS T3 ON T2.OrderID = T3.OrderID INNER JOIN Products AS T4 ON T3.ProductID = T4.ProductID WHERE T1.PostalCode = 28023 ORDER BY T3.Quantity LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the full name of the employee in charge of the Southern region who is to report to Andrew Fuller?",
+        "query": "SELECT DISTINCT T1.FirstName, T1.LastName FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID INNER JOIN Region AS T4 ON T3.RegionID = T4.RegionID WHERE T4.RegionDescription = 'Southern' AND T1.ReportsTo = ( SELECT EmployeeID FROM Employees WHERE FirstName = 'Andrew' AND LastName = 'Fuller' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "On what date did the Du monde entier company request that 9 units of Filo Mix be sent to it?",
+        "query": "SELECT T2.OrderDate FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN `Order Details` AS T3 ON T2.OrderID = T3.OrderID INNER JOIN Products AS T4 ON T3.ProductID = T4.ProductID WHERE T4.ProductName = 'Filo Mix' AND T3.Quantity = 9 AND T1.CompanyName = 'Du monde entier'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Indicate the name of the categories to which the products of order number 10933 belong.",
+        "query": "SELECT T3.CategoryName FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Categories AS T3 ON T1.CategoryID = T3.CategoryID WHERE T2.OrderID = 10933"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the phone number for the employee in charge of the Portsmouth territory?",
+        "query": "SELECT T1.HomePhone FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T3.TerritoryDescription = 'Portsmouth'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the average quantity of product that have been shipped by Federal Shipping in November 1996?",
+        "query": "SELECT CAST(SUM(T2.Quantity) AS REAL) / COUNT(T2.OrderID) FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID INNER JOIN Shippers AS T3 ON T1.ShipVia = T3.ShipperID WHERE T1.ShippedDate LIKE '1996-11%' AND T3.CompanyName = 'Federal Shipping'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Of all the shipments made by United Package throughout the year 1996, what percentage correspond to the month of September?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.ShippedDate LIKE '1996-09%' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T1.ShipVia) FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T2.CompanyName = 'United Package' AND T1.ShippedDate LIKE '1996%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many owners are located in Mexico?",
+        "query": "SELECT COUNT(ContactTitle) FROM Customers WHERE Country = 'Mexico' AND ContactTitle = 'Owner'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the full address of Andr Fonseca?",
+        "query": "SELECT Address, City, Region, PostalCode, Country FROM Customers WHERE ContactName = 'Andr Fonseca'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the companies that have the same phone area code as 171?",
+        "query": "SELECT CompanyName FROM Customers WHERE Phone LIKE '(171)%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the difference in the number of employees from the UK and the USA who work as sales representatives?",
+        "query": "SELECT ( SELECT COUNT(Title) FROM Employees WHERE Country = 'UK' AND Title = 'Sales Representative' ) - ( SELECT COUNT(Title) FROM Employees WHERE Country = 'USA' AND Title = 'Sales Representative' ) AS DIFFERENCE"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many sales associates are located in Sao Paulo, Brazil?",
+        "query": "SELECT COUNT(CustomerID) FROM Customers WHERE City = 'Sao Paulo' AND Country = 'Brazil' AND ContactTitle = 'Sales Associate'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the family name of the employee who shipped the order 10521 to CACTU?",
+        "query": "SELECT T1.LastName FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T2.OrderID = 10521 AND T2.CustomerID = 'CACTU'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the shipping cost for order number 10692 from the company Alfreds Futterkiste?",
+        "query": "SELECT T2.Freight FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.OrderID = 10692 AND T1.CompanyName = 'Alfreds Futterkiste'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the shipping company for order number 10558?",
+        "query": "SELECT T2.CompanyName FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T1.OrderID = 10558"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please list any three order numbers that have been shipped using Speedy Express.",
+        "query": "SELECT T1.OrderID FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T2.CompanyName = 'Speedy Express' LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the products that belong to the beverage category?",
+        "query": "SELECT T2.ProductName FROM Categories AS T1 INNER JOIN Products AS T2 ON T1.CategoryID = T2.CategoryID WHERE T1.CategoryName = 'Beverages'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the description of the category that tofu belongs to?",
+        "query": "SELECT T1.Description FROM Categories AS T1 INNER JOIN Products AS T2 ON T1.CategoryID = T2.CategoryID WHERE T2.ProductName = 'tofu'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which company supplies Gula Malacca?",
+        "query": "SELECT T2.CompanyName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.ProductName = 'Gula Malacca'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the products that are supplied by Aux joyeux ecclsiastiques?",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Aux joyeux ecclsiastiques'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How much per unit of Konbu does Mayumi's charge?",
+        "query": "SELECT T1.UnitPrice FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName LIKE 'Mayumi%' AND T1.ProductName = 'Konbu'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Who is the person to contact to get Camembert Pierrot?",
+        "query": "SELECT T2.ContactName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.ProductName = 'Camembert Pierrot'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please name any three products that have been discontinued in the meat or poultry category.",
+        "query": "SELECT T2.ProductName FROM Categories AS T1 INNER JOIN Products AS T2 ON T1.CategoryID = T2.CategoryID WHERE T2.Discontinued = 1 AND T1.CategoryName = 'Meat/Poultry' LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please name any two products that have the highest satisfaction levels among users of Heli Swaren GmbH & Co. KG.",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Heli Swaren GmbH & Co. KG' ORDER BY T1.ReorderLevel DESC LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Who is the one representing the company \"Heli Swaren GmbH & Co. KG\"?",
+        "query": "SELECT ContactName FROM Suppliers WHERE CompanyName = 'Heli Swaren GmbH & Co. KG'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "From which country is the company \"Drachenblut Delikatessen\" from?",
+        "query": "SELECT Country FROM Customers WHERE CompanyName = 'Drachenblut Delikatessen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many territories are there?",
+        "query": "SELECT COUNT(TerritoryID) FROM Territories"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the largest total price for an order?",
+        "query": "SELECT SUM(UnitPrice) FROM `Order Details` GROUP BY OrderID ORDER BY SUM(UnitPrice) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which product is the most expensive?",
+        "query": "SELECT ProductName FROM Products WHERE UnitPrice = ( SELECT MAX(UnitPrice) FROM Products )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many of the orders are shipped to France?",
+        "query": "SELECT COUNT(ShipCountry) FROM Orders WHERE ShipCountry = 'France'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which region does Hoffman Estates belong to?",
+        "query": "SELECT T2.RegionDescription FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T1.TerritoryDescription = 'Hoffman Estates'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the homepage link for the company that supplies the product \"Thringer Rostbratwurst\"?",
+        "query": "SELECT T2.HomePage FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.ProductName = 'Thringer Rostbratwurst'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List the first names of the employees who take the orders that ship to the city of \"Reims\".",
+        "query": "SELECT DISTINCT T1.FirstName FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T2.ShipCity = 'Reims'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the largest quantity of \"Manjimup Dried Apples\" for an order?",
+        "query": "SELECT T2.Quantity FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T2.ProductID = T1.ProductID WHERE T1.ProductName = 'Manjimup Dried Apples' ORDER BY T2.Quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many orders were shipped by \"Speedy Express\"?",
+        "query": "SELECT COUNT(T1.OrderID) FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T2.CompanyName = 'Speedy Express'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Make a list of all the territories in the Southern region.",
+        "query": "SELECT DISTINCT T1.TerritoryDescription FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T2.RegionDescription = 'Southern'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the prices on cheese products?",
+        "query": "SELECT T2.UnitPrice FROM Categories AS T1 INNER JOIN Products AS T2 ON T1.CategoryID = T2.CategoryID WHERE T1.Description = 'Cheeses'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many orders did \"Laughing Bacchus Wine Cellars\" make?",
+        "query": "SELECT COUNT(T2.OrderID) FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.CompanyName = 'Laughing Bacchus Wine Cellars'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List all the products that were shipped to Starenweg 5.",
+        "query": "SELECT T3.ProductName FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID INNER JOIN Products AS T3 ON T2.ProductID = T3.ProductID WHERE T1.ShipAddress = 'Starenweg 5' GROUP BY T3.ProductName"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the products by the company \"Bigfoot Breweries\"?",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Bigfoot Breweries'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the names of Robert King's territories?",
+        "query": "SELECT T3.TerritoryDescription FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T1.LastName = 'King' AND T1.FirstName = 'Robert'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Provide the name of the contact person who made the orders that shipped to Switzerland.",
+        "query": "SELECT T1.ContactName FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.ShipCountry = 'Switzerland' GROUP BY T1.ContactName"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What proportion of orders are taken by the Sales Representative?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.Title = 'Sales Representative' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T2.OrderID) FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Among the USA employess, how many of them has PhD title of courtesy?",
+        "query": "SELECT COUNT(Country) FROM Employees WHERE TitleOfCourtesy = 'Dr.' AND Country = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the average salary for employees from ID 1 to 9?",
+        "query": "SELECT AVG(Salary) FROM Employees WHERE EmployeeID BETWEEN 1 AND 9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Calculate the total salary for employees from UK.",
+        "query": "SELECT SUM(Salary) FROM Employees WHERE Country = 'UK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Is (206) 555-1189 the home phone number for Laura Callahan?",
+        "query": "SELECT CASE WHEN HomePhone = '(206) 555-1189' THEN 'YES' ELSE 'NO' END FROM Employees WHERE FirstName = 'Laura' AND LastName = 'Callahan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Write down the notes of employee with the highest salary.",
+        "query": "SELECT Notes FROM Employees WHERE Salary = ( SELECT MAX(Salary) FROM Employees )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List down the customer ids who placed order with Michael Suyama.",
+        "query": "SELECT T2.CustomerID FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.FirstName = 'Michael' AND T1.LastName = 'Suyama'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Where are the ship countries of orders placed by Janet Leverling?",
+        "query": "SELECT DISTINCT T2.ShipCountry FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.FirstName = 'Janet' AND T1.LastName = 'Leverling'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many orders have Margaret Peacock placed?",
+        "query": "SELECT COUNT(T2.EmployeeID) FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.FirstName = 'Margaret' AND T1.LastName = 'Peacock'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Calculate the average salary per order for Andrew Fuller.",
+        "query": "SELECT CAST(SUM(T1.Salary) AS REAL) / COUNT(T2.EmployeeID) FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.FirstName = 'Andrew' AND T1.LastName = 'Fuller'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the product names of Exotic Liquids?",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Exotic Liquids'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List down the quantity per unit for products of Tokyo Traders.",
+        "query": "SELECT T1.QuantityPerUnit FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Tokyo Traders'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many products have been discountinued by New Orleans Cajun Delights?",
+        "query": "SELECT COUNT(T1.Discontinued) FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'New Orleans Cajun Delights'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please calculate the average unit price for products of Formaggi Fortini s.r.l.",
+        "query": "SELECT SUM(T1.UnitPrice) / COUNT(T1.SupplierID) FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Formaggi Fortini s.r.l.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Calculate the total products that are supplied by Japan suppliers.",
+        "query": "SELECT COUNT(T1.SupplierID) FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.Country = 'Japan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the contact name for product Teatime Chocolate Biscuits?",
+        "query": "SELECT T2.ContactName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.ProductName = 'Teatime Chocolate Biscuits'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List down the company names that have the highest reorder level.",
+        "query": "SELECT DISTINCT T2.CompanyName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.ReorderLevel = ( SELECT MAX(ReorderLevel) FROM Products )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the contact title for the person who supplied a product that is 10 boxes x 12 pieces.",
+        "query": "SELECT T2.ContactTitle FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.QuantityPerUnit = '10 boxes x 12 pieces'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the total units on order from Exotic Liquids?",
+        "query": "SELECT SUM(T1.UnitsOnOrder) FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Exotic Liquids'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Calculate the percentage of products supplied by Gai pturage over all products.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.CompanyName = 'Gai pturage' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T1.SupplierID) FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List the product ID of the top five products, by descending order, the number of quantities in stock.",
+        "query": "SELECT ProductID FROM Products ORDER BY UnitsInStock DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Among the products, how many of them were discontinued in production?",
+        "query": "SELECT COUNT(*) FROM Products WHERE Discontinued = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Give me the address, home phone and salary of the Sales Manager.",
+        "query": "SELECT Address, HomePhone, Salary FROM Employees WHERE Title = 'Sales Manager'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the full name of the Vice President of Sales. Give me the URL of his/her photo.",
+        "query": "SELECT FirstName, LastName FROM Employees WHERE Title = 'Vice President, Sales'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Write down the top ten companies with the most total sales by amount.",
+        "query": "SELECT CompanyName FROM `Sales Totals by Amount` ORDER BY SaleAmount DESC LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the average sales for each categories?",
+        "query": "SELECT AVG(ProductSales) FROM `Sales by Category` GROUP BY CategoryName"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Compute the total order quantity for Uncle Bob's Organic Dried Pears so far.",
+        "query": "SELECT SUM(T2.Quantity) FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ProductName LIKE 'Uncle Bob%s Organic Dried Pears'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Among the seafoods, how many of them have an order quantity of more than 50?",
+        "query": "SELECT COUNT(T1.ProductID) FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Categories AS T3 ON T1.CategoryID = T3.CategoryID WHERE T3.CategoryName = 'Seafood' AND T2.Quantity > 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List the products whose supplier is Pavlova, Ltd. Please include the product ID and re-order level.",
+        "query": "SELECT T1.ProductName, T1.ProductID, T1.ReorderLevel FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Pavlova, Ltd.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Who are the suppliers of the discontinued products?",
+        "query": "SELECT DISTINCT T2.CompanyName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.Discontinued = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Among the employees, give me the full names of those who have less than 4 territories.",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T2.EmployeeID < 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many employees have territories in the Eastern region?",
+        "query": "SELECT COUNT(DISTINCT T1.FirstName) FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID INNER JOIN Region AS T4 ON T3.RegionID = T4.RegionID WHERE T4.RegionDescription = 'Eastern'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "From 1/3/97 to 8/10/97, how many orders were shipped via Federal Shipping?",
+        "query": "SELECT COUNT(T1.OrderID) FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T2.CompanyName = 'Federal Shipping' AND T1.ShippedDate BETWEEN '1997-03-01 00:00:00' AND '1997-10-08 23:59:59'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Tally the customer ID of orders that were shipped to Brazil by Margaret Peacock from 3/31/97 to 12/10/97.",
+        "query": "SELECT DISTINCT T2.CustomerID FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.LastName = 'Peacock' AND T1.FirstName = 'Margaret' AND T2.ShipCountry = 'Brazil' AND T2.ShippedDate BETWEEN '1997-03-31 00:00:00' AND '1997-12-10 23:59:59'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the re-order level of products that have an order quantity of 1?",
+        "query": "SELECT T1.ReorderLevel FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Quantity = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the stock value of every condiments?",
+        "query": "SELECT T1.UnitPrice * T1.UnitsInStock FROM Products AS T1 INNER JOIN Categories AS T2 ON T1.CategoryID = T2.CategoryID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many territories are owned by Anne Dodsworth?",
+        "query": "SELECT COUNT(T2.TerritoryID) FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.FirstName = 'Anne' AND T1.LastName = 'Dodsworth'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which of the American customers have experienced a delay in the shipment and how long was the longest?",
+        "query": "SELECT T1.CompanyName, TIMESTAMPDIFF(DAY, T2.ShippedDate, T2.RequiredDate) FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.Country = 'USA' AND TIMESTAMPDIFF(DAY, T2.ShippedDate, T2.RequiredDate) < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the contact name and phone number of the customer who has made the most total payment on the order to date?",
+        "query": "SELECT T1.ContactName, T1.Phone FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN `Order Details` AS T3 ON T2.OrderID = T3.OrderID GROUP BY T2.OrderID, T1.ContactName, T1.Phone ORDER BY SUM(T3.UnitPrice * T3.Quantity * (1 - T3.Discount)) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Who is the sales representative of the customer who has made the highest payment? Include the full name of employee and his/her supervisor.",
+        "query": "SELECT T4.LastName, T4.FirstName, T4.ReportsTo , T1.Quantity * T1.UnitPrice * (1 - T1.Discount) AS payment FROM `Order Details` AS T1 INNER JOIN Orders AS T2 ON T1.OrderID = T2.OrderID INNER JOIN Customers AS T3 ON T2.CustomerID = T3.CustomerID INNER JOIN Employees AS T4 ON T2.EmployeeID = T4.EmployeeID ORDER BY payment DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many customers are there in Berlin, Germany?",
+        "query": "SELECT COUNT(City) FROM Customers WHERE Country = 'Germany' AND City = 'Berlin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many products does the company Exotic Liquids supply?",
+        "query": "SELECT COUNT(T1.ProductName) FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Exotic Liquids'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which company has the lowest unit price? Please give the company name and the product name.",
+        "query": "SELECT T2.CompanyName, T1.ProductName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.UnitPrice = ( SELECT MIN(UnitPrice) FROM Products )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the average unit price of Tokyo Traders' products?",
+        "query": "SELECT SUM(T1.UnitPrice) / COUNT(T2.SupplierID) FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Tokyo Traders'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many territories are there in the Eastern region?",
+        "query": "SELECT COUNT(T1.RegionID) FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T2.RegionDescription = 'Eastern'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which region has the most territories?",
+        "query": "SELECT T2.RegionID FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID GROUP BY T2.RegionID ORDER BY COUNT(T1.TerritoryID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which region does territory id 2116 belong to?",
+        "query": "SELECT T2.RegionDescription FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T1.TerritoryID = 2116"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What percentage of orders were placed by customers in Madrid city in 1996?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.City = 'Madrid' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T1.City) FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE STRFTIME('%Y', T2.OrderDate) = 1996"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please list the full names and titles of all employees.",
+        "query": "SELECT FirstName, LastName, Title FROM Employees"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Who has the highest salary? Please give their first name.",
+        "query": "SELECT FirstName, LastName FROM Employees WHERE Salary = ( SELECT MAX(Salary) FROM Employees )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many sales representatives whose salaries are higher than 2000?",
+        "query": "SELECT COUNT(Title) FROM Employees WHERE Salary > 2000 AND Title = 'Sales Representative'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "In 1996, how many orders were from customers in the UK?",
+        "query": "SELECT COUNT(T1.CustomerID) FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE STRFTIME('%Y', T2.OrderDate) = '1996' AND T1.Country = 'UK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which company had the most orders in 1998?",
+        "query": "SELECT T1.CompanyName FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE STRFTIME('%Y', T2.OrderDate) = '1998' GROUP BY T1.CompanyName ORDER BY COUNT(T2.OrderID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please calculate the number of orders from customers by country in 1996.",
+        "query": "SELECT COUNT(T2.CustomerID) FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE STRFTIME('%Y', T2.OrderDate) = '1996' GROUP BY T1.Country"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many orders were from Hanna Moos company in 1999?",
+        "query": "SELECT COUNT(T2.OrderID) FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE STRFTIME('%Y', T2.OrderDate) = '1999' AND T1.CompanyName = 'Hanna Moos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many days was the fastest shipping of Berglunds snabbkp's order?",
+        "query": "SELECT datediff(T2.ShippedDate, T2.OrderDate) FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.CompanyName = 'Berglunds snabbkp' ORDER BY datediff(T2.ShippedDate, T2.OrderDate) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which company placed the order with the id 10257?",
+        "query": "SELECT T1.CompanyName FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.OrderID = 10257"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "In which year did Around the Horn place the most orders?",
+        "query": "SELECT STRFTIME('%Y', T2.OrderDate) FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.CompanyName = 'Around the Horn' GROUP BY STRFTIME('%Y', T2.OrderDate) ORDER BY COUNT(T2.OrderID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many employees report to Andrew Fuller?",
+        "query": "SELECT COUNT(EmployeeID) FROM Employees WHERE ReportsTo = ( SELECT EmployeeID FROM Employees WHERE LastName = 'Fuller' AND FirstName = 'Andrew' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which country are the majority of the suppliers located?",
+        "query": "SELECT Country FROM Suppliers GROUP BY Country ORDER BY COUNT(SupplierID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the full name of the employees who report to the Sales Manager?",
+        "query": "SELECT FirstName, LastName FROM Employees WHERE ReportsTo = ( SELECT EmployeeID FROM Employees WHERE Title = 'Sales Manager' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "In August of 1996, how many orders were placed by the customer with the highest amount of orders?",
+        "query": "SELECT COUNT(OrderID) FROM Orders WHERE OrderDate LIKE '1996-08%' GROUP BY CustomerID ORDER BY COUNT(OrderID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How much is the salary of the first employee that was hired?",
+        "query": "SELECT Salary FROM Employees WHERE HireDate = ( SELECT MIN(HireDate) FROM Employees )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How old was the oldest employee at the time he or she was hired?",
+        "query": "SELECT MAX(TIMESTAMPDIFF(YEAR, BirthDate, HireDate)) FROM Employees"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the total sales amount of all discontinued products?",
+        "query": "SELECT SUM(T2.UnitPrice * T2.Quantity) FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Discontinued = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the category of the product that has the highest number of discontinued products?",
+        "query": "SELECT T2.CategoryName FROM Products AS T1 INNER JOIN Categories AS T2 ON T1.CategoryID = T2.CategoryID WHERE T1.Discontinued = 1 GROUP BY T2.CategoryName ORDER BY COUNT(T1.ProductID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many condiments were sold in 1997?",
+        "query": "SELECT COUNT(T2.ProductID) FROM Categories AS T1 INNER JOIN Products AS T2 ON T1.CategoryID = T2.CategoryID INNER JOIN `Order Details` AS T3 ON T2.ProductID = T3.ProductID INNER JOIN Orders AS T4 ON T3.OrderID = T4.OrderID WHERE T1.CategoryName = 'Condiments' AND T1.CategoryID = 2 AND T4.OrderDate LIKE '1997%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Who is the customer who purchased the highest number of products in a single order?",
+        "query": "SELECT T1.CompanyName FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN `Order Details` AS T3 ON T2.OrderID = T3.OrderID GROUP BY T1.CompanyName ORDER BY COUNT(T3.ProductID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the monthly average number of products shipped via Federal Shipping for the year 1996?",
+        "query": "SELECT CAST(SUM(T1.ShipVia) AS REAL) / 12 FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T2.CompanyName = 'Federal Shipping' AND T1.ShippedDate LIKE '1996%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which products are being supplied by \"G'day, Mate\"? List all of their names.",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName LIKE 'G%day, Mate'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many territories are there in the region with the highest number of territories?",
+        "query": "SELECT COUNT(T2.RegionDescription), T1.TerritoryDescription, COUNT(*) AS num FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID GROUP BY T1.TerritoryDescription ORDER BY num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the company name of the supplier who supplies the product with the highest unit price?",
+        "query": "SELECT T2.CompanyName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.UnitPrice = ( SELECT MAX(UnitPrice) FROM Products )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many female employees are in charge of 3 or more territories?",
+        "query": "SELECT COUNT(EID) FROM ( SELECT T1.EmployeeID AS EID FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.TitleOfCourtesy IN ('Ms.' OR 'Mrs.') GROUP BY T1.EmployeeID HAVING COUNT(T2.TerritoryID) >= 3 ) T1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Who are the top 8 suppliers supplying the products with the highest user satisfaction?",
+        "query": "SELECT T2.CompanyName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID ORDER BY T1.ReorderLevel DESC LIMIT 8"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the company name of the customer who made the biggest amount of purchase in a single order before discount?",
+        "query": "SELECT T1.CompanyName FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN `Order Details` AS T3 ON T2.OrderID = T3.OrderID WHERE T3.Discount = 0 GROUP BY T1.CompanyName ORDER BY SUM(T3.UnitPrice * T3.Quantity) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What was the total amount of sales handled by Nancy Davolio in December 1996, excluding discounts?",
+        "query": "SELECT SUM(T3.UnitPrice * T3.Quantity) FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN `Order Details` AS T3 ON T2.OrderID = T3.OrderID WHERE T1.FirstName = 'Nancy' AND T1.LastName = 'Davolio' AND T2.OrderDate LIKE '1996-12%' AND T3.Discount = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the total amount of sales made in the year 1997?",
+        "query": "SELECT SUM(T2.UnitPrice * T2.Quantity * (1 - T2.Discount)) FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID WHERE T1.OrderDate LIKE '1997%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the average annual amount of shipped sales from 1997 to 1998?",
+        "query": "SELECT SUM(T2.UnitPrice * T2.Quantity * (1 - T2.Discount)) / 3 FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID WHERE T1.ShippedDate BETWEEN '1996-01-01 00:00:00' AND '1998-12-31 23:59:59'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many orders were shipped to Venezuela in 1996?",
+        "query": "SELECT COUNT(OrderID) FROM Orders WHERE ShipCountry = 'Venezuela' AND STRFTIME('%Y', ShippedDate) = '1996'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the ID and description of the condiments category?",
+        "query": "SELECT CategoryID, Description FROM Categories WHERE CategoryName = 'Condiments'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List the order IDs, product IDs and unit price of orders which total payment is greater than 15000.",
+        "query": "SELECT ProductID, OrderID, UnitPrice FROM `Order Details` WHERE UnitPrice * Quantity * (1 - Discount) > 15000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Provide the territory IDs under employee ID of 7.",
+        "query": "SELECT TerritoryID FROM EmployeeTerritories WHERE EmployeeID = 7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Provide the supplier company name in Sydney and its homepage address if available.",
+        "query": "SELECT CompanyName, HomePage FROM Suppliers WHERE City = 'Sydney'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Write down the full name of Vie President of Sales and his age when he was hired.",
+        "query": "SELECT FirstName, LastName , TIMESTAMPDIFF(YEAR, BirthDate, HireDate) AS AGE FROM Employees WHERE Title = 'Vice President, Sales'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List the supplier company names located in Germany.",
+        "query": "SELECT CompanyName FROM Suppliers WHERE Country = 'Germany'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List the employees' full names and ages in 2022 who lived in London.",
+        "query": "SELECT TitleOfCourtesy, FirstName, LastName , TIMESTAMPDIFF(YEAR, BirthDate, NOW()) AS ages FROM Employees WHERE City = 'London'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List down the customer company names, addresses, phones and faxes which are located in London.",
+        "query": "SELECT CompanyName, Address, Phone, Fax FROM Customers WHERE City = 'London'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List the full name of employees and titles who have to report to Sales Manager.",
+        "query": "SELECT FirstName, LastName, Title FROM Employees WHERE ReportsTo = ( SELECT EmployeeID FROM Employees WHERE Title = 'Sales Manager' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List all the customer company names and cities located in Canada.",
+        "query": "SELECT CompanyName, City FROM Customers WHERE Country = 'Canada'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Find the total production amount and product names which had \"10 - 500 g pkgs.\" as quantity per unit.",
+        "query": "SELECT UnitsInStock + UnitsOnOrder, ProductName FROM Products WHERE QuantityPerUnit = '10 - 500 g pkgs.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List all the product names and categories of the highest reorder level.",
+        "query": "SELECT T2.ProductName, T1.CategoryName FROM Categories AS T1 INNER JOIN Products AS T2 ON T1.CategoryID = T2.CategoryID ORDER BY T2.ReorderLevel DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Describe the supplier companies, cities and products which total production amount is more than 120.",
+        "query": "SELECT T2.CompanyName, T2.City, T1.ProductName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.UnitsInStock + UnitsOnOrder > 120"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Provide the contact person name, title and supplied products by \"Escargots Nouveaux\" company.",
+        "query": "SELECT T2.ContactName, T2.ContactTitle, T1.ProductName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Escargots Nouveaux'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List the territory IDs, description and region description under the in-charge of Mrs. Margaret Peacock.",
+        "query": "SELECT T3.TerritoryID, T3.TerritoryDescription, T4.RegionDescription FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID INNER JOIN Region AS T4 ON T3.RegionID = T4.RegionID WHERE T1.TitleOfCourtesy = 'Mrs.' AND T1.LastName = 'Peacock' AND T1.FirstName = 'Margaret'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What were the products supplied by the company in Spain?",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.Country = 'Spain'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What products were ordered by the customer ID \"WILMK\" which were required on 3/26/1998?",
+        "query": "SELECT T3.ProductName FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID INNER JOIN Products AS T3 ON T2.ProductID = T3.ProductID WHERE T1.RequiredDate LIKE '1998-03-26%' AND T1.CustomerID = 'WILMK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Provide the list of product IDs and names under the meat/poultry category.",
+        "query": "SELECT T2.ProductName, T1.CategoryName FROM Categories AS T1 INNER JOIN Products AS T2 ON T1.CategoryID = T2.CategoryID WHERE T2.ReorderLevel = ( SELECT MAX(ReorderLevel) FROM Products )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many orders were made by the customers in Ireland.",
+        "query": "SELECT COUNT(T2.OrderID) FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.Country = 'Ireland'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Provide the products list which were ordered in 1996 by the company in Norway.",
+        "query": "SELECT T4.ProductName FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN `Order Details` AS T3 ON T2.OrderID = T3.OrderID INNER JOIN Products AS T4 ON T3.ProductID = T4.ProductID WHERE T1.Country = 'Norway' AND STRFTIME('%Y', T2.OrderDate) = '1996'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Among orders shipping to Brazil, mention the supplier company of the order which was done by employee Anne Dodsworth in December, 1996 .",
+        "query": "SELECT T5.CompanyName FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN `Order Details` AS T3 ON T2.OrderID = T3.OrderID INNER JOIN Products AS T4 ON T3.ProductID = T4.ProductID INNER JOIN Suppliers AS T5 ON T4.SupplierID = T5.SupplierID WHERE T1.FirstName = 'Anne' AND T1.LastName = 'Dodsworth' AND T2.ShipCountry = 'Brazil' AND T2.OrderDate LIKE '1996-12%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Mention the oldest empoyee's full name, title, salary and number of orders which were shipped to USA by him.",
+        "query": "SELECT T1.FirstName, T1.LastName, T1.Title, T1.Salary , COUNT(T2.OrderID) FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE ShipCountry = 'USA' GROUP BY T1.FirstName, T1.LastName, T1.Title, T1.Salary, T1.BirthDate ORDER BY T1.BirthDate LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List down the territory IDs and descriptions existed in Southern region.",
+        "query": "SELECT T1.TerritoryID, T1.TerritoryDescription FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T2.RegionDescription = 'Southern'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Calculate the average payment per product under confections category.",
+        "query": "SELECT SUM(T2.UnitPrice * T2.Quantity * (1 - T2.Discount)) / COUNT(T1.ProductID) FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Categories AS T3 ON T1.CategoryID = T3.CategoryID WHERE T3.CategoryName = 'Confections'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Find the total payment of the orders by customers from San Francisco.",
+        "query": "SELECT SUM(T3.UnitPrice * T3.Quantity * (1 - T3.Discount)) AS TOTALPAYMENT FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN `Order Details` AS T3 ON T2.OrderID = T3.OrderID WHERE T1.City = 'San Francisco'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Calculate the total production for each product which were supplied from Japan",
+        "query": "SELECT SUM(T1.UnitsInStock + T1.UnitsOnOrder) FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.Country = 'Japan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Among the supplied products from Australia, describe the discontinued products and the category.",
+        "query": "SELECT T2.ProductName, T3.CategoryName FROM Suppliers AS T1 INNER JOIN Products AS T2 ON T1.SupplierID = T2.SupplierID INNER JOIN Categories AS T3 ON T2.CategoryID = T3.CategoryID WHERE T1.Country = 'Australia' AND T2.Discontinued = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Mention the supplier country of Ipoh Coffee and the order ID which had maximum in total payment.",
+        "query": "SELECT T3.Country, T1.OrderID FROM `Order Details` AS T1 INNER JOIN Products AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Suppliers AS T3 ON T2.SupplierID = T3.SupplierID WHERE T2.ProductName = 'Ipoh Coffee' ORDER BY T1.UnitPrice * T1.Quantity * (1 - T1.Discount) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Provide the list of products ordered by ID 10979 and calculate its total payment.",
+        "query": "SELECT T1.ProductName , SUM(T2.UnitPrice * T2.Quantity * (1 - T2.Discount)) FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T2.OrderID = 10979 GROUP BY T1.ProductName"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Among the products under grains/cereals category, provide the contact person and title of the supplier with one digit ID.",
+        "query": "SELECT DISTINCT T1.ContactName, T1.ContactTitle FROM Suppliers AS T1 INNER JOIN Products AS T2 ON T1.SupplierID = T2.SupplierID INNER JOIN Categories AS T3 ON T2.CategoryID = T3.CategoryID WHERE T3.CategoryName = 'Grains/Cereals' AND T1.SupplierID BETWEEN 1 AND 10 LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Provide Speedy Express's phone number and number of shipped orders on 30th January, 1998.",
+        "query": "SELECT T2.Phone, COUNT(T1.OrderID) FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T2.CompanyName = 'Speedy Express' AND T1.ShippedDate LIKE '1998-01-30%' GROUP BY T2.Phone"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Describe the ordered products which were the most overdue from required date.",
+        "query": "SELECT DISTINCT T3.ProductName FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID INNER JOIN Products AS T3 ON T2.ProductID = T3.ProductID WHERE DATEDIFF(T1.ShippedDate, T1.RequiredDate) < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Under the in-charge of inside sales coordinator, provide the product lists which were shipped to Mexico in 1996.",
+        "query": "SELECT T4.ProductName FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN `Order Details` AS T3 ON T2.OrderID = T3.OrderID INNER JOIN Products AS T4 ON T3.ProductID = T4.ProductID WHERE T1.Title = 'Inside Sales Coordinator' AND T2.ShippedDate LIKE '1996%' AND T2.ShipCountry = 'Mexico'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Identify the name of the most popular dairy product in terms of reorder quantity.",
+        "query": "SELECT T2.ProductName FROM Categories AS T1 INNER JOIN Products AS T2 ON T1.CategoryID = T2.CategoryID WHERE T1.CategoryName = 'Dairy Products' AND T2.ReorderLevel = ( SELECT MAX(ReorderLevel) FROM Products )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Calculate the production volume of the dairy product 'Mascarpone Fabioli'.",
+        "query": "SELECT SUM(UnitsInStock + UnitsOnOrder) FROM Products WHERE ProductName = 'Mascarpone Fabioli'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Identify the name and product category for the most expensive and the least expensive products.",
+        "query": "SELECT T2.ProductName, T1.CategoryName FROM Categories AS T1 INNER JOIN Products AS T2 ON T1.CategoryID = T2.CategoryID WHERE T2.UnitPrice IN (( SELECT MIN(UnitPrice) FROM Products ), ( SELECT MAX(UnitPrice) FROM Products ))"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Identify the customer, which placed the largest order in terms of value.",
+        "query": "SELECT T1.CompanyName FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN `Order Details` AS T3 ON T2.OrderID = T3.OrderID GROUP BY T2.CustomerID ORDER BY SUM(T3.UnitPrice * T3.Quantity * (1 - T3.Discount)) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Identify the number of employees in Northern sales region.",
+        "query": "SELECT COUNT(T2.EmployeeID) FROM Territories AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.TerritoryID = T2.TerritoryID INNER JOIN Region AS T3 ON T1.RegionID = T3.RegionID WHERE T3.RegionDescription = 'Northern'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the average value of the sales order?",
+        "query": "SELECT SUM(UnitPrice * Quantity * (1 - Discount)) / COUNT(OrderID) FROM `Order Details`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Find the percentage of discontinued products in Northwind's portfolio of products.",
+        "query": "SELECT CAST(COUNT(CASE WHEN Discontinued = 1 THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(ProductID) FROM Products"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Provide the full name of the employee who processed the sales order with ID 10274.",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T2.OrderID = 10274"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Calculate the total number of orders placed by the company 'GROSELLA-Restaurante'.",
+        "query": "SELECT COUNT(T2.OrderID) FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.CompanyName = 'GROSELLA-Restaurante'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Name products and their quantity ordered by the company 'GROSELLA-Restaurante' in the sales order that was processed by Nancy Davolio.",
+        "query": "SELECT T4.ProductName, T3.Quantity FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN `Order Details` AS T3 ON T2.OrderID = T3.OrderID INNER JOIN Products AS T4 ON T3.ProductID = T4.ProductID INNER JOIN Customers AS T5 ON T2.CustomerID = T5.CustomerID WHERE T1.FirstName = 'Nancy' AND T1.LastName = 'Davolio' AND T5.CompanyName = 'GROSELLA-Restaurante'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Identify the total number of orders placed by the customer 'Laughing Bacchus Wine Cellars' and it's average value.",
+        "query": "SELECT COUNT(T2.OrderID) , SUM(T3.UnitPrice * T3.Quantity * (1 - T3.Discount)) / COUNT(T2.OrderID) FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN `Order Details` AS T3 ON T2.OrderID = T3.OrderID WHERE T1.CompanyName = 'Laughing Bacchus Wine Cellars'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many boxes of 'Pavlova' did Northwind sell?",
+        "query": "SELECT COUNT(T2.Quantity) FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ProductName = 'Pavlova'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the salary range for sales representative in Northwind?",
+        "query": "SELECT ( SELECT MIN(Salary) FROM Employees WHERE Title = 'Sales Representative' ) AS MIN , ( SELECT MAX(Salary) FROM Employees WHERE Title = 'Sales Representative' ) AS MAX"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many suppliers does Northwind have in USA?",
+        "query": "SELECT COUNT(SupplierID) FROM Suppliers WHERE Country = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What products are no longer sold by Northwind?",
+        "query": "SELECT ProductName FROM Products WHERE Discontinued = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Who is the Sales Agent for the company 'Eastern Connection'?",
+        "query": "SELECT ContactName FROM Customers WHERE CompanyName = 'Eastern Connection' AND ContactTitle = 'Sales Agent'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many companies do ship Northwind's orders?",
+        "query": "SELECT COUNT(ShipperID) FROM Shippers"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Identify the total number of orders processed by Northwind employee named Andrew Fuller. What percent of those orders was shipped to Austria?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.ShipCountry = 'Austria' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T2.OrderID) FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.FirstName = 'Andrew' AND T1.LastName = 'Fuller'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Indicate category name of soft drinks, coffees, teas, beers, and ales in description list.",
+        "query": "SELECT CategoryName FROM Categories WHERE Description = 'Soft drinks, coffees, teas, beers, and ales'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List the phone number of company named Around the Horn.",
+        "query": "SELECT Phone FROM Customers WHERE CompanyName = 'Around the Horn'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Indicate the fax of the company Blondesddsl pre et fils in Strasbourg city.",
+        "query": "SELECT Fax FROM Customers WHERE CompanyName = 'Blondesddsl pre et fils' AND City = 'Strasbourg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many companies are there in the city of London?",
+        "query": "SELECT COUNT(CompanyName) FROM Customers WHERE City = 'London'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Indicate the address of the company Eastern Connection whose contact name is Ann Devon.",
+        "query": "SELECT Address FROM Customers WHERE CompanyName = 'Eastern Connection' AND ContactName = 'Ann Devon'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Indicate which company is located in France?",
+        "query": "SELECT CompanyName FROM Customers WHERE Country = 'France'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many product names does the supplier Exotic Liquids have?",
+        "query": "SELECT COUNT(T1.ProductName) FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Exotic Liquids'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the name of the company that has the product with the highest unit price?",
+        "query": "SELECT T2.CompanyName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.UnitPrice = ( SELECT MAX(UnitPrice) FROM Products )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which company name in London city has the most stocked products?",
+        "query": "SELECT T2.CompanyName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.City = 'London' ORDER BY T1.UnitsInStock DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which product of Exotic Liquids company that have the highest reorder levels?",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Exotic Liquids' ORDER BY T1.ReorderLevel DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Provide the category name of the Chef Anton's Gumbo Mix product that New Orleans Cajun Delights company has.",
+        "query": "SELECT T3.CategoryName FROM Suppliers AS T1 INNER JOIN Products AS T2 ON T1.SupplierID = T2.SupplierID INNER JOIN Categories AS T3 ON T2.CategoryID = T3.CategoryID WHERE T1.CompanyName = 'New Orleans Cajun Delights' AND T2.ProductName LIKE 'Chef Anton%s Gumbo Mix'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Indicate the name of the country where Leka Trading supplies Ipoh Coffee product.",
+        "query": "SELECT T2.Country FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.ProductName = 'Ipoh Coffee' AND T2.CompanyName = 'Leka Trading'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Indicate the category name of the product name with the highest units on order.",
+        "query": "SELECT T2.CategoryName FROM Products AS T1 INNER JOIN Categories AS T2 ON T1.CategoryID = T2.CategoryID WHERE T1.UnitsOnOrder = ( SELECT MAX(T1.UnitsOnOrder) FROM Products )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the difference in number of unit price from Chef Anton's Cajun Seasoning product and Chef Anton's Gumbo Mix product of New Orleans Cajun Delights company.",
+        "query": "SELECT ( SELECT T1.UnitPrice FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'New Orleans Cajun Delights' AND T1.ProductName LIKE 'Chef Anton%s Cajun Seasoning' ) - ( SELECT T1.UnitPrice FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'New Orleans Cajun Delights' AND T1.ProductName LIKE 'Chef Anton%s Gumbo Mix' ) AS calu"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which of Cooperativa de Quesos 'Las Cabras' products have a unit price greater than 20?",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName LIKE 'Cooperativa de Quesos%' AND T1.UnitPrice > 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please indicate the product name of Tokyo Traders company with order quantity greater than 40.",
+        "query": "SELECT DISTINCT T2.ProductName FROM Suppliers AS T1 INNER JOIN Products AS T2 ON T1.SupplierID = T2.SupplierID INNER JOIN `Order Details` AS T3 ON T2.ProductID = T3.ProductID WHERE T1.CompanyName = 'Tokyo Traders' AND T3.Quantity > 40"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List all category name of Exotic Liquids 's product with units in stock over 100.",
+        "query": "SELECT T3.CategoryName FROM Suppliers AS T1 INNER JOIN Products AS T2 ON T1.SupplierID = T2.SupplierID INNER JOIN Categories AS T3 ON T2.CategoryID = T3.CategoryID WHERE T2.UnitsInStock > 100 AND T1.CompanyName = 'Exotic Liquids'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many product names have order quantity less than 50? Calculate the percentage of orders less than 50 out of total order quantity.",
+        "query": "SELECT SUM(CASE WHEN T2.Quantity < 50 THEN 1 ELSE 0 END) , CAST(SUM(IF(T2.Quantity < 50, 1, 0)) AS REAL) / COUNT(T1.ProductID) FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please indicate total order quantity of product Geitost and calculate the percentage of such product among all the order quantity.",
+        "query": "SELECT SUM(IF(T1.ProductName = 'Geitost', 1, 0)) AS sum , CAST(SUM(IF(T1.ProductName = 'Geitost', 1, 0)) AS REAL) / COUNT(T1.ProductID) FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the position of Robert King?",
+        "query": "SELECT Title FROM Employees WHERE FirstName = 'Robert' AND LastName = 'King'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Write the shipping company name with the telephone number of (503) 555-9931.",
+        "query": "SELECT CompanyName FROM Shippers WHERE Phone = '(503) 555-9931'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Write the address and phone number of Margaret Peacock.",
+        "query": "SELECT Address, HomePhone FROM Employees WHERE FirstName = 'Margaret' AND LastName = 'Peacock'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the full address of Rattlesnake Canyon Grocery?",
+        "query": "SELECT DISTINCT ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry FROM Orders WHERE ShipName = 'Rattlesnake Canyon Grocery'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List all product names under Confections.",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN Categories AS T2 ON T1.CategoryID = T2.CategoryID WHERE T2.CategoryName = 'Confections'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Sir Rodney's Marmalade is supplied by which company and who is the contact for this company?",
+        "query": "SELECT T2.CompanyName, T2.ContactName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T1.ProductName LIKE 'Sir Rodney%s Marmalade'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the full name of the employee who is in charge of the territory of Denver?",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T3.TerritoryDescription = 'Denver'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List all the territories where Laura Callahan is in charge.",
+        "query": "SELECT T3.TerritoryDescription FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T1.FirstName = 'Laura' AND T1.LastName = 'Callahan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many orders were shipped via Federal Shipping?",
+        "query": "SELECT COUNT(T1.OrderID) FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T2.CompanyName = 'Federal Shipping' AND T1.ShipVia = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Name the products where the suppliers come from Finland.",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.Country = 'Finland'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "The product 'Mozzarella di Giovanni' belongs in which category? Include the category's description as well.",
+        "query": "SELECT T2.CategoryName, T2.Description FROM Products AS T1 INNER JOIN Categories AS T2 ON T1.CategoryID = T2.CategoryID WHERE T1.ProductName = 'Mozzarella di Giovanni'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Name the suppliers that supply products under the category 'cheeses.'",
+        "query": "SELECT DISTINCT T1.CompanyName FROM Suppliers AS T1 INNER JOIN Products AS T2 ON T1.SupplierID = T2.SupplierID INNER JOIN Categories AS T3 ON T2.CategoryID = T3.CategoryID WHERE T3.Description = 'Cheeses'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Name all products supplied by Zaanse Snoepfabriek.",
+        "query": "SELECT T1.ProductName FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Zaanse Snoepfabriek'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which products by Plutzer Lebensmittelgromrkte AG were discontinued and what are their price?",
+        "query": "SELECT T1.UnitPrice FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Plutzer Lebensmittelgromrkte AG' AND T1.Discontinued = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List the cities where the product 'Mishi Kobe Niku' were shipped to.",
+        "query": "SELECT T1.ShipCity FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID INNER JOIN Products AS T3 ON T2.ProductID = T3.ProductID WHERE T3.ProductName = 'Mishi Kobe Niku'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What percentage does the shipment of products by Speedy Express to Sweden make up to the shipping company's total?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.ShipCountry = 'Sweden' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T1.OrderID) FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T2.CompanyName = 'Speedy Express'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many territory fall into region 1?",
+        "query": "SELECT COUNT(TerritoryID) FROM Territories WHERE RegionID = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the the total number of territory in each region?",
+        "query": "SELECT COUNT(TerritoryDescription) FROM Territories WHERE RegionID IN (1, 2, 3, 4) GROUP BY RegionID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many suppliers are from UK?",
+        "query": "SELECT COUNT(SupplierID) FROM Suppliers WHERE Country = 'UK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Please give the contact name for Tokyo Traders.",
+        "query": "SELECT ContactName FROM Suppliers WHERE CompanyName = 'Tokyo Traders'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many employees from USA with Sales Representative title?",
+        "query": "SELECT COUNT(Country) FROM Employees WHERE Country = 'USA' AND Title = 'Sales Representative'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the highest salary earn by the the employee and what is his/her position in the company?",
+        "query": "SELECT Salary, Title FROM Employees WHERE Salary = ( SELECT MAX(Salary) FROM Employees )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many products supplied by Plutzer Lebensmittelgromrkte AG that is currently out of stock and on order?",
+        "query": "SELECT COUNT(T1.ProductID) FROM Products AS T1 INNER JOIN Suppliers AS T2 ON T1.SupplierID = T2.SupplierID WHERE T2.CompanyName = 'Plutzer Lebensmittelgromrkte AG' AND T1.UnitsInStock = 0 AND T1.UnitsOnOrder = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What product have the highest unit price and how many quantity have been being sold?",
+        "query": "SELECT T1.ProductName, T2.Quantity FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID ORDER BY T1.UnitPrice DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which employee has created the least order and please indicates the employee's title?",
+        "query": "SELECT T1.Title FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID GROUP BY T1.Title ORDER BY COUNT(T2.OrderID) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the most common product ordered by a customer from Germany?",
+        "query": "SELECT T2.ProductID FROM Customers AS T1 INNER JOIN `Order Details` AS T2 WHERE T1.Country = 'Germany' GROUP BY T2.ProductID ORDER BY COUNT(T2.ProductID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the total products value shipped to Brazil by Speedy Express Company?",
+        "query": "SELECT SUM(T2.Quantity * T2.UnitPrice) FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID INNER JOIN Shippers AS T3 ON T1.ShipVia = T3.ShipperID WHERE T3.CompanyName = 'Speedy Express' AND T1.ShipCountry = 'Brazil'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many subordinates does employee ID 2 have and what is the biggest order in terms of value that his/her subordinates have created?",
+        "query": "SELECT COUNT(T1.EmployeeID), SUM(T3.Quantity * T3.UnitPrice) FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN `Order Details` AS T3 ON T2.OrderID = T3.OrderID WHERE T1.ReportsTo = 2 ORDER BY SUM(T3.UnitPrice * T3.Quantity) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many sales values have been created by sales representative and which sales representative have the highest sales?",
+        "query": "SELECT SUM(T3.UnitPrice * T3.Quantity) FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN `Order Details` AS T3 ON T2.OrderID = T3.OrderID WHERE T1.Title = 'Sales Representative' ORDER BY SUM(T3.UnitPrice * T3.Quantity)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many employees is a UK citizen and are they all covering the same region?",
+        "query": "SELECT COUNT(T1.EmployeeID), T3.RegionID FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T1.Country = 'UK' GROUP BY T3.RegionID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which customer have the biggest purchase in one order and where does this order being ship to?",
+        "query": "SELECT T1.CompanyName, T2.ShipCountry FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN `Order Details` AS T3 ON T2.OrderID = T3.OrderID GROUP BY T1.CompanyName, T2.ShipCountry ORDER BY COUNT(T3.ProductID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Which customer is a regular customer in this shop and what are the products category that he mostly buy?",
+        "query": "SELECT T1.CustomerID, T4.CategoryName FROM Orders AS T1 INNER JOIN `Order Details` AS T2 ON T1.OrderID = T2.OrderID INNER JOIN Products AS T3 ON T2.ProductID = T3.ProductID INNER JOIN Categories AS T4 ON T3.CategoryID = T4.CategoryID ORDER BY T1.CustomerID DESC, T4.CategoryName DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What are the most popular confections product and calculate the total sales generated by this product?",
+        "query": "SELECT COUNT(T1.UnitPrice * T3.Quantity) FROM Products AS T1 INNER JOIN Categories AS T2 ON T1.CategoryID = T2.CategoryID INNER JOIN `Order Details` AS T3 ON T1.ProductID = T3.ProductID WHERE T2.CategoryName = 'Confections' GROUP BY T3.Quantity ORDER BY T3.Quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the name of product with the ID of 77?",
+        "query": "SELECT ProductName FROM Products WHERE ProductID = 77"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "State the company name of all suppliers in USA.",
+        "query": "SELECT CompanyName FROM Suppliers WHERE Country = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the position title for Laura Callahan?",
+        "query": "SELECT Title FROM Employees WHERE FirstName = 'Laura' AND LastName = 'Callahan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "State the name of employee that manages the order from Victuailles en stock?",
+        "query": "SELECT DISTINCT T1.FirstName, T1.LastName FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Customers AS T3 ON T2.CustomerID = T3.CustomerID WHERE T3.CompanyName = 'Victuailles en stock'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many orders were shipped by Federal Shipping?",
+        "query": "SELECT COUNT(T1.OrderID) FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T2.CompanyName = 'Federal Shipping'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Who was taking charge of orders from Morristown?",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID WHERE T3.TerritoryDescription = 'Morristown'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "State the name of all territories in Northern region.",
+        "query": "SELECT DISTINCT T1.TerritoryDescription FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T2.RegionDescription = 'Northern'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many orders were handled by Michael Suyama. State the order ID.",
+        "query": "SELECT COUNT(T2.OrderID) FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.FirstName = 'Michael' AND T1.LastName = 'Suyama'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the ratio number of territories in Northern region and number territories in Western region?",
+        "query": "SELECT CAST(( SELECT COUNT(T1.TerritoryID) FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T2.RegionDescription = 'Northern' ) AS REAL) * 100 / ( SELECT COUNT(T1.TerritoryID) FROM Territories AS T1 INNER JOIN Region AS T2 ON T1.RegionID = T2.RegionID WHERE T2.RegionDescription = 'Westerns' ) AS Calu"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Provide employees' ID who are in-charge of territory ID from 1000 to 2000.",
+        "query": "SELECT EmployeeID FROM EmployeeTerritories WHERE TerritoryID BETWEEN 1000 AND 2000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List down the territory IDs, descriptions and region description which are under the in-charge of Nancy Davolio,",
+        "query": "SELECT T3.RegionID, T3.TerritoryDescription, T4.RegionDescription FROM Employees AS T1 INNER JOIN EmployeeTerritories AS T2 ON T1.EmployeeID = T2.EmployeeID INNER JOIN Territories AS T3 ON T2.TerritoryID = T3.TerritoryID INNER JOIN Region AS T4 ON T3.RegionID = T4.RegionID WHERE T1.LastName = 'Davolio' AND T1.FirstName = 'Nancy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Describe Sales Representative names who were hired in 1992 and compare the number of orders among them.",
+        "query": "SELECT T1.FirstName, T1.LastName, COUNT(T2.OrderID) FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.Title = 'Sales Representative' AND STRFTIME('%Y', T1.HireDate) = '1992' GROUP BY T1.EmployeeID, T1.FirstName, T1.LastName"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Calculate the total payment of orders for Vegie-spread product.",
+        "query": "SELECT SUM(T2.UnitPrice * T2.Quantity * (1 - T2.Discount)) AS sum FROM Products AS T1 INNER JOIN `Order Details` AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ProductName = 'Vegie-spread'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List down the company names which supplied products for the order on 14th August, 1996.",
+        "query": "SELECT T1.CompanyName FROM Suppliers AS T1 INNER JOIN Products AS T2 ON T1.SupplierID = T2.SupplierID INNER JOIN `Order Details` AS T3 ON T2.ProductID = T3.ProductID INNER JOIN Orders AS T4 ON T3.OrderID = T4.OrderID WHERE date(T4.OrderDate) = '1996-08-14'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Among the product lists in order ID 10337, write down the product names and suppliers which had the highest in reorder level.",
+        "query": "SELECT T2.ProductName, T1.CompanyName FROM Suppliers AS T1 INNER JOIN Products AS T2 ON T1.SupplierID = T2.SupplierID INNER JOIN `Order Details` AS T3 ON T2.ProductID = T3.ProductID WHERE T3.OrderID = 10337 ORDER BY T2.ReorderLevel DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Name the shipper which had the most shipments in first quarter of 1998.",
+        "query": "SELECT T1.CompanyName FROM Shippers AS T1 INNER JOIN Orders AS T2 ON T1.ShipperID = T2.ShipVia WHERE STRFTIME('%Y', T2.ShippedDate) = '1998' GROUP BY T1.CompanyName ORDER BY COUNT(T2.OrderID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many customers are located in London?",
+        "query": "SELECT COUNT(CustomerID) FROM Customers WHERE City = 'London'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the title of Michael Suyama?",
+        "query": "SELECT Title FROM Employees WHERE FirstName = 'Michael' AND LastName = 'Suyama'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List out the full name of employee who has birth day on \"3/4/1955 12:00:00 AM\".",
+        "query": "SELECT FirstName, LastName FROM Employees WHERE BirthDate = '1955-03-04 00:00:00'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Mention the first name of employee who took care the order id 10250.",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T2.OrderID = 10250"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many orders that the employees who are located in Tacoma handled?",
+        "query": "SELECT COUNT(T2.OrderID) FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.City = 'Tacoma'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the country location of the employee who handled order id 10257?",
+        "query": "SELECT T1.Country FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T2.OrderID = 10257"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the title of the employee who handled order id 10270?",
+        "query": "SELECT T1.Title FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T2.OrderID = 10257"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Give the phone number of the customer who placed the order id 10264.",
+        "query": "SELECT T1.Phone FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.OrderID = 10264"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "What is the region where the customer who placed the order id 10276 located?",
+        "query": "SELECT T1.Region FROM Customers AS T1 INNER JOIN Orders AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.OrderID = 10276"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Among the employees who handled orders to Brazil, who has the highest salary and calculate the average salary of them.",
+        "query": "SELECT T1.FirstName, T1.LastName, AVG(T1.Salary) FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T2.ShipCountry = 'Brazil' GROUP BY T1.FirstName, T1.LastName ORDER BY SUM(T1.Salary) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Calculate the percentage salary of employees who handled orders shipped in 1996.",
+        "query": "SELECT CAST(SUM(CASE WHEN STRFTIME('%Y', T2.ShippedDate) = '1996' THEN T1.Salary ELSE 0 END) AS REAL) * 100 / SUM(T1.Salary) FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "When was the employee who handled order id 10281 hired?",
+        "query": "SELECT T1.HireDate FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T2.OrderID = 10281"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many orders was handled by employees who reported to employee id 5?",
+        "query": "SELECT COUNT(T2.OrderID) FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T1.ReportsTo = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "Give the full name of employee who handled the order id 10280.",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Employees AS T1 INNER JOIN Orders AS T2 ON T1.EmployeeID = T2.EmployeeID WHERE T2.OrderID = 10280"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "State the shipping company of order id 10260.",
+        "query": "SELECT T2.CompanyName FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T1.OrderID = 10260"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "How many orders have been shipped through United Package?",
+        "query": "SELECT COUNT(T1.OrderID) FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T2.CompanyName = 'United Package'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_world",
+        "question": "List out the phone number of the shipping company of order id 10296.",
+        "query": "SELECT T2.Phone FROM Orders AS T1 INNER JOIN Shippers AS T2 ON T1.ShipVia = T2.ShipperID WHERE T1.OrderID = 10260"
+    }
+]

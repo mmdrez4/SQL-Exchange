@@ -1,0 +1,175 @@
+{
+    "alignment": [
+        [
+            3,
+            "Neutral"
+        ],
+        [
+            1,
+            "Good"
+        ],
+        [
+            4,
+            "N/A"
+        ]
+    ],
+    "attribute": [
+        [
+            4,
+            "Durability"
+        ],
+        [
+            5,
+            "Power"
+        ],
+        [
+            1,
+            "Intelligence"
+        ]
+    ],
+    "colour": [
+        [
+            14,
+            "Green"
+        ],
+        [
+            22,
+            "Purple"
+        ],
+        [
+            12,
+            "Gold"
+        ]
+    ],
+    "gender": [
+        [
+            2,
+            "Female"
+        ],
+        [
+            3,
+            "N/A"
+        ],
+        [
+            1,
+            "Male"
+        ]
+    ],
+    "publisher": [
+        [
+            5,
+            "George Lucas"
+        ],
+        [
+            4,
+            "DC Comics"
+        ],
+        [
+            11,
+            "J. K. Rowling"
+        ]
+    ],
+    "race": [
+        [
+            40,
+            "Martian"
+        ],
+        [
+            1,
+            "-"
+        ],
+        [
+            27,
+            "Human / Cosmic"
+        ]
+    ],
+    "superhero": [
+        [
+            272,
+            "Flash III",
+            "Wallace Rudolph West",
+            1,
+            1,
+            1,
+            1,
+            24,
+            4,
+            1,
+            183,
+            86
+        ],
+        [
+            21,
+            "Amazo",
+            "-",
+            1,
+            23,
+            1,
+            1,
+            5,
+            4,
+            2,
+            257,
+            173
+        ],
+        [
+            59,
+            "Aurora",
+            "Jeanne-Marie Beaubier",
+            2,
+            7,
+            4,
+            1,
+            42,
+            13,
+            1,
+            180,
+            63
+        ]
+    ],
+    "hero_attribute": [
+        [
+            245,
+            6,
+            15
+        ],
+        [
+            542,
+            6,
+            40
+        ],
+        [
+            683,
+            1,
+            100
+        ]
+    ],
+    "superpower": [
+        [
+            155,
+            "Weather Control"
+        ],
+        [
+            98,
+            "Light Control"
+        ],
+        [
+            94,
+            "Mind Blast"
+        ]
+    ],
+    "hero_power": [
+        [
+            606,
+            20
+        ],
+        [
+            266,
+            157
+        ],
+        [
+            124,
+            1
+        ]
+    ]
+}

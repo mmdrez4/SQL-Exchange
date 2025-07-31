@@ -1,0 +1,182 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Show all the locations where no cinema has capacity over 800.",
+        "query": "SELECT LOCATION FROM cinema EXCEPT SELECT LOCATION FROM cinema WHERE capacity  >  800"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Show all the locations where some cinemas were opened in both year 2010 and year 2011.",
+        "query": "SELECT LOCATION FROM cinema WHERE openning_year  =  2010 INTERSECT SELECT LOCATION FROM cinema WHERE openning_year  =  2011"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "How many cinema do we have?",
+        "query": "SELECT count(*) FROM cinema"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Count the number of cinemas.",
+        "query": "SELECT count(*) FROM cinema"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Show name, opening year, and capacity for each cinema.",
+        "query": "SELECT name ,  openning_year ,  capacity FROM cinema"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Show the cinema name and location for cinemas with capacity above average.",
+        "query": "SELECT name ,  LOCATION FROM cinema WHERE capacity  >  (SELECT avg(capacity) FROM cinema)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "What are all the locations with a cinema?",
+        "query": "SELECT DISTINCT LOCATION FROM cinema"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Find the distinct locations that has a cinema.",
+        "query": "SELECT DISTINCT LOCATION FROM cinema"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Show all the cinema names and opening years in descending order of opening year.",
+        "query": "SELECT name ,  openning_year FROM cinema ORDER BY openning_year DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "What are the name and location of the cinema with the largest capacity?",
+        "query": "SELECT name ,  LOCATION FROM cinema ORDER BY capacity DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Show the average, minimum, and maximum capacity for all the cinemas opened in year 2011 or later.",
+        "query": "SELECT avg(capacity) ,  min(capacity) ,  max(capacity) FROM cinema WHERE openning_year  >=  2011"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Show each location and the number of cinemas there.",
+        "query": "SELECT LOCATION ,  count(*) FROM cinema GROUP BY LOCATION"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "What is the location with the most cinemas opened in year 2010 or later?",
+        "query": "SELECT LOCATION FROM cinema WHERE openning_year  >=  2010 GROUP BY LOCATION ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Show all the locations with at least two cinemas with capacity above 300.",
+        "query": "SELECT LOCATION FROM cinema WHERE capacity  >  300 GROUP BY LOCATION HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Which locations have 2 or more cinemas with capacity over 300?",
+        "query": "SELECT LOCATION FROM cinema WHERE capacity  >  300 GROUP BY LOCATION HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Show the title and director for all films.",
+        "query": "SELECT title ,  directed_by FROM film"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "What are the title and director of each film?",
+        "query": "SELECT title ,  directed_by FROM film"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Show all directors.",
+        "query": "SELECT DISTINCT directed_by FROM film"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Who are all the directors?",
+        "query": "SELECT DISTINCT directed_by FROM film"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "List all directors along with the number of films directed by each director.",
+        "query": "SELECT directed_by ,  count(*) FROM film GROUP BY directed_by"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "What is total number of show times per dat for each cinema?",
+        "query": "SELECT T2.name ,  sum(T1.show_times_per_day) FROM schedule AS T1 JOIN cinema AS T2 ON T1.cinema_id  =  T2.cinema_id GROUP BY T1.cinema_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "What are the title and maximum price of each film?",
+        "query": "SELECT T2.title ,  max(T1.price) FROM schedule AS T1 JOIN film AS T2 ON T1.film_id  =  T2.film_id GROUP BY T1.film_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Give me the title and highest price for each film.",
+        "query": "SELECT T2.title ,  max(T1.price) FROM schedule AS T1 JOIN film AS T2 ON T1.film_id  =  T2.film_id GROUP BY T1.film_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Show cinema name, film title, date, and price for each record in schedule.",
+        "query": "SELECT T3.name ,  T2.title ,  T1.date ,  T1.price FROM schedule AS T1 JOIN film AS T2 ON T1.film_id  =  T2.film_id JOIN cinema AS T3 ON T1.cinema_id  =  T3.cinema_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "What are the title and director of the films without any schedule?",
+        "query": "SELECT title ,  directed_by FROM film WHERE film_id NOT IN (SELECT film_id FROM schedule)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Show director with the largest number of show times in total.",
+        "query": "SELECT T2.directed_by FROM schedule AS T1 JOIN film AS T2 ON T1.film_id  =  T2.film_id GROUP BY T2.directed_by ORDER BY sum(T1.show_times_per_day) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Find the locations that have more than one movie theater with capacity above 300.",
+        "query": "SELECT LOCATION FROM cinema WHERE capacity  >  300 GROUP BY LOCATION HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "In which locations are there more than one movie theater with capacity above 300?",
+        "query": "SELECT LOCATION FROM cinema WHERE capacity  >  300 GROUP BY LOCATION HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "How many films have the word 'Dummy' in their titles?",
+        "query": "SELECT count(*) FROM film WHERE title LIKE \"%Dummy%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cinema",
+        "question": "Count the number of films whose title contains the word 'Dummy'.",
+        "query": "SELECT count(*) FROM film WHERE title LIKE \"%Dummy%\""
+    }
+]

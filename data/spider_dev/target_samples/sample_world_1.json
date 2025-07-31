@@ -1,0 +1,104 @@
+{
+    "city": [
+        [
+            617,
+            "Luxor",
+            "EGY",
+            "Luxor",
+            360503
+        ],
+        [
+            731,
+            "Boksburg",
+            "ZAF",
+            "Gauteng",
+            262648
+        ],
+        [
+            1821,
+            "Hamilton",
+            "CAN",
+            "Ontario",
+            335614
+        ]
+    ],
+    "sqlite_sequence": [
+        [
+            "city",
+            4079
+        ]
+    ],
+    "country": [
+        [
+            "PER",
+            "Peru",
+            "South America",
+            "South America",
+            1285216.0,
+            1821,
+            25662000,
+            70.0,
+            64140.0,
+            65186.0,
+            "Per\u00fa/Piruw",
+            "Republic",
+            "Valentin Paniagua Corazao",
+            2890,
+            "PE"
+        ],
+        [
+            "PYF",
+            "French Polynesia",
+            "Oceania",
+            "Polynesia",
+            4000.0,
+            null,
+            235000,
+            74.8,
+            818.0,
+            781.0,
+            "Polyn\u00e9sie fran\u00e7aise",
+            "Nonmetropolitan Territory of France",
+            "Jacques Chirac",
+            3016,
+            "PF"
+        ],
+        [
+            "LBR",
+            "Liberia",
+            "Africa",
+            "Western Africa",
+            111369.0,
+            1847,
+            3154000,
+            51.0,
+            2012.0,
+            null,
+            "Liberia",
+            "Republic",
+            "Charles Taylor",
+            2440,
+            "LR"
+        ]
+    ],
+    "countrylanguage": [
+        [
+            "MAC",
+            "Canton Chinese",
+            "F",
+            85.6
+        ],
+        [
+            "VUT",
+            "English",
+            "T",
+            28.3
+        ],
+        [
+            "UGA",
+            "Ganda",
+            "F",
+            18.1
+        ]
+    ]
+}

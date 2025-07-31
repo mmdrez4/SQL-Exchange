@@ -1,0 +1,494 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the name of the airport in the city of Goroka.",
+        "query": "SELECT name FROM airports WHERE city  =  'Goroka'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What are the names of the airports in the city of Goroka?",
+        "query": "SELECT name FROM airports WHERE city  =  'Goroka'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the name, city, country, and altitude (or elevation) of the airports in the city of New York.",
+        "query": "SELECT name ,  city ,  country ,  elevation FROM airports WHERE city  =  'New York'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the name, city, country, and elevation for every airport in the city of New York?",
+        "query": "SELECT name ,  city ,  country ,  elevation FROM airports WHERE city  =  'New York'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "How many airlines are there?",
+        "query": "SELECT count(*) FROM airlines"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the total number of airlines?",
+        "query": "SELECT count(*) FROM airlines"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "How many airlines does Russia has?",
+        "query": "SELECT count(*) FROM airlines WHERE country  =  'Russia'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the number of airlines based in Russia?",
+        "query": "SELECT count(*) FROM airlines WHERE country  =  'Russia'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the maximum elevation of all airports in the country of Iceland?",
+        "query": "SELECT max(elevation) FROM airports WHERE country  =  'Iceland'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the highest elevation of an airport in the country of Iceland?",
+        "query": "SELECT max(elevation) FROM airports WHERE country  =  'Iceland'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the name of the airports located in Cuba or Argentina.",
+        "query": "SELECT name FROM airports WHERE country  =  'Cuba' OR country  =  'Argentina'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What are the names of all airports in Cuba or Argentina?",
+        "query": "SELECT name FROM airports WHERE country  =  'Cuba' OR country  =  'Argentina'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the country of the airlines whose name starts with 'Orbit'.",
+        "query": "SELECT country FROM airlines WHERE name LIKE 'Orbit%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What are the countries of all airlines whose names start with Orbit?",
+        "query": "SELECT country FROM airlines WHERE name LIKE 'Orbit%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the name of airports whose altitude is between -50 and 50.",
+        "query": "SELECT name FROM airports WHERE elevation BETWEEN -50 AND 50"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What are the names of all airports whose elevation is between -50 and 50?",
+        "query": "SELECT name FROM airports WHERE elevation BETWEEN -50 AND 50"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Which country is the airport that has the highest altitude located in?",
+        "query": "SELECT country FROM airports ORDER BY elevation DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the country of the airport with the highest elevation?",
+        "query": "SELECT country FROM airports ORDER BY elevation DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the number of airports whose name contain the word 'International'.",
+        "query": "SELECT count(*) FROM airports WHERE name LIKE '%International%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "How many airports' names have the word Interanation in them?",
+        "query": "SELECT count(*) FROM airports WHERE name LIKE '%International%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "How many different cities do have some airport in the country of Greenland?",
+        "query": "SELECT count(DISTINCT city) FROM airports WHERE country  =  'Greenland'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "In how many cities are there airports in the country of Greenland?",
+        "query": "SELECT count(DISTINCT city) FROM airports WHERE country  =  'Greenland'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the number of routes operated by American Airlines.",
+        "query": "SELECT count(*) FROM airlines AS T1 JOIN routes AS T2 ON T1.alid  =  T2.alid WHERE T1.name  =  'American Airlines'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "How many routes does American Airlines operate?",
+        "query": "SELECT count(*) FROM airlines AS T1 JOIN routes AS T2 ON T1.alid  =  T2.alid WHERE T1.name  =  'American Airlines'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the number of routes whose destination airports are in Canada.",
+        "query": "SELECT count(*) FROM airports AS T1 JOIN routes AS T2 ON T1.apid  =  T2.dst_apid WHERE country  =  'Canada'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "How many routes end in a Canadian airport?",
+        "query": "SELECT count(*) FROM airports AS T1 JOIN routes AS T2 ON T1.apid  =  T2.dst_apid WHERE country  =  'Canada'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the name, city, and country of the airport that has the lowest altitude.",
+        "query": "SELECT name ,  city ,  country FROM airports ORDER BY elevation LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the name, city, and country of the airport with the lowest altitude?",
+        "query": "SELECT name ,  city ,  country FROM airports ORDER BY elevation LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the name, city, and country of the airport that has the highest latitude.",
+        "query": "SELECT name ,  city ,  country FROM airports ORDER BY elevation DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the name, city, and country of the airport with the highest elevation?",
+        "query": "SELECT name ,  city ,  country FROM airports ORDER BY elevation DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the name and city of the airport which is the destination of the most number of routes.",
+        "query": "SELECT T1.name ,  T1.city ,  T2.dst_apid FROM airports AS T1 JOIN routes AS T2 ON T1.apid  =  T2.dst_apid GROUP BY T2.dst_apid ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the name and city of the airport that the most routes end at?",
+        "query": "SELECT T1.name ,  T1.city ,  T2.dst_apid FROM airports AS T1 JOIN routes AS T2 ON T1.apid  =  T2.dst_apid GROUP BY T2.dst_apid ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the names of the top 10 airlines that operate the most number of routes.",
+        "query": "SELECT T1.name ,  T2.alid FROM airlines AS T1 JOIN routes AS T2 ON T1.alid  =  T2.alid GROUP BY T2.alid ORDER BY count(*) DESC LIMIT 10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "For the airline ids with the top 10 most routes operated, what are their names?",
+        "query": "SELECT T1.name ,  T2.alid FROM airlines AS T1 JOIN routes AS T2 ON T1.alid  =  T2.alid GROUP BY T2.alid ORDER BY count(*) DESC LIMIT 10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the name and city of the airport which is the source for the most number of flight routes.",
+        "query": "SELECT T1.name ,  T1.city ,  T2.src_apid FROM airports AS T1 JOIN routes AS T2 ON T1.apid  =  T2.src_apid GROUP BY T2.src_apid ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the name and city of the airport from most of the routes start?",
+        "query": "SELECT T1.name ,  T1.city ,  T2.src_apid FROM airports AS T1 JOIN routes AS T2 ON T1.apid  =  T2.src_apid GROUP BY T2.src_apid ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the number of different airports which are the destinations of the American Airlines.",
+        "query": "SELECT count(DISTINCT dst_apid) FROM airlines AS T1 JOIN routes AS T2 ON T1.alid  =  T2.alid WHERE T1.name  =  'American Airlines'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the number of different different airports that are destinations for American Airlines?",
+        "query": "SELECT count(DISTINCT dst_apid) FROM airlines AS T1 JOIN routes AS T2 ON T1.alid  =  T2.alid WHERE T1.name  =  'American Airlines'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Which countries has the most number of airlines?",
+        "query": "SELECT country FROM airlines GROUP BY country ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the name of the country with the most number of home airlines?",
+        "query": "SELECT country FROM airlines GROUP BY country ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Which countries has the most number of airlines whose active status is 'Y'?",
+        "query": "SELECT country FROM airlines WHERE active  =  'Y' GROUP BY country ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What are the countries with the most airlines whose active status is Y?",
+        "query": "SELECT country FROM airlines WHERE active  =  'Y' GROUP BY country ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "List all countries and their number of airlines in the descending order of number of airlines.",
+        "query": "SELECT country ,  count(*) FROM airlines GROUP BY country ORDER BY count(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "How many airlines operate out of each country in descending order?",
+        "query": "SELECT country ,  count(*) FROM airlines GROUP BY country ORDER BY count(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "How many airports are there per country? Order the countries by decreasing number of airports.",
+        "query": "SELECT count(*) ,  country FROM airports GROUP BY country ORDER BY count(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the number of airports per country, ordered from most to least?",
+        "query": "SELECT count(*) ,  country FROM airports GROUP BY country ORDER BY count(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "How many airports are there per city in the United States? Order the cities by decreasing number of airports.",
+        "query": "SELECT count(*) ,  city FROM airports WHERE country  =  'United States' GROUP BY city ORDER BY count(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "How many airports are there per city in the US ordered from most to least?",
+        "query": "SELECT count(*) ,  city FROM airports WHERE country  =  'United States' GROUP BY city ORDER BY count(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Return the cities with more than 3 airports in the United States.",
+        "query": "SELECT city FROM airports WHERE country  =  'United States' GROUP BY city HAVING count(*)  >  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the number of cities in the United States with more than 3 airports?",
+        "query": "SELECT city FROM airports WHERE country  =  'United States' GROUP BY city HAVING count(*)  >  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "How many cities are there that have more than 3 airports?",
+        "query": "SELECT count(*) FROM (SELECT city FROM airports GROUP BY city HAVING count(*)  >  3)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the count of cities with more than 3 airports?",
+        "query": "SELECT count(*) FROM (SELECT city FROM airports GROUP BY city HAVING count(*)  >  3)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "List the cities which have more than one airport and number of airports.",
+        "query": "SELECT city ,  count(*) FROM airports GROUP BY city HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What are the names of all cities with more than one airport and how many airports do they have?",
+        "query": "SELECT city ,  count(*) FROM airports GROUP BY city HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "List the cities which have more than 2 airports sorted by the number of airports.",
+        "query": "SELECT city FROM airports GROUP BY city HAVING count(*)  >  2 ORDER BY count(*)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What are the cities that have more than 2 airports sorted by number of airports?",
+        "query": "SELECT city FROM airports GROUP BY city HAVING count(*)  >  2 ORDER BY count(*)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the number of routes for each source airport and the airport name.",
+        "query": "SELECT count(*) ,  T1.name FROM airports AS T1 JOIN routes AS T2 ON T1.apid  =  T2.src_apid GROUP BY T1.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "For each airport name, how many routes start at that airport?",
+        "query": "SELECT count(*) ,  T1.name FROM airports AS T1 JOIN routes AS T2 ON T1.apid  =  T2.src_apid GROUP BY T1.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the number of routes and airport name for each source airport, order the results by decreasing number of routes.",
+        "query": "SELECT count(*) ,  T1.name FROM airports AS T1 JOIN routes AS T2 ON T1.apid  =  T2.src_apid GROUP BY T1.name ORDER BY count(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "For each  airport name, how many routes start at that airport, ordered from most to least?",
+        "query": "SELECT count(*) ,  T1.name FROM airports AS T1 JOIN routes AS T2 ON T1.apid  =  T2.src_apid GROUP BY T1.name ORDER BY count(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the average elevation of all airports for each country.",
+        "query": "SELECT avg(elevation) ,  country FROM airports GROUP BY country"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "For each country, what is the average elevation of that country's airports?",
+        "query": "SELECT avg(elevation) ,  country FROM airports GROUP BY country"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the cities which have exactly two airports.",
+        "query": "SELECT city FROM airports GROUP BY city HAVING count(*)  =  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What are the cities with exactly two airports?",
+        "query": "SELECT city FROM airports GROUP BY city HAVING count(*)  =  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "For each country and airline name, how many routes are there?",
+        "query": "SELECT T1.country ,  T1.name ,  count(*) FROM airlines AS T1 JOIN routes AS T2 ON T1.alid  =  T2.alid GROUP BY T1.country ,  T1.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the total number of routes for each country and airline in that country?",
+        "query": "SELECT T1.country ,  T1.name ,  count(*) FROM airlines AS T1 JOIN routes AS T2 ON T1.alid  =  T2.alid GROUP BY T1.country ,  T1.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the number of routes with destination airports in Italy.",
+        "query": "SELECT count(*) FROM routes AS T1 JOIN airports AS T2 ON T1.dst_apid  =  T2.apid WHERE T2.country  =  'Italy'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the number of routes whose destinations are Italian airports?",
+        "query": "SELECT count(*) FROM routes AS T1 JOIN airports AS T2 ON T1.dst_apid  =  T2.apid WHERE T2.country  =  'Italy'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Return the number of routes with destination airport in Italy operated by the airline with name 'American Airlines'.",
+        "query": "SELECT count(*) FROM routes AS T1 JOIN airports AS T2 ON T1.dst_apid  =  T2.apid JOIN airlines AS T3 ON T1.alid  =  T3.alid WHERE T2.country  =  'Italy' AND T3.name  =  'American Airlines'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the number of routes operated by the airline American Airlines whose destinations are in Italy?",
+        "query": "SELECT count(*) FROM routes AS T1 JOIN airports AS T2 ON T1.dst_apid  =  T2.apid JOIN airlines AS T3 ON T1.alid  =  T3.alid WHERE T2.country  =  'Italy' AND T3.name  =  'American Airlines'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the number of routes that have destination John F Kennedy International Airport.",
+        "query": "SELECT count(*) FROM airports AS T1 JOIN routes AS T2 ON T1.apid  =  T2.dst_apid WHERE T1.name  =  'John F Kennedy International Airport'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the number of routes that end at John F Kennedy International Airport?",
+        "query": "SELECT count(*) FROM airports AS T1 JOIN routes AS T2 ON T1.apid  =  T2.dst_apid WHERE T1.name  =  'John F Kennedy International Airport'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the number of routes from the United States to Canada.",
+        "query": "SELECT count(*) FROM routes WHERE dst_apid IN (SELECT apid FROM airports WHERE country  =  'Canada') AND src_apid IN (SELECT apid FROM airports WHERE country  =  'United States')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "How many routes go from the United States to Canada?",
+        "query": "SELECT count(*) FROM routes WHERE dst_apid IN (SELECT apid FROM airports WHERE country  =  'Canada') AND src_apid IN (SELECT apid FROM airports WHERE country  =  'United States')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the id of routes whose source and destination airports are in the United States.",
+        "query": "SELECT rid FROM routes WHERE dst_apid IN (SELECT apid FROM airports WHERE country  =  'United States') AND src_apid IN (SELECT apid FROM airports WHERE country  =  'United States')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the id of the routes whose source and destination airports are in the United States?",
+        "query": "SELECT rid FROM routes WHERE dst_apid IN (SELECT apid FROM airports WHERE country  =  'United States') AND src_apid IN (SELECT apid FROM airports WHERE country  =  'United States')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the name of airline which runs the most number of routes.",
+        "query": "SELECT T1.name FROM airlines AS T1 JOIN routes AS T2 ON T1.alid  =  T2.alid GROUP BY T1.name ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the name of the airline with the most routes?",
+        "query": "SELECT T1.name FROM airlines AS T1 JOIN routes AS T2 ON T1.alid  =  T2.alid GROUP BY T1.name ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the busiest source airport that runs most number of routes in China.",
+        "query": "SELECT T1.name FROM airports AS T1 JOIN routes AS T2 ON T1.apid  =  T2.src_apid WHERE T1.country  =  'China' GROUP BY T1.name ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the name of the airport with the most number of routes that start in China?",
+        "query": "SELECT T1.name FROM airports AS T1 JOIN routes AS T2 ON T1.apid  =  T2.src_apid WHERE T1.country  =  'China' GROUP BY T1.name ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "Find the busiest destination airport that runs most number of routes in China.",
+        "query": "SELECT T1.name FROM airports AS T1 JOIN routes AS T2 ON T1.apid  =  T2.dst_apid WHERE T1.country  =  'China' GROUP BY T1.name ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_4",
+        "question": "What is the name of the airport that is the destination of the most number of routes that start in China?",
+        "query": "SELECT T1.name FROM airports AS T1 JOIN routes AS T2 ON T1.apid  =  T2.dst_apid WHERE T1.country  =  'China' GROUP BY T1.name ORDER BY count(*) DESC LIMIT 1"
+    }
+]

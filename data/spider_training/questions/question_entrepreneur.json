@@ -1,0 +1,242 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "How many entrepreneurs are there?",
+        "query": "SELECT count(*) FROM entrepreneur"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "Count the number of entrepreneurs.",
+        "query": "SELECT count(*) FROM entrepreneur"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "List the companies of entrepreneurs in descending order of money requested.",
+        "query": "SELECT Company FROM entrepreneur ORDER BY Money_Requested DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What are the companies of entrepreneurs, ordered descending by amount of money requested?",
+        "query": "SELECT Company FROM entrepreneur ORDER BY Money_Requested DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "List the companies and the investors of entrepreneurs.",
+        "query": "SELECT Company ,  Investor FROM entrepreneur"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What are the companies and investors that correspond to each entrepreneur?",
+        "query": "SELECT Company ,  Investor FROM entrepreneur"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What is the average money requested by all entrepreneurs?",
+        "query": "SELECT avg(Money_Requested) FROM entrepreneur"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "Return the average money requested across all entrepreneurs.",
+        "query": "SELECT avg(Money_Requested) FROM entrepreneur"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What are the names of people in ascending order of weight?",
+        "query": "SELECT Name FROM People ORDER BY Weight ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "Return the names of people, ordered by weight ascending.",
+        "query": "SELECT Name FROM People ORDER BY Weight ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What are the names of entrepreneurs?",
+        "query": "SELECT T2.Name FROM entrepreneur AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "Return the names of entrepreneurs.",
+        "query": "SELECT T2.Name FROM entrepreneur AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What are the names of entrepreneurs whose investor is not \"Rachel Elnaugh\"?",
+        "query": "SELECT T2.Name FROM entrepreneur AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID WHERE T1.Investor != \"Rachel Elnaugh\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "Return the names of entrepreneurs do no not have the investor Rachel Elnaugh.",
+        "query": "SELECT T2.Name FROM entrepreneur AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID WHERE T1.Investor != \"Rachel Elnaugh\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What is the weight of the shortest person?",
+        "query": "SELECT Weight FROM people ORDER BY Height ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "Return the weight of the shortest person.",
+        "query": "SELECT Weight FROM people ORDER BY Height ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What is the name of the entrepreneur with the greatest weight?",
+        "query": "SELECT T2.Name FROM entrepreneur AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID ORDER BY T2.Weight DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "Return the name of the heaviest entrepreneur.",
+        "query": "SELECT T2.Name FROM entrepreneur AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID ORDER BY T2.Weight DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What is the total money requested by entrepreneurs with height more than 1.85?",
+        "query": "SELECT sum(T1.Money_Requested) FROM entrepreneur AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID WHERE T2.Height  >  1.85"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "Give the total money requested by entrepreneurs who are taller than 1.85.",
+        "query": "SELECT sum(T1.Money_Requested) FROM entrepreneur AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID WHERE T2.Height  >  1.85"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What are the dates of birth of entrepreneurs with investor \"Simon Woodroffe\" or \"Peter Jones\"?",
+        "query": "SELECT T2.Date_of_Birth FROM entrepreneur AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID WHERE T1.Investor  =  \"Simon Woodroffe\" OR T1.Investor  =  \"Peter Jones\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "Return the dates of birth for entrepreneurs who have either the investor Simon Woodroffe or Peter Jones.",
+        "query": "SELECT T2.Date_of_Birth FROM entrepreneur AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID WHERE T1.Investor  =  \"Simon Woodroffe\" OR T1.Investor  =  \"Peter Jones\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What are the weights of entrepreneurs in descending order of money requested?",
+        "query": "SELECT T2.Weight FROM entrepreneur AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID ORDER BY T1.Money_Requested DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "Return the weights of entrepreneurs, ordered descending by amount of money requested.",
+        "query": "SELECT T2.Weight FROM entrepreneur AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID ORDER BY T1.Money_Requested DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What are the investors of entrepreneurs and the corresponding number of entrepreneurs invested by each investor?",
+        "query": "SELECT Investor ,  COUNT(*) FROM entrepreneur GROUP BY Investor"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "How many entrepreneurs correspond to each investor?",
+        "query": "SELECT Investor ,  COUNT(*) FROM entrepreneur GROUP BY Investor"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What is the investor that has invested in the most number of entrepreneurs?",
+        "query": "SELECT Investor FROM entrepreneur GROUP BY Investor ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "Return the investor who have invested in the greatest number of entrepreneurs.",
+        "query": "SELECT Investor FROM entrepreneur GROUP BY Investor ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What are the investors that have invested in at least two entrepreneurs?",
+        "query": "SELECT Investor FROM entrepreneur GROUP BY Investor HAVING COUNT(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "Return the investors who have invested in two or more entrepreneurs.",
+        "query": "SELECT Investor FROM entrepreneur GROUP BY Investor HAVING COUNT(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "List the names of entrepreneurs and their companies in descending order of money requested?",
+        "query": "SELECT T2.Name ,  T1.Company FROM entrepreneur AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID ORDER BY T1.Money_Requested"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What are the names of entrepreneurs and their corresponding investors, ordered descending by the amount of money requested?",
+        "query": "SELECT T2.Name ,  T1.Company FROM entrepreneur AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID ORDER BY T1.Money_Requested"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "List the names of people that are not entrepreneurs.",
+        "query": "SELECT Name FROM people WHERE People_ID NOT IN (SELECT People_ID FROM entrepreneur)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What are the names of people who are not entrepreneurs?",
+        "query": "SELECT Name FROM people WHERE People_ID NOT IN (SELECT People_ID FROM entrepreneur)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "Show the investors shared by entrepreneurs that requested more than 140000 and entrepreneurs that requested less than 120000.",
+        "query": "SELECT Investor FROM entrepreneur WHERE Money_Requested  >  140000 INTERSECT SELECT Investor FROM entrepreneur WHERE Money_Requested  <  120000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "What are the investors who have invested in both entrepreneurs who requested more than 140000 and entrepreneurs who requested less than 120000?",
+        "query": "SELECT Investor FROM entrepreneur WHERE Money_Requested  >  140000 INTERSECT SELECT Investor FROM entrepreneur WHERE Money_Requested  <  120000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "How many distinct companies are there?",
+        "query": "SELECT count(DISTINCT Company) FROM entrepreneur"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "Count the number of different companies.",
+        "query": "SELECT count(DISTINCT Company) FROM entrepreneur"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "Show the company of the tallest entrepreneur.",
+        "query": "SELECT T1.Company FROM entrepreneur AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID ORDER BY T2.Height DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entrepreneur",
+        "question": "Which company was started by the entrepreneur with the greatest height?",
+        "query": "SELECT T1.Company FROM entrepreneur AS T1 JOIN people AS T2 ON T1.People_ID  =  T2.People_ID ORDER BY T2.Height DESC LIMIT 1"
+    }
+]

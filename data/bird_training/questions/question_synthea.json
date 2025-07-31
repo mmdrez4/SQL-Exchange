@@ -1,0 +1,1112 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "According to the observation on 2008/3/11, what was the height of Elly Koss?",
+        "query": "SELECT T2.value, T2.units FROM patients AS T1 INNER JOIN observations AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Elly' AND T1.last = 'Koss' AND T2.date = '2008-03-11' AND T2.description = 'Body Height'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "By how much did Elly Koss's weight increase from the observation in 2008 to the observation in 2009?",
+        "query": "SELECT SUM(CASE WHEN strftime('%Y', T2.date) = '2009' THEN T2.VALUE END) - SUM(CASE WHEN strftime('%Y', T2.date) = '2008' THEN T2.VALUE END) AS increase , T2.units FROM patients AS T1 INNER JOIN observations AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Elly' AND T1.last = 'Koss' AND T2.description = 'Body Height'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "During all the observations of Elly Koss, what was the highest Systolic Blood Pressure observed?",
+        "query": "SELECT T2.value, T2.units FROM patients AS T1 INNER JOIN observations AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Elly' AND T1.last = 'Koss' AND T2.description = 'Systolic Blood Pressure' ORDER BY T2.VALUE DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "For how many times had Elly Koss have her Systolic Blood Pressure observed?",
+        "query": "SELECT COUNT(T2.description) FROM patients AS T1 INNER JOIN observations AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Elly' AND T1.last = 'Koss' AND T2.description = 'Systolic Blood Pressure'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "The highest Systolic Blood Pressure was observed in which patient? Please give his or her full name.",
+        "query": "SELECT T1.first, T1.last FROM patients AS T1 INNER JOIN observations AS T2 ON T1.patient = T2.PATIENT WHERE T2.VALUE = ( SELECT MAX(VALUE) FROM observations WHERE description = 'Systolic Blood Pressure' ) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "For how long was Elly Koss required to take Acetaminophen?",
+        "query": "SELECT strftime('%J', T2.STOP) - strftime('%J', T2.START) AS days FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Elly' AND T1.last = 'Koss' AND T2.description LIKE 'Acetaminophen%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Please list all the medication that are prescribed to Elly Koss.",
+        "query": "SELECT DISTINCT T2.description FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Elly' AND T1.last = 'Koss'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Why did Elly Koss need to take Acetaminophen?",
+        "query": "SELECT T2.REASONDESCRIPTION FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Elly' AND T1.last = 'Koss' AND T2.description LIKE 'Acetaminophen%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What medication did Elly Koss take when she had Streptococcal sore throat?",
+        "query": "SELECT T2.description FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Elly' AND T1.last = 'Koss' AND T2.reasondescription = 'Streptococcal sore throat (disorder)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Please give the full names of all the patients who had been prescribed with Acetaminophen.",
+        "query": "SELECT DISTINCT T1.first, T1.last FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T2.description LIKE 'Acetaminophen%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What was the condition of Elly Koss on 2009/1/8?",
+        "query": "SELECT T2.description FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Elly' AND T1.last = 'Koss' AND T2.START = '2009-01-08'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "For how long did Elly Koss's cystitis last?",
+        "query": "SELECT strftime('%J', T2.STOP) - strftime('%J', T2.START) AS days FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Elly' AND T1.last = 'Koss' AND T2.description = 'Cystitis'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "According to all the observations of Elly Koss, what was her average weight?",
+        "query": "SELECT AVG(T2.VALUE), T2.units FROM patients AS T1 INNER JOIN observations AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Elly' AND T1.last = 'Koss' AND T2.description = 'Body Weight'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Among all the patients who once had cystitis, what was the percentage of them being married?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.marital = 'M' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T2.description = 'Cystitis'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Give the body height status of Mr. Vincent Wyman on 2010/8/2.",
+        "query": "SELECT T2.description, T2.VALUE, T2.units FROM patients AS T1 INNER JOIN observations AS T2 ON T1.patient = T2.PATIENT WHERE T1.prefix = 'Mr.' AND T1.first = 'Vincent' AND T1.last = 'Wyman' AND T2.date = '2010-08-02' AND T2.description = 'Body Height'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many care plans has Mrs. Norman Berge taken?",
+        "query": "SELECT COUNT(T2.PATIENT) FROM patients AS T1 INNER JOIN careplans AS T2 ON T1.patient = T2.PATIENT WHERE T1.prefix = 'Mrs.' AND T1.first = 'Norman' AND T1.last = 'Berge'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Why did Mrs. Annabelle Pouros take leucovorin 100 mg injection on 1970/12/19? State the reason.",
+        "query": "SELECT T2.reasondescription FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T1.prefix = 'Mrs.' AND T1.first = 'Annabelle' AND T1.last = 'Pouros' AND T2.start = '1970-12-19' AND T2.description = 'Leucovorin 100 MG Injection'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the prevalence percentage of condition no. 64859006?",
+        "query": "SELECT DISTINCT T1.\"PREVALENCE PERCENTAGE\" FROM all_prevalences AS T1 INNER JOIN conditions AS T2 ON lower(T1.ITEM) = lower(T2.DESCRIPTION) WHERE T2.code = '64859006'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "State the prevalence rate of condition no. 368581000119106.",
+        "query": "SELECT DISTINCT T1.\"PREVALENCE RATE\" FROM all_prevalences AS T1 INNER JOIN conditions AS T2 ON lower(T1.ITEM) = lower(T2.DESCRIPTION) WHERE T2.code = '368581000119106'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Give the procedure description of Ms. Jacquelyn Shanahan on 2009/8/9.",
+        "query": "SELECT DISTINCT T2.description FROM patients AS T1 INNER JOIN procedures AS T2 ON T1.patient = T2.PATIENT WHERE T1.prefix = 'Ms.' AND T1.first = 'Jacquelyn' AND T1.last = 'Shanahan' AND T2.DATE = '2009-08-09'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Give the number of claims did Ms. Abbie Cole have in the year of 2011.",
+        "query": "SELECT COUNT(T2.BILLABLEPERIOD) FROM patients AS T1 INNER JOIN claims AS T2 ON T1.patient = T2.PATIENT WHERE T1.prefix = 'Ms.' AND T1.first = 'Abbie' AND T1.last = 'Cole' AND T2.BILLABLEPERIOD BETWEEN '2010-12-31' AND '2012-01-01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many allergies does Mrs. Saundra Monahan have?",
+        "query": "SELECT COUNT(DISTINCT T2.code) FROM patients AS T1 INNER JOIN allergies AS T2 ON T1.patient = T2.PATIENT WHERE T1.prefix = 'Mrs.' AND T1.first = 'Saundra' AND T1.last = 'Monahan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Provide the name of the patient who had a claim on 1947/9/11.",
+        "query": "SELECT T1.first, T1.last FROM patients AS T1 INNER JOIN claims AS T2 ON T1.patient = T2.PATIENT WHERE T2.billableperiod = '1947-09-11'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Describe the encounter of Mr. Hubert Baumbach on 2008/10/25.",
+        "query": "SELECT T2.description FROM patients AS T1 INNER JOIN encounters AS T2 ON T1.patient = T2.PATIENT WHERE T1.prefix = 'Mr.' AND T1.first = 'Hubert' AND T1.last = 'Baumbach' AND T2.date = '2008-10-25'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What kind of condition did Keven Kuhn have from 2016/9/24 to 2016/10/10? Describe the condition.",
+        "query": "SELECT T2.description FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Keven' AND T1.last = 'Kuhn' AND T2.start = '2016-09-24' AND T2.stop = '2016-10-10'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "When did Mrs. Ira Deckow have the standard pregnancy test?",
+        "query": "SELECT T2.date FROM patients AS T1 INNER JOIN procedures AS T2 ON T1.patient = T2.PATIENT WHERE T1.prefix = 'Mrs.' AND T1.first = 'Ira' AND T1.last = 'Deckow' AND T2.description = 'Standard pregnancy test'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Calculate the average period of Mr. Wesley Lemke's care plans.",
+        "query": "SELECT CAST(SUM(strftime('%J', T2.STOP) - strftime('%J', T2.START)) AS REAL) / COUNT(T1.patient) FROM patients AS T1 INNER JOIN careplans AS T2 ON T1.patient = T2.PATIENT WHERE T1.prefix = 'Mr.' AND T1.first = 'Wesley' AND T1.last = 'Lemke'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "State the average period of Ms. Angelena Kertzmann's several normal pregnancies.",
+        "query": "SELECT CAST(SUM(strftime('%J', T2.STOP) - strftime('%J', T2.START)) AS REAL) / COUNT(T2.PATIENT) FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T1.prefix = 'Ms.' AND T1.first = 'Angelena' AND T1.last = 'Kertzmann' AND T2.description = 'Normal pregnancy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the id of the patient who has the longest allergy period?",
+        "query": "SELECT PATIENT FROM allergies WHERE STOP IS NOT NULL GROUP BY PATIENT ORDER BY CASE WHEN SUBSTR(STOP, -2, 1) != '9' THEN SUBSTR(STOP, LENGTH(STOP) - 1) + 2000 END - CASE WHEN SUBSTR(START, -2, 1) = '9' THEN SUBSTR(START, LENGTH(START) - 1) + 1900 ELSE SUBSTR(START, LENGTH(START) - 1) + 2000 END LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many patients have diabetes that started in 1988?",
+        "query": "SELECT COUNT(PATIENT) FROM conditions WHERE DESCRIPTION = 'Diabetes' AND strftime('%Y', START) = '1988'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many patients are allergic to eggs?",
+        "query": "SELECT COUNT(PATIENT) FROM allergies WHERE DESCRIPTION = 'Allergy to eggs'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the id of the patient whose hypertension started most recently?",
+        "query": "SELECT PATIENT FROM conditions WHERE START = ( SELECT MAX(START) FROM conditions WHERE DESCRIPTION = 'Hypertension' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the most common allergy among patients?",
+        "query": "SELECT DESCRIPTION FROM allergies GROUP BY DESCRIPTION ORDER BY COUNT(DESCRIPTION) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is/are the ids of the tallest patient/s?",
+        "query": "SELECT PATIENT FROM observations WHERE DESCRIPTION = 'Body Height' AND UNITS = 'cm' ORDER BY VALUE DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the most common condition among the female Americans?",
+        "query": "SELECT T2.DESCRIPTION FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T1.gender = 'F' AND T1.ethnicity = 'american' GROUP BY T2.DESCRIPTION ORDER BY COUNT(T2.DESCRIPTION) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Among the patients that started taking Ibuprofen 200mg Oral Tablet in 2016, how many Dominican patients stopped taking the medicine after exactly one month?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Ibuprofen 200 MG Oral Tablet' AND T1.ethnicity = 'dominican' AND strftime('%Y', T2.START) = '2016' AND strftime('%m', T2.STOP) - strftime('%m', T2.START) = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many of the patients born in 1920s had pneumonia?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE DESCRIPTION = 'Pneumonia' AND strftime('%Y', T1.birthdate) LIKE '192%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What are the full names of the patients who started taking Yaz 28 Day Pack in 2011?",
+        "query": "SELECT DISTINCT T1.first, T1.last, T1.suffix FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Yaz 28 Day Pack' AND strftime('%Y', T2.START) = '2011'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many Black patients were immunized with DTaP in 2013?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN immunizations AS T2 ON T1.patient = T2.PATIENT WHERE T1.race = 'black' AND T2.DESCRIPTION = 'DTaP' AND strftime('%Y', T2.DATE) = '2013'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many immunizations did the patient with the most prevalent condition that started recently get?",
+        "query": "SELECT COUNT(T2.patient) FROM all_prevalences AS T1 INNER JOIN conditions AS T2 ON lower(T1.ITEM) = lower(T2.DESCRIPTION) INNER JOIN immunizations AS T3 ON T2.PATIENT = T3.PATIENT GROUP BY T2.PATIENT ORDER BY T2.START DESC, T1.\"PREVALENCE RATE\" DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many patients have the most prevalent conditions?",
+        "query": "SELECT COUNT(DISTINCT T2.patient) FROM all_prevalences AS T1 INNER JOIN conditions AS T2 ON lower(T1.ITEM) = lower(T2.DESCRIPTION) ORDER BY T1.\"PREVALENCE RATE\" DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the most common condition among the patients who received influenza seasonal injectable preservative free immunization?",
+        "query": "SELECT T2.DESCRIPTION FROM immunizations AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T1.DESCRIPTION = 'Influenza  seasonal  injectable  preservative free' GROUP BY T2.DESCRIPTION ORDER BY COUNT(T2.DESCRIPTION) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List the ids of all the patients with condition that has a prevalence percentage of 18.8%.",
+        "query": "SELECT DISTINCT T1.PATIENT FROM conditions AS T1 INNER JOIN all_prevalences AS T2 ON lower(T2.ITEM) = lower(T1.DESCRIPTION) WHERE T2.\"PREVALENCE PERCENTAGE\" = CAST(18.8 AS float)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many conditions did Tyree Eichmann have?",
+        "query": "SELECT COUNT(DISTINCT T2.DESCRIPTION) FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Tyree' AND T1.last = 'Eichmann'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Among the patients who were immunized with meningococcal MCV4P, how many have viral sinusitis disorder after getting the immunization?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM immunizations AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T1.DESCRIPTION = 'meningococcal MCV4P' AND T2.DESCRIPTION = 'Viral sinusitis (disorder)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Among the patients with prediabetes, how many are female?",
+        "query": "SELECT COUNT(DISTINCT T2.patient) FROM conditions AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.gender = 'F' AND T1.DESCRIPTION = 'Prediabetes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Indicate the patient's full name with the lowest body mass index in kg/m2.",
+        "query": "SELECT T1.first, T1.last FROM patients AS T1 INNER JOIN observations AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Body Mass Index' AND T2.UNITS = 'kg/m2' ORDER BY T2.VALUE LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the age of the patient with hypertension named Giovanni Russel?",
+        "query": "SELECT strftime('%Y', T2.deathdate) - strftime('%Y', T2.birthdate) AS age FROM conditions AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.first = 'Giovanni' AND T2.last = 'Russel' AND T1.DESCRIPTION = 'Hypertension'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many Asian female patients take oxaliplatin 5 MG/ML [Eloxatin]?",
+        "query": "SELECT COUNT(DISTINCT T2.patient) FROM medications AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.DESCRIPTION = 'oxaliplatin 5 MG/ML [Eloxatin]' AND T2.race = 'asian' AND T2.gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Count all of the living patients that had a stroke.",
+        "query": "SELECT COUNT(DISTINCT T2.patient) FROM conditions AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.description = 'Stroke' AND T2.deathdate IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the total number of Asian patients who are allergic to peanuts?",
+        "query": "SELECT COUNT(T2.patient) FROM allergies AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.DESCRIPTION = 'Allergy to peanuts' AND T2.race = 'asian'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Among the patients with hypertension, what is the average of their diastolic blood pressure?",
+        "query": "SELECT AVG(T1.VALUE) FROM observations AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient INNER JOIN conditions AS T3 ON T2.patient = T3.PATIENT WHERE T3.DESCRIPTION = 'Hypertension' AND T1.DESCRIPTION = 'Diastolic Blood Pressure'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the medicine prescribed for the patient with social security number 999-94-3751?",
+        "query": "SELECT T1.DESCRIPTION FROM medications AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.ssn = '999-94-3751'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Give the social security number of the female Irish patient allergic to grass pollen.",
+        "query": "SELECT T2.ssn FROM allergies AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.DESCRIPTION = 'Allergy to grass pollen' AND T2.ethnicity = 'irish' AND T2.gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Who is the patient involved in the care plan with code 311791003?",
+        "query": "SELECT T2.first, T2.last FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.CODE = 315043002"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Among the patients that died, what is the condition of the oldest patient?",
+        "query": "SELECT T1.DESCRIPTION FROM conditions AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.deathdate IS NOT NULL ORDER BY strftime('%Y', T2.deathdate) - strftime('%Y', T2.birthdate) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the code of the prevalent disease with the highest occurrences?",
+        "query": "SELECT T2.code FROM all_prevalences AS T1 INNER JOIN conditions AS T2 ON T1.ITEM = T2.DESCRIPTION ORDER BY T1.OCCURRENCES DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the glucose level of the patient that lives at 365 Della Crossroad Suite 202, Deerfield, MA 01342 US?",
+        "query": "SELECT DISTINCT T2.DESCRIPTION, T2.VALUE, T2.UNITS FROM patients AS T1 INNER JOIN observations AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Glucose' AND T1.address = '365 Della Crossroad Suite 202 Deerfield MA 01342 US'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Provide at least 5 social security numbers of patients with a prevalent disease with a prevalence percentage lower than 30% of the average prevalence percentage of conditions.",
+        "query": "SELECT DISTINCT T2.ssn FROM conditions AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient INNER JOIN all_prevalences AS T3 ON lower(T1.DESCRIPTION) = lower(T3.ITEM) WHERE CAST(T3.\"PREVALENCE PERCENTAGE\" AS REAL) * 100 / ( SELECT AVG('PREVALENCE PERCENTAGE') FROM all_prevalences ) < 30 LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Among the patients with acute bronchitis, what is the percentage of Asian women?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.gender = 'F' AND T2.race = 'asian' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.gender) FROM conditions AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.DESCRIPTION = 'Acute bronchitis (disorder)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Provide the number of encounters for Major D'Amore.",
+        "query": "SELECT COUNT(T2.ID) FROM patients AS T1 INNER JOIN encounters AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Major' AND T1.last = 'D''Amore'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List the procedures received by Emmy Waelchi.",
+        "query": "SELECT T2.DESCRIPTION FROM patients AS T1 INNER JOIN procedures AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Emmy' AND T1.last = 'Waelchi'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Provide the patients' full names who received the extraction of wisdom tooth.",
+        "query": "SELECT T1.first, T1.last FROM patients AS T1 INNER JOIN procedures AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Extraction of wisdom tooth'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Provide the body weight of Elly Koss in every observation.",
+        "query": "SELECT T2.DESCRIPTION, T2.VALUE, T2.UNITS FROM patients AS T1 INNER JOIN observations AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Elly' AND T1.last = 'Koss' AND T2.DESCRIPTION = 'Body Weight'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Name the patients who had an allergy to soy.",
+        "query": "SELECT T1.first, T1.last FROM patients AS T1 INNER JOIN allergies AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Allergy to soya'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many times did Keven Kuhn receive DTaP immunization?",
+        "query": "SELECT COUNT(T2.CODE) FROM patients AS T1 INNER JOIN immunizations AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Keven' AND T1.last = 'Kuhn' AND T2.DESCRIPTION = 'DTaP'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Who had to take Clopidogrel 75 MG Oral Tablet for over 10 years?",
+        "query": "SELECT T1.first, T1.last FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Clopidogrel 75 MG Oral Tablet' AND strftime('%Y', T2.STOP) - strftime('%Y', T2.START) > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Which procedures and medications were received by the patient with the third-degree burn?",
+        "query": "SELECT DISTINCT T1.DESCRIPTION, T3.DESCRIPTION FROM procedures AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT INNER JOIN medications AS T3 ON T2.patient = T3.PATIENT WHERE T2.DESCRIPTION = 'Third degree burn'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Provide medications received by patients with an allergy to mould on 6th June 2016.",
+        "query": "SELECT T2.DESCRIPTION FROM allergies AS T1 INNER JOIN medications AS T2 ON T1.PATIENT = T2.PATIENT WHERE T1.START = '6/6/16' AND T1.DESCRIPTION = 'Allergy to mould'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Describe the care plans received by the patient with secondary malignant neoplasm of the colon.",
+        "query": "SELECT DISTINCT T1.DESCRIPTION FROM careplans AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Secondary malignant neoplasm of colon'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the prevalence rate of the patients' diseases started on 9th May 2014?",
+        "query": "SELECT T2.\"PREVALENCE RATE\" FROM conditions AS T1 INNER JOIN all_prevalences AS T2 ON lower(T1.DESCRIPTION) = lower(T2.ITEM) WHERE T1.START = '2014-05-09'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Among observations in 2011, provide the names and ages of patients whose Systolic Blood Pressures are 200mmHg.",
+        "query": "SELECT T2.first, T2.last , CASE WHEN T2.deathdate IS NULL THEN strftime('%Y', T1.DATE) - strftime('%Y', T2.birthdate) ELSE strftime('%Y', T2.deathdate) - strftime('%Y', T2.birthdate) END AS age FROM observations AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.DESCRIPTION = 'Systolic Blood Pressure' AND T1.VALUE = 200 AND T1.UNITS = 'mmHg' AND strftime('%Y', T1.DATE) = '2011'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Among the immunizations in 2017, calculate the percentage of patients who received the Influenza seasonal injectable preservative free. Among them, how many patients are English?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.DESCRIPTION = 'Influenza seasonal injectable preservative free' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.patient), SUM(CASE WHEN T1.ethnicity = 'english' THEN 1 ELSE 0 END) FROM patients AS T1 INNER JOIN immunizations AS T2 ON T1.patient = T2.PATIENT WHERE strftime('%Y', T2.DATE) = '2017'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List down the first name of patients who encountered normal pregnancy.",
+        "query": "SELECT DISTINCT T1.first FROM patients AS T1 INNER JOIN encounters AS T2 ON T1.patient = T2.PATIENT WHERE T2.REASONDESCRIPTION = 'Normal pregnancy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What are the birth date of patients who took outpatient encounter care plan?",
+        "query": "SELECT DISTINCT T1.birthdate FROM patients AS T1 INNER JOIN encounters AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Outpatient Encounter'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List down the first name of patients who have cystitis condition.",
+        "query": "SELECT DISTINCT T1.first FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Cystitis'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many stroke patients have married?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Stroke' AND T1.marital = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List down the address of patients who have billable period in 2010.",
+        "query": "SELECT DISTINCT T1.address FROM patients AS T1 INNER JOIN claims AS T2 ON T1.patient = T2.PATIENT WHERE T2.BILLABLEPERIOD LIKE '2010%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List down the last name of patients who are allergic to dairy products.",
+        "query": "SELECT DISTINCT T1.last FROM patients AS T1 INNER JOIN allergies AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Allergy to dairy product'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "When the allergy starts for Angelo Buckridge.",
+        "query": "SELECT T2.START FROM patients AS T1 INNER JOIN allergies AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Adolfo' AND T1.last = 'Schmitt' AND T2.STOP IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many of the male patients are allergic to house dust mites?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN allergies AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'House dust mite allergy' AND T1.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What kind of allergy is most common among white people?",
+        "query": "SELECT T2.DESCRIPTION FROM patients AS T1 INNER JOIN allergies AS T2 ON T1.patient = T2.PATIENT WHERE T1.race = 'white' GROUP BY T2.DESCRIPTION ORDER BY COUNT(T2.DESCRIPTION) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List down the first name of patients who received \"Influenza seasonal injectable preservative free\" immunization.",
+        "query": "SELECT DISTINCT T1.first, T1.last FROM patients AS T1 INNER JOIN immunizations AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Influenza  seasonal  injectable  preservative free'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Calculate the number of female patients who accepted \"HPV quadrivalent\" immunization.",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN immunizations AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'HPV  quadrivalent' AND T1.gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List down the encounter descriptions of patients who were born in Pittsfield MA US.",
+        "query": "SELECT DISTINCT T2.DESCRIPTION FROM patients AS T1 INNER JOIN encounters AS T2 ON T1.patient = T2.PATIENT WHERE T1.birthplace = 'Pittsfield MA US'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Calculate the total type of allergies for German people.",
+        "query": "SELECT COUNT(DISTINCT T2.DESCRIPTION) FROM patients AS T1 INNER JOIN allergies AS T2 ON T1.patient = T2.PATIENT WHERE T1.ethnicity = 'german'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Calculate the average age of patients with prediabetes care plan.",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.deathdate IS NULL THEN strftime('%Y', T2.STOP) - strftime('%Y', T1.birthdate) ELSE strftime('%Y', T1.deathdate) - strftime('%Y', T1.birthdate) END) AS REAL) / COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN careplans AS T2 ON T1.patient = T2.PATIENT WHERE T2.REASONDESCRIPTION = 'Prediabetes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many of the patients who have stopped taking medication for 'coronary heart disease' are still alive?",
+        "query": "SELECT COUNT(DISTINCT T2.patient) FROM medications AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.REASONDESCRIPTION = 'Coronary Heart Disease' AND T1.STOP IS NOT NULL AND T2.deathdate IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many of the patients who underwent a 'bone immobilization' procedure have a driver's license?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN procedures AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Bone immobilization' AND T1.drivers IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Indicate the full name of the patients who have 3 different allergies.",
+        "query": "SELECT T1.first, T1.last FROM patients AS T1 INNER JOIN allergies AS T2 ON T1.patient = T2.PATIENT GROUP BY T1.patient ORDER BY COUNT(DISTINCT T2.DESCRIPTION) > 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many patients with 'allergy to eggs' have been immunized with 'Td (adult) preservative free'?",
+        "query": "SELECT COUNT(DISTINCT T2.patient) FROM allergies AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient INNER JOIN immunizations AS T3 ON T2.patient = T3.PATIENT WHERE T1.DESCRIPTION = 'Allergy to eggs' AND T3.DESCRIPTION = 'Td (adult) preservative free'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many patients with a body weight of more than 100 kg have a 'diabetes self-management plan' care plan?",
+        "query": "SELECT COUNT(DISTINCT T2.patient) FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient INNER JOIN observations AS T3 ON T2.patient = T3.PATIENT WHERE T3.DESCRIPTION = 'Body Weight' AND T1.DESCRIPTION = 'Diabetes self management plan' AND T3.VALUE > 100 AND T3.UNITS = 'kg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What gender is more prone to 'dander (animal) allergy'?",
+        "query": "SELECT T1.gender FROM patients AS T1 INNER JOIN allergies AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Dander (animal) allergy' GROUP BY T1.gender ORDER BY COUNT(T1.gender) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "On what dates did the billable period begin for patients with the last name Dickinson?",
+        "query": "SELECT DISTINCT T2.BILLABLEPERIOD FROM patients AS T1 INNER JOIN claims AS T2 ON T1.patient = T2.PATIENT WHERE T1.last = 'Dickinson'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List the full name of all patients with 'otitis media'.",
+        "query": "SELECT DISTINCT T1.first, T1.last FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Otitis media'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many patients of Irish ethnicity take medication for 'myocardial infarction'?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T2.REASONDESCRIPTION = 'Myocardial Infarction' AND T1.ethnicity = 'irish'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many patients with care plan for 'concussion with loss of consciousness' are married?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN careplans AS T2 ON T1.patient = T2.PATIENT WHERE T1.marital = 'M' AND T2.REASONDESCRIPTION = 'Concussion with loss of consciousness'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many patients immunized against 'monovalent rotavirus' ceased their care plan on 11/23/2013?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM careplans AS T1 INNER JOIN immunizations AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'rotavirus  monovalent' AND T1.STOP = '2013-11-23'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many women need to take 'Nitroglycerin 0.4 MG/ACTUAT [Nitrolingual]'?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Nitroglycerin 0.4 MG/ACTUAT [Nitrolingual]' AND T1.gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What percentage of patients born in 'Pembroke MA US' have 'allergy to grass pollen'?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.DESCRIPTION = 'Allergy to grass pollen' THEN 1 ELSE 0 END) AS REL) * 100 / COUNT(T1.patient) FROM patients AS T1 INNER JOIN allergies AS T2 ON T1.patient = T2.PATIENT WHERE T1.birthplace = 'Pembroke MA US'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the average body weight of Asian patients?",
+        "query": "SELECT SUM(T2.VALUE) / COUNT(T1.patient) FROM patients AS T1 INNER JOIN observations AS T2 ON T1.patient = T2.PATIENT WHERE T1.race = 'asian' AND T2.DESCRIPTION = 'Body Weight' AND T2.UNITS = 'kg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Write down the Social Security numbers of patients who have latex allergies.",
+        "query": "SELECT T1.ssn FROM patients AS T1 INNER JOIN allergies AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Latex allergy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How long did Isadora Moen's allergy last? Tell me what kind of allergy she has.",
+        "query": "SELECT CASE WHEN SUBSTR(T1.STOP, -2, 1) != '9' THEN SUBSTR(T1.STOP, LENGTH(T1.STOP) - 1) + 2000 END - CASE WHEN SUBSTR(T1.START, -2, 1) = '9' THEN SUBSTR(T1.START, LENGTH(T1.START) - 1) + 1900 ELSE SUBSTR(T1.START, LENGTH(T1.START) - 1) + 2000 END AS years , T1.DESCRIPTION FROM allergies AS T1 INNER JOIN patients AS T2 ON T2.patient = T1.PATIENT WHERE T1.STOP IS NOT NULL AND T1.START IS NOT NULL AND T2.first = 'Isadora' AND T2.last = 'Moen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many times was Elly Koss given a care plan between 1/11/2009 and 10/23/2010?",
+        "query": "SELECT COUNT(T2.PATIENT) FROM patients AS T1 INNER JOIN careplans AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Elly' AND T1.last = 'Koss' AND T2.START BETWEEN '2009-01-11' AND '2010-10-23'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "In 2009, who among the married patients had undergone a care plan for more than 60 days?",
+        "query": "SELECT DISTINCT T1.first, T1.last FROM patients AS T1 INNER JOIN careplans AS T2 ON T1.patient = T2.PATIENT WHERE T1.marital = 'M' AND strftime('%J', T2.STOP) - strftime('%J', T2.START) > 60"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Please provide the dates on which Elly Koss was immunized with the influenza seasonal injectable preservative-free vaccine.",
+        "query": "SELECT T2.DATE FROM patients AS T1 INNER JOIN immunizations AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Influenza  seasonal  injectable  preservative free' AND T1.first = 'Elly' AND T1.last = 'Koss'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "From 7/9/2010 to 10/29/2013, how many black patients were immunized with the meningococcal MCV4P vaccine?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN immunizations AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'meningococcal MCV4P' AND T2.DATE BETWEEN '2010-07-09' AND '2013-10-29' AND T1.race = 'black'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Give me the immunization codes and dates on which Ms. Jacquelyn Shanahan was immunized with influenza seasonal injectable preservative-free vaccine.",
+        "query": "SELECT DISTINCT T2.CODE, T2.DATE FROM patients AS T1 INNER JOIN immunizations AS T2 ON T1.patient = T2.PATIENT WHERE T1.prefix = 'Ms.' AND T1.first = 'Jacquelyn' AND T1.last = 'Shanahan' AND T2.DESCRIPTION = 'Influenza  seasonal  injectable  preservative free'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How long did Berry Keebler take the Acetaminophen 160 MG when he was admitted due to acute bronchitis?",
+        "query": "SELECT strftime('%J', T2.STOP) - strftime('%J', T2.START) AS takenDays FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Berry' AND T1.last = 'Keebler' AND T2.REASONDESCRIPTION = 'Acute bronchitis (disorder)' AND T2.DESCRIPTION = 'Acetaminophen 160 MG'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "In 2010, how many single patients took Nitrofurantoin 5 mg/ML [Furadantin] to cure cystitis?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T1.marital = 'S' AND T2.REASONDESCRIPTION = 'Cystitis' AND T2.DESCRIPTION = 'Nitrofurantoin 5 MG/ML [Furadantin]' AND strftime('%Y', T2.START) = '2010'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Tell me the reason for Lavelle Vandervort's encounter on 11/20/2013?",
+        "query": "SELECT T2.REASONDESCRIPTION FROM patients AS T1 INNER JOIN encounters AS T2 ON T1.patient = T2.PATIENT WHERE T2.DATE = '2013-11-20' AND T1.first = 'Lavelle' AND T1.last = 'Vandervort'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "From 1/9/2011 to 8/29/2012, how many German patients have their outpatient encounters?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN encounters AS T2 ON T1.patient = T2.PATIENT WHERE T1.ethnicity = 'german' AND T2.DATE BETWEEN '2011-01-09' AND '2012-08-29' AND T2.DESCRIPTION = 'Outpatient Encounter'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the social security number and address of the patient who encountered viral sinusitis symptoms on 6/13/2008?",
+        "query": "SELECT T1.ssn, T1.address FROM patients AS T1 INNER JOIN encounters AS T2 ON T1.patient = T2.PATIENT WHERE T2.DATE = '2008-06-13' AND T2.REASONDESCRIPTION = 'Viral sinusitis (disorder)' AND T2.DESCRIPTION = 'Encounter for symptom'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Give me the reason, name of the drug, and duration of medication under encounter ID 23c293ec-dbae-4a22-896e-f12cf3c8bac3. Tell me if the patient is still alive.",
+        "query": "SELECT T2.REASONDESCRIPTION, T2.DESCRIPTION , strftime('%J', T2.STOP) - strftime('%J', T2.START) AS days , CASE WHEN T1.deathdate IS NULL THEN 'alive' ELSE 'dead' END FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T2.ENCOUNTER = '23c293ec-dbae-4a22-896e-f12cf3c8bac3'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many patients with shellfish allergies died when they were under 12 years old? Please give their full names.",
+        "query": "SELECT T1.first, T1.last FROM patients AS T1 INNER JOIN allergies AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Shellfish allergy' AND CAST((strftime('%J', T1.deathdate) - strftime('%J', T1.birthdate)) AS REAL) / 365 < 12"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How long was Mr. Major D'Amore prescribed with Amoxicillin 250 MG / Clavulanate 125 MG [Augmentin]?",
+        "query": "SELECT strftime('%J', T2.STOP) - strftime('%J', T2.START) AS days FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = ' Amoxicillin 250 MG / Clavulanate 125 MG [Augmentin]' AND T1.first = 'Major' AND T1.last = 'D''Amore'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many types of medication have been prescribed to Mr. Major D'Amore since his visit to the hospital?",
+        "query": "SELECT COUNT(DISTINCT T2.DESCRIPTION) FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Major' AND T1.last = 'D''Amore'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List out all the observation information collected for the patient named Bella Rolfson.",
+        "query": "SELECT DISTINCT T2.DESCRIPTION, T2.VALUE, T2.UNITS FROM patients AS T1 INNER JOIN observations AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Bella' AND T1.last = 'Rolfson'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List out patient names with calcium deficiency.",
+        "query": "SELECT DISTINCT T1.first, T1.last FROM patients AS T1 INNER JOIN observations AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Calcium' AND T2.VALUE < 8.6"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List out 5 most common conditions for underweight patient.",
+        "query": "SELECT DISTINCT T2.DESCRIPTION, T2.VALUE, T2.UNITS FROM patients AS T1 INNER JOIN observations AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Body Mass Index' GROUP BY T2.VALUE ORDER BY COUNT(T2.VALUE) LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many mothers have taken immunization during prenatal visit?",
+        "query": "SELECT COUNT(DISTINCT T2.PATIENT) FROM encounters AS T1 INNER JOIN immunizations AS T2 ON T1.PATIENT = T2.PATIENT WHERE T1.REASONDESCRIPTION = 'Normal pregnancy' AND T1.DATE = T2.DATE"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What care plans have been received by Mrs. Elly Koss during year 1970?",
+        "query": "SELECT T2.DESCRIPTION FROM patients AS T1 INNER JOIN careplans AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Elly' AND T1.last = 'Koss' AND strftime('%Y', T2.START) = '2013'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the care plan, procedure, medication and the patient's full name for encounter 6f2e3935-b203-493e-a9c0-f23e847b9798?",
+        "query": "SELECT DISTINCT T3.DESCRIPTION, T4.DESCRIPTION, T5.DESCRIPTION, T1.first, T1.last FROM patients AS T1 INNER JOIN encounters AS T2 ON T1.patient = T2.PATIENT INNER JOIN careplans AS T3 ON T1.patient = T3.PATIENT INNER JOIN procedures AS T4 ON T1.patient = T4.PATIENT INNER JOIN medications AS T5 ON T1.patient = T5.PATIENT WHERE T2.ID = '6f2e3935-b203-493e-a9c0-f23e847b9798'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many male patients are diagnosed with hypertension as compared to female patients?",
+        "query": "SELECT COUNT(DISTINCT CASE WHEN T2.gender = 'M' THEN T2.patient END) AS Male , COUNT(DISTINCT CASE WHEN T2.gender = 'F' THEN T2.patient END) AS Female FROM conditions AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.DESCRIPTION = 'Hypertension'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many unmarried women were checked for normal pregnancy?",
+        "query": "SELECT COUNT(DISTINCT T2.patient) FROM conditions AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.DESCRIPTION = 'Normal pregnancy' AND T2.gender = 'F' AND T2.marital = 'S'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List out the procedure and medicine prescribed for drug overdose patients.",
+        "query": "SELECT DISTINCT T2.DESCRIPTION, T3.DESCRIPTION FROM encounters AS T1 INNER JOIN procedures AS T2 ON T1.PATIENT = T2.PATIENT INNER JOIN medications AS T3 ON T1.PATIENT = T3.PATIENT WHERE T1.REASONDESCRIPTION = 'Drug overdose'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the average body mass index for patients with higher total cholesterol?",
+        "query": "SELECT SUM(T1.VALUE) / COUNT(T1.PATIENT) FROM observations AS T1 INNER JOIN ( SELECT DISTINCT PATIENT FROM observations WHERE DESCRIPTION = 'Total Cholesterol' AND VALUE > 200 ) AS T2 ON T1.PATIENT = T2.PATIENT WHERE T1.DESCRIPTION = 'Body Mass Index'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the difference between average glucose reading for patients in the 20s and 50s?",
+        "query": "SELECT SUM(CASE WHEN ROUND((strftime('%J', T2.DATE) - strftime('%J', T1.birthdate)) / 365) BETWEEN 20 AND 30 THEN T2.VALUE ELSE 0 END) / COUNT(CASE WHEN ROUND((strftime('%J', T2.DATE) - strftime('%J', T1.birthdate)) / 365) BETWEEN 20 AND 30 THEN T2.PATIENT END) - SUM(CASE WHEN ROUND((strftime('%J', T2.DATE) - strftime('%J', T1.birthdate)) / 365) BETWEEN 50 AND 60 THEN T2.VALUE ELSE 0 END) / COUNT(CASE WHEN ROUND((strftime('%J', T2.DATE) - strftime('%J', T1.birthdate)) / 365) BETWEEN 50 AND 60 THEN T2.PATIENT END) AS difference FROM patients AS T1 INNER JOIN observations AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Glucose'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the percentage of the most common conditions for patients age 60 and above?",
+        "query": "SELECT CAST(SUM(CASE WHEN T5.DESCRIPTION = T3.DESCRIPTION THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T3.patient) FROM ( SELECT T2.DESCRIPTION, T1.patient FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE ROUND((strftime('%J', T2.START) - strftime('%J', T1.birthdate)) / 365) > 60 GROUP BY T2.DESCRIPTION ORDER BY COUNT(T2.DESCRIPTION) DESC LIMIT 1 ) AS T3 INNER JOIN patients AS T4 ON T3.patient = T4.patient INNER JOIN conditions AS T5 ON T4.patient = T5.PATIENT WHERE ROUND((strftime('%J', T5.START) - strftime('%J', T4.birthdate)) / 365) > 60"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Name the reason Walter Bahringer visited medical professionals in July 2009.",
+        "query": "SELECT T2.REASONDESCRIPTION FROM patients AS T1 INNER JOIN encounters AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Walter' AND T1.last = 'Bahringer' AND T2.DATE LIKE '2009-07%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How old was Mr. Stacy Morar at the time of his first emergency room admission due to a drug overdose?",
+        "query": "SELECT T2.DATE - T1.birthdate AS age FROM patients AS T1 INNER JOIN encounters AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Stacy' AND T1.last = 'Morar' AND T2.DESCRIPTION = 'Emergency Room Admission' AND T2.REASONDESCRIPTION = 'Drug overdose' ORDER BY T2.DATE LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What drug is administered more often to treat child attention deficit disorder?",
+        "query": "SELECT DESCRIPTION FROM medications WHERE REASONDESCRIPTION = 'Child attention deficit disorder' GROUP BY DESCRIPTION ORDER BY COUNT(DESCRIPTION) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Please include the full name of the patient who received a lung transplant.",
+        "query": "SELECT T2.first, T2.last FROM procedures AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.DESCRIPTION = 'Transplant of lung (procedure)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many patients on average receive combined chemotherapy and radiation therapy procedures each year?",
+        "query": "SELECT CAST(COUNT(PATIENT) AS REAL) / COUNT(DISTINCT strftime('%Y', DATE)) FROM procedures WHERE DESCRIPTION = 'Combined chemotherapy and radiation therapy (procedure)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Indicate the time frame and details of the most recent care plan suggested to Jacquelyn Shanahan.",
+        "query": "SELECT strftime('%J', T2.STOP) - strftime('%J', T2.START) AS timeFrame , T2.DESCRIPTION FROM patients AS T1 INNER JOIN careplans AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Jacquelyn' AND T1.last = 'Shanahan' ORDER BY T2.START DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Identify the allergy period for Isadora Moen and what triggered it.",
+        "query": "SELECT T2.START, T2.STOP, T2.DESCRIPTION FROM patients AS T1 INNER JOIN allergies AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Isadora' AND T1.last = 'Moen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How old was Mrs. Laronda Bernier at the time of her most recent medical encounter?",
+        "query": "SELECT T2.DATE - T1.birthdate AS age FROM patients AS T1 INNER JOIN encounters AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Laronda' AND T1.last = 'Bernier' ORDER BY T2.DATE DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What condition forced Mrs. Joye Homenick to seek medical attention in 2017?",
+        "query": "SELECT T2.DESCRIPTION FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Joye' AND T1.last = 'Homenick' AND strftime('%Y', T2.START) = '2017'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "When did Mrs. Joye Homenick receive her most recent influenza seasonal vaccine?",
+        "query": "SELECT T2.DATE FROM patients AS T1 INNER JOIN immunizations AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Influenza  seasonal  injectable  preservative free' AND T1.first = 'Joye' AND T1.last = 'Homenick' ORDER BY T2.DATE DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How long did Elly Koss have to take Acetaminophen 160 MG?",
+        "query": "SELECT strftime('%J', T2.STOP) - strftime('%J', T2.START) AS days FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Elly' AND last = 'Koss' AND T2.DESCRIPTION = 'Acetaminophen 160 MG'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many patients sought medical attention due to a second-degree burn? Describe the care plan recommended to them.",
+        "query": "SELECT COUNT(DISTINCT T2.PATIENT), T2.DESCRIPTION FROM encounters AS T1 INNER JOIN careplans AS T2 ON T1.PATIENT = T2.PATIENT WHERE T2.REASONDESCRIPTION = 'Second degree burn'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Among all patients who sought medical attention in 2010 due to contact dermatitis, identify the percentage of females.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.gender = 'F' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.PATIENT) FROM encounters AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE strftime('%Y', T1.DATE) = '2010' AND T1.REASONDESCRIPTION = 'Contact dermatitis'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many interactions did Lorri Simons have with medical professionals between 2010 and 2017? What percentage of encounters are attributed to prenatal visits?",
+        "query": "SELECT COUNT(T1.patient) , CAST(SUM(CASE WHEN T2.DESCRIPTION = 'Prenatal visit' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.patient) FROM patients AS T1 INNER JOIN encounters AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Lorri' AND T1.last = 'Simonis' AND strftime('%Y', T2.DATE) BETWEEN '2010' AND '2017'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "State description of medication taken by Joe Homenick.",
+        "query": "SELECT T1.DESCRIPTION FROM medications AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.first = 'Joye' AND T2.last = 'Homenick'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the start date of the care plan of the patient whose maiden name is Adams?",
+        "query": "SELECT DISTINCT T1.START FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.maiden = 'Adams'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Among the male patients, who has the earliest starting date of the care plan?",
+        "query": "SELECT T2.first, T2.last FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.gender = 'M' ORDER BY T1.START LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the percentage of Hispanic patients who stopped their care plan in 2011?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.race = 'hispanic' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.PATIENT) FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE strftime('%Y', T1.stop) = '2011'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "State the description of the reason why Angelo Buckridge needs the care plan.",
+        "query": "SELECT DISTINCT T1.REASONDESCRIPTION FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.first = 'Angelo' AND T2.last = 'Buckridge'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Mention the description of the care plan of American patients.",
+        "query": "SELECT DISTINCT T1.DESCRIPTION FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.ethnicity = 'american'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What are the medical encounter ids of patients who were born in Pembroke MA US?",
+        "query": "SELECT DISTINCT T1.ENCOUNTER FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.birthplace = 'Pembroke MA US'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List out the start date of the care plan of alive patients.",
+        "query": "SELECT DISTINCT T1.START FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.deathdate IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many white patients have the reason code of 10509002?",
+        "query": "SELECT COUNT(DISTINCT T1.PATIENT) FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.race = 'white' AND T1.REASONCODE = '10509002'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List out full name of patients who have \"Diabetic diet\" in the description of the care plan.",
+        "query": "SELECT DISTINCT T2.first, T2.last FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.DESCRIPTION = 'Diabetic diet'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List out the stop date of the care plan of dead patients.",
+        "query": "SELECT DISTINCT T1.STOP FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.deathdate IS NOT NULL AND T1.STOP IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many Italian patients have the care plan code of 304510005?",
+        "query": "SELECT COUNT(DISTINCT T2.patient) FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.ethnicity = 'italian' AND T1.CODE = '304510005'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the percentage of female patients who started the care plan in 2010?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.gender = 'F' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.PATIENT) AS percentage FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE strftime('%Y', T1.START) = '2010'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many black patients stopped their care plan in 2017?",
+        "query": "SELECT COUNT(DISTINCT T2.patient) FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.race = 'black' AND strftime('%Y', T1.STOP) = '2017'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many male patients have prediabetes condition?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN conditions AS T2 WHERE T2.DESCRIPTION = 'Prediabetes' AND T1.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List the full names of patients with nut allergy.",
+        "query": "SELECT DISTINCT T1.first, T1.last FROM patients AS T1 INNER JOIN allergies AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Allergy to nut'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Describe the condition of patient Wilmer Koepp.",
+        "query": "SELECT T2.DESCRIPTION FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Wilmer' AND T1.last = 'Koepp'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Among the patients with viral sinusitis condition, which patient's gender is most affected? Provide the number for each respectively.",
+        "query": "SELECT SUM(CASE WHEN T1.gender = 'F' THEN 1 ELSE 0 END), SUM(CASE WHEN T1.gender = 'M' THEN 1 ELSE 0 END) FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Viral sinusitis (disorder)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Provide the full names of patients who have been taking Penicillin V Potassium 250 MG since 1948.",
+        "query": "SELECT DISTINCT T1.first, T1.last FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Penicillin V Potassium 250 MG' AND strftime('%Y', T2.START) >= '1948'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many white patients whose birth year is 1935 have a stroke?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.patient WHERE strftime('%Y', T1.birthdate) = '1935' AND T1.race = 'white' AND T2.DESCRIPTION = 'Stroke'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Which conditions the patient has when receiving the IPV immunization?",
+        "query": "SELECT DISTINCT T2.DESCRIPTION FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT INNER JOIN immunizations AS T3 ON T1.patient = T3.PATIENT WHERE T3.DESCRIPTION = 'IPV'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List the patient ids whose disease has the most occurrences.",
+        "query": "SELECT T1.patient FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT INNER JOIN all_prevalences AS T3 ON T3.ITEM = T2.DESCRIPTION ORDER BY T3.OCCURRENCES DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List all the full names of patients with a condition described as cystitis.",
+        "query": "SELECT DISTINCT T1.first, T1.last FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.patient WHERE T2.DESCRIPTION = 'Cystitis'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many male patients have been described as immune to quadrivalent HPV?",
+        "query": "SELECT COUNT(DISTINCT T1.patient) FROM patients AS T1 INNER JOIN immunizations AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'HPV  quadrivalent' AND T1.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Indicate the start date of patient Walter Bahringer's care plan.",
+        "query": "SELECT DISTINCT T2.start FROM patients AS T1 INNER JOIN careplans AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Walter' AND T1.last = 'Bahringer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Describe the care plans of patient Major D'Amore's plan of care.",
+        "query": "SELECT DISTINCT T2.DESCRIPTION FROM patients AS T1 INNER JOIN careplans AS T2 ON T1.patient = T2.PATIENT WHERE T1.first = 'Major' AND T1.last = 'D''Amore'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Calculate the percentage of male patients with viral sinusitis condition.",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.gender = 'M' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.patient) FROM patients AS T1 INNER JOIN conditions AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Viral sinusitis (disorder)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Among the patients who have been using Penicillin V Potassium 250 MG, what percentage of patients are female?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.gender = 'F' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.patient) FROM patients AS T1 INNER JOIN medications AS T2 ON T1.patient = T2.PATIENT WHERE T2.DESCRIPTION = 'Penicillin V Potassium 250 MG'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Among the white patients, what is the average body height of the patients?",
+        "query": "SELECT AVG(T1.VALUE) FROM observations AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.race = 'white' AND T1.DESCRIPTION = 'Body Height'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Indicate the care plan needed for the patient living at 179 Sydni Roads, Taunton, MA 02780 US.",
+        "query": "SELECT T1.DESCRIPTION FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.address = '179 Sydni Roads Taunton MA 02780 US'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Provide the allergen of the Dominican patient named Dirk Languish.",
+        "query": "SELECT T1.DESCRIPTION FROM allergies AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.first = 'Dirk' AND T2.last = 'Langosh' AND T2.ethnicity = 'dominican'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "How many patients who are allergic to peanuts have asthma?",
+        "query": "SELECT COUNT(DISTINCT T2.patient) FROM conditions AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient INNER JOIN allergies AS T3 ON T2.patient = T3.PATIENT WHERE T1.DESCRIPTION = 'Asthma' AND T3.DESCRIPTION = 'Allergy to peanuts'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Who is the 44-year-old patient diagnosed with drug overdose?",
+        "query": "SELECT T2.first, T2.last FROM conditions AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.DESCRIPTION = 'Drug overdose' AND ROUND((strftime('%J', T2.deathdate) - strftime('%J', T2.birthdate)) / 365) = 44"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Provide the social security number of the patient with the highest systolic blood pressure.",
+        "query": "SELECT T2.ssn FROM observations AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.DESCRIPTION = 'Systolic Blood Pressure' ORDER BY T1.VALUE DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the care plan description of the prevalent disease with the highest prevalence percentage?",
+        "query": "SELECT T4.DESCRIPTION FROM all_prevalences AS T1 INNER JOIN conditions AS T2 ON T2.DESCRIPTION = T1.ITEM INNER JOIN encounters AS T3 ON T2.ENCOUNTER = T3.ID INNER JOIN careplans AS T4 ON T4.ENCOUNTER = T3.ID ORDER BY T1.\"PREVALENCE PERCENTAGE\" DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the care plan for the patient with social security number 999-15-3685?",
+        "query": "SELECT DISTINCT T1.DESCRIPTION FROM careplans AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T2.ssn = '999-15-3685'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Calculate the average age of the male patients that have hypertension.",
+        "query": "SELECT SUM(CASE WHEN T2.deathdate IS NULL THEN ROUND((strftime('%J', date('now')) - strftime('%J', T2.birthdate)) / 365) ELSE ROUND((strftime('%J', T2.deathdate) - strftime('%J', T2.birthdate)) / 365) END) / COUNT(T2.patient) FROM conditions AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.DESCRIPTION = 'Hypertension' AND T2.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List 5 patients' name that need medication due to streptococcal sore throat disorder.",
+        "query": "SELECT DISTINCT T2.first, T2.last FROM medications AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.REASONDESCRIPTION = 'Streptococcal sore throat (disorder)' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Who is the patient with a body weight of 61.97 kg?",
+        "query": "SELECT T2.first, T2.last FROM observations AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.DESCRIPTION = 'Body Weight' AND T1.UNITS = 'kg' AND T1.VALUE = 61.97"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "Among the male patients, list down 5 birth dates of patients taking the medication \"Penicillin V Potassium 250 MG\".",
+        "query": "SELECT DISTINCT T2.birthdate FROM medications AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.DESCRIPTION = 'Penicillin V Potassium 250 MG' AND T2.gender = 'M' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "List down the full name of Irish patients diagnosed with the prevalent diseases that have an occurrence greater than the 96% of the average occurrences of all conditions.",
+        "query": "SELECT DISTINCT T2.first, T2.last FROM conditions AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient INNER JOIN all_prevalences AS T3 ON T1.DESCRIPTION = T3.ITEM WHERE T2.ethnicity = 'irish' AND 100 * CAST(T3.OCCURRENCES AS REAL) / ( SELECT AVG(OCCURRENCES) FROM all_prevalences ) > 96"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "synthea",
+        "question": "What is the difference between the number of married patients and the number of single patients with diabetes?",
+        "query": "SELECT SUM(CASE WHEN T2.marital = 'M' THEN 1 ELSE 0 END) - SUM(CASE WHEN T2.marital = 'S' THEN 1 ELSE 0 END) FROM conditions AS T1 INNER JOIN patients AS T2 ON T1.PATIENT = T2.patient WHERE T1.DESCRIPTION = 'Diabetes'"
+    }
+]

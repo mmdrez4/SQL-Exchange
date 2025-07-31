@@ -1,0 +1,103 @@
+{
+    "conductor": [
+        [
+            11,
+            "Seiji Ozawa",
+            43,
+            "USA",
+            10
+        ],
+        [
+            8,
+            "Pierre Boulez",
+            49,
+            "UK",
+            11
+        ],
+        [
+            1,
+            "Antal Dor\u00e1ti",
+            40,
+            "USA",
+            10
+        ]
+    ],
+    "orchestra": [
+        [
+            12,
+            "San Francisco Symphony Orchestra",
+            12,
+            "RCA",
+            2008.0,
+            "CD"
+        ],
+        [
+            2,
+            "Columbia Symphony Orchestra",
+            2,
+            "Columbia Masterworks",
+            2009.0,
+            "CD / LP"
+        ],
+        [
+            7,
+            "Seattle Symphony Orchestra",
+            7,
+            "Delos Records",
+            2002.0,
+            "CD"
+        ]
+    ],
+    "performance": [
+        [
+            6,
+            6,
+            "Semi-final 2",
+            "15 June",
+            9.28,
+            "8",
+            "38.1%"
+        ],
+        [
+            10,
+            10,
+            "Series average",
+            "2007",
+            8.38,
+            "TBC",
+            "34%"
+        ],
+        [
+            2,
+            2,
+            "Auditions 2",
+            "10 June",
+            6.73,
+            "8",
+            "28.0%"
+        ]
+    ],
+    "show": [
+        [
+            5,
+            5,
+            "Hampden Park",
+            "T",
+            2431.0
+        ],
+        [
+            4,
+            4,
+            "St. Mirren Park",
+            "F",
+            1925.0
+        ],
+        [
+            1,
+            1,
+            "Glebe Park",
+            "T",
+            1026.0
+        ]
+    ]
+}

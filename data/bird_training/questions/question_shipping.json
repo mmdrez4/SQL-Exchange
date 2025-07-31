@@ -1,0 +1,638 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many shipments were ordered by S K L Enterprises Inc in 2017?",
+        "query": "SELECT COUNT(T2.ship_id) FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id WHERE T1.cust_name = 'S K L Enterprises Inc' AND STRFTIME('%Y', T2.ship_date) = '2017'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the total number of pounds being transported for S K L Enterprises Inc?",
+        "query": "SELECT SUM(T2.weight) FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id WHERE T1.cust_name = 'S K L Enterprises Inc'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Among the shipments done by Sue Newell, how many of them are for S K L Enterprises Inc?",
+        "query": "SELECT COUNT(*) FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id INNER JOIN driver AS T3 ON T3.driver_id = T2.driver_id WHERE T1.cust_name = 'S K L Enterprises Inc' AND T3.first_name = 'Sue' AND T3.last_name = 'Newell'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many shipments were ordered by a customer in Florida?",
+        "query": "SELECT COUNT(T1.cust_id) FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id WHERE T1.state = 'FL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Please list the IDs of all the shipments made by a retailer customer.",
+        "query": "SELECT T2.ship_id FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id WHERE T1.cust_type = 'retailer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Among the customers having at least one shipment in 2017, how many of them have an annual revenue of over 30000000?",
+        "query": "SELECT COUNT(COUNTCUSID) FROM ( SELECT COUNT(T1.cust_id) AS COUNTCUSID FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id WHERE STRFTIME('%Y', T2.ship_date) = '2017' AND T1.annual_revenue > 30000000 GROUP BY T1.cust_id HAVING COUNT(T2.ship_id) >= 1 ) T3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many shipments in 2017 were done by Sue Newell?",
+        "query": "SELECT COUNT(*) FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE STRFTIME('%Y', T1.ship_date) = '2017' AND T2.first_name = 'Sue' AND T2.last_name = 'Newell'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the full name of the driver that has done the most shipments in 2017?",
+        "query": "SELECT T2.first_name, T2.last_name FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE STRFTIME('%Y', T1.ship_date) = '2017' GROUP BY T2.first_name, T2.last_name ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Among the shipments in 2017, how many of them have the destination in New Jersey?",
+        "query": "SELECT COUNT(*) FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id WHERE STRFTIME('%Y', T1.ship_date) = '2017' AND T2.state = 'New Jersey'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the maximum weight being transported to New York during a single shipment?",
+        "query": "SELECT MAX(T1.weight) FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id WHERE T2.city_name = 'New York'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How much more pounds in total were transported to New York than to Chicago?",
+        "query": "SELECT SUM(CASE WHEN T2.city_name = 'New York' THEN T1.weight ELSE 0 END) - SUM(CASE WHEN T2.city_name = 'Chicago' THEN T1.weight ELSE 0 END) FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Please list the destination cities of all the shipments ordered by S K L Enterprises Inc.",
+        "query": "SELECT DISTINCT T3.city_name FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id INNER JOIN city AS T3 ON T3.city_id = T2.city_id WHERE T1.cust_name = 'S K L Enterprises Inc'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the average weight of the goods being transported on a single shipment ordered by S K L Enterprises Inc?",
+        "query": "SELECT AVG(T2.weight) FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id WHERE T1.cust_name = 'S K L Enterprises Inc'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Among all the shipments to Florida, what is the percentage of the shipment to Jacksonville?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.city_name = 'Jacksonville' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id WHERE T2.state = 'Florida'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "State the headquarter of the truck which completed shipment no.1045.",
+        "query": "SELECT T1.make FROM truck AS T1 INNER JOIN shipment AS T2 ON T1.truck_id = T2.truck_id WHERE T2.ship_id = 1045"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many shipments were delivered by the oldest truck model?",
+        "query": "SELECT COUNT(*) FROM truck AS T1 INNER JOIN shipment AS T2 ON T1.truck_id = T2.truck_id GROUP BY T1.model_year ORDER BY T1.model_year ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Who was the customer of shipment no.1275? Give the customer's name.",
+        "query": "SELECT T1.cust_name FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id WHERE T2.ship_id = '1275'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Where was the destination city of shipment no.1701?",
+        "query": "SELECT T2.city_name FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id WHERE T1.ship_id = '1701'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Give the name of the driver of shipment no.1021.",
+        "query": "SELECT T2.first_name, T2.last_name FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE T1.ship_id = '1021'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Tell the name of the driver who received the shipment on 2017/11/5.",
+        "query": "SELECT T2.first_name, T2.last_name FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE T1.ship_date = '2017-11-05'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Show the population of the city which was the destination of shipment no.1398.",
+        "query": "SELECT T2.population FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id WHERE T1.ship_id = '1398'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Provide the ship date of the first shipment to customers in South Carolina.",
+        "query": "SELECT MIN(T1.ship_date) FROM shipment AS T1 INNER JOIN customer AS T2 ON T1.cust_id = T2.cust_id WHERE T2.state = 'SC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "For the shipment received by Leszek Kieltyka on 2017/9/25, what was its weight?",
+        "query": "SELECT T1.weight FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE T2.first_name = 'Leszek' AND T2.last_name = 'Kieltyka' AND T1.ship_date = '2017-09-25'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the area of the destination city of shipment No.1346?",
+        "query": "SELECT T2.area FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id WHERE T1.ship_id = '1346'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Provide the weight of the shipment to U-haul Center Of N Syracuse on 2016/9/21.",
+        "query": "SELECT T1.weight FROM shipment AS T1 INNER JOIN customer AS T2 ON T1.cust_id = T2.cust_id WHERE T2.cust_name = 'U-haul Center Of N Syracuse' AND T1.ship_date = '2016-09-21'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Who was the driver of truck no.3 on 2016/9/19? Tell the full name.",
+        "query": "SELECT T3.first_name, T3.last_name FROM truck AS T1 INNER JOIN shipment AS T2 ON T1.truck_id = T2.truck_id INNER JOIN driver AS T3 ON T3.driver_id = T2.driver_id WHERE T1.truck_id = '3' AND T2.ship_date = '2016-09-19'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Calculate the population density of the city as the destination of shipment no.1369.",
+        "query": "SELECT T2.area / T2.population FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id WHERE T1.ship_id = '1369'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the average number of shipments done by the Kenworth trucks?",
+        "query": "SELECT CAST(COUNT(T2.ship_id) AS REAL) / COUNT(DISTINCT T1.truck_id) FROM truck AS T1 INNER JOIN shipment AS T2 ON T1.truck_id = T2.truck_id WHERE T1.make = 'Kenworth'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many pounds did Sue Newell transport during her first shipment?",
+        "query": "SELECT T1.weight FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE T2.first_name = 'Sue' AND T2.last_name = 'Newell' ORDER BY T1.ship_date ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "To whom did the company transport its heaviest shipment?",
+        "query": "SELECT T2.cust_name FROM shipment AS T1 INNER JOIN customer AS T2 ON T1.cust_id = T2.cust_id ORDER BY T1.weight DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the full name of the driver who transported the first shipment of the company?",
+        "query": "SELECT T2.first_name, T2.last_name FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id ORDER BY T1.ship_date ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "In total, how many shipments were transported to Olympic Camper Sales Inc?",
+        "query": "SELECT COUNT(T2.ship_id) FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id WHERE T1.cust_name = 'Olympic Camper Sales Inc'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many of the shipments bound for New York City were shipped to Harry's Hot Rod Auto and Truck Accessories?",
+        "query": "SELECT COUNT(*) FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id INNER JOIN city AS T3 ON T3.city_id = T2.city_id WHERE T3.city_name = 'New York' AND T1.cust_name = 'Harry''s Hot Rod Auto & Truck Accessories'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Among the top 5 heaviest shipments, how many shipments were transported via Mack?",
+        "query": "SELECT COUNT(T2.ship_id) FROM truck AS T1 INNER JOIN shipment AS T2 ON T1.truck_id = T2.truck_id WHERE T1.make = 'Mack' ORDER BY T2.weight DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the full name of the driver who delivered the most shipments to the least populated city?",
+        "query": "SELECT T1.first_name, T1.last_name FROM driver AS T1 INNER JOIN shipment AS T2 ON T1.driver_id = T2.driver_id INNER JOIN city AS T3 ON T3.city_id = T2.city_id GROUP BY T1.first_name, T1.last_name, T3.population HAVING T3.population = MAX(T3.population) ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many shipments with weight of no more than 1,000 pounds were shipped by the oldest truck?",
+        "query": "SELECT COUNT(*) FROM truck AS T1 INNER JOIN shipment AS T2 ON T1.truck_id = T2.truck_id WHERE T2.weight < 1000 ORDER BY T1.model_year ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How much is the annual revenue of the customer with the most number of shipments?",
+        "query": "SELECT T2.annual_revenue FROM shipment AS T1 INNER JOIN customer AS T2 ON T1.cust_id = T2.cust_id GROUP BY T1.cust_id ORDER BY COUNT(T1.cust_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Among the shipments for Downey, how many shipments were shipped to California in 2016?",
+        "query": "SELECT COUNT(*) FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id INNER JOIN customer AS T3 ON T3.cust_id = T1.cust_id WHERE T2.city_name = 'Downey' AND STRFTIME('%Y', T1.ship_date) = '2016' AND T3.state = 'CA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many shipments did Holger Nohr transport to North Las Vegas overall?",
+        "query": "SELECT COUNT(*) FROM driver AS T1 INNER JOIN shipment AS T2 ON T1.driver_id = T2.driver_id INNER JOIN city AS T3 ON T3.city_id = T2.city_id WHERE T1.first_name = 'Holger' AND T1.last_name = 'Nohr' AND T3.city_name = 'North Las Vegas'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many shipments were shipped to the most densely populated city?",
+        "query": "SELECT COUNT(*) FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id ORDER BY T2.area / T2.population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Determine the percentage of manufacturers who are from Texas among all of Lorenzo's customers.",
+        "query": "SELECT CAST(SUM(CASE WHEN cust_type = 'manufacturer' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM customer WHERE state = 'TX'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Identify the total weight of shipments transported to San Mateo, California, in 2016.",
+        "query": "SELECT SUM(T1.weight) FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id WHERE T2.city_name = 'San Mateo' AND STRFTIME('%Y', T1.ship_date) = '2016'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Identify the total weight of shipments transported in 2016 by the newest Peterbilt.",
+        "query": "SELECT SUM(T2.weight) FROM truck AS T1 INNER JOIN shipment AS T2 ON T1.truck_id = T2.truck_id WHERE T1.make = 'Peterbilt' AND STRFTIME('%Y', T2.ship_date) = '2016' ORDER BY T1.model_year DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What was the maximum weight of the shipment carried to Boston? Name the customer of that shipment.",
+        "query": "SELECT T1.weight, T2.cust_name FROM shipment AS T1 INNER JOIN customer AS T2 ON T1.cust_id = T2.cust_id INNER JOIN city AS T3 ON T3.city_id = T1.city_id WHERE T3.city_name = 'Boston' ORDER BY T1.weight DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Where was shipment no. 1002 headed?",
+        "query": "SELECT T2.city_name FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id WHERE T1.ship_id = '1002'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the average shipment weight carried by the oldest Mack?",
+        "query": "SELECT AVG(T2.weight) FROM truck AS T1 INNER JOIN shipment AS T2 ON T1.truck_id = T2.truck_id WHERE T1.make = 'Mack'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Identify the full name of the driver who delivered a shipment to the city of New York in February 2016.",
+        "query": "SELECT T3.first_name, T3.last_name FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id INNER JOIN driver AS T3 ON T3.driver_id = T1.driver_id WHERE T2.city_name = 'New York' AND T1.ship_date LIKE '2016-02%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Name the customer who sent the shipment to Oak Park.",
+        "query": "SELECT T2.cust_name FROM shipment AS T1 INNER JOIN customer AS T2 ON T1.cust_id = T2.cust_id INNER JOIN city AS T3 ON T3.city_id = T1.city_id WHERE T3.city_name = 'Oak Park'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Determine the number of shipments delivered by Andrea Simons to Huntsville in 2016.",
+        "query": "SELECT COUNT(*) FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id INNER JOIN driver AS T3 ON T3.driver_id = T1.driver_id WHERE T3.first_name = 'Andrea' AND T3.last_name = 'Simons' AND T2.city_name = 'Huntsville' AND STRFTIME('%Y', T1.ship_date) = '2016'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many shipments does each driver deliver per month on average?",
+        "query": "SELECT CAST(COUNT(*) AS REAL) / (12 * COUNT(T2.driver_id)) FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Among all shipments placed by Sunguard Window Tinting & Truck Accessories in 2017, identify the percentage of shipments whose weight exceeded 10,000 pounds.",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.weight >= 10000 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM shipment AS T1 INNER JOIN customer AS T2 ON T1.cust_id = T2.cust_id WHERE T2.cust_name = 'Sunguard Window Tinting & Truck Accessories' AND STRFTIME('%Y', T1.ship_date) = '2017'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Among all shipments delivered by Sue Newel, identify the percentage of shipments that were placed by Autoware Inc.",
+        "query": "SELECT CAST(SUM(CASE WHEN T3.cust_name = 'Autoware Inc' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) AS per FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id INNER JOIN customer AS T3 ON T3.cust_id = T1.cust_id WHERE T2.first_name = 'Sue' AND T2.last_name = 'Newell'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many cities which belong to New Jersey have transported weight greater than 20000?",
+        "query": "SELECT COUNT(*) FROM ( SELECT T2.city_id AS CITYID FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id WHERE T2.state = 'New Jersey' GROUP BY T2.city_id HAVING SUM(T1.weight) > 20000 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many cities whose polulation is larger than 50000 pounds have shipment in 2017?",
+        "query": "SELECT COUNT(*) FROM city AS T1 INNER JOIN shipment AS T2 ON T1.city_id = T2.city_id WHERE T1.population > 50000 AND STRFTIME('%Y', T2.ship_date) = '2017'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "State the weight of shipments transported by Peterbilt.",
+        "query": "SELECT T2.weight FROM truck AS T1 INNER JOIN shipment AS T2 ON T1.truck_id = T2.truck_id WHERE make = 'Peterbilt'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the model year of the truck used in shipment id 1003?",
+        "query": "SELECT T1.model_year FROM truck AS T1 INNER JOIN shipment AS T2 ON T1.truck_id = T2.truck_id WHERE T2.ship_id = '1003'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the brand of truck used in shipment id 1011?",
+        "query": "SELECT T1.make FROM truck AS T1 INNER JOIN shipment AS T2 ON T1.truck_id = T2.truck_id WHERE T2.ship_id = '1011'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the first name of the driver who transported shipment id 1028?",
+        "query": "SELECT T2.first_name, T2.last_name FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE T1.ship_id = 1028"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "List out the state of driver who transported the shipment id 1055.",
+        "query": "SELECT T2.state FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE T1.ship_id = '1055'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "State the address of drivers who transported the shipment with weight greater than 50000 pounds.",
+        "query": "SELECT T2.address FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id GROUP BY T2.driver_id HAVING SUM(T1.weight) > 50000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Give the full name of driver who transported the items on 3/2/2016.",
+        "query": "SELECT T2.first_name, T2.last_name FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE T1.ship_date = '2016-03-02'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the average annual revenue of customers who have shipment weight of less than 65000 pounds?",
+        "query": "SELECT AVG(T1.annual_revenue) FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id WHERE T2.weight < 65000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the percentage of wholesaler customers who have shipment weight of not greater than 70000 pounds?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.weight < 70000 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id WHERE T1.cust_type = 'wholesaler'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the last name of driver who transported shipment id 1088?",
+        "query": "SELECT T2.last_name FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE T1.ship_id = '1088'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Give the phone of drivers who transported shipment weight of greater than 20000 pounds.",
+        "query": "SELECT T2.phone FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id GROUP BY T2.driver_id HAVING SUM(T1.weight) > 20000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the brand and model of truck used in shipment id 1055?",
+        "query": "SELECT T1.make, T1.model_year FROM truck AS T1 INNER JOIN shipment AS T2 ON T1.truck_id = T2.truck_id WHERE T2.ship_id = '1055'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many trucks were manufactured in year 2009?",
+        "query": "SELECT COUNT(truck_id) FROM truck WHERE model_year = 2009"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many customers are manufacturer?",
+        "query": "SELECT COUNT(*) FROM customer WHERE cust_type = 'manufacturer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many customers who live in California that are retailers?",
+        "query": "SELECT COUNT(*) FROM customer WHERE cust_type = 'retailer' AND state = 'CA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many cities are in Connecticut?",
+        "query": "SELECT COUNT(*) FROM city WHERE state = 'Connecticut'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the most populated city in California?",
+        "query": "SELECT city_name FROM city WHERE state = 'California' AND population = ( SELECT MAX(population) FROM city WHERE state = 'California' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the annual revenue of Klett & Sons Repair?",
+        "query": "SELECT annual_revenue FROM customer WHERE cust_name = 'Klett & Sons Repair'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Who is the driver that transported the lightest weight of shipment? Provide the full name of the driver.",
+        "query": "SELECT T2.first_name, T2.last_name FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id ORDER BY T1.weight ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many shipments were shipped to customers living in California in year 2016?",
+        "query": "SELECT COUNT(*) AS per FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id WHERE STRFTIME('%Y', T2.ship_date) = '2016' AND T1.state = 'CA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the brand of the truck that is used to ship by Zachery Hicks?",
+        "query": "SELECT DISTINCT T1.make FROM truck AS T1 INNER JOIN shipment AS T2 ON T1.truck_id = T2.truck_id INNER JOIN driver AS T3 ON T3.driver_id = T2.driver_id WHERE T3.first_name = 'Zachery' AND T3.last_name = 'Hicks'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "List all the name of the customers that received a shipment in February 2017.",
+        "query": "SELECT T1.cust_name FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id WHERE T2.ship_date LIKE '2017-02%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Provide the brand of the truck and the name of the driver that transported goods in Klett & Sons Repair.",
+        "query": "SELECT T3.make, T4.first_name, T4.last_name FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id INNER JOIN truck AS T3 ON T3.truck_id = T2.truck_id INNER JOIN driver AS T4 ON T4.driver_id = T2.driver_id WHERE T1.cust_name = 'Klett & Sons Repair'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the shipment ID of the heaviest shipment that Zachery Hicks transported?",
+        "query": "SELECT T1.ship_id FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE T2.first_name = 'Zachery' AND T2.last_name = 'Hicks' ORDER BY T1.weight DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many shipments did Zachery Hicks transport goods to New York in the year 2016?",
+        "query": "SELECT COUNT(*) FROM city AS T1 INNER JOIN shipment AS T2 ON T1.city_id = T2.city_id INNER JOIN driver AS T3 ON T3.driver_id = T2.driver_id WHERE T3.first_name = 'Zachery' AND T3.last_name = 'Hicks' AND T1.city_name = 'New York' AND STRFTIME('%Y', T2.ship_date) = '2016'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Which headquarter's truck has the highest shipments in year 2016?",
+        "query": "SELECT CASE WHEN T2.make = 'Peterbilt' THEN 'Texas (TX)' WHEN T2.make = 'Mack' THEN 'North Carolina (NC)' WHEN T2.make = 'Kenworth' THEN 'Washington (WA)' END AS \"result\" FROM shipment AS T1 INNER JOIN truck AS T2 ON T1.truck_id = T2.truck_id WHERE CAST(T1.ship_date AS DATE) = 2016 GROUP BY T2.make ORDER BY COUNT(T1.ship_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many shipments were shipped to the least populated city in California?",
+        "query": "SELECT COUNT(T3.city_name) FROM customer AS T1 INNER JOIN shipment AS T2 ON T1.cust_id = T2.cust_id INNER JOIN city AS T3 ON T3.city_id = T2.city_id WHERE T3.state = 'California' ORDER BY T3.population ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "In which city did the heaviest shipment transported?",
+        "query": "SELECT T2.city_name FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id ORDER BY T1.weight DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "List all the cities where Zachery Hicks transported goods.",
+        "query": "SELECT DISTINCT T3.city_name FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id INNER JOIN city AS T3 ON T1.city_id = T3.city_id WHERE T2.first_name = 'Zachery' AND T2.last_name = 'Hicks'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Calculate the average number of shipments that Zachery Hicks shipped in year 2017.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.first_name = 'Zachery' AND T2.last_name = 'Hicks' THEN T1.ship_id ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE STRFTIME('%Y', T1.ship_date) = '2017'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Calculate the percentage of the weight of goods being transported by Zachery Hicks to California in year 2016.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.first_name = 'Zachery' AND T2.last_name = 'Hicks' THEN T1.weight ELSE 0 END) AS REAL) * 100 / SUM(T1.weight) FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE STRFTIME('%Y', T1.ship_date) = '2016'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many shipments were shipped by the driver named Zachary Hicks?",
+        "query": "SELECT COUNT(*) FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE T1.driver_id = 23"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the ship ID of shipments shipped to the city with the largest area?",
+        "query": "SELECT T1.ship_id FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id ORDER BY T2.area DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "List the drivers who shipped the shipments to the least populated city.",
+        "query": "SELECT T3.first_name, T3.last_name FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id INNER JOIN driver AS T3 ON T3.driver_id = T1.driver_id ORDER BY T2.population ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Among the shipments shipped to Cicero, Illinois, how many shipments weighed between 9,000 to 15,000?",
+        "query": "SELECT COUNT(*) FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id WHERE T2.city_name = 'Cicero' AND T2.state = 'Illinois' AND T1.weight BETWEEN 9000 AND 15000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What model year of truck delivered the ship ID 1233?",
+        "query": "SELECT T1.model_year FROM truck AS T1 INNER JOIN shipment AS T2 ON T1.truck_id = T2.truck_id WHERE T2.ship_id = '1233'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the address of the driver that delivers the shipment for the customer lives at 7052 Carroll Road, San Diego, California?",
+        "query": "SELECT T3.address FROM shipment AS T1 INNER JOIN customer AS T2 ON T1.cust_id = T2.cust_id INNER JOIN driver AS T3 ON T3.driver_id = T1.driver_id WHERE T2.address = '7052 Carroll Road' AND T2.city = 'San Diego' AND T2.state = 'CA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Among the shipments delivered by Maria Craft, how many shipments were delivered in 2017?",
+        "query": "SELECT COUNT(*) FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE T2.first_name = 'Maria' AND T2.last_name = 'Craft' AND STRFTIME('%Y', T1.ship_date) = '2017'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the truck's model year used to ship the ship ID 1245?",
+        "query": "SELECT T1.model_year FROM truck AS T1 INNER JOIN shipment AS T2 ON T1.truck_id = T2.truck_id WHERE T2.ship_id = '1245'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Where does the driver of ship ID 1127 live?",
+        "query": "SELECT T2.address FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE T1.ship_id = '1127'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Give the annual revenue of the customer of ship ID 1047.",
+        "query": "SELECT T2.annual_revenue FROM shipment AS T1 INNER JOIN customer AS T2 ON T1.cust_id = T2.cust_id WHERE T1.ship_id = '1047'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the weight of the shipment delivered by Andrea Simons on March 7, 2016?",
+        "query": "SELECT T1.weight FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE T2.first_name = 'Andrea' AND T2.last_name = 'Simons' AND T1.ship_date = '2016-03-07'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Provide the destination city of the shipment shipped by January 16, 2017.",
+        "query": "SELECT T2.city_name FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id WHERE T1.ship_date = '2017-01-16'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "How many shipments were delivered to a customer from New York?",
+        "query": "SELECT COUNT(*) FROM shipment AS T1 INNER JOIN customer AS T2 ON T1.cust_id = T2.cust_id WHERE T2.state = 'NY'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the name of the customer of ship ID 1147?",
+        "query": "SELECT T2.cust_name FROM shipment AS T1 INNER JOIN customer AS T2 ON T1.cust_id = T2.cust_id WHERE T1.ship_id = '1147'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "List the ship ID of shipments shipped to the most populated city.",
+        "query": "SELECT T1.ship_id FROM shipment AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id ORDER BY T2.population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "List the driver's name of the shipment shipped on February 22, 2016.",
+        "query": "SELECT T2.first_name, T2.last_name FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE T1.ship_date = '2016-02-22'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "List the weight of the customer's shipment with annual revenue of 39448581.",
+        "query": "SELECT T1.weight FROM shipment AS T1 INNER JOIN customer AS T2 ON T1.cust_id = T2.cust_id WHERE T2.annual_revenue = 39448581"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "What is the customer's address for the shipment with ship ID 1117?",
+        "query": "SELECT T2.address FROM shipment AS T1 INNER JOIN customer AS T2 ON T1.cust_id = T2.cust_id WHERE T1.ship_id = '1117'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Among the shipments to a customer from Texas, what percentage of the shipments shipped in 2017?",
+        "query": "SELECT CAST(SUM(CASE WHEN STRFTIME('%Y', T1.ship_date) = '2017' THEN 1 ELSE 0 END) AS REAL ) * 100 / COUNT(*) FROM shipment AS T1 INNER JOIN customer AS T2 ON T1.cust_id = T2.cust_id WHERE T2.state = 'TX'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "Calculate the difference between the number of shipments shipped by the truck with the model year 2005 and model year 2006.",
+        "query": "SELECT SUM(CASE WHEN T1.model_year = '2005' THEN 1 ELSE 0 END) - SUM(CASE WHEN T1.model_year = '2006' THEN 1 ELSE 0 END) FROM truck AS T1 INNER JOIN shipment AS T2 ON T1.truck_id = T2.truck_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shipping",
+        "question": "List the driver's name of the shipment with a weight greater than 95% of the average weight of all shipments.",
+        "query": "SELECT T2.first_name, T2.last_name FROM shipment AS T1 INNER JOIN driver AS T2 ON T1.driver_id = T2.driver_id WHERE T1.weight * 100 > ( SELECT 95 * AVG(weight) FROM shipment )"
+    }
+]

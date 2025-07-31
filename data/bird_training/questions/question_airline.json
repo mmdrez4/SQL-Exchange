@@ -1,0 +1,554 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many flights were there on 2018/8/1?",
+        "query": "SELECT COUNT(*) FROM Airlines WHERE FL_DATE = '2018/8/1'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Among the flights on 2018/8/1, how many of them departed from an airport in New York?",
+        "query": "SELECT COUNT(*) FROM Airlines WHERE FL_DATE = '2018/8/1' AND ORIGIN = 'JFK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Please list the destination cities of all the flights that were cancelled on 2018/8/1.",
+        "query": "SELECT DEST FROM Airlines WHERE FL_DATE = '2018/8/1' AND CANCELLED = 1 GROUP BY DEST"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Please list the dates of the flights that were cancelled due to the most serious reason.",
+        "query": "SELECT FL_DATE FROM Airlines WHERE CANCELLATION_CODE = 'A' GROUP BY FL_DATE"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Please list the departure airports of the flights on 2018/8/1 that were delayed.",
+        "query": "SELECT T1.Description FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.ORIGIN WHERE T2.FL_DATE = '2018/8/1' AND T2.DEP_DELAY > 0 GROUP BY T1.Description"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Among the flights on 2018/8/1, how many of them were scheduled to depart from John F. Kennedy International in New York?",
+        "query": "SELECT COUNT(T1.Code) FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.ORIGIN WHERE T2.FL_DATE = '2018/8/1' AND T1.Description = 'New York, NY: John F. Kennedy International'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "For the flight on 2018/8/1 that was delayed for the longest time, which was the destination airport of this flight?",
+        "query": "SELECT T1.Description FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.DEST WHERE T2.FL_DATE = '2018/8/1' ORDER BY T2.DEP_DELAY DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Among the flights departing from John F. Kennedy International, how many of them arrived earlier than scheduled?",
+        "query": "SELECT SUM(CASE WHEN T2.ARR_DELAY < 0 THEN 1 ELSE 0 END) AS count FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.ORIGIN WHERE T1.Description = 'New York, NY: John F. Kennedy International'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Among all the flights scheduled to depart from John F. Kennedy International on 2018/8/1, when was the earliest one scheduled to depart?",
+        "query": "SELECT T2.DEP_TIME FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.ORIGIN WHERE T2.FL_DATE = '2018/8/1' AND T1.Description = 'New York, NY: John F. Kennedy International' AND T2.DEP_TIME IS NOT NULL ORDER BY T2.DEP_TIME ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many flights on 2018/8/1 were operated by American Airlines Inc.?",
+        "query": "SELECT COUNT(*) FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.ORIGIN INNER JOIN `Air Carriers` AS T3 ON T2.OP_CARRIER_AIRLINE_ID = T3.Code WHERE T2.FL_DATE = '2018/8/1' AND T3.Description = 'American Airlines Inc.: AA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Please list the flight numbers of all the flights operated by American Airlines Inc. that were scheduled to depart from John F. Kennedy International.",
+        "query": "SELECT T2.OP_CARRIER_FL_NUM FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.ORIGIN INNER JOIN `Air Carriers` AS T3 ON T2.OP_CARRIER_AIRLINE_ID = T3.Code WHERE T3.Description = 'American Airlines Inc.: AA' AND T1.Description = 'New York, NY: John F. Kennedy International' AND T2.FL_DATE = '2018/8/1'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many flights operated by American Airlines Inc. on 2018/8/1 were faster than scheduled?",
+        "query": "SELECT SUM(CASE WHEN T2.ACTUAL_ELAPSED_TIME < CRS_ELAPSED_TIME THEN 1 ELSE 0 END) AS count FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.ORIGIN INNER JOIN `Air Carriers` AS T3 ON T2.OP_CARRIER_AIRLINE_ID = T3.Code WHERE T2.FL_DATE = '2018/8/1' AND T3.Description = 'American Airlines Inc.: AA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the flight number of the flight operated by American Airlines Inc. that had the longest delay in departure?",
+        "query": "SELECT T1.OP_CARRIER_FL_NUM FROM Airlines AS T1 INNER JOIN Airports AS T2 ON T2.Code = T1.ORIGIN INNER JOIN `Air Carriers` AS T3 ON T1.OP_CARRIER_AIRLINE_ID = T3.Code WHERE T3.Description = 'American Airlines Inc.: AA' ORDER BY T1.DEP_TIME DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Among the flights operated by American Airlines Inc., how many of them were scheduled to land in New York?",
+        "query": "SELECT SUM(CASE WHEN T2.DEST = 'JFK' THEN 1 ELSE 0 END) AS count FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.DEST INNER JOIN `Air Carriers` AS T3 ON T2.OP_CARRIER_AIRLINE_ID = T3.Code WHERE T3.Description = 'American Airlines Inc.: AA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Among the flights operated by American Airlines Inc. on 2018/8/1, how many of them were cancelled?",
+        "query": "SELECT SUM(CASE WHEN T2.CANCELLED = 1 THEN 1 ELSE 0 END) AS count FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.ORIGIN INNER JOIN `Air Carriers` AS T3 ON T2.OP_CARRIER_AIRLINE_ID = T3.Code WHERE T2.FL_DATE = '2018/8/1' AND T3.Description = 'American Airlines Inc.: AA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Which airline operated more flights on 2018/8/1, American Airlines Inc. or Endeavor Air Inc.?",
+        "query": "SELECT CASE WHEN COUNT(CASE WHEN T3.Description = 'American Airlines Inc.: AA' THEN 1 ELSE NULL END) > COUNT(CASE WHEN T3.Description = 'Endeavor Air Inc.: 9E' THEN 1 ELSE NULL END) THEN 'American Airlines Inc.: AA' ELSE 'Endeavor Air Inc.: 9E' END AS RESULT FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.ORIGIN INNER JOIN `Air Carriers` AS T3 ON T2.OP_CARRIER_AIRLINE_ID = T3.Code WHERE T2.FL_DATE = '2018/8/1'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the average departure delay time of flights operated by American Airlines Inc.?",
+        "query": "SELECT AVG(T1.DEP_DELAY) FROM Airlines AS T1 INNER JOIN Airports AS T2 ON T2.Code = T1.ORIGIN INNER JOIN `Air Carriers` AS T3 ON T1.OP_CARRIER_AIRLINE_ID = T3.Code WHERE T3.Description = 'American Airlines Inc.: AA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many flights on average does American Airlines Inc. operate every day in August, 2018?",
+        "query": "SELECT CAST( SUM(CASE WHEN T2.FL_DATE LIKE '2018/8%' THEN 1 ELSE 0 END) AS REAL) / 31 FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.ORIGIN INNER JOIN `Air Carriers` AS T3 ON T2.OP_CARRIER_AIRLINE_ID = T3.Code WHERE T3.Description = 'American Airlines Inc.: AA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the number of air carriers in the database?",
+        "query": "SELECT COUNT(Code) FROM `Air Carriers`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Give the number of planes that took off from Los Angeles International airport on 2018/8/27.",
+        "query": "SELECT SUM(CASE WHEN T2.FL_DATE = '2018/8/27' THEN 1 ELSE 0 END) AS count FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.ORIGIN WHERE T1.Description = 'Los Angeles, CA: Los Angeles International'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Provide the number of airplanes that landed on Oakland Airport on 2018/8/7.",
+        "query": "SELECT SUM(CASE WHEN T1.Description LIKE '%Oakland%' THEN 1 ELSE 0 END) AS count FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.DEST WHERE T2.FL_DATE = '2018/8/7'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many flights of Alaska Airlines were delayed on 2018/8/2?",
+        "query": "SELECT COUNT(*) FROM Airlines AS T1 INNER JOIN `Air Carriers` AS T2 ON T1.OP_CARRIER_AIRLINE_ID = T2.Code WHERE T1.FL_DATE = '2018/8/2' AND T2.Description = 'Alaska Airlines Inc.: AS' AND T1.DEP_DELAY > 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Tell the number of fights landed earlier on Miami Airport on 2018/8/12.",
+        "query": "SELECT COUNT(*) FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.DEST WHERE T2.FL_DATE = '2018/8/12' AND T2.DEST = 'MIA' AND T2.ARR_DELAY < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many flights from American Airlines were cancelled due to a type A cancellation code?",
+        "query": "SELECT COUNT(*) FROM Airlines AS T1 INNER JOIN `Air Carriers` AS T2 ON T1.OP_CARRIER_AIRLINE_ID = T2.Code WHERE T1.CANCELLATION_CODE = 'A' AND T2.Description = 'American Airlines Inc.: AA' AND T1.CANCELLED = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many flights of Endeavor Air Inc. were faster than scheduled on 2018/8/31?",
+        "query": "SELECT SUM(CASE WHEN T1.ACTUAL_ELAPSED_TIME < CRS_ELAPSED_TIME THEN 1 ELSE 0 END) AS count FROM Airlines AS T1 INNER JOIN `Air Carriers` AS T2 ON T1.OP_CARRIER_AIRLINE_ID = T2.Code WHERE T1.FL_DATE = '2018/8/31' AND T2.Description = 'Endeavor Air Inc.: 9E'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many planes of Spirit Air Lines took off on 2018/8/7?",
+        "query": "SELECT COUNT(T2.Code) FROM Airlines AS T1 INNER JOIN `Air Carriers` AS T2 ON T1.OP_CARRIER_AIRLINE_ID = T2.Code WHERE T1.FL_DATE = '2018/8/7' AND T2.Description = 'Spirit Air Lines: NK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "For the flight with the tail number 'N702SK', which air carrier does it belong to?",
+        "query": "SELECT T2.Description FROM Airlines AS T1 INNER JOIN `Air Carriers` AS T2 ON T1.OP_CARRIER_AIRLINE_ID = T2.Code WHERE T1.TAIL_NUM = 'N702SK' GROUP BY T2.Description"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Provide the name of the airport which landed the most number of flights on 2018/8/15.",
+        "query": "SELECT T1.Description FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.DEST WHERE T2.FL_DATE = '2018/8/15' ORDER BY T2.DEST DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "For the flight from ATL to PHL on 2018/8/1 that scheduled local departure time as \"2040\", which air carrier does this flight belong to?",
+        "query": "SELECT T2.Description FROM Airlines AS T1 INNER JOIN `Air Carriers` AS T2 ON T1.OP_CARRIER_AIRLINE_ID = T2.Code WHERE T1.FL_DATE = '2018/8/1' AND T1.ORIGIN = 'ATL' AND T1.DEST = 'PHL' AND T1.CRS_DEP_TIME = '2040' GROUP BY T2.Description"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Tell the number of flights that landed at Lake Charles Regional Airport on 2018/8/15.",
+        "query": "SELECT COUNT(T1.Code) FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.DEST WHERE T2.FL_DATE = '2018/8/15' AND T1.Description = 'Lake Charles, LA: Lake Charles Regional'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many flights were there from San Diego International airport to Los Angeles International airport in the August of 2018?",
+        "query": "SELECT COUNT(FL_DATE) FROM Airlines WHERE FL_DATE LIKE '2018/8%' AND ORIGIN = ( SELECT T2.ORIGIN FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.ORIGIN WHERE T1.Description = 'San Diego, CA: San Diego International' ) AND DEST = ( SELECT T4.DEST FROM Airports AS T3 INNER JOIN Airlines AS T4 ON T3.Code = T4.DEST WHERE T3.Description = 'Los Angeles, CA: Los Angeles International' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the percentage of flights from Los Angeles International airport that were cancelled due to a type C cancellation code?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.CANCELLATION_CODE = 'C' THEN 1.0 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.ORIGIN WHERE T2.FL_DATE = '2018/8/15' AND T2.CANCELLATION_CODE IS NOT NULL AND T1.Description = 'Los Angeles, CA: Los Angeles International'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the percentage of flights which landed at Pittsburgh were faster than scheduled?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.ACTUAL_ELAPSED_TIME < T1.CRS_ELAPSED_TIME THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM Airlines AS T1 INNER JOIN Airports AS T2 ON T2.Code = T1.DEST WHERE T2.Description LIKE '%Pittsburgh%' AND T1.CRS_ELAPSED_TIME IS NOT NULL AND T1.ACTUAL_ELAPSED_TIME IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the description of the airline code 19049?",
+        "query": "SELECT Description FROM `Air Carriers` WHERE Code = 19049"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many flights departed on time on 8/1/2018?",
+        "query": "SELECT COUNT(*) FROM Airlines WHERE FL_DATE = '2018/8/1' AND DEP_DELAY <= 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What are the codes of the airport found in Ankara, Turkey?",
+        "query": "SELECT Code FROM Airports WHERE Description LIKE '%Ankara, Turkey%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How long was the longest minute delay caused by a weather problem in airport id 12264?",
+        "query": "SELECT WEATHER_DELAY FROM Airlines WHERE ORIGIN_AIRPORT_ID = 12264 ORDER BY WEATHER_DELAY DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the IATA code of the Anita Bay Airport in Anita Bay, Alaska?",
+        "query": "SELECT Code FROM Airports WHERE Description = 'Anita Bay, AK: Anita Bay Airport'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the origin airport id that recorded the longest delay due to a late aircraft?",
+        "query": "SELECT ORIGIN_AIRPORT_ID FROM Airlines ORDER BY LATE_AIRCRAFT_DELAY DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many flights depart to Hartsfield-Jackson Atlanta International from Chicago O'Hare International?",
+        "query": "SELECT COUNT(FL_DATE) FROM Airlines WHERE ORIGIN = ( SELECT T2.ORIGIN FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.ORIGIN WHERE T1.Description = 'Chicago, IL: Chicago O''Hare International' ) AND DEST = ( SELECT T4.DEST FROM Airports AS T3 INNER JOIN Airlines AS T4 ON T3.Code = T4.DEST WHERE T3.Description = 'Atlanta, GA: Hartsfield-Jackson Atlanta International' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many planes does Southwest Airlines Co. have?",
+        "query": "SELECT COUNT(T3.TAIL_NUM) FROM ( SELECT T1.TAIL_NUM FROM Airlines AS T1 INNER JOIN `Air Carriers` AS T2 ON T1.OP_CARRIER_AIRLINE_ID = T2.Code WHERE T2.Description = 'Southwest Airlines Co.: WN' GROUP BY T1.TAIL_NUM ) T3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "On August 2018, which day had the highest number of cancelled flights due to the most serious reasons in Dallas/Fort Worth International?",
+        "query": "SELECT T2.FL_DATE FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.ORIGIN WHERE T2.FL_DATE LIKE '2018/8%' AND T1.Description = 'Dallas/Fort Worth, TX: Dallas/Fort Worth International' AND T2.ORIGIN = 'DFW' AND T2.CANCELLED = 1 AND T2.CANCELLATION_CODE = 'A' GROUP BY T2.FL_DATE ORDER BY COUNT(T2.FL_DATE) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "List the tail numbers of all the aircraft that arrived on time at Meadows Field airport in August of 2018?",
+        "query": "SELECT T2.TAIL_NUM FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.DEST WHERE T2.FL_DATE LIKE '2018/8%' AND T1.Description = 'Bakersfield, CA: Meadows Field' AND T2.DEST = 'BFL' AND T2.ARR_DELAY <= 0 GROUP BY T2.TAIL_NUM"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Among the airports whose destination is Logan International, what is the airline id of the carrier operator with the highest delay in minutes due to security?",
+        "query": "SELECT T2.OP_CARRIER_AIRLINE_ID FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.DEST WHERE T1.Description = 'Boston, MA: Logan International' AND T2.DEST = 'BOS' ORDER BY T2.SECURITY_DELAY DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What are the names of the top 5 airlines with the highest number of aircraft?",
+        "query": "SELECT T2.Description FROM Airlines AS T1 INNER JOIN `Air Carriers` AS T2 ON T1.OP_CARRIER_AIRLINE_ID = T2.Code GROUP BY T2.Description ORDER BY T1.TAIL_NUM DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the name of the airline with the highest number of non-cancelled flights?",
+        "query": "SELECT T2.Description FROM Airlines AS T1 INNER JOIN `Air Carriers` AS T2 ON T1.OP_CARRIER_AIRLINE_ID = T2.Code WHERE T1.CANCELLED = 0 GROUP BY T2.Description ORDER BY COUNT(T1.CANCELLED) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Give the name of the airline to which tail number N202NN belongs to.",
+        "query": "SELECT T2.Description FROM Airlines AS T1 INNER JOIN `Air Carriers` AS T2 ON T1.OP_CARRIER_AIRLINE_ID = T2.Code WHERE T1.TAIL_NUM = 'N202NN' GROUP BY T2.Description"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the name of the airline that flew the most flights to Chicago Midway International?",
+        "query": "SELECT T3.Description FROM Airports AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.DEST INNER JOIN `Air Carriers` AS T3 ON T2.OP_CARRIER_AIRLINE_ID = T3.Code WHERE T1.Description = 'Chicago, IL: Chicago Midway International' AND T2.DEST = 'MDW' GROUP BY T3.Description ORDER BY COUNT(T3.Description) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the tail number of a Compass Airline's plane that flew the most number of flights from LAX to ABQ?",
+        "query": "SELECT T2.OP_CARRIER_AIRLINE_ID FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T1.Description = 'Compass Airlines: CP' AND T2.ORIGIN = 'LAX' AND T2.DEST = 'ABQ' GROUP BY T2.OP_CARRIER_AIRLINE_ID ORDER BY COUNT(T2.OP_CARRIER_AIRLINE_ID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Which airport did Republic Airline fly the most from?",
+        "query": "SELECT T2.DEST FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T1.Description = 'Republic Airline: YX' GROUP BY T2.DEST ORDER BY COUNT(T2.DEST) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Which airline does the aircraft with the fastest flight belong to?",
+        "query": "SELECT T1.OP_CARRIER_AIRLINE_ID FROM Airlines AS T1 INNER JOIN Airports AS T2 ON T1.ORIGIN = T2.Code WHERE T1.ACTUAL_ELAPSED_TIME IS NOT NULL AND T1.CRS_ELAPSED_TIME IS NOT NULL ORDER BY T1.ACTUAL_ELAPSED_TIME - T1.CRS_ELAPSED_TIME ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many hours in total did all of the Delta Air Lines aircraft were delayed due to a late aircraft in August of 2018? Identify the plane number of the aircraft with the highest delayed hours.",
+        "query": "SELECT T1.TAIL_NUM, SUM(CAST(T1.LATE_AIRCRAFT_DELAY AS REAL) / 60) AS delay FROM Airlines AS T1 INNER JOIN `Air Carriers` AS T2 ON T2.Code = T1.OP_CARRIER_AIRLINE_ID WHERE T1.FL_DATE LIKE '2018/8/%' AND T2.Description = 'Delta Air Lines Inc.: DL' ORDER BY delay DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Please list any three airports with their codes.",
+        "query": "SELECT Code, Description FROM Airports LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the code of Mississippi Valley Airlines?",
+        "query": "SELECT Code FROM `Air Carriers` WHERE Description LIKE 'Mississippi Valley Airlines%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the scheduled local departure time and the actual departure time of the flight from Philadelphia to Harrisburg with the plane's tail number N627AE on the 13th of August 2018?",
+        "query": "SELECT CRS_DEP_TIME, DEP_TIME FROM Airlines WHERE ORIGIN = 'PHL' AND DEST = 'MDT' AND TAIL_NUM = 'N627AE' AND FL_DATE = '2018/8/13'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many flights on the 1st of August 2018 were coming from Allentown, Pennsylvania?",
+        "query": "SELECT COUNT(*) FROM Airlines WHERE FL_DATE = '2018/8/1' AND ORIGIN = 'ABE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the only flight destination for flights from Albany?",
+        "query": "SELECT DEST FROM Airlines WHERE ORIGIN = 'ABY' GROUP BY DEST"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many flights from Dallas to Santa Ana departed on time?",
+        "query": "SELECT COUNT(*) FROM Airlines WHERE DEST = 'SNA' AND ORIGIN = 'DFW' AND DEP_DELAY = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many flights from Charlotte Douglas International Airport to Austin - Bergstrom International Airport experienced serious reasons that cause flight cancellation?",
+        "query": "SELECT COUNT(*) FROM Airlines AS T1 INNER JOIN Airports AS T2 ON T1.ORIGIN = T2.Code WHERE T1.ORIGIN = 'CLT' AND T1.DEST = 'AUS' AND T2.Description = 'Charlotte, NC: Charlotte Douglas International' AND T1.CANCELLATION_CODE = 'A'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Which flight carrier operator has the most cancelled flights?",
+        "query": "SELECT T1.Description FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID ORDER BY T2.CANCELLED DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the actual departure time of JetBlue Airways with the plane's tail number N903JB to Fort Lauderdale-Hollywood International Airport on the 20th of August 2018?",
+        "query": "SELECT T1.DEP_TIME FROM Airlines AS T1 INNER JOIN `Air Carriers` AS T2 ON T1.OP_CARRIER_AIRLINE_ID = T2.Code INNER JOIN Airports AS T3 ON T1.DEST = T3.Code WHERE T1.FL_DATE = '2018/8/20' AND T1.TAIL_NUM = 'N903JB' AND T2.Description LIKE '%JetBlue Airways%' AND T3.Description LIKE '%Fort Lauderdale-Hollywood%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Which flight carrier operator flies from Atlantic City to Fort Lauderdale?",
+        "query": "SELECT T2.Description FROM Airlines AS T1 INNER JOIN `Air Carriers` AS T2 ON T1.OP_CARRIER_AIRLINE_ID = T2.Code WHERE T1.ORIGIN = 'ACY' AND T1.DEST = 'FLL' GROUP BY T2.Description"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the airport description of the airport code A11?",
+        "query": "SELECT Description FROM Airports WHERE Code = 'A11'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the total number of flights that have Oklahoma as their origin?",
+        "query": "SELECT COUNT(*) AS num FROM Airlines WHERE Origin = 'OKC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many airports have a code starting with the letter C?",
+        "query": "SELECT COUNT(*) FROM Airports WHERE Code LIKE 'C%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Provide the destinations of flight number 1596.",
+        "query": "SELECT DEST FROM Airlines WHERE OP_CARRIER_FL_NUM = 1596"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "List the description of the airports that have code that ends with number 3?",
+        "query": "SELECT Description FROM Airports WHERE Code LIKE '%3'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Give the code of the airport described as Driftwood Bay, AK: Driftwood Bay Airport.",
+        "query": "SELECT Code FROM Airports WHERE Description = 'Driftwood Bay, AK: Driftwood Bay Airport'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many cancelled flights are there?",
+        "query": "SELECT COUNT(*) FROM Airlines WHERE CANCELLED = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "List the tail number of flights that flew on August 17, 2018.",
+        "query": "SELECT TAIL_NUM FROM Airlines WHERE FL_DATE = '2018/8/17' GROUP BY TAIL_NUM"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Provide the origin of the flight that has the shortest actual elapsed time.",
+        "query": "SELECT ORIGIN FROM Airlines ORDER BY ACTUAL_ELAPSED_TIME ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Provide the date and tail number of flight with air carrier \"Ross Aviation Inc.: GWE\".",
+        "query": "SELECT T1.FL_DATE, T1.TAIL_NUM FROM Airlines AS T1 INNER JOIN `Air Carriers` AS T2 ON T1.OP_CARRIER_AIRLINE_ID = T2.Code WHERE T2.Description = 'Ross Aviation Inc.: GWE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "List the air carrier description and code of the flight with the shortest arrival time.",
+        "query": "SELECT T1.Description, T1.Code FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID ORDER BY T2.ARR_TIME ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "How many flights of air carrier called JetBlue Airways: B6 have 0 new arrival delay?",
+        "query": "SELECT COUNT(*) FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T1.Description LIKE '%JetBlue Airways: B6%' AND T2.ARR_DELAY_NEW = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Provide the air carrier description of all flights arriving at Miami.",
+        "query": "SELECT T1.Description FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T2.DEST = 'MIA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the air carrier's description of the cancelled flights?",
+        "query": "SELECT T1.Description FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T2.CANCELLED = 1 GROUP BY T1.Description"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Give the actual elapsed time of the flights with air carrier named Semo Aviation Inc.: SEM.",
+        "query": "SELECT T2.ACTUAL_ELAPSED_TIME FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T1.Description = 'Semo Aviation Inc.: SEM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Among the flights with air carrier described as Asap Air Inc.: ASP, what is the tail number of the flight with the longest departure delay?",
+        "query": "SELECT T2.TAIL_NUM FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T1.Description = 'Asap Air Inc.: ASP' ORDER BY T2.DEP_DELAY DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "List the air carrier's description of the flights with 0 departure delay.",
+        "query": "SELECT T1.Description FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T2.DEP_DELAY = 0 GROUP BY T1.Description"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Provide the air carrier description of the flight with the highest actual elapsed time.",
+        "query": "SELECT T1.Description FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID ORDER BY T2.ACTUAL_ELAPSED_TIME DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What are the destinations of the flights with air carrier description \"Southeast Alaska Airlines: WEB\"?",
+        "query": "SELECT T2.DEST FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T1.Description = 'Southeast Alaska Airlines: WEB'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "From August 10 to August 20, 2018, how many cancelled flights of air carrier named Spirit Air Lines: NK are there?",
+        "query": "SELECT COUNT(*) FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T1.Description = 'Spirit Air Lines: NK' AND T2.CANCELLED = 0 AND T2.FL_DATE BETWEEN '2018/8/10' AND '2018/8/20'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the total number of flights that flew on August 2, 2018 with air carrier described as Horizon Air?",
+        "query": "SELECT COUNT(*) FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T1.Description LIKE '%Horizon Air%' AND T2.FL_DATE = '2018/8/2'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What is the tail number of the flight with air carrier named Iscargo Hf: ICQ and arrival time of 1000 and below?",
+        "query": "SELECT T2.TAIL_NUM FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T2.ARR_TIME <= 1000 AND T1.Description = 'Iscargo Hf: ICQ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "List the flight date of flights with air carrier described as Profit Airlines Inc.: XBH which have an actual elapsed time below 100.",
+        "query": "SELECT T2.FL_DATE FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T2.ACTUAL_ELAPSED_TIME < 100 AND T1.Description = 'Profit Airlines Inc.: XBH'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Among the flights with air carrier named Republic Airline, how many of the flights have departure delay of 30 minutes and above?",
+        "query": "SELECT COUNT(*) FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T1.Description LIKE '%Republic Airline%' AND T2.DEP_DELAY > 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "What are the air carriers of the flights that flew on August 25, 2018 that have departure delay of -5?",
+        "query": "SELECT T1.Description FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T2.FL_DATE = '2018/8/25' GROUP BY T1.Description"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Provide the air carrier description of the flight with a tail number N922US from Phoenix.",
+        "query": "SELECT T2.Description FROM Airlines AS T1 INNER JOIN `Air Carriers` AS T2 ON T2.Code = T1.OP_CARRIER_AIRLINE_ID WHERE T1.TAIL_NUM = 'N922US' AND T1.ORIGIN = 'PHX' GROUP BY T2.Description"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Give the air carrier description of the flights that have an earlier arrival and departure.",
+        "query": "SELECT T1.Description FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T2.ARR_DELAY < 0 AND T2.DEP_DELAY < 0 GROUP BY T1.Description"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Among the flights with air carrier \"Southwest Airlines Co.: WN\", provide the tail number of flights with an actual elapsed time lower than the 80% of the average actual elapsed time of listed flights.",
+        "query": "SELECT T2.TAIL_NUM FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T1.Description = 'Southwest Airlines Co.: WN' AND T2.ACTUAL_ELAPSED_TIME < ( SELECT AVG(ACTUAL_ELAPSED_TIME) * 0.8 FROM Airlines )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "List the air carrier's description with arrival time lower than the 40% of the average arrival time of flights that flew to Phoenix.",
+        "query": "SELECT T1.Description FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T2.DEST = 'PHX' AND T2.ARR_TIME < ( SELECT AVG(ARR_TIME) * 0.4 FROM Airlines ) GROUP BY T1.Description"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "airline",
+        "question": "Among the flights of the air carrier described as American Airlines, what is the percentage of the flights with earlier departure?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.DEP_DELAY < 0 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM `Air Carriers` AS T1 INNER JOIN Airlines AS T2 ON T1.Code = T2.OP_CARRIER_AIRLINE_ID WHERE T1.Description LIKE '%American Airlines%'"
+    }
+]

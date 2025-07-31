@@ -1,0 +1,176 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "the names of models that launched between 2002 and 2004.",
+        "query": "SELECT Model_name FROM chip_model WHERE Launch_year BETWEEN 2002 AND 2004;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "Which model has the least amount of RAM? List the model name and the amount of RAM.",
+        "query": "SELECT Model_name ,  RAM_MiB FROM chip_model ORDER BY RAM_MiB ASC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "What are the chip model and screen mode of the phone with hardware model name \"LG-P760\"?",
+        "query": "SELECT chip_model ,  screen_mode FROM phone WHERE Hardware_Model_name = \"LG-P760\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "How many phone hardware models are produced by the company named \"Nokia Corporation\"?",
+        "query": "SELECT count(*) FROM phone WHERE Company_name = \"Nokia Corporation\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "What is maximum and minimum RAM size of phone produced by company named \"Nokia Corporation\"?",
+        "query": "SELECT max(T1.RAM_MiB) ,  min(T1.RAM_MiB) FROM chip_model AS T1 JOIN phone AS T2 ON T1.Model_name  =  T2.chip_model WHERE T2.Company_name = \"Nokia Corporation\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "What is the average ROM size of phones produced by the company named \"Nokia Corporation\"?",
+        "query": "SELECT avg(T1.ROM_MiB) FROM chip_model AS T1 JOIN phone AS T2 ON T1.Model_name  =  T2.chip_model WHERE T2.Company_name = \"Nokia Corporation\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "List the hardware model name and company name for all the phones that were launched in year 2002 or have RAM size greater than 32.",
+        "query": "SELECT T2.Hardware_Model_name ,  T2.Company_name FROM chip_model AS T1 JOIN phone AS T2 ON T1.Model_name  =  T2.chip_model WHERE T1.Launch_year = 2002 OR T1.RAM_MiB  >  32;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "Find all phones that have word 'Full' in their accreditation types. List the Hardware Model name and Company name.",
+        "query": "SELECT Hardware_Model_name ,  Company_name FROM phone WHERE Accreditation_type LIKE 'Full';"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "Find the Char cells, Pixels and Hardware colours for the screen of the phone whose hardware model name is \"LG-P760\".",
+        "query": "SELECT T1.Char_cells ,  T1.Pixels ,  T1.Hardware_colours FROM screen_mode AS T1 JOIN phone AS T2 ON T1.Graphics_mode = T2.screen_mode WHERE T2.Hardware_Model_name = \"LG-P760\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "List the hardware model name and company name for the phone whose screen mode type is \"Graphics.\"",
+        "query": "SELECT T2.Hardware_Model_name ,  T2.Company_name FROM screen_mode AS T1 JOIN phone AS T2 ON T1.Graphics_mode = T2.screen_mode WHERE T1.Type  =  \"Graphics\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "Find the name of the company that has the least number of phone models. List the company name and the number of phone model produced by that company.",
+        "query": "SELECT Company_name ,  count(*) FROM phone GROUP BY Company_name ORDER BY count(*) ASC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "List the name of the company that produced more than one phone model.",
+        "query": "SELECT Company_name FROM phone GROUP BY Company_name HAVING count(*)  >  1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "List the maximum, minimum and average number of used kb in screen mode.",
+        "query": "SELECT max(used_kb) , min(used_kb) , avg(used_kb) FROM screen_mode;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "List the name of the phone model launched in year 2002 and with the highest RAM size.",
+        "query": "SELECT T2.Hardware_Model_name FROM chip_model AS T1 JOIN phone AS T2 ON T1.Model_name  =  T2.chip_model WHERE T1.Launch_year = 2002 ORDER BY T1.RAM_MiB DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "What are the wifi and screen mode type of the hardware model named \"LG-P760\"?",
+        "query": "SELECT T1.WiFi , T3.Type FROM chip_model AS T1 JOIN phone AS T2 ON T1.Model_name  =  T2.chip_model JOIN screen_mode AS T3 ON T2.screen_mode = T3.Graphics_mode WHERE T2.Hardware_Model_name = \"LG-P760\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "List the hardware model name for the phones that have screen mode type \"Text\" or RAM size greater than 32.",
+        "query": "SELECT T2.Hardware_Model_name FROM chip_model AS T1 JOIN phone AS T2 ON T1.Model_name  =  T2.chip_model JOIN screen_mode AS T3 ON T2.screen_mode = T3.Graphics_mode WHERE T3.Type = \"Text\" OR T1.RAM_MiB  >  32;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "List the hardware model name for the phones that were produced by \"Nokia Corporation\" or whose screen mode type is \"Graphics.\"",
+        "query": "SELECT DISTINCT T2.Hardware_Model_name FROM screen_mode AS T1 JOIN phone AS T2 ON T1.Graphics_mode = T2.screen_mode WHERE T1.Type  =  \"Graphics\" OR t2.Company_name  =  \"Nokia Corporation\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "List the hardware model name for the phons that were produced by \"Nokia Corporation\" but whose screen mode type is not Text.",
+        "query": "SELECT DISTINCT T2.Hardware_Model_name FROM screen_mode AS T1 JOIN phone AS T2 ON T1.Graphics_mode = T2.screen_mode WHERE t2.Company_name  =  \"Nokia Corporation\" AND T1.Type != \"Text\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "List the phone hardware model and company name for the phones whose screen usage in kb is between 10 and 15.",
+        "query": "SELECT DISTINCT T2.Hardware_Model_name , T2.Company_name FROM screen_mode AS T1 JOIN phone AS T2 ON T1.Graphics_mode = T2.screen_mode WHERE T1.used_kb BETWEEN 10 AND 15;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "Find the number of phones for each accreditation type.",
+        "query": "SELECT Accreditation_type ,  count(*) FROM phone GROUP BY Accreditation_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "How many phones belongs to each accreditation type?",
+        "query": "SELECT Accreditation_type ,  count(*) FROM phone GROUP BY Accreditation_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "Find the accreditation level that more than 3 phones use.",
+        "query": "SELECT Accreditation_level FROM phone GROUP BY Accreditation_level HAVING count(*)  >  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "Find the details for all chip models.",
+        "query": "SELECT * FROM chip_model"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "How many models do not have the wifi function?",
+        "query": "SELECT count(*) FROM chip_model WHERE wifi  =  'No'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "Count the number of chip model that do not have wifi.",
+        "query": "SELECT count(*) FROM chip_model WHERE wifi  =  'No'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "List all the model names sorted by their launch year.",
+        "query": "SELECT model_name FROM chip_model ORDER BY launch_year"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "Find the average ram mib size of the chip models that are never used by any phone.",
+        "query": "SELECT avg(RAM_MiB) FROM chip_model WHERE model_name NOT IN (SELECT chip_model FROM phone)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "Find the names of the chip models that are not used by any phone with full accreditation type.",
+        "query": "SELECT model_name FROM chip_model EXCEPT SELECT chip_model FROM phone WHERE Accreditation_type  =  'Full'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "phone_1",
+        "question": "Find the pixels of the screen modes that are used by both phones with full accreditation types and phones with Provisional accreditation types.",
+        "query": "SELECT t1.pixels FROM screen_mode AS t1 JOIN phone AS t2 ON t1.Graphics_mode  =  t2.screen_mode WHERE t2.Accreditation_type  =  'Provisional' INTERSECT SELECT t1.pixels FROM screen_mode AS t1 JOIN phone AS t2 ON t1.Graphics_mode  =  t2.screen_mode WHERE t2.Accreditation_type  =  'Full'"
+    }
+]

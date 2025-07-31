@@ -1,0 +1,266 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find all the distinct district names ordered by city area in descending.",
+        "query": "SELECT DISTINCT District_name FROM district ORDER BY city_area DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What are the different district names in order of descending city area?",
+        "query": "SELECT DISTINCT District_name FROM district ORDER BY city_area DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find the list of page size which have more than 3 product listed",
+        "query": "SELECT max_page_size FROM product GROUP BY max_page_size HAVING count(*)  >  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What is the maximum page size for everything that has more than 3 products listed?",
+        "query": "SELECT max_page_size FROM product GROUP BY max_page_size HAVING count(*)  >  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find the name and population of district with population between 200000 and 2000000",
+        "query": "SELECT District_name ,  City_Population FROM district WHERE City_Population BETWEEN 200000 AND 2000000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What are the district names and city populations for all districts that between 200,000 and 2,000,000 residents?",
+        "query": "SELECT District_name ,  City_Population FROM district WHERE City_Population BETWEEN 200000 AND 2000000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find the name all districts with city area greater than 10 or population larger than 100000",
+        "query": "SELECT district_name FROM district WHERE city_area  >  10 OR City_Population  >  100000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What are the names of all districts with a city area greater than 10 or have more than 100000 people living there?",
+        "query": "SELECT district_name FROM district WHERE city_area  >  10 OR City_Population  >  100000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Which district has the largest population?",
+        "query": "SELECT district_name FROM district ORDER BY city_population DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What is the name of the district with the most residents?",
+        "query": "SELECT district_name FROM district ORDER BY city_population DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Which district has the least area?",
+        "query": "SELECT district_name FROM district ORDER BY city_area ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What is the name of the district with the smallest area?",
+        "query": "SELECT district_name FROM district ORDER BY city_area ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find the total population of the top 3 districts with the largest area.",
+        "query": "SELECT sum(city_population) FROM district ORDER BY city_area DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What is the total number of residents for the districts with the 3 largest areas?",
+        "query": "SELECT sum(city_population) FROM district ORDER BY city_area DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find all types of store and number of them.",
+        "query": "SELECT TYPE ,  count(*) FROM store GROUP BY TYPE"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "For each type of store, how many of them are there?",
+        "query": "SELECT TYPE ,  count(*) FROM store GROUP BY TYPE"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find the names of all stores in Khanewal District.",
+        "query": "SELECT t1.store_name FROM store AS t1 JOIN store_district AS t2 ON t1.store_id  =  t2.store_id JOIN district AS t3 ON t2.district_id  =  t3.district_id WHERE t3.district_name  =  \"Khanewal District\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What are the names of all the stores located in Khanewal District?",
+        "query": "SELECT t1.store_name FROM store AS t1 JOIN store_district AS t2 ON t1.store_id  =  t2.store_id JOIN district AS t3 ON t2.district_id  =  t3.district_id WHERE t3.district_name  =  \"Khanewal District\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find all the stores in the district with the most population.",
+        "query": "SELECT t1.store_name FROM store AS t1 JOIN store_district AS t2 ON t1.store_id  =  t2.store_id WHERE district_id  =  (SELECT district_id FROM district ORDER BY city_population DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What are the names of all the stores in the largest district by population?",
+        "query": "SELECT t1.store_name FROM store AS t1 JOIN store_district AS t2 ON t1.store_id  =  t2.store_id WHERE district_id  =  (SELECT district_id FROM district ORDER BY city_population DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Which city is the headquarter of the store named \"Blackville\" in?",
+        "query": "SELECT t3.headquartered_city FROM store AS t1 JOIN store_district AS t2 ON t1.store_id  =  t2.store_id JOIN district AS t3 ON t2.district_id  =  t3.district_id WHERE t1.store_name  =  \"Blackville\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What city is the headquarter of the store Blackville?",
+        "query": "SELECT t3.headquartered_city FROM store AS t1 JOIN store_district AS t2 ON t1.store_id  =  t2.store_id JOIN district AS t3 ON t2.district_id  =  t3.district_id WHERE t1.store_name  =  \"Blackville\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find the number of stores in each city.",
+        "query": "SELECT t3.headquartered_city ,  count(*) FROM store AS t1 JOIN store_district AS t2 ON t1.store_id  =  t2.store_id JOIN district AS t3 ON t2.district_id  =  t3.district_id GROUP BY t3.headquartered_city"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "How many stores are headquarted in each city?",
+        "query": "SELECT t3.headquartered_city ,  count(*) FROM store AS t1 JOIN store_district AS t2 ON t1.store_id  =  t2.store_id JOIN district AS t3 ON t2.district_id  =  t3.district_id GROUP BY t3.headquartered_city"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find the city with the most number of stores.",
+        "query": "SELECT t3.headquartered_city FROM store AS t1 JOIN store_district AS t2 ON t1.store_id  =  t2.store_id JOIN district AS t3 ON t2.district_id  =  t3.district_id GROUP BY t3.headquartered_city ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What is the city with the most number of flagship stores?",
+        "query": "SELECT t3.headquartered_city FROM store AS t1 JOIN store_district AS t2 ON t1.store_id  =  t2.store_id JOIN district AS t3 ON t2.district_id  =  t3.district_id GROUP BY t3.headquartered_city ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What is the average pages per minute color?",
+        "query": "SELECT avg(pages_per_minute_color) FROM product"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What is the average number of pages per minute color?",
+        "query": "SELECT avg(pages_per_minute_color) FROM product"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What products are available at store named \"Miramichi\"?",
+        "query": "SELECT t1.product FROM product AS t1 JOIN store_product AS t2 ON t1.product_id  =  t2.product_id JOIN store AS t3 ON t2.store_id  =  t3.store_id WHERE t3.store_name  =  \"Miramichi\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What products are sold at the store named Miramichi?",
+        "query": "SELECT t1.product FROM product AS t1 JOIN store_product AS t2 ON t1.product_id  =  t2.product_id JOIN store AS t3 ON t2.store_id  =  t3.store_id WHERE t3.store_name  =  \"Miramichi\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find products with max page size as \"A4\" and pages per minute color smaller than 5.",
+        "query": "SELECT product FROM product WHERE max_page_size  =  \"A4\" AND pages_per_minute_color  <  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What are the products with the maximum page size A4 that also have a pages per minute color smaller than 5?",
+        "query": "SELECT product FROM product WHERE max_page_size  =  \"A4\" AND pages_per_minute_color  <  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find products with max page size as \"A4\" or pages per minute color smaller than 5.",
+        "query": "SELECT product FROM product WHERE max_page_size  =  \"A4\" OR pages_per_minute_color  <  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What are the products with the maximum page size eqal to A4 or a pages per minute color less than 5?",
+        "query": "SELECT product FROM product WHERE max_page_size  =  \"A4\" OR pages_per_minute_color  <  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find all the product whose name contains the word \"Scanner\".",
+        "query": "SELECT product FROM product WHERE product LIKE \"%Scanner%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What are all of the products whose name includes the substring \"Scanner\"?",
+        "query": "SELECT product FROM product WHERE product LIKE \"%Scanner%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find the most prominent max page size among all the products.",
+        "query": "SELECT max_page_size FROM product GROUP BY max_page_size ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What is the most common maximum page size?",
+        "query": "SELECT max_page_size FROM product GROUP BY max_page_size ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find the name of the products that are not using the most frequently-used max page size.",
+        "query": "SELECT product FROM product WHERE product != (SELECT max_page_size FROM product GROUP BY max_page_size ORDER BY count(*) DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What are the names of all products that are not the most frequently-used maximum page size?",
+        "query": "SELECT product FROM product WHERE product != (SELECT max_page_size FROM product GROUP BY max_page_size ORDER BY count(*) DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find the total population of the districts where the area is bigger than the average city area.",
+        "query": "SELECT sum(city_population) FROM district WHERE city_area  >  (SELECT avg(city_area) FROM district)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What is the total population for all the districts that have an area larger tahn the average city area?",
+        "query": "SELECT sum(city_population) FROM district WHERE city_area  >  (SELECT avg(city_area) FROM district)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "Find the names of districts where have both city mall and village store type stores.",
+        "query": "SELECT t3.District_name FROM store AS t1 JOIN store_district AS t2 ON t1.store_id  =  t2.store_id JOIN district AS t3 ON t2.district_id  =  t3.district_id WHERE t1.Type  =  \"City Mall\" INTERSECT SELECT t3.District_name FROM store AS t1 JOIN store_district AS t2 ON t1.store_id  =  t2.store_id JOIN district AS t3 ON t2.district_id  =  t3.district_id WHERE t1.Type  =  \"Village Store\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_product",
+        "question": "What are the names of the districts that have both mall and village store style shops?",
+        "query": "SELECT t3.District_name FROM store AS t1 JOIN store_district AS t2 ON t1.store_id  =  t2.store_id JOIN district AS t3 ON t2.district_id  =  t3.district_id WHERE t1.Type  =  \"City Mall\" INTERSECT SELECT t3.District_name FROM store AS t1 JOIN store_district AS t2 ON t1.store_id  =  t2.store_id JOIN district AS t3 ON t2.district_id  =  t3.district_id WHERE t1.Type  =  \"Village Store\""
+    }
+]

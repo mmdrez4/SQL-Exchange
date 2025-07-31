@@ -1,0 +1,242 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "List the names of all the customers in alphabetical order.",
+        "query": "SELECT customer_details FROM customers ORDER BY customer_details"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Sort the customer names in alphabetical order.",
+        "query": "SELECT customer_details FROM customers ORDER BY customer_details"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Find all the policy type codes associated with the customer \"Dayana Robel\"",
+        "query": "SELECT policy_type_code FROM policies AS t1 JOIN customers AS t2 ON t1.customer_id  =  t2.customer_id WHERE t2.customer_details  =  \"Dayana Robel\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "What are the type codes of the policies used by the customer \"Dayana Robel\"?",
+        "query": "SELECT policy_type_code FROM policies AS t1 JOIN customers AS t2 ON t1.customer_id  =  t2.customer_id WHERE t2.customer_details  =  \"Dayana Robel\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Which type of policy is most frequently used? Give me the policy type code.",
+        "query": "SELECT policy_type_code FROM policies GROUP BY policy_type_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Find the type code of the most frequently used policy.",
+        "query": "SELECT policy_type_code FROM policies GROUP BY policy_type_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Find all the policy types that are used by more than 2 customers.",
+        "query": "SELECT policy_type_code FROM policies GROUP BY policy_type_code HAVING count(*)  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Which types of policy are chosen by more than 2 customers? Give me the policy type codes.",
+        "query": "SELECT policy_type_code FROM policies GROUP BY policy_type_code HAVING count(*)  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Find the total and average amount paid in claim headers.",
+        "query": "SELECT sum(amount_piad) ,  avg(amount_piad) FROM claim_headers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "What are the total amount and average amount paid in claim headers?",
+        "query": "SELECT sum(amount_piad) ,  avg(amount_piad) FROM claim_headers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Find the total amount claimed in the most recently created document.",
+        "query": "SELECT sum(t1.amount_claimed) FROM claim_headers AS t1 JOIN claims_documents AS t2 ON t1.claim_header_id  =  t2.claim_id WHERE t2.created_date  =  (SELECT created_date FROM claims_documents ORDER BY created_date LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "How much amount in total were claimed in the most recently created document?",
+        "query": "SELECT sum(t1.amount_claimed) FROM claim_headers AS t1 JOIN claims_documents AS t2 ON t1.claim_header_id  =  t2.claim_id WHERE t2.created_date  =  (SELECT created_date FROM claims_documents ORDER BY created_date LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "What is the name of the customer who has made the largest amount of claim in a single claim?",
+        "query": "SELECT t3.customer_details FROM claim_headers AS t1 JOIN policies AS t2 ON t1.policy_id  =  t2.policy_id JOIN customers AS t3 ON t2.customer_id  =  t3.customer_id WHERE t1.amount_claimed  =  (SELECT max(amount_claimed) FROM claim_headers)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Which customer made the largest amount of claim in a single claim? Return the customer details.",
+        "query": "SELECT t3.customer_details FROM claim_headers AS t1 JOIN policies AS t2 ON t1.policy_id  =  t2.policy_id JOIN customers AS t3 ON t2.customer_id  =  t3.customer_id WHERE t1.amount_claimed  =  (SELECT max(amount_claimed) FROM claim_headers)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "What is the name of the customer who has made the minimum amount of payment in one claim?",
+        "query": "SELECT t3.customer_details FROM claim_headers AS t1 JOIN policies AS t2 ON t1.policy_id  =  t2.policy_id JOIN customers AS t3 ON t2.customer_id  =  t3.customer_id WHERE t1.amount_piad  =  (SELECT min(amount_piad) FROM claim_headers)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Which customer made the smallest amount of claim in one claim? Return the customer details.",
+        "query": "SELECT t3.customer_details FROM claim_headers AS t1 JOIN policies AS t2 ON t1.policy_id  =  t2.policy_id JOIN customers AS t3 ON t2.customer_id  =  t3.customer_id WHERE t1.amount_piad  =  (SELECT min(amount_piad) FROM claim_headers)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Find the names of customers who have no policies associated.",
+        "query": "SELECT customer_details FROM customers EXCEPT SELECT t2.customer_details FROM policies AS t1 JOIN customers AS t2 ON t1.customer_id  =  t2.customer_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "What are the names of customers who do not have any policies?",
+        "query": "SELECT customer_details FROM customers EXCEPT SELECT t2.customer_details FROM policies AS t1 JOIN customers AS t2 ON t1.customer_id  =  t2.customer_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "How many claim processing stages are there in total?",
+        "query": "SELECT count(*) FROM claims_processing_stages"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Find the number of distinct stages in claim processing.",
+        "query": "SELECT count(*) FROM claims_processing_stages"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "What is the name of the claim processing stage that most of the claims are on?",
+        "query": "SELECT t2.claim_status_name FROM claims_processing AS t1 JOIN claims_processing_stages AS t2 ON t1.claim_stage_id  =  t2.claim_stage_id GROUP BY t1.claim_stage_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Which claim processing stage has the most claims? Show the claim status name.",
+        "query": "SELECT t2.claim_status_name FROM claims_processing AS t1 JOIN claims_processing_stages AS t2 ON t1.claim_stage_id  =  t2.claim_stage_id GROUP BY t1.claim_stage_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Find the names of customers whose name contains \"Diana\".",
+        "query": "SELECT customer_details FROM customers WHERE customer_details LIKE \"%Diana%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Which customers have the substring \"Diana\" in their names? Return the customer details.",
+        "query": "SELECT customer_details FROM customers WHERE customer_details LIKE \"%Diana%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Find the names of the customers who have an deputy policy.",
+        "query": "SELECT DISTINCT t2.customer_details FROM policies AS t1 JOIN customers AS t2 ON t1.customer_id  =  t2.customer_id WHERE t1.policy_type_code  =  \"Deputy\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Which customers have an insurance policy with the type code \"Deputy\"? Give me the customer details.",
+        "query": "SELECT DISTINCT t2.customer_details FROM policies AS t1 JOIN customers AS t2 ON t1.customer_id  =  t2.customer_id WHERE t1.policy_type_code  =  \"Deputy\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Find the names of customers who either have an deputy policy or uniformed policy.",
+        "query": "SELECT DISTINCT t2.customer_details FROM policies AS t1 JOIN customers AS t2 ON t1.customer_id  =  t2.customer_id WHERE t1.policy_type_code  =  \"Deputy\" OR t1.policy_type_code  =  \"Uniform\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Which customers have an insurance policy with the type code \"Deputy\" or \"Uniform\"? Return the customer details.",
+        "query": "SELECT DISTINCT t2.customer_details FROM policies AS t1 JOIN customers AS t2 ON t1.customer_id  =  t2.customer_id WHERE t1.policy_type_code  =  \"Deputy\" OR t1.policy_type_code  =  \"Uniform\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Find the names of all the customers and staff members.",
+        "query": "SELECT customer_details FROM customers UNION SELECT staff_details FROM staff"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "What are the names of the customers and staff members?",
+        "query": "SELECT customer_details FROM customers UNION SELECT staff_details FROM staff"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Find the number of records of each policy type and its type code.",
+        "query": "SELECT policy_type_code ,  count(*) FROM policies GROUP BY policy_type_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "For each policy type, return its type code and its count in the record.",
+        "query": "SELECT policy_type_code ,  count(*) FROM policies GROUP BY policy_type_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Find the name of the customer that has been involved in the most policies.",
+        "query": "SELECT t2.customer_details FROM policies AS t1 JOIN customers AS t2 ON t1.customer_id  =  t2.customer_id GROUP BY t2.customer_details ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Which customer have the most policies? Give me the customer details.",
+        "query": "SELECT t2.customer_details FROM policies AS t1 JOIN customers AS t2 ON t1.customer_id  =  t2.customer_id GROUP BY t2.customer_details ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "What is the description of the claim status \"Open\"?",
+        "query": "SELECT claim_status_description FROM claims_processing_stages WHERE claim_status_name  =  \"Open\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Find the description of the claim status \"Open\".",
+        "query": "SELECT claim_status_description FROM claims_processing_stages WHERE claim_status_name  =  \"Open\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "How many distinct claim outcome codes are there?",
+        "query": "SELECT count(DISTINCT claim_outcome_code) FROM claims_processing"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Count the number of distinct claim outcome codes.",
+        "query": "SELECT count(DISTINCT claim_outcome_code) FROM claims_processing"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Which customer is associated with the latest policy?",
+        "query": "SELECT t2.customer_details FROM policies AS t1 JOIN customers AS t2 ON t1.customer_id  =  t2.customer_id WHERE t1.start_date  =  (SELECT max(start_date) FROM policies)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "insurance_and_eClaims",
+        "question": "Find the customer who started a policy most recently.",
+        "query": "SELECT t2.customer_details FROM policies AS t1 JOIN customers AS t2 ON t1.customer_id  =  t2.customer_id WHERE t1.start_date  =  (SELECT max(start_date) FROM policies)"
+    }
+]

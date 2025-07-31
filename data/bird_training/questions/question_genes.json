@@ -1,0 +1,140 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "For the genes that are located in the plasma membrane, please list their number of chromosomes.",
+        "query": "SELECT T1.Chromosome FROM Genes AS T1 INNER JOIN Classification AS T2 ON T1.GeneID = T2.GeneID WHERE T2.Localization = 'plasma membrane'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "How many non-essential genes are located in the nucleus?",
+        "query": "SELECT COUNT(T1.GeneID) FROM Genes AS T1 INNER JOIN Classification AS T2 ON T1.GeneID = T2.GeneID WHERE T2.Localization = 'nucleus' AND T1.Essential = 'Non-Essential'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "Among the genes with nucleic acid metabolism defects, how many of them can be found in the vacuole?",
+        "query": "SELECT COUNT(T1.GeneID) FROM Genes AS T1 INNER JOIN Classification AS T2 ON T1.GeneID = T2.GeneID WHERE T2.Localization = 'vacuole' AND T1.Phenotype = 'Nucleic acid metabolism defects'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "Please list the location of the genes that have the most chromosomes.",
+        "query": "SELECT T2.Localization FROM Genes AS T1 INNER JOIN Classification AS T2 ON T1.GeneID = T2.GeneID ORDER BY T1.Chromosome DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "Among the pairs of genes that are both located in the nucleus, what is the highest expression correlation score?",
+        "query": "SELECT T2.Expression_Corr FROM Genes AS T1 INNER JOIN Interactions AS T2 ON T1.GeneID = T2.GeneID1 INNER JOIN Genes AS T3 ON T3.GeneID = T2.GeneID2 WHERE T1.Localization = 'nucleus' AND T3.Localization = 'nucleus' ORDER BY T2.Expression_Corr DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "What are the functions of the pair of genes that have the lowest expression correlation score?a",
+        "query": "SELECT T1.Function FROM Genes AS T1 INNER JOIN Interactions AS T2 ON T1.GeneID = T2.GeneID1 ORDER BY T2.Expression_Corr ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "Among the pairs of genes that are not from the class of motorproteins, how many of them are negatively correlated?",
+        "query": "SELECT COUNT(T1.GeneID) FROM Genes AS T1 INNER JOIN Interactions AS T2 ON T1.GeneID = T2.GeneID1 WHERE T2.Expression_Corr < 0 AND T1.Class = 'Motorproteins'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "For the pairs of genes with one having 8 chromosomes and the other having 6 chromosomes, what is the highest expression correlation score?",
+        "query": "SELECT T2.Expression_Corr FROM Genes AS T1 INNER JOIN Interactions AS T2 ON T1.GeneID = T2.GeneID1 WHERE T1.Chromosome = 6 OR T1.Chromosome = 8 ORDER BY T2.Expression_Corr DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "Please list the motif of the genes that are located in the cytoplasm and have 7 chromosomes.",
+        "query": "SELECT T2.GeneID1, T2.GeneID2 FROM Genes AS T1 INNER JOIN Interactions AS T2 ON T1.GeneID = T2.GeneID1 WHERE T1.Localization = 'cytoplasm' AND T1.Chromosome = 7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "For the non-essential genes whose functions are transcription, how many of them are not located in the cytoplasm?",
+        "query": "SELECT COUNT(T1.GeneID) FROM Genes AS T1 INNER JOIN Interactions AS T2 ON T1.GeneID = T2.GeneID1 WHERE T1.Localization != 'cytoplasm' AND T1.Function = 'TRANSCRIPTION' AND T1.Essential = 'NON-Essential'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "How many pairs of positively correlated genes are both non-essential?",
+        "query": "SELECT COUNT(T2.GeneID2) FROM Genes AS T1 INNER JOIN Interactions AS T2 ON T1.GeneID = T2.GeneID1 WHERE T2.Expression_Corr > 0 AND T1.Essential = 'Non-Essential'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "If a pair of genes is positively correlated, what is the possibility of it being composed of two genes both with over 10 chromosomes?",
+        "query": "SELECT CAST(SUM(IIF(T1.Chromosome > 10 AND T3.Chromosome > 10, 1, 0)) AS REAL) * 100 / COUNT(T1.GeneID) FROM Genes AS T1 INNER JOIN Interactions AS T2 ON T1.GeneID = T2.GeneID1 INNER JOIN Genes AS T3 ON T3.GeneID = T2.GeneID2 WHERE T2.Expression_Corr > 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "For the pairs of genes both from the class ATPases, what is the average expression correlation score?",
+        "query": "SELECT AVG(T2.Expression_Corr) FROM Genes AS T1 INNER JOIN Interactions AS T2 ON T1.GeneID = T2.GeneID1 WHERE T1.Class = 'ATPases'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "Lists all genes by identifier number located in the cytoplasm and whose function is metabolism.",
+        "query": "SELECT DISTINCT GeneID FROM Genes WHERE Localization = 'cytoplasm' AND Function = 'METABOLISM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "How many different genes do we have if we add those located in the plasma and in the nucleus?",
+        "query": "SELECT COUNT(GeneID) FROM Classification WHERE Localization IN ('plasma', 'nucleus')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "What kind of expression correlation occurs in physical type interacting gene pairs and what percentage of these are negatively correlated?",
+        "query": "SELECT Expression_Corr FROM Interactions WHERE Type = 'Physical' UNION ALL SELECT CAST(SUM(Expression_Corr < 0) AS REAL) * 100 / COUNT(*) FROM Interactions WHERE Type = 'Physical'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "What percentage of genes located in the cytoskeleton are of unknown class? And of these, how many are not conditional phenotypes?",
+        "query": "SELECT SUM(Localization = 'cytoskeleton' AND Phenotype = 'Conditional phenotypes') , CAST(SUM(Localization = 'cytoskeleton') AS REAL) * 100 / COUNT(GeneID) FROM Genes;"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "What type of interactions occurs in genes whose function is cellular transport and transport medicine and are classified as non-essential?",
+        "query": "SELECT T2.Type FROM Genes AS T1 INNER JOIN Interactions AS T2 ON T1.GeneID = T2.GeneID1 WHERE T1.Function = 'TRANSCRIPTION' AND T1.Essential = 'Non-Essential'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "List all genes whose interaction is with genes located in the nucleus in which it is positively correlated.",
+        "query": "SELECT T1.GeneID FROM Genes AS T1 INNER JOIN Interactions AS T2 ON T1.GeneID = T2.GeneID1 WHERE T2.Expression_Corr > 0 AND T1.Localization = 'nucleus'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "Taking all the essential genes of the transcription factors class located in the nucleus as a reference, how many of them carry out a genetic-type interaction with another gene? List them.",
+        "query": "SELECT T2.GeneID1 FROM Genes AS T1 INNER JOIN Interactions AS T2 ON T1.GeneID = T2.GeneID1 WHERE T1.Localization = 'nucleus' AND T1.Class = 'Transcription factors' AND T1.Essential = 'Essential' AND T2.Expression_Corr != 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "Of all the nonessential genes that are not of the motorprotein class and whose phenotype is cell cycle defects, how many do not have a physical type of interaction?",
+        "query": "SELECT COUNT(T1.GeneID) FROM Genes AS T1 INNER JOIN Interactions AS T2 ON T1.GeneID = T2.GeneID1 WHERE T2.Type != 'Physical' AND T1.Phenotype = 'Cell cycle defects' AND T1.Class != 'Motorproteins' AND T1.Essential = 'Non-Essential'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "Of the genes whose phenotype and motif are nucleic acid metabolism defects, PS00107, what percentage perform positive interaction with another gene?",
+        "query": "SELECT CAST(SUM(IIF(T2.Expression_Corr > 0, 1, 0)) AS REAL) * 100 / COUNT(T2.GeneID1) FROM Genes AS T1 INNER JOIN Interactions AS T2 ON T1.GeneID = T2.GeneID1 WHERE T1.Phenotype = 'Nucleic acid metabolism defects' AND T1.Motif = 'PS00107'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "genes",
+        "question": "Which negatively correlated, genetically interacting genes are non-essential? What percentage do they represent with respect to those that are essential?",
+        "query": "SELECT CAST(COUNT(T1.GeneID) AS REAL) * 100 / ( SELECT COUNT(T1.GeneID) FROM Genes AS T1 INNER JOIN Interactions AS T2 ON T1.GeneID = T2.GeneID1 WHERE T2.Expression_Corr < 0 ) FROM Genes AS T1 INNER JOIN Interactions AS T2 ON T1.GeneID = T2.GeneID1 WHERE T2.Expression_Corr < 0 AND T1.Essential = 'Non-Essential'"
+    }
+]

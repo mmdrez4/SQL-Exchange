@@ -1,0 +1,944 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Among the countries in the group of Heavily Indebted Poor Countries, how many of them are under the lending category of the International Development Associations?",
+        "query": "SELECT COUNT(CountryCode) FROM Country WHERE LendingCategory = 'IDA' AND OtherGroups = 'HIPC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please list the countries under the lending category of the International Development Associations and have a external debt reporting finished by estimation.",
+        "query": "SELECT ShortName, ExternalDebtReportingStatus FROM Country WHERE LendingCategory = 'IDA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What's the description of the series code SM.POP.TOTL for Aruba?",
+        "query": "SELECT T2.Description FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.ShortName = 'Aruba' AND T2.Seriescode = 'SM.POP.TOTL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please list the countries in Latin America & Caribbean with a note on the series code SM.POP.TOTL.",
+        "query": "SELECT T1.SHORTNAME, T2.Description FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.Region = 'Latin America & Caribbean' AND T2.Seriescode = 'SM.POP.TOTL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Among the countries with note on the series code SM.POP.TOTL, how many of them are in the low-income group?",
+        "query": "SELECT COUNT(T1.Countrycode) FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.Seriescode = 'SM.POP.TOTL' AND T1.IncomeGroup = 'Low income'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please list the descriptions of the series code SM.POP.TOTL for all the countries that are under the lending category of the International Development Associations.",
+        "query": "SELECT T2.Description FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.LendingCategory = 'IDA' AND T2.Seriescode = 'SM.POP.TOTL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many low-income countries under the lending category of the International Development Associations have a note on the series code SM.POP.TOTL?",
+        "query": "SELECT COUNT(T1.Countrycode) FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.LendingCategory = 'IDA' AND T2.Seriescode = 'SM.POP.TOTL' AND IncomeGroup = 'Low income'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Among the countries in the High income: OECD group whose currency unit is Euro, how many of them have a note on the series code SP.DYN.AMRT.FE?",
+        "query": "SELECT COUNT(T1.Countrycode) FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.IncomeGroup = 'High income: OECD' AND T1.CurrencyUnit = 'Euro' AND T2.Seriescode = 'SP.DYN.AMRT.FE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the long name of the country with the description \"Estimates are derived from data on foreign-born population.\" on the series code SM.POP.TOTL?",
+        "query": "SELECT T1.LongName FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.Description = 'Estimates are derived FROM data on foreign-born population.' AND T2.Seriescode = 'SM.POP.TOTL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the description of the footnote on the series code AG.LND.FRST.K2 in 1990 for Aruba?",
+        "query": "SELECT T2.Description FROM Country AS T1 INNER JOIN FootNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.ShortName = 'Aruba' AND T2.Seriescode = 'AG.LND.FRST.K2' AND T2.Year = 'YR1990'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "On which years did Aruba got a footnote on the series code AG.LND.FRST.K2?",
+        "query": "SELECT T2.Year FROM Country AS T1 INNER JOIN FootNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.ShortName = 'Aruba' AND T2.Seriescode = 'AG.LND.FRST.K2'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please list the countries that got the footnote \"Data are classified as official aid.\" on the series code DC.DAC.AUSL.CD in 2002.",
+        "query": "SELECT T1.SHORTNAME FROM Country AS T1 INNER JOIN FootNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.Description = 'Data are classified as official aid.' AND T2.Seriescode = 'DC.DAC.AUSL.CD' AND T2.Year LIKE '%2002%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many footnotes did Aruba got on different series code in the year 2002?",
+        "query": "SELECT COUNT(T2.SeriesCode) FROM Country AS T1 INNER JOIN FootNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.ShortName = 'Aruba' AND T2.Year = 'YR2002'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "For how many consecutive years did Aruba get a footnote on the series code BX.KLT.DINV.CD.WD?",
+        "query": "SELECT COUNT(T2.Year) FROM Country AS T1 INNER JOIN FootNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.ShortName = 'Aruba' AND T2.Seriescode = 'BX.KLT.DINV.CD.WD'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the average adolescent fertility rate of the country whose Alpha2Code is 1A over the years this indicator was calculated.",
+        "query": "SELECT AVG(T2.Value) FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.Alpha2Code = '1A' AND T2.IndicatorName LIKE 'adolescent fertility rate%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What are the special notes for the country whose average adolescent fertility rate is the highest?",
+        "query": "SELECT DISTINCT T1.SpecialNotes FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.Value = ( SELECT Value FROM Indicators WHERE IndicatorName LIKE 'Adolescent fertility rate%' ORDER BY Value DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List the East Asia & Pacific countries which are under the High income: nonOECD group. Please include their alpha code.",
+        "query": "SELECT CountryCode, Alpha2Code FROM Country WHERE Region = 'East Asia & Pacific' AND IncomeGroup = 'High income: nonOECD'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "In which country's latest trade data and latest water withdrawal data were both updated in the year 2013? Give its long name and Alpha 2 code.",
+        "query": "SELECT LongName, Alpha2Code FROM Country WHERE LatestTradeData = 2013 AND LatestWaterWithdrawalData = 2013"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the average value of Adjusted net enrolment rate, primary, both sexes (%) indicator in Algeria from 1975 to 1980?",
+        "query": "SELECT CAST(SUM(Value) AS REAL) / COUNT(CountryCode) FROM Indicators WHERE CountryName = 'Algeria' AND Year > 1974 AND Year < 1981 AND IndicatorName = 'Adjusted net enrolment rate, primary, both sexes (%)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What are the Indicator names and aggregation methods when the topic is Economic Policy & Debt: Balance of payments: Capital & financial account?",
+        "query": "SELECT IndicatorName, AggregationMethod FROM Series WHERE Topic = 'Economic Policy & Debt: Balance of payments: Capital & financial account'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List down the series codes in which the topic is about Environment: Emissions and the license type is restricted. Please include their alpha code.",
+        "query": "SELECT SeriesCode FROM Series WHERE Topic = 'Environment: Emissions' AND LicenseType = 'Restricted'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "In 1970, how many Middle Eastern & North African countries whose value for CO2 emissions from gaseous fuel consumption (kt) indicator is more than 600?",
+        "query": "SELECT COUNT(T2.CountryCode)  FROM Indicators AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.Region = 'Middle East & North Africa' AND T1.IndicatorName = 'CO2 emissions FROM gaseous fuel consumption (kt)' AND T1.Year = 1970 AND T1.Value > 600"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List down the top 3 Latin American & Caribbean countries with the highest average value in \"CO2 emissions (kt)\" indicator since 1965. Give their highest value and in what year.",
+        "query": "SELECT DISTINCT T1.CountryCode, T1.Year, T1.Value FROM Indicators AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.Region = 'Latin America & Caribbean' AND T1.IndicatorName = 'CO2 emissions (kt)' AND T1.Year > 1965 AND T1.Year < 1980 ORDER BY T1.Value DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the series note description of the series \"SP.DYN.TO65.MA.ZS\" which covers the topic \"Health: Mortality\" in 1967?",
+        "query": "SELECT T2.Description FROM Series AS T1 INNER JOIN SeriesNotes AS T2 ON T1.SeriesCode = T2.Seriescode WHERE T1.SeriesCode = 'SP.DYN.TO65.MA.ZS' AND T1.Topic = 'Health: Mortality' AND T2.Year = 'YR1967'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please write down the footnote descriptions of Albania in 1981.",
+        "query": "SELECT DISTINCT T1.Description FROM FootNotes AS T1 INNER JOIN Country AS T2 ON T1.Countrycode = T2.CountryCode WHERE T1.Year = 'YR1981' AND T2.ShortName = 'Albania'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Enumerate the footnote narratives of The Bahamas under the series code SH.DTH.IMRT in the year 1984.",
+        "query": "SELECT DISTINCT T1.Description FROM FootNotes AS T1 INNER JOIN Country AS T2 ON T1.Countrycode = T2.CountryCode WHERE T1.Year = 'YR1984' AND T2.ShortName = 'The Bahamas' AND T1.Seriescode = 'SH.DTH.IMRT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the short name of the country in which the \"Net bilateral aid flows from DAC donors, Sweden (current US$)\" indicator hit the 570,000 value in 1970?",
+        "query": "SELECT T2.ShortName FROM Indicators AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.IndicatorName = 'Net bilateral aid flows FROM DAC donors, Sweden (current US$)' AND T1.Year = 1970 AND T1.Value = 570000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List down the World Bank code of the countries whose country note has described \"Data source : Human Mortality Database by University of California, Berkeley, and Max Planck Institute for Demographic Research.\"? Please include their lending category.",
+        "query": "SELECT DISTINCT T1.Wb2code, T1.LendingCategory FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.Description = 'Data source : Human Mortality Database by University of California, Berkeley, and Max Planck Institute for Demographic Research.' AND T1.LendingCategory != ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the topic of the series when the Total reserves minus gold (current US$) indicator of Haiti hit the value of 3,000,000 in 1961? Please include its series code and license type.",
+        "query": "SELECT T2.Topic, T2.Seriescode, T2.LicenseType FROM Indicators AS T1 INNER JOIN Series AS T2 ON T1.IndicatorName = T2.IndicatorName WHERE T1.Year = 1961 AND T1.CountryName = 'Haiti' AND T1.IndicatorName = 'Total reserves minus gold (current US$)' AND T1.Value = 3000000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many countries have reached their Adjusted net national income per capita (constant 2005 US$) indicator value to more than 1,000 but have not finished their external debt reporting?",
+        "query": "SELECT COUNT(T1.CountryCode) FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.IndicatorName = 'Adjusted net national income per capita (constant 2005 US$)' AND T1.ExternalDebtReportingStatus = 'Preliminary' AND T2.Value > 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which countries have a fertility rate between 4 and 5 in 1979? List their names.",
+        "query": "SELECT CountryName FROM Indicators WHERE Year = 1979 AND IndicatorName = 'Fertility rate, total (births per woman)' AND value >= 4 AND Value <= 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Find the countries in south Asia which are in the low-income group. What is the source of their recent income and expenditure data? List it alongside the table name of the countries.",
+        "query": "SELECT TableName, SourceOfMostRecentIncomeAndExpenditureData FROM Country WHERE Region = 'South Asia' AND IncomeGroup = 'Low income'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What are the sources for the data of children who finished primary school education in Latin America & Caribbean countries?",
+        "query": "SELECT DISTINCT T2.Source FROM Footnotes AS T1 INNER JOIN Series AS T2 ON T1.Seriescode = T2.SeriesCode INNER JOIN Country AS T3 ON T1.Countrycode = T3.CountryCode WHERE T3.Region = 'Latin America & Caribbean' AND T2.IndicatorName = 'Children out of school, primary'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List the sources for the Net Migration in South American countries in 2002.",
+        "query": "SELECT T2.Source FROM CountryNotes AS T1 INNER JOIN Series AS T2 ON T1.Seriescode = T2.SeriesCode INNER JOIN Country AS T3 ON T1.Countrycode = T3.CountryCode INNER JOIN SeriesNotes AS T4 ON T2.SeriesCode = T4.Seriescode WHERE T4.Year LIKE '%2002%' AND T2.IndicatorName = 'Net migration'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What are the sources for the data of children who finished primary school education in North American countries?",
+        "query": "SELECT DISTINCT T3.Description FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode INNER JOIN CountryNotes AS T3 ON T2.CountryCode = T3.Countrycode WHERE T1.Region = 'North America' AND T2.IndicatorName = 'Out-of-school children of primary school age, both sexes (number)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "In the countries for which the latest trade data are from 2013, what was the GDP growth in 2014? List them in the ascending order of GDP.",
+        "query": "SELECT DISTINCT T1.CountryCode, T2.Value FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.LatestTradeData = 2013 AND T2.IndicatorName LIKE 'GDP growth (annual %)' AND T2.year = 2014 AND T2.Value > 0 ORDER BY T2.Value ASC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which European countries had the highest private expenditure on health in 2005? List the top ten countries in descending order and find the source of the data.",
+        "query": "SELECT DISTINCT T1.CountryCode, T3.Description FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode INNER JOIN CountryNotes AS T3 ON T1.CountryCode = T3.Countrycode WHERE T2.IndicatorName = 'Out-of-pocket health expenditure (% of private expenditure on health)' AND T2.Value > 0 AND T2.year = 2005 ORDER BY T2.Value DESC LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many low income countries are there in South Asia?",
+        "query": "SELECT COUNT(CountryCode) FROM Country WHERE Region = 'South Asia' AND IncomeGroup = 'Low income'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please list the short name of countries which have the latest trade data after 2010.",
+        "query": "SELECT ShortName FROM Country WHERE LatestTradeData > 2010"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please calculate the percentage of Sub-Saharan African countries which are in the Special trade system.",
+        "query": "SELECT  CAST(SUM(CASE WHEN Region = 'Sub-Saharan Africa' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(CountryCode) FROM Country WHERE SystemOfTrade = 'Special trade system'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please calculate the average of Arms imports (SIPRI trend indicator values) of the European & Central Asian countries.",
+        "query": "SELECT CAST(SUM(T2.Value) AS REAL) / COUNT(T1.CountryCode) FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.Region = 'Europe & Central Asia' AND T2.IndicatorName = 'Arms imports (SIPRI trend indicator values)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which upper middle income country has the lowest value of CO2 emissions (kt)?",
+        "query": "SELECT T1.CountryCode FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.IncomeGroup = 'Upper middle income' AND T2.IndicatorName = 'CO2 emissions (kt)' ORDER BY T2.Value ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the minimum of International migrant stock, total of heavily indebted poor countries?",
+        "query": "SELECT MIN(T2.Value) FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.OtherGroups = 'HIPC' AND T2.IndicatorName = 'International migrant stock, total'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please list the indicator names belonging to Education: Inputs topic in 2000.",
+        "query": "SELECT DISTINCT T2.IndicatorName FROM Footnotes AS T1 INNER JOIN Series AS T2 ON T1.Seriescode = T2.SeriesCode WHERE T1.Year = 'YR2000' AND T2.Topic = 'Education: Inputs'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many annual indicators use the Sum aggregation method from 2001 to 2003?",
+        "query": "SELECT COUNT(DISTINCT T2.SeriesCode)  FROM Footnotes AS T1 INNER JOIN Series AS T2 ON T1.Seriescode = T2.SeriesCode WHERE T1.Year IN ('YR2001', 'YR2002', 'YR2003') AND T2.Periodicity = 'Annual' AND T2.AggregationMethod = 'Sum'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "In 2005, which series codes use the International Monetary Fund, Balance of Payments Statistics Yearbook and data files source?",
+        "query": "SELECT T1.Seriescode, T2.Source FROM Footnotes AS T1 INNER JOIN Series AS T2 ON T1.Seriescode = T2.SeriesCode WHERE T1.Year LIKE '%2005%' AND T2.Source LIKE 'International Monetary Fund%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What percentage of countries in South Asia have the Life expectancy at birth, female (years) greater than 50?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.value > 50 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.CountryCode) FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.Region = 'South Asia' AND T2.IndicatorName = 'Life expectancy at birth, female (years)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "From 1960 to 1965, which country had the highest Death rate, crude (per 1,000 people)?",
+        "query": "SELECT CountryName FROM Indicators WHERE Year BETWEEN 1960 AND 1965 AND IndicatorName = 'Death rate, crude (per 1,000 people)' ORDER BY Value DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please list the indicator names of Arab World whose values are higher than 50 in 1960.",
+        "query": "SELECT IndicatorName FROM Indicators WHERE CountryName = 'Arab World' AND Year = 1960 AND Value > 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which country has the highest value of Merchandise imports by the reporting economy (current US$)?",
+        "query": "SELECT CountryName FROM Indicators WHERE IndicatorName = 'Merchandise imports by the reporting economy (current US$)' ORDER BY Value DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please list annual indicator names which have values of more than 100 in 1965.",
+        "query": "SELECT DISTINCT T2.IndicatorName FROM Indicators AS T1 INNER JOIN Series AS T2 ON T1.IndicatorName = T2.IndicatorName WHERE T1.Year = 1965 AND T1.Value > 100 AND T2.Periodicity = 'Annual'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "From 1968 to 1970, what are indicator names whose license type is open and values are less than 100?",
+        "query": "SELECT DISTINCT T1.IndicatorName FROM Indicators AS T1 INNER JOIN Series AS T2 ON T1.IndicatorName = T2.IndicatorName WHERE T1.Year >= 1968 AND T1.Year < 1971 AND T2.LicenseType = 'Open' AND T1.Value < 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which country had the highest value of indicator belongs to Private Sector & Trade: Exports topic? Please list the country name and indicator name.",
+        "query": "SELECT T1.CountryName, T1.IndicatorName FROM Indicators AS T1 INNER JOIN Series AS T2 ON T1.IndicatorName = T2.IndicatorName WHERE T2.Topic = 'Private Sector & Trade: Exports' ORDER BY T1.Value DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which indicator name uses the Weighted average method and has the lowest value?",
+        "query": "SELECT T1.IndicatorName, MIN(T1.Value) FROM Indicators AS T1 INNER JOIN Series AS T2 ON T1.IndicatorName = T2.IndicatorName WHERE T2.AggregationMethod = 'Weighted average'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please list out all annual indicator names of Sudan in 1961?",
+        "query": "SELECT T1.IndicatorName FROM Indicators AS T1 INNER JOIN Series AS T2 ON T1.IndicatorName = T2.IndicatorName WHERE T1.CountryName = 'Sudan' AND T1.Year = 1961 AND T2.Periodicity = 'Annual'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "From 1960 to 1965, which country has the lowest value of indicator belongs to Health: Population: Structure?",
+        "query": "SELECT CountryName FROM Indicators WHERE Value = ( SELECT MIN(T1.Value) FROM Indicators AS T1 INNER JOIN Series AS T2 ON T1.IndicatorName = T2.IndicatorName WHERE T1.Year >= 1960 AND T1.Year < 1966 AND T2.Topic = 'Health: Population: Structure' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What percentage of upper middle income countries which have the CO2 emissions from liquid fuel consumption (% of total)\n\nless than 80%?",
+        "query": "SELECT SUM(CASE WHEN T2.IndicatorName = 'CO2 emissions FROM liquid fuel consumption (% of total)' AND t2.Value < 80 THEN 1 ELSE 0 END) * 1.0 / COUNT(T1.CountryCode) persent FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.IncomeGroup = 'Upper middle income'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is indicator code of Rural population?",
+        "query": "SELECT DISTINCT IndicatorCode FROM Indicators WHERE IndicatorName = 'Rural population'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many country uses the 2008 System of National Accounts methodology? List our their table name.",
+        "query": "SELECT TableName  FROM Country WHERE SystemOfNationalAccounts = 'Country uses the 2008 System of National Accounts methodology.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List out the series code of countries using Euro as their currency unit.",
+        "query": "SELECT DISTINCT T2.SeriesCode FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.CurrencyUnit = 'Euro'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List out the long name of countries using series code as DT.DOD.DSTC.CD",
+        "query": "SELECT T1.LongName FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.SeriesCode = 'DT.DOD.DSTC.CD'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Mention the series code of countries using Hong Kong dollar as their currency unit.",
+        "query": "SELECT T2.SeriesCode FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.CurrencyUnit = 'Hong Kong dollar'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List out the table name of countries using series code as SP.DYN.TO65.MA.ZS",
+        "query": "SELECT T1.TableName FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.Seriescode = 'SP.DYN.TO65.MA.ZS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List out the country name of lower earning countries",
+        "query": "SELECT DISTINCT T2.CountryName FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.IncomeGroup = 'Low income'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List out the series code and country code of the poor countries that located in Latin American & Carribbean.",
+        "query": "SELECT T2.SeriesCode, T2.CountryCode FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.Region = 'Latin America & Caribbean' AND t1.incomegroup = 'Low income'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Mention the series code of countries using Australian dollar as their currency unit. Which country belongs to middle income group among them.",
+        "query": "SELECT T1.CountryCode, T2.SeriesCode FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.CurrencyUnit = 'Australian dollar' AND T1.IncomeGroup = 'Lower middle income'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List out the country name of upper middle income group. Which country has the earliest national account base year? List out the region where this country locates.",
+        "query": "SELECT DISTINCT T1.CountryName FROM indicators AS T1 INNER JOIN country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.IncomeGroup = 'Upper middle income' UNION SELECT longname FROM ( SELECT longname FROM country WHERE NationalAccountsBaseYear <> '' ORDER BY NationalAccountsBaseYear ASC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List out the country code and country name of the rich countries using Euro as their currency unit",
+        "query": "SELECT DISTINCT T1.CountryCode, T2.CountryName FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.CurrencyUnit = 'Euro' AND (T1.IncomeGroup = 'High income: OECD' OR T1.IncomeGroup = 'High income: nonOECD')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List out the table name and currency unit of countries using series code as FP.CPI.TOTL",
+        "query": "SELECT T1.TableName, T1.CurrencyUnit FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.SeriesCode = 'FP.CPI.TOTL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List out the name and indicator code of high income: nonOECD countries",
+        "query": "SELECT DISTINCT T1.CountryCode, T2.CountryName FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.IncomeGroup = 'High income: nonOECD'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Mention the series code of countries using pound sterling as their currency unit. Which country belongs to high income group among them.",
+        "query": "SELECT DISTINCT T1.CountryCode, T1.CurrencyUnit, T1.IncomeGroup FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.CurrencyUnit = 'Pound sterling' AND T1.IncomeGroup LIKE '%high income%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List down 10 country codes and it's short names.",
+        "query": "SELECT CountryCode, ShortName FROM Country LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many of the countries name start with alphabet A? List down the Alpha2Code of them.",
+        "query": "SELECT COUNT(ShortName) FROM Country WHERE ShortName LIKE 'A%' UNION SELECT alpha2code FROM country WHERE shortname LIKE 'A%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which countries use Euro as their currency? List down the table name.",
+        "query": "SELECT TableName FROM Country WHERE CurrencyUnit = 'Euro'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many of the countries do not have special notes? List the long name.",
+        "query": "SELECT COUNT(LongName) FROM Country WHERE SpecialNotes = '' UNION SELECT longname FROM country WHERE specialnotes = ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which high income group countries are from Asia?",
+        "query": "SELECT CountryCode, Region FROM Country WHERE (IncomeGroup = 'High income: OECD' OR IncomeGroup = 'High income: nonOECD') AND Region LIKE '%Asia%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Name the countries' long name with national accounts base year prior to 1980.",
+        "query": "SELECT LongName FROM Country WHERE NationalAccountsBaseYear < '1980' AND NationalAccountsBaseYear != ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which low income country has a series code of DT.DOD.DECT.CD? Name the country code of it.",
+        "query": "SELECT T1.CountryCode FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.IncomeGroup = 'Low income' AND T2.Seriescode = 'DT.DOD.DECT.CD'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "State the table name of country with description of \"Covers mainland Tanzania only\".",
+        "query": "SELECT DISTINCT T1.TableName FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.Description = 'Covers mainland Tanzania only.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Write down the description and series code of Benin in year 2005.",
+        "query": "SELECT T2.Description, T2.Seriescode FROM Country AS T1 INNER JOIN FootNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.TableName = 'Benin' AND T2.Year = 'YR2005'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What are the footnote description of Finland in year 2000?",
+        "query": "SELECT DISTINCT T2.Description FROM Country AS T1 INNER JOIN FootNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T1.TableName = 'Finland' AND T2.Year = 'YR2000'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What are the years when countries have indicator name of \"Air transport, passengers carried\"? List the table name of these countries.",
+        "query": "SELECT DISTINCT T2.Year, T1.TableName FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.IndicatorName = 'Air transport, passengers carried'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List the long name of countries with indicator name in 1980.",
+        "query": "SELECT DISTINCT T1.LongName FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.Year = 1980 AND T2.IndicatorName IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "State the currency of Malaysia and what are the indicator code used by this country in 1970?",
+        "query": "SELECT T1.currencyunit, T2.IndicatorCode FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.TableName = 'Malaysia' AND T2.Year = 1970"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Name 5 country codes of country with highest value and state the region of these countries.",
+        "query": "SELECT DISTINCT T1.CountryCode, T1.Region FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode ORDER BY T2.Value DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many countries have country note description as \"Sources: UN Energy Statistics (2014)\"? List the currency of these countries.",
+        "query": "SELECT COUNT(DISTINCT T1.Countrycode) FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.Description = 'Sources: UN Energy Statistics (2014)' UNION SELECT DISTINCT t1.CurrencyUnit FROM country AS t1 INNER JOIN countrynotes AS t2 ON t1.CountryCode = t2.Countrycode WHERE t2.Description = 'Sources: UN Energy Statistics (2014)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many footnotes have been made in year 1980 and what are the table names of these countries that made the footnotes?",
+        "query": "SELECT COUNT(T2.Description) FROM Country AS T1 INNER JOIN FootNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.Year = 'YR1980' UNION ALL SELECT DISTINCT T1.TableName FROM Country AS T1 INNER JOIN FootNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.Year = 'YR1980'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List the series code of country with country notes description as \"Data sources : Eurostat\" and state the Wb2Code of these countries.",
+        "query": "SELECT T2.seriescode, T1.Wb2Code FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.Description = 'Data sources : Eurostat'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Among the low income countries, which country has the lowest fertility rate?",
+        "query": "SELECT T2.CountryName FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.IncomeGroup = 'Low income' AND T2.IndicatorName = 'Adolescent fertility rate (births per 1,000 women ages 15-19)' ORDER BY T2.Value LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How much is the total urban population of middle income countries in 1960?",
+        "query": "SELECT SUM(T2.Value) FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.IncomeGroup LIKE '%middle income' AND T2.Year = 1960 AND T2.IndicatorName = 'Urban population'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Name the country with fastest growth in adjusted net national income in 1980 and state the currency used by this country.",
+        "query": "SELECT T2.countryname, T1.CurrencyUnit FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.IndicatorName = 'Adjusted net national income (annual % growth)' AND T2.Year = 1980 AND T1.CurrencyUnit != '' ORDER BY T2.Value DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many countries using the 1993 System of National Accounts methodology?",
+        "query": "SELECT COUNT(CountryCode) FROM Country WHERE SystemOfNationalAccounts = 'Country uses the 1993 System of National Accounts methodology.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which country have completed vital registration? List all the countries.",
+        "query": "SELECT ShortName FROM Country WHERE VitalRegistrationComplete = 'Yes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which country have conducted population census from 2010 until 2012 and have completed vital registration?",
+        "query": "SELECT ShortName, LongName FROM Country WHERE LatestPopulationCensus >= 2010 AND LatestPopulationCensus < 2013 AND VitalRegistrationComplete = 'Yes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which country have the highest CO2 emissions in 1960?",
+        "query": "SELECT CountryName FROM Indicators WHERE Year = 1960 AND IndicatorName = 'CO2 emissions (metric tons per capita)' ORDER BY Value DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the ratio between country with the highest number of infant deaths in 1971 and the lowest number of infant deaths in 1971? List the country with the highest number of infant deaths in 1971 and the lowest number of infant deaths in 1971.",
+        "query": "SELECT CAST(MAX(value) AS REAL) / MIN(value) FROM indicators WHERE indicatorname = 'Number of infant deaths' AND year = '1971' UNION ALL SELECT countryname FROM ( SELECT countryname, MAX(value) FROM indicators WHERE indicatorname = 'Number of infant deaths' AND year = '1971' ) UNION SELECT countryname FROM ( SELECT countryname, MIN(value) FROM indicators WHERE indicatorname = 'Number of infant deaths' AND year = '1971' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What country have the series code of SP.DYN.CBRT.IN?",
+        "query": "SELECT T1.ShortName FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.SeriesCode = 'SP.DYN.CBRT.IN'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which country have data classified as official aid?",
+        "query": "SELECT DISTINCT T1.CountryCode FROM Country AS T1 INNER JOIN FootNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.Description = 'Data are classified as official aid.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What country have its data estimated based on regression?",
+        "query": "SELECT DISTINCT T1.ShortName FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.Description = 'Estimates are based on regression.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "List all the country in East Asia & Pacific region that have more than 2000000 urban population in 1970.",
+        "query": "SELECT DISTINCT T1.CountryCode FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.Year = 1970 AND T1.Region = 'East Asia & Pacific' AND T2.Value > 2000000 AND t2.indicatorname = 'Urban population'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "In 1960, what is largest population for country with upper middle income?",
+        "query": "SELECT MAX(T2.Value) FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.IncomeGroup = 'Upper middle income' AND T2.Year = 1960 AND T2.IndicatorName = 'Population, total'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many countries uses the 1968 System of National Accounts methodology?",
+        "query": "SELECT COUNT(CountryCode)  FROM Country WHERE SystemOfNationalAccounts = 'Country uses the 1968 System of National Accounts methodology.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What upper middle income country under East Asia & Pacific region which covers the topic about Social Protection & Labor: Migration\n? Indicate the short name of the said country.",
+        "query": "SELECT DISTINCT T1.ShortName FROM Country AS T1 INNER JOIN footnotes AS T2 ON T1.CountryCode = T2.CountryCode INNER JOIN Series AS T3 ON T2.Seriescode = T3.SeriesCode WHERE T1.IncomeGroup = 'Upper middle income' AND T1.Region = 'East Asia & Pacific' AND T3.Topic = 'Social Protection & Labor: Migration'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Name the country in which the topic is about Poverty: Shared Prosperity. Indicate the long name of the country.",
+        "query": "SELECT DISTINCT T1.LongName FROM Country AS T1 INNER JOIN footnotes AS T2 ON T1.CountryCode = T2.Countrycode INNER JOIN Series AS T3 ON T2.Seriescode = T3.SeriesCode WHERE T3.Topic = 'Poverty: Shared prosperity'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What country has the latest trade data with a series code of \"SP.DYN.CDRT.IN\n\"? List the table name of the country.",
+        "query": "SELECT DISTINCT T1.TableName FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.LatestTradeData = 2013 AND T2.IndicatorCode = 'SP.DYN.CDRT.IN'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What country in the region of Sub-Saharan Africa has a series code of \"SP.DYN.AMRT.FE\"? Indicate the long name of the country",
+        "query": "SELECT DISTINCT T3.LongName FROM SeriesNotes AS T1 INNER JOIN CountryNotes AS T2 ON T1.SeriesCode = T2.Seriescode INNER JOIN Country AS T3 ON T2.Countrycode = T3.CountryCode WHERE T3.Region = 'Sub-Saharan Africa' AND T1.SeriesCode = 'SP.DYN.AMRT.FE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many countries are using the same type of currency? Please list the short names of any 3 countries.",
+        "query": "SELECT ShortName FROM country WHERE currencyunit = 'U.S. dollar' LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What South Asian nations have low incomes? Please include the entire names of the nations in your answer.",
+        "query": "SELECT LongName FROM Country WHERE IncomeGroup = 'Low income' AND Region = 'South Asia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please provide full name of any two countries using special trade system.",
+        "query": "SELECT LongName FROM Country WHERE SystemOfTrade = 'Special trade system' LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which country has had the highest proportion of CO2 emissions from transport?",
+        "query": "SELECT CountryName FROM Indicators WHERE IndicatorName LIKE 'CO2 emissions FROM transport%' ORDER BY Value DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which country has the lowest percentage of arable land?",
+        "query": "SELECT CountryName FROM Indicators WHERE IndicatorName LIKE 'Arable land (% of land area)' ORDER BY Value DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What are the subjects of series that have a restricted type of license?",
+        "query": "SELECT DISTINCT Topic FROM Series WHERE LicenseType = 'Restricted'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which countries in the upper middle income category still have unfinished external debt reporting? Please provide the country codes in your answer.",
+        "query": "SELECT CountryCode FROM Country WHERE IncomeGroup = 'Upper middle income' AND ExternalDebtReportingStatus = 'Preliminary'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the percentage of countries in the Middle East and North Africa that have finished reporting on their real external debt?",
+        "query": "SELECT CAST(SUM(CASE WHEN ExternalDebtReportingStatus = 'Actual' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(CountryCode) FROM Country WHERE region = 'Middle East & North Africa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which form of government has more countries that have completed the actual external debt reporting between the two types of government accounting concepts, budgetary central government vs. consolidated central government?",
+        "query": "SELECT SUM(CASE WHEN GovernmentAccountingConcept = 'Budgetary central government' THEN 1 ELSE 0 END), SUM(CASE WHEN GovernmentAccountingConcept = 'Consolidated central government' THEN 1 ELSE 0 END) central_nums FROM country WHERE ExternalDebtReportingStatus = 'Actual'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many nations in East Asia and the Pacific have completed their external debt reporting on time?",
+        "query": "SELECT COUNT(CountryCode)  FROM Country WHERE Region = 'East Asia & Pacific' AND ExternalDebtReportingStatus = 'Estimate'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What proportion of Sub-Saharan Africa's countries have lower middle incomes?",
+        "query": "SELECT SUM(CASE WHEN IncomeGroup = 'Lower middle income' THEN 1 ELSE 0 END) * 100.0 / COUNT(CountryCode) persentage FROM Country WHERE Region = 'Sub-Saharan Africa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "From 1961 to 1980, what was the highest percentage of land used for agriculture in the Republic of Benin?",
+        "query": "SELECT MAX(T1.Value) FROM Indicators AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.Year >= 1961 AND T1.Year < 1981 AND T1.IndicatorName LIKE 'Agricultural land (% of land area)' AND T2.LongName = 'Republic of Benin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please list the full names of any three countries that have their series code with a description of UN Energy Statistics (2014).",
+        "query": "SELECT DISTINCT T2.LongName FROM CountryNotes AS T1 INNER JOIN Country AS T2 ON T1.Countrycode = T2.CountryCode WHERE T1.Description = 'Sources: UN Energy Statistics (2014)' LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What was the deposit interest rate in the Commonwealth of Australia in 1979 in percentage?",
+        "query": "SELECT T1.Value FROM Indicators AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.LongName = 'Commonwealth of Australia' AND T1.IndicatorName = 'Deposit interest rate (%)' AND T1.Year = 1979"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the series code for Germany and what is its description?",
+        "query": "SELECT T1.Seriescode, T1.Description FROM CountryNotes AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.ShortName = 'Germany'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please provide the subject of series of Austria.",
+        "query": "SELECT DISTINCT T3.Topic FROM CountryNotes AS T1 INNER JOIN Country AS T2 ON T1.Countrycode = T2.CountryCode INNER JOIN Series AS T3 ON T1.Seriescode = T3.SeriesCode WHERE T2.ShortName = 'Austria'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the subject of the series SP.DYN.AMRT.MA and what does it pertain to?",
+        "query": "SELECT DISTINCT T1.Topic, T2.Description FROM Series AS T1 INNER JOIN SeriesNotes AS T2 ON T1.SeriesCode = T2.Seriescode WHERE T1.SeriesCode = 'SP.DYN.AMRT.MA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many countries are having their country's footnotes described as \"unspecified\"? Please provide the full names of any three of those countries.",
+        "query": "SELECT COUNT(DISTINCT T1.CountryCode)  FROM Country AS T1 INNER JOIN Footnotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.Description = 'Unspecified' OR T2.Description = 'Not specified' UNION SELECT T1.LongName FROM Country AS T1 INNER JOIN Footnotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.Description = 'Unspecified' OR T2.Description = 'Not specified' LIMIT 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which nation completed its external debt reporting in 1980 and had a Land under cereal production value of 3018500?",
+        "query": "SELECT T2.CountryCode FROM Indicators AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.IndicatorName LIKE 'Land under cereal production%' AND T1.Value = 3018500 AND T1.Year = 1980 AND T2.ExternalDebtReportingStatus = 'Actual'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What portion of the nations in Latin America and the Caribbean had more than 50% of their land used for agriculture in 1961?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.Value > 50 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.CountryCode) FROM Indicators AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.Year = 1961 AND T2.Region = 'Latin America & Caribbean' AND indicatorname = 'Agricultural land (% of land area)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What are the full names of the countries in South Asia that belongs to the low income group?",
+        "query": "SELECT LongName FROM Country WHERE IncomeGroup = 'Low income' AND Region = 'South Asia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the indicator code for Mobile Cellular Subscriptions of Brazil?",
+        "query": "SELECT DISTINCT IndicatorCode FROM Indicators WHERE CountryName = 'Brazil' AND IndicatorName = 'Mobile cellular subscriptions'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many countries in Europe & Central Asia uses Danish krone as its currency? List the full names of those coutnries.",
+        "query": "SELECT COUNT(longname) FROM country WHERE region = 'Europe & Central Asia' AND currencyunit = 'Danish krone' UNION SELECT longname FROM country WHERE currencyunit = 'Danish krone' AND region = 'Europe & Central Asia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the name of the country with the highest percentage of rural population in the overall total population? Indicate the rural population percentage of total population.",
+        "query": "SELECT countryname, MAX(value) FROM indicators WHERE indicatorname = 'Rural population (% of total population)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many countries have a latest population census in 2011? Indicate their full names.",
+        "query": "SELECT COUNT(LongName) FROM country WHERE LatestPopulationCensus = '2011' UNION ALL SELECT LongName FROM country WHERE LatestPopulationCensus = '2011'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the agricultural land area in sq. km of Italy in 1968?",
+        "query": "SELECT Value FROM Indicators WHERE IndicatorName = 'Agricultural land (sq. km)' AND Year = 1968 AND CountryName = 'Italy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "In Sub-Saharan Africa, how many female out-of-school children of primary school age are there in the country with the higest number of female out-of-school children of primary school age? Indicate the year of when it was recorded.",
+        "query": "SELECT MAX(T1.value), T1.year FROM indicators AS T1 INNER JOIN country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.Region = 'Sub-Saharan Africa' AND T1.IndicatorName = 'Out-of-school children of primary school age, female (number)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the series code for number of infant deaths in year 1965 for the country whose full name is Islamic State of Afghanistan?",
+        "query": "SELECT DISTINCT T3.Seriescode FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode INNER JOIN CountryNotes AS T3 ON T2.CountryCode = T3.Countrycode WHERE T2.IndicatorName = 'Number of infant deaths' AND T1.LongName = 'Islamic State of Afghanistan' AND T2.Year = 1965"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Among the countries who uses the 1968 System of National Accounts methodology, how many are in the Middle East & North Africa? Name the country with the highest CO2 emissions from solid fuel consumption in kiloton.",
+        "query": "SELECT COUNT(DISTINCT T1.CountryCode) FROM indicators AS T1 INNER JOIN country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.Region = 'Middle East & North Africa' AND T2.SystemOfNationalAccounts = 'Country uses the 1968 System of National Accounts methodology.' AND T1.IndicatorName = 'CO2 emissions FROM solid fuel consumption (kt)' UNION SELECT * FROM ( SELECT T1.CountryName FROM indicators AS T1 INNER JOIN country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.Region = 'Middle East & North Africa' AND T2.SystemOfNationalAccounts = 'Country uses the 1968 System of National Accounts methodology.' AND T1.IndicatorName = 'CO2 emissions FROM solid fuel consumption (kt)' GROUP BY T1.CountryName ORDER BY SUM(T1.value) DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What are the indicator codes for the Republic of Albania in the year 1960?",
+        "query": "SELECT DISTINCT T1.IndicatorCode FROM Indicators AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.Year = 1960 AND T2.LongName = 'Republic of Albania'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the lending category of the country with a cereal production of 6140000 metric tons for the year 1966?",
+        "query": "SELECT T1.LendingCategory FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.IndicatorName = 'Cereal production (metric tons)' AND T2.Value = 6140000 AND T2.Year = 1966"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which country has the highest population in largest city for 19 consecutive years starting from 1960? Indicate the region to which the country is located.",
+        "query": "SELECT T2.CountryCode, T2.Region FROM Indicators AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.IndicatorName = 'Population in largest city' AND T1.Year >= 1960 AND T1.Year < 1980 ORDER BY T2.Region DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "From 1975 to 1980, how much is the total amount CO2 emmission in kiloton of the the world? Indicate which year the world recorded its highest CO2 emmissions.",
+        "query": "SELECT SUM(T1.Value), T1.Year FROM Indicators AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.IndicatorName = 'CO2 emissions (kt)' AND T1.Year >= 1975 AND T1.Year < 1981 AND T1.CountryCode = 'WLD' AND T2.SpecialNotes = 'World aggregate.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which country has the smallest land area in square kilometers for 19 consecutive years starting from year 1961? Indicate how much is its land area in square kilometers in those years and the income group of the country.",
+        "query": "SELECT T1.CountryName, SUM(T1.Value) area, T2.IncomeGroup FROM Indicators AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.IndicatorName = 'Land area (sq. km)' AND T1.Year >= 1961 AND T1.Year < 1980 GROUP BY T1.CountryCode ORDER BY SUM(T1.Value) ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the average number of passengers carried via air transport per year by Bulgaria between 1970 to 1980? Indicate the country's system of trade.",
+        "query": "SELECT AVG(T1.Value), T2.SystemOfTrade FROM Indicators AS T1 INNER JOIN Country AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.IndicatorName = 'Air transport, passengers carried' AND T1.Year >= 1970 AND T1.Year < 1981 AND T1.CountryName = 'Bulgaria'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What's the lastest household survey in Angola and when did it take place?",
+        "query": "SELECT LatestHouseholdSurvey, PppSurveyYear FROM Country WHERE ShortName = 'Angola'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many countries in the North America Region has completed the vital registration?",
+        "query": "SELECT COUNT(CountryCode) FROM Country WHERE VitalRegistrationComplete = 'Yes' AND Region = 'North America'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "In which years does the country whose Alpha2Code is 1A have a result of the indicator Adolescent fertility rate?",
+        "query": "SELECT T2.Year FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.Alpha2Code = '1A' AND T2.IndicatorName = 'Adolescent fertility rate (births per 1,000 women ages 15-19)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What's the long name of the country that got 3000000 on the indicator Arms exports in 1960?",
+        "query": "SELECT T1.LongName FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.IndicatorName = 'Arms exports (SIPRI trend indicator values)' AND T2.Year = 1960 AND T2.Value = 3000000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please list the Alpha2Codes of all the countries that have an indicator on Rural population in 1960.",
+        "query": "SELECT T1.Alpha2Code FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.IndicatorName = 'Rural population' AND T2.Year = 1960"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which country's indicator for Adolescent fertility rate is the highest in 1960, please give its special notes.",
+        "query": "SELECT DISTINCT T1.CountryCode, T1.SpecialNotes FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T2.Value = ( SELECT Value FROM Indicators WHERE IndicatorName = 'Adolescent fertility rate (births per 1,000 women ages 15-19)' AND Year = 1960 ORDER BY Value DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "By how much did the indicator on Adolescent fertility rate increase from 1960 to 1961 in the country whose Alpha2Code is 1A?",
+        "query": "SELECT ( SELECT T2.Value FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.Alpha2Code = '1A' AND T2.IndicatorName = 'Adolescent fertility rate (births per 1,000 women ages 15-19)' AND T2.Year = 1961 ) - ( SELECT T2.Value FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.Alpha2Code = '1A' AND T2.IndicatorName = 'Adolescent fertility rate (births per 1,000 women ages 15-19)' AND T2.Year = 1960 ) DIFF"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the note for Australia on the indicator SP.ADO.TFRT?",
+        "query": "SELECT T2.Description FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode WHERE T2.Seriescode = 'SP.ADO.TFRT' AND T1.ShortName = 'Australia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Please list the notes for Aruba on the indicators under the topic of Environment: Energy production & use.",
+        "query": "SELECT T2.Description FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode INNER JOIN Series AS T3 ON T2.Seriescode = T3.SeriesCode WHERE T1.ShortName = 'Aruba' AND T3.Topic = 'Environment: Energy production & use'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "Which countries have notes on the indicator BX.KLT.DINV.CD.WD?",
+        "query": "SELECT T1.ShortName FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode INNER JOIN Series AS T3 ON T2.Seriescode = T3.SeriesCode WHERE T3.Seriescode = 'BX.KLT.DINV.CD.WD'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "For the country that has notes on the indicator Inflation, consumer prices, in which region is it in?",
+        "query": "SELECT T1.Region FROM Country AS T1 INNER JOIN CountryNotes AS T2 ON T1.CountryCode = T2.Countrycode INNER JOIN Series AS T3 ON T2.Seriescode = T3.SeriesCode WHERE T3.IndicatorName = 'Inflation, consumer prices (annual %)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "How many countries have notes on the indicator Stocks traded, turnover ratio of domestic shares?",
+        "query": "SELECT COUNT(T1.Countrycode)  FROM CountryNotes AS T1 INNER JOIN Series AS T2 ON T1.Seriescode = T2.SeriesCode WHERE T2.IndicatorName = 'Stocks traded, turnover ratio of domestic shares (%)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What's the agregation method for the indicator whose value is 133 in 1960 for the Arab World?",
+        "query": "SELECT T2.AggregationMethod FROM Indicators AS T1 INNER JOIN Series AS T2 ON T1.IndicatorName = T2.IndicatorName INNER JOIN Country AS T3 ON T1.CountryCode = T3.CountryCode WHERE T3.ShortName = 'Arab World' AND T1.Value = 133 AND T1.Year = 1960"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What's the value of the indicator whose long definition is \"Adolescent fertility rate is the number of births per 1,000 women ages 15-19.\" for the Arab World in 1960?",
+        "query": "SELECT T1.Value FROM Indicators AS T1 INNER JOIN Series AS T2 ON T1.IndicatorName = T2.IndicatorName INNER JOIN Country AS T3 ON T1.CountryCode = T3.CountryCode WHERE T2.LongDefinition = 'Adolescent fertility rate is the number of births per 1,000 women ages 15-19.' AND T3.ShortName = 'Arab World' AND T1.Year = 1960"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the percentage of increase of the indicator on Adolescent fertility rate from 1960 to 1961 in the country whose Alpha2Code is 1A?",
+        "query": "SELECT (( SELECT T2.Value FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.Alpha2Code = '1A' AND T2.IndicatorName = 'Adolescent fertility rate (births per 1,000 women ages 15-19)' AND T2.Year = 1961 ) - ( SELECT T2.Value FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.Alpha2Code = '1A' AND T2.IndicatorName = 'Adolescent fertility rate (births per 1,000 women ages 15-19)' AND T2.Year = 1960 )) * 1.0 / ( SELECT SUM(T2.Value) FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.Alpha2Code = '1A' AND T2.IndicatorName = 'Adolescent fertility rate (births per 1,000 women ages 15-19)' AND T2.Year = 1960 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "world_development_indicators",
+        "question": "What is the average value of Adolescent fertility rate in the country whose Alpha2Code is 1A?",
+        "query": "SELECT CAST(SUM(T2.Value) AS REAL) * 100 / COUNT(T2.Year) FROM Country AS T1 INNER JOIN Indicators AS T2 ON T1.CountryCode = T2.CountryCode WHERE T1.Alpha2Code = '1A' AND T2.IndicatorName = 'Adolescent fertility rate (births per 1,000 women ages 15-19)'"
+    }
+]

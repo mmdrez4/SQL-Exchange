@@ -1,0 +1,680 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Which trip had the longest duration? State the start and end station.",
+        "query": "SELECT start_station_name, end_station_name FROM trip WHERE duration = ( SELECT MAX(duration) FROM trip )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the percentage of the trip were done by a subscriber?",
+        "query": "SELECT CAST(COUNT(subscription_type) AS REAL) * 100 / ( SELECT COUNT(subscription_type) FROM trip ) FROM trip WHERE subscription_type = 'Subscriber'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "State the final station of bike id 13. Which city was it at?",
+        "query": "SELECT T2.end_station_id, T1.city FROM station AS T1 INNER JOIN trip AS T2 ON T1.name = T2.end_station_name WHERE T2.bike_id = 13 ORDER BY T2.end_date DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Name all the trips where the bike was borrowed and returned on a different day. State the city where the bike was returned.",
+        "query": "SELECT DISTINCT T1.city FROM station AS T1 INNER JOIN trip AS T2 ON T2.start_station_name = T1.name WHERE SUBSTR(CAST(T2.start_date AS TEXT), INSTR(T2.start_date, '/') + 1) - SUBSTR(CAST(T2.start_date AS TEXT), INSTR(T2.start_date, ' ') - 5) <> SUBSTR(CAST(T2.end_date AS TEXT), INSTR(T2.end_date, '/') + 1) - SUBSTR(CAST(T2.end_date AS TEXT), INSTR(T2.end_date, ' ') - 5)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Which is the station where no bike could not be borrowed form on the 2013/11/03 02:01:01? State the location of the station.",
+        "query": "SELECT T1.name, T1.long FROM station AS T1 INNER JOIN status AS T2 ON T2.station_id = T1.id WHERE T2.time = '2013/11/03 02:01:01' AND T2.bikes_available = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Name the station and city with the most borrowed bike.",
+        "query": "SELECT T2.start_station_name, T1.city FROM station AS T1 INNER JOIN trip AS T2 ON T2.start_station_name = T1.name GROUP BY T2.start_station_name ORDER BY COUNT(T2.start_station_name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What was the hottest temperature on the day of trip ID 4080?",
+        "query": "SELECT MAX(T2.max_temperature_f) FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code AND T2.date = SUBSTR(CAST(T1.start_date AS TEXT), 1, INSTR(T1.start_date, ' ') - 1) WHERE T1.id = 4080"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "At what date and time did San Jose Diridon Caltrain Station have most bikes available.",
+        "query": "SELECT T2.time FROM station AS T1 INNER JOIN status AS T2 ON T2.station_id = T1.id WHERE T1.name = 'San Jose Diridon Caltrain Station' AND T2.bikes_available = ( SELECT MAX(T2.bikes_available) FROM station AS T1 INNER JOIN status AS T2 ON T2.station_id = T1.id WHERE T1.name = 'San Jose Diridon Caltrain Station' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Name all the trip on the days when it rained. State the duration of the trip",
+        "query": "SELECT T1.id, T1.duration FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code AND T2.date = SUBSTR(CAST(T1.start_date AS TEXT), 1, INSTR(T1.start_date, ' ') - 1) WHERE T2.events LIKE '%Rain%' OR T2.events LIKE '%rain%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "List all trips where bikes were returned at location 37.331415, -121.8932. State the date the bike was borrowed.",
+        "query": "SELECT T2.end_station_name, T2.start_date FROM station AS T1 INNER JOIN trip AS T2 ON T2.end_station_name = T1.name WHERE T1.lat = 37.331415 AND T1.long = -121.8932"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Among the trips in August 2013, how many bikes were borrowed from Redwood City.",
+        "query": "SELECT COUNT(T2.start_date) FROM station AS T1 INNER JOIN trip AS T2 ON T2.start_station_name = T1.name WHERE T2.start_date LIKE '8/%/2013%' AND T1.city = 'Redwood City'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "For all trips which took less 5 minutes, state the station name where the bike were borrowed and returned. Indicate mean temperature of the day.",
+        "query": "SELECT T1.start_station_name, T1.end_station_name, T2.mean_temperature_f FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T1.duration < 300"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Among all the trips, which day had the most bikes borrowed? What was the average coldest temperature on that day?",
+        "query": "SELECT T2.date, AVG(T2.min_temperature_f) FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code GROUP BY T2.date ORDER BY COUNT(T1.start_date) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Calculate the average usage of each bike in the third quarter of year 2013. Find the average wind direction within the same period.",
+        "query": "SELECT AVG(T1.duration), AVG(T2.wind_dir_degrees) FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE SUBSTR(CAST(T2.date AS TEXT), 1, INSTR(T2.date, '/') - 1) IN ('7', '8', '9') AND SUBSTR(CAST(T2.date AS TEXT), -4) = '2013'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many bike stations were installed in San Jose in 2014? Indicate the names of the stations.",
+        "query": "SELECT SUM(CASE WHEN city = 'San Jose' AND SUBSTR(installation_date, -4) = '2014' THEN 1 ELSE 0 END) FROM station UNION SELECT name FROM station WHERE city = 'San Jose' AND SUBSTR(installation_date, -4) = '2014'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the longest trip duration that started and ended August 29, 2013?",
+        "query": "SELECT MAX(duration) FROM trip WHERE start_date LIKE '8/29/2013%' AND end_date LIKE '8/29/2013%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How long did it take for bike id 426 to reach 2nd at South Park from Market at 4th on 8/29/2013? Indicate the duration in minutes.",
+        "query": "SELECT CAST(duration AS REAL) / 60  FROM trip WHERE bike_id = 426 AND end_station_name = '2nd at South Park' AND start_station_name = 'Market at 4th' AND start_date LIKE '8/29/2013%' AND end_date LIKE '8/29/2013%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "On 8/29/2013, who took the longest to arrive in California Ave Caltrain Station from University and Emerson? Indicate the bike id.",
+        "query": "SELECT bike_id FROM trip WHERE start_date LIKE '8/29/2013%' AND end_date LIKE '8/29/2013%' AND end_station_name = 'California Ave Caltrain Station' AND start_station_name = 'University and Emerson' AND duration = ( SELECT MAX(duration) FROM trip WHERE start_date LIKE '8/29/2013%' AND end_date LIKE '8/29/2013%' AND end_station_name = 'California Ave Caltrain Station' AND start_station_name = 'University and Emerson' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many stations in San Francico can hold more than 20 bikes?",
+        "query": "SELECT SUM(CASE WHEN city = 'San Francisco' AND dock_count > 20 THEN 1 ELSE 0 END) FROM station"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "When was the hottest temperature recorded? If there are multiple dates with the hottest temperature, indicate all of the dates.",
+        "query": "SELECT max_temperature_f, date FROM weather WHERE max_temperature_f = ( SELECT MAX(max_temperature_f) FROM weather WHERE max_temperature_f IS NOT NULL AND max_temperature_f IS NOT '' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the maximum dew point in Fahrenheit degree on 7/15/2014 in the area with a zip code of 94301?",
+        "query": "SELECT DISTINCT CASE WHEN date = '7/15/2014' AND zip_code = 94301 THEN max_dew_point_f END FROM weather"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Which year experienced the most rain?",
+        "query": "SELECT SUBSTR(CAST(date AS TEXT), -4) FROM weather GROUP BY SUBSTR(CAST(date AS TEXT), -4) ORDER BY SUM(CASE WHEN events LIKE '%Rain%' OR events LIKE '%rain%' THEN 1 ELSE 0 END) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "On 10/20/2014, what is the duration of the fastest trip which started from the station with latitude and longitudes of 37.789625 and -122.400811, respectively? Indicate the bike id.",
+        "query": "SELECT MIN(T2.duration), T2.bike_id FROM station AS T1 INNER JOIN trip AS T2 ON T2.start_station_name = T1.name WHERE T2.start_date LIKE '10/20/2014%' AND T1.lat = 37.789625 AND T1.long = -122.400811"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Among the subscribers who rented a bike from South Van Ness at Market on 12/1/2013, whose duration was the shortest and to which station was the bike returned to? Indicate South Van Ness's dock count.",
+        "query": "SELECT MIN(T2.duration), T2.end_station_name, COUNT(T2.start_station_name) FROM station AS T1 INNER JOIN trip AS T2 ON T2.start_station_name = T1.name WHERE T2.start_date LIKE '12/1/2013%' AND T2.start_station_name = 'South Van Ness at Market' AND T2.subscription_type = 'Subscriber'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the maximum humidity in Powell Street BART when bike 496 was borrowed from the station on 8/29/2013?",
+        "query": "SELECT T2.max_humidity FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T1.start_date LIKE '8/29/2013%' AND T1.bike_id = 496 AND T1.start_station_name = 'Powell Street BART'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Which day in the month of November, 2014 have a foggy weather in the zip code 94301 and in total, how many bikes were borrowed by subscribers from all of the stations in the said day?",
+        "query": "SELECT T2.date, COUNT(T1.start_station_name) FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T2.date LIKE '11/%/2014%' AND T2.zip_code = 94301 AND T2.events = 'Fog' AND T1.subscription_type = 'Subscriber'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the name of the station that is less used by customers who borrow bikes from? Indicate when was the station installed.",
+        "query": "SELECT T1.start_station_name, T2.installation_date FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T1.subscription_type = 'Customer' GROUP BY T1.start_station_name ORDER BY COUNT(T1.subscription_type) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "On 11/3/2013, which stations are often empty? Indicate the names of the stations.",
+        "query": "SELECT DISTINCT T1.name FROM station AS T1 INNER JOIN status AS T2 ON T2.station_id = T1.id WHERE T2.bikes_available = 0 AND T2.time LIKE '2013/11/03%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the average duration of bike trips in the city of Palo Alto?",
+        "query": "SELECT AVG(T1.duration) FROM trip AS T1 LEFT JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T2.city = 'Palo Alto'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the route that has the longest duration? Indicate the city of where the stations are located.",
+        "query": "SELECT T1.start_station_name, T1.end_station_name, T2.city FROM trip AS T1 LEFT JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T1.duration = ( SELECT MAX(T1.duration) FROM trip AS T1 LEFT JOIN station AS T2 ON T2.name = T1.start_station_name )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "List the name of stations that were installed from 8/5/2013 to 12/31/2013. Indicate their installation date and city name.",
+        "query": "SELECT name, installation_date, city FROM station WHERE (SUBSTR(CAST(installation_date AS TEXT), 1, INSTR(installation_date, '/') - 1) = '5' AND SUBSTR(CAST(installation_date AS TEXT), INSTR(installation_date, '/') + 1, -6) >= '8' AND SUBSTR(CAST(installation_date AS TEXT), -4) = '2013') OR (SUBSTR(CAST(installation_date AS TEXT), 1, INSTR(installation_date, '/') - 1) IN ( '6', '7', '8', '9', '10', '11', '12' ) AND SUBSTR(CAST(installation_date AS TEXT), -4) = '2013')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the average duration of trips which are started at Adobe on Almaden station to Ryland Park?",
+        "query": "SELECT AVG(duration) FROM trip WHERE start_station_name = 'Adobe on Almaden' AND end_station_name = 'Ryland Park'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Write down the times when there is no available bike to borrow in a station. List down the stations name and location coordinate.",
+        "query": "SELECT T2.time, T1.name, T1.lat, T1.long FROM station AS T1 INNER JOIN status AS T2 ON T2.station_id = T1.id WHERE T2.bikes_available = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "List down the trips in which their start and end station are similar. Give me their trip IDs and location coordinates.",
+        "query": "SELECT T1.id, T2.lat, T2.long FROM trip AS T1 LEFT JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T1.start_station_name = T1.end_station_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "On 8/29/2013 at 6:14:01 PM, how many bikes were borrowed from San Jose Diridon Caltrain Station?",
+        "query": "SELECT SUM(T1.dock_count - T2.bikes_available) FROM station AS T1 INNER JOIN status AS T2 ON T1.id = T2.station_id WHERE T1.name = 'San Jose Diridon Caltrain Station' AND T2.time = '2013/08/29 06:14:01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "List down the trip IDs when bike no. 10 was used by subscribers and the weather's mean temperature is no less than 62 degress Fahrenheit.",
+        "query": "SELECT T1.id FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T1.bike_id = 10 AND T2.mean_temperature_f > 62 AND T1.subscription_type = 'Subscriber'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What were the max gust speed and cloud clover when the customer using bike no. 10 recorded the 386 seconds duration of the trip from MLK Library to San Salvador at 1st?",
+        "query": "SELECT T2.max_gust_speed_mph, T2.cloud_cover FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code AND T2.date = SUBSTR(CAST(T1.start_date AS TEXT), 1, INSTR(T1.start_date, ' ') - 1) WHERE T1.bike_id = 10 AND T2.mean_temperature_f > 62 AND T1.subscription_type = 'Customer' AND T1.start_station_name = 'MLK Library' AND T1.end_station_name = 'San Salvador at 1st' AND T1.duration = 386"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Among the subscriber, how many of them finished the 2nd at Folsom and Civic Center BART (7th at Market) as their start and end stations respectively for no more than 490 seconds under minimum visibility of 4 miles.",
+        "query": "SELECT COUNT(T1.id) FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T1.subscription_type = 'Subscriber' AND T2.min_visibility_miles = 4 AND T1.duration < 490 AND T1.start_station_name = '2nd at Folsom' AND T1.end_station_name = 'Civic Center BART (7th at Market)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many docks were available at the starting station of trip ID 912900?",
+        "query": "SELECT SUM(T2.docks_available) FROM trip AS T1 INNER JOIN status AS T2 ON T2.station_id = T1.start_station_id WHERE T1.zip_code = 912900"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Please write down the trip IDs which ended on the days when the minimum temperature is less than 45 degrees Fahrenheit.",
+        "query": "SELECT T1.id FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T2.min_temperature_f < 45"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "In 2014, what is the shortest duration of trips by subscribers which started at 2nd at Folsom and ended in the 5th at Howard stations, and by how much shorter than the average? Give me the minimum temperature, maximum gust speed and weather event on that trip.",
+        "query": "SELECT MIN(T1.duration) , MIN(T1.duration) - AVG(T1.duration), T2.min_temperature_f FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T1.start_date = '1/1/2014 0:00' AND T1.end_date = '12/31/2014 11:59' AND T1.start_station_name = '2nd at Folsom' AND T1.end_station_name = '5th at Howard' AND T1.subscription_type = 'Subscriber'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Find the average ride time of the bikes that started at Steuart at Market station and ended at Embarcadero at Sansome station in July 2014.",
+        "query": "SELECT AVG(duration) FROM trip WHERE start_date = '7/1/2014%' AND end_date = '7/31/2014%' AND start_station_name = 'Steuart at Market' AND end_station_name = 'Embarcadero at Sansome'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What are the average maximum and minimum temperatures in May 2015 when the mean humidity is between 65 and 75?",
+        "query": "SELECT AVG(max_temperature_f), AVG(min_temperature_f) FROM weather WHERE date LIKE '5/%/2015' AND mean_humidity BETWEEN 65 AND 75"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Calculate the difference between the number of customers and the number of subscribers who did the trip in June 2013.",
+        "query": "SELECT SUM(IIF(subscription_type = 'Subscriber', 1, 0)) - SUM(IIF(subscription_type = 'Customer', 1, 0)) FROM trip WHERE start_date LIKE '6/%/2013%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "List the days in 2013 when rain and fog occurred together and find the id of bikes borrowed on these days.",
+        "query": "SELECT T2.date, T1.bike_id FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE SUBSTR(CAST(T2.date AS TEXT), -4) = '2013' AND T2.events = 'Fog-Rain'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Find the longest ride on foggy day. What were the mean visibility, mean wind speed, and weather event during that ride? Also, list the coordinates and names of the start and end stations.",
+        "query": "SELECT T3.mean_visibility_miles, T3.mean_wind_speed_mph, T3.events, T1.lat, T1.long , T2.start_station_name, T2.end_station_name FROM station AS T1 INNER JOIN trip AS T2 ON T2.start_station_name = T1.name INNER JOIN weather AS T3 ON T3.zip_code = T2.zip_code WHERE T3.events = 'Fog' ORDER BY T2.duration DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "For the rides that started at Market at 10th station and ended at South Van Ness at Market station in August of 2013, which day had the coldest temperature?",
+        "query": "SELECT T1.start_date FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code AND T2.date = SUBSTR(CAST(T1.start_date AS TEXT), 1, INSTR(T1.start_date, ' ') - 1) WHERE T2.date LIKE '8/%/2013' AND T1.start_station_name = 'Market at 10th' AND T1.end_station_name = 'South Van Ness at Market' AND T2.min_temperature_f = ( SELECT MIN(T2.min_temperature_f) FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code AND T2.date = SUBSTR(CAST(T1.start_date AS TEXT), 1, INSTR(T1.start_date, ' ') - 1) WHERE T2.date LIKE '8/%/2013' AND T1.start_station_name = 'Market at 10th' AND T1.end_station_name = 'South Van Ness at Market' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Among the rides during the rainy days, which ride was the longest? List the start station, end station, and duration of this ride.",
+        "query": "SELECT T1.start_station_name, T1.end_station_name, T1.duration FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T2.events = 'Rain' OR T2.events = 'rain' ORDER BY T1.duration DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Find the average ride duration during the rain of more than 0.8 inches.",
+        "query": "SELECT AVG(T1.duration) FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE (T2.events = 'Rain' AND T2.precipitation_inches > 0.8) OR (T2.events = 'rain' AND T2.precipitation_inches > 0.8)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "List the name and city of starting stations which has an above-average duration trips.",
+        "query": "SELECT DISTINCT T1.start_station_name, T2.city FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T1.duration > ( SELECT AVG(T1.duration) FROM trip AS T1 LEFT JOIN station AS T2 ON T2.name = T1.start_station_name )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many stations in San Francisco are installed in 2014?",
+        "query": "SELECT SUM(CASE WHEN city = 'San Francisco' AND SUBSTR(installation_date, -4) = '2014' THEN 1 ELSE 0 END) FROM station"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "In 2006, how many trips ended at stations in Mountain View?",
+        "query": "SELECT COUNT(T2.city) FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.end_station_name WHERE T2.city = 'Mountain View' AND T1.start_date LIKE '%2006%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Which trip id had the longest duration and the start station is in Redwood City?",
+        "query": "SELECT T1.id FROM trip AS T1 LEFT JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T2.city = 'Redwood City' AND T1.duration = ( SELECT MAX(T1.duration) FROM trip AS T1 LEFT JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T2.city = 'Redwood City' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Please list bikes id were used in trips which start station were installed in 2013.",
+        "query": "SELECT DISTINCT T1.bike_id FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T2.installation_date LIKE '%2013'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many trips which subscription types were Subscriber and ended in San Jose city?",
+        "query": "SELECT COUNT(T1.subscription_type) FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.end_station_name WHERE T1.subscription_type = 'Subscriber' AND T2.city = 'San Jose'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Which trip had the shortest duration and started at the station that can hold 15 bikes?",
+        "query": "SELECT T1.id FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T2.dock_count = 15 AND T1.duration = ( SELECT MIN(T1.duration) FROM trip AS T1 LEFT JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T2.dock_count = 15 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Which year had the most number of trips that started at stations in San Francisco?",
+        "query": "SELECT SUBSTR(CAST(T1.start_date AS TEXT), INSTR(T1.start_date, ' '), -4) FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T2.city = 'San Francisco' GROUP BY T1.start_station_name ORDER BY COUNT(T1.id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the percentage of trips that started in San Jose and durations were longer than 800 seconds?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.duration > 800 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.id) FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T2.city = 'San Jose'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many trips in 2013 had durations longer than 1000 seconds?",
+        "query": "SELECT COUNT(duration) FROM trip WHERE start_date LIKE '%/%/2013%' AND duration > 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Please calculate the average duration of trips started at South Van Ness at Market in 2015.",
+        "query": "SELECT AVG(duration) FROM trip WHERE start_date LIKE '%2015%' AND start_station_name = 'South Van Ness at Market'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many trips which start station and end station are the same?",
+        "query": "SELECT SUM(IIF(start_station_id = end_station_id, 1, 0)) FROM trip"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Please list trips id started on the hottest day.",
+        "query": "SELECT T1.id FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code ORDER BY T2.max_temperature_f DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Which were the trips that started at Mountain View City Hall and ended on a rainy day?",
+        "query": "SELECT T1.id FROM trip AS T1 INNER JOIN weather AS T2 WHERE T2.events = 'Rain' AND T1.start_station_name = 'Mountain View City Hall'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the average duration of trips that ended on a foggy day?",
+        "query": "SELECT AVG(T1.duration) FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T2.events = 'Fog'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What was duration of the longest trip started on the day that has a maximum wind speed of 30 mph?",
+        "query": "SELECT T1.duration FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T2.max_wind_Speed_mph = 30 ORDER BY T1.duration DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Please calculate the average temperature of those trips that started at Market at 4th in 2013.",
+        "query": "SELECT AVG(T2.mean_temperature_f) FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE SUBSTR(CAST(T2.date AS TEXT), -4) = '2013' AND T1.start_station_name = 'Market at 4th'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What was the mean humidity of a trip with id 4275?",
+        "query": "SELECT T2.mean_humidity FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T1.id = 4275"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "In 2015, what percentage of trips that had the subscription type was Customer and ended on a rainy day?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.events = 'Rain' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.id) FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE SUBSTR(CAST(T2.date AS TEXT), -4) = '2015' AND T1.subscription_type = 'Customer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many bike stations are installed after August, 2013 in San Jose?",
+        "query": "SELECT COUNT(installation_date) FROM station WHERE city = 'San Jose' AND (SUBSTR(CAST(installation_date AS TEXT), 1, INSTR(installation_date, '/') - 1) IN ('8', '9', '10', '11', '12') AND SUBSTR(CAST(installation_date AS TEXT), -4) = '2013') OR SUBSTR(CAST(installation_date AS TEXT), -4) > '2013'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the mean temperature in Fahrenheit on 8/29/2013 for the area where the zip code is 94107?",
+        "query": "SELECT SUM(IIF(zip_code = 94107 AND date = '8/29/2013', mean_temperature_f, 0)) FROM weather"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the difference between the hottest temperature and the coldest temperature in in Fahrenheit on 8/29/2013 for the area where the zip code is 94107?",
+        "query": "SELECT SUM(IIF(zip_code = 94107 AND date = '8/29/2013', max_temperature_f - min_temperature_f, 0)) FROM weather"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many bikes can be borrowed in San Jose Diridon Caltrain Station at 12:06:01 on 2013/8/29?",
+        "query": "SELECT T2.bikes_available FROM station AS T1 INNER JOIN status AS T2 ON T1.id = T2.station_id WHERE T1.name = 'San Jose Diridon Caltrain Station' AND T2.time = '2013/08/29 12:06:01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "In which city's station is a bike borrowed on trip ID4069?",
+        "query": "SELECT T2.city FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T1.id = 4069"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many bike trips started on the days in September, 2013 with the hottest temperature over 70 degrees Fahrenheit in the area where the zip code is 94107?",
+        "query": "SELECT COUNT(T1.id) FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T2.date LIKE '9/%/2013' AND T2.zip_code = 94107 AND T2.max_temperature_f > 70"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Please list the starting stations of the bike trips made on a day with a max humidity over 80 in 2013 in the area where the zip code is 94107.",
+        "query": "SELECT DISTINCT T1.start_station_name FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE SUBSTR(CAST(T2.date AS TEXT), -4) = '2013' AND T2.zip_code = 94107 AND T2.max_temperature_f > 80"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many trips made by a subscriber started in August, 2013 from a station that can hold more than 20 bikes?",
+        "query": "SELECT COUNT(T2.id) FROM station AS T1 INNER JOIN trip AS T2 ON T1.id = T2.start_station_id WHERE T2.subscription_type = 'Subscriber' AND T2.start_date LIKE '8/%/2013%' AND T1.dock_count > 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the location coordinates of the bike station from which the bike for the trip that last the longest was borrowed?",
+        "query": "SELECT T2.lat, T2.long FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T1.duration = ( SELECT MAX(T1.duration) FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.start_station_name )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many docks were left at the end station for trip ID4069?",
+        "query": "SELECT SUM(T2.docks_available) FROM trip AS T1 INNER JOIN status AS T2 ON T2.station_id = T1.end_station_id WHERE T1.ID = 4069"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Among the bike trips started on the days with a fog in 2013, how many of those trips started from the station \"2nd at Townsend\"?",
+        "query": "SELECT COUNT(T1.start_station_name) FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T2.date LIKE '%2013%' AND T2.events = 'Fog' AND T1.start_station_name = '2nd at Townsend' AND T2.zip_code = 94107"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the longest duration for a bike trip starting on a day with a fog in 2013?",
+        "query": "SELECT MAX(T1.duration) FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T2.date LIKE '%2013%' AND T2.events = 'Fog' AND T2.zip_code = 94107"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "When was the bike station from which the bike was borrowed on trip ID4069 installed?",
+        "query": "SELECT T2.installation_date FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T1.id = 4069"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many trips with a bike borrowed from the stations in San Francisco were made by a subscriber?",
+        "query": "SELECT COUNT(T1.id) FROM trip AS T1 INNER JOIN station AS T2 ON T2.ID = T1.start_station_id WHERE T2.city = 'San Francisco' AND T1.subscription_type = 'Subscriber'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "On the day with the hottest temperature ever in 2014, how many bike trips started from the station 2nd at Folsom?",
+        "query": "SELECT COUNT(T1.start_station_name) FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T2.date LIKE '%2014%' AND T2.zip_code = 94107 AND T1.start_station_name = '2nd at Folsom' ORDER BY T2.max_temperature_f DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the average duration of a bike trip made on the day with the hottest temperature ever in 2014?",
+        "query": "SELECT AVG(T1.duration) FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T2.date LIKE '%2014%' AND T1.start_station_name = '2nd at Folsom' AND T2.max_temperature_f = ( SELECT max_temperature_f FROM weather ORDER BY max_temperature_f DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "List out all end stations for a bicycle that were making a trip starting from 2nd at South Park station? Only retain the unique value.",
+        "query": "SELECT DISTINCT end_station_name FROM trip WHERE start_station_name = '2nd at South Park'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many rainy days were recorded in Mountain View?",
+        "query": "SELECT SUM(IIF(zip_code = 94041 AND events = 'Rain', 1, 0)) FROM weather"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the total number of bikes that can be hold in Redwood City before 2014.",
+        "query": "SELECT SUM(CASE WHEN city = 'Redwood City' AND SUBSTR(installation_date, -4) < '2014' THEN dock_count ELSE 0 END) NUM FROM station"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the longest trip duration according? Convert the it to number of days.",
+        "query": "SELECT MAX(duration), CAST(MAX(duration) AS REAL) / 86400 FROM trip"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Convert all temperature recorded at San Francisco city during August 2013 into degree Celsius.",
+        "query": "SELECT (max_temperature_f - 32) / 1.8000 , (mean_temperature_f - 32) / 1.8000 , (min_temperature_f - 32) / 1.8000 FROM weather WHERE SUBSTR(CAST(date AS TEXT), 1, INSTR(date, '/') - 1) = '8' AND SUBSTR(CAST(date AS TEXT), -4) = '2013' AND zip_code = 94107"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the ratio for subscriber to customer given that the starting and the ending stations is 2nd at South Park?",
+        "query": "SELECT CAST(SUM(IIF(subscription_type = 'Subscriber', 1, 0)) AS REAL) / SUM(IIF(subscription_type = 'Customer', 1, 0)) FROM trip WHERE start_station_name = '2nd at South Park' AND end_station_name = '2nd at South Park'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Are all stations with zip code 94107 located in San Francisco city?",
+        "query": "SELECT DISTINCT T2.city FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T1.zip_code = 94107"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "List out all stations name that having a mean temperature 20 degree Celsius in year 2014.",
+        "query": "SELECT DISTINCT T2.start_station_name, T2.end_station_name FROM weather AS T1 INNER JOIN trip AS T2 ON T1.zip_code = T2.zip_code WHERE T1.date LIKE '%2014' AND T1.mean_temperature_f = 20 * 1.8 + 32"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many bicycle trip were made within San Jose city during August 2013?",
+        "query": "SELECT COUNT(T2.id) FROM station AS T1 INNER JOIN trip AS T2 ON T2.start_station_name = T1.name WHERE T1.city = 'San Jose' AND T2.start_date LIKE '8/%/2013%' AND T2.start_station_name LIKE 'San Jose%' AND T2.end_station_name LIKE 'San Jose%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Is there any intercity trip were made during 2014? If yes, list out the city name for the start and end station.",
+        "query": "SELECT T1.start_station_name, T1.end_station_name FROM trip AS T1 LEFT JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T1.start_date LIKE '%/%/2014%' AND T1.start_station_name != T1.end_station_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Does the bike with Id number 16 making any intercity trip? If yes, calculate the total travel duration during all the intercity trip. Convert the duration to hour.",
+        "query": "SELECT T1.end_station_name, T2.city, CAST(SUM(T1.duration) AS REAL) / 3600 FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T1.bike_id = 16 AND T1.start_station_name != T1.end_station_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the ratio of customer to subscriber that making a trip inside Mountain View city?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.subscription_type = 'Customer' THEN 1 ELSE 0 END) AS REAL) * 100 / SUM(CASE WHEN T1.subscription_type = 'Subscriber' THEN 1 ELSE 0 END) FROM trip AS T1 LEFT JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T2.city = 'Mountain View'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the total trip duration made within Palo Alto city? Convert the duration to hour.",
+        "query": "SELECT CAST(SUM(T1.duration) AS REAL) / 3600 FROM trip AS T1 LEFT JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T2.city = 'Palo Alto'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Which bicycle is the least used bike. Check if the start and end station are from the same city and calculate the total duration travelled by the bicycle in hours for a trip made within the same city.",
+        "query": "SELECT T2.bike_id, T2.start_station_name, T2.end_station_name, T1.city , CAST(T2.duration AS REAL) / 3600 FROM station AS T1 INNER JOIN trip AS T2 ON T1.name = T2.start_station_name GROUP BY T2.bike_id ORDER BY COUNT(T2.id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Count the number of subscribers who started their trips in Market at 4th.",
+        "query": "SELECT COUNT(CASE WHEN subscription_type = 'Subscriber' AND start_station_name = 'Market at 4th' THEN id END) FROM trip"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "List the names of the stations within Mountain View that were installed on 12/31/2013.",
+        "query": "SELECT name FROM station WHERE installation_date = '12/31/2013' AND city = 'Mountain View'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Which city is Townsend at 7th Station located and how many bikes could it hold?",
+        "query": "SELECT city, SUM(dock_count) FROM station WHERE name = 'Townsend at 7th'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many bikes could Evelyn Park and Ride hold and how many users who started on that station are subscribers?",
+        "query": "SELECT SUM(T2.dock_count), COUNT(T1.subscription_type) FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T2.name = 'Evelyn Park and Ride' AND T1.start_station_name = T2.name AND T1.subscription_type = 'Subscriber'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many subscribers are in the zip code of 94301 and what is the hottest temperature recorded on that zip code?",
+        "query": "SELECT COUNT(T3.zip_code), T3.max_temperature_f FROM trip AS T2 INNER JOIN weather AS T3 ON T3.zip_code = T2.zip_code WHERE T3.zip_code = 94301 AND T2.subscription_type = 'Subscriber' ORDER BY T3.max_temperature_f DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the percentage ration of customers to subscribers that started their trips within the city of San Francisco?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.subscription_type = 'Customer' THEN 1 ELSE 0 END) AS REAL) * 100 / SUM(CASE WHEN T1.subscription_type = 'Subscriber' THEN 1 ELSE 0 END) FROM trip AS T1 LEFT JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T2.city = 'San Francisco'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the average duration of trips for the starting station of Santa Clara at Almaden and what is the latitude and longitude of this station?",
+        "query": "SELECT AVG(T1.duration), T2.lat, T2.long FROM trip AS T1 LEFT JOIN station AS T2 ON T2.name = T1.start_station_name LEFT JOIN station AS T3 ON T3.name = T1.end_station_name WHERE T1.start_station_name = 'Santa Clara at Almaden'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the shortest trip made starting from Franklin at Maple and what is the maximum wind speed at that date?",
+        "query": "SELECT MIN(T1.duration), MAX(T2.max_wind_Speed_mph) FROM trip AS T1 INNER JOIN weather AS T2 ON T2.zip_code = T1.zip_code WHERE T1.start_station_name = 'Franklin at Maple' AND T2.date = '9/4/2013'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many bikes have been borrowed at San Jose Diridon Caltrain Station on the date and time of 10/20/2013 8:11:01 AM and indicate the station's coordinates.",
+        "query": "SELECT SUM(T2.bikes_available), T1.long, T1.lat FROM station AS T1 INNER JOIN status AS T2 ON T2.station_id = T1.id WHERE T2.time = '2013/10/20 8:11:01' AND T1.name = 'San Jose Diridon Caltrain Station'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Name the city of the station that trip ID 585842 borrowed a bike and indicate when that station was first installed.",
+        "query": "SELECT T2.city, T2.installation_date FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T1.id = 585842"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many stations were installed on the date of 8/16/2013 and how many users on those stations are classified as a customer?",
+        "query": "SELECT COUNT(T1.name) , SUM(CASE WHEN T2.subscription_type = 'Customer' THEN 1 ELSE 0 END) FROM station AS T1 INNER JOIN trip AS T2 ON T2.start_station_name = T1.name WHERE T1.installation_date = '8/16/2013' AND T2.subscription_type = 'Customer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Which station did the user who started at Market at 4th station ended their trip at the time of 12:45:00 PM and the date of 8/29/2013 and what is the location coordinates of the ending station?",
+        "query": "SELECT T1.name, T1.lat, T1.long FROM station AS T1 INNER JOIN trip AS T2 ON T2.end_station_name = T1.name WHERE T2.start_station_name = 'Market at 4th' AND T2.end_date = '8/29/2013 12:45'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "How many subscribers have ended their trip at MLK Library and how many docks does that station have?",
+        "query": "SELECT COUNT(T1.id), T2.dock_count FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T1.end_station_name = 'MLK Library' AND T1.subscription_type = 'Subscriber' AND T2.dock_count = 19"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "What is the average coldest temperature for the zip code of 94301 and what stations are within the zip code? Include the latitude and longitude as well.",
+        "query": "SELECT AVG(T3.min_temperature_f), T1.long, T1.lat FROM station AS T1 INNER JOIN trip AS T2 ON T2.start_station_name = T1.name INNER JOIN weather AS T3 ON T3.zip_code = T2.zip_code WHERE T3.zip_code = 94301"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "bike_share_1",
+        "question": "Calculate the average duration travelled by subscribers that both started and ended their trip in Mountain View City Hall and indicate the date when the station was first installed.",
+        "query": "SELECT AVG(T1.duration), T2.installation_date FROM trip AS T1 INNER JOIN station AS T2 ON T2.name = T1.start_station_name WHERE T1.start_station_name = 'Mountain View City Hall' AND T1.subscription_type = 'Subscriber' AND T1.end_station_name = 'Mountain View City Hall'"
+    }
+]

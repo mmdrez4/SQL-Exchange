@@ -1,0 +1,746 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many English language codes whose comments for the method are in the XML format?",
+        "query": "SELECT COUNT(Lang) FROM Method WHERE Lang = 'en' AND CommentIsXml = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the task of the method whose tokenized name is \"online median filter test median window filling\"?",
+        "query": "SELECT SUBSTR(SUBSTR(Name, INSTR(Name, '.') + 1), 1, INSTR(SUBSTR(Name, INSTR(Name, '.') + 1), '.') - 1) task FROM Method WHERE NameTokenized = 'online median filter test median window filling'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the time of sampling of the solution with the highest sampling time? Indicate the id number of the solution.",
+        "query": "SELECT DISTINCT SampledAt, SolutionId FROM Method WHERE SampledAt = ( SELECT MAX(SampledAt) FROM Method )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many followers do the most followed repository on Github have? Give the github address of the repository.",
+        "query": "SELECT Forks, Url FROM Repo WHERE Forks = ( SELECT MAX(Forks) FROM Repo )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the id of the repository with the highest number of solution path?",
+        "query": "SELECT RepoId FROM solution GROUP BY RepoId ORDER BY COUNT(Path) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the most liked repository? Indicate its github address and the amount of stars it has received.",
+        "query": "SELECT Url, Stars FROM Repo WHERE Stars = ( SELECT MAX(Stars) FROM Repo )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the name of the solution path with the highest processed time?",
+        "query": "SELECT Path FROM Solution WHERE ProcessedTime = ( SELECT MAX(ProcessedTime) FROM Solution )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How much is the processed time of downloading the most popular repository?",
+        "query": "SELECT ProcessedTime FROM Repo WHERE Watchers = ( SELECT MAX(Watchers) FROM Repo )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the github address of the \"nofear_Mara\\Mara.sln\" solution path?",
+        "query": "SELECT Url FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE Path = 'nofear_MaraMara.sln'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Which repository has the longest amount of processed time of downloading? Indicate whether the solution paths in the repository can be implemented without needs of compilation.",
+        "query": "SELECT DISTINCT T1.id, T2.WasCompiled FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.ProcessedTime = ( SELECT MAX(ProcessedTime) FROM Repo )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the tokenized name of the solution whose path is \"maravillas_linq-to-delicious\\tasty.sln\"?",
+        "query": "SELECT DISTINCT T2.NameTokenized FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T1.Path = 'maravillas_linq-to-delicious'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Among the repositories whose number of stars received are between 6,000 to 9,000, which repository has the highest number of solution paths and many of those solution paths needs to be compiled if user wants to implement it?",
+        "query": "SELECT T2.RepoId, COUNT(T2.RepoId) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Stars BETWEEN 6000 AND 9000 AND T2.WasCompiled = 0 GROUP BY T2.RepoId ORDER BY COUNT(T2.RepoId) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "In the \"https://github.com/wallerdev/htmlsharp.git\", give all the linearized sequenced of API calls.",
+        "query": "SELECT T3.ApiCalls FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId INNER JOIN Method AS T3 ON T2.Id = T3.SolutionId WHERE T1.Url = 'https://github.com/wallerdev/htmlsharp.git'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many solution paths are there inside the 2nd most popular repository?",
+        "query": "SELECT COUNT(DISTINCT T2.Path) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Watchers = ( SELECT Watchers FROM Repo ORDER BY Watchers DESC LIMIT 1, 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the average processed time of the solution paths inside the \"https://github.com/zphingphong/DiscardCustomerApp.git\"?",
+        "query": "SELECT CAST(SUM(T2.ProcessedTime) AS REAL) / COUNT(T2.RepoId) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Url = 'https://github.com/zphingphong/DiscardCustomerApp.git'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the full comment on the method whose solution path is \"bmatzelle_nini\\Source\\Nini.sln\" with a tokenized name of \"alias text add alias\"?",
+        "query": "SELECT T2.FullComment FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T1.Path = 'bmatzelle_niniSourceNini.sln' AND T2.NameTokenized = 'alias text add alias'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the linearized sequenced of API calls of the method whose solution path is \"mauriciodeamorim_tdd.encontro2\\Tdd.Encontro2.sln\"?",
+        "query": "SELECT T2.ApiCalls FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T1.Path = 'mauriciodeamorim_tdd.encontro2Tdd.Encontro2.sln'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many solution paths that needs to be compiled if user wants to implement it in \"https://github.com/jeffdik/tachy.git\"?",
+        "query": "SELECT COUNT(T2.Path) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Url = 'https://github.com/jeffdik/tachy.git' AND T2.WasCompiled = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How much is the processed time of the method whose tokenized name is \"about box1 dispose\"? Indicate the language of the method.",
+        "query": "SELECT DISTINCT T1.ProcessedTime, T2.Lang FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.NameTokenized = 'about box1 dispose'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "In \"maxild_playground\\Playground.sln\", what is the time of sampling for the method \"GitHubRepo.Cli.GitHubClientWrapper.GetReleases\"?",
+        "query": "SELECT T2.SampledAt FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T1.Path = 'maxild_playgroundPlayground.sln' AND T2.Name = 'GitHubRepo.Cli.GitHubClientWrapper.GetReleases'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the language of the method used in the solution path \"opendns_diagnosticapp\\windows\\OpenDnsDiagnostic.sln\"?",
+        "query": "SELECT T2.Lang FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T1.Path = 'opendns_diagnosticappwindowsOpenDnsDiagnostic.sln'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What's the task of the method whose tokenized name is \"html parser feed\"?",
+        "query": "SELECT SUBSTR(SUBSTR(Name, INSTR(Name, '.') + 1), 1, INSTR(SUBSTR(Name, INSTR(Name, '.') + 1), '.') - 1) task FROM Method WHERE NameTokenized = 'html parser feed'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Are the comments for the method \"HtmlSharp.HtmlParser.Feed\" in XML format?",
+        "query": "SELECT CASE WHEN CommentIsXml = 0 THEN 'No' WHEN CommentIsXml = 1 THEN 'Yes' END isXMLFormat FROM Method WHERE Name = 'HtmlSharp.HtmlParser.Feed'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Which method has the summary \"Write a command to the log\"?",
+        "query": "SELECT Name FROM Method WHERE Summary = 'Write a command to the log'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many solutions contain files found within the repository most people like?",
+        "query": "SELECT COUNT(T2.RepoId) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Stars = ( SELECT MAX(Stars) FROM Repo )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Please list the path of the solution that contains files found within the repository most people like.",
+        "query": "SELECT DISTINCT T2.Path FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Stars = ( SELECT MAX(Stars) FROM Repo )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the github address of the repository that contains files used by solution ID12?",
+        "query": "SELECT T1.Url FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T2.Id = 12"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Among the solutions that contain files within the repository followed by over 1000 people, how many of them can be\nimplemented without needs of compilation?",
+        "query": "SELECT COUNT(T2.RepoId) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Forks > 1000 AND T2.WasCompiled = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Which solution contains files within a more popular repository, the solution ID18 or solution ID19?",
+        "query": "SELECT CASE WHEN SUM(CASE WHEN T2.Id = 18 THEN T1.Watchers ELSE 0 END) > SUM(CASE WHEN T2.Id = 19 THEN T1.Watchers ELSE 0 END) THEN 'SolutionID18' WHEN SUM(CASE WHEN T2.Id = 18 THEN T1.Watchers ELSE 0 END) < SUM(CASE WHEN T2.Id = 19 THEN T1.Watchers ELSE 0 END) THEN 'SolutionID19' END isMorePopular FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Among the solutions that contain files within the repository needing the longest processed time to download, how many of them doesn't need to be\ncompiled if user wants to implement it?",
+        "query": "SELECT COUNT(T2.RepoId) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.ProcessedTime = ( SELECT MAX(ProcessedTime) FROM Repo ) AND T2.WasCompiled = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the processed time to download the repository whose files are contained in the solution with the path \"jeffdik_tachy\\src\\Tachy.sln\".",
+        "query": "SELECT DISTINCT T2.ProcessedTime FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T2.Path = 'jeffdik_tachysrcTachy.sln'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Please give the url of the repository whose files are contained in solution ID 9?",
+        "query": "SELECT T1.Url FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T2.Id = 9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Please list all the paths of the solutions containing files within the repository whose url is \"https://github.com/maxild/playground.git\".",
+        "query": "SELECT T2.Path FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Url = 'https://github.com/maxild/playground.git'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Among the repositories with over 200 likes, how many of them have files contained by solutions with a processed time of under 636439500080712000?",
+        "query": "SELECT COUNT(T2.RepoId) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T2.ProcessedTime < 636439500080712000 AND T1.Stars > 200"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Please list the IDs of the solutions that contain files within the top 3 followed repositories.",
+        "query": "SELECT T2.Id FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId ORDER BY T1.Forks DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the average time needed for the solutions containing files within the repository whose url is \"https://github.com/jeffdik/tachy.git\" to be processd?",
+        "query": "SELECT CAST(SUM(T2.ProcessedTime) AS REAL) / COUNT(T2.RepoId) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Url = 'https://github.com/jeffdik/tachy.git'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many more followers in percentage are there for the repository used by solution ID 18 than solution ID19?",
+        "query": "SELECT CAST((SUM(CASE WHEN T2.Id = 18 THEN T1.Forks ELSE 0 END) - SUM(CASE WHEN T2.Id = 19 THEN T1.Forks ELSE 0 END)) AS REAL) * 100 / SUM(CASE WHEN T2.Id = 19 THEN T1.Forks ELSE 0 END) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the language of the method ''PixieTests.SqlConnectionLayerTests.TestSqlCreateGuidColumn\"?",
+        "query": "SELECT Lang FROM Method WHERE Name = 'PixieTests.SqlConnectionLayerTests.TestSqlCreateGuidColumn'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Show the full Comment of the method \"DE2_UE_Fahrradkurier.de2_uebung_fahrradkurierDataSet1TableAdapters.TableAdapterManager.UpdateInsertedRows\".",
+        "query": "SELECT FullComment FROM Method WHERE Name = 'DE2_UE_Fahrradkurier.de2_uebung_fahrradkurierDataSet1TableAdapters.TableAdapterManager.UpdateInsertedRows'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "List the summary of the method \"Castle.MonoRail.Framework.Test.StubViewComponentContext.RenderSection\".",
+        "query": "SELECT DISTINCT Summary FROM Method WHERE Name = 'Castle.MonoRail.Framework.Test.StubViewComponentContext.RenderSection'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Give the tokenized name for the method \"Supay.Irc.Messages.KnockMessage.GetTokens\".",
+        "query": "SELECT NameTokenized FROM Method WHERE Name = 'Supay.Irc.Messages.KnockMessage.GetTokens'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many stars does the repository of the solution No. 45997 have?",
+        "query": "SELECT T1.Stars FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T2.Id = 45997"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "For the repository which got '8094' Stars, how many solutions does it contain?",
+        "query": "SELECT COUNT(T2.RepoId) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Stars = 8094"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the solution path for the method \"IQ.Data.DbQueryProvider.CanBeEvaluatedLocally\"?",
+        "query": "SELECT T1.Path FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Name = 'IQ.Data.DbQueryProvider.CanBeEvaluatedLocally'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "For the method which got the tokenized name as 'interp parser expr', what is the processed time for its solution?",
+        "query": "SELECT T1.ProcessedTime FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.NameTokenized = 'interp parser expr'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the repository number for the solution of method \"SCore.Poisson.ngtIndex\"?",
+        "query": "SELECT T1.RepoId FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Name = 'SCore.Poisson.ngtIndex'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Tell the path of the solution for the method \"ExportToRTF.RTFStyleSheet.H6Write\".",
+        "query": "SELECT T1.Path FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Name = 'ExportToRTF.RTFStyleSheet.H6Write'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "For the repository with '8094' watchers , how many solutions does it contain?",
+        "query": "SELECT COUNT(T2.RepoId) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Watchers = 8094"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Give the repository Url of the one with most solutions.",
+        "query": "SELECT T1.Url FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId GROUP BY T2.RepoId ORDER BY COUNT(T2.RepoId) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many solutions does the repository which has 1445 Forks contain?",
+        "query": "SELECT COUNT(T2.RepoId) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Forks = 1445"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Among all the solution of the 'zh-cn' methods, which path is most often used?",
+        "query": "SELECT T1.Path FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Lang = 'zh-cn' GROUP BY T1.Path ORDER BY COUNT(T1.Path) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Give the number of watchers that the repository of the solution No. 338082 have.",
+        "query": "SELECT T1.Watchers FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T2.Id = 338082"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "For the repository which got '189' Stars, how many solutions which needs to be compiled does it contain?",
+        "query": "SELECT COUNT(T2.RepoId) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Stars = 189 AND T2.WasCompiled = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Show the solution path for the method \"Mosa.Platform.x86.Instructions.IMul.EmitLegacy\"?",
+        "query": "SELECT T1.Path FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Name = 'Mosa.Platform.x86.Instructions.IMul.EmitLegacy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "For the method which got the tokenized name as 't jadwal entity get single mpic', what is the path time for its solution?",
+        "query": "SELECT DISTINCT T1.ProcessedTime FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.NameTokenized = 't jadwal entity get single mpic'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Give the repository ID for the solution of method \"Kalibrasi.Data.EntityClasses.THistoryJadwalEntity.GetSingleTjadwal\".",
+        "query": "SELECT DISTINCT T1.RepoId FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Name = 'Kalibrasi.Data.EntityClasses.THistoryJadwalEntity.GetSingleTjadwal'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "For the method has the summary of \"Refetches the Entity from the persistent storage. Refetch is used to re-load an Entity which is marked \"Out-of-sync\", due to a save action. Refetching an empty Entity has no effect.\", what is its solution path?",
+        "query": "SELECT DISTINCT T1.Path FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Summary = 'Refetches the Entity FROM the persistent storage. Refetch is used to re-load an Entity which is marked \"Out-of-sync\", due to a save action. Refetching an empty Entity has no effect.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Give the number of solutions that the repository which has 3060 Stars contains.",
+        "query": "SELECT COUNT(T2.RepoId) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Stars = 3060"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "For the solution of the most 'sw' methods, what is its path?",
+        "query": "SELECT DISTINCT T1.Path FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Lang = 'sw'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many percent more of the watchers for the repository of solution No.83855 than No.1502?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.Id = 83855 THEN T1.Watchers ELSE 0 END) - SUM(CASE WHEN T2.Id = 1502 THEN T1.Watchers ELSE 0 END) AS REAL) * 100 / SUM(CASE WHEN T2.Id = 1502 THEN T1.Watchers ELSE 0 END) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many percent more of the stars for the repository of solution No.51424 than No.167053?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.Id = 51424 THEN T1.Stars ELSE 0 END) - SUM(CASE WHEN T2.Id = 167053 THEN T1.Stars ELSE 0 END) AS REAL) * 100 / SUM(CASE WHEN T2.Id = 167053 THEN T1.Stars ELSE 0 END) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many percent more of the Forks for the repository of solution No.53546 than No.1502?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.Id = 53546 THEN T1.Forks ELSE 0 END) - SUM(CASE WHEN T2.Id = 1502 THEN T1.Forks ELSE 0 END) AS REAL) * 100 / SUM(CASE WHEN T2.Id = 1502 THEN T1.Forks ELSE 0 END) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "List all the methods with a solution with a \"636449700980488000\" processed time.",
+        "query": "SELECT DISTINCT T2.Name FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T1.ProcessedTime = 636449700980488000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many solutions are in \"https://github.com/derickbailey/presentations-and-training.git\"?",
+        "query": "SELECT COUNT(T2.RepoId) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Url = 'https://github.com/derickbailey/presentations-and-training.git'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the total processed time of all solutions from the repository with the most forks?",
+        "query": "SELECT SUM(T2.ProcessedTime) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Forks = ( SELECT MAX(Forks) FROM Repo )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "List all the path of solution from all the \"it\" lang code method.",
+        "query": "SELECT DISTINCT T1.Path FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Lang = 'it'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the path of solution of \"spinachLexer.mT__55\" method?",
+        "query": "SELECT T1.Path FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Name = 'spinachLexer.mT__55'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What are the \"en\" methods with solutions from repository \"1093\"",
+        "query": "SELECT DISTINCT T2.id FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T1.RepoId = 1093 AND T2.Lang = 'en'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What are the paths of solutions in repository \"https://github.com/ecoffey/Bebop.git\"",
+        "query": "SELECT DISTINCT T2.Path FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Url = 'https://github.com/ecoffey/Bebop.git'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "List all the ids of repositories for solutions with \"ro\" methods.",
+        "query": "SELECT DISTINCT T1.RepoId FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Lang = 'ro'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the repository id of the method with tokenized name \"crc parameters get hash code\"?",
+        "query": "SELECT T1.RepoId FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.NameTokenized = 'crc parameters get hash code'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many methods with solutions with path 'maravillas_linq-to-delicious\\tasty.sln'?",
+        "query": "SELECT COUNT(T2.SolutionId) FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T1.Path = 'maravillas_linq-to-delicious\\tasty.sln'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "List all the solutions ids of the repository with \"636430969128176000\" processed time",
+        "query": "SELECT T2.Id FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.ProcessedTime = 636430969128176000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the url for repository that has the longest processed time solution?",
+        "query": "SELECT T1.Url FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T2.ProcessedTime = ( SELECT MAX(ProcessedTime) FROM Solution )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "List all the solutions of repositories with the Forks higher than half of the watchers.",
+        "query": "SELECT DISTINCT T2.Id FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Forks > T1.Watchers / 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the percentage of Forks to Stars of repository for solution \"104086\"?",
+        "query": "SELECT CAST(T1.Forks AS REAL) * 100 / T1.Stars FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T2.Id = 104086"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Please provide the id of the respository that the most people like.",
+        "query": "SELECT Id FROM Repo WHERE Stars = ( SELECT MAX(Stars) FROM Repo )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the solution's path of method \"HtmlSharp.HtmlParser.Feed\"?",
+        "query": "SELECT T1.Path FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Name = 'HtmlSharp.HtmlParser.Feed'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Please provide the number of forks that the repository of the solution 35 have.",
+        "query": "SELECT T1.Forks FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T2.Id = 35"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Please provide the id of the solution whose repository has the most watchers.",
+        "query": "SELECT T2.Id FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Watchers = ( SELECT MAX(Watchers) FROM Repo )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Please provide the number of stars that the repository of the solution 20 have.",
+        "query": "SELECT T1.Stars FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T2.Id = 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many methods does solution 1 have? And please tell me if solution 1 needs to be compiled.",
+        "query": "SELECT COUNT(T2.SolutionId) , CASE WHEN T1.WasCompiled = 0 THEN 'Needs' ELSE 'NoNeeds' END needToCompile FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.SolutionId = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the percentage of the methods' solutions that need to be compiled among the methods whose comments is XML format?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.WasCompiled = 0 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.SolutionId) FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.CommentIsXml = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Please list the names of methods with the solution path \"wallerdev_htmlsharp\\HtmlSharp.sln\".",
+        "query": "SELECT T2.Name FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T1.Path = 'wallerdev_htmlsharpHtmlSharp.sln'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the percentage of respositories that receive more than 2,000 stars?",
+        "query": "SELECT CAST(SUM(CASE WHEN Stars > 2000 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(Stars) FROM Repo"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the url of solution 1?",
+        "query": "SELECT T1.Url FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T2.Id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Please provide the id of the respository that received the most forks among the respositories that receive 21 stars.",
+        "query": "SELECT Id FROM Repo WHERE Stars = 21 AND Forks = ( SELECT MAX(Forks) FROM Repo WHERE Stars = 21 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What the percentage of the english methods among the methods whose comments is XML format?",
+        "query": "SELECT CAST(SUM(CASE WHEN Lang = 'en' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(Name) FROM Method WHERE CommentIsXml = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Please provide the path of solution of method whose tokenized name is html parser feed.",
+        "query": "SELECT T1.Path FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.NameTokenized = 'html parser feed'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Please provide the solution id of the respository among the respository that receive 238 forks.",
+        "query": "SELECT T2.Id FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Forks = 238"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Among the english methods,please list the tokenized names of methods whose solutions need to be compiled.",
+        "query": "SELECT NameTokenized FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE Lang = 'en' AND WasCompiled = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many solutions whose repository's stars are a third more than forks?",
+        "query": "SELECT COUNT(T2.RepoId) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Forks < T1.Stars * 1 / 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Please provide the path of solution of method whose full comment is Feeds data into the parser.",
+        "query": "SELECT T1.Path FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.FullComment = 'Feeds data into the parser'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Among the repository \"3\", how many methods whose comments is XML format?",
+        "query": "SELECT COUNT(T2.SolutionId) FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T1.RepoId = 3 AND T2.CommentIsXml = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the percentage of solutions for the method that needs to be compiled in the English methods?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.WasCompiled = 0 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(Lang) FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Lang = 'en'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many more stars in percentage are there for the repository of solution \"1\" than solution \"2\"?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.Id = 1 THEN T1.Stars ELSE 0 END) - SUM(CASE WHEN T2.Id = 2 THEN T1.Stars ELSE 0 END) AS REAL) * 100 / SUM(CASE WHEN T2.Id = 2 THEN T1.Stars ELSE 0 END) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many solutions are there whose respositories received the number of stars more than one third of the number of forks?",
+        "query": "SELECT COUNT(DISTINCT T1.Id) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Stars > CAST(T1.Forks AS REAL) / 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the task of method number 2?",
+        "query": "SELECT SUBSTR(SUBSTR(Name, INSTR(Name, '.') + 1), 1, INSTR(SUBSTR(Name, INSTR(Name, '.') + 1), '.') - 1) task FROM Method WHERE Id = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What format does the method number 8's comment have?",
+        "query": "SELECT CASE WHEN CommentIsXml = 0 THEN 'isNotXMLFormat' WHEN CommentIsXml = 1 THEN 'isXMLFormat' END format FROM Method WHERE Id = 8"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Please provide a link to the most well-known repository's Github address.",
+        "query": "SELECT Url FROM Repo WHERE Watchers = ( SELECT MAX(Watchers) FROM Repo )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the task of the method that is in the Czech language?",
+        "query": "SELECT DISTINCT SUBSTR(SUBSTR(Name, INSTR(Name, '.') + 1), 1, INSTR(SUBSTR(Name, INSTR(Name, '.') + 1), '.') - 1) task FROM Method WHERE Lang = 'cs'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the solution path for method number 3?",
+        "query": "SELECT T1.Path FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Id = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the language of method number 28 that can be found in the repository number 3?",
+        "query": "SELECT T2.Lang FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Id = 28 AND T1.RepoId = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is solution 1's processing time and how many methods have been using this solution?",
+        "query": "SELECT T1.ProcessedTime, COUNT(T2.SolutionId) FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.SolutionId = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many methods in the same repository share a tokenized name that begins with \"query language...\"?",
+        "query": "SELECT COUNT(T2.SolutionId) FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.NameTokenized LIKE 'query language%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Please state the API calls for method number 10 and its intended course of action.",
+        "query": "SELECT T2.ApiCalls, T1.Path FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Id = 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many methods in repository 150 did not have a comment and a summary?",
+        "query": "SELECT COUNT(T2.SolutionId) FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T1.RepoId = 150 AND T2.FullComment IS NULL AND T2.Summary IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the comment format of method number 50 with the solution path \"managedfusion_managedfusion\\ManagedFusion.sln\"?",
+        "query": "SELECT CASE WHEN T2.CommentIsXml = 0 THEN 'isNotXMLFormat' WHEN T2.CommentIsXml = 1 THEN 'isXMLFormat' END format FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.Id = 50 AND T1.Path = 'managedfusion_managedfusionManagedFusion.sln'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the task method of the tokenized name \"string extensions to pascal case\n\"?",
+        "query": "SELECT DISTINCT SUBSTR(SUBSTR(Name, INSTR(Name, '.') + 1), 1, INSTR(SUBSTR(Name, INSTR(Name, '.') + 1), '.') - 1) task FROM Method WHERE NameTokenized = 'string extensions to pascal case'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Provide the tokenized name of the method \"Sky.Excel.ExcelBook.TypeConvert\".",
+        "query": "SELECT NameTokenized FROM Method WHERE Name = 'Sky.Excel.ExcelBook.TypeConvert'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many path does the github address \"https://github.com/jeffdik/tachy.git\" have?",
+        "query": "SELECT COUNT(DISTINCT T2.Path) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Url = 'https://github.com/jeffdik/tachy.git'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many watchers does the path \"maff_se3ue7\\US7.sln\" have?",
+        "query": "SELECT T1.Watchers FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T2.Path = 'maff_se3ue7US7.sln'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "List 5 github address that the solutions can be implemented without the need of compilation.",
+        "query": "SELECT T1.Url FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T2.WasCompiled = 1 LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What are the solution path of the tokenized name \"matrix multiply\"?",
+        "query": "SELECT DISTINCT T1.Path FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.NameTokenized = 'matrix multiply'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many XML format does the github address \"https://github.com/dogeth/vss2git.git\" have?",
+        "query": "SELECT COUNT(T3.CommentIsXml) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId INNER JOIN Method AS T3 ON T2.Id = T3.SolutionId WHERE T1.Url = 'https://github.com/dogeth/vss2git.git' AND T3.CommentIsXml = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "List 5 solution path that has sampling time of 636431758961741000.",
+        "query": "SELECT DISTINCT T1.Path FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T2.SampledAt = 636431758961741000 LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the github address of the solution path \"joeyrobert_bloomfilter\\DataTypes.BloomFilter.sln\"?",
+        "query": "SELECT T1.Url FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T2.Path = 'joeyrobert_bloomfilterDataTypes.BloomFilter.sln'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "List all the method name of the solution path \"graffen_NLog.Targets.Syslog\\src\\NLog.Targets.Syslog.sln\n\".",
+        "query": "SELECT DISTINCT T2.Name FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T1.Path = 'graffen_NLog.Targets.SyslogsrcNLog.Targets.Syslog.sln'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "List all the tokenized name of the solution path \"jurney_P4Backup\\P4Backup\\P4Backup.sln\n\".",
+        "query": "SELECT DISTINCT T2.NameTokenized FROM Solution AS T1 INNER JOIN Method AS T2 ON T1.Id = T2.SolutionId WHERE T1.Path = 'jurney_P4BackupP4BackupP4Backup.sln'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "Provide the github address with the summary of method \"A test for Decompose\n\".",
+        "query": "SELECT T1.Url FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId INNER JOIN Method AS T3 ON T2.Id = T3.SolutionId WHERE T3.Summary = 'A test for Decompose'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many liked by people does the solution path \"ninject_Ninject\\Ninject.sln\n\" have?",
+        "query": "SELECT DISTINCT T1.Stars FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T2.Path = 'ninject_NinjectNinject.sln'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many solution path does the repository with 111 stars, 58 forks, and 111 watchers?",
+        "query": "SELECT COUNT(T2.Path) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Stars = 111 AND T1.Forks = 58 AND T1.Watchers = 111"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "What is the average processed time of the solution with a repository of 254 likes, 88 followers, and 254 watchers?",
+        "query": "SELECT CAST(SUM(T2.ProcessedTime) AS REAL) / COUNT(T2.ProcessedTime) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId WHERE T1.Stars = 254 AND T1.Forks = 88 AND T1.Watchers = 254"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "codebase_comments",
+        "question": "How many language code of method is used for the github address \"https://github.com/managedfusion/managedfusion.git\n\"?",
+        "query": "SELECT COUNT(DISTINCT T3.Lang) FROM Repo AS T1 INNER JOIN Solution AS T2 ON T1.Id = T2.RepoId INNER JOIN Method AS T3 ON T2.Id = T3.SolutionId WHERE T1.Url = 'https://github.com/managedfusion/managedfusion.git'"
+    }
+]

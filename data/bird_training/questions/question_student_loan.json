@@ -1,0 +1,1220 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students have never been absent from school?",
+        "query": "SELECT COUNT(name) FROM longest_absense_from_school WHERE `month` = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "For the students who have been absent from school for the longest time, how many months have they been absent?",
+        "query": "SELECT MAX(month) FROM longest_absense_from_school"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students belong to the navy department?",
+        "query": "SELECT COUNT(name) FROM enlist WHERE organ = 'navy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among the students that have been absent from school for more than 5 months, how many of them are male?",
+        "query": "SELECT COUNT(T1.name) FROM longest_absense_from_school AS T1 INNER JOIN male AS T2 ON T1.`name` = T2.`name` WHERE T1.`month` >= 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Please list the names of the male students that belong to the navy department.",
+        "query": "SELECT T1.name FROM enlist AS T1 INNER JOIN male AS T2 ON T1.`name` = T2.`name` WHERE T1.organ = 'navy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among the students that have filed for bankruptcy, how many of them have been absent from school for over 5 months?",
+        "query": "SELECT COUNT(T1.name) FROM filed_for_bankrupcy AS T1 INNER JOIN longest_absense_from_school AS T2 ON T1.`name` = T2.`name` WHERE T2.`month` > 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among the students from the navy department, how many of them have payment due?",
+        "query": "SELECT COUNT(T1.name) FROM enlist AS T1 INNER JOIN no_payment_due AS T2 ON T1.`name` = T2.`name` WHERE T1.organ = 'navy' AND T2.bool = 'pos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Please list the male students that are disabled and have filed for bankruptcy.",
+        "query": "SELECT T1.name, T2.name, T3.name FROM disabled AS T1 INNER JOIN male AS T2 ON T1.`name` = T2.`name` INNER JOIN filed_for_bankrupcy AS T3 ON T1.`name` = T3.`name`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many female students are disabled?",
+        "query": "SELECT COUNT(name) FROM disabled WHERE name NOT IN ( SELECT name FROM male )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students are unemployed and have payment due?",
+        "query": "SELECT COUNT(T1.name) FROM unemployed AS T1 INNER JOIN no_payment_due AS T2 ON T1.`name` = T2.`name`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the longest time for a student from the navy department to be absent from school?",
+        "query": "SELECT T1.month FROM longest_absense_from_school AS T1 INNER JOIN enlist AS T2 ON T1.`name` = T2.`name` WHERE T2.organ = 'navy' ORDER BY T1.`month` DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many disabled students have never been absent from school?",
+        "query": "SELECT COUNT(T1.name) FROM longest_absense_from_school AS T1 INNER JOIN disabled AS T2 ON T1.`name` = T2.`name` WHERE T1.`month` = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Please list the departments the students are absent from school for 9 months are in.",
+        "query": "SELECT T2.organ FROM longest_absense_from_school AS T1 INNER JOIN enlist AS T2 ON T1.`name` = T2.`name` WHERE T1.`month` = 9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Which department has the most disabled students?",
+        "query": "SELECT T2.organ, COUNT(T1.name) FROM disabled AS T1 INNER JOIN enlist AS T2 ON T1.`name` = T2.`name` GROUP BY T2.organ ORDER BY COUNT(T1.name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Please list all the female students that have filed for bankruptcy.",
+        "query": "SELECT name FROM filed_for_bankrupcy WHERE name NOT IN ( SELECT name FROM male )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the percentage of male students in the navy department?",
+        "query": "SELECT CAST(COUNT(T2.name) AS REAL) * 100 / COUNT(T1.name) FROM enlist AS T1 LEFT JOIN male AS T2 ON T1.`name` = T2.`name` WHERE T1.organ = 'navy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the average time for a disabled student to be absent from school?",
+        "query": "SELECT AVG(T1.month) FROM longest_absense_from_school AS T1 INNER JOIN disabled AS T2 ON T1.`name` = T2.`name`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Name all students enlisted in the foreign legion.",
+        "query": "SELECT name FROM enlist WHERE organ = 'foreign_legion'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Does student348 have a due payment?",
+        "query": "SELECT bool FROM no_payment_due WHERE name = 'student348'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Which school is student829 enrolled in?",
+        "query": "SELECT school FROM enrolled WHERE name = 'student829'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many months has student217 been absent?",
+        "query": "SELECT month FROM longest_absense_from_school WHERE name = 'student217'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List all students that have been absent for 6 months.",
+        "query": "SELECT name FROM longest_absense_from_school WHERE `month` = 6"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Which organization did student285 enlist?",
+        "query": "SELECT organ FROM enlist WHERE name = 'student285'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Is student281 disabled and which school is the student enrolled in?",
+        "query": "SELECT T2.name, T1.school FROM enrolled AS T1 INNER JOIN disabled AS T2 ON T1.`name` = T2.`name` WHERE T1.name = 'student281'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List all students in the air force and which school they were enrolled at.",
+        "query": "SELECT T1.name, T1.school FROM enrolled AS T1 INNER JOIN enlist AS T2 ON T1.`name` = T2.`name` WHERE T2.organ = 'air_force'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List 10 students that have no due payments and are not males.",
+        "query": "SELECT T1.name FROM no_payment_due AS T1 INNER JOIN person AS T2 ON T1.`name` = T2.`name` WHERE T2.`name` NOT IN ( SELECT name FROM male ) AND T1.bool = 'neg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Name 5 students with due payments that are enlisted alongside which organization they were enlisted.",
+        "query": "SELECT T2.organ, T1.name FROM no_payment_due AS T1 INNER JOIN enlist AS T2 ON T1.`name` = T2.`name` WHERE T1.bool = 'pos' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Name all disabled students that are enrolled in SMC.",
+        "query": "SELECT T2.name FROM enrolled AS T1 INNER JOIN disabled AS T2 ON T1.`name` = T2.`name` WHERE T1.school = 'smc'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Which students that filed for bankruptcy are also in the foreign legion?",
+        "query": "SELECT T2.name FROM enlist AS T1 INNER JOIN filed_for_bankrupcy AS T2 ON T1.`name` = T2.`name` WHERE T1.organ = 'foreign_legion'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many male students have no due payments?",
+        "query": "SELECT COUNT(T1.name) FROM no_payment_due AS T1 INNER JOIN male AS T2 ON T1.name = T2.name WHERE T1.bool = 'neg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Which students that are in the marines have been absent for 6 months?",
+        "query": "SELECT T1.name FROM longest_absense_from_school AS T1 INNER JOIN enlist AS T2 ON T1.`name` = T2.`name` WHERE T2.organ = 'marines' AND T1.`month` = 6"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students from SMC are unemployed?",
+        "query": "SELECT T2.name FROM enrolled AS T1 INNER JOIN unemployed AS T2 ON T1.`name` = T2.`name` WHERE T1.school = 'smc'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many unemployed students are there that have been absent for 6 months?",
+        "query": "SELECT T1.name FROM longest_absense_from_school AS T1 INNER JOIN unemployed AS T2 ON T1.`name` = T2.name WHERE T1.`month` = 6"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Count the number of students from UCSD enlisted in the peace corps.",
+        "query": "SELECT COUNT(T1.name) FROM enlist AS T1 INNER JOIN enrolled AS T2 ON T1.`name` = T2.`name` WHERE T2.school = 'ucsd' AND T1.organ = 'peace_corps'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Student21 is enlisted in which organization and has the student been absent?",
+        "query": "SELECT T2.month, T1.organ FROM enlist AS T1 INNER JOIN longest_absense_from_school AS T2 ON T1.`name` = T2.`name` WHERE T1.name = 'student21'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the percentage ratio of students who are enlisted in foreign legions that have a due payment?",
+        "query": "SELECT CAST(SUM(IIF(T1.bool = 'pos', 1, 0)) AS REAL) * 100 / SUM(IIF(T1.bool = 'neg', 1, 0)) FROM no_payment_due AS T1 INNER JOIN enlist AS T2 ON T1.`name` = T2.`name` WHERE T2.organ = 'foreign_legion'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What percentage of students who enlisted in the navy make up the number of students enrolled in OCC?",
+        "query": "SELECT CAST(SUM(IIF(T1.school = 'occ', 1.0, 0)) AS REAL) * 100 / COUNT(T1.name) FROM enrolled AS T1 INNER JOIN enlist AS T2 ON T1.`name` = T2.`name` WHERE T2.organ = 'navy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List out student IDs that have the longest absence duration from school.",
+        "query": "SELECT name FROM longest_absense_from_school WHERE `month` = ( SELECT MAX(month) FROM longest_absense_from_school )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the total number of students in the school?",
+        "query": "SELECT COUNT(name) FROM person"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the longest students absence duration from school?",
+        "query": "SELECT name, month FROM longest_absense_from_school WHERE `month` = ( SELECT MAX(month) FROM longest_absense_from_school )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students were absence for 4 month?",
+        "query": "SELECT COUNT(name) FROM longest_absense_from_school WHERE month = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the number of unemployed and bankrupt students?",
+        "query": "SELECT COUNT(T1.name) FROM unemployed AS T1 INNER JOIN filed_for_bankrupcy AS T2 ON T1.name = T2.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Does disable students join organization. If yes, please indicate the organization joined by the students.",
+        "query": "SELECT DISTINCT T2.organ FROM disabled AS T1 INNER JOIN enlist AS T2 ON T1.`name` = T2.`name`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many unemployed and bankrupt students that have payment dues?",
+        "query": "SELECT COUNT(T1.name) FROM unemployed AS T1 INNER JOIN filed_for_bankrupcy AS T2 ON T1.name = T2.name INNER JOIN no_payment_due AS T3 ON T2.name = T3.name WHERE T3.bool = 'pos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Please check if student 124 is disabled male.",
+        "query": "SELECT IIF(T2.name IS NULL, 'female', 'male') FROM male AS T1 LEFT JOIN disabled AS T2 ON T1.name = T2.name WHERE T1.name = 'student124'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the employment, disability, gender and school debt status for student180 and student117?",
+        "query": "SELECT ( SELECT COUNT(name) FROM disabled WHERE name IN ('student180', 'student117') ), ( SELECT COUNT(name) FROM unemployed WHERE name IN ('student180', 'student117') ), ( SELECT COUNT(name) FROM male WHERE name IN ('student180', 'student117') ), ( SELECT COUNT(name) FROM no_payment_due WHERE name IN ('student180', 'student117'))"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many female students joined a marines and air force organization?",
+        "query": "SELECT COUNT(name) FROM enlist WHERE organ IN ('marines', 'air_force') AND name NOT IN ( SELECT name FROM male )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List out the organization joined and school enrolled by student27, student17 and student101?",
+        "query": "SELECT T1.school, T2.organ FROM enrolled AS T1 INNER JOIN enlist AS T2 ON T1.`name` = T2.`name` WHERE T1.`name` IN ('student27,student17,studetn101')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the ratio of disable female to male students?",
+        "query": "SELECT CAST(SUM(IIF(T2.name IS NULL, 1, 0)) AS REAL) * 100 / COUNT(T2.name) FROM disabled AS T1 LEFT JOIN male AS T2 ON T1.`name` = T2.`name`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many female students are not joining any of the organization?",
+        "query": "SELECT COUNT(name) FROM person WHERE name NOT IN ( SELECT name FROM male ) AND name NOT IN ( SELECT name FROM enrolled )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List out all bankrupt students that are able to make payment before due?",
+        "query": "SELECT T1.name FROM filed_for_bankrupcy AS T1 INNER JOIN no_payment_due AS T2 ON T1.name = T2.name WHERE T2.bool = 'neg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the average absence period of a student?",
+        "query": "SELECT AVG(month) FROM longest_absense_from_school"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the average of absence for an employed students?",
+        "query": "SELECT AVG(month) FROM longest_absense_from_school WHERE name NOT IN ( SELECT name FROM unemployed )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the average absence period of a disabled student?",
+        "query": "SELECT AVG(T1.month) FROM longest_absense_from_school AS T1 INNER JOIN disabled AS T2 ON T1.name = T2.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Which organization does student 313 belong to?",
+        "query": "SELECT organ FROM enlist WHERE name = 'studenT113'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students enlisted in the fire-department?",
+        "query": "SELECT COUNT(name) FROM enlist WHERE organ = 'fire_department'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students who have never been absent from school?",
+        "query": "SELECT COUNT(name) FROM longest_absense_from_school WHERE month = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students have been absent above 2 months?",
+        "query": "SELECT COUNT(name) FROM longest_absense_from_school WHERE month > 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "State the number of students do not have payment due.",
+        "query": "SELECT COUNT(name) FROM no_payment_due WHERE bool = 'neg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Give the number of students who have payment due.",
+        "query": "SELECT COUNT(name) FROM no_payment_due WHERE bool = 'pos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Mention the name of disabled students who have never been absent from school.",
+        "query": "SELECT T1.name FROM disabled AS T1 INNER JOIN longest_absense_from_school AS T2 ON T1.name = T2.name WHERE T2.month = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many unemployed students are enlisted in the navy organization?",
+        "query": "SELECT COUNT(T1.name) FROM unemployed AS T1 INNER JOIN enlist AS T2 ON T1.name = T2.name WHERE T2.organ = 'navy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Count the number of male students who belong to foreign legion.",
+        "query": "SELECT COUNT(T1.name) FROM male AS T1 INNER JOIN enlist AS T2 ON T1.name = T2.name WHERE T2.organ = 'foreign_legion'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List out the number of female students who enlisted in the air force.",
+        "query": "SELECT COUNT(name) FROM enlist WHERE organ = 'air_force' AND name NOT IN ( SELECT name FROM male )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "State name of disabled students who have the longest duration of absense from school.",
+        "query": "SELECT T1.name FROM disabled AS T1 INNER JOIN longest_absense_from_school AS T2 ON T1.name = T2.name ORDER BY T2.month DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "State the unemployed students who enlisted in marines.",
+        "query": "SELECT T1.name FROM unemployed AS T1 INNER JOIN enlist AS T2 ON T1.name = T2.name WHERE T2.organ = 'marines'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Calculate the average duration of absense of disabled students.",
+        "query": "SELECT AVG(T1.month) FROM longest_absense_from_school AS T1 INNER JOIN disabled AS T2 ON T1.name = T2.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the percentage of unemployed students who have been absent for 5 months from school?",
+        "query": "SELECT CAST(SUM(IIF(T1.month > 5, 1, 0)) AS REAL) * 100 / COUNT(T1.month) FROM longest_absense_from_school AS T1 INNER JOIN unemployed AS T2 ON T1.name = T2.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many unemployed disabled students have been absent for 8 months from school?",
+        "query": "SELECT COUNT(T1.name) FROM longest_absense_from_school AS T1 INNER JOIN unemployed AS T2 ON T1.name = T2.name INNER JOIN disabled AS T3 ON T2.name = T3.name WHERE T1.month = 8"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "State name of unemployed students who have the longest duration of absense from school.",
+        "query": "SELECT T1.name FROM longest_absense_from_school AS T1 INNER JOIN unemployed AS T2 ON T1.name = T2.name ORDER BY T1.month DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Mention the name of unemployed students who have never been absent from school.",
+        "query": "SELECT T1.name FROM longest_absense_from_school AS T1 INNER JOIN unemployed AS T2 ON T1.name = T2.name WHERE T1.month = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many disabled students have been absent for 3 months from school?",
+        "query": "SELECT COUNT(T1.name) FROM longest_absense_from_school AS T1 INNER JOIN disabled AS T2 ON T1.name = T2.name WHERE T1.month = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Mention the name of students who filed for bankruptcy and have never been absent from school.",
+        "query": "SELECT T1.name FROM longest_absense_from_school AS T1 INNER JOIN filed_for_bankrupcy AS T2 ON T1.name = T2.name WHERE T1.month = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "State name of students who filed for bankruptcy and have the longest duration of absense from school.",
+        "query": "SELECT T1.name FROM longest_absense_from_school AS T1 INNER JOIN filed_for_bankrupcy AS T2 ON T1.name = T2.name ORDER BY T1.month DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the gender of student1000?",
+        "query": "SELECT IIF(T.result = 0, 'female', 'male') AS re FROM ( SELECT COUNT(name) AS result FROM male WHERE name = 'studenT1000' ) T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students are disabled?",
+        "query": "SELECT COUNT(name) FROM disabled"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students have been absents for more than 6 months?",
+        "query": "SELECT COUNT(name) FROM longest_absense_from_school WHERE month > 6"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Which students have absents the most?",
+        "query": "SELECT name FROM longest_absense_from_school WHERE month = ( SELECT MAX(month) FROM longest_absense_from_school )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students are enlisted in the army?",
+        "query": "SELECT COUNT(name) FROM enlist WHERE organ = 'army'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Find the average number of absences for each student.",
+        "query": "SELECT AVG(month) FROM longest_absense_from_school"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Sum up the number of students enlisted in foreign legion, peace corps and army.",
+        "query": "SELECT COUNT(name) FROM enlist WHERE organ IN ('army', 'peace_corps', 'foreign_legion')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among the students enlisted in marines, how many of them are disabled?",
+        "query": "SELECT COUNT(T1.name) FROM enlist AS T1 INNER JOIN disabled AS T2 ON T1.name = T2.name WHERE T1.organ = 'marines'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many unemployed students still have payment due?",
+        "query": "SELECT COUNT(T1.name) FROM unemployed AS T1 INNER JOIN no_payment_due AS T2 ON T1.name = T2.name WHERE T2.bool = 'pos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Which female students had never been absent?",
+        "query": "SELECT T2.name FROM male AS T1 INNER JOIN longest_absense_from_school AS T2 ON T1.name <> T2.name WHERE T2.month = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Which school has the highest number of disabled students?",
+        "query": "SELECT T.school FROM ( SELECT T2.school, COUNT(T2.name) AS num FROM disabled AS T1 INNER JOIN enrolled AS T2 ON T1.name = T2.name GROUP BY T2.school ) T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List all the organisations of students who filed for bankcrupcy.",
+        "query": "SELECT T2.organ FROM filed_for_bankrupcy AS T1 INNER JOIN enlist AS T2 ON T1.name = T2.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many male students join more than one organization?",
+        "query": "SELECT COUNT(T.a) FROM ( SELECT COUNT(DISTINCT T1.name) AS a, COUNT(T2.organ) AS num FROM male AS T1 INNER JOIN enlist AS T2 ON T1.name = T2.name GROUP BY T1.name ) T WHERE T.num > 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List all the navy students who are disabled.",
+        "query": "SELECT T1.name FROM disabled AS T1 INNER JOIN enlist AS T2 ON T1.name = T2.name WHERE T2.organ = 'navy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many SMC's students that absent for 7 months?",
+        "query": "SELECT COUNT(T1.name) FROM enrolled AS T1 INNER JOIN longest_absense_from_school AS T2 ON T1.name = T2.name WHERE T1.school = 'smc' AND T2.month = 7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List all the disabled female students.",
+        "query": "SELECT T1.name FROM disabled AS T1 INNER JOIN male AS T2 ON T1.name <> T2.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Calculate the ratio between unemployed students and disabled students.",
+        "query": "SELECT CAST(( SELECT COUNT(name) FROM unemployed ) AS REAL ) / ( SELECT COUNT(name) FROM disabled )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Find the percentage of male students enlisted in the fire department.",
+        "query": "SELECT CAST(COUNT(T2.name) AS REAL) * 100 / COUNT(T1.name) FROM enlist AS T1 LEFT JOIN male AS T2 ON T1.name = T2.name WHERE T1.organ = 'fire_department'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students has the longest absense from school for 5 months?",
+        "query": "SELECT COUNT(name) FROM longest_absense_from_school WHERE month = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students are enlisted in the Army organization?",
+        "query": "SELECT COUNT(name) FROM enlist WHERE organ = 'army'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students are enrolled in UCLA school?",
+        "query": "SELECT COUNT(name) FROM enrolled WHERE school = 'ucla'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List at least 5 students who has the longest absense from schoool?",
+        "query": "SELECT name FROM longest_absense_from_school ORDER BY month DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many of the students joined two organization?",
+        "query": "SELECT COUNT(name) FROM enlist WHERE organ >= 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students are enlisted in the Navy organization?",
+        "query": "SELECT COUNT(name) FROM enlist WHERE organ = 'navy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many male stuents do not have payment due?",
+        "query": "SELECT COUNT(T1.name) FROM male AS T1 INNER JOIN no_payment_due AS T2 ON T1.name = T2.name WHERE T2.bool = 'neg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students are enlisted in the Peace Corps organization are enrolled in UCSD school?",
+        "query": "SELECT COUNT(T1.name) FROM enlist AS T1 INNER JOIN enrolled AS T2 ON T1.name = T2.name WHERE T1.organ = 'peace_corps' AND T2.school = 'ucsd'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among the unemployed students, how many of them have no payment due?",
+        "query": "SELECT COUNT(T1.name) FROM unemployed AS T1 INNER JOIN no_payment_due AS T2 ON T1.name = T2.name WHERE T2.bool = 'neg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many female students have no payment due?",
+        "query": "SELECT COUNT(name) FROM no_payment_due WHERE name NOT IN ( SELECT name FROM male )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many unemployed students have never been absent?",
+        "query": "SELECT COUNT(T2.name) FROM longest_absense_from_school AS T1 INNER JOIN unemployed AS T2 ON T2.name = T1.name WHERE T1.month = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List at least 10 students who have no payment due and are enlisted in Fire Department organization.",
+        "query": "SELECT T1.name FROM no_payment_due AS T1 INNER JOIN enlist AS T2 ON T2.name = T1.name WHERE T1.bool = 'neg' AND T2.organ = 'fire_department' LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many female students are enlisted in the Navy organization?",
+        "query": "SELECT COUNT(name) FROM enlist WHERE organ = 'navy' AND name NOT IN ( SELECT name FROM male )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many unemployed students are enlisted in the Army organization?",
+        "query": "SELECT COUNT(T1.name) FROM enlist AS T1 INNER JOIN unemployed AS T2 ON T2.name = T1.name WHERE T1.organ = 'army'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many unemployed students have payment due?",
+        "query": "SELECT COUNT(T1.name) FROM no_payment_due AS T1 INNER JOIN unemployed AS T2 ON T2.name = T1.name WHERE T1.bool = 'pos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List at least 5 students who have payment due and are enlisted in Peace Corps organization?",
+        "query": "SELECT T1.name FROM no_payment_due AS T1 INNER JOIN enlist AS T2 ON T2.name = T1.name WHERE T2.organ = 'peace_corps' AND T1.bool = 'pos' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many disabled students are female?",
+        "query": "SELECT COUNT(name) FROM disabled WHERE name NOT IN ( SELECT name FROM male )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many disabled students have payment due?",
+        "query": "SELECT COUNT(T1.name) FROM disabled AS T1 INNER JOIN no_payment_due AS T2 ON T2.name = T1.name WHERE T2.bool = 'pos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Calculate the average number of female students who are disabled and who joined Foreign Legion organization.",
+        "query": "SELECT CAST(SUM(IIF(T3.name IS NULL, 1, 0)) AS REAL) / COUNT(T1.name) FROM disabled AS T1 INNER JOIN enlist AS T2 ON T1.name = T2.name LEFT JOIN male AS T3 ON T2.name = T3.name WHERE T2.organ = 'foreign_legion'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Calculate the ratio in percentage between the average number of female and male students who joined Fire Department organization.",
+        "query": "SELECT CAST(SUM(IIF(T2.name IS NULL, 1, 0)) AS REAL) * 100 / COUNT(T1.name), CAST(SUM(IIF(T2.name IS NOT NULL, 1, 0)) AS REAL) * 100 / COUNT(T1.name) FROM enlist AS T1 LEFT JOIN male AS T2 ON T2.name = T1.name WHERE T1.organ = 'fire_department'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students enlisted in the navy?",
+        "query": "SELECT COUNT(name) FROM enlist WHERE organ = 'navy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Calculate the percentage of students who have never been absent.",
+        "query": "SELECT CAST(SUM(IIF(month = 0, 1, 0)) AS REAL) * 100 / COUNT(name) FROM longest_absense_from_school"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the ratio of students who have payment due and those who do not have payment due?",
+        "query": "SELECT CAST(SUM(IIF(`bool` = 'pos', 1, 0)) AS REAL) / SUM(IIF(`bool` = 'neg', 1, 0)) FROM no_payment_due"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Provide the students' names and schools who enrolled for 15 months.",
+        "query": "SELECT name, school FROM enrolled WHERE month = 15"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Calculate the average enlisted students per organization.",
+        "query": "SELECT CAST(COUNT(NAME) AS REAL) * 100 / COUNT(DISTINCT organ) FROM enlist"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List down the enrolled schools and duration of student214.",
+        "query": "SELECT school, month FROM enrolled WHERE name = 'student214'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among all students, calculate the percentage of disabled students.",
+        "query": "SELECT CAST(COUNT(T2.name) AS REAL) * 100 / COUNT(T1.name) FROM person AS T1 LEFT JOIN disabled AS T2 ON T2.name = T1.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among students who have been absent for nine months, how many of them are disabled?",
+        "query": "SELECT COUNT(T1.name) FROM disabled AS T1 LEFT JOIN longest_absense_from_school AS T2 ON T2.name = T1.name WHERE T2.month = 9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List down the student names who did not file for bankruptcy.",
+        "query": "SELECT name FROM person WHERE name NOT IN ( SELECT name FROM filed_for_bankrupcy )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List any five female students' names who enlisted for the air force.",
+        "query": "SELECT T1.name FROM enlist AS T1 LEFT JOIN male AS T2 ON T2.name = T1.name WHERE T2.name IS NULL AND T1.organ = 'air_force' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Calculate the number of students who are not disabled.",
+        "query": "SELECT COUNT(CASE  WHEN T2.name IS NULL THEN T1.name END) AS \"number\" FROM person AS T1 LEFT JOIN disabled AS T2 ON T2.name = T1.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Define the gender of \"student995\" and his/her enrolled schools.",
+        "query": "SELECT IIF(T2.name IS NULL, 'female', 'male') AS gen , T1.school FROM enrolled AS T1 LEFT JOIN male AS T2 ON T2.name = T1.name WHERE T1.name = 'student995'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among the students with disabilities, list any five students' names who are unemployed.",
+        "query": "SELECT T1.name FROM disabled AS T1 INNER JOIN unemployed AS T2 ON T2.name = T1.name LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many unemployed students filed for bankruptcy?",
+        "query": "SELECT COUNT(T1.name) FROM unemployed AS T1 INNER JOIN filed_for_bankrupcy AS T2 ON T2.name = T1.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among the students who have been absent for four months, provide any five students' names and enlisted organizations.",
+        "query": "SELECT T2.name, T2.organ FROM longest_absense_from_school AS T1 INNER JOIN enlist AS T2 ON T2.name = T1.name WHERE T1.month = 4 LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among the students with payment due, how many of them are unemployed?",
+        "query": "SELECT COUNT(T1.name) FROM no_payment_due AS T1 INNER JOIN unemployed AS T2 ON T2.name = T1.name WHERE T1.bool = 'pos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Provide the enlisted organizations of student160 and status of his/her payment due.",
+        "query": "SELECT T1.organ, T2.bool FROM enlist AS T1 INNER JOIN no_payment_due AS T2 ON T2.name = T1.name WHERE T1.name = 'student160'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List any ten male students who enlisted for foreign legion.",
+        "query": "SELECT T1.name FROM enlist AS T1 INNER JOIN male AS T2 ON T2.name = T1.name WHERE T1.organ = 'foreign_legion' LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Calculate the percentage of female students.",
+        "query": "SELECT CAST(SUM(IIF(T2.name IS NULL, 1, 0)) AS REAL) * 100 / COUNT(T1.name) FROM person AS T1 LEFT JOIN male AS T2 ON T2.name = T1.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students are filed for bankruptcy?",
+        "query": "SELECT COUNT(name) FROM filed_for_bankrupcy"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students are enrolled in smc during month 1?",
+        "query": "SELECT COUNT(name) FROM enrolled WHERE school = 'smc' AND month = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students enlist in the air force organization?",
+        "query": "SELECT COUNT(name) FROM enlist WHERE organ = 'air_force'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the organization enlisted by student168?",
+        "query": "SELECT organ FROM enlist WHERE name = 'student168'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many disabled male students joined an organization?",
+        "query": "SELECT COUNT(T1.name) FROM disabled AS T1 LEFT JOIN male AS T2 ON T2.name = T1.name INNER JOIN enlist AS T3 ON T3.name = T2.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Please provide a disability breakdown for each school.",
+        "query": "SELECT COUNT(T1.name) FROM enrolled AS T1 INNER JOIN disabled AS T2 ON T2.name = T1.name GROUP BY T1.school"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Please provide a gender breakdown for each organization.",
+        "query": "SELECT IIF(T2.name IS NULL, 'female', 'male') AS gender FROM enlist AS T1 LEFT JOIN male AS T2 ON T2.name = T1.name GROUP BY T1.organ"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List out student names that enrolled in two schools and two organizations?",
+        "query": "SELECT T.name FROM ( SELECT T1.name, COUNT(T1.organ) AS num FROM enlist AS T1 INNER JOIN enrolled AS T2 ON T1.name = T2.name GROUP BY T1.name ) T WHERE T.num = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the percentage difference between month 0 absence and month 9 absence?",
+        "query": "SELECT CAST(((SUM(IIF(month = 0, 1, 0)) - SUM(IIF(month = 9, 1, 0)))) AS REAL) * 100 / SUM(IIF(month = 0, 1, 0)) FROM longest_absense_from_school"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Which school have the highest student enrollment? How many of those students are filed for bankruptcy?",
+        "query": "SELECT T.school, num FROM ( SELECT T1.school, COUNT(T2.name) AS num FROM enrolled AS T1 LEFT JOIN filed_for_bankrupcy AS T2 ON T2.name = T1.name GROUP BY T1.school ) T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students is disabled and unemployed at the same time?",
+        "query": "SELECT COUNT(T1.name) FROM disabled AS T1 INNER JOIN unemployed AS T2 ON T2.name = T1.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List out students that enrolled in occ school and enlisted in a fire department.",
+        "query": "SELECT T1.name FROM enlist AS T1 INNER JOIN enrolled AS T2 ON T2.name = T1.name WHERE T2.school = 'occ' AND T1.organ = 'fire_department'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Which male students are unemployed, disable and were absent for 5 month?",
+        "query": "SELECT T1.name FROM unemployed AS T1 INNER JOIN disabled AS T2 ON T2.name = T1.name INNER JOIN longest_absense_from_school AS T3 ON T3.name = T2.name WHERE T3.month = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List out female students that enrolled in occ school and ulca?",
+        "query": "SELECT name FROM enrolled WHERE school IN ('occ', 'ulca') AND name NOT IN ( SELECT name FROM male )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the school and organization enrolled by student211?",
+        "query": "SELECT T2.school, T1.organ FROM enlist AS T1 INNER JOIN enrolled AS T2 ON T2.name = T1.name WHERE T1.name = 'student211'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many male students filed for bankruptcy as compare to female students?",
+        "query": "SELECT COUNT(T2.name) - SUM(IIF(T2.name IS NULL, 1, 0)) AS num FROM filed_for_bankrupcy AS T1 LEFT JOIN male AS T2 ON T2.name = T1.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the average absent month for a unemployed male students?",
+        "query": "SELECT AVG(T2.month) AS avg FROM unemployed AS T1 INNER JOIN longest_absense_from_school AS T2 ON T2.name = T1.name INNER JOIN male AS T3 ON T3.name = T2.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the percentage difference between the attendence of disabled and non-disable students? Do the disable students show better attendance than non-disable students?",
+        "query": "SELECT CAST((SUM(IIF(T2.name IS NOT NULL AND T1.month = 0, 1, 0)) - SUM(IIF(T2.name IS NULL AND T1.month = 0, 1, 0))) AS REAL) * 100 / COUNT(T1.name), IIF(SUM(IIF(T2.name IS NOT NULL AND T1.month = 0, 1, 0)) - SUM(IIF(T2.name IS NULL AND T1.month = 0, 1, 0)) > 0, 'YES', 'NO') AS isHigh FROM longest_absense_from_school AS T1 LEFT JOIN disabled AS T2 ON T2.name = T1.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Calculate the average duration of absense of disabled male students.",
+        "query": "SELECT AVG(T1.month) FROM longest_absense_from_school AS T1 INNER JOIN disabled AS T2 ON T2.name = T1.name INNER JOIN male AS T3 ON T3.name = T2.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Calculate the ratio of unemployed students who have never been absent from school.",
+        "query": "SELECT CAST(SUM(IIF(T2.month = 0, 1, 0)) AS REAL) * 100 / COUNT(T1.name) FROM unemployed AS T1 INNER JOIN longest_absense_from_school AS T2 ON T2.name = T1.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "State the number of male students who do not have payment due.",
+        "query": "SELECT COUNT(T1.name) FROM no_payment_due AS T1 INNER JOIN male AS T2 ON T2.name = T1.name WHERE T1.bool = 'pos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "State the number of students who filed for bankruptcy and have payment due.",
+        "query": "SELECT COUNT(T1.name) FROM filed_for_bankrupcy AS T1 INNER JOIN no_payment_due AS T2 ON T2.name = T1.name WHERE T2.bool = 'pos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the status of payment of student 124?",
+        "query": "SELECT `bool` FROM no_payment_due WHERE name = 'student124'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "State the number of disabled students who have payment due.",
+        "query": "SELECT COUNT(T1.name) FROM no_payment_due AS T1 INNER JOIN disabled AS T2 ON T1.name = T2.name WHERE T1.bool = 'neg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "State name of students who have the longest duration of absense from school and do not have payment due.",
+        "query": "SELECT T1.name FROM longest_absense_from_school AS T1 INNER JOIN no_payment_due AS T2 ON T1.name = T2.name WHERE T2.bool = 'neg' ORDER BY T1.month DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "State name of students who have been absent for 5 months from school and do not have payment due.",
+        "query": "SELECT T1.name FROM longest_absense_from_school AS T1 INNER JOIN no_payment_due AS T2 ON T1.name = T2.name WHERE T1.month = 5 AND T2.bool = 'neg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List out the number of disabled students who enlisted in marines.",
+        "query": "SELECT COUNT(T1.name) FROM disabled AS T1 INNER JOIN enlist AS T2 ON T1.name = T2.name WHERE T2.organ = 'marines'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List out the number of students who have the longest duration of absense from school and enlisted in the peace corps.",
+        "query": "SELECT COUNT(T1.NAME) FROM longest_absense_from_school AS T1 INNER JOIN enlist AS T2 ON T1.name = T2.name WHERE T2.organ = 'peace_corps' ORDER BY T1.month DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List out the number of students who filed for bankruptcy and enlisted in navy.",
+        "query": "SELECT COUNT(T1.name) FROM enlist AS T1 INNER JOIN filed_for_bankrupcy AS T2 ON T1.name = T2.name WHERE T1.organ = 'navy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Give the number of students who enlisted in marines and have payment due.",
+        "query": "SELECT COUNT(T1.name) FROM no_payment_due AS T1 INNER JOIN enlist AS T2 ON T1.name = T2.name WHERE T1.bool = 'pos' AND T2.organ = 'marines'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Calculate the ratio of disabled students who have never been absent from school.",
+        "query": "SELECT 100 * SUM(IIF(T2.month = 0, 1, 0)) AS num FROM disabled AS T1 INNER JOIN longest_absense_from_school AS T2 ON T1.name = T2.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students in the Air Force?",
+        "query": "SELECT COUNT(name) FROM enlist WHERE organ = 'air_force'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students have been absent less than 4 months?",
+        "query": "SELECT COUNT(name) FROM longest_absense_from_school WHERE month < 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Count the number of female students who belong to marines organization.",
+        "query": "SELECT COUNT(*) FROM person AS T1 INNER JOIN enlist AS T2 ON T1.name = T2.name LEFT JOIN male AS T3 ON T1.name = T3.name WHERE T2.organ = 'marines' AND T3.name IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Calculate the average duration of absense of female students.",
+        "query": "SELECT AVG(T2.month) FROM person AS T1 INNER JOIN longest_absense_from_school AS T2 ON T1.name = T2.name LEFT JOIN male AS T3 ON T1.name = T3.name WHERE T3.name IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "State name of female students who filed for bankruptcy.",
+        "query": "SELECT T1.name FROM person AS T1 INNER JOIN filed_for_bankrupcy AS T2 ON T1.name = T2.name LEFT JOIN male AS T3 ON T1.name = T3.name WHERE T3.name IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Mention the status of payment of student 299.",
+        "query": "SELECT bool FROM no_payment_due WHERE name = 'student299'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students are enlisted to the air force?",
+        "query": "SELECT COUNT(name) FROM enlist WHERE organ = 'air_force'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students have absent from school?",
+        "query": "SELECT COUNT(name) FROM longest_absense_from_school WHERE month > 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Provide the names of the students enlisted in the fire department.",
+        "query": "SELECT name FROM enlist WHERE organ = 'fire_department'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many disabled students have payment due?",
+        "query": "SELECT COUNT(T1.name) FROM no_payment_due AS T1 INNER JOIN disabled AS T2 ON T1.name = T2.name WHERE T1.bool = 'pos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among the students that filed for bankruptcy, how many of them have been enrolled in OCC?",
+        "query": "SELECT COUNT(T1.name) FROM filed_for_bankrupcy AS T1 INNER JOIN enrolled AS T2 ON T1.name = T2.name WHERE T2.school = 'occ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many disabled students are male?",
+        "query": "SELECT COUNT(T1.name) FROM male AS T1 INNER JOIN disabled AS T2 ON T1.name = T2.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List the names of disabled students enlisted in the navy.",
+        "query": "SELECT T1.name FROM enlist AS T1 INNER JOIN disabled AS T2 ON T1.name = T2.name WHERE T1.organ = 'navy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among the male students, list down the names of students with payment due.",
+        "query": "SELECT T1.name FROM male AS T1 INNER JOIN no_payment_due AS T2 ON T1.name = T2.name WHERE T2.bool = 'pos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the employment and payment status of student110?",
+        "query": "SELECT T1.bool FROM no_payment_due AS T1 INNER JOIN unemployed AS T2 ON T1.name = T2.name WHERE T1.name = 'student110'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among all students, calculate the percentage of male students.",
+        "query": "SELECT CAST(COUNT(T2.name) AS REAL) * 100 / COUNT(T1.name) FROM person AS T1 LEFT JOIN male AS T2 ON T1.name = T2.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the school and gender of student34?",
+        "query": "SELECT T1.school , IIF(T3.name IS NULL, 'female', 'male') AS gender FROM enrolled AS T1 INNER JOIN person AS T2 ON T1.name = T2.name LEFT JOIN male AS T3 ON T2.name = T3.name WHERE T2.name = 'student34'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List the longest duration of absense for a student enlisted in the fire department.",
+        "query": "SELECT T1.month FROM longest_absense_from_school AS T1 INNER JOIN enlist AS T2 ON T1.name = T2.name WHERE T2.organ = 'fire_department' ORDER BY T1.month DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among students with 1 month of absenses, how many of them are enlisted in the air force department?",
+        "query": "SELECT COUNT(T1.name) FROM longest_absense_from_school AS T1 INNER JOIN enlist AS T2 ON T1.name = T2.name WHERE T1.month = 1 AND T2.organ = 'air_force'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Provide the name of disabled male students that are unemployed.",
+        "query": "SELECT T2.NAME FROM unemployed AS T1 INNER JOIN male AS T2 ON T1.name = T2.name INNER JOIN disabled AS T3 ON T3.name = T2.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many male students are enrolled at OCC?",
+        "query": "SELECT COUNT(T1.name) FROM enrolled AS T1 INNER JOIN male AS T2 ON T1.name = T2.name WHERE T1.school = 'occ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among the students enrolled in UCLA, what is the percentage of male students in the air force department?",
+        "query": "SELECT CAST(COUNT(T4.name) AS REAL) * 100 / COUNT(T2.name) FROM enlist AS T1 INNER JOIN person AS T2 ON T1.name = T2.name INNER JOIN enrolled AS T3 ON T3.name = T2.name LEFT JOIN male AS T4 ON T2.name = T4.name WHERE T3.school = 'ucla' AND T1.organ = 'air_force'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Calculate the average number of disabled female students enrolled in UCI.",
+        "query": "SELECT CAST(SUM(IIF(T1.school = 'uci' AND T4.name IS NULL, 1, 0)) AS REAL) / COUNT(T1.name) FROM enrolled AS T1 INNER JOIN disabled AS T2 ON T1.name = T2.name INNER JOIN person AS T3 ON T1.name = T3.name LEFT JOIN male AS T4 ON T3.name = T4.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students have never been absent in school?",
+        "query": "SELECT COUNT(name) FROM longest_absense_from_school WHERE month = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What are the names of the students who joined the Marines?",
+        "query": "SELECT name FROM enlist WHERE organ = 'marines'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students enlisted in the Navy?",
+        "query": "SELECT COUNT(name) FROM enlist WHERE organ = 'navy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the name of the student with the longest duration of absence?",
+        "query": "SELECT name FROM longest_absense_from_school WHERE month = ( SELECT MAX(month) FROM longest_absense_from_school )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "What is the name of the organization which most of the students are enlisted in?",
+        "query": "SELECT organ FROM ( SELECT organ, COUNT(organ) AS num FROM enlist GROUP BY organ ) T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many students have absences of no more than 3 months?",
+        "query": "SELECT COUNT(name) FROM longest_absense_from_school WHERE month < 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among the students that have a payment due, how many students are unemployed?",
+        "query": "SELECT COUNT(T1.name) FROM no_payment_due AS T1 INNER JOIN unemployed AS T2 ON T1.name = T2.name WHERE T1.bool = 'pos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many female students have enlisted for the Army?",
+        "query": "SELECT SUM(IIF(T3.name IS NULL, 1, 0)) AS \"result\" FROM enlist AS T1 INNER JOIN person AS T2 ON T1.name = T2.name LEFT JOIN male AS T3 ON T2.name = T3.name WHERE T1.organ = 'army'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Which organization has the least number of male students?",
+        "query": "SELECT T.organ FROM ( SELECT T2.organ, COUNT(T1.name) AS num FROM male AS T1 INNER JOIN enlist AS T2 ON T1.name = T2.name GROUP BY T2.organ ) T ORDER BY T.num LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many disabled students have zero absences?",
+        "query": "SELECT COUNT(T1.name) FROM disabled AS T1 INNER JOIN longest_absense_from_school AS T2 ON T1.name = T2.name WHERE T2.month = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many of the unemployed students are disabled?",
+        "query": "SELECT COUNT(T1.name) FROM unemployed AS T1 INNER JOIN disabled AS T2 ON T1.name = T2.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "List the names of the disabled students who were absent from school for more than 5 months.",
+        "query": "SELECT T1.name FROM longest_absense_from_school AS T1 INNER JOIN disabled AS T2 ON T1.name = T2.name WHERE T1.month > 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many bankrupt students are there in the Marines?",
+        "query": "SELECT COUNT(T1.name) FROM filed_for_bankrupcy AS T1 INNER JOIN enlist AS T2 ON T1.name = T2.name WHERE T2.organ = 'marines'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among the students who filed for bankruptcy, how many students are disabled?",
+        "query": "SELECT COUNT(T1.name) FROM disabled AS T1 INNER JOIN filed_for_bankrupcy AS T2 ON T1.name = T2.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many months did a student in the Air Force miss school the most?",
+        "query": "SELECT T1.month FROM longest_absense_from_school AS T1 INNER JOIN enlist AS T2 ON T1.name = T2.name ORDER BY T1.month DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Among the students who filed for bankruptcy with an absence in school of no more than 6 months, how many students enlisted for the fire department?",
+        "query": "SELECT COUNT(T1.name) FROM longest_absense_from_school AS T1 INNER JOIN filed_for_bankrupcy AS T2 ON T1.name = T2.name INNER JOIN enlist AS T3 ON T3.name = T2.name WHERE T3.organ = 'fire_department'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "How many employed disabled students have zero absences?",
+        "query": "SELECT COUNT(T1.name) FROM longest_absense_from_school AS T1 INNER JOIN disabled AS T2 ON T1.name = T2.name INNER JOIN unemployed AS T3 ON T3.name = T2.name WHERE T1.month = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "student_loan",
+        "question": "Which organization has the highest number of male students? Calculate for the percentage of the male students in the said organization.",
+        "query": "SELECT T.organ, T.per FROM ( SELECT T1.organ, CAST(COUNT(T3.name) AS REAL) / COUNT(T2.name) AS per , COUNT(T3.name) AS num FROM enlist AS T1 INNER JOIN person AS T2 ON T1.name = T2.name LEFT JOIN male AS T3 ON T2.name = T3.name GROUP BY T1.organ ) T ORDER BY T.num DESC LIMIT 1"
+    }
+]

@@ -1,0 +1,164 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the emails of the user named \"Mary\".",
+        "query": "SELECT email FROM user_profiles WHERE name  =  'Mary'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "What is the partition id of the user named \"Iron Man\".",
+        "query": "SELECT partitionid FROM user_profiles WHERE name  =  'Iron Man'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "How many users are there?",
+        "query": "SELECT count(*) FROM user_profiles"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "How many followers does each user have?",
+        "query": "SELECT count(*) FROM follows"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the number of followers for each user.",
+        "query": "SELECT count(*) FROM follows GROUP BY f1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the number of tweets in record.",
+        "query": "SELECT count(*) FROM tweets"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the number of users who posted some tweets.",
+        "query": "SELECT count(DISTINCT UID) FROM tweets"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the name and email of the user whose name contains the word \u2018Swift\u2019.",
+        "query": "SELECT name ,  email FROM user_profiles WHERE name LIKE '%Swift%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the names of users whose emails contain \u2018superstar\u2019 or \u2018edu\u2019.",
+        "query": "SELECT name FROM user_profiles WHERE email LIKE '%superstar%' OR email LIKE '%edu%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Return the text of tweets about the topic 'intern'.",
+        "query": "SELECT text FROM tweets WHERE text LIKE '%intern%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the name and email of the users who have more than 1000 followers.",
+        "query": "SELECT name ,  email FROM user_profiles WHERE followers  >  1000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the names of the users whose number of followers is greater than that of the user named \"Tyler Swift\".",
+        "query": "SELECT T1.name FROM user_profiles AS T1 JOIN follows AS T2 ON T1.uid  =  T2.f1 GROUP BY T2.f1 HAVING count(*)  >  (SELECT count(*) FROM user_profiles AS T1 JOIN follows AS T2 ON T1.uid  =  T2.f1 WHERE T1.name  =  'Tyler Swift')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the name and email for the users who have more than one follower.",
+        "query": "SELECT T1.name ,  T1.email FROM user_profiles AS T1 JOIN follows AS T2 ON T1.uid  =  T2.f1 GROUP BY T2.f1 HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the names of users who have more than one tweet.",
+        "query": "SELECT T1.name FROM user_profiles AS T1 JOIN tweets AS T2 ON T1.uid  =  T2.uid GROUP BY T2.uid HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the id of users who are followed by Mary and Susan.",
+        "query": "SELECT T2.f1 FROM user_profiles AS T1 JOIN follows AS T2 ON T1.uid  =  T2.f2 WHERE T1.name  =  \"Mary\" INTERSECT SELECT T2.f1 FROM user_profiles AS T1 JOIN follows AS T2 ON T1.uid  =  T2.f2 WHERE T1.name  =  \"Susan\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the id of users who are followed by Mary or Susan.",
+        "query": "SELECT T2.f1 FROM user_profiles AS T1 JOIN follows AS T2 ON T1.uid  =  T2.f2 WHERE T1.name  =  \"Mary\" OR T1.name  =  \"Susan\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the name of the user who has the largest number of followers.",
+        "query": "SELECT name FROM user_profiles ORDER BY followers DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the name and email of the user followed by the least number of people.",
+        "query": "SELECT name ,  email FROM user_profiles ORDER BY followers LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "List the name and number of followers for each user, and sort the results by the number of followers in descending order.",
+        "query": "SELECT name ,  followers FROM user_profiles ORDER BY followers DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "List the names of 5 users followed by the largest number of other users.",
+        "query": "SELECT name FROM user_profiles ORDER BY followers DESC LIMIT 5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "List the text of all tweets in the order of date.",
+        "query": "SELECT text FROM tweets ORDER BY createdate"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the name of each user and number of tweets tweeted by each of them.",
+        "query": "SELECT T1.name ,  count(*) FROM user_profiles AS T1 JOIN tweets AS T2 ON T1.uid  =  T2.uid GROUP BY T2.uid"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the name and partition id for users who tweeted less than twice.",
+        "query": "SELECT T1.name ,  T1.partitionid FROM user_profiles AS T1 JOIN tweets AS T2 ON T1.uid  =  T2.uid GROUP BY T2.uid HAVING count(*)  <  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the name of the user who tweeted more than once, and number of tweets tweeted by them.",
+        "query": "SELECT T1.name ,  count(*) FROM user_profiles AS T1 JOIN tweets AS T2 ON T1.uid  =  T2.uid GROUP BY T2.uid HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the average number of followers for the users who do not have any tweet.",
+        "query": "SELECT avg(followers) FROM user_profiles WHERE UID NOT IN (SELECT UID FROM tweets)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the average number of followers for the users who had some tweets.",
+        "query": "SELECT avg(followers) FROM user_profiles WHERE UID IN (SELECT UID FROM tweets)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "twitter_1",
+        "question": "Find the maximum and total number of followers of all users.",
+        "query": "SELECT max(followers) ,  sum(followers) FROM user_profiles"
+    }
+]

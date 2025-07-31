@@ -1,0 +1,686 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Please list all the keywords of the episode \"Refuge: Part 1\".",
+        "query": "SELECT T2.keyword FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Refuge: Part 1'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many keywords are there for season 9, episode 23 of law_and_order?",
+        "query": "SELECT COUNT(T2.keyword) FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.season = 9 AND T1.episode = 23"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the title of the episode with the keyword \"laundering money\"?",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T2.keyword = 'laundering money'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Please list all the keywords for the episodes with a rating of over 8.",
+        "query": "SELECT T2.keyword FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.rating > 8"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many 10-star votes were given to the episode titled \"Cherished\"?",
+        "query": "SELECT T2.votes FROM Episode AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Cherished' AND T2.stars = 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many votes did the episode titled \"Cherished\" get in total?",
+        "query": "SELECT SUM(T2.votes) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Cherished'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the title of the episode that got the most 10-star votes?",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id WHERE T2.stars = 10 ORDER BY T2.votes DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Park Dietz was credited in which role in the episode titled \"Cherished\"?",
+        "query": "SELECT T2.role FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Person AS T3 ON T3.person_id = T2.person_id WHERE T1.title = 'Cherished' AND T3.name = 'Park Dietz' AND T2.credited = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many people had filled a role in the episode titled \"Cherished\", but did not show up in the on-screen credits?",
+        "query": "SELECT COUNT(T1.episode_id) FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Cherished' AND T2.credited = 'false'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Who was credited as \"technical advisor\" in the episode titled \"Cherished\"?",
+        "query": "SELECT T3.name FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Person AS T3 ON T3.person_id = T2.person_id WHERE T1.title = 'Cherished' AND T2.credited = 'true' AND T2.role = 'technical advisor'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "For how many times was Park Dietz credited?",
+        "query": "SELECT COUNT(T3.person_id) FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Person AS T3 ON T3.person_id = T2.person_id WHERE T2.credited = 'true' AND T3.name = 'Park Dietz'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Please list the titles of all the episodes in which Park Dietz was credited.",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Person AS T3 ON T3.person_id = T2.person_id WHERE T2.credited = 'true' AND T3.name = 'Park Dietz'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Was Anthony Azzara's role in episode tt0629204 displayed in the credits at the end of the episode?",
+        "query": "SELECT T1.credited FROM Credit AS T1 INNER JOIN Person AS T2 ON T2.person_id = T1.person_id WHERE T2.name = 'Anthony Azzara' AND T1.episode_id = 'tt0629204'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many keywords are there in the episode Disciple?",
+        "query": "SELECT COUNT(T2.keyword) FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Disciple'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Which episode got the most 1 star votes? Give its title.",
+        "query": "SELECT T2.title FROM Vote AS T1 INNER JOIN Episode AS T2 ON T2.episode_id = T1.episode_id WHERE T1.stars = 1 ORDER BY T1.votes DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many nominations did Law and Order season 9, episode 20 get?",
+        "query": "SELECT COUNT(T2.award_id) FROM Episode AS T1 INNER JOIN Award AS T2 ON T1.episode_id = T2.episode_id WHERE T2.series = 'Law and Order' AND T1.season = 9 AND T1.episode = 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "For season 9, episode 17 of the show Law and Order, how many roles have been included in the credit?",
+        "query": "SELECT COUNT(T2.role) FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T1.series = 'Law and Order' AND T1.season = 9 AND T1.episode = 17 AND T2.credited = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Describe what happened in the episode of award no.296.",
+        "query": "SELECT T1.summary FROM Episode AS T1 INNER JOIN Award AS T2 ON T1.episode_id = T2.episode_id WHERE T2.award_id = 296"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Which role did Joseph Blair play in the show?",
+        "query": "SELECT T1.role FROM Credit AS T1 INNER JOIN Person AS T2 ON T2.person_id = T1.person_id WHERE T2.name = 'Joseph Blair'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many awards has Rene Balcer been nominated for?",
+        "query": "SELECT COUNT(T2.award_id) FROM Person AS T1 INNER JOIN Award AS T2 ON T1.person_id = T2.person_id WHERE T1.name = 'Rene Balcer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "For the episode with the most votes, give its air date.",
+        "query": "SELECT T2.air_date FROM Vote AS T1 INNER JOIN Episode AS T2 ON T2.episode_id = T1.episode_id GROUP BY T2.episode_id ORDER BY SUM(T1.votes) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Who was nominated for award no.313? Give the full name.",
+        "query": "SELECT T1.name FROM Person AS T1 INNER JOIN Award AS T2 ON T1.person_id = T2.person_id WHERE T2.award_id = 313"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many episodes did J.K. Simmons' role appear on the show?",
+        "query": "SELECT COUNT(T1.role) FROM Credit AS T1 INNER JOIN Person AS T2 ON T2.person_id = T1.person_id WHERE T2.name = 'J.K. Simmons'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Display the number of 9-star votes the episode Sideshow received.",
+        "query": "SELECT T2.votes FROM Episode AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id WHERE T2.stars = 9 AND T1.title = 'Sideshow'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many times is the number of keywords in \"Refuge: Part 1\" episode than \"Shield\" episode?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.title = 'Refuge: Part 1' THEN 1 ELSE 0 END) AS REAL) / SUM(CASE WHEN T1.title = 'Shield' THEN 1 ELSE 0 END) FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Calculate the average number of cast members that appeared in the credit from the 185th to the 193rd episode.",
+        "query": "SELECT CAST(COUNT(T1.episode_id) AS REAL) / (193 - 185 + 1) FROM Credit AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T1.category = 'Cast' AND T1.credited = 'true' AND T2.number_in_series BETWEEN 185 AND 193"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What are the names of the person that were not credited at the end of episode tt0629391?",
+        "query": "SELECT T2.name FROM Credit AS T1 INNER JOIN Person AS T2 ON T2.person_id = T1.person_id WHERE T1.credited = 'false' AND T1.episode_id = 'tt0629391'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many people have won at least 3 awards?",
+        "query": "SELECT COUNT(T1.person_id) FROM Person AS T1 INNER JOIN Award AS T2 ON T1.person_id = T2.person_id WHERE T2.result = 'Winner' GROUP BY T1.person_id HAVING COUNT(T2.award_id) >= 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Who is the script supervisor of the series in episode tt0629204?",
+        "query": "SELECT T2.name FROM Credit AS T1 INNER JOIN Person AS T2 ON T2.person_id = T1.person_id WHERE T1.episode_id = 'tt0629204' AND T1.role = 'script supervisor'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many awards has Julia Roberts been nominated for?",
+        "query": "SELECT COUNT(T2.award_id) FROM Person AS T1 INNER JOIN Award AS T2 ON T1.person_id = T2.person_id WHERE T1.name = 'Julia Roberts' AND T2.result = 'Nominee'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Who is the tallest camera operator?",
+        "query": "SELECT T2.name FROM Credit AS T1 INNER JOIN Person AS T2 ON T2.person_id = T1.person_id WHERE T1.role = 'camera operator' ORDER BY T2.height_meters DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many people, who were born in Canada, won an award in 1999?",
+        "query": "SELECT COUNT(T1.person_id) FROM Person AS T1 INNER JOIN Award AS T2 ON T1.person_id = T2.person_id WHERE T2.year = 1999 AND T1.birth_country = 'Canada'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many people gave the most enjoyed episode a 10-star rating?",
+        "query": "SELECT COUNT(T1.episode_id) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id WHERE T2.stars = 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What are the keywords of the \"Shield\" episode?",
+        "query": "SELECT T2.keyword FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Shield'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the percentage of people who gave the \"True North\" episode a 1-star rating?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.stars = 1 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.episode_id) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'True North' AND T1.episode_id = 'tt0629477'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the title of the episode with the highest number of keywords?",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id GROUP BY T1.episode_id ORDER BY COUNT(T2.keyword) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Among the episodes that were aired in 1998, how many won an International Monitor Awards?",
+        "query": "SELECT COUNT(T1.episode_id) FROM Episode AS T1 INNER JOIN Award AS T2 ON T1.episode_id = T2.episode_id WHERE strftime('%Y', T1.air_date) = '1998' AND T2.organization = 'International Monitor Awards' AND T2.result = 'Winner'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many times did the episode titled \"Agony\" win an award?",
+        "query": "SELECT COUNT(T2.award_id) FROM Episode AS T1 INNER JOIN Award AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Agony' AND T2.result = 'Winner'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many episodes are there in the 9th season of Law and Order? Calculate the average number of casts per season of the said series.",
+        "query": "SELECT SUM(CASE WHEN T2.season = 9 THEN 1 ELSE 0 END) AS num , CAST(SUM(CASE WHEN T2.season = 9 THEN 1 ELSE 0 END) AS REAL) / COUNT(T1.episode_id) FROM Credit AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T1.category = 'Cast' AND T2.series = 'Law and Order'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What are the keywords of the episode which received the 2nd-highest number of votes?",
+        "query": "SELECT T2.keyword FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.votes NOT IN ( SELECT MAX(T1.votes) FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id ) ORDER BY T1.votes DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many awards did the \"Agony\" win?",
+        "query": "SELECT COUNT(T2.award) FROM Episode AS T1 INNER JOIN Award AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Agony' AND T2.result = 'Winner'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Who is the narrator of the \"Flight\" episode?",
+        "query": "SELECT T3.name FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Person AS T3 ON T3.person_id = T2.person_id WHERE T1.title = 'Flight' AND T2.role = 'Narrator'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "In which organization did Constantine Makris win the most awards?",
+        "query": "SELECT T2.organization FROM Person AS T1 INNER JOIN Award AS T2 ON T1.person_id = T2.person_id WHERE T1.name = 'Constantine Makris' AND T2.result = 'Winner' GROUP BY T2.organization ORDER BY COUNT(T2.award_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Who is the stunt coordinator in episode 3?",
+        "query": "SELECT T3.name FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Person AS T3 ON T3.person_id = T2.person_id WHERE T1.episode = 3 AND T2.role = 'stunt coordinator'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many people were not credited at the end of the \"Admissions\" episode?",
+        "query": "SELECT COUNT(T2.person_id) FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Admissions' AND T2.credited = 'false'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the title of the episode that has the highest number of crews in the Art Department?",
+        "query": "SELECT T2.title FROM Credit AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T1.category = 'Art Department' GROUP BY T2.episode_id ORDER BY COUNT(T1.category) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many roles did Julia Roberts play in the series?",
+        "query": "SELECT COUNT(T1.role) FROM Credit AS T1 INNER JOIN Person AS T2 ON T2.person_id = T1.person_id WHERE T2.name = 'Julia Roberts'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What are the titles of the top 3 episodes that received no less than 30 votes in its 10-star rating?",
+        "query": "SELECT T2.title FROM Vote AS T1 INNER JOIN Episode AS T2 ON T2.episode_id = T1.episode_id WHERE T1.votes >= 30 AND T1.stars = 10 ORDER BY T1.votes DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Who is the youngest person to ever play a \"clerk\" role in the series?",
+        "query": "SELECT T2.name FROM Credit AS T1 INNER JOIN Person AS T2 ON T2.person_id = T1.person_id WHERE T1.role = 'Clerk' AND T2.birthdate IS NOT NULL ORDER BY T2.birthdate LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many people did not enjoy the finale episode?",
+        "query": "SELECT COUNT(T1.episode_id) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id WHERE T1.episode = 24 AND T2.stars = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "List the names of all the cast members in the series.",
+        "query": "SELECT T2.name FROM Credit AS T1 INNER JOIN Person AS T2 ON T2.person_id = T1.person_id WHERE T1.category = 'Cast'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Who is the person who appeared the most in the series? Calculate in percentage how many times he or she appeared.",
+        "query": "SELECT T2.person_id, CAST(COUNT(T2.person_id) AS REAL) * 100 / ( SELECT COUNT(T2.person_id) AS num FROM Credit AS T1 INNER JOIN Person AS T2 ON T2.person_id = T1.person_id ) AS per FROM Credit AS T1 INNER JOIN Person AS T2 ON T2.person_id = T1.person_id GROUP BY T2.person_id ORDER BY COUNT(T2.person_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Which episodes of the Law & Order have been nominated for the Primetime Emmy Awards?",
+        "query": "SELECT DISTINCT episode_id FROM Award WHERE award_category = 'Primetime Emmy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many episodes have not won any Law & Order series awards?",
+        "query": "SELECT COUNT(award_id) FROM Award WHERE Result = 'Nominee'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What roles have not been credited at the end of the episodes?",
+        "query": "SELECT DISTINCT role FROM Credit WHERE credited = 'false'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the title of the 3 worst rated episodes?",
+        "query": "SELECT title FROM Episode ORDER BY rating LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the full place of birth of Rene Chenevert Balcer?",
+        "query": "SELECT birth_place, birth_region FROM Person WHERE birth_name = 'Rene Chenevert Balcer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the name of the actors born in the USA?",
+        "query": "SELECT name FROM Person WHERE birth_country = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the title of the episodes that were least enjoyed?",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id WHERE T2.stars = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What are the names of the two people who won an award for their role as directors?",
+        "query": "SELECT T1.name FROM Person AS T1 INNER JOIN Award AS T2 ON T1.person_id = T2.person_id WHERE T2.Result = 'Winner' AND T2.role = 'director'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many votes did the episode titled Juvenile get?",
+        "query": "SELECT SUM(T2.votes) FROM Episode AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Juvenile'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "In which episodes was Anthony Azzara not credited?",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Person AS T3 ON T3.person_id = T2.person_id WHERE T2.credited = 'false' AND T3.name = 'Anthony Azzara'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "In what year did the episodes titled DWB get an award?",
+        "query": "SELECT DISTINCT T1.year FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T2.title = 'DWB' AND T1.result = 'Winner'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "In which region were the assistant location managers born?",
+        "query": "SELECT T2.birth_region FROM Credit AS T1 INNER JOIN Person AS T2 ON T2.person_id = T1.person_id WHERE T1.role = 'president of NBC West Coast'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many stars did the episodes in which Donna Villella worked?",
+        "query": "SELECT COUNT(T3.person_id) FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Person AS T3 ON T3.person_id = T2.person_id WHERE T3.name = 'Donna Villella'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What role was Julia Roberts nominated for?",
+        "query": "SELECT T2.role FROM Person AS T1 INNER JOIN Award AS T2 ON T1.person_id = T2.person_id WHERE T2.Result = 'Nominee' AND T1.name = 'Julia Roberts'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What role does the tallest person play?",
+        "query": "SELECT T2.role FROM Person AS T1 INNER JOIN Credit AS T2 ON T1.person_id = T2.person_id INNER JOIN Award AS T3 ON T2.episode_id = T3.episode_id ORDER BY T1.height_meters DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the title of the episode with the most nominations?",
+        "query": "SELECT T2.title FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T1.result = 'Nominee' GROUP BY T2.episode_id ORDER BY COUNT(T1.result) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What was the rating of the episodes that Jace Alexander worked on?",
+        "query": "SELECT T1.rating FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Person AS T3 ON T3.person_id = T2.person_id WHERE T3.name = 'Jace Alexander'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What are the names of all the people who worked on episode 19 of season 9?",
+        "query": "SELECT T3.name FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Person AS T3 ON T3.person_id = T2.person_id WHERE T1.episode = 19 AND T1.season = 9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the average star rating of the episodes Jim Bracchitta has worked on?",
+        "query": "SELECT CAST(SUM(T3.stars) AS REAL) / COUNT(T2.episode_id) FROM Person AS T1 INNER JOIN Credit AS T2 ON T1.person_id = T2.person_id INNER JOIN Vote AS T3 ON T2.episode_id = T3.episode_id WHERE T3.stars = 1 AND T1.name = 'Jim Bracchitta'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What percentage of people have worked on the True North episode as additional crew?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.role = 'Additional Crew' THEN 1 ELSE 0 END) AS REAL ) * 100 / COUNT(T1.episode_id) FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'True North'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Write down the title, summary, and air date of the episode that garnered 72 10-star votes.",
+        "query": "SELECT T2.title, T2.summary, T2.air_date FROM Vote AS T1 INNER JOIN Episode AS T2 ON T2.episode_id = T1.episode_id WHERE T1.stars = 10 AND T1.votes = 72"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many 6-star votes did episode 12 get? Please include the air date and rating.",
+        "query": "SELECT T2.air_date, T2.rating FROM Vote AS T1 INNER JOIN Episode AS T2 ON T2.episode_id = T1.episode_id WHERE T1.stars = 6 AND T2.episode = 12"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Who is the winner of the Best Television Episode award for the Edgar category in 2000? Include his or her name and role.",
+        "query": "SELECT T1.name, T2.role FROM Person AS T1 INNER JOIN Award AS T2 ON T1.person_id = T2.person_id WHERE T2.year = 2000 AND T2.award_category = 'Edgar' AND T2.award = 'Best Television Episode'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Write down the organization, year, award, and award category in which Rene Balcer is the winner.",
+        "query": "SELECT T2.organization, T2.year, T2.award, T2.award_category FROM Person AS T1 INNER JOIN Award AS T2 ON T1.person_id = T2.person_id WHERE T1.name = 'Rene Balcer' AND T2.result = 'Winner'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Give me the years and episode IDs in which Constantine Makris was the winner of the Television Silver Gavel Award at the American Bar Association Silver Gavel Awards for Media and the Arts for two consecutive years.",
+        "query": "SELECT t3.years, t3.episode_id FROM ( SELECT DISTINCT T2.year AS years, T2.episode_id, row_number() OVER (PARTITION BY T2.episode_id ORDER BY T2.year) AS rm FROM Person AS T1 INNER JOIN Award AS T2 ON T1.person_id = T2.person_id WHERE T2.award = 'Television' AND T2.award_category = 'Silver Gavel Award' AND T1.name = 'Constantine Makris' AND T2.result = 'Winner' AND T2.organization = 'American Bar Association Silver Gavel Awards for Media and the Arts' ) AS T3 GROUP BY t3.episode_id HAVING COUNT(t3.years - t3.rm) >= 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Who was the Law and Order series writer who also won the Television Silver Gavel Award at the American Bar Association Silver Gavel Awards for Media and the Arts for two consecutive years?",
+        "query": "SELECT t3.name FROM ( SELECT DISTINCT T2.year AS years, T1.name, row_number() OVER (PARTITION BY T1.name ORDER BY T2.year) AS rm FROM Person AS T1 INNER JOIN Award AS T2 ON T1.person_id = T2.person_id WHERE T2.award = 'Television' AND T2.award_category = 'Silver Gavel Award' AND T2.series = 'Law and Order' AND T2.result = 'Winner' AND T2.organization = 'American Bar Association Silver Gavel Awards for Media and the Arts' ) AS T3 GROUP BY t3.name HAVING COUNT(t3.years - t3.rm) >= 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many times was episode 20 of the Law and Order series nominated for the Primetime Emmy Awards in 1999?",
+        "query": "SELECT COUNT(T2.award_id) FROM Episode AS T1 INNER JOIN Award AS T2 ON T1.episode_id = T2.episode_id WHERE T2.year = 1999 AND T2.result = 'Nominee' AND T1.episode = 20 AND T2.organization = 'Primetime Emmy Awards' AND T1.series = 'Law and Order'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "On what episode did Julia Roberts win the \"Outstanding Guest Actress in a Drama Series\" award during the 1999 Primetime Emmy Awards? Tell me her role.",
+        "query": "SELECT T3.episode_id, T2.role FROM Person AS T1 INNER JOIN Award AS T2 ON T1.person_id = T2.person_id INNER JOIN Episode AS T3 ON T2.episode_id = T3.episode_id WHERE T2.year = 1999 AND T2.award = 'Outstanding Guest Actress in a Drama Series' AND T2.organization = 'Primetime Emmy Awards' AND T1.name = 'Julia Roberts' AND T2.result = 'Nominee'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "List the titles and air dates of episodes that were produced by Billy Fox.",
+        "query": "SELECT T1.title, T1.air_date FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Person AS T3 ON T3.person_id = T2.person_id WHERE T2.category = 'Produced by' AND T2.role = 'producer' AND T3.name = 'Billy Fox'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Among the American casts, how many were uncredited on episode ID tt0629228?",
+        "query": "SELECT COUNT(T1.person_id) FROM Credit AS T1 INNER JOIN Person AS T2 ON T2.person_id = T1.person_id WHERE T1.episode_id = 'tt0629228' AND T1.category = 'Cast' AND T1.credited = 'false' AND T2.birth_country = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What was the role of Jason Kuschner in episode 9?",
+        "query": "SELECT T1.role FROM Credit AS T1 INNER JOIN Person AS T2 ON T2.person_id = T1.person_id INNER JOIN Episode AS T3 ON T1.episode_id = T3.episode_id WHERE T3.episode = 9 AND T2.name = 'Jason Kuschner'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Who played the role of the \"president of NBC West Coast\" in the first episode?",
+        "query": "SELECT T2.name FROM Credit AS T1 INNER JOIN Person AS T2 ON T2.person_id = T1.person_id INNER JOIN Episode AS T3 ON T1.episode_id = T3.episode_id WHERE T3.episode = 1 AND T1.role = 'president of NBC West Coast'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "List down the titles of the top 3 episodes, from highest to lowest, in terms of their weighted stars.",
+        "query": "SELECT T2.title FROM Vote AS T1 INNER JOIN Episode AS T2 ON T2.episode_id = T1.episode_id WHERE T1.stars BETWEEN 1 AND 10 GROUP BY T2.title ORDER BY CAST(SUM(T1.stars * T1.percent) AS REAL) / 100 DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the ratio of American casts on episode 2 of the series? Please include their roles.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.category = 'Cast' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.category), T1.role FROM Award AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Episode AS T3 ON T2.episode_id = T3.episode_id INNER JOIN Person AS T4 ON T2.person_id = T4.person_id WHERE T3.episode = 2 AND T4.birth_country = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many people from Canada are nominated for an award?",
+        "query": "SELECT COUNT(T1.person_id) FROM Person AS T1 INNER JOIN Award AS T2 ON T1.person_id = T2.person_id WHERE T1.birth_country = 'Canada'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many episodes are credited to Jerry Orbach?",
+        "query": "SELECT COUNT(T2.person_id) FROM Credit AS T1 INNER JOIN Person AS T2 ON T2.person_id = T1.person_id WHERE T2.name = 'Jerry Orbach'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "List out all the credit names for episode 9.",
+        "query": "SELECT T3.name FROM Episode AS T1 INNER JOIN Credit AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Person AS T3 ON T3.person_id = T2.person_id WHERE T1.episode = 9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "List out all award titles nominated for episode 20.",
+        "query": "SELECT T2.award FROM Episode AS T1 INNER JOIN Award AS T2 ON T1.episode_id = T2.episode_id WHERE T1.episode = 20 AND T2.result IN ('Winner', 'Nominee')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Which role have won at least two awards for the entire season and list out the name?",
+        "query": "SELECT T1.name FROM Person AS T1 INNER JOIN Award AS T2 ON T1.person_id = T2.person_id GROUP BY T2.role HAVING COUNT(T2.award_id) > 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "List out director names that received an award along with the episode number.",
+        "query": "SELECT T3.name, T1.episode_id FROM Episode AS T1 INNER JOIN Award AS T2 ON T1.episode_id = T2.episode_id INNER JOIN Person AS T3 ON T2.person_id = T3.person_id WHERE T2.role = 'director' AND T2.result = 'Winner'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Which episodes are nominated for an awards but not win?",
+        "query": "SELECT T1.episode FROM Episode AS T1 INNER JOIN Award AS T2 ON T1.episode_id = T2.episode_id WHERE T2.result = 'Nominee'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the average rating for each episode in season 9?",
+        "query": "SELECT SUM(rating) / COUNT(episode_id) FROM Episode WHERE season = 9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the difference of 10 stars votes between the first episode and the last episode?",
+        "query": "SELECT SUM(CASE WHEN T2.episode = 24 THEN T1.votes ELSE 0 END) - SUM(CASE WHEN T2.episode = 1 THEN T1.votes ELSE 0 END) FROM Vote AS T1 INNER JOIN Episode AS T2 ON T2.episode_id = T1.episode_id WHERE T1.stars = 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the episode rating with the most award won?",
+        "query": "SELECT T1.rating FROM Episode AS T1 INNER JOIN Award AS T2 ON T1.episode_id = T2.episode_id WHERE T2.result = 'Winner' GROUP BY T1.episode_id ORDER BY COUNT(T2.award_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many credits have been displayed from episode 1 until 10?",
+        "query": "SELECT COUNT(T1.person_id) FROM Credit AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T1.credited = 'true' AND T2.episode BETWEEN 1 AND 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the episode that has mafia keyword?",
+        "query": "SELECT T1.episode FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T2.Keyword = 'mafia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the average star with highest percentage for episodes that have received award?",
+        "query": "SELECT T2.person_id FROM Vote AS T1 INNER JOIN Award AS T2 ON T1.episode_id = T2.episode_id ORDER BY T1.percent DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the average ranking episodes that are nominated for an award?",
+        "query": "SELECT SUM(T1.rating) / COUNT(T1.episode) FROM Episode AS T1 INNER JOIN Award AS T2 ON T1.episode_id = T2.episode_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "How many winners have been awarded a Television award by the \"American Bar Association Silver Gavel Awards for Media and the Arts\"?",
+        "query": "SELECT COUNT(award_id) FROM Award WHERE result = 'Winner' AND award = 'Television' AND organization = 'American Bar Association Silver Gavel Awards for Media and the Arts'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Which continent was Michael Preston born on?",
+        "query": "SELECT birth_country FROM Person WHERE name = 'Michael Preston'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Who was the nominee playing the role of Katrina Ludlow in the Law & Order series?",
+        "query": "SELECT T2.name FROM Award AS T1 INNER JOIN Person AS T2 ON T1.person_id = T2.person_id WHERE T1.result = 'Nominee' AND T1.role = 'Katrina Ludlow' AND T1.series = 'Law and Order'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Who played the role of a teleplay in the episode that won \"Best Television Episode\"?",
+        "query": "SELECT T2.name FROM Award AS T1 INNER JOIN Person AS T2 ON T1.person_id = T2.person_id WHERE T1.result = 'Winner' AND T1.award = 'Best Television Episode'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What is the date of birth of the actor who played the role of a \"writer\"?",
+        "query": "SELECT T2.birthdate FROM Award AS T1 INNER JOIN Person AS T2 ON T1.person_id = T2.person_id WHERE T1.role = 'writer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Which episode was nominated for the award for \"Outstanding Costume Design for a Series\"?",
+        "query": "SELECT T2.title FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T1.award = 'Outstanding Costume Design for a Series'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Which episode has the highest total number of viewer votes?",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id GROUP BY T1.title ORDER BY SUM(T1.votes) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Who was the actor who was portraying \"Alex Brown\" and has been credited?",
+        "query": "SELECT T1.name FROM Person AS T1 INNER JOIN Credit AS T2 ON T1.person_id = T2.person_id WHERE T2.role = 'Alex Brown' AND T2.credited = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Where is the place of birth of the actor with the number nm0007064 who has not been credited for playing the role of a \"Narrator\"?",
+        "query": "SELECT DISTINCT T1.birth_place FROM Person AS T1 INNER JOIN Credit AS T2 ON T1.person_id = T2.person_id WHERE T1.person_id = 'nm0007064' AND T2.role = 'Narrator' AND T2.credited = 'false'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "What are the keywords of the episode \"Shield\"?",
+        "query": "SELECT T2.keyword FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T1.title = 'Shield'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Who are the actors with a height of over 1.80m in an episode that won an award?",
+        "query": "SELECT T2.name FROM Award AS T1 INNER JOIN Person AS T2 ON T1.person_id = T2.person_id WHERE T1.result = 'Winner' AND T2.height_meters > 1.80"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Which episode has the two keywords \"nun\" and \"priest\"?",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Keyword AS T2 ON T1.episode_id = T2.episode_id WHERE T2.keyword IN ('nun', 'priest')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Which episode number has the second highest positive viewer comments and has been awarded \"Best Television Episode\"?",
+        "query": "SELECT T2.episode_id FROM Award AS T1 INNER JOIN Episode AS T2 ON T1.episode_id = T2.episode_id WHERE T1.award = 'Best Television Episode' AND T1.result = 'Winner' ORDER BY T2.rating DESC LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "law_episode",
+        "question": "Please list any three episodes that were most enjoyed by the viewers.",
+        "query": "SELECT T1.title FROM Episode AS T1 INNER JOIN Vote AS T2 ON T1.episode_id = T2.episode_id WHERE T2.stars = 10 LIMIT 3"
+    }
+]

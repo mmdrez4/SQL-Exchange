@@ -1,0 +1,1238 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the device id of the oldest user?",
+        "query": "SELECT device_id FROM gender_age WHERE age = ( SELECT MAX(age) FROM gender_age )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many events were held at coordinate 97,40?",
+        "query": "SELECT COUNT(event_id) FROM `events` WHERE latitude = 40 AND longitude = 97"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many male users are in the age group of M32-38?",
+        "query": "SELECT COUNT(gender) FROM gender_age WHERE gender = 'M' AND `group` = 'M32-38'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many female users over the age of 50 are there?",
+        "query": "SELECT COUNT(gender) FROM gender_age WHERE age > 50 AND gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many active users were there in the event id 2?",
+        "query": "SELECT COUNT(is_active) FROM app_events WHERE event_id = 2 AND is_active = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the gender of the youngest user?",
+        "query": "SELECT gender FROM gender_age WHERE age = ( SELECT MIN(age) FROM gender_age )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the name of the category which most users belong to?",
+        "query": "SELECT T.category FROM ( SELECT T2.category, COUNT(T1.app_id) AS num FROM app_labels AS T1 INNER JOIN label_categories AS T2 ON T2.label_id = T1.label_id GROUP BY T1.app_id, T2.category ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the model of the oldest user's device?",
+        "query": "SELECT T1.device_model FROM phone_brand_device_model2 AS T1 INNER JOIN gender_age AS T2 ON T2.device_id = T1.device_id ORDER BY T2.age DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many users are there in the Home Decoration category?",
+        "query": "SELECT COUNT(T1.app_id) FROM app_labels AS T1 INNER JOIN label_categories AS T2 ON T2.label_id = T1.label_id WHERE T2.category = 'Home Decoration'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many male users are active in the events held on 5/1/2016?",
+        "query": "SELECT COUNT(T3.gender) FROM app_events AS T1 INNER JOIN events_relevant AS T2 ON T2.event_id = T1.event_id INNER JOIN gender_age AS T3 ON T3.device_id = T2.device_id WHERE T1.is_active = 1 AND T3.gender = 'M' AND T2.timestamp LIKE '2016-05-01%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many female users use ZenFone 5 devices?",
+        "query": "SELECT COUNT(T1.gender) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T2.device_id = T1.device_id WHERE T1.gender = 'F' AND T2.device_model = 'ZenFone 5'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the age of the oldest active user that participated in the event held on 5/6/2016 at coordinates 121, 31?",
+        "query": "SELECT T3.age FROM app_events AS T1 INNER JOIN events_relevant AS T2 ON T1.event_id = T2.event_id INNER JOIN gender_age AS T3 ON T2.device_id = T3.device_id WHERE T1.is_active = 1 AND T2.longitude = 121 AND T2.latitude = 31 AND SUBSTR(T2.timestamp, 1, 10) = '2016-05-06' ORDER BY T3.age DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the most common device model among female users between the ages 27 to 28?",
+        "query": "SELECT T2.device_model FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.`group` = 'F27-28' AND T1.gender = 'F' ORDER BY T2.device_id DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What are the categories of the top 2 oldest events?",
+        "query": "SELECT T4.category FROM events_relevant AS T1 INNER JOIN app_events_relevant AS T2 ON T1.event_id = T2.event_id INNER JOIN app_labels AS T3 ON T3.app_id = T2.app_id INNER JOIN label_categories AS T4 ON T3.label_id = T4.label_id ORDER BY T1.timestamp LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the gender of the majority of Vivo phone users?",
+        "query": "SELECT T.gender FROM ( SELECT T2.gender, COUNT(T2.gender) AS num FROM phone_brand_device_model2 AS T1 INNER JOIN gender_age AS T2 ON T2.device_id = T1.device_id WHERE T1.phone_brand = 'vivo' GROUP BY T2.gender ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Which category has the highest number of users?",
+        "query": "SELECT T.category FROM ( SELECT T2.category, COUNT(T1.app_id) AS num FROM app_labels AS T1 INNER JOIN label_categories AS T2 ON T2.label_id = T1.label_id GROUP BY T1.app_id, T2.category ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many users belong to the MOBA category?",
+        "query": "SELECT COUNT(T2.app_id) FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T2.label_id = T1.label_id WHERE T1.category = 'MOBA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the percentage of female OPPO users against the male OPPO users?",
+        "query": "SELECT SUM(IIF(T2.gender = 'F', 1, 0)) * 100 / COUNT(T2.device_id) AS perFemale , SUM(IIF(T2.gender = 'M', 1, 0)) * 100 / COUNT(T2.device_id) AS perMale FROM phone_brand_device_model2 AS T1 INNER JOIN gender_age AS T2 ON T2.device_id = T1.device_id WHERE T1.phone_brand = 'OPPO'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What were the locations of the events on 8th May, 2016?",
+        "query": "SELECT longitude, latitude FROM `events` WHERE SUBSTR(`timestamp`, 1, 10) = '2016-05-08'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "List the app users IDs and installed status for the event ID of 844.",
+        "query": "SELECT app_id , IIF(is_installed = 1, 'YES', 'NO') AS status FROM app_events WHERE event_id = 844"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many events were there on 30th April, 2016?",
+        "query": "SELECT COUNT(event_id) FROM events WHERE SUBSTR(`timestamp`, 1, 10) = '2016-04-30'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many users used Vivo Xplay3S model?",
+        "query": "SELECT COUNT(device_id) FROM phone_brand_device_model2 WHERE device_model = 'Xplay3S' AND phone_brand = 'vivo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the ratio of male and female users in 27-28 age group?",
+        "query": "SELECT SUM(IIF(gender = 'M' AND `group` = 'M27-28', 1, 0)) / SUM(IIF(gender = 'F' AND `group` = 'F27-28', 1, 0)) AS r FROM gender_age"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What are the labels' IDs of online shopping and online malls categories?",
+        "query": "SELECT label_id FROM label_categories WHERE category IN ('online shopping', 'online malls')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Describe the phone brands and models of the users who participated in events on 5th May, 2016 at the coordinates of (112,44).",
+        "query": "SELECT DISTINCT T2.phone_brand, T2.device_model FROM events AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T2.device_id = T1.device_id WHERE T1.timestamp LIKE '2016-05-05%' AND T1.longitude = 112 AND T1.latitude = 44"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Provide the app users IDs and time for the event ID of 82.",
+        "query": "SELECT T1.app_id, T2.timestamp FROM app_events AS T1 INNER JOIN events AS T2 ON T2.event_id = T1.event_id WHERE T2.event_id = 82"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Describe the device user gender and age of the event ID of 15251.",
+        "query": "SELECT T1.gender, T1.age FROM gender_age AS T1 INNER JOIN events AS T2 ON T2.device_id = T1.device_id WHERE T2.event_id = 15251"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many events did the 88-years-old male users participate on 4th May,2016?",
+        "query": "SELECT COUNT(T2.event_id) FROM gender_age AS T1 INNER JOIN events AS T2 ON T2.device_id = T1.device_id WHERE T1.gender = 'M' AND SUBSTR(`timestamp`, 1, 10) = '2016-05-04' AND T1.age = 88"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Describe the ages, genders and numbers of events participated by the users at coordinates of (-102,38).",
+        "query": "SELECT DISTINCT T1.age, T1.gender, COUNT(T2.event_id) FROM gender_age AS T1 INNER JOIN `events` AS T2 ON T2.device_id = T1.device_id WHERE T2.longitude = -102 AND T2.latitude = 38 GROUP BY T1.age, T1.gender, T2.longitude, T2.latitude"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Provide the phone brands and models of the users who were at the coordinates of (80,44).",
+        "query": "SELECT DISTINCT T1.phone_brand, T1.device_model FROM phone_brand_device_model2 AS T1 INNER JOIN events AS T2 ON T2.device_id = T1.device_id WHERE T2.longitude = 80 AND T2.latitude = 44"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "List the included categories in the event ID of 155.",
+        "query": "SELECT DISTINCT T1.category FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T2.label_id = T1.label_id INNER JOIN app_events AS T3 ON T3.app_id = T2.app_id WHERE T3.event_id = 155"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among HTC Butterfly phone users, list any five devices' IDs used by females.",
+        "query": "SELECT T2.device_id FROM phone_brand_device_model2 AS T1 INNER JOIN gender_age AS T2 ON T2.device_id = T1.device_id WHERE T1.device_model = 'Butterfly' AND T2.gender = 'F' AND T1.phone_brand = 'HTC' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many app IDs were included under science fiction category?",
+        "query": "SELECT COUNT(T2.app_id) FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T2.label_id = T1.label_id WHERE T1.category = 'science fiction'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What are the ages and genders of the LG L70 users?",
+        "query": "SELECT T2.age, T2.gender FROM phone_brand_device_model2 AS T1 INNER JOIN gender_age AS T2 ON T2.device_id = T1.device_id WHERE T1.phone_brand = 'LG' AND T1.device_model = 'L70'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Calculate the percentage of the app user IDs under Industry tag category.",
+        "query": "SELECT SUM(IIF(T1.category = 'Industry tag', 1, 0)) * 100 / COUNT(T2.app_id) AS per FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T2.label_id = T1.label_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among the LG brand users, calculate the percentage of the Nexus 5 model user. What is the ratio of male and female users of it?",
+        "query": "SELECT SUM(IIF(T1.device_model = 'Nexus 5', 1, 0)) * 100 / COUNT(T1.device_id) AS per , SUM(IIF(T1.device_model = 'Nexus 5' AND T2.gender = 'M', 1, 0)) / SUM(IIF(T1.device_model = 'Nexus 5' AND T2.gender = 'F', 1, 0)) AS r FROM phone_brand_device_model2 AS T1 INNER JOIN gender_age AS T2 ON T2.device_id = T1.device_id WHERE T1.phone_brand = 'LG'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many users of the app were not active when event no.2 happened?",
+        "query": "SELECT COUNT(event_id) FROM app_events WHERE event_id = 2 AND is_active = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many events in total have happened on the devices in 2016?",
+        "query": "SELECT COUNT(event_id) FROM `events` WHERE SUBSTR(`timestamp`, 1, 4) = '2016'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many events have happened on device no.29182687948017100 in 2016?",
+        "query": "SELECT COUNT(event_id) FROM `events` WHERE SUBSTR(`timestamp`, 1, 4) = '2016' AND device_id = 29182687948017100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many device users are male?",
+        "query": "SELECT COUNT(device_id) FROM gender_age WHERE gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the age of the oldest device user?",
+        "query": "SELECT MAX(age) FROM gender_age"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among the female users of the devices, how many of them are under 30?",
+        "query": "SELECT COUNT(device_id) FROM gender_age WHERE age < 30 AND gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among the users who use a Galaxy Note 2, how many of them are female?",
+        "query": "SELECT COUNT(T1.device_id) FROM phone_brand_device_model2 AS T1 INNER JOIN gender_age AS T2 ON T2.device_id = T1.device_id WHERE T2.gender = 'F' AND T1.device_model = 'Galaxy Note 2'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please list the ages of all the users who use a Galaxy Note 2.",
+        "query": "SELECT T2.age FROM phone_brand_device_model2 AS T1 INNER JOIN gender_age AS T2 ON T2.device_id = T1.device_id WHERE T1.device_model = 'Galaxy Note 2'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the device model of the device used by the oldest user?",
+        "query": "SELECT device_model FROM phone_brand_device_model2 WHERE device_id IN ( SELECT device_id FROM gender_age WHERE age = ( SELECT MAX(age) FROM gender_age ) )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "To which user group do most of the users who uses a vivo device belong?",
+        "query": "SELECT T.`group` FROM ( SELECT T2.`group`, COUNT(`group`) AS num FROM phone_brand_device_model2 AS T1 INNER JOIN gender_age AS T2 ON T2.device_id = T1.device_id WHERE T1.phone_brand = 'vivo' GROUP BY T2.`group` ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many app users belong to the category of Securities?",
+        "query": "SELECT COUNT(T1.app_id) FROM app_labels AS T1 INNER JOIN label_categories AS T2 ON T2.label_id = T1.label_id WHERE T2.category = 'Securities'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "To which categories does app user no.1977658975649780000 belong?",
+        "query": "SELECT T1.category FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id WHERE T2.app_id = 1977658975649780000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please list the categories of the app users who are not active when event no.2 happened.",
+        "query": "SELECT DISTINCT T1.category FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id INNER JOIN app_events AS T3 ON T2.app_id = T3.app_id WHERE T3.event_id = 2 AND T3.is_active = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please list the location coordinates of all the devices with an inactive app user when event no.2 happened.",
+        "query": "SELECT DISTINCT T2.longitude, T2.latitude FROM app_events AS T1 INNER JOIN events AS T2 ON T2.event_id = T1.event_id WHERE T2.event_id = 2 AND T1.is_active = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among all the times event no.2 happened when the app user was not active, when was the earliest time this situation happened?",
+        "query": "SELECT T2.timestamp FROM app_events AS T1 INNER JOIN events AS T2 ON T2.event_id = T1.event_id WHERE T1.is_active = 0 AND T2.event_id = 2 ORDER BY T2.timestamp LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please list the IDs of the events happened on all the vivo devices.",
+        "query": "SELECT T2.event_id FROM phone_brand_device_model2 AS T1 INNER JOIN events AS T2 ON T2.device_id = T1.device_id WHERE T1.phone_brand = 'vivo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among the devices with event no.2 happening, how many of them are vivo devices?",
+        "query": "SELECT COUNT(T1.device_id) FROM phone_brand_device_model2 AS T1 INNER JOIN events AS T2 ON T2.device_id = T1.device_id WHERE T1.phone_brand = 'vivo' AND T2.event_id = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please list the time when event no.2 happened on a vivo device.",
+        "query": "SELECT T1.timestamp FROM events AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.event_id = T2.device_id WHERE T2.phone_brand = 'vivo' AND T1.event_id = '2'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many events in total have happened on all the vivo devices in the year 2016?",
+        "query": "SELECT COUNT(T1.event_id) FROM events AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.event_id = T2.device_id WHERE STRFTIME('%Y', T1.timestamp) = '2016' AND T2.phone_brand = 'vivo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among the users who uses a vivo device, how many of them are female and under 30?",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.gender = 'F' AND T2.phone_brand = 'vivo' AND T1.age < 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the category that the most app users belong to?",
+        "query": "SELECT T.category FROM ( SELECT T1.category, COUNT(T2.app_id) AS num FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id GROUP BY T1.label_id ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the brand of the device used by the youngest female user?",
+        "query": "SELECT phone_brand FROM phone_brand_device_model2 WHERE device_id IN ( SELECT * FROM ( SELECT device_id FROM gender_age WHERE gender = 'F' ORDER BY age LIMIT 1 ) AS T )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many users in user group M23-26 use a vivo device?",
+        "query": "SELECT COUNT(T2.device_id) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.`group` = 'M23-26' AND T2.phone_brand = 'vivo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among all the users who use a vivo device, what is the percentage of the users in the M23-26 user group?",
+        "query": "SELECT SUM(IIF(T1.`group` = 'M23-26', 1.0, 0)) / COUNT(T1.device_id) AS per FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.phone_brand = 'vivo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among all the devices with event no.2 happening, what is the percentage of the device being a vivo phone?",
+        "query": "SELECT SUM(IIF(T2.phone_brand = 'vivo', 1, 0)) / COUNT(T1.device_id) AS per FROM events AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.event_id = T2.device_id WHERE T1.event_id = '2'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the average age of all the vivo device users?",
+        "query": "SELECT AVG(age) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.phone_brand = 'vivo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many female users belong to the age group of 27 to 28?",
+        "query": "SELECT COUNT(device_id) FROM gender_age WHERE `group` = 'F27-28' AND gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the age of the oldest male user of the app?",
+        "query": "SELECT MAX(age) FROM gender_age WHERE gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many users installed the app but are not active?",
+        "query": "SELECT COUNT(app_id) FROM app_events WHERE is_installed = 1 AND is_active = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the age of the youngest female user of the app?",
+        "query": "SELECT MIN(age) FROM gender_age WHERE gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many models does the VIVO phone brand released?",
+        "query": "SELECT COUNT(device_id) FROM phone_brand_device_model2 WHERE phone_brand = 'vivo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "List at least 15 phone models released under the OPPO brand.",
+        "query": "SELECT device_model FROM phone_brand_device_model2 WHERE phone_brand = 'OPPO' LIMIT 15"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "List at least 10 device models that male users over the age of 39 usually use.",
+        "query": "SELECT T1.device_model FROM phone_brand_device_model2 AS T1 INNER JOIN gender_age AS T2 ON T1.device_id = T2.device_id WHERE T2.`group` = 'M39+' AND T2.gender = 'M' LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "List 5 device models that users use to install the app and are active in using the app.",
+        "query": "SELECT T1.device_model FROM phone_brand_device_model2 AS T1 INNER JOIN events AS T2 ON T1.device_id = T2.event_id INNER JOIN app_events AS T3 ON T2.event_id = T3.event_id WHERE T3.is_active = 1 AND T3.is_installed = 1 LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many users belong to \"Financial Information\" category?",
+        "query": "SELECT COUNT(T1.app_id) FROM app_labels AS T1 INNER JOIN label_categories AS T2 ON T1.label_id = T2.label_id WHERE T2.category = 'Financial Information'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many users belong to \"game-Art Style\" category?",
+        "query": "SELECT COUNT(T1.app_id) FROM app_labels AS T1 INNER JOIN label_categories AS T2 ON T1.label_id = T2.label_id WHERE T2.category = 'game-Art Style'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Provide the total number of the male users that use OPPO as their phone brand.",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.phone_brand = 'OPPO' AND T1.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the brand of the youngest user's device?",
+        "query": "SELECT device_model FROM phone_brand_device_model2 WHERE device_id IN ( SELECT device_id FROM gender_age WHERE age = ( SELECT MIN(age) FROM gender_age ) )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "List at least 3 categories with the lowest number of users.",
+        "query": "SELECT T1.category FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id ORDER BY T2.label_id LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many male users use the Galaxy Ace Plus model?",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.device_model = 'Galaxy Ace Plus' AND T1.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the age group of most OPPO users?",
+        "query": "SELECT T.`group` FROM ( SELECT T1.`group`, COUNT(T1.`group`) AS num FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.phone_brand = 'OPPO' GROUP BY T1.`group` ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "List at least 5 device models that are commonly used by female users.",
+        "query": "SELECT T.device_model FROM ( SELECT T2.device_model, COUNT(T2.device_model) AS num FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.gender = 'F' GROUP BY T2.device_model ) AS T ORDER BY T.num DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Calculate the ratio in percentage between the average number of app users belonging to \"80s Japanese comic\" and \"90s Japanese comic\".",
+        "query": "SELECT SUM(IIF(T1.category = '80s Japanese comic', 1, 0)) / COUNT(T1.label_id) AS J8 , SUM(IIF(T1.category = '90s Japanese comic', 1, 0)) / COUNT(T1.label_id) AS J9 FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among the female users that uses OPPO as their phone brand, what is the percentage of them of the user that uses R815T model to install the app?",
+        "query": "SELECT SUM(IIF(T1.phone_brand = 'OPPO', 1, 0)) / SUM(IIF(T1.device_id = 'R815T', 1, 0)) AS num FROM phone_brand_device_model2 AS T1 INNER JOIN gender_age AS T2 ON T1.device_id = T2.device_id WHERE T2.gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the phone brand of the device model \"\u575a\u679c\u624b\u673a\"?",
+        "query": "SELECT phone_brand FROM phone_brand_device_model2 WHERE device_model = '\u575a\u679c\u624b\u673a'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Give the number of device models for \"\u4e2d\u5174\" phone brand.",
+        "query": "SELECT COUNT(device_id) FROM phone_brand_device_model2 WHERE device_model = '\u4e2d\u5174'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Which group does age 24 belong to?",
+        "query": "SELECT `group` FROM gender_age WHERE age = '24'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Give the time stamp for event No.887711.",
+        "query": "SELECT timestamp FROM events WHERE event_id = '887711'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Provide the number of events that happened on 2016/5/6.",
+        "query": "SELECT COUNT(event_id) FROM events WHERE SUBSTR(`timestamp`, 1, 10) = '2016-05-06'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "For the event which happened at 23:55:16 on 2016/5/7, in the location coordinate(113, 28), on what device did it happen? Give the name of the device model.",
+        "query": "SELECT T1.device_model FROM phone_brand_device_model2 AS T1 INNER JOIN events AS T2 ON T1.device_id = T2.event_id WHERE T2.longitude = '113' AND T2.latitude = '28' AND T2.timestamp = '2016-05-07 23:55:16'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Give the number of \"game-Fishing\" apps.",
+        "query": "SELECT COUNT(T2.app_id) FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id WHERE T1.category = 'game-Fishing'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "State the number of the \"\u9b45\u84ddNote 2\" users who are in the \"F29-32\" group.",
+        "query": "SELECT COUNT(T2.device_id) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.`group` = 'F29-32' AND T2.device_model = '\u9b45\u84ddNote 2'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Give the number of 30-year-old users who were active in the events on 2016/5/2.",
+        "query": "SELECT COUNT(T3.device_id) FROM app_events AS T1 INNER JOIN events AS T2 ON T1.event_id = T2.event_id INNER JOIN gender_age AS T3 ON T2.device_id = T3.device_id WHERE SUBSTR(`timestamp`, 1, 10) = '2016-05-02' AND T1.is_active = 1 AND T3.age = '30'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "For the event which happened at 23:33:34 on 2016/5/6, how many installed apps were involved?",
+        "query": "SELECT COUNT(T1.event_id) FROM app_events AS T1 INNER JOIN events AS T2 ON T1.event_id = T2.event_id WHERE SUBSTR(T2.`timestamp`, 1, 10) = '2016-05-06' AND T1.is_installed = '1'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Give the number of female users of \"E\u6d3e\" brand devices.",
+        "query": "SELECT COUNT(T2.device_id) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.gender = 'F' AND T2.phone_brand = 'E\u6d3e'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many male users of the \"Galaxy S5\" device model?",
+        "query": "SELECT COUNT(T1.device_id) FROM phone_brand_device_model2 AS T1 INNER JOIN gender_age AS T2 ON T1.device_id = T2.device_id WHERE T1.device_model = 'Galaxy S5' AND T2.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many users from the group \"F29-32\" who were active in the events on 2016/5/7?",
+        "query": "SELECT COUNT(T1.app_id) FROM app_events AS T1 INNER JOIN events AS T2 ON T1.event_id = T2.event_id INNER JOIN gender_age AS T3 ON T2.event_id = T3.device_id WHERE SUBSTR(T2.`timestamp`, 1, 10) = '2016-05-07' AND T1.is_active = '1' AND T3.`group` = 'F29-32'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Which category does the app id No.894384172610331000 belong to?",
+        "query": "SELECT T1.category FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id WHERE T2.app_id = '894384172610331000'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "For the event which happened at 14:09:49 on 2016/5/6, in the location coordinate(116, 40), how many apps were active?",
+        "query": "SELECT COUNT(T1.app_id) FROM app_events AS T1 INNER JOIN events AS T2 ON T1.event_id = T2.event_id WHERE T2.timestamp = '2016-05-06 14:09:49' AND T1.is_active = '1' AND T2.longitude = '116' AND T2.latitude = '40'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many times is the number of active apps in the event that happened at 7:50:28 on 2016/5/2 than in the event that happened at 7:41:03 on 2016/5/2?",
+        "query": "SELECT SUM(IIF(timestamp = '2016-05-02 7:50:28', 1, 0)) / SUM(IIF(timestamp = '2016-05-02 7:41:03', 1, 0)) AS num FROM events AS T1 INNER JOIN app_events AS T2 ON T1.event_id = T2.event_id WHERE T2.is_active = '1'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many devices are of the brand vivo?",
+        "query": "SELECT COUNT(device_id) FROM phone_brand_device_model2 WHERE phone_brand = 'vivo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many more devices are there of the brand vivo than of the brand LG?",
+        "query": "SELECT SUM(IIF(phone_brand = 'vivo', 1, 0)) - SUM(IIF(phone_brand = 'LG', 1, 0)) AS num FROM phone_brand_device_model2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the ID of the device used by the youngest user?",
+        "query": "SELECT device_id FROM gender_age WHERE age = ( SELECT MIN(age) FROM gender_age )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among the female users of the devices, how many of them are over 30?",
+        "query": "SELECT COUNT(device_id) FROM gender_age WHERE age > 30 AND gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Is the oldest device user male or female?",
+        "query": "SELECT gender FROM gender_age WHERE age = ( SELECT MAX(age) FROM gender_age )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the age of the youngest female device user?",
+        "query": "SELECT MIN(age) FROM gender_age WHERE gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among all the users who use a vivo device, what is the age of the youngest user?",
+        "query": "SELECT T1.age FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.phone_brand = 'vivo' ORDER BY T1.age LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please list the app IDs of all the users in the Securities category.",
+        "query": "SELECT T2.app_id FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id WHERE T1.category = 'Securities'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "For the device with an event occurring on 2016/5/1 at 0:55:25, what is the gender of its user?",
+        "query": "SELECT T1.gender FROM gender_age AS T1 INNER JOIN events AS T2 ON T1.device_id = T2.device_id WHERE T2.timestamp = '2016-05-01 00:55:25'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among the devices with an event occurring in 2016, how many of them are owned by a user in the M23-26 user group?",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN events AS T2 ON T1.device_id = T2.device_id WHERE STRFTIME('%Y', T2.timestamp) = '2016' AND T1.`group` = 'M23-26'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the brand of the device used by the most users in the M23-26 user group?",
+        "query": "SELECT T.phone_brand FROM ( SELECT T2.phone_brand, COUNT(T1.device_id) AS num FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.`group` = 'M23-26' GROUP BY T2.phone_brand ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please list the location coordinates of all the Galaxy Note 2 devices when an event happened.",
+        "query": "SELECT T1.longitude, T1.latitude FROM events AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.device_model = 'Galaxy Note 2'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please list all the models of the devices used by a female user.",
+        "query": "SELECT T1.device_model FROM phone_brand_device_model2 AS T1 INNER JOIN gender_age AS T2 ON T1.device_id = T2.device_id WHERE T2.gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What are the categories that app user ID7324884708820020000 belongs to?",
+        "query": "SELECT T1.category FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id WHERE T2.app_id = 7324884708820020000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among the app users who were not active when event no.2 happened, how many of them belong to the category Property Industry 1.0?",
+        "query": "SELECT COUNT(T2.app_id) FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id INNER JOIN app_events AS T3 ON T2.app_id = T3.app_id WHERE T3.is_active = 0 AND T1.category = 'Property Industry 1.0' AND T3.event_id = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many categories in total do the app users who were not active when event no.2 happened belong to?",
+        "query": "SELECT COUNT(*) FROM ( SELECT COUNT(DISTINCT T1.category) AS result FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id INNER JOIN app_events AS T3 ON T2.app_id = T3.app_id WHERE T3.event_id = 2 AND T3.is_active = 0 GROUP BY T1.category ) T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the device model used by the most female users over 30?",
+        "query": "SELECT T.device_model FROM ( SELECT T2.device_model, COUNT(T2.device_model) AS num FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.age > 30 AND T1.gender = 'F' GROUP BY T2.device_model ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please list the models of all the devices with an event under the location coordinates (121, 31).",
+        "query": "SELECT T2.device_model FROM events AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.longitude = 121 AND T1.latitude = 31"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What are the top 3 categories with the most app users?",
+        "query": "SELECT T.category FROM ( SELECT T2.category, COUNT(T1.app_id) AS num FROM app_labels AS T1 INNER JOIN label_categories AS T2 ON T1.label_id = T2.label_id GROUP BY T2.category ) AS T ORDER BY T.num DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please list the event IDs of the events that have happened on the device of the oldest user.",
+        "query": "SELECT T2.event_id FROM gender_age AS T1 INNER JOIN events AS T2 ON T1.device_id = T2.device_id ORDER BY T1.age DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many events have happened on the device of the youngest female user?",
+        "query": "SELECT COUNT(T1.event_id) FROM events AS T1 INNER JOIN gender_age AS T2 ON T1.device_id = T2.device_id WHERE T2.gender = 'F' GROUP BY T1.event_id, T2.age ORDER BY T2.age LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among the devices on which an event happened on 2016/5/1, how many of them are used by a male user?",
+        "query": "SELECT COUNT(T1.device_id) FROM events AS T1 INNER JOIN gender_age AS T2 ON T1.device_id = T2.device_id WHERE T1.timestamp = '2016-05-01' AND T2.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Which category has more app users, Securities or Finance?",
+        "query": "SELECT IIF(SUM(IIF(T2.category = 'Securities', 1, 0)) - SUM(IIF(T2.category = 'Finance', 1, 0)) > 0, 'Securities', 'Finance') AS diff FROM app_labels AS T1 INNER JOIN label_categories AS T2 ON T1.label_id = T2.label_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please list the device models of all the devices used by a user in the M23-26 user group.",
+        "query": "SELECT T2.device_model FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.`group` = 'M23-26'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the average age of the female users who uses a vivo device?",
+        "query": "SELECT AVG(T1.age) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.phone_brand = 'vivo' AND T1.gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the ratio of female users to male users who uses a vivo device?",
+        "query": "SELECT SUM(IIF(T1.gender = 'M', 1, 0)) / SUM(IIF(T1.gender = 'F', 1, 0)) AS per FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.phone_brand = 'vivo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the ratio of the number of app users that belong to the Securities category to the number of app users that belong to the Finance category?",
+        "query": "SELECT SUM(IIF(T2.category = 'Securities', 1, 0)) / SUM(IIF(T2.category = 'Finance', 1, 0)) AS per FROM app_labels AS T1 INNER JOIN label_categories AS T2 ON T1.label_id = T2.label_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the label ID of \"Third-party card management\" category?",
+        "query": "SELECT label_id FROM label_categories WHERE category = 'Third-party card management'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the ratio of active and inactive app users of the event ID \"58\"?",
+        "query": "SELECT SUM(IIF(is_active = 1, 1, 0)) / SUM(IIF(is_active = 0, 1, 0)) AS per FROM app_events WHERE event_id = 58"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many events did the device ID \"3915082290673130000\" join?",
+        "query": "SELECT COUNT(event_id) FROM events WHERE device_id = 3915082290673130000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Calculate the percentage of male users among all device users.",
+        "query": "SELECT SUM(IIF(gender = 'M', 1, 0)) / COUNT(device_id) AS per FROM gender_age"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many events were participated by the users at longitude of \"-156\"?",
+        "query": "SELECT COUNT(event_id) FROM events WHERE longitude = -156"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many app users belong to label ID of \"48\"?",
+        "query": "SELECT COUNT(app_id) FROM app_labels WHERE label_id = 48"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many category names start with the word \"game\"?",
+        "query": "SELECT COUNT(label_id) FROM label_categories WHERE category LIKE 'game%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Provide the number of events participated by the device users at coordinates of (80,37).",
+        "query": "SELECT COUNT(event_id) FROM events WHERE longitude = 80 AND latitude = 37"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "List down the labels' IDs and categories of the app ID \"5758400314709850000\".",
+        "query": "SELECT T1.label_id, T2.category FROM app_labels AS T1 INNER JOIN label_categories AS T2 ON T1.label_id = T2.label_id WHERE T1.app_id = 5758400314709850000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "List down the app IDs under the category of game-Rowing .",
+        "query": "SELECT T2.app_id FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id WHERE T1.category = 'game-Rowing'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What are the label IDs and app IDs of the Chinese Classical Mythology category?",
+        "query": "SELECT T1.label_id, T2.app_id FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id WHERE T1.category = 'Chinese Classical Mythology'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Describe the number of app IDs and location of the event ID \"79641\".",
+        "query": "SELECT COUNT(T1.app_id), T2.longitude, T2.latitude FROM app_events AS T1 INNER JOIN events AS T2 ON T1.event_id = T2.event_id WHERE T1.event_id = 79641 GROUP BY T2.longitude, T2.latitude"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Provide the locations and times of the events of app ID \"8715964299802120000\".",
+        "query": "SELECT T1.longitude, T1.latitude, T1.timestamp FROM events AS T1 INNER JOIN app_events AS T2 ON T1.event_id = T2.event_id WHERE T2.app_id = 8715964299802120000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many OPPO users participated in events which were held around 12 AM on 1st May,2016?",
+        "query": "SELECT COUNT(T1.device_id) FROM events AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.phone_brand = 'OPPO' AND STRFTIME('%Y-%m-%d', T1.`timestamp`) = '2016-05-01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the ratio of male and female users of vivo X5pro model?",
+        "query": "SELECT SUM(IIF(T1.gender = 'M', 1, 0)) / SUM(IIF(T1.gender = 'F', 1, 0)) AS per FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.phone_brand = 'vivo' AND T2.device_model = 'X5Pro'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many females use ZUK Z1 phones in the age group under 23?",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.gender = 'F' AND T2.device_model = 'Z1' AND T1.`group` = 'F23-' AND T2.phone_brand = 'ZUK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "List the phone brands and models of the users under 10 years of age.",
+        "query": "SELECT T2.phone_brand, T2.device_model FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.age < 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among the HTC users, calculate the percentage of female users who are over 80.",
+        "query": "SELECT SUM(IIF(T1.gender = 'F' AND T1.age > 80, 1, 0)) / COUNT(T1.device_id) AS per FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.phone_brand = 'HTC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Which phone brand and model was used for event ID \"6701\"?",
+        "query": "SELECT T2.phone_brand, T2.device_model FROM events AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.event_id = 6701"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Between device ID of \"-9215352913819630000\" and \"-9222956879900150000\", mention the age and gender of device user who participated more events.",
+        "query": "SELECT T.age, T.gender FROM ( SELECT T2.age, T2.gender, COUNT(T1.device_id) AS num FROM events AS T1 INNER JOIN gender_age AS T2 ON T1.device_id = T2.device_id WHERE T1.device_id BETWEEN -9215352913819630000 AND -9222956879900150000 GROUP BY T2.age, T2.gender ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "List out the time of the event id 12.",
+        "query": "SELECT timestamp FROM events WHERE event_id = 12"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many active users are there in the event?",
+        "query": "SELECT COUNT(app_id) FROM app_events WHERE is_active = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many devices belong to model \"A51\"?",
+        "query": "SELECT COUNT(device_id) FROM phone_brand_device_model2 WHERE device_model = 'A51'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "State the gender of users who use the device \"-9222956879900150000\".",
+        "query": "SELECT gender FROM gender_age WHERE device_id = -9222956879900150000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many labels belong to the game-card category?",
+        "query": "SELECT COUNT(label_id) FROM label_categories WHERE category = 'game-card'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the age group of users who use phone brand of vivo?",
+        "query": "SELECT T1.`group` FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.phone_brand = 'vivo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many users who are under 30 years old use device model of Galaxy Note 2?",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.device_model = 'Galaxy Note 2' AND T1.age < 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among the users who use OPPO, calculate the percentage of those who are under 50 years old.",
+        "query": "SELECT SUM(IIF(T1.age < 50, 1, 0)) / COUNT(T1.device_id) AS per FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.phone_brand = 'OPPO'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the average age of the users who use model device of R7?",
+        "query": "SELECT SUM(T1.age) / COUNT(T1.device_id) AS avg FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.device_model = 'R7'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the category of the label that represented the behavior category of app id 5902120154267990000?",
+        "query": "SELECT T1.category FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id WHERE T2.app_id = 5902120154267990000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Mention the group of age of users who use phone brand of LG.",
+        "query": "SELECT T1.`group` FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.phone_brand = 'LG'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "State the category of the label that represented the behavior category of app id 4955831798976240000.",
+        "query": "SELECT T1.category FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id WHERE T2.app_id = 4955831798976240000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many female users use device model of MI 3?",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.gender = 'F' AND T2.device_model = 'MI 3'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among the male users, how many users use device model of Desire 820?",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.device_model = 'Desire 820' AND T1.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among the users who are above 20, how many users use device model of ELIFE E7 Mini?",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.device_model = 'ELIFE E7 Mini' AND T1.age > 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "State the number of users who are under 50 and above 20 use device model of Galaxy Premier.",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.age BETWEEN 20 AND 50 AND T2.device_model = 'Galaxy Premier'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Give the number of male users who use phone branded HTC.",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.gender = 'M' AND T2.phone_brand = 'HTC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many users who are between 20 and 60 use phone brand of TCL?",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.age BETWEEN 20 AND 60 AND T2.phone_brand = 'TCL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Among the users who use SUGAR, calculate the percentage of those who are above 20 years old.",
+        "query": "SELECT SUM(IIF(T1.age > 20, 1, 0)) / COUNT(T1.device_id) AS per FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.phone_brand = 'SUGAR'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Indicate the location of all the events that occurred on April 30, 2016.",
+        "query": "SELECT longitude, latitude FROM events WHERE date(timestamp) = '2016-04-30'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many different models does the HTC brand have?",
+        "query": "SELECT COUNT(device_model) FROM phone_brand_device_model2 WHERE phone_brand = 'HTC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Identify all installed and activated apps by their id.",
+        "query": "SELECT app_id FROM app_events WHERE is_active = 1 AND is_installed = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many apps are labeled 7?",
+        "query": "SELECT COUNT(app_id) FROM app_labels WHERE label_id = 7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Identify by their id all the devices that are used by women who are in the age range of 29 to 31 years.",
+        "query": "SELECT device_id FROM gender_age_train WHERE age BETWEEN 29 AND 31 AND gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Identify by their id all the apps that belong to the game-stress reliever category.",
+        "query": "SELECT T2.app_id FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id WHERE T1.category = 'game-stress reliever'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "On what date were the most events logged on devices for 40-year-old male users?",
+        "query": "SELECT T.timestamp FROM ( SELECT T2.timestamp, COUNT(T2.event_id) AS num FROM gender_age AS T1 INNER JOIN events_relevant AS T2 ON T1.device_id = T2.device_id WHERE T1.gender = 'M' AND T1.age = 40 GROUP BY T2.timestamp ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "On which brand of phone are the most applications installed?",
+        "query": "SELECT T.phone_brand FROM ( SELECT T1.phone_brand, COUNT(T4.is_active) AS num FROM phone_brand_device_model2 AS T1 INNER JOIN gender_age AS T2 ON T1.device_id = T2.device_id INNER JOIN events_relevant AS T3 ON T2.device_id = T3.device_id INNER JOIN app_events_relevant AS T4 ON T3.event_id = T4.event_id WHERE T4.is_active = 1 GROUP BY T1.phone_brand ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many men under the age of 23 have apps installed but are not active on their devices?",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN events_relevant AS T2 ON T1.device_id = T2.device_id INNER JOIN app_events_relevant AS T3 ON T2.event_id = T3.event_id WHERE T1.gender = 'M' AND T3.is_active = 0 AND T1.age < 23"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many women have apps from the game-Finding fault category installed on their device?",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN events_relevant AS T2 ON T1.device_id = T2.device_id INNER JOIN app_events_relevant AS T3 ON T2.event_id = T3.event_id WHERE T1.age < 23 AND T1.gender = 'F' AND T3.is_active = 0 AND T3.is_installed = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Which gender logged in the most to an event in the first 10 days of May 2016?",
+        "query": "SELECT T.gender FROM ( SELECT T1.gender, COUNT(T1.device_id) AS num FROM gender_age AS T1 INNER JOIN events_relevant AS T2 ON T1.device_id = T2.device_id WHERE date(T2.timestamp) BETWEEN '2016-05-01' AND '2016-05-10' GROUP BY T1.gender ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What age group is the most using SM-T2558 model phones?",
+        "query": "SELECT T.`group` FROM ( SELECT T1.`group`, COUNT(T1.device_id) AS num FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.device_model = 'SM-T2558' GROUP BY T1.`group` ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many people over the age of 50 do not have HTC One M8 Eye phones?",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.age > 50 AND T2.device_model != 'One M8 Eye' AND T2.phone_brand != 'HTC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Locate all events on devices of women under 30 years old.",
+        "query": "SELECT T1.device_id FROM gender_age AS T1 INNER JOIN events_relevant AS T2 ON T1.device_id = T2.device_id WHERE T1.gender = 'F' AND T1.age < 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What percentage of women do not have applications installed on their mobile with respect to men?",
+        "query": "SELECT SUM(IIF(T1.gender = 'F', 1, 0)) / SUM(IIF(T1.gender = 'M', 1, 0)) AS per FROM gender_age AS T1 INNER JOIN events_relevant AS T2 ON T1.device_id = T2.device_id INNER JOIN app_events_relevant AS T3 ON T2.event_id = T3.event_id WHERE T3.is_installed = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Calculate the average age of people who have apps installed but are not active on their devices.",
+        "query": "SELECT AVG(T1.age) FROM gender_age AS T1 INNER JOIN events_relevant AS T2 ON T1.device_id = T2.device_id INNER JOIN app_events_relevant AS T3 ON T2.event_id = T3.event_id WHERE T3.is_installed = 1 AND T3.is_active = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please list any three events that happened on the 1st of May 2016 that have the same latitude of 31.",
+        "query": "SELECT event_id FROM events WHERE timestamp LIKE '2016-05-01%' AND latitude = 31 LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please list any three events that have the longitude and latitude of 0.",
+        "query": "SELECT event_id FROM events WHERE longitude = 0 AND latitude = 0 LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the difference between the events of device number -9222956879900150000 that can be located and those that are unable to be located?",
+        "query": "SELECT SUM(IIF(latitude != 0 AND longitude != 0, 1, 0)) - SUM(IIF(latitude = 0 AND longitude = 0, 1, 0)) AS diff FROM events WHERE device_id = '-922956879900150000'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please list any three devices that are owned by female users.",
+        "query": "SELECT device_id FROM gender_age WHERE gender = 'F' LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please list any five app categories that are related to games, along with their label ID.",
+        "query": "SELECT category, label_id FROM label_categories WHERE category LIKE '%game%' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please list any three OPPO device models.",
+        "query": "SELECT device_model FROM phone_brand_device_model2 WHERE phone_brand = 'OPPO' LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the percentage of users who experienced event number 6 who have the app installed but do not use the app?",
+        "query": "SELECT SUM(IIF(is_installed = 1 AND is_active = 0, 1, 0)) / COUNT(app_id) AS perrcent FROM app_events WHERE event_id = 6"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Which gender owned more of the Galaxy Note 2 device model?",
+        "query": "SELECT IIF(SUM(IIF(T1.gender = 'M', 1, 0)) - SUM(IIF(T1.gender = 'F', 1, 0)) > 0, 'M', 'F') AS gender FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.device_model = 'Galaxy Note 2'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "When did event number 2 happen and how many users were active?",
+        "query": "SELECT COUNT(T1.app_id) AS num FROM app_events AS T1 INNER JOIN events AS T2 ON T1.event_id = T2.event_id WHERE T1.event_id = 2 AND T1.is_active = 1 GROUP BY T2.timestamp"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Which behavior category does user number 5902120154267990000 belong to?",
+        "query": "SELECT T1.category FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id WHERE T2.app_id = 5902120154267990000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many users belong to the same behavior category as comics?",
+        "query": "SELECT COUNT(T2.app_id) FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id WHERE T1.category = 'comics'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the age and gender of the person who uses the device number 29182687948017100 on event number 1?",
+        "query": "SELECT T1.age, T1.gender FROM gender_age AS T1 INNER JOIN events_relevant AS T2 ON T1.device_id = T2.device_id WHERE T1.device_id = 29182687948017100 AND T2.event_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many male users have the log of events at the same longitude of 114?",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN events_relevant AS T2 ON T1.device_id = T2.device_id WHERE T2.longitude = 114 AND T1.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "When did event number 7 happen for user number -8022267440849930000?",
+        "query": "SELECT T1.timestamp FROM events_relevant AS T1 INNER JOIN app_events AS T2 ON T1.event_id = T2.event_id WHERE T2.app_id = -8022267440849930000 AND T1.event_id = 7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What are the behavior categories that user number -9222198347540750000 belongs to?",
+        "query": "SELECT T3.category FROM app_all AS T1 INNER JOIN app_labels AS T2 ON T1.app_id = T2.app_id INNER JOIN label_categories AS T3 ON T2.label_id = T3.label_id WHERE T1.app_id = -9222198347540750000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please provide the age group of any LG Nexus 4 device users.",
+        "query": "SELECT T1.`group` FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.phone_brand = 'LG' AND T2.device_model = 'Nexus 4'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Please provide the gender of at least one user who owns an HTC Desire 826 device.",
+        "query": "SELECT T1.gender FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.device_model = 'Desire 826' AND T2.phone_brand = 'HTC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the percentage of users who are in the same behavior category as \"Academic Information\"?",
+        "query": "SELECT SUM(IIF(T1.category = 'Academic Information', 1.0, 0)) / COUNT(T2.app_id) AS per FROM label_categories AS T1 INNER JOIN app_labels AS T2 ON T1.label_id = T2.label_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the percentage of device users in the F27-28 age group who experienced an event on the 3rd of May 2016?",
+        "query": "SELECT SUM(IIF(T1.`group` = 'F27-28', 1, 0)) / COUNT(T1.device_id) AS per FROM gender_age AS T1 INNER JOIN events_relevant AS T2 ON T1.device_id = T2.device_id WHERE SUBSTR(T2.timestamp, 1, 10) = '2016-05-03'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many OPPO devices are there?",
+        "query": "SELECT COUNT(device_id) FROM phone_brand_device_model2 WHERE phone_brand = 'OPPO'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What is the most common age group among all device users?",
+        "query": "SELECT T.num FROM ( SELECT `group`, COUNT(`group`) AS num FROM gender_age GROUP BY `group` ) T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many events does the device \"4069764298338760000\" have?",
+        "query": "SELECT COUNT(event_id) FROM events WHERE device_id = 4069764298338760000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many of the apps belong in the \"Equity Fund\" category?",
+        "query": "SELECT COUNT(T1.app_id) FROM app_labels AS T1 INNER JOIN label_categories AS T2 ON T1.label_id = T2.label_id WHERE T2.category = 'Equity Fund'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "List all females aged 24 to 26 devices' locations.",
+        "query": "SELECT T2.longitude, T2.latitude FROM gender_age AS T1 INNER JOIN events_relevant AS T2 ON T1.device_id = T2.device_id WHERE T1.`group` = 'F24-26' AND T1.gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "How many male users have a Galaxy Note 3?",
+        "query": "SELECT COUNT(T1.device_id) FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.device_model = 'Galaxy Note 3' AND T1.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "List all the devices' brands and models of events on 5/7/2016 at 6:03:22 AM.",
+        "query": "SELECT T1.phone_brand, T1.device_model FROM phone_brand_device_model2 AS T1 INNER JOIN events_relevant AS T2 ON T1.device_id = T2.device_id WHERE T2.timestamp = '2016-05-07 06:03:22'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "Which brand is most common among people in their twenties?",
+        "query": "SELECT T.phone_brand FROM ( SELECT T2.phone_brand, COUNT(T2.phone_brand) AS num FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T1.age BETWEEN 20 AND 30 GROUP BY T2.phone_brand ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "talkingdata",
+        "question": "What percentage of vivo devices belong to users with no information?",
+        "query": "SELECT SUM(IIF(T1.gender IS NULL AND T1.age IS NULL AND T1.`group` IS NULL, 1, 0)) / COUNT(T1.device_id) AS per FROM gender_age AS T1 INNER JOIN phone_brand_device_model2 AS T2 ON T1.device_id = T2.device_id WHERE T2.phone_brand = 'vivo'"
+    }
+]

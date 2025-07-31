@@ -1,0 +1,692 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "How much more total box office gross did the Walt Disney Company have in revenue in 1998 than in 1997?",
+        "query": "SELECT SUM(CASE WHEN `Year` = 1998 THEN Total ELSE 0 END) - SUM(CASE WHEN `Year` = 1997 THEN Total ELSE 0 END) FROM revenue"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "In which segment did the Walt Disney Company earned a bigger revenue in 1998, Studio Entertainment or Disney Media Networks?",
+        "query": "SELECT CASE WHEN 'Studio Entertainment[NI 1]' > 'Disney Media Networks' THEN 'Studio Entertainment[NI 1]' ELSE 'Disney Media Networks' END FROM revenue WHERE `Year` = 1998"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who is the director of the movie Pinocchio?",
+        "query": "SELECT director FROM director WHERE name = 'Pinocchio'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Please list the villains of all the movies directed by Wolfgang Reitherman.",
+        "query": "SELECT T2.villian FROM director AS T1 INNER JOIN characters AS T2 ON T1.name = T2.movie_title WHERE T1.director = 'Wolfgang Reitherman' AND T2.villian IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Among the movies directed by Wolfgang Reitherman, how many of them were released in December?",
+        "query": "SELECT COUNT(movie_title) FROM characters AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE SUBSTR(release_date, INSTR(release_date, '-') + 1, 3) = 'Dec' AND T2.director = 'Wolfgang Reitherman'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "The song \"Once Upon a Dream\" is associated with the movie directed by whom?",
+        "query": "SELECT T2.director FROM characters AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE T1.song = 'Once Upon a Dream'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who is the voice actor for the villain of the movie \"Alice in Wonderland\"?",
+        "query": "SELECT T1.`voice-actor` FROM `voice-actors` AS T1 INNER JOIN characters AS T2 ON T1.movie = T2.movie_title WHERE T1.character LIKE '%' OR T2.villian OR '%' AND T2.movie_title = 'Alice in Wonderland'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Please list the release dates of all the movies in which Alan Tudyk is a voice actor.",
+        "query": "SELECT T2.release_date FROM `voice-actors` AS T1 INNER JOIN characters AS T2 ON T1.movie = T2.movie_title WHERE T1.`voice-actor` = 'Alan Tudyk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Among the movies in which Alan Tudyk is a voice actor, how many of them were released after 2012?",
+        "query": "SELECT COUNT(T2.movie) FROM characters AS T1 INNER JOIN `voice-actors` AS T2 ON T1.movie_title = T2.movie WHERE T2.`voice-actor` = 'Alan Tudyk' AND SUBSTR(release_date, INSTR(release_date, '-') + 5) > 12"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Among the movies directed by Wolfgang Reitherman, how many of them are Comedies?",
+        "query": "SELECT COUNT(T3.name) FROM ( SELECT T2.name FROM `movies_total_gross` AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE T2.director = 'Wolfgang Reitherman' AND T1.genre = 'Comedy' GROUP BY T2.name ) T3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Among the movies directed by Wolfgang Reitherman, which one of them was the most popular?",
+        "query": "SELECT T2.movie_title FROM director AS T1 INNER JOIN movies_total_gross AS T2 ON T1.name = T2.movie_title WHERE T1.director = 'Wolfgang Reitherman' ORDER BY T2.total_gross DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Please list the movies directed by Wolfgang Reitherman that can be watched by the general audience.",
+        "query": "SELECT T1.movie_title FROM `movies_total_gross` AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE T1.MPAA_rating = 'G' AND T2.director = 'Wolfgang Reitherman'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Which character is the villain of the most popular movie?",
+        "query": "SELECT T2.villian FROM `movies_total_gross` AS T1 INNER JOIN characters AS T2 ON T1.movie_title = T2.movie_title ORDER BY T1.total_gross DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "What is the genre of the movie whose villain is Commander Rourke?",
+        "query": "SELECT T2.genre FROM characters AS T1 INNER JOIN movies_total_gross AS T2 ON T2.movie_title = T1.movie_title WHERE T1.villian = 'Commander Rourke'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who is the villain of the movie \"Beauty and the Beast\"?",
+        "query": "SELECT villian FROM characters WHERE movie_title = 'Beauty and the Beast'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Which movie is the character Robin Hood in?",
+        "query": "SELECT movie_title FROM characters WHERE hero = 'Robin Hood'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Give the name of the movie which the song \"I Thought I Lost You\" is associated with.",
+        "query": "SELECT movie_title FROM characters WHERE song = 'I Thought I Lost You'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who is the voice actor of the character \"Binkie Muddlefoot\"?",
+        "query": "SELECT `voice-actor` FROM `voice-actors` WHERE character = 'Binkie Muddlefoot'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who is the hero character of the movie whose total gross was $222,527,828?",
+        "query": "SELECT T1.hero FROM characters AS T1 INNER JOIN movies_total_gross AS T2 ON T2.movie_title = T1.movie_title WHERE T2.total_gross = '$222,527,828'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Which song is associated with the most popular Disney movie in 1970s?",
+        "query": "SELECT T2.song FROM movies_total_gross AS T1 INNER JOIN characters AS T2 ON T1.movie_title = T2.movie_title WHERE CAST(SUBSTR(T1.release_date, INSTR(T1.release_date, ', ') + 1) AS int) BETWEEN 1970 AND 1979 ORDER BY CAST(REPLACE(SUBSTR(T1.total_gross, 2), ',', '') AS float) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who is the hero character of the Disney movie directed by Will Finn?",
+        "query": "SELECT T1.hero FROM characters AS T1 INNER JOIN director AS T2 ON T2.name = T1.movie_title WHERE T2.director = 'Will Finn'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who is the voice actor of the hero character from the movie The Little Mermaid?",
+        "query": "SELECT T2.`voice-actor` FROM characters AS T1 INNER JOIN `voice-actors` AS T2 ON T2.movie = T1.movie_title WHERE T1.movie_title = 'The Little Mermaid' AND T2.character = T1.hero"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Give the name of the director of the movie in which Verna Felton was the voice actor for its character \"Aunt Sarah\".",
+        "query": "SELECT T1.director FROM director AS T1 INNER JOIN `voice-actors` AS T2 ON T2.movie = T1.name WHERE T2.character = 'Aunt Sarah' AND T2.`voice-actor` = 'Verna Felton'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "For the movie in which Tress MacNeille was the voice actor for its character \"Hyacinth Hippo\", what was the release date of that movie?",
+        "query": "SELECT T1.release_date FROM characters AS T1 INNER JOIN `voice-actors` AS T2 ON T2.movie = T1.movie_title WHERE T2.character = 'Hyacinth Hippo' AND T2.`voice-actor` = 'Tress MacNeille'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who is the director of the adventure movie which was released on 2007/3/30?",
+        "query": "SELECT T1.director FROM director AS T1 INNER JOIN movies_total_gross AS T2 ON T2.movie_title = T1.name WHERE T2.genre = 'Adventure' AND T2.release_date = 'Mar 30, 2007'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Wolfgang Reitherman has directed several Disney movies, which one has the highest grossing after accounting for inflation?",
+        "query": "SELECT T1.movie_title FROM movies_total_gross AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE T2.director = 'Wolfgang Reitherman' ORDER BY CAST(REPLACE(SUBSTR(inflation_adjusted_gross, 2), ',', '') AS REAL) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who is the hero character of the adventure movie which was released on 2016/3/4?",
+        "query": "SELECT T1.hero FROM characters AS T1 INNER JOIN movies_total_gross AS T2 ON T2.movie_title = T1.movie_title WHERE T2.genre = 'Adventure' AND T1.release_date = '4-Mar-16'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "The character Donald Duck has appeared in two Disney movies, which one has more grossing?",
+        "query": "SELECT T1.movie_title FROM movies_total_gross AS T1 INNER JOIN characters AS T2 ON T1.movie_title = T2.movie_title WHERE T2.hero = 'Donald Duck' ORDER BY CAST(REPLACE(SUBSTR(total_gross, 2), ',', '') AS REAL) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "How many movies did Wolfgang Reitherman direct?",
+        "query": "SELECT COUNT(name) FROM director WHERE director = 'Wolfgang Reitherman'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who is the most productive director?",
+        "query": "SELECT director FROM director GROUP BY director ORDER BY COUNT(name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "How many restricted horror movies were released between 1/1/1990 to 12/31/2015?",
+        "query": "SELECT COUNT(movie_title) FROM movies_total_gross WHERE MPAA_rating = 'R' AND genre = 'Horror' AND CAST(SUBSTR(release_date, INSTR(release_date, ', ') + 1) AS int) BETWEEN 1990 AND 2015"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "What are the names of the characters voiced by Frank Welker?",
+        "query": "SELECT character FROM `voice-actors` WHERE 'voice-actor' = 'Frank Welker'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "How much is the total gross of the movie with a song titled \"Little Wonders\"?",
+        "query": "SELECT T1.total_gross FROM movies_total_gross AS T1 INNER JOIN characters AS T2 ON T2.movie_title = T1.movie_title WHERE T2.song = 'Little Wonders'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "What is the Motion Picture Association of America rating for the movie featuring a villain named Turbo?",
+        "query": "SELECT T1.MPAA_rating FROM movies_total_gross AS T1 INNER JOIN characters AS T2 ON T2.movie_title = T1.movie_title WHERE T2.villian = 'Turbo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "How many movies for mature audiences or parental guidance suggested did Bill Thompson work as a voice actor?",
+        "query": "SELECT COUNT(T.movie) FROM ( SELECT T1.movie FROM `voice-actors` AS T1 INNER JOIN movies_total_gross AS T2 ON T1.movie = T2.movie_title WHERE MPAA_rating = 'PG' AND `voice-actor` = 'Bill Thompson' GROUP BY T1.movie ) AS T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "How many of Gary Trousdale's movies are adventure movies?",
+        "query": "SELECT COUNT(T.name) FROM ( SELECT T1.name FROM director AS T1 INNER JOIN movies_total_gross AS T2 ON T1.name = T2.movie_title WHERE T1.director = 'Gary Trousdale' AND T2.genre = 'Adventure' GROUP BY T1.name ) T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Which director did Bill Thompson work the most with?",
+        "query": "SELECT director FROM director AS T1 INNER JOIN `voice-actors` AS T2 ON T1.name = T2.movie WHERE T2.`voice-actor` = 'Bill Thompson' GROUP BY director ORDER BY COUNT(director) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "What is the most popular movie directed by Ron Clements?",
+        "query": "SELECT T2.name FROM movies_total_gross AS T1 INNER JOIN director AS T2 ON T2.name = T1.movie_title WHERE T2.director = 'Ron Clements' ORDER BY CAST(REPLACE(SUBSTR(total_gross, 2), ',', '') AS int) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "List all the voice actors in the movie directed by Ben Sharpsteen which was released on February 9, 1940.",
+        "query": "SELECT T2.`voice-actor` FROM director AS T1 INNER JOIN `voice-actors` AS T2 INNER JOIN movies_total_gross AS T3 ON T1.name = T2.movie AND T2.movie = T3.movie_title WHERE T1.director = 'Ben Sharpsteen' AND T3.release_date = 'Feb 9, 1940' AND T2.`voice-actor` != 'None' GROUP BY T2.`voice-actor`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "How many PG adventure movies did Ron Clements direct?",
+        "query": "SELECT COUNT(*) FROM director AS T1 INNER JOIN movies_total_gross AS T2 ON T1.name = T2.movie_title WHERE T1.director = 'Ron Clements' AND T2.MPAA_rating = 'PG' AND T2.genre = 'Adventure'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "How many horror movies are there?",
+        "query": "SELECT COUNT(movie_title) FROM `movies_total_gross` WHERE genre = 'Horror'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who is the villain in the movie \"The Great Mouse Detective\"?",
+        "query": "SELECT villian FROM characters WHERE movie_title = 'The Great Mouse Detective'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "List the voice actors from the movie \"Meet the Robinsons\".",
+        "query": "SELECT 'voice-actor' FROM `voice-actors` WHERE movie = 'Meet the Robinsons'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Which director has made the most movies?",
+        "query": "SELECT director, COUNT(name) FROM director GROUP BY director ORDER BY COUNT(name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "From 2000 to 2010, in which year did the studio entertainment segment make the most revenue?",
+        "query": "SELECT `Year` FROM revenue WHERE `Year` BETWEEN 2000 AND 2010 ORDER BY `Studio Entertainment[NI 1]` DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "List all the songs associated with drama movies.",
+        "query": "SELECT song FROM movies_total_gross AS T1 INNER JOIN characters AS T2 ON T1.movie_title = T2.movie_title WHERE T1.genre = 'Drama' GROUP BY song"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who are the voice actors for all the heroes?",
+        "query": "SELECT T2.`voice-actor` FROM characters AS T1 INNER JOIN `voice-actors` AS T2 ON T2.character = T1.hero WHERE T2.movie = T1.movie_title"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Provide a list of directors from the 1990s.",
+        "query": "SELECT T2.director FROM movies_total_gross AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name AND CAST(SUBSTR(release_date, INSTR(release_date, ', ') + 1) AS int) BETWEEN 1990 AND 2000 GROUP BY T2.director"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who voiced the villain in \"The Rescuers\"?",
+        "query": "SELECT T1.`voice-actor` FROM `voice-actors` AS T1 INNER JOIN characters AS T2 ON T2.movie_title = T1.movie WHERE T2.movie_title = 'The Rescuers' AND T1.character = T2.villian"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "List all of Wolfgang Reitherman's movies and their voice actors.",
+        "query": "SELECT T1.name, T2.`voice-actor` FROM director AS T1 INNER JOIN `voice-actors` AS T2 ON T1.name = T2.movie WHERE T1.director = 'Wolfgang Reitherman'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "What are the characters in the PG movies?",
+        "query": "SELECT DISTINCT T2.character FROM movies_total_gross AS T1 INNER JOIN `voice-actors` AS T2 ON T1.movie_title = T2.movie WHERE T1.MPAA_rating = 'PG'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "What is the highest grossing movie without a song?",
+        "query": "SELECT T1.movie_title FROM movies_total_gross AS T1 INNER JOIN characters AS T2 ON T2.movie_title = T1.movie_title WHERE T2.song IS NULL ORDER BY CAST(REPLACE(trim(T1.total_gross, '$'), ',', '') AS REAL) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who directed the movie with the most voice actors?",
+        "query": "SELECT T2.director, COUNT(DISTINCT T1.`voice-actor`) FROM `voice-actors` AS T1 INNER JOIN director AS T2 ON T1.movie = T2.name GROUP BY T2.director ORDER BY COUNT(DISTINCT T1.`voice-actor`) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who are the voice actors in the movie that came out on 11/24/2010?",
+        "query": "SELECT T2.`voice-actor` FROM movies_total_gross AS T1 INNER JOIN `voice-actors` AS T2 ON T1.movie_title = T2.movie WHERE T1.release_date = 'Nov 24, 2010'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "List the directors of movies that feature a song.",
+        "query": "SELECT T2.director FROM characters AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE T1.song IS NOT NULL GROUP BY T2.director"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "What are the total grosses for the movies with Jim Cummings as the voice actor?",
+        "query": "SELECT T2.movie_title FROM `voice-actors` AS T1 INNER JOIN movies_total_gross AS T2 ON T2.movie_title = T1.movie WHERE T1.`voice-actor` = 'Jim Cummings' ORDER BY CAST(REPLACE(trim(T2.total_gross, '$'), ',', '') AS REAL) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Which of the movies directed by Ron Clements has the highest total gross?",
+        "query": "SELECT T2.movie_title FROM director AS T1 INNER JOIN movies_total_gross AS T2 ON T1.name = T2.movie_title WHERE T1.director = 'Ron Clements' ORDER BY CAST(REPLACE(trim(T2.total_gross, '$'), ',', '') AS REAL) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "What is the average total gross for the movies featuring Sterling Holloway?",
+        "query": "SELECT SUM(CAST(REPLACE(trim(T2.total_gross, '$'), ',', '') AS REAL)) / COUNT(T2.movie_title) FROM `voice-actors` AS T1 INNER JOIN movies_total_gross AS T2 ON T1.movie = T2.movie_title WHERE T1.`voice-actor` = 'Sterling Holloway'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "What proportion of the total gross of all movies is from movies with songs?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.song IS NOT NULL THEN T2.movie_title ELSE NULL END) AS REAL) * 100 / COUNT(T2.movie_title) FROM characters AS T1 INNER JOIN movies_total_gross AS T2 ON T1.movie_title = T2.movie_title"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "List the movies and genres released in 2016.",
+        "query": "SELECT movie_title, genre FROM movies_total_gross WHERE SUBSTR(release_date, LENGTH(release_date) - 3, LENGTH(release_date)) = '2016'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who is the villain in Little Mermaid?",
+        "query": "SELECT villian FROM characters WHERE movie_title = 'Little Mermaid'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "List the movie titles directed by Jack Kinney.",
+        "query": "SELECT name FROM director WHERE director = 'Jack Kinney'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Provide the movie titles and the estimated inflation rate of the highest total grossed movie.",
+        "query": "SELECT movie_title, CAST(REPLACE(trim(inflation_adjusted_gross, '$'), ',', '') AS REAL) / CAST(REPLACE(trim(total_gross, '$'), ',', '') AS REAL) FROM movies_total_gross ORDER BY CAST(REPLACE(trim(total_gross, '$'), ',', '') AS REAL) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "List the PG-13 romantic comedy movie titles and their release dates.",
+        "query": "SELECT movie_title, release_date FROM movies_total_gross WHERE MPAA_rating = 'PG-13' AND genre = 'Romantic Comedy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "List the movie titles and character names by Bill Thompson.",
+        "query": "SELECT movie, character FROM `voice-actors` WHERE 'voice-actor' = 'Bill Thompson'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "List the movie titles and associated songs directed by Ron Clements.",
+        "query": "SELECT T1.movie_title, T1.song FROM characters AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE T2.director = 'Ron Clements'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Provide the titles, main characters, and associated songs of the movies directed by Wolfgang Reitherman in 1977.",
+        "query": "SELECT T1.movie_title, T2.hero, T2.song FROM movies_total_gross AS T1 INNER JOIN characters AS T2 ON T1.movie_title = T2.movie_title INNER JOIN director AS T3 ON T1.movie_title = T3.name WHERE T3.director = 'Wolfgang Reitherman' AND SUBSTR(T1.release_date, LENGTH(T1.release_date) - 3, LENGTH(T1.release_date)) = '1977'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Which movies had the main character named Donald Duck and who directed them?",
+        "query": "SELECT T1.movie_title, T2.director FROM characters AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE T1.hero = 'Donald Duck'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Describe the hero, director, and the release date of Mulan.",
+        "query": "SELECT T1.hero, T2.director, T1.release_date FROM characters AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE T1.movie_title = 'Mulan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Provide the title, total gross, and MPAA rating of the movie which has a hero named Elsa.",
+        "query": "SELECT T1.movie_title, T1.total_gross, T1.MPAA_rating FROM movies_total_gross AS T1 INNER JOIN characters AS T2 ON T1.movie_title = T2.movie_title INNER JOIN director AS T3 ON T3.name = T1.movie_title WHERE T2.hero = 'Elsa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Provide the title, director, and release date of the movie voice-acted by Freddie Jones.",
+        "query": "SELECT T1.movie, T3.director, T2.release_date FROM `voice-actors` AS T1 INNER JOIN characters AS T2 ON T1.movie = T2.movie_title INNER JOIN director AS T3 ON T3.name = T2.movie_title WHERE T1.`voice-actor` = 'Freddie Jones'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Among Frank Welker's voice-acted movies, list the movie titles and the total gross when the estimated inflation rate was less than 2.",
+        "query": "SELECT T1.movie_title, T1.total_gross FROM movies_total_gross AS T1 INNER JOIN `voice-actors` AS T2 ON T1.movie_title = T2.movie WHERE T2.`voice-actor` = 'Frank Welker' AND CAST(REPLACE(trim(T1.inflation_adjusted_gross, '$'), ',', '') AS REAL) * 1.0 / CAST(REPLACE(trim(T1.total_gross, '$'), ',', '') AS REAL) * 1.0 < 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who directed the most popular movie?",
+        "query": "SELECT T2.director FROM movies_total_gross AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name ORDER BY CAST(REPLACE(trim(T1.total_gross, '$'), ',', '') AS REAL) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Describe the voice actors and villains in Cinderella.",
+        "query": "SELECT T1.`voice-actor`, T2.villian FROM `voice-actors` AS T1 INNER JOIN characters AS T2 ON T1.movie = T2.movie_title WHERE T2.movie_title = 'Cinderella'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who is the voice actor of the hero in Lion King?",
+        "query": "SELECT T1.`voice-actor` FROM `voice-actors` AS T1 INNER JOIN characters AS T2 ON T1.movie = T2.movie_title WHERE T2.movie_title = 'Lion King' AND T1.character = 'Lion King'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Provide the directors and MPAA ratings of the musical movies released in 1993.",
+        "query": "SELECT T2.director, T1.MPAA_rating FROM movies_total_gross AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE T1.genre = 'Musical' AND SUBSTR(T1.release_date, LENGTH(T1.release_date) - 3, LENGTH(T1.release_date)) = '1993'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Among the movies released from 1991 to 2000, calculate the percentage of comedy movies. Provide any five movie titles and directors.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.genre = 'Comedy' THEN T1.movie_title ELSE NULL END) AS REAL) * 100 / COUNT(T1.movie_title), group_concat(T1.movie_title), group_concat(T2.director) FROM movies_total_gross AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE SUBSTR(T1.release_date, LENGTH(T1.release_date) - 3, LENGTH(T1.release_date)) BETWEEN '1991' AND '2000'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Among the movies released from 2001 to 2005, list down the titles and directors of the movies which had a total gross of more than 100% above the average.",
+        "query": "SELECT T2.name, T2.director FROM movies_total_gross AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE SUBSTR(T1.release_date, LENGTH(T1.release_date) - 3, LENGTH(T1.release_date)) BETWEEN '2001' AND '2005' AND CAST(REPLACE(trim(T1.total_gross, '$'), ',', '') AS REAL) / ( SELECT SUM(CAST(REPLACE(trim(T3.total_gross, '$'), ',', '') AS REAL)) / COUNT(T3.movie_title) AS avg_gross FROM movies_total_gross AS T3 INNER JOIN director AS T4 ON T3.movie_title = T4.name WHERE SUBSTR(T3.release_date, LENGTH(T3.release_date) - 3, LENGTH(T3.release_date)) BETWEEN '2001' AND '2005' ) - 1 > 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Name the voice actor of the character Calliope in the movie Hercules.",
+        "query": "SELECT `voice-actor` FROM `voice-actors` WHERE movie = 'Hercules' AND character = 'Calliope'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "How many voice actors for the movie Aladdin?",
+        "query": "SELECT COUNT('voice-actor') FROM `voice-actors` WHERE movie = 'Aladdin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "List the movie titles with the voice actor Jeff Bennet",
+        "query": "SELECT movie FROM `voice-actors` WHERE 'voice-actor' = 'Jeff Bennett'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Provide the director's name of Wreck-It Ralph movie.",
+        "query": "SELECT director FROM director WHERE name = 'Wreck-It Ralph'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "What movies did director Jack Kinney direct?",
+        "query": "SELECT name FROM director WHERE director = 'Jack Kinney'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "How many movies were released between 1937 and 1950?",
+        "query": "SELECT COUNT(movie_title) FROM characters WHERE SUBSTR(release_date, LENGTH(release_date) - 1, LENGTH(release_date)) BETWEEN '37' AND '50'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Provide the name of the song from the movie directed by Ben Sharpsteen.",
+        "query": "SELECT T1.song FROM characters AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE T2.director = 'Ben Sharpsteen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Indicate the release date of the film The Lion King directed by Roger Allers.",
+        "query": "SELECT T1.release_date FROM characters AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE T2.director = 'Roger Allers' AND T1.movie_title = 'The Lion King'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Name the villain of the movie with Scott Weinger and Brad Kane as voice actors.",
+        "query": "SELECT T1.villian FROM characters AS T1 INNER JOIN `voice-actors` AS T2 ON T1.movie_title = T2.movie WHERE T2.`voice-actor` = 'Scott Weinger Brad Kane'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Which movies of director Wolfgang Reitherman do not have villain?",
+        "query": "SELECT T1.movie_title FROM characters AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE T2.director = 'Wolfgang Reitherman' AND T1.villian IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "List the titles of movies directed by Jack Kinney that were released before 1947.",
+        "query": "SELECT T1.movie_title FROM characters AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE T2.director = 'Jack Kinney' AND SUBSTR(T1.release_date, LENGTH(T1.release_date) - 1, LENGTH(T1.release_date)) < '47'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "List the names of the directors whose films grossed over $100 million.",
+        "query": "SELECT DISTINCT T2.director FROM characters AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name INNER JOIN movies_total_gross AS T3 ON T1.movie_title = T3.movie_title WHERE CAST(REPLACE(trim(T3.total_gross, '$'), ',', '') AS REAL) > 100000000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Which movie's song title has the highest total gross?",
+        "query": "SELECT T2.song FROM movies_total_gross AS T1 INNER JOIN characters AS T2 ON T1.movie_title = T2.movie_title ORDER BY CAST(REPLACE(trim(T1.total_gross, '$'), ',', '') AS REAL) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Which director had the most popular film from 1937 to 1990?",
+        "query": "SELECT T2.director FROM characters AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name INNER JOIN movies_total_gross AS T3 ON T3.movie_title = T1.movie_title WHERE SUBSTR(T3.release_date, LENGTH(T3.release_date) - 3, LENGTH(T3.release_date)) BETWEEN '1937' AND '1990' ORDER BY CAST(REPLACE(trim(T3.total_gross, '$'), ',', '') AS REAL) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "List all the main characters of the movie that are comedy genre.",
+        "query": "SELECT T2.hero FROM movies_total_gross AS T1 INNER JOIN characters AS T2 ON T1.movie_title = T2.movie_title WHERE T1.genre = 'Comedy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Provide the names of voice actors for the characters of films directed by Wolfgang Reitherman.",
+        "query": "SELECT T2.hero, T1.`voice-actor` FROM `voice-actors` AS T1 INNER JOIN characters AS T2 ON T1.movie = T2.movie_title INNER JOIN director AS T3 ON T3.name = T2.movie_title WHERE T3.director = 'Wolfgang Reitherman'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "What genre of movie has Taran as the main character?",
+        "query": "SELECT T1.genre FROM movies_total_gross AS T1 INNER JOIN characters AS T2 ON T1.movie_title = T2.movie_title WHERE T2.hero = 'Taran'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "The main character Elsa is voiced by which actor and who is the director of the movie?",
+        "query": "SELECT T1.`voice-actor`, T3.director FROM `voice-actors` AS T1 INNER JOIN characters AS T2 ON T1.movie = T2.movie_title INNER JOIN director AS T3 ON T2.movie_title = T3.name WHERE T2.hero = 'Elsa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Calculate the percentage of directors whose films grossed over $100 million.",
+        "query": "SELECT CAST(COUNT(DISTINCT CASE WHEN CAST(REPLACE(trim(T1.total_gross, '$'), ',', '') AS REAL) > 100000000 THEN T3.director ELSE NULL END) AS REAL) * 100 / COUNT(DISTINCT T3.director) FROM movies_total_gross AS T1 INNER JOIN characters AS T2 ON T1.movie_title = T2.movie_title INNER JOIN director AS T3 ON T1.movie_title = T3.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Calculate the percentage of voice actors whose main character in the movie is in the Drama genre.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.genre = 'Drama' THEN T3.`voice-actor` ELSE NULL END) AS REAL) * 100 / COUNT(T3.`voice-actor`) FROM movies_total_gross AS T1 INNER JOIN characters AS T2 ON T1.movie_title = T2.movie_title INNER JOIN `voice-actors` AS T3 ON T3.movie = T1.movie_title"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Name the first movie released by Disney.",
+        "query": "SELECT movie_title FROM characters ORDER BY SUBSTR(release_date, LENGTH(release_date) - 1, LENGTH(release_date)) ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "How many movies were released by Disney between 2010 and 2016?",
+        "query": "SELECT COUNT(movie_title) FROM characters WHERE SUBSTR(release_date, LENGTH(release_date) - 1, LENGTH(release_date)) BETWEEN '10' AND '16'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Who was the first ever Disney villain?",
+        "query": "SELECT villian FROM characters ORDER BY SUBSTR(release_date, LENGTH(release_date) - 1, LENGTH(release_date)) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "What is Disney's highest grossing action movie?",
+        "query": "SELECT movie_title FROM movies_total_gross WHERE genre = 'Action' ORDER BY CAST(REPLACE(trim(total_gross, '$'), ',', '') AS REAL) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Which actor voices Akela from The Jungle Book?",
+        "query": "SELECT `voice-actor` FROM `voice-actors` WHERE character = 'Akela'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Determine Disney's total box office gross between 2010 and 2016.",
+        "query": "SELECT SUM(Total) FROM revenue WHERE `Year` BETWEEN 2010 AND 2016"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Name the main character of Disney's most popular adventure movie based on its inflation-adjusted gross.",
+        "query": "SELECT T2.hero FROM movies_total_gross AS T1 INNER JOIN characters AS T2 ON T1.movie_title = T2.movie_title WHERE T1.genre = 'Adventure' ORDER BY CAST(REPLACE(trim(T1.inflation_adjusted_gross, '$'), ',', '') AS REAL) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Name the director of Disney's lowest grossing movie.",
+        "query": "SELECT T2.director FROM movies_total_gross AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name ORDER BY CAST(REPLACE(trim(T1.total_gross, '$'), ',', '') AS REAL) ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Find out what proportion of total revenue Walt Disney Parks and Resorts received in 2010.",
+        "query": "SELECT SUM(`Walt Disney Parks and Resorts`) / SUM(Total) * 100 FROM revenue WHERE year = 2010"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Determine the average gross for Disney's PG-13-rated action movies.",
+        "query": "SELECT SUM(CAST(REPLACE(trim(total_gross, '$'), ',', '') AS REAL)) / COUNT(movie_title) FROM movies_total_gross WHERE MPAA_rating = 'PG-13'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "How many voice-actors were involved in the Bambi movie?",
+        "query": "SELECT COUNT(DISTINCT 'voice-actor') FROM `voice-actors` WHERE movie = 'Bambi'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Find the estimated inflation rate that was used to adjust the 1995 box office revenue for Disney's films.",
+        "query": "SELECT SUM(CAST(REPLACE(trim(inflation_adjusted_gross, '$'), ',', '') AS REAL)) / SUM(CAST(REPLACE(trim(total_gross, '$'), ',', '') AS REAL)) FROM movies_total_gross WHERE SUBSTR(release_date, LENGTH(release_date) - 3, LENGTH(release_date)) = '1995' GROUP BY SUBSTR(release_date, LENGTH(release_date) - 3, LENGTH(release_date)) = '1995'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "What is the difference in the current gross of Cars and its sequel, Cars 2? Which movie is more popular?",
+        "query": "SELECT SUM(CASE WHEN movie_title = 'Cars' THEN CAST(REPLACE(trim(inflation_adjusted_gross, '$'), ',', '') AS REAL) ELSE 0 END), SUM(CASE WHEN movie_title = 'Cars 2' THEN CAST(REPLACE(trim(inflation_adjusted_gross, '$'), ',', '') AS REAL) ELSE 0 END) FROM movies_total_gross"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Name the most recent movie directed by Chris Buck. Which of his movies was more successful in terms of grossing? Use the current gross for comparison.",
+        "query": "SELECT T1.movie_title, MAX(T1.release_date), MAX(T1.inflation_adjusted_gross) FROM movies_total_gross AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE T2.director = 'Chris Buck'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Name actors who voiced more than five Disney characters.",
+        "query": "SELECT 'voice-actor' FROM `voice-actors` GROUP BY 'voice-actor' HAVING COUNT(movie) > 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Name the top 5 highest-grossing Disney movies adjusted for inflation. Identify the percentage they contributed to the total of Disney's current gross.",
+        "query": "SELECT SUM(CASE WHEN CAST(REPLACE(trim(inflation_adjusted_gross, '$'), ',', '') AS REAL) > 1236035515 THEN CAST(REPLACE(trim(inflation_adjusted_gross, '$'), ',', '') AS REAL) ELSE 0 END) * 100 / SUM(CAST(REPLACE(trim(inflation_adjusted_gross, '$'), ',', '') AS REAL)) FROM movies_total_gross"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "disney",
+        "question": "Among all Disney movies directed by Gary Trousdale, determine the percentage that earned over USD100m based on actual grossing.",
+        "query": "SELECT CAST(COUNT(CASE WHEN CAST(REPLACE(trim(T1.total_gross, '$'), ',', '') AS REAL) > 100000000 THEN T1.movie_title ELSE NULL END) AS REAL) * 100 / COUNT(T1.movie_title) FROM movies_total_gross AS T1 INNER JOIN director AS T2 ON T1.movie_title = T2.name WHERE T2.director = 'Gary Trousdale'"
+    }
+]

@@ -1,0 +1,704 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many restaurants have not obtained a minimum of 3 in their reviews?",
+        "query": "SELECT COUNT(id_restaurant) FROM generalinfo WHERE review < 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What types of food are served at the 4 top-reviewed restaurants?",
+        "query": "SELECT food_type FROM generalinfo WHERE review = ( SELECT MAX(review) FROM generalinfo ) LIMIT 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many restaurants in the city of Richmond serve Mediterranean food?",
+        "query": "SELECT COUNT(id_restaurant) FROM generalinfo WHERE food_type = 'mediterranean' AND city = 'richmond'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List all the cities in Sonoma County.",
+        "query": "SELECT city FROM geographic WHERE county = 'sonoma county'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What counties are not in the Bay Area Region?",
+        "query": "SELECT DISTINCT county FROM geographic WHERE region != 'bay area'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List all cities in the Northern California Region.",
+        "query": "SELECT city FROM geographic WHERE region = 'northern california'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List by its ID number all restaurants on 11th Street in Oakland.",
+        "query": "SELECT id_restaurant FROM location WHERE city = 'oakland' AND street_name = '11th street'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many restaurants can we find at number 871 on its street?",
+        "query": "SELECT COUNT(id_restaurant) FROM location WHERE street_num = 871"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "At what numbers on 9th Avenue of San Francisco there are restaurants?",
+        "query": "SELECT id_restaurant FROM location WHERE City = 'san francisco' AND street_name = '9th avenue'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What type of food is there in the restaurants on Adeline Street in Berkeley city?",
+        "query": "SELECT T1.food_type FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T2.street_name = 'adeline st' AND T2.city = 'berkeley'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "In which regions are there no African food restaurants?",
+        "query": "SELECT DISTINCT T2.region FROM generalinfo AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T1.food_type != 'african'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "In which counties are there A&W Root Beer Restaurants?",
+        "query": "SELECT DISTINCT T2.county FROM generalinfo AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T1.label = 'a & w root beer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Indicate street and number of the Adelitas Taqueria Restaurants.",
+        "query": "SELECT T1.street_name, T1.street_num FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T2.label = 'adelitas taqueria'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What type of food is served at the restaurant located at 3140, Alpine Road at San Mateo County?",
+        "query": "SELECT T2.food_type FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant INNER JOIN geographic AS T3 ON T2.city = T3.city WHERE T3.County = 'san mateo county' AND T1.street_name = 'alpine rd' AND T1.street_num = 3140"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "In which streets of the city of San Francisco are there restaurants that serve seafood?",
+        "query": "SELECT T1.street_name FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.city = 'san francisco' AND T2.food_type = 'seafood' AND street_name IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List all counties where there is no Bakers Square Restaurant & Pie Shop.",
+        "query": "SELECT DISTINCT T2.county FROM generalinfo AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T1.label != 'bakers square restaurant & pie shop'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "In how many counties is there a street called Appian Way?",
+        "query": "SELECT COUNT(DISTINCT T2.county) FROM location AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T1.street_name = 'appian way'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the rating of each restaurant reviews on Atlantic Ave?",
+        "query": "SELECT T1.review FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T2.street_name = 'atlantic ave'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Identify all restaurants in Contra Costa County by id.",
+        "query": "SELECT T1.id_restaurant FROM location AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T2.county = 'contra costa county'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Identify all the restaurants in Yolo County by their label.",
+        "query": "SELECT T1.id_restaurant, T1.label FROM generalinfo AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T2.county = 'yolo county'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What restaurant on Drive Street in San Rafael doesn't serve American food?",
+        "query": "SELECT T1.label FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T2.street_name = 'drive' AND T1.food_type != 'american' AND T2.city = 'san rafael'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "On which streets in the city of San Francisco are there restaurants with a review of 1.7?",
+        "query": "SELECT T2.street_name FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.city = 'san francisco' AND T1.review = 1.7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Which restaurant on the street Alameda de las Pulgas in the city of Menlo Park is the worst rated?",
+        "query": "SELECT T2.label FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.street_name = 'avenida de las pulgas' AND T2.city = 'menlo park' ORDER BY review LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "On what street in Tuolumne County is Good Heavens restaurant located?",
+        "query": "SELECT T1.street_name FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant INNER JOIN geographic AS T3 ON T2.city = T3.city WHERE T2.label = 'good heavens' AND T3.county = 'tuolumne county'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Indicate the street numbers where Aux Delices Vietnamese Restaurant are located.",
+        "query": "SELECT DISTINCT T1.street_num FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T2.label = 'aux delices vietnamese restaurant'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Identify all the restaurants in Marin County by their id.",
+        "query": "SELECT T1.id_restaurant FROM generalinfo AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T2.county = 'marin county'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "In which regions are there no pizza restaurants?",
+        "query": "SELECT DISTINCT T2.region FROM generalinfo AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T1.food_type = 'pizza' AND T2.region != 'unknown'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Calculate the average rating of reviews for restaurants in Santa Cruz County.",
+        "query": "SELECT AVG(T2.review) FROM geographic AS T1 INNER JOIN generalinfo AS T2 ON T1.city = T2.city WHERE T1.county = 'santa cruz county'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What percentage of restaurants in Monterey County have Mexican food?",
+        "query": "SELECT CAST(SUM(IIF(T2.food_type = 'mexican', 1, 0)) AS REAL) * 100 / COUNT(T2.id_restaurant) FROM geographic AS T1 INNER JOIN generalinfo AS T2 ON T1.city = T2.city WHERE T1.county = 'monterey county'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What percentage of streets named 11th Street are in Alameda County?",
+        "query": "SELECT CAST(SUM(IIF(T1.street_name = '11th st', 1, 0)) AS REAL) * 100 / COUNT(T1.id_restaurant) FROM location AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T2.County = 'alameda county'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Please list all of the restaurants that serve European food.",
+        "query": "SELECT label FROM generalinfo WHERE food_type = 'european'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What cities are located in Northern California?",
+        "query": "SELECT city FROM geographic WHERE region = 'northern california'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What does the one and only 24-hour diner's name?",
+        "query": "SELECT label FROM generalinfo WHERE food_type = '24 hour diner'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Please list any five cities that have an unidentified county and region.",
+        "query": "SELECT city FROM geographic WHERE county = 'unknown' AND region = 'unknown' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the county and region of Davis City?",
+        "query": "SELECT county, region FROM geographic WHERE city = 'Davis'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Please list all of the street names in Clayton City.",
+        "query": "SELECT street_name FROM location WHERE city = 'Clayton'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What are the most popular restaurants in San Francisco among diners?",
+        "query": "SELECT id_restaurant, label FROM generalinfo WHERE city = 'San Francisco' AND review = ( SELECT MAX(review) FROM generalinfo WHERE city = 'San Francisco' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many American food restaurants are unpopular in Carmel?",
+        "query": "SELECT COUNT(id_restaurant) FROM generalinfo WHERE food_type = 'american' AND city = 'carmel' AND review = ( SELECT MIN(review) FROM generalinfo WHERE food_type = 'american' AND city = 'carmel' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the percentage of restaurants that serve American food in Dublin city?",
+        "query": "SELECT CAST(SUM(IIF(food_type = 'american food', 1, 0)) AS REAL) * 100 / COUNT(id_restaurant) FROM generalinfo WHERE city = 'dublin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the full address of Albert's Caf\u00e9?",
+        "query": "SELECT T2.street_num, T2.street_name, T1.city FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.label = 'Albert''s Caf\u00e9'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What are the restaurants that are located at \"19th St. Oakland\"?",
+        "query": "SELECT T1.id_restaurant FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.city = 'Oakland' AND T2.street_name = '19th St'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What kind of restaurants can be found at \"106 E 25th Ave\"?",
+        "query": "SELECT T1.food_type FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T2.street_num = 106 AND T2.street_name = 'e 25th ave'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Please name any three restaurants that have an unidentified region.",
+        "query": "SELECT T2.label FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant INNER JOIN geographic AS T3 ON T2.city = T3.city WHERE T3.region = 'unknown' LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the name of the Chinese restaurant that can be found at 104 San Tomas Aquino Road, Campbell?",
+        "query": "SELECT T1.label FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T2.street_num = 104 AND T1.city = 'campbell' AND T2.street_name = 'san tomas aquino road'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many Thai restaurants can be found in San Pablo Ave, Albany?",
+        "query": "SELECT COUNT(T1.id_restaurant) FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.food_type = 'thai' AND T1.city = 'albany' AND T2.street_name = 'san pablo ave'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the county and region of Plearn-Thai Cuisine restaurant?",
+        "query": "SELECT T1.county, T1.region, T2.label FROM geographic AS T1 INNER JOIN generalinfo AS T2 ON T1.city = T2.city WHERE T2.label = 'plearn-thai cuisine'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the name of the restaurant that is located in El Dorado County, Lake Tahoe region?",
+        "query": "SELECT T2.label FROM geographic AS T1 INNER JOIN generalinfo AS T2 ON T1.city = T2.city WHERE T1.region = 'lake tahoe' AND T1.county = 'el dorado county'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Which county and region does the street E. El Camino Real belong to?",
+        "query": "SELECT DISTINCT T2.county, T2.region FROM location AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T1.street_name = 'E. El Camino Real'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the name of the least popular Indian restaurant on Shattuck Avenue in Berkeley?",
+        "query": "SELECT T1.id_restaurant FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.city = 'berkeley' AND T2.street_name = 'shattuck ave' AND T1.food_type = 'Indian restaurant' ORDER BY T1.review LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the percentage of restaurants in the Bay Area region that scored over 4 for the review rating?",
+        "query": "SELECT CAST(SUM(IIF(T2.review > 4, 1, 0)) AS REAL) * 100 / COUNT(T2.id_restaurant) FROM geographic AS T1 RIGHT JOIN generalinfo AS T2 ON T1.city = T2.city WHERE T1.region = 'bay area'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List every city in San Mateo County.",
+        "query": "SELECT city FROM geographic WHERE county = 'san mateo county'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many restaurants have more than 4 star reviews?",
+        "query": "SELECT COUNT(id_restaurant) AS cnt FROM generalinfo WHERE review > 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Which street has the most restaurants?",
+        "query": "SELECT street_name FROM location GROUP BY street_name ORDER BY COUNT(street_name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Which chicken restaurant has the highest review?",
+        "query": "SELECT label FROM generalinfo WHERE food_type = 'chicken' ORDER BY review DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Which county is El Cerrito from?",
+        "query": "SELECT county FROM geographic WHERE city = 'el cerrito'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many restaurants are on Irving Street?",
+        "query": "SELECT COUNT(id_restaurant) FROM location WHERE street_name = 'irving'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Provide a list of restaurants from Marin county.",
+        "query": "SELECT T1.label FROM generalinfo AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T2.county = 'marin county'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the address of the Peking Duck restaurant?",
+        "query": "SELECT T2.street_name FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.label = 'peking duck restaurant'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List all the streets with more than 10 restaurants in Alameda county.",
+        "query": "SELECT T2.street_name FROM geographic AS T1 INNER JOIN location AS T2 ON T1.city = T2.city WHERE T1.county = 'alameda county' GROUP BY T2.street_name HAVING COUNT(T2.id_restaurant) > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What are the regions with Greek restaurants?",
+        "query": "SELECT DISTINCT T1.region FROM geographic AS T1 INNER JOIN generalinfo AS T2 ON T1.city = T2.city WHERE T2.food_type = 'greek'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List all of the restaurant addresses from an unknown region.",
+        "query": "SELECT T2.street_name FROM geographic AS T1 INNER JOIN location AS T2 ON T1.city = T2.city WHERE T1.region = 'unknown'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the review of the restaurant at 8440 Murray Ave?",
+        "query": "SELECT T2.review FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.street_name = 'murray ave' AND T1.street_num = 8440"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What type of restaurant is most common in Monterey county?",
+        "query": "SELECT T2.food_type FROM geographic AS T1 INNER JOIN generalinfo AS T2 ON T1.city = T2.city WHERE T1.county = 'Monterey' GROUP BY T2.food_type ORDER BY COUNT(T2.food_type) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Which street in San Francisco has the most burger restaurants?",
+        "query": "SELECT T2.street_name FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.city = 'san francisco' AND T1.food_type = 'burgers' GROUP BY T2.street_name ORDER BY COUNT(T2.id_restaurant) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the region of 1149 El Camino Real?",
+        "query": "SELECT T2.region FROM location AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T1.street_num = 1149 AND T1.street_name = 'el camino real'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the county of the Sankee restaurant?",
+        "query": "SELECT T2.county FROM generalinfo AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T1.label = 'sankee'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many streets with restaurants are there in the Northern California region?",
+        "query": "SELECT COUNT(T1.city) FROM geographic AS T1 INNER JOIN location AS T2 ON T1.city = T2.city WHERE T1.region = 'northern california'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List all of the restaurants on Park St.",
+        "query": "SELECT T2.label FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.street_name = 'park st'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What percentage of restaurants are from the Bay Area?",
+        "query": "SELECT CAST(SUM(IIF(T1.region = 'bay area', 1, 0)) AS REAL) * 100 / COUNT(T2.id_restaurant) FROM geographic AS T1 INNER JOIN location AS T2 ON T1.city = T2.city"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List all the average reviews of Chinese restaurants for each county from highest to lowest.",
+        "query": "SELECT AVG(T1.review) FROM generalinfo AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T1.food_type = 'chinese' GROUP BY T1.id_restaurant ORDER BY AVG(T1.review) DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List street names in San Francisco city.",
+        "query": "SELECT street_name FROM location WHERE city = 'San Francisco'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List restaurant ids located in Danville city.",
+        "query": "SELECT id_restaurant FROM location WHERE city = 'Danville'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many cities are located in the Bay Area?",
+        "query": "SELECT COUNT(city) FROM geographic WHERE region = 'bay area'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many labels of the restaurant have an unknown country?",
+        "query": "SELECT COUNT(T1.label) FROM generalinfo AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T2.county = 'unknown'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Please indicate the street names of restaurants with food type is American.",
+        "query": "SELECT T1.street_name FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.city = T2.city WHERE T2.food_type = 'American'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Please indicate which labels have the city located in Santa Cruz.",
+        "query": "SELECT T1.label FROM generalinfo AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T2.county = 'Santa Cruz county'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Give the review of the restaurant at 430, Broadway.",
+        "query": "SELECT T1.review FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T2.street_name = 'Broadway' AND T2.street_num = 430"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Indicate the address of the restaurant with the most popular reviews.",
+        "query": "SELECT T2.street_num, T2.street_name FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant ORDER BY T1.review DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Which country has the most restaurants with Italian food?",
+        "query": "SELECT T2.county FROM generalinfo AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T1.food_type = 'Italian' GROUP BY T2.county ORDER BY COUNT(T1.id_restaurant) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Find the percentage of restaurant in Napa Valley.",
+        "query": "SELECT CAST(SUM(IIF(region = 'Napa Valley', 1, 0)) AS REAL) * 100 / COUNT(region) FROM geographic"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many of the cities are in a Bay Area?",
+        "query": "SELECT COUNT(city) FROM geographic WHERE region = 'bay area'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List down the cities with unknown country.",
+        "query": "SELECT city FROM geographic WHERE county = 'unknown'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the city located in Bay Area of Santa Clara?",
+        "query": "SELECT city FROM geographic WHERE region = 'bay area' AND county = 'santa clara county'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List down the restaurant ID of restaurants located in Sunnyvale.",
+        "query": "SELECT id_restaurant FROM location WHERE city = 'sunnyvale'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Among the restaurants on street number below 1000, how many of them are in Railroad St.?",
+        "query": "SELECT COUNT(city) FROM location WHERE street_name = 'railroad' AND street_num < 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the name of the 24 hour diner at San Francisco?",
+        "query": "SELECT label FROM generalinfo WHERE food_type = '24 hour diner' AND city = 'san francisco'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Give the review of the restaurant located in Ocean St., Santa Cruz.",
+        "query": "SELECT T2.review FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T2.city = 'santa cruz' AND T1.street_name = 'ocean st'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Give the street number of a bar in Oakland with a 2.7 review.",
+        "query": "SELECT T2.street_num FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.review = 2.7 AND T2.city = 'oakland' AND T1.food_type = 'bar'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Among the bakeries, what is total number of bakery located at University Avenue, Palo Alto?",
+        "query": "SELECT COUNT(T1.id_restaurant) FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T2.food_type = 'bakery' AND T2.city = 'palo alto' AND T1.street_name = 'university ave.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Among the listed winery, what is the street number of the winery named \"Tulocay Winery\"?",
+        "query": "SELECT T1.street_num FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T2.label = 'Tulocay winery' AND T2.food_type = 'winery'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List the review and label of the restaurants in Mission Blvd., Hayward.",
+        "query": "SELECT T2.review, T2.label FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T2.city = 'hayward' AND T1.street_name = 'mission blvd'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Among all indian restaurants in Castro St., Mountainview, how many of them is about cookhouse in their label?",
+        "query": "SELECT COUNT(T1.id_restaurant) FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.street_name = 'castro st' AND T1.city = 'mountain view' AND T2.food_type = 'indian' AND T2.label LIKE '%cookhouse%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "In restaurants with a review of 2, how many restaurants have a street number below 500?",
+        "query": "SELECT COUNT(T1.id_restaurant) FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T2.review = 2 AND T1.street_num < 500"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Among all asian restaurants in N. Milpitas Blvd., Milpitas, how many of them have restaurant ID greater than 385?",
+        "query": "SELECT COUNT(T1.id_restaurant) AS num FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T2.city = 'milpitas' AND T2.food_type = 'asian' AND T1.street_name = 'n milpitas blvd' AND T1.id_restaurant > 385"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the restaurant's name and ID located at Ocean Avenue, San Francisco?",
+        "query": "SELECT T2.label, T1.id_restaurant FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.city = 'san francisco' AND T1.street_name = 'ocean avenue'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the full address of the restaurant named \"Sanuki Restaurant\"?",
+        "query": "SELECT T2.city, T1.street_num, T1.street_name FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T2.label = 'sanuki restaurant'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List the food type of the restaurant located in 22779 6th St., Hayward City.",
+        "query": "SELECT T2.food_type FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.street_num = 22779 AND T1.street_name = '6th St' AND T2.city = 'hayward'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many American restaurants are located in Front, San Francisco?",
+        "query": "SELECT COUNT(T2.food_type = 'american') FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.city = 'san francisco' AND T1.street_name = 'front'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List the restaurant's ID that has a review greater than the 70% of average review of all American restaurants with street number greater than 2000.",
+        "query": "SELECT T1.id_restaurant FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T2.food_type = 'american' AND T1.street_num > 2000 GROUP BY T1.id_restaurant ORDER BY AVG(T2.review) * 0.7 DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Among the restaurants located on the street number ranges from 1000 to 2000, what is the percentage of Afghani restaurants are there?",
+        "query": "SELECT CAST(SUM(IIF(T2.food_type = 'afghani', 1, 0)) AS REAL) * 100 / COUNT(T1.id_restaurant) FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE 1000 <= T1.street_num <= 2000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the name of the most popular restaurant serving Asian foods in San Francisco?",
+        "query": "SELECT label FROM generalinfo WHERE food_type = 'asian' AND city = 'san francisco' AND review = ( SELECT MAX(review) FROM generalinfo WHERE food_type = 'asian' AND city = 'san francisco' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many cities are there in Monterey?",
+        "query": "SELECT COUNT(DISTINCT city) FROM geographic WHERE region = 'monterey'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many deli in Belmont have a review rating of 2 or more?",
+        "query": "SELECT COUNT(id_restaurant) FROM generalinfo WHERE city = 'belmont' AND review > 2 AND food_type = 'deli'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Which county in northern California has the highest number of cities?",
+        "query": "SELECT county FROM geographic WHERE region = 'northern california' GROUP BY county ORDER BY COUNT(city) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many restaurants can you find in Concord?",
+        "query": "SELECT COUNT(id_restaurant) FROM location WHERE city = 'concord'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "In which region can you find the top 4 most popular restaurants?",
+        "query": "SELECT T2.region FROM generalinfo AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city ORDER BY T1.review DESC LIMIT 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many Chinese restaurants are there on 1st st, Livermore?",
+        "query": "SELECT COUNT(T1.id_restaurant) FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant WHERE T1.city = 'livermore' AND T1.food_type = 'chinese' AND T2.street_name = '1st st'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many Indian restaurants are there in the Los Angeles area?",
+        "query": "SELECT COUNT(T1.city) FROM geographic AS T1 INNER JOIN generalinfo AS T2 ON T1.city = T2.city WHERE T2.food_type = 'indian' AND T1.region = 'los angeles area'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "In the Bay Area, what is the most common type of food served by restaurants?",
+        "query": "SELECT T2.food_type FROM geographic AS T1 INNER JOIN generalinfo AS T2 ON T1.city = T2.city WHERE T1.region = 'bay area' GROUP BY T2.food_type ORDER BY COUNT(T2.food_type) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many restaurants in Broadway, Oakland received a review of no more than 3?",
+        "query": "SELECT COUNT(T1.id_restaurant) FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.city = T2.city WHERE T1.street_name = 'broadway' AND T2.review < 3 AND T1.city = 'oakland'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "In which region can you find the highest number of Baskin Robbins restaurants?",
+        "query": "SELECT T2.region AS num FROM generalinfo AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city WHERE T1.label = 'baskin robbins' GROUP BY T2.region ORDER BY COUNT(T1.city) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List all the streets where pizza-serving restaurants are found in San Jose.",
+        "query": "SELECT T1.street_name FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.city = T2.city WHERE T2.food_type = 'pizza' AND T1.city = 'san jose'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "How many types of restaurants are there in the Yosemite and Mono Lake area?",
+        "query": "SELECT COUNT(T2.food_type) FROM geographic AS T1 INNER JOIN generalinfo AS T2 ON T1.city = T2.city WHERE T1.region = 'yosemite and mono lake area'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "What is the full address of the most popular restaurant among the diners?",
+        "query": "SELECT T2.street_name, T2.street_num, T2.city FROM generalinfo AS T1 INNER JOIN location AS T2 ON T1.id_restaurant = T2.id_restaurant ORDER BY T1.review DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "In which counties can you find the restaurant with the highest number of branches?",
+        "query": "SELECT T2.county FROM generalinfo AS T1 INNER JOIN geographic AS T2 ON T1.city = T2.city GROUP BY T2.county ORDER BY COUNT(T1.label) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "Which region has the highest number of restaurants?",
+        "query": "SELECT T1.region FROM geographic AS T1 INNER JOIN location AS T2 ON T1.city = T2.city GROUP BY T1.region ORDER BY COUNT(T2.id_restaurant) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "restaurant",
+        "question": "List the full address of all the American restaurants with a review of 4 or more?",
+        "query": "SELECT T1.street_num, T1.street_name, T1.city FROM location AS T1 INNER JOIN generalinfo AS T2 ON T1.city = T2.city WHERE T2.review >= 4"
+    }
+]

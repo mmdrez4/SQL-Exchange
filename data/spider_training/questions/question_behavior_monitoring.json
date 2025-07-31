@@ -1,0 +1,242 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "How many assessment notes are there in total?",
+        "query": "SELECT count(*) FROM ASSESSMENT_NOTES"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "What are the dates of the assessment notes?",
+        "query": "SELECT date_of_notes FROM Assessment_Notes"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "How many addresses have zip code 197?",
+        "query": "SELECT count(*) FROM ADDRESSES WHERE zip_postcode  =  \"197\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "How many distinct incident type codes are there?",
+        "query": "SELECT count(DISTINCT incident_type_code) FROM Behavior_Incident"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Return all distinct detention type codes.",
+        "query": "SELECT DISTINCT detention_type_code FROM Detention"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "What are the start and end dates for incidents with incident type code \"NOISE\"?",
+        "query": "SELECT date_incident_start ,  date_incident_end FROM Behavior_Incident WHERE incident_type_code  =  \"NOISE\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Return all detention summaries.",
+        "query": "SELECT detention_summary FROM Detention"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Return the cell phone number and email address for all students.",
+        "query": "SELECT cell_mobile_number ,  email_address FROM STUDENTS"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "What is the email of the student with first name \"Emma\" and last name \"Rohan\"?",
+        "query": "SELECT email_address FROM Students WHERE first_name  =  \"Emma\" AND last_name  =  \"Rohan\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "How many distinct students have been in detention?",
+        "query": "SELECT count(DISTINCT student_id) FROM Students_in_Detention"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "What is the gender of the teacher with last name \"Medhurst\"?",
+        "query": "SELECT gender FROM TEACHERS WHERE last_name  =  \"Medhurst\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "What is the incident type description for the incident type with code \"VIOLENCE\"?",
+        "query": "SELECT incident_type_description FROM Ref_Incident_Type WHERE incident_type_code  =  \"VIOLENCE\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Find the maximum and minimum monthly rental for all student addresses.",
+        "query": "SELECT max(monthly_rental) ,  min(monthly_rental) FROM Student_Addresses"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Find the first names of teachers whose email address contains the word \"man\".",
+        "query": "SELECT first_name FROM Teachers WHERE email_address LIKE '%man%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "List all information about the assessment notes sorted by date in ascending order.",
+        "query": "SELECT * FROM Assessment_Notes ORDER BY date_of_notes ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "List all cities of addresses in alphabetical order.",
+        "query": "SELECT city FROM Addresses ORDER BY city"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Find the first names and last names of teachers in alphabetical order of last name.",
+        "query": "SELECT first_name ,  last_name FROM Teachers ORDER BY last_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Find all information about student addresses, and sort by monthly rental in descending order.",
+        "query": "SELECT * FROM Student_Addresses ORDER BY monthly_rental DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Find the id and first name of the student that has the most number of assessment notes?",
+        "query": "SELECT T1.student_id ,  T2.first_name FROM Assessment_Notes AS T1 JOIN Students AS T2 ON T1.student_id  =  T2.student_id GROUP BY T1.student_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Find the ids and first names of the 3 teachers that have the most number of assessment notes?",
+        "query": "SELECT T1.teacher_id ,  T2.first_name FROM Assessment_Notes AS T1 JOIN Teachers AS T2 ON T1.teacher_id  =  T2.teacher_id GROUP BY T1.teacher_id ORDER BY count(*) DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Find the id and last name of the student that has the most behavior incidents?",
+        "query": "SELECT T1.student_id ,  T2.last_name FROM Behavior_Incident AS T1 JOIN Students AS T2 ON T1.student_id  =  T2.student_id GROUP BY T1.student_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Find the id and last name of the teacher that has the most detentions with detention type code \"AFTER\"?",
+        "query": "SELECT T1.teacher_id ,  T2.last_name FROM Detention AS T1 JOIN Teachers AS T2 ON T1.teacher_id  =  T2.teacher_id WHERE T1.detention_type_code  =  \"AFTER\" GROUP BY T1.teacher_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "What are the id and first name of the student whose addresses have the highest average monthly rental?",
+        "query": "SELECT T1.student_id ,  T2.first_name FROM Student_Addresses AS T1 JOIN Students AS T2 ON T1.student_id  =  T2.student_id GROUP BY T1.student_id ORDER BY AVG(monthly_rental) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Find the id and city of the student address with the highest average monthly rental.",
+        "query": "SELECT T2.address_id ,  T1.city FROM Addresses AS T1 JOIN Student_Addresses AS T2 ON T1.address_id  =  T2.address_id GROUP BY T2.address_id ORDER BY AVG(monthly_rental) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "What are the code and description of the most frequent behavior incident type?",
+        "query": "SELECT T1.incident_type_code ,  T2.incident_type_description FROM Behavior_Incident AS T1 JOIN Ref_Incident_Type AS T2 ON T1.incident_type_code  =  T2.incident_type_code GROUP BY T1.incident_type_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "What are the code and description of the least frequent detention type ?",
+        "query": "SELECT T1.detention_type_code ,  T2.detention_type_description FROM Detention AS T1 JOIN Ref_Detention_Type AS T2 ON T1.detention_type_code  =  T2.detention_type_code GROUP BY T1.detention_type_code ORDER BY count(*) ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Find the dates of assessment notes for students with first name \"Fanny\".",
+        "query": "SELECT T1.date_of_notes FROM Assessment_Notes AS T1 JOIN Students AS T2 ON T1.student_id  =  T2.student_id WHERE T2.first_name  =  \"Fanny\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Find the texts of assessment notes for teachers with last name \"Schuster\".",
+        "query": "SELECT T1.text_of_notes FROM Assessment_Notes AS T1 JOIN Teachers AS T2 ON T1.teacher_id  =  T2.teacher_id WHERE T2.last_name  =  \"Schuster\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Find the start and end dates of behavior incidents of students with last name \"Fahey\".",
+        "query": "SELECT T1.date_incident_start ,  date_incident_end FROM Behavior_Incident AS T1 JOIN Students AS T2 ON T1.student_id  =  T2.student_id WHERE T2.last_name  =  \"Fahey\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Find the start and end dates of detentions of teachers with last name \"Schultz\".",
+        "query": "SELECT T1.datetime_detention_start ,  datetime_detention_end FROM Detention AS T1 JOIN Teachers AS T2 ON T1.teacher_id  =  T2.teacher_id WHERE T2.last_name  =  \"Schultz\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "What are the id and zip code of the address with the highest monthly rental?",
+        "query": "SELECT T2.address_id ,  T1.zip_postcode FROM Addresses AS T1 JOIN Student_Addresses AS T2 ON T1.address_id  =  T2.address_id ORDER BY monthly_rental DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "What is the cell phone number of the student whose address has the lowest monthly rental?",
+        "query": "SELECT T2.cell_mobile_number FROM Student_Addresses AS T1 JOIN Students AS T2 ON T1.student_id  =  T2.student_id ORDER BY T1.monthly_rental ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "What are the monthly rentals of student addresses in Texas state?",
+        "query": "SELECT T2.monthly_rental FROM Addresses AS T1 JOIN Student_Addresses AS T2 ON T1.address_id  =  T2.address_id WHERE T1.state_province_county  =  \"Texas\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "What are the first names and last names of students with address in Wisconsin state?",
+        "query": "SELECT T2.first_name ,  T2.last_name FROM Addresses AS T1 JOIN Students AS T2 ON T1.address_id  =  T2.address_id WHERE T1.state_province_county  =  \"Wisconsin\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "What are the line 1 and average monthly rentals of all student addresses?",
+        "query": "SELECT T1.line_1 ,  avg(T2.monthly_rental) FROM Addresses AS T1 JOIN Student_Addresses AS T2 ON T1.address_id  =  T2.address_id GROUP BY T2.address_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "What is the zip code of the address where the teacher with first name \"Lyla\" lives?",
+        "query": "SELECT T1.zip_postcode FROM Addresses AS T1 JOIN Teachers AS T2 ON T1.address_id  =  T2.address_id WHERE T2.first_name  =  \"Lyla\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "What are the email addresses of teachers whose address has zip code \"918\"?",
+        "query": "SELECT T2.email_address FROM Addresses AS T1 JOIN Teachers AS T2 ON T1.address_id  =  T2.address_id WHERE T1.zip_postcode  =  \"918\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "How many students are not involved in any behavior incident?",
+        "query": "SELECT count(*) FROM STUDENTS WHERE student_id NOT IN ( SELECT student_id FROM Behavior_Incident )"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "Find the last names of teachers who are not involved in any detention.",
+        "query": "SELECT last_name FROM Teachers EXCEPT SELECT T1.last_name FROM Teachers AS T1 JOIN Detention AS T2 ON T1.teacher_id  =  T2.teacher_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "behavior_monitoring",
+        "question": "What are the line 1 of addresses shared by some students and some teachers?",
+        "query": "SELECT T1.line_1 FROM Addresses AS T1 JOIN Students AS T2 ON T1.address_id  =  T2.address_id INTERSECT SELECT T1.line_1 FROM Addresses AS T1 JOIN Teachers AS T2 ON T1.address_id  =  T2.address_id"
+    }
+]

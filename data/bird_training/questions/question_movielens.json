@@ -1,0 +1,590 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "List the different director IDs of the movies whose user rating is more than 4.",
+        "query": "SELECT DISTINCT T2.directorid FROM u2base AS T1 INNER JOIN movies2directors AS T2 ON T1.movieid = T2.movieid WHERE T1.rating > 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Among the users who gave a rating of 5, how many of them are male?",
+        "query": "SELECT COUNT(T1.userid) FROM u2base AS T1 INNER JOIN users AS T2 ON T1.userid = T2.userid WHERE T1.rating = 5 AND T2.u_gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "List the genres of the movies which actor id 851 is the star.",
+        "query": "SELECT T2.genre FROM movies2actors AS T1 INNER JOIN movies2directors AS T2 ON T1.movieid = T2.movieid INNER JOIN actors AS T3 ON T1.actorid = T3.actorid WHERE T3.actorid = 851"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many movies from the USA which user rating is less than 3?",
+        "query": "SELECT COUNT(T1.movieid) FROM u2base AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid WHERE T2.country = 'USA' AND T1.rating < 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Among the movies from France, how many of them are drama?",
+        "query": "SELECT COUNT(T1.movieid) FROM movies2directors AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid WHERE T2.country = 'France' AND T1.genre = 'drama'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What is the average occupation of users whose ratings are not more than 2 ?",
+        "query": "SELECT AVG(T2.occupation) FROM u2base AS T1 INNER JOIN users AS T2 ON T1.userid = T2.userid WHERE T1.rating < 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "List the top 10 USA movies, by descending order, from the highest to the lowest, the user rating.",
+        "query": "SELECT T1.movieid FROM u2base AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid WHERE T2.country = 'USA' GROUP BY T1.movieid ORDER BY AVG(T1.rating) DESC LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What is the average number of casts of movies that are from the USA?",
+        "query": "SELECT AVG(T2.cast_num) FROM movies AS T1 INNER JOIN movies2actors AS T2 ON T1.movieid = T2.movieid WHERE T1.country = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "List the top 5 movies from other countries which to language is not in English.",
+        "query": "SELECT DISTINCT T1.movieid FROM u2base AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid WHERE T2.country = 'other' AND T2.isEnglish = 'F' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Among the best actors, how many of them got a rating of 5 to the movies they starred?",
+        "query": "SELECT COUNT(T1.actorid) FROM actors AS T1 INNER JOIN movies2actors AS T2 ON T1.actorid = T2.actorid INNER JOIN u2base AS T3 ON T2.movieid = T3.movieid WHERE T1.a_quality = 5 AND T3.rating = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What is the average rating of the newest movies from France?",
+        "query": "SELECT AVG(T1.rating) FROM u2base AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid WHERE T2.country = 'france' AND T2.year = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Among the most rated UK movies, how many of them has running time of less than 2?",
+        "query": "SELECT COUNT(T1.movieid) FROM u2base AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid WHERE T2.country = 'UK' AND T2.runningtime < 2 AND T1.rating = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "List the id of male users who gave ratings of less than 3 to French movies with running time of 2.",
+        "query": "SELECT T1.userid FROM u2base AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid INNER JOIN users AS T3 ON T1.userid = T3.userid WHERE T2.country = 'France' AND T2.runningtime = 2 AND T1.rating < 3 AND T3.u_gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Among the worst actresses, how many of them got a rating of more than 3 to the movies they starred?",
+        "query": "SELECT COUNT(T1.userid) FROM u2base AS T1 INNER JOIN movies2actors AS T2 ON T1.movieid = T2.movieid INNER JOIN actors AS T3 ON T2.actorid = T3.actorid INNER JOIN users AS T4 ON T1.userid = T4.userid WHERE T3.a_quality = 0 AND T1.rating > 3 AND T4.u_gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What is the ID of audiences that gave the most rating of 5?",
+        "query": "SELECT userid FROM u2base WHERE rating = 5 GROUP BY userid ORDER BY COUNT(movieid) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What are the ID of actors that had worked together with director 22397? What was the genre of that movie?",
+        "query": "SELECT T2.actorid, T4.genre FROM movies AS T1 INNER JOIN movies2actors AS T2 ON T1.movieid = T2.movieid INNER JOIN actors AS T3 ON T2.actorid = T3.actorid INNER JOIN movies2directors AS T4 ON T1.movieid = T4.movieid WHERE T4.directorid = 22397"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Please list down the ID of actors and directors in action movies.",
+        "query": "SELECT T2.actorid, T1.directorid FROM movies2directors AS T1 INNER JOIN movies2actors AS T2 ON T1.movieid = T2.movieid WHERE T1.genre = 'Action'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many female actors acted in the movies of year 4?",
+        "query": "SELECT COUNT(T2.actorid) FROM movies AS T1 INNER JOIN movies2actors AS T2 ON T1.movieid = T2.movieid INNER JOIN actors AS T3 ON T2.actorid = T3.actorid WHERE T3.a_gender = 'F' AND T1.year = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What are the ID of actors with quality rating of 3 acted in English USA movies?",
+        "query": "SELECT T2.actorid FROM movies AS T1 INNER JOIN movies2actors AS T2 ON T1.movieid = T2.movieid INNER JOIN actors AS T3 ON T2.actorid = T3.actorid WHERE T3.a_quality = 3 AND T1.country = 'USA' AND T1.isEnglish = 'T'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "List down the ID of movies with running time of 3 and average revenue of 1?",
+        "query": "SELECT T1.movieid FROM movies AS T1 INNER JOIN movies2directors AS T2 ON T1.movieid = T2.movieid INNER JOIN directors AS T3 ON T2.directorid = T3.directorid WHERE T1.runningtime = 3 AND T3.avg_revenue = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "UK produced what genre of movies?",
+        "query": "SELECT T2.genre FROM movies AS T1 INNER JOIN movies2directors AS T2 ON T1.movieid = T2.movieid WHERE T1.country = 'UK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What is the favourite movie genre for audiences of age 18?",
+        "query": "SELECT T1.genre FROM movies2directors AS T1 INNER JOIN u2base AS T2 ON T1.movieid = T2.movieid INNER JOIN users AS T3 ON T2.userid = T3.userid WHERE T3.age = 18 GROUP BY T1.genre ORDER BY COUNT(T1.movieid) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What is the ID of actors that acted in the movies most viewed by audience with occupation 5?",
+        "query": "SELECT T3.actorid FROM users AS T1 INNER JOIN u2base AS T2 ON T1.userid = T2.userid INNER JOIN movies2actors AS T3 ON T2.movieid = T3.movieid WHERE T1.occupation = 5 GROUP BY T2.movieid ORDER BY COUNT(T1.userid) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Movies with rating 3 are viewed by audiences in which distinct age group?",
+        "query": "SELECT DISTINCT T2.age FROM u2base AS T1 INNER JOIN users AS T2 ON T1.userid = T2.userid WHERE T1.rating = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Action movies are mostly directed by directors of which country?",
+        "query": "SELECT T3.country FROM movies2directors AS T1 INNER JOIN directors AS T2 ON T1.directorid = T2.directorid INNER JOIN movies AS T3 ON T1.movieid = T3.movieid WHERE T1.genre = 'Action' GROUP BY T3.country ORDER BY COUNT(T3.country) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Please list down ID of movies acted by top 5 actors based on actor rating.",
+        "query": "SELECT T2.movieid FROM actors AS T1 INNER JOIN movies2actors AS T2 ON T1.actorid = T2.actorid GROUP BY T2.actorid ORDER BY AVG(T1.a_quality) DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "List down 5 non English adventure movies from UK?",
+        "query": "SELECT T1.movieid FROM movies2directors AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid WHERE T2.country = 'UK' AND T1.genre = 'Adventure' AND T2.isEnglish = 'F' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What is the percentage of female audiences who viewed movies with rating 2?",
+        "query": "SELECT CAST(SUM(IIF(T2.u_gender = 'F', 1, 0)) AS REAL) * 100 / COUNT(T2.userid) FROM u2base AS T1 INNER JOIN users AS T2 ON T1.userid = T2.userid WHERE T1.rating = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What is the difference of female and male audiences in number who viewed horror movies?",
+        "query": "SELECT SUM(IIF(T2.u_gender = 'F', 1, 0)) - SUM(IIF(T2.u_gender = 'M', 1, 0)) FROM u2base AS T1 INNER JOIN users AS T2 ON T1.userid = T2.userid INNER JOIN movies2directors AS T3 ON T3.movieid = T1.movieid WHERE T3.genre = 'horror'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Please list the genre of the movies that are the newest and is in English.",
+        "query": "SELECT T2.genre FROM movies AS T1 INNER JOIN movies2directors AS T2 ON T1.movieid = T2.movieid WHERE T1.year = 4 AND T1.isEnglish = 'T'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Among the action movies from the USA, how many of them are not in English?",
+        "query": "SELECT COUNT(T1.movieid) FROM movies AS T1 INNER JOIN movies2directors AS T2 ON T1.movieid = T2.movieid WHERE T1.country = 'USA' AND T1.isEnglish = 'F' AND T2.genre = 'Action'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "For the male users no older than 18, how many times have they given the highest rating?",
+        "query": "SELECT COUNT(T1.movieid) FROM u2base AS T1 INNER JOIN users AS T2 ON T1.userid = T2.userid WHERE T1.rating = 5 AND T2.age < 18 AND T2.u_gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Please list the ID of the movie that has been mostly rated by female users.",
+        "query": "SELECT T1.movieid FROM u2base AS T1 INNER JOIN users AS T2 ON T1.userid = T2.userid WHERE T2.u_gender = 'F' GROUP BY T1.movieid ORDER BY COUNT(T2.userid) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Among divergent movies that got the highest rating, how many of them are from the UK?",
+        "query": "SELECT COUNT(DISTINCT T1.movieid) FROM u2base AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid WHERE T2.country = 'UK' AND T1.rating = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Please list different IDs of movies that are the newest and have gotten the lowest rating.",
+        "query": "SELECT DISTINCT T1.movieid FROM u2base AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid WHERE T2.year = 4 AND T1.rating = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "For the movies in English that are the oldest, how many of them have the lowest rating?",
+        "query": "SELECT COUNT(DISTINCT T1.movieid) FROM movies AS T1 INNER JOIN u2base AS T2 ON T1.movieid = T2.movieid WHERE T1.year = 1 AND T2.rating = 1 AND T1.isEnglish = 'T'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many different female users have rated movies from France?",
+        "query": "SELECT COUNT(DISTINCT T2.userid) FROM users AS T1 INNER JOIN u2base AS T2 ON T1.userid = T2.userid INNER JOIN movies AS T3 ON T2.movieid = T3.movieid WHERE T1.u_gender = 'F' AND T3.country = 'France'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "For different directors who direct well, how many of them have directed an action film?",
+        "query": "SELECT COUNT(DISTINCT T2.directorid) FROM movies2directors AS T2 INNER JOIN directors AS T3 ON T2.directorid = T3.directorid WHERE T2.genre = 'Action' AND T3.d_quality = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Please list the genre of the movies that are directed by the directors with the highest level of average revenue.",
+        "query": "SELECT T2.genre FROM directors AS T1 INNER JOIN movies2directors AS T2 ON T1.directorid = T2.directorid WHERE T1.avg_revenue = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many distinct movies in English stars a male actor who acts the best?",
+        "query": "SELECT COUNT(DISTINCT T1.actorid) FROM actors AS T1 INNER JOIN movies2actors AS T2 ON T1.actorid = T2.actorid INNER JOIN movies AS T3 ON T2.movieid = T3.movieid WHERE T3.isEnglish = 'T' AND T1.a_gender = 'M' AND T1.a_quality = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Please list the country of the movie that stars an actress who acts the worse.",
+        "query": "SELECT T3.country FROM actors AS T1 INNER JOIN movies2actors AS T2 ON T1.actorid = T2.actorid INNER JOIN movies AS T3 ON T2.movieid = T3.movieid WHERE T1.a_gender = 'F' AND T1.a_quality = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What is the highest average rating for action movies made in the USA?",
+        "query": "SELECT AVG(T2.rating) FROM movies AS T1 INNER JOIN u2base AS T2 ON T1.movieid = T2.movieid INNER JOIN movies2directors AS T3 ON T1.movieid = T3.movieid WHERE T1.country = 'USA' AND T3.genre = 'Action' GROUP BY T1.movieid ORDER BY AVG(T2.rating) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Among the films directed by directors who direct the best, how many of them have an average rating of over 3.5?",
+        "query": "SELECT COUNT(*) FROM ( SELECT DISTINCT T2.movieid FROM directors AS T1 INNER JOIN movies2directors AS T2 ON T1.directorid = T2.directorid INNER JOIN u2base AS T3 ON T2.movieid = T3.movieid WHERE T1.d_quality = 5 GROUP BY T2.movieid HAVING AVG(T3.rating) > 3.5 ) AS T1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Which adventure movie has the highest average rating?",
+        "query": "SELECT T1.movieid FROM movies2directors AS T1 INNER JOIN u2base AS T2 ON T1.movieid = T2.movieid WHERE T1.genre = 'Adventure' GROUP BY T1.movieid ORDER BY AVG(T2.rating) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many of the users who rate the movie with the id '2462959' are female?",
+        "query": "SELECT COUNT(T1.userid) FROM users AS T1 INNER JOIN u2base AS T2 ON T1.userid = T2.userid WHERE T2.userid = 2462959 AND T1.u_gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What is the most distinct rated movie with a running time of 0?",
+        "query": "SELECT DISTINCT T1.movieid FROM movies AS T1 INNER JOIN u2base AS T2 ON T1.movieid = T2.movieid WHERE T1.runningtime = 0 AND T2.rating = ( SELECT MAX(rating) FROM u2base )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "List the ids and ratings of each actors played in the movie with the id 1722327?",
+        "query": "SELECT T1.actorid, T1.a_quality FROM actors AS T1 INNER JOIN movies2actors AS T2 ON T1.actorid = T2.actorid WHERE T2.movieid = 1722327"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Which directors with the best quality directed the most films?",
+        "query": "SELECT T1.directorid FROM directors AS T1 INNER JOIN movies2directors AS T2 ON T1.directorid = T2.directorid WHERE T1.d_quality = 5 GROUP BY T1.directorid ORDER BY COUNT(T2.movieid) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many drama movie with the rating of 3?",
+        "query": "SELECT COUNT(DISTINCT T2.movieid) FROM u2base AS T1 INNER JOIN movies2directors AS T2 ON T1.movieid = T2.movieid WHERE T2.genre = 'drama' AND T1.rating = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many of the movies rated 5 are rated by a user between the ages of 25 and 35?",
+        "query": "SELECT COUNT(T1.movieid) FROM u2base AS T1 INNER JOIN users AS T2 ON T1.userid = T2.userid WHERE T1.rating = 5 AND T2.age BETWEEN 25 AND 35"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Please list all horror films that have a rating of 1.",
+        "query": "SELECT T1.movieid FROM u2base AS T1 INNER JOIN movies2directors AS T2 ON T1.movieid = T2.movieid WHERE T1.rating = 1 AND T2.genre = 'Horror'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "List the IDs of all the directors who worked on French films.",
+        "query": "SELECT T2.directorid FROM movies AS T1 INNER JOIN movies2directors AS T2 ON T1.movieid = T2.movieid WHERE T1.country = 'France'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "List all of the user ids and ages who rated movies with the id 1695219?",
+        "query": "SELECT T2.userid, T2.age FROM u2base AS T1 INNER JOIN users AS T2 ON T1.userid = T2.userid WHERE T1.movieid = 1695219"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Which genre contains the greatest number of non-English films?",
+        "query": "SELECT T2.genre FROM movies AS T1 INNER JOIN movies2directors AS T2 ON T1.movieid = T2.movieid WHERE T1.isEnglish = 'F' GROUP BY T2.genre ORDER BY COUNT(T1.movieid) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "List the cast and the director of the movie with the id 1949144.",
+        "query": "SELECT T1.actorid, T2.directorid FROM movies2actors AS T1 INNER JOIN movies2directors AS T2 ON T1.movieid = T2.movieid WHERE T1.movieid = 1949144"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Among the actors who acted in UK movies, what percentage of actors received a rating of at least 3?",
+        "query": "SELECT CAST(SUM(IIF(T3.a_quality >= 3, 1, 0)) AS REAL) * 100 / COUNT(T1.movieid) FROM movies AS T1 INNER JOIN movies2actors AS T2 ON T1.movieid = T2.movieid INNER JOIN actors AS T3 ON T2.actorid = T3.actorid WHERE T1.country = 'UK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What is the proportion of action movies directors who are called 'box office success paradox'?",
+        "query": "SELECT CAST(SUM(IIF(T2.avg_revenue > T2.d_quality, 1, 0)) AS REAL) * 100 / COUNT(T1.movieid) FROM movies2directors AS T1 INNER JOIN directors AS T2 ON T1.directorid = T2.directorid WHERE T1.genre = 'Action'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Please list the actor IDs whose movies have the newest published date.",
+        "query": "SELECT T1.actorid FROM movies2actors AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid WHERE T2.year = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Who are cast members in an English movie which has a running time equal to 2? Please list their IDs.",
+        "query": "SELECT T2.actorid FROM movies AS T1 INNER JOIN movies2actors AS T2 ON T1.movieid = T2.movieid WHERE T1.runningtime = 2 AND T1.isEnglish = 'T'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Which actor has acted in at least 2 French films? Please list their IDs.",
+        "query": "SELECT T2.actorid FROM movies AS T1 INNER JOIN movies2actors AS T2 ON T1.movieid = T2.movieid WHERE T1.country = 'France' GROUP BY T2.actorid HAVING COUNT(T1.movieid) > 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many American movies have cast number more than 1?",
+        "query": "SELECT COUNT(T2.actorid) FROM movies AS T1 INNER JOIN movies2actors AS T2 ON T1.movieid = T2.movieid WHERE T1.country = 'USA' AND T2.cast_num > 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Please list movie IDs which has the oldest publication date and the cast numbers are zero.",
+        "query": "SELECT DISTINCT T1.movieid FROM movies AS T1 INNER JOIN movies2actors AS T2 ON T1.movieid = T2.movieid WHERE T1.year = 1 AND T2.cast_num = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many actors have acted in both US or UK films?",
+        "query": "SELECT COUNT(T1.actorid) FROM movies2actors AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid WHERE T2.country = 'USA' OR T2.country = 'UK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many directors with average revenue of 4 have made either action or adventure films?",
+        "query": "SELECT COUNT(T1.directorid) FROM directors AS T1 INNER JOIN movies2directors AS T2 ON T1.directorid = T2.directorid WHERE T1.avg_revenue = 4 AND (T2.genre = 'Adventure' OR T2.genre = 'Action')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Please list director IDs who have the quality of at least 3 and have made at least 2 different genres of movies.",
+        "query": "SELECT T1.directorid FROM directors AS T1 INNER JOIN movies2directors AS T2 ON T1.directorid = T2.directorid WHERE T1.d_quality >= 3 GROUP BY T1.directorid HAVING COUNT(T2.movieid) >= 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many American comedies are there?",
+        "query": "SELECT COUNT(T1.movieid) FROM movies AS T1 INNER JOIN movies2directors AS T2 ON T1.movieid = T2.movieid WHERE T1.country = 'USA' AND T2.genre = 'comedy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many latest released dramas and action movies?",
+        "query": "SELECT COUNT(T1.movieid) FROM movies2directors AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid WHERE T2.year = 4 AND T1.genre IN ('Action', 'drama')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What horror movies have a running time of at least 2? Please list movie IDs.",
+        "query": "SELECT T1.movieid FROM movies2directors AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid WHERE T2.runningtime >= 2 AND T1.genre = 'Horror'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Please calculate negative critical reception of American movies",
+        "query": "SELECT CAST(SUM(IIF(T1.rating = 1, 1, 0)) AS REAL) * 100 / COUNT(T1.movieid) FROM u2base AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid WHERE T2.country = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What is the disparate number of the comedy films that got the 1 rating?",
+        "query": "SELECT COUNT(DISTINCT T1.movieid) FROM movies2directors AS T1 INNER JOIN u2base AS T2 ON T1.movieid = T2.movieid WHERE T2.rating = 1 AND T1.genre = 'comedy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What's different average revenue status for director who directed the movie that got the most 1 ratings?",
+        "query": "SELECT DISTINCT T1.avg_revenue FROM directors AS T1 INNER JOIN movies2directors AS T2 ON T1.directorid = T2.directorid WHERE T1.d_quality = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many French movies got the highest ranking?",
+        "query": "SELECT COUNT(movieid) FROM movies WHERE country = 'France' AND movieid IN ( SELECT movieid FROM u2base WHERE rating = ( SELECT MAX(rating) FROM u2base ) )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "List the movie that has been rated most by 25 years old users.",
+        "query": "SELECT T2.movieid FROM users AS T1 INNER JOIN u2base AS T2 ON T1.userid = T2.userid WHERE T1.age = 25 GROUP BY T2.movieid ORDER BY COUNT(T1.userid) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many separate 35 year-old uesers have rated the movie from UK?",
+        "query": "SELECT COUNT(DISTINCT T2.userid) FROM movies AS T1 INNER JOIN u2base AS T2 ON T1.movieid = T2.movieid INNER JOIN users AS T3 ON T2.userid = T3.userid WHERE T1.country = 'UK' AND T3.age = 35"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "List the user ids and ages who gave the rate 2 to the movie No. 2409051.",
+        "query": "SELECT T1.userid, T1.age FROM users AS T1 INNER JOIN u2base AS T2 ON T1.userid = T2.userid WHERE T2.movieid = '2409051' AND T2.rating = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Please give the ids of the oldest films that got the most ratings.",
+        "query": "SELECT DISTINCT T1.movieid FROM u2base AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid WHERE T1.rating = 5 AND T2.year = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Which different movies from France got the least ratings?",
+        "query": "SELECT DISTINCT T1.movieid FROM u2base AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid WHERE T2.country = 'France' AND T1.rating = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many female actors have been played a role in any of French or USA movies?",
+        "query": "SELECT COUNT(T2.actorid) FROM movies AS T1 INNER JOIN movies2actors AS T2 ON T1.movieid = T2.movieid WHERE T1.country IN ('France', 'USA')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many different actors have played a role in the highest rating movie?",
+        "query": "SELECT COUNT(DISTINCT T2.actorid) FROM u2base AS T1 INNER JOIN movies2actors AS T2 ON T1.movieid = T2.movieid WHERE T1.rating = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Which Crime film got the lowest average rating?",
+        "query": "SELECT T2.movieid FROM u2base AS T2 INNER JOIN movies2directors AS T3 ON T2.movieid = T3.movieid WHERE T3.genre = 'Crime' GROUP BY T2.movieid ORDER BY AVG(T2.rating) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What's the ratio of gender in actors to actress in all the UK movies?",
+        "query": "SELECT CAST(SUM(IIF(T3.a_gender = 'M', 1, 0)) AS REAL) / SUM(IIF(T3.a_gender = 'F', 1, 0)) FROM movies AS T1 INNER JOIN movies2actors AS T2 ON T1.movieid = T2.movieid INNER JOIN actors AS T3 ON T2.actorid = T3.actorid WHERE T1.country = 'UK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many 35-year-old female users gave the movie 1711133 a rating of 3?",
+        "query": "SELECT COUNT(T1.userid) FROM users AS T1 INNER JOIN u2base AS T2 ON T1.userid = T2.userid WHERE T2.rating = 3 AND T2.movieid = '1711133' AND T1.age = 35 AND T1.u_gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many users have rated 1 each for the UK's second newest movies with a running time of 2?",
+        "query": "SELECT COUNT(T2.userid) FROM movies AS T1 INNER JOIN u2base AS T2 ON T1.movieid = T2.movieid WHERE T1.country = 'UK' AND T1.runningtime = 2 AND T2.rating = 1 AND T1.year = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many unique directors with an average earnings of 2 and a quality of 3 have not made comedy films? List them.",
+        "query": "SELECT DISTINCT T1.directorid FROM directors AS T1 INNER JOIN movies2directors AS T2 ON T1.directorid = T2.directorid WHERE T1.d_quality = 3 AND T1.avg_revenue = 2 AND T2.genre != 'Comedy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Calculate the percentage of female actors and quality 2 who have appeared twice at the casting of the film 1672580.",
+        "query": "SELECT CAST(SUM(IIF(T2.cast_num = 2 AND T1.a_quality = 2, 1, 0)) AS REAL) * 100 / COUNT(T1.actorid) FROM actors AS T1 INNER JOIN movies2actors AS T2 ON T1.actorid = T2.actorid WHERE T2.movieid = 1672580 AND T1.a_gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many of the worst actors are men and how many of the worst actors are women? Indicate your answer in ratio form.",
+        "query": "SELECT CAST(SUM(IIF(a_gender = 'M', 1, 0)) AS REAL) / SUM(IIF(a_gender = 'F', 1, 0)) FROM actors WHERE a_quality = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Which actor has appeared in the most films?",
+        "query": "SELECT actorid FROM movies2actors GROUP BY actorid ORDER BY COUNT(movieid) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What is the most popular genre of film directed by directors?",
+        "query": "SELECT genre FROM movies2directors GROUP BY genre ORDER BY COUNT(movieid) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What are the most common film genres made by the worst directors?",
+        "query": "SELECT T2.genre FROM directors AS T1 INNER JOIN movies2directors AS T2 ON T1.directorid = T2.directorid WHERE T1.d_quality = 0 GROUP BY T2.genre ORDER BY COUNT(T2.movieid) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What non-English American film/s has received the lowest user ratings? Mention the movie's I.D.",
+        "query": "SELECT T2.movieid FROM movies AS T1 INNER JOIN u2base AS T2 ON T1.movieid = T2.movieid WHERE T1.isEnglish = 'F' AND T1.country = 'USA' ORDER BY T2.rating LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What is the total average movie directed by the directors who's quality and revenue is 4?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.d_quality = 4 AND T1.avg_revenue = 4 THEN 1 ELSE 0 END) AS REAL) / COUNT(T2.movieid) FROM directors AS T1 INNER JOIN movies2directors AS T2 ON T1.directorid = T2.directorid"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Which movies have received the greatest ratings from female users whose occupations fall within the category of 3?",
+        "query": "SELECT T2.movieid FROM users AS T1 INNER JOIN u2base AS T2 ON T1.userid = T2.userid INNER JOIN movies AS T3 ON T2.movieid = T3.movieid WHERE T1.u_gender = 'F' AND T1.occupation = 3 AND T2.rating = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many female actresses appeared in the movie 2312852, what country was it in, and what was it's running time?",
+        "query": "SELECT SUM(IIF(T1.a_gender = 'F', 1, 0)) , T3.country, T3.runningtime FROM actors AS T1 INNER JOIN movies2actors AS T2 ON T1.actorid = T2.actorid INNER JOIN movies AS T3 ON T2.movieid = T3.movieid WHERE T2.movieid = 2312852 GROUP BY T3.country, T3.runningtime"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "How many horror movies were made by the worst directors?",
+        "query": "SELECT COUNT(T1.movieid) FROM movies2directors AS T1 INNER JOIN movies AS T2 ON T1.movieid = T2.movieid INNER JOIN directors AS T3 ON T1.directorid = T3.directorid WHERE T1.genre = 'horror' AND T3.d_quality = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What are the genres of all the English-language foreign films having a runtime of two hours or less? List each one.",
+        "query": "SELECT T2.genre FROM movies AS T1 INNER JOIN movies2directors AS T2 ON T1.movieid = T2.movieid WHERE T1.runningtime <= 2 AND T1.isEnglish = 'T' AND T1.country = 'other'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "Among the English comedy movies produced in the UK, how many movies with a running time of 3 was rated the highest by users between the age 45-50? Indicate the movie names.",
+        "query": "SELECT DISTINCT T1.movieid FROM movies AS T1 INNER JOIN movies2directors AS T2 ON T1.movieid = T2.movieid INNER JOIN u2base AS T3 ON T1.movieid = T3.movieid INNER JOIN users AS T4 ON T3.userid = T4.userid WHERE T1.country = 'UK' AND T2.genre = 'Comedy' AND T1.runningtime = 3 AND T3.rating = 5 AND T4.age BETWEEN 45 AND 50 AND T1.isEnglish = 'T'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What is the percentage difference of English and non-English-language crime movies in other countries in year 3?",
+        "query": "SELECT CAST(SUM(IIF(T1.isEnglish = 'T', 1, 0)) - SUM(IIF(T1.isEnglish = 'F', 1, 0)) AS REAL) * 100 / COUNT(T1.movieid) FROM movies AS T1 INNER JOIN movies2directors AS T2 ON T1.movieid = T2.movieid WHERE T1.country = 'other' AND T1.year = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movielens",
+        "question": "What is the total amount male and female actors who were casted in movie ID 1684910 and what is the proportion between the highest quality actors against the worst quality of actors? Indicate your answer in percentage. List the the director as well as the genre.",
+        "query": "SELECT SUM(IIF(a_gender = 'M', 1, 0)) , SUM(IIF(a_gender = 'F', 1, 0)) , CAST(SUM(IIF(a_quality = 5, 1, 0)) AS REAL) * 100 / COUNT(*) , CAST(SUM(IIF(a_quality = 0, 1, 0)) AS REAL) * 100 / COUNT(*), ( SELECT directorid FROM movies2directors WHERE movieid = 1684910 ) , ( SELECT genre FROM movies2directors WHERE movieid = 1684910 ) FROM actors WHERE actorid IN ( SELECT actorid FROM movies2actors WHERE movieid = 1684910 )"
+    }
+]

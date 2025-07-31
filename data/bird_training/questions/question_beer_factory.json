@@ -1,0 +1,788 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the name of the root beer brand that has the longest history?",
+        "query": "SELECT BrandName FROM rootbeerbrand WHERE FirstBrewedYear = ( SELECT MIN(FirstBrewedYear) FROM rootbeerbrand )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many breweries are located in North America?",
+        "query": "SELECT COUNT(BrandID) FROM rootbeerbrand WHERE Country = 'United States'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Please list the names of all the root beer brands that are advertised on facebook.",
+        "query": "SELECT BrandName FROM rootbeerbrand WHERE FacebookPage IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the name of the root beer brand with the lowest unit profit available to wholesalers?",
+        "query": "SELECT BrandName FROM rootbeerbrand ORDER BY CurrentRetailPrice - WholesaleCost LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the description of the root beer brand A&W?",
+        "query": "SELECT Description FROM rootbeerbrand WHERE BrandName = 'A&W'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "In which city is the brewery AJ Stephans Beverages located?",
+        "query": "SELECT City FROM rootbeerbrand WHERE BreweryName = 'AJ Stephans Beverages'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many transactions had Frank-Paul Santangelo made in July, 2014?",
+        "query": "SELECT COUNT(T1.CustomerID) FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.First = 'Frank-Paul' AND T1.Last = 'Santangelo' AND STRFTIME('%Y-%m', T2.TransactionDate) = '2014-07'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Among the transactions made in July, 2014, how many of them were made by a male customer?",
+        "query": "SELECT COUNT(T1.CustomerID) FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.Gender = 'M' AND STRFTIME('%Y-%m', T2.TransactionDate) = '2014-07'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Among the users that permit the company to send regular emails to them, how many of them had made a transaction with a Visa card in July, 2014?",
+        "query": "SELECT COUNT(T1.CustomerID) FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.SubscribedToEmailList = 'TRUE' AND T2.CreditCardType = 'Visa' AND STRFTIME('%Y-%m', T2.TransactionDate) = '2014-07'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the full name of the customer that had made the most transactions in August, 2014?",
+        "query": "SELECT T1.First, T1.Last FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE STRFTIME('%Y-%m', T2.TransactionDate) = '2014-08' GROUP BY T1.CustomerID ORDER BY COUNT(T2.CustomerID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Please list the brands of all the root beer that Frank-Paul Santangelo had purchased on 2014/7/7.",
+        "query": "SELECT DISTINCT T4.BrandName FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN rootbeer AS T3 ON T2.RootBeerID = T3.RootBeerID INNER JOIN rootbeerbrand AS T4 ON T3.BrandID = T4.BrandID WHERE T1.First = 'Frank-Paul' AND T1.Last = 'Santangelo' AND T2.TransactionDate = '2014-07-07'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Of the 4 root beers that Frank-Paul Santangelo purchased on 2014/7/7, how many of them were in cans?",
+        "query": "SELECT COUNT(T1.CustomerID) FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN rootbeer AS T3 ON T2.RootBeerID = T3.RootBeerID WHERE T1.First = 'Frank-Paul' AND T1.Last = 'Santangelo' AND T2.TransactionDate = '2014-07-07' AND T3.ContainerType = 'Can'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many root beers of the Bulldog were purchased in August, 2014?",
+        "query": "SELECT COUNT(T1.BrandID) FROM rootbeer AS T1 INNER JOIN `transaction` AS T2 ON T1.RootBeerID = T2.RootBeerID INNER JOIN rootbeerbrand AS T3 ON T1.BrandID = T3.BrandID WHERE T2.TransactionDate LIKE '2014-08%' AND T3.BrandName = 'Bulldog'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Please list the full names of the customers who have purchased at least one root beer produced by AJ Stephans Beverages.",
+        "query": "SELECT T1.First, T1.Last FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN rootbeer AS T3 ON T2.RootBeerID = T3.RootBeerID INNER JOIN rootbeerbrand AS T4 ON T3.BrandID = T4.BrandID WHERE T4.BreweryName = 'AJ Stephans Beverages'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Among the root beer brands that do not advertise on Twitter, how many of them have root beers sold in August, 2014?",
+        "query": "SELECT COUNT(T1.BrandID) FROM rootbeer AS T1 INNER JOIN `transaction` AS T2 ON T1.RootBeerID = T2.RootBeerID INNER JOIN rootbeerbrand AS T3 ON T1.BrandID = T3.BrandID WHERE T2.TransactionDate LIKE '2014-08%' AND T3.Twitter IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the number of the credit card that Frank-Paul Santangelo used to purchase root beers on 2014/7/7?",
+        "query": "SELECT DISTINCT T2.CreditCardNumber FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.First = 'Frank-Paul' AND T1.Last = 'Santangelo' AND T2.TransactionDate = '2014-07-07'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Among all the root beers purchased by Frank-Paul Santangelo, how many of them were non-sweetened?",
+        "query": "SELECT COUNT(T1.CustomerID) FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN rootbeer AS T3 ON T2.RootBeerID = T3.RootBeerID INNER JOIN rootbeerbrand AS T4 ON T3.BrandID = T4.BrandID WHERE T1.First = 'Frank-Paul' AND T1.Last = 'Santangelo' AND T4.ArtificialSweetener = 'FALSE' AND T4.Honey = 'FALSE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Please list the dates on which a male customer has purchased more than 3 root beers.",
+        "query": "SELECT T2.TransactionDate FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.Gender = 'M' GROUP BY T2.TransactionDate HAVING COUNT(T2.CustomerID) > 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the average number of root beers of the brand A&W sold in a day in August, 2014?",
+        "query": "SELECT CAST(COUNT(T1.BrandID) AS REAL) / 31 FROM rootbeer AS T1 INNER JOIN `transaction` AS T2 ON T1.RootBeerID = T2.RootBeerID INNER JOIN rootbeerbrand AS T3 ON T1.BrandID = T3.BrandID WHERE T2.TransactionDate LIKE '2014-08%' AND T3.BrandName = 'A&W'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Among all the root beers sold in 2014, what is the percentage of the root beers produced by the brewery AJ Stephans Beverages?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T3.BreweryName = 'AJ Stephans Beverages' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T1.BrandID) FROM rootbeer AS T1 INNER JOIN `transaction` AS T2 ON T1.RootBeerID = T2.RootBeerID INNER JOIN rootbeerbrand AS T3 ON T1.BrandID = T3.BrandID WHERE T2.TransactionDate LIKE '2014%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Tell the number of reviews given by James House.",
+        "query": "SELECT COUNT(T2.CustomerID) FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.First = 'James' AND T1.Last = 'House'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Show the credit card number of Lisa Ling.",
+        "query": "SELECT DISTINCT T2.CreditCardNumber FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.First = 'Lisa' AND T1.Last = 'Ling'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "State the coordinate of Sac State American River Courtyard.",
+        "query": "SELECT T2.Latitude, T2.Longitude FROM location AS T1 INNER JOIN geolocation AS T2 ON T1.LocationID = T2.LocationID WHERE T1.LocationName = 'Sac State American River Courtyard'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Provide the name of the location where transaction no.100885 happened.",
+        "query": "SELECT T2.LocationName FROM `transaction` AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE T1.TransactionID = 100885"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Which city does the customer who finished transaction no.103545 live in?",
+        "query": "SELECT T1.City FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.TransactionID = 103545"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the phone number of the customer who owns the credit card of number 6011179359005380?",
+        "query": "SELECT DISTINCT T1.PhoneNumber FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.CreditCardNumber = 6011179359005382"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Which customer has the most reviews? State the full name.",
+        "query": "SELECT T1.First, T1.Last FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID GROUP BY T1.CustomerID ORDER BY COUNT(T2.CustomerID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "For the customer who leaves the review content of \"Tastes like Australia.\", when was his/her first purchase date?",
+        "query": "SELECT T1.FirstPurchaseDate FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.Review = 'Tastes like Australia.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "When did Natalie Dorris buy her first root beer?",
+        "query": "SELECT T2.TransactionDate FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.First = 'Natalie' AND T1.Last = 'Dorris' ORDER BY T2.TransactionDate LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "For the root beer brand with the most 5 star ratings, what is the name of the brewery?",
+        "query": "SELECT T1.BreweryName FROM rootbeerbrand AS T1 INNER JOIN rootbeerreview AS T2 ON T1.BrandID = T2.BrandID WHERE T2.StarRating = 5 GROUP BY T1.BrandID ORDER BY COUNT(T2.StarRating) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "For the customer who gave a 3 star rating to Frostie brand on 2014/4/24, did the user permit the company to send regular emails to him/her?",
+        "query": "SELECT CASE WHEN T1.SubscribedToEmailList LIKE 'TRUE' THEN 'YES' ELSE 'NO' END AS result FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN rootbeerbrand AS T3 ON T2.BrandID = T3.BrandID WHERE T2.StarRating = 3 AND T3.BrandName = 'Frostie' AND T2.ReviewDate = '2014-04-24'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "For the root beer brand which got the review with the content of \"The quintessential dessert root beer. No ice cream required.\", what is the current retail price of the root beer?",
+        "query": "SELECT T1.CurrentRetailPrice - T1.WholesaleCost AS price FROM rootbeerbrand AS T1 INNER JOIN rootbeerreview AS T2 ON T1.BrandID = T2.BrandID WHERE T2.Review = 'The quintessential dessert root beer. No ice cream required.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the percentage of 5 star ratings River City brand root beer get?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.StarRating = 5 THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T2.StarRating) FROM rootbeerbrand AS T1 INNER JOIN rootbeerreview AS T2 ON T1.BrandID = T2.BrandID WHERE T1.BrandName = 'River City'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the average number of reviews of all the root beer brands from \"CA\" State?",
+        "query": "SELECT CAST(COUNT(*) AS REAL) / COUNT(DISTINCT T1.BrandID) AS avgreview FROM rootbeerbrand AS T1 INNER JOIN rootbeerreview AS T2 ON T1.BrandID = T2.BrandID WHERE T1.State = 'CA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many female customers permit the company to send regular emails to them?",
+        "query": "SELECT COUNT(CustomerID) FROM customers WHERE Gender = 'F' AND SubscribedToEmailList = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the name of the brand of the beer with the shortest brewed history?",
+        "query": "SELECT BrandName FROM rootbeerbrand ORDER BY FirstBrewedYear DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What are the full names of the first top 10 customers?",
+        "query": "SELECT First, Last FROM customers ORDER BY FirstPurchaseDate LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many breweries are there in Australia?",
+        "query": "SELECT COUNT(BreweryName) FROM rootbeerbrand WHERE Country = 'Australia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many customers are named Charles in Sacramento?",
+        "query": "SELECT COUNT(CustomerID) FROM customers WHERE First = 'Charles' AND City = 'Sacramento'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many transactions were paid through MasterCard in 2014?",
+        "query": "SELECT COUNT(TransactionID) FROM `transaction` WHERE CreditCardType = 'MasterCard' AND TransactionDate LIKE '2014%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Which brand of root beer did Jayne Collins give the lowest rating?",
+        "query": "SELECT T3.BrandName FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN rootbeerbrand AS T3 ON T2.BrandID = T3.BrandID WHERE T1.First = 'Jayne' AND T1.Last = 'Collins' AND T2.StarRating = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many sweet bottled root beers that do not contain cane sugar were purchased in 2015 through the selling company located in Sac State American River Courtyard?",
+        "query": "SELECT COUNT(T1.BrandID) FROM rootbeer AS T1 INNER JOIN rootbeerbrand AS T2 ON T1.BrandID = T2.BrandID INNER JOIN location AS T3 ON T1.LocationID = T3.LocationID WHERE T3.LocationName = 'Sac State American River Courtyard' AND T1.PurchaseDate LIKE '2015%' AND T2.Honey = 'TRUE' AND T2.CaneSugar = 'FALSE' AND T1.ContainerType = 'Bottle'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Which brewery does the most purchased root beer in 2016 belong to?",
+        "query": "SELECT T2.BreweryName FROM rootbeer AS T1 INNER JOIN rootbeerbrand AS T2 ON T1.BrandID = T2.BrandID WHERE T1.PurchaseDate BETWEEN '2016-01-01' AND '2016-12-31' GROUP BY T2.BrandID ORDER BY COUNT(T1.BrandID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What are the full names of the customer who gave River City a 5-star?",
+        "query": "SELECT T1.First, T1.Last FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN rootbeerbrand AS T3 ON T2.BrandID = T3.BrandID WHERE T3.BrandName = 'River City' AND T2.StarRating = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many root beers did Tom Hanks purchase between 2015 to 2016?",
+        "query": "SELECT COUNT(T2.RootBeerID) FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.First = 'Tom' AND T1.Last = 'Hanks' AND T2.TransactionDate BETWEEN '2015-01-01' AND '2016-12-31'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Which brand of root beer was highly rated by customers?",
+        "query": "SELECT T1.BrandName FROM rootbeerbrand AS T1 INNER JOIN rootbeerreview AS T2 ON T1.BrandID = T2.BrandID WHERE T2.StarRating = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many Henry Weinhard's were bought by Nicholas Sparks?",
+        "query": "SELECT COUNT(T1.CustomerID) FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN rootbeer AS T3 ON T2.RootBeerID = T3.RootBeerID INNER JOIN rootbeerbrand AS T4 ON T3.BrandID = T4.BrandID WHERE T1.First = 'Nicholas' AND T1.Last = 'Sparks' AND T4.BrandName LIKE 'Henry Weinhard%s'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Among the root beer brands that do not advertise on Facebook and Twitter, which brand has the highest number of purchases?",
+        "query": "SELECT T2.BreweryName FROM rootbeer AS T1 INNER JOIN rootbeerbrand AS T2 ON T1.BrandID = T2.BrandID WHERE T2.FacebookPage IS NULL AND T2.Twitter IS NULL GROUP BY T2.BrandID ORDER BY COUNT(T1.BrandID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Between Sac State Union and Sac State American River Courtyard, which location sold the most Dog n Suds root beer?",
+        "query": "SELECT T3.LocationName FROM rootbeer AS T1 INNER JOIN rootbeerbrand AS T2 ON T1.BrandID = T2.BrandID INNER JOIN location AS T3 ON T1.LocationID = T3.LocationID WHERE T2.BrandName = 'Dog n Suds' AND T3.LocationName IN ('Sac State American River Courtyard', 'Sac State Union') GROUP BY T1.LocationID ORDER BY COUNT(T1.BrandID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many canned A&W were purchased in 2016?",
+        "query": "SELECT COUNT(T1.BrandID) FROM rootbeer AS T1 INNER JOIN rootbeerbrand AS T2 ON T1.BrandID = T2.BrandID WHERE T1.ContainerType = 'Can' AND T2.BrandName = 'A&W' AND T1.PurchaseDate LIKE '2016%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the precise location of Sac State Union?",
+        "query": "SELECT T2.Latitude, T2.Longitude FROM location AS T1 INNER JOIN geolocation AS T2 ON T1.LocationID = T2.LocationID WHERE T1.LocationName = 'Sac State Union'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What are the brands of the root beers that received 5-star ratings from no less than 5 customers?",
+        "query": "SELECT T1.BrandName FROM rootbeerbrand AS T1 INNER JOIN rootbeerreview AS T2 ON T1.BrandID = T2.BrandID WHERE T2.StarRating = 5 GROUP BY T2.BrandID HAVING COUNT(T2.StarRating) >= 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "List the brands of root beer produced by Dr Pepper Snapple Group and calculate their percentage of purchases between 2014 to 2016.",
+        "query": "SELECT T1.BrandName , CAST(SUM(CASE WHEN T2.PurchaseDate >= '2014-01-01' AND T2.PurchaseDate <= '2016-12-31' THEN 1 ELSE 0 END) AS REAL) / COUNT(T2.BrandID) AS purchase FROM rootbeerbrand AS T1 INNER JOIN rootbeer AS T2 ON T1.BrandID = T2.BrandID WHERE T1.BreweryName = 'Dr Pepper Snapple Group' GROUP BY T2.BrandID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Which brand of root beer has the lowest unit profit available to wholesalers? Indicate the ID of the customer that has the highest number of purchases of the said brand.",
+        "query": "SELECT T3.BrandName, T2.CustomerID FROM rootbeer AS T1 INNER JOIN `transaction` AS T2 ON T1.RootBeerID = T2.RootBeerID INNER JOIN rootbeerbrand AS T3 ON T1.BrandID = T3.BrandID GROUP BY T3.BrandID ORDER BY T3.CurrentRetailPrice - T3.WholesaleCost, COUNT(T1.BrandID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "List the full name and phone number of male customers from Fair Oaks who are subscribed to the email list.",
+        "query": "SELECT First, Last, PhoneNumber FROM customers WHERE Gender = 'M' AND City = 'Fair Oaks' AND SubscribedToEmailList = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Among the root beer purchased in 2014, what percentage were sold in cans?",
+        "query": "SELECT CAST(COUNT(CASE WHEN ContainerType = 'Can' THEN RootBeerID ELSE NULL END) AS REAL) * 100 / COUNT(RootBeerID) FROM rootbeer WHERE PurchaseDate LIKE '2014%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Give the name of the brands that brewed their first drink between 1996 and 2000 in the descending order of the date brewed.",
+        "query": "SELECT BrandName FROM rootbeerbrand WHERE FirstBrewedYear BETWEEN '1996' AND '2000' ORDER BY FirstBrewedYear DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Find the brand Id of the root beer which has the most number of customers who gave 1-star ratings.",
+        "query": "SELECT BrandID FROM rootbeerreview WHERE StarRating = 1 GROUP BY BrandID ORDER BY COUNT(BrandID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Among the transactions, what percentage is done by using a visa card?",
+        "query": "SELECT CAST(COUNT(CASE WHEN CreditCardType = 'Visa' THEN TransactionID ELSE NULL END) AS REAL) * 100 / COUNT(TransactionID) FROM `transaction`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many brands of root beers are available in cans and contain corn syrup and artificial sweeteners?",
+        "query": "SELECT COUNT(BrandID) FROM rootbeerbrand WHERE CornSyrup = 'TRUE' AND ArtificialSweetener = 'TRUE' AND AvailableInCans = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Calculate the percentage of sales done at Sac State American River Courtyard.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.LocationName = 'Sac State American River Courtyard' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T1.TransactionID) FROM `transaction` AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "On average how many caffeinated root beers are sold a day?",
+        "query": "SELECT CAST(COUNT(T2.RootBeerID) AS REAL) / COUNT(DISTINCT T2.PurchaseDate) FROM rootbeerbrand AS T1 INNER JOIN rootbeer AS T2 ON T1.BrandID = T2.BrandID INNER JOIN `transaction` AS T3 ON T2.RootBeerID = T3.RootBeerID WHERE T1.Caffeinated = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Find the root beer with the most and least amount of profit per unit and list the container types in which these root beers are sold.",
+        "query": "SELECT * FROM ( SELECT T1.BrandName, T2.ContainerType FROM rootbeerbrand AS T1 INNER JOIN rootbeer AS T2 ON T1.BrandID = T2.BrandID ORDER BY T1.CurrentRetailPrice - T1.WholesaleCost DESC LIMIT 1 ) UNION ALL SELECT * FROM ( SELECT T3.BrandName, T4.ContainerType FROM rootbeerbrand AS T3 INNER JOIN rootbeer AS T4 ON T3.BrandID = T4.BrandID ORDER BY T3.CurrentRetailPrice - T3.WholesaleCost ASC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the average cost of root beers purchased for more than 2 dollars and sold in bottles?",
+        "query": "SELECT AVG(T2.PurchasePrice) FROM rootbeer AS T1 INNER JOIN `transaction` AS T2 ON T1.RootBeerID = T2.RootBeerID INNER JOIN rootbeerbrand AS T3 ON T1.BrandID = T3.BrandID WHERE T1.ContainerType = 'Bottle' AND T2.PurchasePrice > 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Among the root beers sold in bottles, how many are sold at the location 38.559615, -121.42243?",
+        "query": "SELECT COUNT(T4.BrandID) FROM `transaction` AS T1 INNER JOIN geolocation AS T2 ON T1.LocationID = T2.LocationID INNER JOIN location AS T3 ON T1.LocationID = T3.LocationID INNER JOIN rootbeer AS T4 ON T1.RootBeerID = T4.RootBeerID WHERE T2.Latitude = 38.559615 AND T2.Longitude = -121.42243 AND T4.ContainerType = 'Bottle'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Among the customers not subscribed to the mailing list, what percentage has given three or more stars in a review?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.StarRating > 3 THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T2.CustomerID) FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.SubscribedToEmailList = 'FALSE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Which root beer got the most five stars in 2012? Give the brand name of this beer.",
+        "query": "SELECT T3.BrandName FROM rootbeer AS T1 INNER JOIN rootbeerreview AS T2 ON T1.BrandID = T2.BrandID INNER JOIN rootbeerbrand AS T3 ON T1.BrandID = T3.BrandID WHERE T2.StarRating = 5 AND strftime('%Y', T2.ReviewDate) = '2012' GROUP BY T1.BrandID ORDER BY COUNT(T2.BrandID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "In the female customers, how many bought root beer that contains artificial sweetener?",
+        "query": "SELECT COUNT(T1.CustomerID) FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN rootbeer AS T3 ON T2.RootBeerID = T3.RootBeerID INNER JOIN rootbeerbrand AS T4 ON T3.BrandID = T4.BrandID WHERE T1.Gender = 'F' AND T4.ArtificialSweetener = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Calculate the difference between the number of root beers sold that use cane sugar and corn syrup.",
+        "query": "SELECT COUNT(CASE WHEN T3.CaneSugar = 'TRUE' THEN T1.BrandID ELSE NULL END) - COUNT(CASE WHEN T3.CornSyrup = 'TRUE' THEN T1.BrandID ELSE NULL END) AS DIFFERENCE FROM rootbeer AS T1 INNER JOIN `transaction` AS T2 ON T1.RootBeerID = T2.RootBeerID INNER JOIN rootbeerbrand AS T3 ON T1.BrandID = T3.BrandID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Which brewery brewed the most sold root beer in 2015?",
+        "query": "SELECT T3.BreweryName FROM rootbeer AS T1 INNER JOIN `transaction` AS T2 ON T1.RootBeerID = T2.RootBeerID INNER JOIN rootbeerbrand AS T3 ON T1.BrandID = T3.BrandID WHERE T2.TransactionDate LIKE '2015%' GROUP BY T3.BrandID ORDER BY COUNT(T1.BrandID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Among the male customers in Sacramento, what percentage bought Dominion root beer in 2013?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T4.BrandName = 'Dominion' THEN T1.CustomerID ELSE NULL END) AS REAL) * 100 / COUNT(T1.CustomerID) FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN rootbeer AS T3 ON T2.RootBeerID = T3.RootBeerID INNER JOIN rootbeerbrand AS T4 ON T3.BrandID = T4.BrandID WHERE T1.City = 'Sacramento' AND T1.Gender = 'M' AND T2.TransactionDate LIKE '2014%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the difference in the average number of sales per day of root beer brands that contain honey and that don\u2019t contain honey.",
+        "query": "SELECT (CAST(SUM(CASE WHEN T1.Honey = 'TRUE' THEN 1 ELSE 0 END) AS REAL) / COUNT(DISTINCT T3.TransactionDate)) - (CAST(SUM(CASE WHEN T1.Honey <> 'TRUE' THEN 1 ELSE 0 END) AS REAL) / COUNT(DISTINCT T3.TransactionDate)) FROM rootbeerbrand AS T1 INNER JOIN rootbeer AS T2 ON T1.BrandID = T2.BrandID INNER JOIN `transaction` AS T3 ON T2.RootBeerID = T3.RootBeerID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Find and list the full name and email of the customers who used American Express cards in Sac State Union.",
+        "query": "SELECT DISTINCT T1.First, T1.Last, T1.Email FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN location AS T3 ON T2.LocationID = T3.LocationID WHERE T3.LocationName = 'Sac State Union' AND T2.CreditCardType = 'American Express'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "In the reviews of September 2014. Which brand of beers obtained the highest star ratings?",
+        "query": "SELECT DISTINCT T1.BrandName FROM rootbeerbrand AS T1 INNER JOIN rootbeerreview AS T2 ON T1.BrandID = T2.BrandID WHERE T2.StarRating = 5 AND T2.ReviewDate BETWEEN '2014-09-01' AND '2014-09-30'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the precise location of all paying customers with American Express?",
+        "query": "SELECT DISTINCT T2.Latitude, T2.Longitude FROM `transaction` AS T1 INNER JOIN geolocation AS T2 ON T1.LocationID = T2.LocationID WHERE T1.CreditCardType = 'American Express'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many Folsom customers prefer to pay with Visa?",
+        "query": "SELECT COUNT(T1.CustomerID) FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.City = 'Folsom' AND T2.CreditCardType = 'Visa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "From which cities are the customers who gave 5 stars in their reviews in November 2012?",
+        "query": "SELECT DISTINCT T1.City FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.StarRating = 5 AND T2.ReviewDate BETWEEN '2012-11-01' AND '2012-11-30'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What brands of beer has Peg Winchester consumed?",
+        "query": "SELECT T3.BrandName FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN rootbeerbrand AS T3 ON T2.BrandID = T3.BrandID WHERE T1.First = 'Peg' AND T1.Last = 'Winchester'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What brand of beer has been the worst rated most times?",
+        "query": "SELECT T1.BrandName FROM rootbeerbrand AS T1 INNER JOIN rootbeerreview AS T2 ON T2.BrandID = T1.BrandID WHERE T2.StarRating = 1 GROUP BY T1.BrandName ORDER BY COUNT(T1.BrandName) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What credit card is the most used in the purchase of non-alcoholic beer?",
+        "query": "SELECT T2.CreditCardType FROM rootbeer AS T1 INNER JOIN `transaction` AS T2 ON T1.RootBeerID = T2.RootBeerID INNER JOIN rootbeerbrand AS T3 ON T1.BrandID = T3.BrandID WHERE T3.Alcoholic = 'FALSE' GROUP BY T2.CreditCardType ORDER BY COUNT(T2.CreditCardType) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the name of all the customers who have ever given a 5-star review?",
+        "query": "SELECT T1.First, T1.Last FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.StarRating = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "At what latitude is the Thomas Kemper brand beer consumed the most?",
+        "query": "SELECT T3.Latitude FROM rootbeer AS T1 INNER JOIN rootbeerbrand AS T2 ON T1.BrandID = T2.BrandID INNER JOIN geolocation AS T3 ON T1.LocationID = T3.LocationID WHERE T2.BrandName = 'Thomas Kemper' GROUP BY T3.Latitude ORDER BY COUNT(T1.BrandID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What star rating is the most common for beers containing corn syrup?",
+        "query": "SELECT T2.StarRating FROM rootbeerbrand AS T1 INNER JOIN rootbeerreview AS T2 ON T1.BrandID = T2.BrandID WHERE T1.CornSyrup = 'TRUE' GROUP BY T2.StarRating ORDER BY COUNT(T2.StarRating) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the precise location of zip code 95819?",
+        "query": "SELECT T2.Latitude, T2.Longitude FROM location AS T1 INNER JOIN geolocation AS T2 ON T1.LocationID = T2.LocationID WHERE T1.ZipCode = 95819"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What brands of beers are manufactured at coordinates 38,566,129, -121,426,432?",
+        "query": "SELECT DISTINCT T2.BrandName FROM rootbeer AS T1 INNER JOIN rootbeerbrand AS T2 ON T1.BrandID = T2.BrandID INNER JOIN geolocation AS T3 ON T1.LocationID = T3.LocationID WHERE T3.Latitude = '38.566129' AND T3.Longitude = '-121.426432'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the average unit profit for wholesalers of canned beers?",
+        "query": "SELECT AVG(T2.CurrentRetailPrice - T2.WholesaleCost) FROM rootbeer AS T1 INNER JOIN rootbeerbrand AS T2 ON T1.BrandID = T2.BrandID WHERE T1.ContainerType = 'Can'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What percentage of customers who paid with a Discover Credit Card gave a 3-star rating?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.StarRating = 3 THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T1.CustomerID) FROM rootbeerreview AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.CreditCardType = 'Discover'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "List the brand IDs of the beers whose star rating is more than 3.",
+        "query": "SELECT BrandID FROM rootbeerreview WHERE StarRating > 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many brands of bottle root beer were purchased between 4/3/2015 and 10/26/2015?",
+        "query": "SELECT COUNT(BrandID) FROM rootbeer WHERE ContainerType = 'Bottle' AND PurchaseDate BETWEEN '2015-04-03' AND '2015-10-26'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the full name of the customer who gave a 5-star rating and commented \"The quintessential dessert root beer. No ice cream required\" on his review?",
+        "query": "SELECT T1.First, T1.Last FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.StarRating = 5 AND T2.Review = 'The quintessential dessert root beer. No ice cream required.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Tally the email addresses and phone numbers of customers from Sacramento who gave a star rating of more than 3 in 2014.",
+        "query": "SELECT DISTINCT T1.Email, T1.PhoneNumber FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.StarRating > 3 AND T1.City = 'Sacramento' AND T2.ReviewDate BETWEEN '2014-01-01' AND '2014-12-31'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many female mailing list subscribers from Sacramento gave a 4-star rating between 1/3/2016 and 10/26/2016?",
+        "query": "SELECT COUNT(T1.CustomerID) FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.StarRating = 4 AND T1.City = 'Sacramento' AND T1.Gender = 'F' AND T1.SubscribedToEmailList = 'TRUE' AND T2.ReviewDate BETWEEN '2013-01-03' AND '2013-10-26'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Give me the brewery and brand names of canned root beer that were purchased before 6/6/2015.",
+        "query": "SELECT DISTINCT T2.BreweryName, T2.BrandName FROM rootbeer AS T1 INNER JOIN rootbeerbrand AS T2 ON T1.BrandID = T2.BrandID WHERE T1.PurchaseDate < '2015-06-06' AND T1.ContainerType = 'Can'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "List the brand names of bottled root beer whose first brewing year is no later than 1930.",
+        "query": "SELECT T2.BrandName FROM rootbeer AS T1 INNER JOIN rootbeerbrand AS T2 ON T1.BrandID = T2.BrandID WHERE T2.FirstBrewedYear < '1930-01-01' AND T1.ContainerType = 'Bottle' ORDER BY T2.FirstBrewedYear LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many times did Anna Himes use her Mastercard when paying between 12/25/2014 and 5/20/2016 ?",
+        "query": "SELECT COUNT(T2.CustomerID) FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.First = 'Anna' AND T1.Last = 'Himes' AND T2.CreditCardType = 'MasterCard' AND T2.TransactionDate BETWEEN '2014-12-25' AND '2016-05-20'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the average star rating given by female customers to brand ID 10018 from 1/25/2015 to 3/10/2015?",
+        "query": "SELECT AVG(T2.StarRating) FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.BrandID = 10018 AND T1.Gender = 'F' AND T2.ReviewDate BETWEEN '2013-01-25' AND '2015-03-10'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the brand name of the root beer that gained a 1-star rating from customer ID 331115 while saying, \"Yuk, more like licorice soda\"?",
+        "query": "SELECT T1.BrandName FROM rootbeerbrand AS T1 INNER JOIN rootbeerreview AS T2 ON T1.BrandID = T2.BrandID WHERE T2.CustomerID = 331115 AND T2.Review = 'Yuk, more like licorice soda.' AND T2.StarRating = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Calculate the total purchases made by customers using their Visa credit cards in the Sac State American River Courtyard between 6/3/2014 and 11/27/2015.",
+        "query": "SELECT SUM(T1.PurchasePrice) FROM `transaction` AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE T2.LocationName = 'Sac State American River Courtyard' AND T1.CreditCardType = 'Visa' AND T1.TransactionDate BETWEEN '2014-06-03' AND '2015-11-27'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many transactions were made in Sac State Union using the American Express credit card in 2014?",
+        "query": "SELECT COUNT(T1.TransactionID) FROM `transaction` AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE T2.LocationName = 'Sac State Union' AND T1.CreditCardType = 'American Express' AND T1.TransactionDate BETWEEN '2014-01-01' AND '2014-12-31'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the precise coordinate of Sac State Union?",
+        "query": "SELECT T2.Latitude, T2.Longitude FROM location AS T1 INNER JOIN geolocation AS T2 ON T1.LocationID = T2.LocationID WHERE T1.LocationName = 'Sac State Union'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What did the customer say in his or her review of Bulldog root beer on 7/26/2013?",
+        "query": "SELECT T2.Review FROM rootbeerbrand AS T1 INNER JOIN rootbeerreview AS T2 ON T1.BrandID = T2.BrandID WHERE T1.BrandName = 'Bulldog' AND T2.ReviewDate = '2013-07-26'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "List down the brand names of root beer that gained a 5-star rating from a customer's review in 2013. Calculate the unit profit available to wholesalers for each brand.",
+        "query": "SELECT T1.BrandName, T1.CurrentRetailPrice - T1.WholesaleCost AS result FROM rootbeerbrand AS T1 INNER JOIN rootbeerreview AS T2 ON T1.BrandID = T2.BrandID WHERE T2.StarRating = 5 AND T2.ReviewDate BETWEEN '2013-01-01' AND '2013-12-31'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Give me the full name of the first customer, and tell me how long ago he or she wrote his or her first review since making his or her first purchase.",
+        "query": "SELECT T1.First, T1.Last , strftime('%J', ReviewDate) - strftime('%J', FirstPurchaseDate) AS TIMEAGO FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the credit card type used by Kenneth Walton?",
+        "query": "SELECT DISTINCT T2.CreditCardType FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.First = 'Kenneth' AND T1.Last = 'Walton'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the container type, brand name and star rating for root beer ID 10054?",
+        "query": "SELECT T4.ContainerType, T3.BrandName, T1.StarRating FROM rootbeerreview AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN rootbeerbrand AS T3 ON T1.BrandID = T3.BrandID INNER JOIN rootbeer AS T4 ON T2.RootBeerID = T4.RootBeerID WHERE T2.RootBeerID = 100054"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "List out the root beers bought by Tim Ocel and Dawn Childress.",
+        "query": "SELECT T2.RootBeerID FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T2.CustomerID = T1.CustomerID WHERE (T1.First = 'Tim' AND T1.Last = 'Ocel') OR (T1.First = 'Dawn' AND T1.Last = 'Childress')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "List out the root beer ID for the brand Bulldog, Bundaberg, Dad's, Dog n Suds and Virgil's.",
+        "query": "SELECT T1.RootBeerID FROM rootbeer AS T1 INNER JOIN rootbeerbrand AS T2 ON T2.BrandID = T1.BrandID WHERE T2.BrandName IN ('Bulldog', 'Bundaberg', 'Dad''s', 'Dog n Suds', 'Virgil''s')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many bottles of beer have been bought by Jim Breech?",
+        "query": "SELECT COUNT(T3.ContainerType) FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T2.CustomerID = T1.CustomerID INNER JOIN rootbeer AS T3 ON T3.RootBeerID = T2.RootBeerID WHERE T3.ContainerType = 'Bottle' AND T1.First = 'Jim' AND T1.Last = 'Breech'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many transactions have been made to purchase a root beer brand from California?",
+        "query": "SELECT COUNT(T3.RootBeerID) FROM rootbeerbrand AS T1 INNER JOIN rootbeer AS T2 ON T1.BrandID = T2.BrandID INNER JOIN `transaction` AS T3 ON T2.RootBeerID = T3.RootBeerID WHERE T1.State = 'CA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the average review given by a subscriber?",
+        "query": "SELECT AVG(T2.StarRating) FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.SubscribedToEmailList = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the amount difference between the bottles of root beer sold from Louisiana and Missouri?",
+        "query": "SELECT ( SELECT COUNT(T1.BrandID) FROM rootbeer AS T1 INNER JOIN rootbeerbrand AS T2 ON T1.BrandID = T2.BrandID WHERE T2.State = 'LA' AND T1.ContainerType = 'Bottle' ) - ( SELECT COUNT(T3.BrandID) FROM rootbeer AS T3 INNER JOIN rootbeerbrand AS T4 ON T3.BrandID = T4.BrandID WHERE T4.State = 'MO' AND T3.ContainerType = 'Bottle' ) AS DIFFERENCE"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the transaction ratio being made at Sac State American River Courtyard and Sac State Union?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.LocationName = 'Sac State American River Courtyard' THEN T1.TransactionID ELSE NULL END) AS REAL) * 100 / COUNT(CASE WHEN T2.LocationName = 'Sac State Union' THEN T1.TransactionID ELSE NULL END) FROM `transaction` AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "List out the name of the top 10 spenders and what credit card type are they using.",
+        "query": "SELECT T1.First, T1.Last, T2.CreditCardType FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID GROUP BY T1.CustomerID ORDER BY SUM(T2.PurchasePrice) DESC LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "List out root beer brand that is not caffeinated and not containing cane sugar. What is the total amount sold for this products?",
+        "query": "SELECT T1.BrandName, SUM(T3.PurchasePrice) FROM rootbeerbrand AS T1 INNER JOIN rootbeer AS T2 ON T1.BrandID = T2.BrandID INNER JOIN `transaction` AS T3 ON T2.RootBeerID = T3.RootBeerID WHERE T1.CaneSugar = 'FALSE' AND T1.Caffeinated = 'FALSE' GROUP BY T1.BrandName"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Which of the root beer brand have the lowest purchase?",
+        "query": "SELECT T2.BrandName FROM rootbeer AS T1 INNER JOIN rootbeerbrand AS T2 ON T1.BrandID = T2.BrandID GROUP BY T2.BrandID ORDER BY COUNT(T1.BrandID) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the best seller root beer brand and what is the average star rating for this root beer?",
+        "query": "SELECT T1.BrandID, AVG(T1.StarRating) FROM rootbeerreview AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN rootbeerbrand AS T3 ON T1.BrandID = T3.BrandID GROUP BY T3.BrandID ORDER BY COUNT(T1.BrandID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the percentage difference of River City sale compare to Frostie?",
+        "query": "SELECT CAST((SUM(CASE WHEN T3.BrandName = 'River City' THEN T2.PurchasePrice ELSE 0 END) - SUM(CASE WHEN T3.BrandName = 'Frostie' THEN T2.PurchasePrice ELSE 0 END)) AS REAL) * 100 / SUM(CASE WHEN T3.BrandName = 'Frostie' THEN T2.PurchasePrice ELSE 0 END) FROM rootbeer AS T1 INNER JOIN `transaction` AS T2 ON T1.RootBeerID = T2.RootBeerID INNER JOIN rootbeerbrand AS T3 ON T1.BrandID = T3.BrandID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Please name all of the cities in California.",
+        "query": "SELECT DISTINCT City FROM customers WHERE State = 'CA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the percentage of female customers who subscribed to the email list?",
+        "query": "SELECT CAST(COUNT(CASE WHEN Gender = 'F' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(SubscribedToEmailList) FROM customers WHERE SubscribedToEmailList = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Which type of card did Dick Ruthven use to pay for all of his transactions?",
+        "query": "SELECT DISTINCT T2.CreditCardType FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.First = 'Dick' AND T1.Last = 'Ruthven'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many transactions were made at Sac State Union?",
+        "query": "SELECT COUNT(T1.TransactionID) FROM `transaction` AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE T2.LocationName = 'Sac State Union'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many stars did Urijah Faber rate for Frostie?",
+        "query": "SELECT T2.StarRating FROM customers AS T1 INNER JOIN rootbeerreview AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN rootbeerbrand AS T3 ON T2.BrandID = T3.BrandID WHERE T1.First = 'Urijah' AND T1.Last = 'Faber' AND T3.BrandName = 'Frostie'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Which brand has the lowest star rating with a \"Too spicy!\" review?",
+        "query": "SELECT T1.BrandName FROM rootbeerbrand AS T1 INNER JOIN rootbeerreview AS T2 ON T2.BrandID = T1.BrandID WHERE T2.StarRating = 1 AND T2.Review = 'Too Spicy!'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many purchases were made at Sac State American River Courtyard using Master Card?",
+        "query": "SELECT COUNT(T1.TransactionID) FROM `transaction` AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE T2.LocationName = 'Sac State American River Courtyard' AND T1.CreditCardType = 'MasterCard'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Which brand in 2012 has the lowest star rating and contains cane sugar as well as honey?",
+        "query": "SELECT DISTINCT T1.BrandName FROM rootbeerbrand AS T1 INNER JOIN rootbeerreview AS T2 ON T1.BrandID = T2.BrandID WHERE T1.CaneSugar = 'TRUE' AND T1.Honey = 'TRUE' AND T2.StarRating = 1 AND T2.ReviewDate LIKE '2012%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the precise location of the place where Tommy Kono made a purchase in 2014?",
+        "query": "SELECT DISTINCT T1.Latitude, T1.Longitude FROM geolocation AS T1 INNER JOIN `transaction` AS T2 ON T2.LocationID = T1.LocationID INNER JOIN customers AS T3 ON T3.CustomerID = T2.CustomerID WHERE T3.First = 'Tommy' AND T3.Last = 'Kono' AND T2.TransactionDate LIKE '2014%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the email address of the customer who made a purchase in transaction 100016?",
+        "query": "SELECT T1.Email FROM customers AS T1 INNER JOIN `transaction` AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.TransactionID = '100016'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "How many transactions were made to purchase a bottle of beer using American Express?",
+        "query": "SELECT COUNT(T1.RootBeerID) FROM rootbeer AS T1 INNER JOIN `transaction` AS T2 ON T1.RootBeerID = T2.RootBeerID WHERE T1.ContainerType = 'Bottle' AND T2.CreditCardType = 'American Express'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Which location sold more bottles of beer?",
+        "query": "SELECT T2.LocationName FROM rootbeer AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE T1.ContainerType = 'Bottle' GROUP BY T2.LocationID ORDER BY COUNT(T1.LocationID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "Please name any three root beer brands that have the highest market evaluation and acceptance.",
+        "query": "SELECT DISTINCT T1.BrandName FROM rootbeerbrand AS T1 INNER JOIN rootbeerreview AS T2 ON T1.BrandID = T2.BrandID WHERE T2.StarRating = 5 LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "beer_factory",
+        "question": "What is the precise location of the Sac State American River Courtyard?",
+        "query": "SELECT T2.Latitude, T2.Longitude FROM location AS T1 INNER JOIN geolocation AS T2 ON T1.LocationID = T2.LocationID WHERE T1.LocationName = 'Sac State American River Courtyard'"
+    }
+]

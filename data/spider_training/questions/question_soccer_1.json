@@ -1,0 +1,86 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_1",
+        "question": "List all country and league names.",
+        "query": "SELECT T1.name ,  T2.name FROM Country AS T1 JOIN League AS T2 ON T1.id  =  T2.country_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_1",
+        "question": "How many leagues are there in England?",
+        "query": "SELECT count(*) FROM Country AS T1 JOIN League AS T2 ON T1.id  =  T2.country_id WHERE T1.name  =  \"England\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_1",
+        "question": "What is the average weight of all players?",
+        "query": "SELECT avg(weight) FROM Player"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_1",
+        "question": "What is the maximum and minimum height of all players?",
+        "query": "SELECT max(weight) ,  min(weight) FROM Player"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_1",
+        "question": "List all player names who have an overall rating higher than the average.",
+        "query": "SELECT DISTINCT T1.player_name FROM Player AS T1 JOIN Player_Attributes AS T2 ON T1.player_api_id = T2.player_api_id WHERE T2.overall_rating  >  ( SELECT avg(overall_rating) FROM Player_Attributes )"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_1",
+        "question": "What are the names of players who have the best dribbling?",
+        "query": "SELECT DISTINCT T1.player_name FROM Player AS T1 JOIN Player_Attributes AS T2 ON T1.player_api_id = T2.player_api_id WHERE T2.dribbling  =  ( SELECT max(overall_rating) FROM Player_Attributes)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_1",
+        "question": "List the names of all players who have a crossing score higher than 90 and prefer their right foot.",
+        "query": "SELECT DISTINCT T1.player_name FROM Player AS T1 JOIN Player_Attributes AS T2 ON T1.player_api_id = T2.player_api_id WHERE T2.crossing  >  90 AND T2.preferred_foot  =  \"right\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_1",
+        "question": "List the names of all left-footed players who have overall rating between 85 and 90.",
+        "query": "SELECT DISTINCT T1.player_name FROM Player AS T1 JOIN Player_Attributes AS T2 ON T1.player_api_id = T2.player_api_id WHERE T2.preferred_foot  =  \"left\" AND T2.overall_rating  >=  85 AND T2.overall_rating  <=  90"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_1",
+        "question": "What is the average rating for right-footed players and left-footed players?",
+        "query": "SELECT preferred_foot ,  avg(overall_rating) FROM Player_Attributes GROUP BY preferred_foot"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_1",
+        "question": "Of all players with an overall rating greater than 80, how many are right-footed and left-footed?",
+        "query": "SELECT preferred_foot ,  count(*) FROM Player_Attributes WHERE overall_rating  >  80 GROUP BY preferred_foot"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_1",
+        "question": "List all of the player ids with a height of at least 180cm and an overall rating higher than 85.",
+        "query": "SELECT player_api_id FROM Player WHERE height  >=  180 INTERSECT SELECT player_api_id FROM Player_Attributes WHERE overall_rating  >  85"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_1",
+        "question": "List all of the ids for left-footed players with a height between 180cm and 190cm.",
+        "query": "SELECT player_api_id FROM Player WHERE height  >=  180 AND height  <=  190 INTERSECT SELECT player_api_id FROM Player_Attributes WHERE preferred_foot  =  \"left\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_1",
+        "question": "Who are the top 3 players in terms of overall rating?",
+        "query": "SELECT DISTINCT T1.player_name FROM Player AS T1 JOIN Player_Attributes AS T2 ON T1.player_api_id  =  T2.player_api_id ORDER BY overall_rating DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_1",
+        "question": "List the names and birthdays of the top five players in terms of potential.",
+        "query": "SELECT DISTINCT T1.player_name ,  T1.birthday FROM Player AS T1 JOIN Player_Attributes AS T2 ON T1.player_api_id  =  T2.player_api_id ORDER BY potential DESC LIMIT 5"
+    }
+]

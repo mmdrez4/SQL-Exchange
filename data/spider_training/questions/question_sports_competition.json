@@ -1,0 +1,314 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "How many clubs are there?",
+        "query": "SELECT count(*) FROM club"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What is the total number of clubs?",
+        "query": "SELECT count(*) FROM club"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "List the distinct region of clubs in ascending alphabetical order.",
+        "query": "SELECT DISTINCT Region FROM club ORDER BY Region ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the different regions of clubs in ascending alphabetical order?",
+        "query": "SELECT DISTINCT Region FROM club ORDER BY Region ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What is the average number of gold medals for clubs?",
+        "query": "SELECT avg(Gold) FROM club_rank"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What is the average number of gold medals for a club?",
+        "query": "SELECT avg(Gold) FROM club_rank"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the types and countries of competitions?",
+        "query": "SELECT Competition_type ,  Country FROM competition"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the types of every competition and in which countries are they located?",
+        "query": "SELECT Competition_type ,  Country FROM competition"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the distinct years in which the competitions type is not \"Tournament\"?",
+        "query": "SELECT DISTINCT YEAR FROM competition WHERE Competition_type != \"Tournament\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the different years for all competitions that are not of type equal to tournament?",
+        "query": "SELECT DISTINCT YEAR FROM competition WHERE Competition_type != \"Tournament\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the maximum and minimum number of silver medals for clubs.",
+        "query": "SELECT max(Silver) ,  min(Silver) FROM club_rank"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the maximum and minimum number of silver medals for all the clubs?",
+        "query": "SELECT max(Silver) ,  min(Silver) FROM club_rank"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "How many clubs have total medals less than 10?",
+        "query": "SELECT count(*) FROM club_rank WHERE Total  <  10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What is the total number of clubs that have less than 10 medals in total?",
+        "query": "SELECT count(*) FROM club_rank WHERE Total  <  10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "List all club names in ascending order of start year.",
+        "query": "SELECT name FROM club ORDER BY Start_year ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the names of all the clubs starting with the oldest?",
+        "query": "SELECT name FROM club ORDER BY Start_year ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "List all club names in descending alphabetical order.",
+        "query": "SELECT name FROM club ORDER BY name DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the names of all the clubs ordered in descending alphabetical order?",
+        "query": "SELECT name FROM club ORDER BY name DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "Please show the names and the players of clubs.",
+        "query": "SELECT T1.name ,  T2.Player_id FROM club AS T1 JOIN player AS T2 ON T1.Club_ID  =  T2.Club_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the names and players of all the clubs?",
+        "query": "SELECT T1.name ,  T2.Player_id FROM club AS T1 JOIN player AS T2 ON T1.Club_ID  =  T2.Club_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "Show the names of clubs that have players with position \"Right Wing\".",
+        "query": "SELECT T1.name FROM club AS T1 JOIN player AS T2 ON T1.Club_ID  =  T2.Club_ID WHERE T2.Position  =  \"Right Wing\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the names of the clubs that have players in the position of \"Right Wing\"?",
+        "query": "SELECT T1.name FROM club AS T1 JOIN player AS T2 ON T1.Club_ID  =  T2.Club_ID WHERE T2.Position  =  \"Right Wing\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What is the average points of players from club with name \"AIB\".",
+        "query": "SELECT avg(T2.Points) FROM club AS T1 JOIN player AS T2 ON T1.Club_ID  =  T2.Club_ID WHERE T1.name  =  \"AIB\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What is the average number of points for players from the \"AIB\" club?",
+        "query": "SELECT avg(T2.Points) FROM club AS T1 JOIN player AS T2 ON T1.Club_ID  =  T2.Club_ID WHERE T1.name  =  \"AIB\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "List the position of players and the average number of points of players of each position.",
+        "query": "SELECT POSITION ,  avg(Points) FROM player GROUP BY POSITION"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "For each position, what is the average number of points for players in that position?",
+        "query": "SELECT POSITION ,  avg(Points) FROM player GROUP BY POSITION"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "List the position of players with average number of points scored by players of that position bigger than 20.",
+        "query": "SELECT POSITION FROM player GROUP BY name HAVING avg(Points)  >=  20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the positions of players whose average number of points scored by that position is larger than 20?",
+        "query": "SELECT POSITION FROM player GROUP BY name HAVING avg(Points)  >=  20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "List the types of competition and the number of competitions of each type.",
+        "query": "SELECT Competition_type ,  COUNT(*) FROM competition GROUP BY Competition_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the types of competition and number of competitions for that type?",
+        "query": "SELECT Competition_type ,  COUNT(*) FROM competition GROUP BY Competition_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "List the most common type of competition.",
+        "query": "SELECT Competition_type FROM competition GROUP BY Competition_type ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What is the most common competition type?",
+        "query": "SELECT Competition_type FROM competition GROUP BY Competition_type ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "List the types of competition that have at most five competitions of that type.",
+        "query": "SELECT Competition_type FROM competition GROUP BY Competition_type HAVING COUNT(*)  <=  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the types of competition that have most 5 competitions for that type?",
+        "query": "SELECT Competition_type FROM competition GROUP BY Competition_type HAVING COUNT(*)  <=  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "List the names of clubs that do not have any players.",
+        "query": "SELECT name FROM CLub WHERE Club_ID NOT IN (SELECT Club_ID FROM player)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the names of all clubs that do not have any players?",
+        "query": "SELECT name FROM CLub WHERE Club_ID NOT IN (SELECT Club_ID FROM player)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the positions with both players having more than 20 points and less than 10 points.",
+        "query": "SELECT POSITION FROM player WHERE Points  >  20 INTERSECT SELECT POSITION FROM player WHERE Points  <  10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the positions of both players that have more than 20 20 points and less than 10 points?",
+        "query": "SELECT POSITION FROM player WHERE Points  >  20 INTERSECT SELECT POSITION FROM player WHERE Points  <  10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "Show total points of all players.",
+        "query": "SELECT sum(Points) FROM player"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What is the total number of points for all players?",
+        "query": "SELECT sum(Points) FROM player"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "how many different positions are there?",
+        "query": "SELECT count(DISTINCT POSITION) FROM player"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "How many different position for players are listed?",
+        "query": "SELECT count(DISTINCT POSITION) FROM player"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "what are the name of players who get more than the average points.",
+        "query": "SELECT name FROM player WHERE points  >  (SELECT avg(points) FROM player)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the names of all players that got more than the average number of points?",
+        "query": "SELECT name FROM player WHERE points  >  (SELECT avg(points) FROM player)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "find the number of players whose points are lower than 30 in each position.",
+        "query": "SELECT count(*) ,  POSITION FROM player WHERE points  <  30 GROUP BY POSITION"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What is the number of players who have points less than 30 for each position?",
+        "query": "SELECT count(*) ,  POSITION FROM player WHERE points  <  30 GROUP BY POSITION"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "which country did participated in the most number of Tournament competitions?",
+        "query": "SELECT country FROM competition WHERE competition_type  =  'Tournament' GROUP BY country ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "what is the name of the country that participated in the most tournament competitions?",
+        "query": "SELECT country FROM competition WHERE competition_type  =  'Tournament' GROUP BY country ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "which countries did participated in both Friendly and Tournament type competitions.",
+        "query": "SELECT country FROM competition WHERE competition_type  =  'Friendly' INTERSECT SELECT country FROM competition WHERE competition_type  =  'Tournament'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the countries that participated in both friendly and tournament type competitions?",
+        "query": "SELECT country FROM competition WHERE competition_type  =  'Friendly' INTERSECT SELECT country FROM competition WHERE competition_type  =  'Tournament'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "Find the countries that have never participated in any competition with Friendly type.",
+        "query": "SELECT country FROM competition EXCEPT SELECT country FROM competition WHERE competition_type  =  'Friendly'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "sports_competition",
+        "question": "What are the countries that have never participated in any friendly-type competitions?",
+        "query": "SELECT country FROM competition EXCEPT SELECT country FROM competition WHERE competition_type  =  'Friendly'"
+    }
+]

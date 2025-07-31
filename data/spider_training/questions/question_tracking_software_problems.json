@@ -1,0 +1,290 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "What is the id of the problem log that is created most recently?",
+        "query": "SELECT problem_log_id FROM problem_log ORDER BY log_entry_date DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Which problem log was created most recently? Give me the log id.",
+        "query": "SELECT problem_log_id FROM problem_log ORDER BY log_entry_date DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "What is the oldest log id and its corresponding problem id?",
+        "query": "SELECT problem_log_id ,  problem_id FROM problem_log ORDER BY log_entry_date LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Find the oldest log id and its corresponding problem id.",
+        "query": "SELECT problem_log_id ,  problem_id FROM problem_log ORDER BY log_entry_date LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Find all the ids and dates of the logs for the problem whose id is 10.",
+        "query": "SELECT problem_log_id ,  log_entry_date FROM problem_log WHERE problem_id = 10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "For the problem with id 10, return the ids and dates of its problem logs.",
+        "query": "SELECT problem_log_id ,  log_entry_date FROM problem_log WHERE problem_id = 10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "List all the log ids and their descriptions from the problem logs.",
+        "query": "SELECT problem_log_id ,  log_entry_description FROM problem_log"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "What are the log id and entry description of each problem?",
+        "query": "SELECT problem_log_id ,  log_entry_description FROM problem_log"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "List the first and last names of all distinct staff members who are assigned to the problem whose id is 1.",
+        "query": "SELECT DISTINCT staff_first_name ,  staff_last_name FROM staff AS T1 JOIN problem_log AS T2 ON T1.staff_id = T2.assigned_to_staff_id WHERE T2.problem_id = 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Which staff members are assigned to the problem with id 1? Give me their first and last names.",
+        "query": "SELECT DISTINCT staff_first_name ,  staff_last_name FROM staff AS T1 JOIN problem_log AS T2 ON T1.staff_id = T2.assigned_to_staff_id WHERE T2.problem_id = 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "List the problem id and log id which are assigned to the staff named Rylan Homenick.",
+        "query": "SELECT DISTINCT T2.problem_id ,  T2.problem_log_id FROM staff AS T1 JOIN problem_log AS T2 ON T1.staff_id = T2.assigned_to_staff_id WHERE T1.staff_first_name = \"Rylan\" AND T1.staff_last_name = \"Homenick\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Which problem id and log id are assigned to the staff named Rylan Homenick?",
+        "query": "SELECT DISTINCT T2.problem_id ,  T2.problem_log_id FROM staff AS T1 JOIN problem_log AS T2 ON T1.staff_id = T2.assigned_to_staff_id WHERE T1.staff_first_name = \"Rylan\" AND T1.staff_last_name = \"Homenick\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "How many problems are there for product voluptatem?",
+        "query": "SELECT count(*) FROM product AS T1 JOIN problems AS T2 ON T1.product_id = T2.product_id WHERE T1.product_name = \"voluptatem\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "How many problems did the product called \"voluptatem\" have in record?",
+        "query": "SELECT count(*) FROM product AS T1 JOIN problems AS T2 ON T1.product_id = T2.product_id WHERE T1.product_name = \"voluptatem\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "How many problems does the product with the most problems have? List the number of the problems and product name.",
+        "query": "SELECT count(*) ,  T1.product_name FROM product AS T1 JOIN problems AS T2 ON T1.product_id = T2.product_id GROUP BY T1.product_name ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Which product has the most problems? Give me the number of problems and the product name.",
+        "query": "SELECT count(*) ,  T1.product_name FROM product AS T1 JOIN problems AS T2 ON T1.product_id = T2.product_id GROUP BY T1.product_name ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Give me a list of descriptions of the problems that are reported by the staff whose first name is Christop.",
+        "query": "SELECT T1.problem_description FROM problems AS T1 JOIN staff AS T2 ON T1.reported_by_staff_id = T2.staff_id WHERE T2.staff_first_name = \"Christop\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Which problems are reported by the staff with first name \"Christop\"? Show the descriptions of the problems.",
+        "query": "SELECT T1.problem_description FROM problems AS T1 JOIN staff AS T2 ON T1.reported_by_staff_id = T2.staff_id WHERE T2.staff_first_name = \"Christop\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Find the ids of the problems that are reported by the staff whose last name is Bosco.",
+        "query": "SELECT T1.problem_id FROM problems AS T1 JOIN staff AS T2 ON T1.reported_by_staff_id = T2.staff_id WHERE T2.staff_last_name = \"Bosco\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Which problems are reported by the staff with last name \"Bosco\"? Show the ids of the problems.",
+        "query": "SELECT T1.problem_id FROM problems AS T1 JOIN staff AS T2 ON T1.reported_by_staff_id = T2.staff_id WHERE T2.staff_last_name = \"Bosco\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "What are the ids of the problems which are reported after 1978-06-26?",
+        "query": "SELECT problem_id FROM problems WHERE date_problem_reported > \"1978-06-26\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Find the ids of the problems reported after 1978-06-26.",
+        "query": "SELECT problem_id FROM problems WHERE date_problem_reported > \"1978-06-26\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "What are the ids of the problems which are reported before 1978-06-26?",
+        "query": "SELECT problem_id FROM problems WHERE date_problem_reported < \"1978-06-26\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Which problems are reported before 1978-06-26? Give me the ids of the problems.",
+        "query": "SELECT problem_id FROM problems WHERE date_problem_reported < \"1978-06-26\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "For each product which has problems, what are the number of problems and the product id?",
+        "query": "SELECT count(*) ,  T2.product_id FROM problems AS T1 JOIN product AS T2 ON T1.product_id = T2.product_id GROUP BY T2.product_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "For each product with some problems, list the count of problems and the product id.",
+        "query": "SELECT count(*) ,  T2.product_id FROM problems AS T1 JOIN product AS T2 ON T1.product_id = T2.product_id GROUP BY T2.product_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "For each product that has problems, find the number of problems reported after 1986-11-13 and the product id?",
+        "query": "SELECT count(*) ,  T2.product_id FROM problems AS T1 JOIN product AS T2 ON T1.product_id = T2.product_id WHERE T1.date_problem_reported > \"1986-11-13\" GROUP BY T2.product_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "What are the products that have problems reported after 1986-11-13? Give me the product id and the count of problems reported after 1986-11-13.",
+        "query": "SELECT count(*) ,  T2.product_id FROM problems AS T1 JOIN product AS T2 ON T1.product_id = T2.product_id WHERE T1.date_problem_reported > \"1986-11-13\" GROUP BY T2.product_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "List the names of all the distinct product names in alphabetical order?",
+        "query": "SELECT DISTINCT product_name FROM product ORDER BY product_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Sort all the distinct product names in alphabetical order.",
+        "query": "SELECT DISTINCT product_name FROM product ORDER BY product_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "List all the distinct product names ordered by product id?",
+        "query": "SELECT DISTINCT product_name FROM product ORDER BY product_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "What is the list of distinct product names sorted by product id?",
+        "query": "SELECT DISTINCT product_name FROM product ORDER BY product_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "What are the id of problems reported by the staff named Dameon Frami or Jolie Weber?",
+        "query": "SELECT product_id FROM problems AS T1 JOIN staff AS T2 ON T1.reported_by_staff_id = T2.staff_id WHERE T2.staff_first_name = \"Dameon\" AND T2.staff_last_name = \"Frami\" UNION SELECT product_id FROM problems AS T1 JOIN staff AS T2 ON T1.reported_by_staff_id = T2.staff_id WHERE T2.staff_first_name = \"Jolie\" AND T2.staff_last_name = \"Weber\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Which problems were reported by the staff named Dameon Frami or Jolie Weber? Give me the ids of the problems.",
+        "query": "SELECT product_id FROM problems AS T1 JOIN staff AS T2 ON T1.reported_by_staff_id = T2.staff_id WHERE T2.staff_first_name = \"Dameon\" AND T2.staff_last_name = \"Frami\" UNION SELECT product_id FROM problems AS T1 JOIN staff AS T2 ON T1.reported_by_staff_id = T2.staff_id WHERE T2.staff_first_name = \"Jolie\" AND T2.staff_last_name = \"Weber\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "What are the product ids for the problems reported by Christop Berge with closure authorised by Ashley Medhurst?",
+        "query": "SELECT product_id FROM problems AS T1 JOIN staff AS T2 ON T1.reported_by_staff_id = T2.staff_id WHERE T2.staff_first_name = \"Christop\" AND T2.staff_last_name = \"Berge\" INTERSECT SELECT product_id FROM problems AS T1 JOIN staff AS T2 ON T1.closure_authorised_by_staff_id = T2.staff_id WHERE T2.staff_first_name = \"Ashley\" AND T2.staff_last_name = \"Medhurst\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "For which product was there a problem reported by Christop Berge, with closure authorised by Ashley Medhurst? Return the product ids.",
+        "query": "SELECT product_id FROM problems AS T1 JOIN staff AS T2 ON T1.reported_by_staff_id = T2.staff_id WHERE T2.staff_first_name = \"Christop\" AND T2.staff_last_name = \"Berge\" INTERSECT SELECT product_id FROM problems AS T1 JOIN staff AS T2 ON T1.closure_authorised_by_staff_id = T2.staff_id WHERE T2.staff_first_name = \"Ashley\" AND T2.staff_last_name = \"Medhurst\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "What are the ids of the problems reported before the date of any problem reported by Lysanne Turcotte?",
+        "query": "SELECT T1.problem_id FROM problems AS T1 JOIN staff AS T2 ON T1.reported_by_staff_id = T2.staff_id WHERE date_problem_reported  <  ( SELECT min(date_problem_reported) FROM problems AS T3 JOIN staff AS T4 ON T3.reported_by_staff_id = T4.staff_id WHERE T4.staff_first_name = \"Lysanne\" AND T4.staff_last_name = \"Turcotte\" )"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Which problems were reported before the date of any problem reported by the staff Lysanne Turcotte? Give me the ids of the problems.",
+        "query": "SELECT T1.problem_id FROM problems AS T1 JOIN staff AS T2 ON T1.reported_by_staff_id = T2.staff_id WHERE date_problem_reported  <  ( SELECT min(date_problem_reported) FROM problems AS T3 JOIN staff AS T4 ON T3.reported_by_staff_id = T4.staff_id WHERE T4.staff_first_name = \"Lysanne\" AND T4.staff_last_name = \"Turcotte\" )"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "What are the ids of the problems reported after the date of any problems reported by Rylan Homenick?",
+        "query": "SELECT T1.problem_id FROM problems AS T1 JOIN staff AS T2 ON T1.reported_by_staff_id = T2.staff_id WHERE date_problem_reported  >  ( SELECT max(date_problem_reported) FROM problems AS T3 JOIN staff AS T4 ON T3.reported_by_staff_id = T4.staff_id WHERE T4.staff_first_name = \"Rylan\" AND T4.staff_last_name = \"Homenick\" )"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Find the ids of the problems reported after the date of any problems reported by the staff Rylan Homenick.",
+        "query": "SELECT T1.problem_id FROM problems AS T1 JOIN staff AS T2 ON T1.reported_by_staff_id = T2.staff_id WHERE date_problem_reported  >  ( SELECT max(date_problem_reported) FROM problems AS T3 JOIN staff AS T4 ON T3.reported_by_staff_id = T4.staff_id WHERE T4.staff_first_name = \"Rylan\" AND T4.staff_last_name = \"Homenick\" )"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Find the top 3 products which have the largest number of problems?",
+        "query": "SELECT T2.product_name FROM problems AS T1 JOIN product AS T2 ON T1.product_id = T2.product_id GROUP BY T2.product_name ORDER BY count(*) DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "What are the three products that have the most problems?s",
+        "query": "SELECT T2.product_name FROM problems AS T1 JOIN product AS T2 ON T1.product_id = T2.product_id GROUP BY T2.product_name ORDER BY count(*) DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "List the ids of the problems from the product \"voluptatem\" that are reported after 1995?",
+        "query": "SELECT T1.problem_id FROM problems AS T1 JOIN product AS T2 ON T1.product_id = T2.product_id WHERE T2.product_name = \"voluptatem\" AND T1.date_problem_reported > \"1995\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "What are the ids of the problems that are from the product \"voluptatem\" and are reported after 1995?",
+        "query": "SELECT T1.problem_id FROM problems AS T1 JOIN product AS T2 ON T1.product_id = T2.product_id WHERE T2.product_name = \"voluptatem\" AND T1.date_problem_reported > \"1995\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Find the first and last name of the staff members who reported problems from the product \"rem\" but not \"aut\"?",
+        "query": "SELECT T3.staff_first_name ,  T3.staff_last_name FROM problems AS T1 JOIN product AS T2 JOIN staff AS T3 ON T1.product_id = T2.product_id AND T1.reported_by_staff_id = T3.staff_id WHERE T2.product_name = \"rem\" EXCEPT SELECT T3.staff_first_name ,  T3.staff_last_name FROM problems AS T1 JOIN product AS T2 JOIN staff AS T3 ON T1.product_id = T2.product_id AND T1.reported_by_staff_id = T3.staff_id WHERE T2.product_name = \"aut\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Which staff members who reported problems from the product \"rem\" but not \"aut\"? Give me their first and last names.",
+        "query": "SELECT T3.staff_first_name ,  T3.staff_last_name FROM problems AS T1 JOIN product AS T2 JOIN staff AS T3 ON T1.product_id = T2.product_id AND T1.reported_by_staff_id = T3.staff_id WHERE T2.product_name = \"rem\" EXCEPT SELECT T3.staff_first_name ,  T3.staff_last_name FROM problems AS T1 JOIN product AS T2 JOIN staff AS T3 ON T1.product_id = T2.product_id AND T1.reported_by_staff_id = T3.staff_id WHERE T2.product_name = \"aut\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Find the products which have problems reported by both Lacey Bosco and Kenton Champlin?",
+        "query": "SELECT T2.product_name FROM problems AS T1 JOIN product AS T2 JOIN staff AS T3 ON T1.product_id = T2.product_id AND T1.reported_by_staff_id = T3.staff_id WHERE T3.staff_first_name = \"Lacey\" AND T3.staff_last_name = \"Bosco\" INTERSECT SELECT T2.product_name FROM problems AS T1 JOIN product AS T2 JOIN staff AS T3 ON T1.product_id = T2.product_id AND T1.reported_by_staff_id = T3.staff_id WHERE T3.staff_first_name = \"Kenton\" AND T3.staff_last_name = \"Champlin\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "tracking_software_problems",
+        "question": "Which products have problems reported by both the staff named Lacey Bosco and the staff named Kenton Champlin?",
+        "query": "SELECT T2.product_name FROM problems AS T1 JOIN product AS T2 JOIN staff AS T3 ON T1.product_id = T2.product_id AND T1.reported_by_staff_id = T3.staff_id WHERE T3.staff_first_name = \"Lacey\" AND T3.staff_last_name = \"Bosco\" INTERSECT SELECT T2.product_name FROM problems AS T1 JOIN product AS T2 JOIN staff AS T3 ON T1.product_id = T2.product_id AND T1.reported_by_staff_id = T3.staff_id WHERE T3.staff_first_name = \"Kenton\" AND T3.staff_last_name = \"Champlin\""
+    }
+]

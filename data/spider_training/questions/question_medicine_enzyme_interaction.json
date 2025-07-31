@@ -1,0 +1,266 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "How many kinds of enzymes are there?",
+        "query": "SELECT count(*) FROM enzyme"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What is the total count of enzymes?",
+        "query": "SELECT count(*) FROM enzyme"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "List the name of enzymes in descending lexicographical order.",
+        "query": "SELECT name FROM enzyme ORDER BY name DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the names of enzymes in descending order?",
+        "query": "SELECT name FROM enzyme ORDER BY name DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "List the names and the locations that the enzymes can make an effect.",
+        "query": "SELECT name ,  LOCATION FROM enzyme"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the names and locations of all enzymes listed?",
+        "query": "SELECT name ,  LOCATION FROM enzyme"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What is the maximum Online Mendelian Inheritance in Man (OMIM) value of the enzymes?",
+        "query": "SELECT max(OMIM) FROM enzyme"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What is the maximum OMIM value in the database?",
+        "query": "SELECT max(OMIM) FROM enzyme"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What is the product, chromosome and porphyria related to the enzymes which take effect at the location 'Cytosol'?",
+        "query": "SELECT product ,  chromosome ,  porphyria FROM enzyme WHERE LOCATION  =  'Cytosol'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What is the product, chromosome, and porphyria of the enzymes located at 'Cytosol'?",
+        "query": "SELECT product ,  chromosome ,  porphyria FROM enzyme WHERE LOCATION  =  'Cytosol'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the names of enzymes who does not produce 'Heme'?",
+        "query": "SELECT name FROM enzyme WHERE product != 'Heme'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the names of enzymes whose product is not 'Heme'?",
+        "query": "SELECT name FROM enzyme WHERE product != 'Heme'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the names and trade names of the medicines which has 'Yes' value in the FDA record?",
+        "query": "SELECT name ,  trade_name FROM medicine WHERE FDA_approved  =  'Yes'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the names and trade names of the medcines that are FDA approved?",
+        "query": "SELECT name ,  trade_name FROM medicine WHERE FDA_approved  =  'Yes'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the names of enzymes in the medicine named 'Amisulpride' that can serve as an 'inhibitor'?",
+        "query": "SELECT T1.name FROM enzyme AS T1 JOIN medicine_enzyme_interaction AS T2 ON T1.id  =  T2.enzyme_id JOIN medicine AS T3 ON T2.medicine_id  =  T3.id WHERE T3.name  =  'Amisulpride' AND T2.interaction_type  =  'inhibitor'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the names of the enzymes used in the medicine  Amisulpride that acts as inhibitors?",
+        "query": "SELECT T1.name FROM enzyme AS T1 JOIN medicine_enzyme_interaction AS T2 ON T1.id  =  T2.enzyme_id JOIN medicine AS T3 ON T2.medicine_id  =  T3.id WHERE T3.name  =  'Amisulpride' AND T2.interaction_type  =  'inhibitor'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the ids and names of the medicine that can interact with two or more enzymes?",
+        "query": "SELECT T1.id ,  T1.Name FROM medicine AS T1 JOIN medicine_enzyme_interaction AS T2 ON T2.medicine_id  =  T1.id GROUP BY T1.id HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "For every medicine id, what are the names of the medicines that can interact with more than one enzyme?",
+        "query": "SELECT T1.id ,  T1.Name FROM medicine AS T1 JOIN medicine_enzyme_interaction AS T2 ON T2.medicine_id  =  T1.id GROUP BY T1.id HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the ids, names and FDA approval status of medicines in descending order of the number of enzymes that it can interact with.",
+        "query": "SELECT T1.id ,  T1.Name ,  T1.FDA_approved FROM medicine AS T1 JOIN medicine_enzyme_interaction AS T2 ON T2.medicine_id  =  T1.id GROUP BY T1.id ORDER BY count(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the ids, names, and FDA approval status for medicines ordered by descending number of possible enzyme interactions?",
+        "query": "SELECT T1.id ,  T1.Name ,  T1.FDA_approved FROM medicine AS T1 JOIN medicine_enzyme_interaction AS T2 ON T2.medicine_id  =  T1.id GROUP BY T1.id ORDER BY count(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What is the id and name of the enzyme with most number of medicines that can interact as 'activator'?",
+        "query": "SELECT T1.id ,  T1.name FROM enzyme AS T1 JOIN medicine_enzyme_interaction AS T2 ON T1.id  =  T2.enzyme_id WHERE T2.interaction_type  =  'activitor' GROUP BY T1.id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What is the id and name of the enzyme that can interact with the most medicines as an activator?",
+        "query": "SELECT T1.id ,  T1.name FROM enzyme AS T1 JOIN medicine_enzyme_interaction AS T2 ON T1.id  =  T2.enzyme_id WHERE T2.interaction_type  =  'activitor' GROUP BY T1.id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What is the interaction type of the enzyme named 'ALA synthase' and the medicine named 'Aripiprazole'?",
+        "query": "SELECT T1.interaction_type FROM medicine_enzyme_interaction AS T1 JOIN medicine AS T2 ON T1.medicine_id  =  T2.id JOIN enzyme AS T3 ON T1.enzyme_id  =  T3.id WHERE T3.name  =  'ALA synthase' AND T2.name  =  'Aripiprazole'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What is the type of interaction for the enzyme named 'ALA synthase' and the medicine named 'Aripiprazole'?",
+        "query": "SELECT T1.interaction_type FROM medicine_enzyme_interaction AS T1 JOIN medicine AS T2 ON T1.medicine_id  =  T2.id JOIN enzyme AS T3 ON T1.enzyme_id  =  T3.id WHERE T3.name  =  'ALA synthase' AND T2.name  =  'Aripiprazole'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What is the most common interaction type between enzymes and medicine? And how many are there?",
+        "query": "SELECT interaction_type ,  count(*) FROM medicine_enzyme_interaction GROUP BY interaction_type ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the most common types of interactions between enzymes and medicine, and how many types are there?",
+        "query": "SELECT interaction_type ,  count(*) FROM medicine_enzyme_interaction GROUP BY interaction_type ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "How many medicines have the FDA approval status 'No' ?",
+        "query": "SELECT count(*) FROM medicine WHERE FDA_approved  =  'No'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "How many medicines were not approved by the FDA?",
+        "query": "SELECT count(*) FROM medicine WHERE FDA_approved  =  'No'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "How many enzymes do not have any interactions?",
+        "query": "SELECT count(*) FROM enzyme WHERE id NOT IN ( SELECT enzyme_id FROM medicine_enzyme_interaction );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What is the count of enzymes without any interactions?",
+        "query": "SELECT count(*) FROM enzyme WHERE id NOT IN ( SELECT enzyme_id FROM medicine_enzyme_interaction );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What is the id and trade name of the medicines can interact with at least 3 enzymes?",
+        "query": "SELECT T1.id ,  T1.trade_name FROM medicine AS T1 JOIN medicine_enzyme_interaction AS T2 ON T2.medicine_id  =  T1.id GROUP BY T1.id HAVING COUNT(*)  >=  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the ids and trade names of the medicine that can interact with at least 3 enzymes?",
+        "query": "SELECT T1.id ,  T1.trade_name FROM medicine AS T1 JOIN medicine_enzyme_interaction AS T2 ON T2.medicine_id  =  T1.id GROUP BY T1.id HAVING COUNT(*)  >=  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the distinct name, location and products of the enzymes which has any 'inhibitor' interaction?",
+        "query": "SELECT DISTINCT T1.name ,  T1.location ,  T1.product FROM enzyme AS T1 JOIN medicine_enzyme_interaction AS T2 ON T2.enzyme_id  =  T1.id WHERE T2.interaction_type  =  'inhibitor'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the different names, locations, and products of the enzymes that are capable inhibitor interactions?",
+        "query": "SELECT DISTINCT T1.name ,  T1.location ,  T1.product FROM enzyme AS T1 JOIN medicine_enzyme_interaction AS T2 ON T2.enzyme_id  =  T1.id WHERE T2.interaction_type  =  'inhibitor'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "List the medicine name and trade name which can both interact as 'inhibitor' and 'activitor' with enzymes.",
+        "query": "SELECT T1.name ,  T1.trade_name FROM medicine AS T1 JOIN medicine_enzyme_interaction AS T2 ON T2.medicine_id  =  T1.id WHERE interaction_type  =  'inhibitor' INTERSECT SELECT T1.name ,  T1.trade_name FROM medicine AS T1 JOIN medicine_enzyme_interaction AS T2 ON T2.medicine_id  =  T1.id WHERE interaction_type  =  'activitor'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the medicine and trade names that can interact as an inhibitor and activitor with enzymes?",
+        "query": "SELECT T1.name ,  T1.trade_name FROM medicine AS T1 JOIN medicine_enzyme_interaction AS T2 ON T2.medicine_id  =  T1.id WHERE interaction_type  =  'inhibitor' INTERSECT SELECT T1.name ,  T1.trade_name FROM medicine AS T1 JOIN medicine_enzyme_interaction AS T2 ON T2.medicine_id  =  T1.id WHERE interaction_type  =  'activitor'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "Show the medicine names and trade names that cannot interact with the enzyme with product 'Heme'.",
+        "query": "SELECT name ,  trade_name FROM medicine EXCEPT SELECT T1.name ,  T1.trade_name FROM medicine AS T1 JOIN medicine_enzyme_interaction AS T2 ON T2.medicine_id  =  T1.id JOIN enzyme AS T3 ON T3.id  =  T2.enzyme_id WHERE T3.product  =  'Protoporphyrinogen IX'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the medicine and trade names that cannot interact with the enzyme with the product 'Heme'?",
+        "query": "SELECT name ,  trade_name FROM medicine EXCEPT SELECT T1.name ,  T1.trade_name FROM medicine AS T1 JOIN medicine_enzyme_interaction AS T2 ON T2.medicine_id  =  T1.id JOIN enzyme AS T3 ON T3.id  =  T2.enzyme_id WHERE T3.product  =  'Protoporphyrinogen IX'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "How many distinct FDA approval statuses are there for the medicines?",
+        "query": "SELECT count(DISTINCT FDA_approved) FROM medicine"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "How many different FDA approval statuses exist for medicines?",
+        "query": "SELECT count(DISTINCT FDA_approved) FROM medicine"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "Which enzyme names have the substring \"ALA\"?",
+        "query": "SELECT name FROM enzyme WHERE name LIKE \"%ALA%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "What are the names of enzymes that include the string 'ALA'?",
+        "query": "SELECT name FROM enzyme WHERE name LIKE \"%ALA%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "find the number of medicines offered by each trade.",
+        "query": "SELECT trade_name ,  count(*) FROM medicine GROUP BY trade_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "medicine_enzyme_interaction",
+        "question": "How many medicines are offered by each trade name?",
+        "query": "SELECT trade_name ,  count(*) FROM medicine GROUP BY trade_name"
+    }
+]

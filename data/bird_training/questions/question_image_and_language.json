@@ -1,0 +1,836 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many object samples are there in image no.1?",
+        "query": "SELECT COUNT(OBJ_SAMPLE_ID) FROM IMG_OBJ WHERE IMG_ID = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many images have over 20 object samples?",
+        "query": "SELECT COUNT(T1.IMG_ID) FROM ( SELECT IMG_ID FROM IMG_OBJ GROUP BY IMG_ID HAVING COUNT(OBJ_SAMPLE_ID) > 20 ) T1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the ID of the image with the most number of object samples?",
+        "query": "SELECT IMG_ID FROM IMG_OBJ GROUP BY IMG_ID ORDER BY COUNT(OBJ_SAMPLE_ID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Please list the IDs of the object samples in class no. 297 in image no.1.",
+        "query": "SELECT OBJ_SAMPLE_ID FROM IMG_OBJ WHERE IMG_ID = 1 AND OBJ_CLASS_ID = 297"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many self-relations are there between the object samples in image no.5?",
+        "query": "SELECT SUM(CASE WHEN IMG_ID = 5 THEN 1 ELSE 0 END) FROM IMG_REL WHERE OBJ1_SAMPLE_ID = OBJ2_SAMPLE_ID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the bounding box of the object sample in image no.5 that has a self-relation?",
+        "query": "SELECT T2.X, T2.Y, T2.W, T2.H FROM IMG_REL AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.IMG_ID = T2.IMG_ID WHERE T1.IMG_ID = 5 AND T1.OBJ1_SAMPLE_ID = T1.OBJ2_SAMPLE_ID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many object samples in image no.1 are in the class of \"man\"?",
+        "query": "SELECT SUM(CASE WHEN T1.OBJ_CLASS = 'man' THEN 1 ELSE 0 END) FROM OBJ_CLASSES AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.IMG_ID = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many images have at least one object sample in the class of \"man\"?",
+        "query": "SELECT COUNT(T.IMG_ID) FROM ( SELECT T2.IMG_ID FROM OBJ_CLASSES AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.OBJ_CLASS = 'man' GROUP BY T2.IMG_ID ) T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Please list the classes of all the object samples in image no.1.",
+        "query": "SELECT T1.OBJ_CLASS FROM OBJ_CLASSES AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.IMG_ID = 1 GROUP BY T1.OBJ_CLASS"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the relation between object sample no.8 and object sample no.4 in image no.1?",
+        "query": "SELECT T1.PRED_CLASS FROM PRED_CLASSES AS T1 INNER JOIN IMG_REL AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T2.IMG_ID = 1 AND T2.OBJ1_SAMPLE_ID = 8 AND T2.OBJ2_SAMPLE_ID = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many pairs of object samples in image no.1 have the relation of \"parked on\"?",
+        "query": "SELECT SUM(CASE WHEN T1.PRED_CLASS = 'parked on' THEN 1 ELSE 0 END) FROM PRED_CLASSES AS T1 INNER JOIN IMG_REL AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T2.IMG_ID = 1 AND T2.OBJ1_SAMPLE_ID != OBJ2_SAMPLE_ID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Please list all the predicted relation classes of object sample no.14 in image no.1.",
+        "query": "SELECT T1.PRED_CLASS FROM PRED_CLASSES AS T1 INNER JOIN IMG_REL AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T2.OBJ1_SAMPLE_ID = 14 AND T2.OBJ2_SAMPLE_ID = 14"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many images have at least one pair of object samples with the relation \"parked on\"?",
+        "query": "SELECT SUM(CASE WHEN T1.PRED_CLASS = 'parked on' THEN 1 ELSE 0 END) FROM PRED_CLASSES AS T1 INNER JOIN IMG_REL AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T2.OBJ1_SAMPLE_ID != T2.OBJ2_SAMPLE_ID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Please list the IDs of all the images with more than 2 pairs of object samples with the relation \"parked on\".",
+        "query": "SELECT T2.IMG_ID FROM PRED_CLASSES AS T1 INNER JOIN IMG_REL AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T1.PRED_CLASS = 'parked on' AND T2.OBJ1_SAMPLE_ID != T2.OBJ2_SAMPLE_ID GROUP BY T2.IMG_ID HAVING COUNT(T2.IMG_ID) > 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "To which predicted relation class does the self-relation of the object sample in image no.5 belong?",
+        "query": "SELECT T1.PRED_CLASS FROM PRED_CLASSES AS T1 INNER JOIN IMG_REL AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T2.IMG_ID = 5 AND T2.OBJ1_SAMPLE_ID = T2.OBJ2_SAMPLE_ID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What are the bounding boxes of the object samples with a predicted relation class of \"by\" in image no.1?",
+        "query": "SELECT T3.X, T3.Y, T3.W, T3.H FROM PRED_CLASSES AS T1 INNER JOIN IMG_REL AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID INNER JOIN IMG_OBJ AS T3 ON T2.OBJ1_SAMPLE_ID = T3.OBJ_CLASS_ID WHERE T2.IMG_ID = 1 AND T1.PRED_CLASS = 'by'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the average difference in the y coordinate of 2 object samples with the relation \"parked on\" in image no.1?",
+        "query": "SELECT CAST(SUM(T3.Y) AS REAL) / COUNT(CASE WHEN T1.PRED_CLASS = 'parked on' THEN 1 ELSE NULL END) FROM PRED_CLASSES AS T1 INNER JOIN IMG_REL AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID INNER JOIN IMG_OBJ AS T3 ON T2.OBJ1_SAMPLE_ID = T3.OBJ_CLASS_ID WHERE T2.IMG_ID = 1 AND T2.OBJ1_SAMPLE_ID != T2.OBJ2_SAMPLE_ID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the percentage of the object samples in the class of \"man\" in image no.1?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.OBJ_CLASS = 'man' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T1.OBJ_CLASS_ID) FROM OBJ_CLASSES AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.IMG_ID = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "State the total number of the attribute classes.",
+        "query": "SELECT COUNT(ATT_CLASS_ID) FROM ATT_CLASSES"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many object classes are there in the database?",
+        "query": "SELECT COUNT(OBJ_CLASS_ID) FROM OBJ_CLASSES"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Provide the number of predicted classes.",
+        "query": "SELECT COUNT(PRED_CLASS_ID) FROM PRED_CLASSES"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Give the bounding box of the kite in image no.2324765.",
+        "query": "SELECT T2.X, T2.Y, T2.W, T2.H FROM OBJ_CLASSES AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.IMG_ID = 2324765 AND T1.OBJ_CLASS = 'kite'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many white objects are there in image no.2347915?",
+        "query": "SELECT SUM(CASE WHEN T2.ATT_CLASS = 'white' THEN 1 ELSE 0 END) FROM IMG_OBJ_ATT AS T1 INNER JOIN ATT_CLASSES AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID WHERE T1.IMG_ID = 2347915"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Give the number of samples in image no.2377985 whose attribute is electrical.",
+        "query": "SELECT SUM(CASE WHEN T2.ATT_CLASS = 'white' THEN 1 ELSE 0 END) FROM IMG_OBJ_ATT AS T1 INNER JOIN ATT_CLASSES AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID WHERE T1.IMG_ID = 2347915"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the relationship between object sample no.12 and no.8 of image no.2345511?",
+        "query": "SELECT T1.PRED_CLASS FROM PRED_CLASSES AS T1 INNER JOIN IMG_REL AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T2.IMG_ID = 2345511 AND T2.OBJ1_SAMPLE_ID = 12 AND T2.OBJ2_SAMPLE_ID = 8"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Give the object number of the sample which has the relationship of \"lying on\" with object sample no.1 from image no.2345524.",
+        "query": "SELECT T2.OBJ1_SAMPLE_ID FROM PRED_CLASSES AS T1 INNER JOIN IMG_REL AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T2.IMG_ID = 2345524 AND T1.PRED_CLASS = 'lying on' AND T2.OBJ2_SAMPLE_ID = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many samples of food object are there in image no.6?",
+        "query": "SELECT COUNT(T2.OBJ_SAMPLE_ID) FROM OBJ_CLASSES AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.IMG_ID = 6 AND T1.OBJ_CLASS = 'food'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Give the number of images containing the object sample of \"suit\".",
+        "query": "SELECT COUNT(T.IMG_ID) FROM ( SELECT T2.IMG_ID FROM OBJ_CLASSES AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.OBJ_CLASS = 'suit' GROUP BY T2.IMG_ID ) T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the relationship between \"feathers\" and \"onion\" in image no.2345528?",
+        "query": "SELECT T1.PRED_CLASS FROM PRED_CLASSES AS T1 INNER JOIN IMG_REL AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID INNER JOIN IMG_OBJ AS T3 ON T2.OBJ1_SAMPLE_ID = T3.OBJ_SAMPLE_ID INNER JOIN OBJ_CLASSES AS T4 ON T3.OBJ_CLASS_ID = T4.OBJ_CLASS_ID WHERE (T4.OBJ_CLASS = 'feathers' OR T4.OBJ_CLASS = 'onion') AND T2.IMG_ID = 2345528 GROUP BY T1.PRED_CLASS"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Tell the attribute of the weeds in image no.2377988.",
+        "query": "SELECT T2.ATT_CLASS FROM IMG_OBJ_att AS T1 INNER JOIN ATT_CLASSES AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID INNER JOIN IMG_OBJ AS T3 ON T1.IMG_ID = T3.IMG_ID INNER JOIN OBJ_CLASSES AS T4 ON T3.OBJ_CLASS_ID = T4.OBJ_CLASS_ID WHERE T4.OBJ_CLASS = 'weeds' AND T1.IMG_ID = 2377988"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the object whose attribute is blurry in image no.2377993? Give the explanation about the object.",
+        "query": "SELECT T4.OBJ_CLASS_ID, T4.OBJ_CLASS FROM IMG_OBJ_att AS T1 INNER JOIN ATT_CLASSES AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID INNER JOIN IMG_OBJ AS T3 ON T1.IMG_ID = T3.IMG_ID INNER JOIN OBJ_CLASSES AS T4 ON T3.OBJ_CLASS_ID = T4.OBJ_CLASS_ID WHERE T2.ATT_CLASS = 'blurry' AND T1.IMG_ID = 22377993"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many samples of \"wall\" are there in image no.2353079?",
+        "query": "SELECT SUM(CASE WHEN T1.OBJ_CLASS = 'wall' THEN 1 ELSE 0 END) FROM OBJ_CLASSES AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.IMG_ID = 2353079"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "State the object class of sample no.10 of image no.2320341.",
+        "query": "SELECT T1.OBJ_CLASS FROM OBJ_CLASSES AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.IMG_ID = 2320341 AND T2.OBJ_SAMPLE_ID = 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many times is the number of images containing \"broccoli\" than \"tomato\"?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.OBJ_CLASS = 'broccoli' THEN T2.OBJ_SAMPLE_ID ELSE NULL END) AS REAL) / COUNT(CASE WHEN T1.OBJ_CLASS = 'tomato' THEN T2.OBJ_SAMPLE_ID ELSE NULL END) times FROM OBJ_CLASSES AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many images have at least 25 attributes?",
+        "query": "SELECT COUNT(*) FROM ( SELECT IMG_ID FROM IMG_OBJ_att GROUP BY IMG_ID HAVING COUNT(ATT_CLASS_ID) > 25 ) T1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "List all the ids of the images that have a self-relation relationship.",
+        "query": "SELECT DISTINCT IMG_ID FROM IMG_REL WHERE OBJ1_SAMPLE_ID = OBJ2_SAMPLE_ID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many objects are there in the attribute class id with the highest number of objects?",
+        "query": "SELECT COUNT(ATT_CLASS_ID) FROM IMG_OBJ_att GROUP BY IMG_ID ORDER BY COUNT(ATT_CLASS_ID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What are the id of all the objects belonging to the transportation class?",
+        "query": "SELECT OBJ_CLASS_ID FROM OBJ_CLASSES WHERE OBJ_CLASS IN ('bus', 'train', 'aeroplane', 'car', 'etc')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What are the corresponding classes for the \"very large bike\" attribute?",
+        "query": "SELECT ATT_CLASS_ID FROM ATT_CLASSES WHERE ATT_CLASS = 'very large'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the unique id number identifying the onion object class?",
+        "query": "SELECT OBJ_CLASS_ID FROM OBJ_CLASSES WHERE OBJ_CLASS = 'onion'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "List all the corresponding classes for attributes of image id 8.",
+        "query": "SELECT T2.ATT_CLASS FROM IMG_OBJ_att AS T1 INNER JOIN ATT_CLASSES AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID WHERE T1.IMG_ID = 8"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the bounding box of the object with image id 4 and a prediction relationship class id of 144?",
+        "query": "SELECT T2.X, T2.Y, T2.W, T2.H FROM IMG_REL AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.IMG_ID = T2.IMG_ID WHERE T1.PRED_CLASS_ID = 144 AND T1.IMG_ID = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many images have at least 5 \"black\" classes?",
+        "query": "SELECT COUNT(IMGID) FROM ( SELECT T1.IMG_ID AS IMGID FROM IMG_OBJ_att AS T1 INNER JOIN ATT_CLASSES AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID WHERE T2.ATT_CLASS = 'black' GROUP BY T1.IMG_ID HAVING COUNT(T1.ATT_CLASS_ID) >= 5 ) T3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the prediction relationship class id of the tallest image?",
+        "query": "SELECT T1.PRED_CLASS_ID FROM IMG_REL AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.IMG_ID = T2.IMG_ID ORDER BY T2.H DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Which image has the highest number of \"white\" class attributes?",
+        "query": "SELECT T1.IMG_ID AS IMGID FROM IMG_OBJ_att AS T1 INNER JOIN ATT_CLASSES AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID WHERE T2.ATT_CLASS = 'white' GROUP BY T1.IMG_ID ORDER BY COUNT(T1.ATT_CLASS_ID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What are the x and y coordinates of all the images with a prediction relationship class id of 98?",
+        "query": "SELECT T2.X, T2.Y FROM IMG_REL AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.IMG_ID = T2.IMG_ID WHERE T1.PRED_CLASS_ID = 98"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many prediction classes with \"has\" captions are there for image id 3050?",
+        "query": "SELECT COUNT(T2.PRED_CLASS_ID) FROM IMG_REL AS T1 INNER JOIN PRED_CLASSES AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T1.IMG_ID = 3050 AND T2.PRED_CLASS = 'has'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "List all the explanations about object classes of all the images with an x and y coordinate of 0.",
+        "query": "SELECT T1.OBJ_CLASS FROM OBJ_CLASSES AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.X = 0 AND T2.Y = 0 GROUP BY T1.OBJ_CLASS"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What are the captions of all the self-relation relationship prediction classes?",
+        "query": "SELECT T2.PRED_CLASS FROM IMG_REL AS T1 INNER JOIN pred_classes AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T1.OBJ1_SAMPLE_ID = T1.OBJ2_SAMPLE_ID GROUP BY T2.PRED_CLASS"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Give all the bounding boxes for image 2222 whose object classes are feathers.",
+        "query": "SELECT T2.X, T2.Y, T2.H, T2.W FROM OBJ_CLASSES AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.IMG_ID = 2222 AND T1.OBJ_CLASS = 'feathers'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Among the objects that have multiple relations, how many images whose captions for the prediction class ids are \"on\"?",
+        "query": "SELECT COUNT(T2.PRED_CLASS_ID) FROM IMG_REL AS T1 INNER JOIN PRED_CLASSES AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T1.OBJ1_SAMPLE_ID != T1.OBJ2_SAMPLE_ID AND T2.PRED_CLASS = 'on'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the object class of the image with a bounding box of 0, 0, 135, 212?",
+        "query": "SELECT T1.OBJ_CLASS FROM OBJ_CLASSES AS T1 INNER JOIN IMG_OBJ AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.X = 0 AND T2.Y = 0 AND T2.W = 135 AND T2.H = 212"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Provide the dimensions of the bounding box that contains the keyboard that was spotted in image no. 3.",
+        "query": "SELECT T1.W, T1.H FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.IMG_ID = 3 AND T2.OBJ_CLASS = 'keyboard'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Identify the border's coordinates on the X and Y axes that enclose a folk in image no. 6.",
+        "query": "SELECT T1.X, T1.Y FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.IMG_ID = 6 AND T2.OBJ_CLASS = 'folk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Define the onion's bounding box on image no. 285930.",
+        "query": "SELECT T1.X, T1.Y, T1.W, T1.H FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.IMG_ID = 285930 AND T2.OBJ_CLASS = 'onion'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many objects can you spot in image no. 72? What objects may be identified on the same image and within the bounding box represented as (341, 27, 42, 51)?",
+        "query": "SELECT SUM(IIF(T1.IMG_ID = 1, 1, 0)), SUM(IIF(T1.X = 341 AND T1.Y = 27 AND T1.W = 42 AND T1.H = 51, 1, 0)) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "On image no. 5, name the attributes that are composed of multiple objects.",
+        "query": "SELECT T2.ATT_CLASS FROM IMG_OBJ_ATT AS T1 INNER JOIN ATT_CLASSES AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID WHERE T1.IMG_ID = 5 GROUP BY T2.ATT_CLASS HAVING COUNT(T2.ATT_CLASS) > 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What attributes are used to describe the wall on image no. 27.",
+        "query": "SELECT T4.ATT_CLASS FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID INNER JOIN IMG_OBJ_ATT AS T3 ON T1.IMG_ID = T3.IMG_ID INNER JOIN ATT_CLASSES AS T4 ON T3.ATT_CLASS_ID = T4.ATT_CLASS_ID WHERE T2.OBJ_CLASS = 'wall' AND T1.IMG_ID = 27 GROUP BY T4.ATT_CLASS"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Name the object element that is described as being scattered on image no. 10.",
+        "query": "SELECT T2.OBJ_CLASS FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID INNER JOIN IMG_OBJ_ATT AS T3 ON T1.IMG_ID = T3.IMG_ID INNER JOIN ATT_CLASSES AS T4 ON T3.ATT_CLASS_ID = T4.ATT_CLASS_ID WHERE T4.ATT_CLASS = 'scattered' AND T1.IMG_ID = 10 GROUP BY T2.OBJ_CLASS"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many images contain 'bridge' as an object element?",
+        "query": "SELECT COUNT(DISTINCT T1.IMG_ID) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.OBJ_CLASS = 'bridge'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many object elements are there on average in each image?",
+        "query": "SELECT CAST(COUNT(OBJ_CLASS_ID) AS REAL) / COUNT(DISTINCT IMG_ID) FROM IMG_OBJ"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What colour is the van that can be spotted in image no. 1?",
+        "query": "SELECT T4.ATT_CLASS FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID INNER JOIN IMG_OBJ_ATT AS T3 ON T1.IMG_ID = T3.IMG_ID INNER JOIN ATT_CLASSES AS T4 ON T3.ATT_CLASS_ID = T4.ATT_CLASS_ID WHERE T2.OBJ_CLASS = 'van' AND T1.IMG_ID = 1 GROUP BY T4.ATT_CLASS"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Describe the objects, their attributes, and the relationships that comprise the scene on image no. 1 within the bounding box, represented as (388, 369, 48, 128).",
+        "query": "SELECT DISTINCT T2.OBJ_CLASS, T4.ATT_CLASS, T6.PRED_CLASS FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID INNER JOIN IMG_OBJ_ATT AS T3 ON T1.IMG_ID = T3.IMG_ID INNER JOIN ATT_CLASSES AS T4 ON T3.ATT_CLASS_ID = T4.ATT_CLASS_ID INNER JOIN IMG_REL AS T5 ON T1.IMG_ID = T5.IMG_ID INNER JOIN PRED_CLASSES AS T6 ON T5.PRED_CLASS_ID = T6.PRED_CLASS_ID WHERE T1.IMG_ID = 1 AND T1.X = 388 AND T1.Y = 369 AND T1.W = 48 AND T1.H = 128"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the relationship between object sample no. 25 and object sample no. 2 on image no. 1?",
+        "query": "SELECT T2.PRED_CLASS FROM IMG_REL AS T1 INNER JOIN PRED_CLASSES AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T1.IMG_ID = 1 AND T1.OBJ1_SAMPLE_ID = 25 AND T1.OBJ2_SAMPLE_ID = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many attributes are related to the object sample no. 7 on image no. 4?",
+        "query": "SELECT COUNT(ATT_CLASS_ID) FROM IMG_OBJ_ATT WHERE IMG_ID = 4 AND OBJ_SAMPLE_ID = 7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many object elements can be detected on image no. 31?",
+        "query": "SELECT COUNT(OBJ_CLASS_ID) FROM IMG_OBJ WHERE IMG_ID = 31"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "On image no. 20, identify the attribute ID that is composed of the highest number of objects.",
+        "query": "SELECT ATT_CLASS_ID FROM IMG_OBJ_ATT WHERE IMG_ID = 20 GROUP BY ATT_CLASS_ID ORDER BY COUNT(ATT_CLASS_ID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Define the bounding box of the object sample no. 7 on image no. 42.",
+        "query": "SELECT X, Y, W, H FROM IMG_OBJ WHERE IMG_ID = 42 AND OBJ_SAMPLE_ID = 7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "On image no. 99 identify the percentage of objects that are described as white.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.ATT_CLASS = 'white' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(OBJ_SAMPLE_ID) FROM IMG_OBJ_ATT AS T1 INNER JOIN ATT_CLASSES AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID WHERE T1.IMG_ID = 99"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many attribute classes are there for image id 5?",
+        "query": "SELECT COUNT(ATT_CLASS_ID) FROM IMG_OBJ_ATT WHERE IMG_ID = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "State the explanation about object class 10.",
+        "query": "SELECT OBJ_CLASS FROM OBJ_CLASSES WHERE OBJ_CLASS_ID = 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Name the object class of the image with a bounding (422, 63, 77, 363).",
+        "query": "SELECT T2.OBJ_CLASS FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.X = 422 AND T1.Y = 63 AND T1.W = 77 AND T1.H = 363"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the caption for the prediction class id 12?",
+        "query": "SELECT PRED_CLASS FROM PRED_CLASSES WHERE PRED_CLASS_ID = 12"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Indicate the bounding box of the image 8.",
+        "query": "SELECT X, Y, W, H FROM IMG_OBJ WHERE IMG_ID = 8"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many object samples in image no.908 are in the class of tip?",
+        "query": "SELECT SUM(CASE WHEN T2.OBJ_CLASS = 'tip' THEN 1 ELSE 0 END) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.IMG_ID = 908"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "List out the number of object samples in image no.41 which are in the class of \"kitchen\"?",
+        "query": "SELECT SUM(CASE WHEN T2.OBJ_CLASS = 'kitchen' THEN 1 ELSE 0 END) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.IMG_ID = 41"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Count the image numbers that contain the \"paint\" object.",
+        "query": "SELECT COUNT(DISTINCT T1.IMG_ID) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.OBJ_CLASS = 'paint'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many samples of clouds are there in the image no.2315533?",
+        "query": "SELECT SUM(CASE WHEN T1.IMG_ID = 2315533 THEN 1 ELSE 0 END) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.OBJ_CLASS = 'clouds'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Which object classes belong to the onion category?",
+        "query": "SELECT OBJ_CLASS_ID FROM OBJ_CLASSES WHERE OBJ_CLASS = 'onion'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the bounding box of \"spoon\" in image id 1344?",
+        "query": "SELECT T1.X, T1.Y, T1.W, T1.H FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.IMG_ID = 1344 AND T2.OBJ_CLASS = 'spoon'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the percentage of \"surface\" object samples in image No.2654?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.OBJ_CLASS = 'surface' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.OBJ_CLASS_ID) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.IMG_ID = 2654"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many images include the \"wood\" objects?",
+        "query": "SELECT COUNT(DISTINCT T1.IMG_ID) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.OBJ_CLASS = 'wood'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "State the object class of the image with tallest bounding box.",
+        "query": "SELECT T2.OBJ_CLASS FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID ORDER BY T1.H DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Calculate the percentage of \"airplane\" object class in the table.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.OBJ_CLASS = 'airplane' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.OBJ_CLASS) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many samples of animal objects are there in image no.660?",
+        "query": "SELECT COUNT(T1.IMG_ID) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.OBJ_CLASS = 'animal' AND T1.IMG_ID = 660"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Name number of samples of \"bed\" object are there in the image No.1098?",
+        "query": "SELECT SUM(CASE WHEN T2.OBJ_CLASS = 'bed' THEN 1 ELSE 0 END) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.IMG_ID = 1098"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Name the object class of the image with lowest bounding box.",
+        "query": "SELECT T2.OBJ_CLASS FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID ORDER BY T1.H LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Indicating the bounding box of \"kitchen\" in image id 250.",
+        "query": "SELECT T1.X, T1.Y, T1.W, T1.H FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.IMG_ID = 250 AND T2.OBJ_CLASS = 'kitchen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Which images have more than 20 object samples?",
+        "query": "SELECT IMG_ID FROM IMG_OBJ GROUP BY IMG_ID HAVING COUNT(IMG_ID) > 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Which object in image 8 is the widest? State its object sample ID.",
+        "query": "SELECT OBJ_SAMPLE_ID FROM IMG_OBJ WHERE IMG_ID = 8 ORDER BY W DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Find the object in image 5 where the object with the coordinate of (634, 468).",
+        "query": "SELECT OBJ_SAMPLE_ID FROM IMG_OBJ WHERE IMG_ID = 5 AND X = 634 AND Y = 468"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Which object has the highest attribute classes?",
+        "query": "SELECT OBJ_SAMPLE_ID FROM IMG_OBJ_ATT GROUP BY OBJ_SAMPLE_ID ORDER BY COUNT(OBJ_SAMPLE_ID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the ratio between the number of object samples in image 1 and the number of object samples in image 6?",
+        "query": "SELECT CAST(SUM(CASE WHEN IMG_ID = 1 THEN 1 ELSE 0 END) AS REAL) / SUM(CASE WHEN IMG_ID = 6 THEN 1 ELSE 0 END) FROM IMG_OBJ"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Calculate the average of object samples for the image.",
+        "query": "SELECT CAST(COUNT(OBJ_SAMPLE_ID) AS REAL) / COUNT(DISTINCT IMG_ID) FROM IMG_OBJ"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "List all the IDs of images that have objects with the attributes of 'wired'.",
+        "query": "SELECT DISTINCT T2.IMG_ID FROM ATT_CLASSES AS T1 INNER JOIN IMG_OBJ_ATT AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID WHERE T1.ATT_CLASS = 'wired'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "List all the object classes in image 10.",
+        "query": "SELECT DISTINCT T2.OBJ_CLASS FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.IMG_ID = 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "List attributes for object class 'tip' In image 1314.",
+        "query": "SELECT T1.ATT_CLASS FROM ATT_CLASSES AS T1 INNER JOIN IMG_OBJ_ATT AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID INNER JOIN IMG_OBJ AS T3 ON T2.IMG_ID = T3.IMG_ID INNER JOIN OBJ_CLASSES AS T4 ON T3.OBJ_CLASS_ID = T4.OBJ_CLASS_ID WHERE T3.IMG_ID = 1314 AND T4.OBJ_CLASS = 'tip'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the prediction class between object class 'chain' and 'label' in image 2360078?",
+        "query": "SELECT DISTINCT T2.PRED_CLASS FROM IMG_REL AS T1 INNER JOIN PRED_CLASSES AS T2 ON T2.PRED_CLASS_ID = T1.PRED_CLASS_ID INNER JOIN IMG_OBJ AS T3 ON T1.IMG_ID = T3.IMG_ID AND T1.OBJ1_SAMPLE_ID = T3.OBJ_SAMPLE_ID INNER JOIN OBJ_CLASSES AS T4 ON T3.OBJ_CLASS_ID = T4.OBJ_CLASS_ID WHERE T1.IMG_ID = 2360078 AND T1.OBJ1_SAMPLE_ID = 15 OR T1.OBJ2_SAMPLE_ID = 18"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many images have objects with the attributes of polka dot?",
+        "query": "SELECT COUNT(T2.OBJ_SAMPLE_ID) FROM ATT_CLASSES AS T1 INNER JOIN IMG_OBJ_ATT AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID WHERE T1.ATT_CLASS = 'polka dot'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What are the attributes of the widest object in image 400?",
+        "query": "SELECT T1.ATT_CLASS FROM ATT_CLASSES AS T1 INNER JOIN IMG_OBJ_ATT AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID INNER JOIN IMG_OBJ AS T3 ON T2.IMG_ID = T3.IMG_ID WHERE T2.IMG_ID = 400 ORDER BY T3.W DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "State the name of the object class that has in most images.",
+        "query": "SELECT OBJ_CLASS FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID GROUP BY T2.OBJ_CLASS ORDER BY COUNT(T1.OBJ_CLASS_ID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "State the width and height of the object with the class of 'van' in image 1.",
+        "query": "SELECT T1.H, T1.W FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.IMG_ID = 1 AND T2.OBJ_CLASS = 'van'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "State the coordinate of X and Y for the object with the attribute of 'sparse' in image 1.",
+        "query": "SELECT T3.OBJ_SAMPLE_ID, T3.X, T3.Y FROM ATT_CLASSES AS T1 INNER JOIN IMG_OBJ_ATT AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID INNER JOIN IMG_OBJ AS T3 ON T2.IMG_ID = T3.IMG_ID WHERE T3.IMG_ID = 1 AND T1.ATT_CLASS = 'sparse'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Calculate the percentage of object samples that are related to street lights.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.OBJ_CLASS = 'street lights' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.OBJ_SAMPLE_ID) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Based on image 5, what is the percentage of images that belong windows object class?",
+        "query": "SELECT CAST(COUNT(T1.OBJ_SAMPLE_ID) AS REAL) * 100 / COUNT(CASE WHEN T1.IMG_ID = 5 THEN 1 ELSE 0 END) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.OBJ_CLASS = 'windows'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many images have an x-coordinate of 5 and y-coordinate of 5?",
+        "query": "SELECT COUNT(IMG_ID) FROM IMG_OBJ WHERE X = 5 AND Y = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many images have less than 15 object samples?",
+        "query": "SELECT COUNT(IMG_ID) FROM IMG_OBJ WHERE OBJ_SAMPLE_ID < 15"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many images have a total of 10 attribute classes?",
+        "query": "SELECT COUNT(IMG_ID) FROM IMG_OBJ WHERE OBJ_CLASS_ID = 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "List the ID of all images with objects that have multiple relations.",
+        "query": "SELECT IMG_ID FROM IMG_REL GROUP BY PRED_CLASS_ID HAVING COUNT(DISTINCT OBJ1_SAMPLE_ID) != 0 AND COUNT(DISTINCT OBJ2_SAMPLE_ID) != 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many images have \"vegetable\" and \"fruits\" as their object classes?",
+        "query": "SELECT COUNT(T1.IMG_ID) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.OBJ_CLASS = 'vegetables' OR T2.OBJ_CLASS = 'fruits'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the image ID with a predicted class of \"parked on\"?",
+        "query": "SELECT DISTINCT T1.IMG_ID FROM IMG_REL AS T1 INNER JOIN PRED_CLASSES AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T2.PRED_CLASS = 'parked on'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "List all the object classes of the images that have a (5,5) coordinate.",
+        "query": "SELECT T2.OBJ_CLASS FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.X = 5 AND T1.Y = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many images have \"keyboard\" as their object class?",
+        "query": "SELECT COUNT(T1.IMG_ID) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.OBJ_CLASS = 'keyboard'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What are the width and height of the bounding box of the object with \"keyboard\" as their object class and (5, 647) as their coordinate?",
+        "query": "SELECT T1.W, T1.H FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.OBJ_CLASS = 'keyboard' AND T1.X = 5 AND T1.Y = 647"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "List all the ID of the images that have an attribute class of \"horse\".",
+        "query": "SELECT T2.IMG_ID FROM ATT_CLASSES AS T1 INNER JOIN IMG_OBJ_ATT AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID WHERE T1.ATT_CLASS = 'horse'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Provide the x-coordinate and y-coordinate of the image with an attribute class of ''horse\" and an object class of \"fur\".",
+        "query": "SELECT T3.X, T3.Y FROM ATT_CLASSES AS T1 INNER JOIN IMG_OBJ_ATT AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID INNER JOIN IMG_OBJ AS T3 ON T2.IMG_ID = T3.IMG_ID INNER JOIN OBJ_CLASSES AS T4 ON T3.OBJ_CLASS_ID = T4.OBJ_CLASS_ID WHERE T1.ATT_CLASS = 'horse' AND T4.OBJ_CLASS = 'fur'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "List all the attribute classes of the image ID \"15\".",
+        "query": "SELECT T1.ATT_CLASS FROM ATT_CLASSES AS T1 INNER JOIN IMG_OBJ_ATT AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID WHERE T2.IMG_ID = 15"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "For those objects that have multiple relations, how many images have a prediction class of \"reading\"?",
+        "query": "SELECT COUNT(T1.IMG_ID) FROM IMG_REL AS T1 INNER JOIN PRED_CLASSES AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T2.PRED_CLASS = 'reading'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many images have \"picture\" as their attribute class?",
+        "query": "SELECT COUNT(T2.IMG_ID) FROM ATT_CLASSES AS T1 INNER JOIN IMG_OBJ_ATT AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID WHERE T1.ATT_CLASS = 'picture'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many images have \"picture\" as their attribute class and \"bear\" as their object class?",
+        "query": "SELECT COUNT(T2.IMG_ID) FROM ATT_CLASSES AS T1 INNER JOIN IMG_OBJ_ATT AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID INNER JOIN IMG_OBJ AS T3 ON T2.IMG_ID = T3.IMG_ID INNER JOIN OBJ_CLASSES AS T4 ON T3.OBJ_CLASS_ID = T4.OBJ_CLASS_ID WHERE T1.ATT_CLASS = 'picture' AND T4.OBJ_CLASS = 'bear'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "List all the attribute classes of the images that have a (5,5) coordinate.",
+        "query": "SELECT T1.ATT_CLASS FROM ATT_CLASSES AS T1 INNER JOIN IMG_OBJ_ATT AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID INNER JOIN IMG_OBJ AS T3 ON T2.IMG_ID = T3.IMG_ID WHERE T3.X = 5 AND T3.Y = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Calculate the average number of images with an attribute class of \"keyboard\".",
+        "query": "SELECT AVG(T1.IMG_ID) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.OBJ_CLASS = 'keyboard'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Calculate the ratio of the total number of images with an object class of \"man\" and \"person\".",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.OBJ_CLASS = 'man' THEN 1 ELSE 0 END) AS REAL) / COUNT(CASE WHEN T2.OBJ_CLASS = 'person' THEN 1 ELSE 0 END) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "List the object sample IDs of image ID 17 with coordinates (0,0).",
+        "query": "SELECT OBJ_SAMPLE_ID FROM IMG_OBJ WHERE IMG_ID = 17 AND X = 0 AND Y = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "List all bounding box widths and heights of object sample ID 2.",
+        "query": "SELECT W, H FROM IMG_OBJ WHERE OBJ_SAMPLE_ID = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "In the Y coordinate of image ID 12, how many are 0?",
+        "query": "SELECT COUNT(IMG_ID) FROM IMG_OBJ WHERE IMG_ID = 12 AND Y = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "List all the attribute classes of image ID 22.",
+        "query": "SELECT T1.ATT_CLASS FROM ATT_CLASSES AS T1 INNER JOIN IMG_OBJ_ATT AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID WHERE T2.IMG_ID = 22"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "List the object classes of image ID 36 with coordinates (0,0).",
+        "query": "SELECT T2.OBJ_CLASS FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.IMG_ID = 36 AND T1.X = 0 AND T1.Y = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Write 10 coordinates with the object class \"pizza.\"",
+        "query": "SELECT T1.IMG_ID, T1.X, T1.Y FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T2.OBJ_CLASS = 'pizza' LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What object class is in the X and Y coordinates of 126 and 363?",
+        "query": "SELECT T1.IMG_ID, T2.OBJ_CLASS FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.X = 126 AND T1.Y = 363"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the most common object class of image ID 56?",
+        "query": "SELECT T2.OBJ_CLASS FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.IMG_ID = 56 GROUP BY T2.OBJ_CLASS ORDER BY COUNT(T2.OBJ_CLASS_ID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Write the object classes of image ID 22 alongside the object's width and height.",
+        "query": "SELECT T1.W, T1.H, T2.OBJ_CLASS FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.IMG_ID = 22"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the predicate class of image ID 68?",
+        "query": "SELECT T2.PRED_CLASS FROM IMG_REL AS T1 INNER JOIN PRED_CLASSES AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T1.IMG_ID = 68"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many 'has' predicate classes does image ID 107 have?",
+        "query": "SELECT COUNT(T2.PRED_CLASS) FROM IMG_REL AS T1 INNER JOIN PRED_CLASSES AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T1.IMG_ID = 107 AND T2.PRED_CLASS = 'has'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Name the most common predicate class of image ID 4434.",
+        "query": "SELECT T2.PRED_CLASS FROM IMG_REL AS T1 INNER JOIN PRED_CLASSES AS T2 ON T1.PRED_CLASS_ID = T2.PRED_CLASS_ID WHERE T1.IMG_ID = 4434 ORDER BY T2.PRED_CLASS DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Count the number of 'dress' object classes and include their X and Y coordinates in image ID 1764.",
+        "query": "SELECT T1.X, T1.Y FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.IMG_ID = 1764 AND T2.OBJ_CLASS = 'dress'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "Give the X and Y coordinates of the sample object of image ID 23 that has the 'cast' attribute class.",
+        "query": "SELECT T3.OBJ_SAMPLE_ID, T3.X, T3.Y FROM ATT_CLASSES AS T1 INNER JOIN IMG_OBJ_ATT AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID INNER JOIN IMG_OBJ AS T3 ON T2.IMG_ID = T3.IMG_ID WHERE T3.IMG_ID = 23 AND T1.ATT_CLASS = 'cast'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "How many 'blue' attribute classes are there on image ID 2355735?",
+        "query": "SELECT COUNT(T1.ATT_CLASS) FROM ATT_CLASSES AS T1 INNER JOIN IMG_OBJ_ATT AS T2 ON T1.ATT_CLASS_ID = T2.ATT_CLASS_ID WHERE T2.IMG_ID = 2355735 AND T1.ATT_CLASS = 'blue'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "image_and_language",
+        "question": "What is the average width and height of the objects in image ID 47? List their object classes as well.",
+        "query": "SELECT T2.OBJ_CLASS, AVG(T1.W), AVG(T1.H) FROM IMG_OBJ AS T1 INNER JOIN OBJ_CLASSES AS T2 ON T1.OBJ_CLASS_ID = T2.OBJ_CLASS_ID WHERE T1.IMG_ID = 47 GROUP BY T2.OBJ_CLASS"
+    }
+]

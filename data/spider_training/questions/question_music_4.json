@@ -1,0 +1,362 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "How many artists are there?",
+        "query": "SELECT count(*) FROM artist"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Count the number of artists.",
+        "query": "SELECT count(*) FROM artist"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "List the age of all music artists.",
+        "query": "SELECT Age FROM artist"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the ages of all music artists?",
+        "query": "SELECT Age FROM artist"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What is the average age of all artists?",
+        "query": "SELECT avg(Age) FROM artist"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Return the average age across all artists.",
+        "query": "SELECT avg(Age) FROM artist"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the famous titles of the artist \"Triumfall\"?",
+        "query": "SELECT Famous_Title FROM artist WHERE Artist  =  \"Triumfall\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Return the famous titles of the artist called \"Triumfall\".",
+        "query": "SELECT Famous_Title FROM artist WHERE Artist  =  \"Triumfall\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the distinct Famous release dates?",
+        "query": "SELECT distinct(Famous_Release_date) FROM artist"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Give the distinct famous release dates for all artists.",
+        "query": "SELECT distinct(Famous_Release_date) FROM artist"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Return the dates of ceremony and the results of all music festivals",
+        "query": "SELECT Date_of_ceremony ,  RESULT FROM music_festival"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the dates of ceremony and results for each music festival?",
+        "query": "SELECT Date_of_ceremony ,  RESULT FROM music_festival"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the category of music festivals with result \"Awarded\"?",
+        "query": "SELECT Category FROM music_festival WHERE RESULT  =  \"Awarded\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Return the categories of music festivals that have the result \"Awarded\".",
+        "query": "SELECT Category FROM music_festival WHERE RESULT  =  \"Awarded\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the maximum and minimum week on top of all volumes?",
+        "query": "SELECT max(Weeks_on_Top) ,  min(Weeks_on_Top) FROM volume"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Give the maximum and minimum weeks on top across all volumes.",
+        "query": "SELECT max(Weeks_on_Top) ,  min(Weeks_on_Top) FROM volume"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the songs in volumes with more than 1 week on top?",
+        "query": "SELECT Song FROM volume WHERE Weeks_on_Top  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Give the songs included in volumes that have more than 1 week on top.",
+        "query": "SELECT Song FROM volume WHERE Weeks_on_Top  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Please list all songs in volumes in ascending alphabetical order.",
+        "query": "SELECT Song FROM volume ORDER BY Song"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the the songs in volumes, listed in ascending order?",
+        "query": "SELECT Song FROM volume ORDER BY Song"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "How many distinct artists do the volumes associate to?",
+        "query": "SELECT COUNT(DISTINCT Artist_ID) FROM volume"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Count the number of distinct artists who have volumes.",
+        "query": "SELECT COUNT(DISTINCT Artist_ID) FROM volume"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Please show the date of ceremony of the volumes that last more than 2 weeks on top.",
+        "query": "SELECT T1.Date_of_ceremony FROM music_festival AS T1 JOIN volume AS T2 ON T1.Volume  =  T2.Volume_ID WHERE T2.Weeks_on_Top  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the dates of ceremony at music festivals corresponding to volumes that lasted more than 2 weeks on top?",
+        "query": "SELECT T1.Date_of_ceremony FROM music_festival AS T1 JOIN volume AS T2 ON T1.Volume  =  T2.Volume_ID WHERE T2.Weeks_on_Top  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Please show the songs that have result \"nominated\" at music festivals.",
+        "query": "SELECT T2.Song FROM music_festival AS T1 JOIN volume AS T2 ON T1.Volume  =  T2.Volume_ID WHERE T1.Result  =  \"Nominated\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the songs in volumes that have resulted in a nomination at music festivals?",
+        "query": "SELECT T2.Song FROM music_festival AS T1 JOIN volume AS T2 ON T1.Volume  =  T2.Volume_ID WHERE T1.Result  =  \"Nominated\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the issue dates of volumes associated with the artist \"Gorgoroth\"?",
+        "query": "SELECT T2.Issue_Date FROM artist AS T1 JOIN volume AS T2 ON T1.Artist_ID  =  T2.Artist_ID WHERE T1.Artist  =  \"Gorgoroth\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Return the issue dates of volumes that are by the artist named Gorgoroth.",
+        "query": "SELECT T2.Issue_Date FROM artist AS T1 JOIN volume AS T2 ON T1.Artist_ID  =  T2.Artist_ID WHERE T1.Artist  =  \"Gorgoroth\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the songs in volumes associated with the artist aged 32 or older?",
+        "query": "SELECT T2.Song FROM artist AS T1 JOIN volume AS T2 ON T1.Artist_ID  =  T2.Artist_ID WHERE T1.age  >=  32"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Return names of songs in volumes that are by artists that are at least 32 years old.",
+        "query": "SELECT T2.Song FROM artist AS T1 JOIN volume AS T2 ON T1.Artist_ID  =  T2.Artist_ID WHERE T1.age  >=  32"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What is the average weeks on top of volumes associated with the artist aged 25 or younger?",
+        "query": "SELECT avg(T2.Weeks_on_Top) FROM artist AS T1 JOIN volume AS T2 ON T1.Artist_ID  =  T2.Artist_ID WHERE T1.age  <=  25"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Return the average number of weeks on top for volumes by artists that are at most 25 years old.",
+        "query": "SELECT avg(T2.Weeks_on_Top) FROM artist AS T1 JOIN volume AS T2 ON T1.Artist_ID  =  T2.Artist_ID WHERE T1.age  <=  25"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the famous title of the artists associated with volumes with more than 2 weeks on top?",
+        "query": "SELECT T1.Famous_Title FROM artist AS T1 JOIN volume AS T2 ON T1.Artist_ID  =  T2.Artist_ID WHERE T2.Weeks_on_Top  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Return the famous titles for artists that have volumes that lasted more than 2 weeks on top.",
+        "query": "SELECT T1.Famous_Title FROM artist AS T1 JOIN volume AS T2 ON T1.Artist_ID  =  T2.Artist_ID WHERE T2.Weeks_on_Top  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Please list the age and famous title of artists in descending order of age.",
+        "query": "SELECT Famous_Title ,  Age FROM artist ORDER BY Age DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the famous titles and ages of each artist, listed in descending order by age?",
+        "query": "SELECT Famous_Title ,  Age FROM artist ORDER BY Age DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What is the famous release date of the artist with the oldest age?",
+        "query": "SELECT Famous_Release_date FROM artist ORDER BY Age DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Return the famous release date for the oldest artist.",
+        "query": "SELECT Famous_Release_date FROM artist ORDER BY Age DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Please show the categories of the music festivals and the count.",
+        "query": "SELECT Category ,  COUNT(*) FROM music_festival GROUP BY Category"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Return the number of music festivals of each category.",
+        "query": "SELECT Category ,  COUNT(*) FROM music_festival GROUP BY Category"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What is the most common result of the music festival?",
+        "query": "SELECT RESULT FROM music_festival GROUP BY RESULT ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Return the result that is most frequent at music festivals.",
+        "query": "SELECT RESULT FROM music_festival GROUP BY RESULT ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Please show the categories of the music festivals with count more than 1.",
+        "query": "SELECT Category FROM music_festival GROUP BY Category HAVING COUNT(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the categories of music festivals for which there have been more than 1 music festival?",
+        "query": "SELECT Category FROM music_festival GROUP BY Category HAVING COUNT(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What is the song in the volume with the maximum weeks on top?",
+        "query": "SELECT Song FROM volume ORDER BY Weeks_on_Top DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Return the song in the volume that has spent the most weeks on top?",
+        "query": "SELECT Song FROM volume ORDER BY Weeks_on_Top DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Find the famous titles of artists that do not have any volume.",
+        "query": "SELECT Famous_Title FROM artist WHERE Artist_ID NOT IN(SELECT Artist_ID FROM volume)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the famous titles of artists who do not have any volumes?",
+        "query": "SELECT Famous_Title FROM artist WHERE Artist_ID NOT IN(SELECT Artist_ID FROM volume)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Show the famous titles of the artists with both volumes that lasted more than 2 weeks on top and volumes that lasted less than 2 weeks on top.",
+        "query": "SELECT T1.Famous_Title FROM artist AS T1 JOIN volume AS T2 ON T1.Artist_ID  =  T2.Artist_ID WHERE T2.Weeks_on_Top  >  2 INTERSECT SELECT T1.Famous_Title FROM artist AS T1 JOIN volume AS T2 ON T1.Artist_ID  =  T2.Artist_ID WHERE T2.Weeks_on_Top  <  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the famous titles of artists who have not only had volumes that spent more than 2 weeks on top but also volumes that spent less than 2 weeks on top?",
+        "query": "SELECT T1.Famous_Title FROM artist AS T1 JOIN volume AS T2 ON T1.Artist_ID  =  T2.Artist_ID WHERE T2.Weeks_on_Top  >  2 INTERSECT SELECT T1.Famous_Title FROM artist AS T1 JOIN volume AS T2 ON T1.Artist_ID  =  T2.Artist_ID WHERE T2.Weeks_on_Top  <  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the date of ceremony of music festivals with category \"Best Song\" and result \"Awarded\"?",
+        "query": "SELECT Date_of_ceremony FROM music_festival WHERE Category  =  \"Best Song\" AND RESULT  =  \"Awarded\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Return the dates of ceremony corresponding to music festivals that had the category \"Best Song\" and result \"Awarded\".",
+        "query": "SELECT Date_of_ceremony FROM music_festival WHERE Category  =  \"Best Song\" AND RESULT  =  \"Awarded\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What is the issue date of the volume with the minimum weeks on top?",
+        "query": "SELECT Issue_Date FROM volume ORDER BY Weeks_on_Top ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Return the issue date of the volume that has spent the fewest weeks on top.",
+        "query": "SELECT Issue_Date FROM volume ORDER BY Weeks_on_Top ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "How many distinct artists have volumes?",
+        "query": "SELECT COUNT(DISTINCT Artist_ID) FROM volume"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Count the number of artists who have had volumes.",
+        "query": "SELECT COUNT(DISTINCT Artist_ID) FROM volume"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Please show the results of music festivals and the number of music festivals that have had each, ordered by this count.",
+        "query": "SELECT RESULT ,  COUNT(*) FROM music_festival GROUP BY RESULT ORDER BY COUNT(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "How many music festivals have had each kind of result, ordered descending by count?",
+        "query": "SELECT RESULT ,  COUNT(*) FROM music_festival GROUP BY RESULT ORDER BY COUNT(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "What are the issue dates of volumes associated with the artist aged 23 or younger?",
+        "query": "SELECT Issue_Date FROM artist AS T1 JOIN volume AS T2 ON T1.Artist_ID  =  T2.Artist_ID WHERE T1.age  <=  23"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_4",
+        "question": "Return the issue dates of volumes by artists who are at most 23 years old?",
+        "query": "SELECT Issue_Date FROM artist AS T1 JOIN volume AS T2 ON T1.Artist_ID  =  T2.Artist_ID WHERE T1.age  <=  23"
+    }
+]

@@ -1,0 +1,290 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "Name the coin that has the highest market capitalization for all transactions in 2018.",
+        "query": "SELECT T1.name FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date LIKE '2018%' AND T2.market_cap = ( SELECT MAX(market_cap) FROM historical WHERE STRFTIME('%Y', date) = '2018' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "What is the total value of Argentum coined traded in the past 24 hours on 2016/10/11.",
+        "query": "SELECT T2.volume_24h FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T1.name = 'Argentum' AND T2.date = '2016-10-11'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "List the price for Zetacoin on 13/11/1 and the next 7 consecutive days. What is the average price for these 7 days?",
+        "query": "SELECT T2.price FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T1.name = 'Zetacoin' AND T2.date BETWEEN '2013-11-01' AND '2013-11-07' UNION ALL SELECT AVG(T2.PRICE) FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T1.name = 'Zetacoin' AND T2.date BETWEEN '2013-11-01' AND '2013-11-07'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "For all transactions for WRAP in August 2016, list the time to achieve highest price and the time to achieve the lowest price.",
+        "query": "SELECT T2.time_high, T2.time_low, T2.date FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T1.name = 'WARP' AND STRFTIME('%Y-%m', T2.date) = '2016-08'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "State the transaction date whereby DigixDAO was transacted at the hightest price.",
+        "query": "SELECT T2.date FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T1.name = 'DigixDAO' ORDER BY T2.price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "Name the coin with the highest percentage price changed in 24 hours. State the transaction date and price.",
+        "query": "SELECT T1.name, T2.DATE, T2.price FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.percent_change_24h = ( SELECT MAX(percent_change_24h) FROM historical )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "What is the average monthly circulating supply for Frozen in 2014.",
+        "query": "SELECT CAST(SUM(T2.circulating_supply) AS REAL) / 12 FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T1.name = 'Frozen' AND STRFTIME('%Y', T2.date) = '2014'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "List all the inactive coins and state the last date of its transaction?",
+        "query": "SELECT T1.NAME, MAX(T2.DATE) FROM coins AS T1 INNER JOIN historical AS T2 ON T1.ID = T2.coin_id WHERE T1.status = 'inactive' ORDER BY T2.DATE DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "What was the price of 1 Bitcoin in 2016?",
+        "query": "SELECT AVG(T2.price) FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T1.name = 'Bitcoin' AND STRFTIME('%Y', T2.date) = '2016'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "State the transaction date and the price when Bitcoin was bottomed?",
+        "query": "SELECT T2.date, T2.price FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T1.name = 'Bitcoin' ORDER BY T2.price LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "For all coins with average price more than $1000. State the current status of the coin.",
+        "query": "SELECT T1.status FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id GROUP BY T1.name HAVING AVG(T2.price) > 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "Name the coin and date of transactions with the greatest decline in percent change in 1 hour.",
+        "query": "SELECT T1.name, T2.date FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.percent_change_1h = ( SELECT MIN(percent_change_1h) FROM historical )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "Name the coin under the token category that gives the highest max profit.",
+        "query": "SELECT T1.name FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T1.category = 'token' ORDER BY T2.high - T2.low DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "Name the coin that have higher than average percentage price changed from the previous 24 hours for transaction on 2013/6/22.",
+        "query": "SELECT T1.name FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date = '2020-06-22' GROUP BY T1.name HAVING AVG(T2.percent_change_24h) > T2.PRICE"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "Which crytocurrency was ranked the first by CoinMarketCap on 2013/4/28?",
+        "query": "SELECT T1.name FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date = '2013-04-28' AND T2.cmc_rank = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "How much dollars was a Bitcoin worth on 2013/4/28 according to the coin market?",
+        "query": "SELECT T2.market_cap FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date = '2013-04-28' AND T1.name = 'Bitcoin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "Which crytocurrency was not opened on 2013/5/3?",
+        "query": "SELECT T1.name FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date = '2013-05-03' AND T2.open IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "What was the price of Bitcoin when it closed at the end of the day on 2013/4/29?",
+        "query": "SELECT T2.close FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date = '2013-04-29' AND T1.name = 'Bitcoin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "When did Bitcoin reach its highest price on 2013/4/29?",
+        "query": "SELECT T2.time_high FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date = '2013-04-29' AND T1.name = 'Bitcoin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "What was the max profit a user can make on Bitcoin on 2013/4/28?",
+        "query": "SELECT T2.high - T2.low FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date = '2013-04-28' AND T1.name = 'Bitcoin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "What was the number of Bitcoins verifiably burned until 2013/4/28?",
+        "query": "SELECT T2.max_supply - T2.total_supply FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date = '2013-04-28' AND T1.name = 'Bitcoin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "Which crytocurrency was traded in the highest value on 2016/1/8?",
+        "query": "SELECT T1.name FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date = '2016-01-08' AND T2.volume_24h = ( SELECT MAX(volume_24h) FROM historical WHERE date = '2016-01-08' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "Please list the names of the crytocurrencies that have a total amount of existence of over 10000000 on 2013/4/28.",
+        "query": "SELECT T1.name FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date = '2013-04-28' AND T2.total_supply > 10000000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "Had Bitcoin's price increased or decreased on 2013/5/5 compared with the price 7 days before?",
+        "query": "SELECT (CASE WHEN T2.percent_change_7d > 0 THEN 'INCREASED' ELSE 'DECREASED' END) FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date = '2013-05-05' AND T1.name = 'Bitcoin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "Which crytocurrency had a bigger number of coins circulating in the market and in the general public's hands on 2013/4/28, Bitcoin or Litecoin?",
+        "query": "SELECT T1.name FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date = '2013-04-28' AND T1.name IN ('Bitcoin', 'Litecoin') ORDER BY T2.circulating_supply DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "How much was a Bitcoin on 2013/4/28?",
+        "query": "SELECT T2.price FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date = '2013-04-28' AND T1.name = 'Bitcoin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "What was the average price of a Bitcoin in the year 2013?",
+        "query": "SELECT AVG(T2.price) FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE STRFTIME('%Y', T2.date) = '2013' AND T1.name = 'Bitcoin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "What was the percentage of the Bitcoins verifiably burned until 2018/4/28?",
+        "query": "SELECT CAST((SUM(T2.max_supply) - SUM(T2.total_supply)) AS REAL) / SUM(T2.total_supply) FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date < '2018-04-28' AND T1.name = 'Bitcoin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "Please list the names of coins that has been disappeared.",
+        "query": "SELECT name FROM coins WHERE status = 'extinct'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "What's the descripition of BitBar?",
+        "query": "SELECT description FROM coins WHERE name = 'BitBar'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "How many coins were added in May 2013? Please list the names of coins.",
+        "query": "SELECT COUNT(id) num FROM coins WHERE STRFTIME('%Y-%m', date_added) = '2013-05' UNION ALL SELECT name FROM coins WHERE STRFTIME('%Y-%m', date_added) = '2013-05'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "List the names and symbols of the coins that were added on June 14, 2013.",
+        "query": "SELECT name, symbol FROM coins WHERE date_added LIKE '2013-06-14%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "List the names of coins that cannot be traded in 2014.",
+        "query": "SELECT name FROM coins WHERE date_added LIKE '2014%' AND status = 'untracked'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "Name the coins that have three tags.",
+        "query": "SELECT name FROM coins WHERE LENGTH(tag_names) - LENGTH(replace(tag_names, ',', '')) = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "What is the name of the coin with the highest price?",
+        "query": "SELECT T1.name FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.price = ( SELECT MAX(price) FROM historical )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "Please name the coin that ranked first among the coins traded on April 29, 2013.",
+        "query": "SELECT T1.name FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date = '2013-04-29' AND T2.cmc_rank = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "When is the best time to purchase Bitcoin?",
+        "query": "SELECT T2.date FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T1.name = 'Bitcoin' ORDER BY T2.low LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "What is the name of the coin that creates the most total value in the past 24 hours?",
+        "query": "SELECT T1.name FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.volume_24h = ( SELECT MAX(volume_24h) FROM historical )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "Name the coins that were not opened on May 2013.",
+        "query": "SELECT T1.name FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE STRFTIME('%Y-%m', T2.date) = '2013-05' AND T2.open IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "When is the highest closed price of CHNCoin?",
+        "query": "SELECT T2.date FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T1.name = 'CHNCoin' ORDER BY T2.close DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "When did Peercoin rank fifth?",
+        "query": "SELECT T2.date FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T1.name = 'Peercoin' AND T2.cmc_rank = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "When is Devcoin most valuable in the market?",
+        "query": "SELECT T2.date FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T1.name = 'Devcoin' ORDER BY T2.market_cap DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "List the names of the top five coins traded on January 1, 2014.",
+        "query": "SELECT T1.name FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date = '2014-01-01' AND T2.cmc_rank <= 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "When was Lebowskis not opened?",
+        "query": "SELECT DISTINCT T2.date FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T1.name = 'Lebowskis' AND (T2.open IS NULL OR T2.open = 0)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "When is the highest price of Terracoin?",
+        "query": "SELECT T2.date FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T1.name = 'Terracoin' ORDER BY T2.price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "How many times was Bytecoin traded in June 2013?",
+        "query": "SELECT COUNT(T2.coin_id) FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T1.name = 'Bytecoin' AND STRFTIME('%Y-%m', T2.date) = '2013-06'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "List the names of the coins above the average price on April 28, 2013.",
+        "query": "SELECT T1.name FROM coins AS T1 INNER JOIN historical AS T2 ON T1.id = T2.coin_id WHERE T2.date = '2018-04-28' AND T2.price > ( SELECT AVG(price) FROM historical WHERE date = '2018-04-28' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "coinmarketcap",
+        "question": "What's the percentage of coins that is higher than the price 1 hour ago in May 29,2013? List the names of these coins.",
+        "query": "SELECT T1.NAME FROM coins AS T1 INNER JOIN historical AS T2 ON T1.ID = T2.coin_id WHERE T2.DATE = '2013-05-29' AND T2.percent_change_1h > 0"
+    }
+]

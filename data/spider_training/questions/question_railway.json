@@ -1,0 +1,128 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "How many railways are there?",
+        "query": "SELECT count(*) FROM railway"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "List the builders of railways in ascending alphabetical order.",
+        "query": "SELECT Builder FROM railway ORDER BY Builder ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "List the wheels and locations of the railways.",
+        "query": "SELECT Wheels ,  LOCATION FROM railway"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "What is the maximum level of managers in countries that are not \"Australia\"?",
+        "query": "SELECT max(LEVEL) FROM manager WHERE Country != \"Australia\t\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "What is the average age for all managers?",
+        "query": "SELECT avg(Age) FROM manager"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "What are the names of managers in ascending order of level?",
+        "query": "SELECT Name FROM manager ORDER BY LEVEL ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "What are the names and arrival times of trains?",
+        "query": "SELECT Name ,  Arrival FROM train"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "What is the name of the oldest manager?",
+        "query": "SELECT Name FROM manager ORDER BY Age DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "Show the names of trains and locations of railways they are in.",
+        "query": "SELECT T2.Name ,  T1.Location FROM railway AS T1 JOIN train AS T2 ON T1.Railway_ID  =  T2.Railway_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "Show the builder of railways associated with the trains named \"Andaman Exp\".",
+        "query": "SELECT T1.Builder FROM railway AS T1 JOIN train AS T2 ON T1.Railway_ID  =  T2.Railway_ID WHERE T2.Name  =  \"Andaman Exp\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "Show id and location of railways that are associated with more than one train.",
+        "query": "SELECT T2.Railway_ID ,  T1.Location FROM railway AS T1 JOIN train AS T2 ON T1.Railway_ID  =  T2.Railway_ID GROUP BY T2.Railway_ID HAVING COUNT(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "Show the id and builder of the railway that are associated with the most trains.",
+        "query": "SELECT T2.Railway_ID ,  T1.Builder FROM railway AS T1 JOIN train AS T2 ON T1.Railway_ID  =  T2.Railway_ID GROUP BY T2.Railway_ID ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "Show different builders of railways, along with the corresponding number of railways using each builder.",
+        "query": "SELECT Builder ,  COUNT(*) FROM railway GROUP BY Builder"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "Show the most common builder of railways.",
+        "query": "SELECT Builder FROM railway GROUP BY Builder ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "Show different locations of railways along with the corresponding number of railways at each location.",
+        "query": "SELECT LOCATION ,  COUNT(*) FROM railway GROUP BY LOCATION"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "Show the locations that have more than one railways.",
+        "query": "SELECT LOCATION FROM railway GROUP BY LOCATION HAVING COUNT(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "List the object number of railways that do not have any trains.",
+        "query": "SELECT ObjectNumber FROM railway WHERE Railway_ID NOT IN (SELECT Railway_ID FROM train)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "Show the countries that have both managers of age above 50 and managers of age below 46.",
+        "query": "SELECT Country FROM manager WHERE Age  >  50 INTERSECT SELECT Country FROM manager WHERE Age  <  46"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "Show the distinct countries of managers.",
+        "query": "SELECT DISTINCT Country FROM manager"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "Show the working years of managers in descending order of their level.",
+        "query": "SELECT Working_year_starts FROM manager ORDER BY LEVEL DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "railway",
+        "question": "Show the countries that have managers of age above 50 or below 46.",
+        "query": "SELECT Country FROM manager WHERE Age  >  50 OR Age  <  46"
+    }
+]

@@ -1,0 +1,279 @@
+{
+    "badges": [
+        [
+            20464,
+            11361,
+            "Scholar",
+            "2012-05-21 01:36:23.0"
+        ],
+        [
+            13531,
+            6412,
+            "Critic",
+            "2011-11-29 09:42:34.0"
+        ],
+        [
+            80004,
+            46495,
+            "Tumbleweed",
+            "2014-06-07 22:26:28.0"
+        ]
+    ],
+    "comments": [
+        [
+            102551,
+            52543,
+            0,
+            "Thanks for your help but I was wondering if I could get a more theoretical answer? What probability are you actually calculating with |X|?",
+            "2013-03-18 00:01:15.0",
+            17140,
+            null
+        ],
+        [
+            160879,
+            82005,
+            0,
+            "You might find useful references and articles in the Wikipedia article on baseball statistics [link](https://en.wikipedia.org/wiki/APBRmetrics)",
+            "2014-01-13 01:08:33.0",
+            29374,
+            null
+        ],
+        [
+            178868,
+            91326,
+            0,
+            "Can you state your hypothesis in plain English (without using statistical jargon like \"significant\" -- which doesn't belong in a hypothesis)? Please note that hypotheses are about unobserved populations, not observed samples, so measures like \"number of\" generally don't belong in hypotheses either.",
+            "2014-03-25 22:24:31.0",
+            805,
+            null
+        ]
+    ],
+    "postHistory": [
+        [
+            275443,
+            5,
+            82333,
+            "5ebe6159-e2d1-461d-93f9-948864d3935a",
+            "2014-01-15 12:08:37.0",
+            37188,
+            "No, you can't do it in an unsupervised way. The reason is simple: somehow you need to incorporate a rule of when two nodes should be connected; or if the final graph is weighted, you need a rule about the weights you expect given the $a(i,j)$ and $b(i,j)$. In the first case you end up doing classification, in the later regression. The missing rule is the free parameter you try to find, that is how $a$ and $b$ are related. \\\\n\\\\nIf you can't make an arbitrary decision for the free parameter (e.g. just take their sum, that is free parameter equals to one), then you need to build a dataset with several different combinations of $a$ and $b$, the required result in each case and find the free parameter using a supervised approach. By the way, I don't know your data, but you already made some assumption about that rule: that it connects $a$ and $b$ in a linear way.",
+            "added 138 characters in body",
+            ""
+        ],
+        [
+            45437,
+            3,
+            15449,
+            "3da81fff-e281-4435-adfa-badff7d465cf",
+            "2011-09-12 01:00:17.0",
+            6169,
+            "<machine-learning><text-mining>",
+            "",
+            ""
+        ],
+        [
+            350143,
+            3,
+            104488,
+            "4e9a544b-1532-4bc8-82df-9edc2f1d1e24",
+            "2014-06-24 04:57:14.0",
+            4370,
+            "<regression>",
+            "",
+            ""
+        ]
+    ],
+    "postLinks": [
+        [
+            2804759,
+            "2014-01-04 01:34:34.0",
+            81170,
+            77850,
+            1
+        ],
+        [
+            3243878,
+            "2014-07-27 17:01:12.0",
+            109569,
+            50745,
+            1
+        ],
+        [
+            2715135,
+            "2013-11-03 18:56:47.0",
+            57688,
+            22346,
+            1
+        ]
+    ],
+    "posts": [
+        [
+            5721,
+            2,
+            null,
+            "2010-12-23 18:45:57.0",
+            0,
+            null,
+            "<p>What is wrong with doing simple non-linear least squares in this case?  Am I missing something obvious?</p>\n",
+            1777,
+            "2010-12-23 18:45:57.0",
+            null,
+            null,
+            null,
+            1,
+            null,
+            null,
+            null,
+            null,
+            5700,
+            null,
+            null,
+            null
+        ],
+        [
+            24541,
+            2,
+            null,
+            "2012-03-12 21:25:58.0",
+            1,
+            null,
+            "<p>Are you by chance modeling count data? You need to use a Poisson or Negative Binomial regression for count data, otherwise you can end up with negative predictions.</p>\n",
+            1764,
+            "2012-03-12 21:25:58.0",
+            null,
+            null,
+            null,
+            5,
+            null,
+            null,
+            null,
+            null,
+            24535,
+            null,
+            null,
+            null
+        ],
+        [
+            24212,
+            1,
+            24213,
+            "2012-03-06 20:56:27.0",
+            0,
+            131,
+            "<p>For $a_1,a_2$ and $b_1,b_2$, $\\\\in\\\\Re^+$, if $a_1&lt;b_1$ , then for any perturbation by a random variable $\\\\epsilon\\\\in \\\\Re^+$,\n$$r_1=\\\\frac{a_1+\\\\epsilon}{b_1+\\\\epsilon}&gt;\\\\frac{a_1}{b_1} $$ and if $a_2&gt;b_2$,  $$r_2=\\\\frac{a_2+\\\\epsilon}{b_2+\\\\epsilon}&lt;\\\\frac{a_2}{b_2} $$</p>\n\n<p>If $\\\\epsilon$ is generated from a density as, $\\\\epsilon_1={f_\\\\epsilon(t=x)}$ and $\\\\epsilon_2={f_\\\\epsilon(t=y)}$ for $r_1$ and $r_2$ respectively or as a special case where $\\\\epsilon=\\\\epsilon_1=\\\\epsilon_2$, when $x=y$, </p>\n\n<p>What would be a way to characterize $r_1-r_2$ in terms of $f_\\\\epsilon(t)?$  </p>\n\n<p><em>Note</em>: The parameters of the density function $f_\\\\epsilon(.)$ are generic here. Feel free to use multi-parameter densities, if you would like to solve the problem with a chosen distributional assumption for $f_\\\\epsilon$ </p>\n",
+            6897,
+            "2012-03-06 23:24:14.0",
+            "Perturbations of rational numbers with random variables",
+            "<confidence-interval><stochastic-processes><probability>",
+            1,
+            1,
+            null,
+            4856,
+            "2012-03-06 23:24:14.0",
+            null,
+            null,
+            null,
+            null,
+            null
+        ]
+    ],
+    "tags": [
+        [
+            422,
+            "particle-filter",
+            24,
+            null,
+            null
+        ],
+        [
+            1604,
+            "chi-distribution",
+            1,
+            67110,
+            67109
+        ],
+        [
+            1548,
+            "regression-to-the-mean",
+            5,
+            null,
+            null
+        ]
+    ],
+    "users": [
+        [
+            35801,
+            1,
+            "2013-12-07 00:29:41.0",
+            "Robbie",
+            "2014-09-14 01:52:01.0",
+            null,
+            null,
+            null,
+            1,
+            0,
+            0,
+            3525646,
+            null,
+            "https://www.gravatar.com/avatar/?s=128&d=identicon&r=PG&f=1"
+        ],
+        [
+            38366,
+            51,
+            "2014-02-01 22:11:44.0",
+            "Thomas Lumley",
+            "2014-03-04 16:14:40.0",
+            null,
+            null,
+            null,
+            4,
+            0,
+            0,
+            3951205,
+            null,
+            null
+        ],
+        [
+            29848,
+            1,
+            "2013-09-03 12:01:19.0",
+            "user29848",
+            "2014-08-25 09:21:09.0",
+            null,
+            null,
+            null,
+            0,
+            0,
+            0,
+            3253148,
+            null,
+            "https://www.gravatar.com/avatar/?s=128&d=identicon&r=PG&f=1"
+        ]
+    ],
+    "votes": [
+        [
+            24059,
+            5600,
+            2,
+            "2010-12-19",
+            null,
+            null
+        ],
+        [
+            34382,
+            7939,
+            2,
+            "2011-03-07",
+            null,
+            null
+        ],
+        [
+            32298,
+            7481,
+            2,
+            "2011-02-22",
+            null,
+            null
+        ]
+    ]
+}

@@ -1,0 +1,188 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "Which assets have 2 parts and have less than 2 fault logs? List the asset id and detail.",
+        "query": "SELECT T1.asset_id ,  T1.asset_details FROM Assets AS T1 JOIN Asset_Parts AS T2 ON T1.asset_id  =  T2.asset_id GROUP BY T1.asset_id HAVING count(*)  =  2 INTERSECT SELECT T1.asset_id ,  T1.asset_details FROM Assets AS T1 JOIN Fault_Log AS T2 ON T1.asset_id  =  T2.asset_id GROUP BY T1.asset_id HAVING count(*)  <  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "How many assets does each maintenance contract contain? List the number and the contract id.",
+        "query": "SELECT count(*) ,  T1.maintenance_contract_id FROM Maintenance_Contracts AS T1 JOIN Assets AS T2 ON T1.maintenance_contract_id  =  T2.maintenance_contract_id GROUP BY T1.maintenance_contract_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "How many assets does each third party company supply? List the count and the company id.",
+        "query": "SELECT count(*) ,  T1.company_id FROM Third_Party_Companies AS T1 JOIN Assets AS T2 ON T1.company_id  =  T2.supplier_company_id GROUP BY T1.company_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "Which third party companies have at least 2 maintenance engineers or have at least 2 maintenance contracts? List the company id and name.",
+        "query": "SELECT T1.company_id ,  T1.company_name FROM Third_Party_Companies AS T1 JOIN Maintenance_Engineers AS T2 ON T1.company_id  =  T2.company_id GROUP BY T1.company_id HAVING count(*)  >=  2 UNION SELECT T3.company_id ,  T3.company_name FROM Third_Party_Companies AS T3 JOIN Maintenance_Contracts AS T4 ON T3.company_id  =  T4.maintenance_contract_company_id GROUP BY T3.company_id HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "What is the name and id of the staff who recorded the fault log but has not contacted any visiting engineers?",
+        "query": "SELECT T1.staff_name ,  T1.staff_id FROM Staff AS T1 JOIN Fault_Log AS T2 ON T1.staff_id  =  T2.recorded_by_staff_id EXCEPT SELECT T3.staff_name ,  T3.staff_id FROM Staff AS T3 JOIN Engineer_Visits AS T4 ON T3.staff_id  =  T4.contact_staff_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "Which engineer has visited the most times? Show the engineer id, first name and last name.",
+        "query": "SELECT T1.engineer_id ,  T1.first_name ,  T1.last_name FROM Maintenance_Engineers AS T1 JOIN Engineer_Visits AS T2 GROUP BY T1.engineer_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "Which parts have more than 2 faults? Show the part name and id.",
+        "query": "SELECT T1.part_name ,  T1.part_id FROM Parts AS T1 JOIN Part_Faults AS T2 ON T1.part_id  =  T2.part_id GROUP BY T1.part_id HAVING count(*)  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "List all every engineer's first name, last name, details and coresponding skill description.",
+        "query": "SELECT T1.first_name ,  T1.last_name ,  T1.other_details ,  T3.skill_description FROM Maintenance_Engineers AS T1 JOIN Engineer_Skills AS T2 ON T1.engineer_id  =  T2.engineer_id JOIN Skills AS T3 ON T2.skill_id  =  T3.skill_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "For all the faults of different parts, what are all the decriptions of the skills required to fix them? List the name of the faults and the skill description.",
+        "query": "SELECT T1.fault_short_name ,  T3.skill_description FROM Part_Faults AS T1 JOIN Skills_Required_To_Fix AS T2 ON T1.part_fault_id  =  T2.part_fault_id JOIN Skills AS T3 ON T2.skill_id  =  T3.skill_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "How many assets can each parts be used in? List the part name and the number.",
+        "query": "SELECT T1.part_name ,  count(*) FROM Parts AS T1 JOIN Asset_Parts AS T2 ON T1.part_id  =  T2.part_id GROUP BY T1.part_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "What are all the fault descriptions and the fault status of all the faults recoreded in the logs?",
+        "query": "SELECT T1.fault_description ,  T2.fault_status FROM Fault_Log AS T1 JOIN Fault_Log_Parts AS T2 ON T1.fault_log_entry_id  =  T2.fault_log_entry_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "How many engineer visits are required at most for a single fault log? List the number and the log entry id.",
+        "query": "SELECT count(*) ,  T1.fault_log_entry_id FROM Fault_Log AS T1 JOIN Engineer_Visits AS T2 ON T1.fault_log_entry_id  =  T2.fault_log_entry_id GROUP BY T1.fault_log_entry_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "What are all the distinct last names of all the engineers?",
+        "query": "SELECT DISTINCT last_name FROM Maintenance_Engineers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "How many fault status codes are recorded in the fault log parts table?",
+        "query": "SELECT DISTINCT fault_status FROM Fault_Log_Parts"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "Which engineers have never visited to maintain the assets? List the engineer first name and last name.",
+        "query": "SELECT first_name ,  last_name FROM Maintenance_Engineers WHERE engineer_id NOT IN (SELECT engineer_id FROM Engineer_Visits)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "List the asset id, details, make and model for every asset.",
+        "query": "SELECT asset_id ,  asset_details ,  asset_make ,  asset_model FROM Assets"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "When was the first asset acquired?",
+        "query": "SELECT asset_acquired_date FROM Assets ORDER BY asset_acquired_date ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "Which part fault requires the most number of skills to fix? List part id and name.",
+        "query": "SELECT T1.part_id ,  T1.part_name FROM Parts AS T1 JOIN Part_Faults AS T2 ON T1.part_id  =  T2.part_id JOIN Skills_Required_To_Fix AS T3 ON T2.part_fault_id  =  T3.part_fault_id GROUP BY T1.part_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "Which kind of part has the least number of faults? List the part name.",
+        "query": "SELECT T1.part_name FROM Parts AS T1 JOIN Part_Faults AS T2 ON T1.part_id  =  T2.part_id GROUP BY T1.part_name ORDER BY count(*) ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "Among those engineers who have visited, which engineer makes the least number of visits? List the engineer id, first name and last name.",
+        "query": "SELECT T1.engineer_id ,  T1.first_name ,  T1.last_name FROM Maintenance_Engineers AS T1 JOIN Engineer_Visits AS T2 ON T1.engineer_id  =  T2.engineer_id GROUP BY T1.engineer_id ORDER BY count(*) ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "Which staff have contacted which engineers? List the staff name and the engineer first name and last name.",
+        "query": "SELECT T1.staff_name ,  T3.first_name ,  T3.last_name FROM Staff AS T1 JOIN Engineer_Visits AS T2 ON T1.staff_id  =  T2.contact_staff_id JOIN Maintenance_Engineers AS T3 ON T2.engineer_id  =  T3.engineer_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "Which fault log included the most number of faulty parts? List the fault log id, description and record time.",
+        "query": "SELECT T1.fault_log_entry_id ,  T1.fault_description ,  T1.fault_log_entry_datetime FROM Fault_Log AS T1 JOIN Fault_Log_Parts AS T2 ON T1.fault_log_entry_id  =  T2.fault_log_entry_id GROUP BY T1.fault_log_entry_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "Which skill is used in fixing the most number of faults? List the skill id and description.",
+        "query": "SELECT T1.skill_id ,  T1.skill_description FROM Skills AS T1 JOIN Skills_Required_To_Fix AS T2 ON T1.skill_id  =  T2.skill_id GROUP BY T1.skill_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "What are all the distinct asset models?",
+        "query": "SELECT DISTINCT asset_model FROM Assets"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "List the all the assets make, model, details by the disposed date ascendingly.",
+        "query": "SELECT asset_make ,  asset_model ,  asset_details FROM Assets ORDER BY asset_disposed_date ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "Which part has the least chargeable amount? List the part id and amount.",
+        "query": "SELECT part_id ,  chargeable_amount FROM Parts ORDER BY chargeable_amount ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "Which company started the earliest the maintenance contract? Show the company name.",
+        "query": "SELECT T1.company_name FROM Third_Party_Companies AS T1 JOIN Maintenance_Contracts AS T2 ON T1.company_id  =  T2.maintenance_contract_company_id ORDER BY T2.contract_start_date ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "What is the description of the type of the company who concluded its contracts most recently?",
+        "query": "SELECT T1.company_name FROM Third_Party_Companies AS T1 JOIN Maintenance_Contracts AS T2 ON T1.company_id  =  T2.maintenance_contract_company_id JOIN Ref_Company_Types AS T3 ON T1.company_type_code  =  T3.company_type_code ORDER BY T2.contract_end_date DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "Which gender makes up the majority of the staff?",
+        "query": "SELECT gender FROM staff GROUP BY gender ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "How many engineers did each staff contact? List both the contact staff name and number of engineers contacted.",
+        "query": "SELECT T1.staff_name ,  count(*) FROM Staff AS T1 JOIN Engineer_Visits AS T2 ON T1.staff_id  =  T2.contact_staff_id GROUP BY T1.staff_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "assets_maintenance",
+        "question": "Which assets did not incur any fault log? List the asset model.",
+        "query": "SELECT asset_model FROM Assets WHERE asset_id NOT IN (SELECT asset_id FROM Fault_Log)"
+    }
+]

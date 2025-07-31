@@ -1,0 +1,1130 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many community areas are there in Central Chicago?",
+        "query": "SELECT COUNT(*) FROM Community_Area WHERE side = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Which district is the community area Lincoln Square grouped into?",
+        "query": "SELECT side FROM Community_Area WHERE community_area_name = 'Lincoln Square'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Which district in Chicago has the most community areas?",
+        "query": "SELECT side FROM Community_Area GROUP BY side ORDER BY COUNT(side) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Which community area has the least population?",
+        "query": "SELECT community_area_name FROM Community_Area ORDER BY population ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Who is the person responsible for the crime cases in Central Chicago?",
+        "query": "SELECT commander FROM District WHERE district_name = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the email address to contact the administrator of Central Chicago?",
+        "query": "SELECT email FROM District WHERE district_name = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "To which community area does the neighborhood Albany Park belong?",
+        "query": "SELECT T2.community_area_name FROM Neighborhood AS T1 INNER JOIN Community_Area AS T2 ON T1.community_area_no = T2.community_area_no WHERE T1.neighborhood_name = 'Albany Park'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many neighborhoods are there in the community area of Lincoln Square?",
+        "query": "SELECT COUNT(T3.community_area_no) FROM ( SELECT T1.community_area_no FROM Community_Area AS T1 INNER JOIN Neighborhood AS T2 ON T1.community_area_no = T2.community_area_no WHERE community_area_name = 'Lincoln Square' GROUP BY T1.community_area_no ) T3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Please list the names of all the neighborhoods in the community area with the most population.",
+        "query": "SELECT T1.neighborhood_name FROM Neighborhood AS T1 INNER JOIN Community_Area AS T2 ON T2.community_area_no = T2.community_area_no ORDER BY T2.population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Please list the names of all the neighborhoods in Central Chicago.",
+        "query": "SELECT T2.neighborhood_name FROM Community_Area AS T1 INNER JOIN Neighborhood AS T2 ON T1.community_area_no = T2.community_area_no WHERE T1.side = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Please list the precise location coordinates of all the crimes in Central Chicago.",
+        "query": "SELECT T2.latitude, T2.longitude FROM District AS T1 INNER JOIN Crime AS T2 ON T1.district_no = T2.district_no WHERE T1.district_name = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many crimes had happened in Central Chicago?",
+        "query": "SELECT COUNT(*) FROM Crime AS T1 INNER JOIN District AS T2 ON T1.district_no = T2.district_no WHERE T2.district_name = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Among all the crimes that had happened in Central Chicago, how many of them were cases of domestic violence?",
+        "query": "SELECT COUNT(*) FROM Crime AS T1 INNER JOIN District AS T2 ON T1.district_no = T2.district_no WHERE T2.district_name = 'Central' AND T1.domestic = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Please list the case numbers of all the crimes with no arrest made in Central Chicago.",
+        "query": "SELECT COUNT(*) FROM Crime AS T1 INNER JOIN District AS T2 ON T1.district_no = T2.district_no WHERE T2.district_name = 'Central' AND T1.arrest = 'FALSE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many crimes had happened in the community area with the most population?",
+        "query": "SELECT COUNT(T2.report_no) FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T1.community_area_no = T2.community_area_no GROUP BY T1.community_area_name ORDER BY T1.population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Among the crimes in Woodlawn, how many of them happened in January, 2018?",
+        "query": "SELECT SUM(CASE WHEN T1.community_area_name = 'Woodlawn' THEN 1 ELSE 0 END) FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T1.community_area_no = T2.community_area_no WHERE T2.date LIKE '%1/2018%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "More crimes happened in which community area in January, 2018, Woodlawn or Lincoln Square?",
+        "query": "SELECT T1.community_area_name FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T1.community_area_no = T2.community_area_no WHERE T1.community_area_name IN ('Woodlawn', 'Lincoln Square') AND T2.date LIKE '%1/2018%' GROUP BY T1.community_area_name ORDER BY COUNT(T1.community_area_name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the fax number for the district with the most number of crimes in January, 2018?",
+        "query": "SELECT T1.fax FROM District AS T1 INNER JOIN Crime AS T2 ON T1.district_no = T2.district_no WHERE T2.date LIKE '%1/2018%' GROUP BY T2.district_no ORDER BY COUNT(case_number) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the average number of crimes in a neighborhood in Central Chicago?",
+        "query": "SELECT CAST(COUNT(T1.report_no) AS REAL) / COUNT(T2.community_area_no) FROM Crime AS T1 INNER JOIN Community_Area AS T2 ON T1.community_area_no = T2.community_area_no WHERE T2.side = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Among the crimes in all the districts in Chicago, what is the percentage of them happening in the Central district?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.district_name = 'Central' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.case_number) FROM Crime AS T1 INNER JOIN District AS T2 ON T1.district_no = T2.district_no"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many community areas are in the Far North side?",
+        "query": "SELECT COUNT(*) FROM Community_Area WHERE side = 'Far North '"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Who is the commander of Morgan Park district?",
+        "query": "SELECT commander FROM District WHERE district_name = 'Morgan Park'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Where did case No. JB100065 happen? Give the name of the district.",
+        "query": "SELECT T1.district_name FROM District AS T1 INNER JOIN Crime AS T2 ON T1.district_no = T2.district_no WHERE T2.case_number = 'JB100065'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Where is the coordinate (41.66236555, -87.63470194) located? Give the name of the district.",
+        "query": "SELECT T2.district_name FROM Crime AS T1 INNER JOIN District AS T2 ON T1.district_no = T2.district_no WHERE T1.longitude = '-87.63470194' AND T1.latitude = '41.66236555'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Give the name of the person who was responsible for case No.JB524952.",
+        "query": "SELECT T1.commander FROM District AS T1 INNER JOIN Crime AS T2 ON T1.district_no = T2.district_no WHERE T2.case_number = 'JB524952'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many simple assaults happened on 2018/9/8?",
+        "query": "SELECT SUM(CASE WHEN T2.secondary_description = 'SIMPLE' THEN 1 ELSE 0 END) FROM Crime AS T1 INNER JOIN IUCR AS T2 ON T1.iucr_no = T2.iucr_no WHERE T1.date LIKE '%9/8/2018%' AND T2.primary_description = 'ASSAULT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Which district had the most number of first degree murders? Give the district number.",
+        "query": "SELECT T2.district_no FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T1.iucr_no = T2.iucr_no WHERE T1.secondary_description = 'FIRST DEGREE MURDER' GROUP BY T2.district_no ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How severe was case JB296775? Give the index code for severity.",
+        "query": "SELECT T2.iucr_no FROM Crime AS T1 INNER JOIN IUCR AS T2 ON T1.iucr_no = T2.iucr_no WHERE T1.case_number = 'JB296775'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Give the name of the community area which had the most pocket-picking thefts.",
+        "query": "SELECT T3.community_area_name FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T1.iucr_no = T2.iucr_no INNER JOIN Community_Area AS T3 ON T2.community_area_no = T3.community_area_no WHERE T1.primary_description = 'THEFT' AND T1.secondary_description = 'POCKET-PICKING' GROUP BY T2.community_area_no ORDER BY T2.case_number DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Who was the alderman of the legislative district where case No. JB103470 took place? Give the full name.",
+        "query": "SELECT T1.alderman_first_name, T1.alderman_last_name FROM Ward AS T1 INNER JOIN Crime AS T2 ON T1.ward_no = T2.ward_no WHERE T2.case_number = 'JB103470'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Give the neighborhood name of West Englewood community.",
+        "query": "SELECT T1.neighborhood_name FROM Neighborhood AS T1 INNER JOIN Community_Area AS T2 ON T1.community_area_no = T2.community_area_no WHERE T2.community_area_name = 'West Englewood'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many different neighborhoods are there in Roseland community?",
+        "query": "SELECT SUM(CASE WHEN T1.community_area_name = 'Roseland' THEN 1 ELSE 0 END) FROM Community_Area AS T1 INNER JOIN Neighborhood AS T2 ON T1.community_area_no = T2.community_area_no"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Give the FBI code description of case No.JB134191.",
+        "query": "SELECT description FROM Crime AS T1 INNER JOIN FBI_Code AS T2 ON T1.fbi_code_no = T2.fbi_code_no WHERE T1.case_number = 'JB134191'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Tell the number of cases with arrests in North Lawndale community.",
+        "query": "SELECT SUM(CASE WHEN T1.community_area_name = 'North Lawndale' THEN 1 ELSE 0 END) FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T1.community_area_no = T2.community_area_no WHERE T2.arrest = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the percentage of under $500 thefts among all cases that happened in West Englewood?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.secondary_description = '$500 AND UNDER' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.case_number) FROM Crime AS T1 INNER JOIN IUCR AS T2 ON T1.iucr_no = T2.iucr_no INNER JOIN Community_Area AS T3 ON T1.community_area_no = T3.community_area_no WHERE T2.primary_description = 'THEFT' AND T3.community_area_name = 'West Englewood'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the percentage of larceny cases among all cases that happened in Edgewater community?",
+        "query": "SELECT CAST(SUM(CASE WHEN T3.title = 'Larceny' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.case_number) FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T1.community_area_no = T2.community_area_no INNER JOIN FBI_Code AS T3 ON T2.fbi_code_no = T3.fbi_code_no WHERE T1.community_area_name = 'Edgewater'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many crimes were committed at 018XX S KOMENSKY AVEin May 2018?",
+        "query": "SELECT SUM(CASE WHEN date LIKE '5/%/2018%' THEN 1 ELSE 0 END) FROM Crime WHERE block = '018XX S KOMENSKY AVE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the name of the community with the highest population?",
+        "query": "SELECT community_area_name FROM Community_Area ORDER BY population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many incidents of domestic violence occurred in an abandoned building in 2018?",
+        "query": "SELECT SUM(CASE WHEN location_description = 'ABANDONED BUILDING' THEN 1 ELSE 0 END) FROM Crime WHERE date LIKE '%2018%' AND domestic = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the population of the district with the least population?",
+        "query": "SELECT SUM(population) FROM Community_Area GROUP BY side ORDER BY SUM(population) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many arrests were made in 2018 in an animal hospital under FBI code 08B?",
+        "query": "SELECT SUM(CASE WHEN arrest = 'TRUE' THEN 1 ELSE 0 END) FROM Crime WHERE date LIKE '%2018%' AND location_description = 'ANIMAL HOSPITAL' AND fbi_code_no = '08B'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Give the detailed description of all the crimes against society.",
+        "query": "SELECT description FROM FBI_Code WHERE crime_against = 'Society'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Who is the commanding officer in the district with the highest number of disorderly conduct?",
+        "query": "SELECT T1.commander FROM District AS T1 INNER JOIN Crime AS T2 ON T1.district_no = T2.district_no INNER JOIN FBI_Code AS T3 ON T2.fbi_code_no = T3.fbi_code_no WHERE T3.title = 'Disorderly Conduct' AND T2.fbi_code_no = 24 GROUP BY T2.fbi_code_no ORDER BY COUNT(T1.district_no) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Which crime was committed the most by criminals?",
+        "query": "SELECT T2.title FROM Crime AS T1 INNER JOIN FBI_Code AS T2 ON T1.fbi_code_no = T2.fbi_code_no ORDER BY T2.fbi_code_no DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "In Albany Park, how many arrests were made in an apartment due to criminal sexual abuse?",
+        "query": "SELECT SUM(CASE WHEN T3.title = 'Criminal Sexual Abuse' THEN 1 ELSE 0 END) FROM District AS T1 INNER JOIN Crime AS T2 ON T1.district_no = T2.district_no INNER JOIN FBI_Code AS T3 ON T2.fbi_code_no = T3.fbi_code_no WHERE T1.district_name = 'Albany Park' AND T2.arrest = 'TRUE' AND T2.location_description = 'APARTMENT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the precise location or coordinate where most of the robberies in Rogers Park occurred?",
+        "query": "SELECT T2.latitude, T2.longitude FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T1.community_area_no = T2.community_area_no INNER JOIN FBI_Code AS T3 ON T2.fbi_code_no = T3.fbi_code_no WHERE T1.community_area_name = 'Rogers Park' AND T3.title = 'Robbery' AND T3.fbi_code_no = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many solicit on public way prostitution crimes were arrested in West Garfield Park?",
+        "query": "SELECT SUM(CASE WHEN T2.arrest = 'TRUE' THEN 1 ELSE 0 END) FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T1.community_area_no = T2.community_area_no INNER JOIN IUCR AS T3 ON T2.iucr_no = T3.iucr_no WHERE T1.community_area_name = 'West Garfield Park' AND T3.secondary_description = 'SOLICIT ON PUBLIC WAY' AND T3.primary_description = 'PROSTITUTION'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "In the most populated ward, how many incidents of domestic violence were reported in a bar or tavern?",
+        "query": "SELECT COUNT(T2.report_no) FROM Ward AS T1 INNER JOIN Crime AS T2 ON T1.ward_no = T2.ward_no WHERE T2.domestic = 'TRUE' AND T2.location_description = 'BAR OR TAVERN' ORDER BY T1.Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many neighborhoods are there in Near North Side?",
+        "query": "SELECT SUM(CASE WHEN T1.community_area_name = 'Near North Side' THEN 1 ELSE 0 END) FROM Community_Area AS T1 INNER JOIN Neighborhood AS T2 ON T1.community_area_no = T2.community_area_no"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Out of all the incidents of domestic violence reported at the ward represented by alderman Walter Burnett Jr., how many were arrested?",
+        "query": "SELECT SUM(CASE WHEN T2.arrest = 'TRUE' THEN 1 ELSE 0 END) FROM Ward AS T1 INNER JOIN Crime AS T2 ON T1.ward_no = T2.ward_no WHERE T1.alderman_first_name = 'Walter' AND T1.alderman_last_name = 'Burnett' AND alderman_name_suffix = 'Jr.' AND T2.domestic = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the short description of the crime committed the most by criminals in the least populated community?",
+        "query": "SELECT T3.title FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T1.community_area_no = T2.community_area_no INNER JOIN FBI_Code AS T3 ON T2.fbi_code_no = T3.fbi_code_no GROUP BY T3.title ORDER BY T1.population ASC, T3.fbi_code_no DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the legislative district's office address where 010XX W LAKE ST is located?",
+        "query": "SELECT T1.ward_office_address FROM Ward AS T1 INNER JOIN Crime AS T2 ON T1.ward_no = T2.ward_no WHERE T2.block = '010XX W LAKE ST' GROUP BY T1.ward_office_address"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the name of the community that has the highest number of crimes related to prostitution?",
+        "query": "SELECT T3.community_area_name FROM Crime AS T1 INNER JOIN IUCR AS T2 ON T1.iucr_no = T2.iucr_no INNER JOIN Community_Area AS T3 ON T1.community_area_no = T3.community_area_no WHERE T2.primary_description = 'PROSTITUTION' GROUP BY T1.iucr_no ORDER BY T1.case_number DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many vandalisms were arrested in the ward represented by Edward Burke?",
+        "query": "SELECT SUM(CASE WHEN T1.alderman_last_name = 'Burke' THEN 1 ELSE 0 END) FROM Ward AS T1 INNER JOIN Crime AS T2 ON T1.ward_no = T2.ward_no INNER JOIN FBI_Code AS T3 ON T2.fbi_code_no = T3.fbi_code_no WHERE T3.title = 'Vandalism' AND T2.arrest = 'TRUE' AND T1.alderman_first_name = 'Edward'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many domestic violence cases were reported in May 2018?",
+        "query": "SELECT COUNT(*) FROM Crime WHERE date LIKE '5/%/2018%' AND domestic = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "List the IUCR numbers and index status of homicide incidents.",
+        "query": "SELECT index_code FROM IUCR WHERE primary_description = 'HOMICIDE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Provide the responsible person and his/her email address of Chicago Lawn.",
+        "query": "SELECT commander, email FROM District WHERE district_name = 'Chicago Lawn'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the alderman's full name of the most crowded ward?",
+        "query": "SELECT alderman_name_suffix, alderman_first_name, alderman_last_name FROM Ward ORDER BY population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "List the community area names in the Northwest.",
+        "query": "SELECT community_area_name FROM Community_Area WHERE side = 'Northwest'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "List down the titles and descriptions of the crimes cases against persons.",
+        "query": "SELECT title, description FROM FBI_Code WHERE crime_against = 'Persons'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Describe the specific description and case locations under IUCR 142.",
+        "query": "SELECT T1.secondary_description, T2.latitude, T2.longitude FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T1.iucr_no = T2.iucr_no WHERE T2.iucr_no = 142"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many crimes were handled by Brendan Reilly on 7th October 2018?",
+        "query": "SELECT SUM(CASE WHEN T2.alderman_last_name = 'Reilly' THEN 1 ELSE 0 END) FROM Crime AS T1 INNER JOIN Ward AS T2 ON T1.ward_no = T2.ward_no WHERE T2.alderman_name_suffix IS NULL AND T2.alderman_first_name = 'Brendan' AND date LIKE '10/7/2018%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many cases have been arrested among the crimes that happened in the restaurant of Englewood?",
+        "query": "SELECT SUM(CASE WHEN T1.arrest = 'TRUE' THEN 1 ELSE 0 END) FROM Crime AS T1 INNER JOIN District AS T2 ON T1.district_no = T2.district_no WHERE T2.district_name = 'Englewood' AND T1.location_description = 'RESTAURANT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Provide case numbers, aldermen's full names, and district names of the crimes that happened in 0000X N FRANCISCO AVE.",
+        "query": "SELECT T2.case_number, T3.alderman_first_name, T3.alderman_last_name, T1.district_name FROM District AS T1 INNER JOIN Crime AS T2 ON T1.district_no = T2.district_no INNER JOIN Ward AS T3 ON T2.ward_no = T3.ward_no WHERE T2.block = '0000X N FRANCISCO AVE' GROUP BY T2.case_number, T3.alderman_first_name, T3.alderman_last_name, T1.district_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many crimes were Misc Non-Index Offense?",
+        "query": "SELECT SUM(CASE WHEN T1.title = 'Misc Non-Index Offense' THEN 1 ELSE 0 END) FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T2.fbi_code_no = T1.fbi_code_no"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "List down the neighborhood areas of Douglas.",
+        "query": "SELECT T2.neighborhood_name FROM Community_Area AS T1 INNER JOIN Neighborhood AS T2 ON T2.community_area_no = T1.community_area_no WHERE T1.community_area_name = 'Douglas'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Calculate the average crime rate per month in the highest populous area.",
+        "query": "SELECT CAST(COUNT(T2.report_no) AS REAL) / 12 FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T2.community_area_no = T1.community_area_no GROUP BY T1.community_area_no HAVING COUNT(T1.population) ORDER BY COUNT(T1.population) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Among the crimes in the Central, calculate the percentage of larceny incidents.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T3.title = 'Larceny' THEN T2.report_no END) AS REAL) * 100 / COUNT(T2.report_no) FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T2.community_area_no = T1.community_area_no INNER JOIN FBI_Code AS T3 ON T3.fbi_code_no = T2.fbi_code_no WHERE T1.side = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "List the location descriptions and aldermen's full names of the arson by explosive.",
+        "query": "SELECT T2.location_description, T1.alderman_first_name, T1.alderman_last_name, T1.alderman_name_suffix FROM Ward AS T1 INNER JOIN Crime AS T2 ON T2.ward_no = T1.ward_no INNER JOIN IUCR AS T3 ON T3.iucr_no = T2.iucr_no WHERE T3.primary_description = 'ARSON' AND T3.secondary_description = 'BY EXPLOSIVE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Provide the occurrence date and location of the deceptive practice due to the unlawful use of recorded sound.",
+        "query": "SELECT T2.date, T2.latitude, T2.longitude FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T2.iucr_no = T1.iucr_no WHERE T1.primary_description = 'DECEPTIVE PRACTICE' AND T1.secondary_description = 'UNLAWFUL USE OF RECORDED SOUND'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Among the criminal sexual assaults in the district of Adnardo Gutierrez, how many cases happened in the residence?",
+        "query": "SELECT COUNT(T2.report_no) FROM District AS T1 INNER JOIN Crime AS T2 ON T2.district_no = T1.district_no INNER JOIN FBI_Code AS T3 ON T3.fbi_code_no = T2.fbi_code_no WHERE T3.title = 'Criminal Sexual Assault' AND T1.commander = 'Adnardo Gutierrez' AND T2.location_description = 'RESIDENCE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many percent of domestic violence cases were arrested in West Pullman?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.arrest = 'TRUE' THEN T2.report_no END) AS REAL) * 100 / COUNT(T2.report_no) FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T2.community_area_no = T1.community_area_no WHERE T1.community_area_name = 'West Pullman' AND T2.domestic = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Calculate the percentage of the domestic violence cases handled by Christopher Taliaferro. Among them, list report numbers of cases that happened in the bank.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.domestic = 'TRUE' THEN T1.report_no END) AS REAL) * 100 / COUNT(T1.report_no), COUNT(CASE WHEN T1.domestic = 'TRUE' AND T1.location_description = 'BANK' THEN T1.report_no END) AS \"number\" FROM Crime AS T1 INNER JOIN Ward AS T2 ON T2.ward_no = T1.ward_no WHERE T2.alderman_first_name = 'Christopher' AND T2.alderman_last_name = 'Taliaferro'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many aldermen have \"James\" as their first name?",
+        "query": "SELECT COUNT(*) FROM Ward WHERE alderman_first_name = 'James'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many crimes are commited on January 1, 2018?",
+        "query": "SELECT COUNT(*) FROM Crime WHERE date LIKE '1/1/2018%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Calculate the average population of community areas in the West side.",
+        "query": "SELECT AVG(population) FROM Community_Area WHERE side = 'West '"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Among the cases reported in the ward with Edward Burke as the alderman and happened in the community area with the highest population, provide the report number of the crime with the highest beat.",
+        "query": "SELECT T2.report_no FROM Ward AS T1 INNER JOIN Crime AS T2 ON T2.ward_no = T1.ward_no INNER JOIN Community_Area AS T3 ON T3.community_area_no = T2.community_area_no WHERE T1.alderman_first_name = 'Edward' AND T1.alderman_last_name = 'Burke' ORDER BY T2.beat DESC, T3.population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many of the crimes that happened in the street have FBI title \"Homicide 1st & 2nd Degree\"?",
+        "query": "SELECT SUM(CASE WHEN T2.location_description = 'STREET' THEN 1 ELSE 0 END) FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T2.fbi_code_no = T1.fbi_code_no WHERE T1.title = 'Homicide 1st & 2nd Degree'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Who is the alderman in the ward associated with the crime with report number 23769?",
+        "query": "SELECT T2.alderman_first_name, T2.alderman_last_name FROM Crime AS T1 INNER JOIN Ward AS T2 ON T2.ward_no = T1.ward_no WHERE T1.report_no = 23769"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "List the case numbers of domestic violence crimes reported in Lincoln Square.",
+        "query": "SELECT T2.case_number FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T2.community_area_no = T1.community_area_no WHERE T1.community_area_name = 'Lincoln Square' AND T2.domestic = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Among the crimes reported to the ward located at 1958 N. Milwaukee Ave., list down the report number of the crimes happened inside the apartment.",
+        "query": "SELECT T1.case_number FROM Crime AS T1 INNER JOIN Ward AS T2 ON T2.ward_no = T1.ward_no WHERE T1.location_description = 'APARTMENT' AND T2.ward_office_address = '1958 N. Milwaukee Ave.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the total number of crimes that happened in Bridgeport with beat less than 1000?",
+        "query": "SELECT SUM(CASE WHEN T2.beat < 1000 THEN 1 ELSE 0 END) FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T2.community_area_no = T1.community_area_no WHERE T1.community_area_name = 'Bridgeport'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "List the report number of crimes reported in a community area in the far north side with a population greater than 60,000.",
+        "query": "SELECT SUM(CASE WHEN T1.population > 60000 THEN 1 ELSE 0 END) FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T2.community_area_no = T1.community_area_no WHERE T1.side = 'Far North '"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "List the report number of crimes against property happened in Riverdale.",
+        "query": "SELECT SUM(CASE WHEN T1.crime_against = 'Property' THEN 1 ELSE 0 END) FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T2.fbi_code_no = T1.fbi_code_no INNER JOIN Community_Area AS T3 ON T3.community_area_no = T2.community_area_no WHERE T3.community_area_name = 'Riverdale'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many domestic violence cases were brought in the ward that uses \"ward13@cityofchicago.org\"?",
+        "query": "SELECT SUM(CASE WHEN T2.domestic = 'TRUE' THEN 1 ELSE 0 END) FROM Ward AS T1 INNER JOIN Crime AS T2 ON T2.ward_no = T1.ward_no WHERE T1.ward_email = 'ward13@cityofchicago.org'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the district address associated with the case JB107731?",
+        "query": "SELECT T1.address FROM District AS T1 INNER JOIN Crime AS T2 ON T2.district_no = T1.district_no WHERE T2.case_number = 'JB107731'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Calculate the total beat of the crimes reported in a community area in the central side with population of 50,000 and above.",
+        "query": "SELECT 1.0 * SUM(CASE WHEN T1.population > 50000 THEN T2.beat ELSE 0 END) AS sum FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T2.community_area_no = T1.community_area_no WHERE T1.side = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "List the case number of crimes against society that happened in June 2018.",
+        "query": "SELECT T2.case_number FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T2.fbi_code_no = T1.fbi_code_no WHERE T2.date LIKE '6/%/2018%' AND T1.crime_against = 'Society'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Among the crimes located in the community area with the highest population, what is the percentage of domestic violence?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.domestic = 'TRUE' THEN T2.domestic END) AS REAL) * 100 / COUNT(T2.domestic) FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T2.community_area_no = T1.community_area_no GROUP BY T1.community_area_no HAVING COUNT(T1.population) ORDER BY COUNT(T1.population) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "List the case number of the crimes in wards with population below 52000 that have beat greater than the 90% of the average beat of all crimes.",
+        "query": "SELECT COUNT(T1.report_no) FROM Crime AS T1 INNER JOIN Ward AS T2 ON T1.ward_no = T2.ward_no WHERE T2.Population < 52000 AND T1.beat > ( SELECT AVG(T1.beat) * 0.9 FROM Crime AS T1 INNER JOIN Ward AS T2 ON T1.ward_no = T2.ward_no WHERE T2.Population < 52000 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Please list the area name of the communities in the Far north side, which has a population of more than 50000 but less than 70000.",
+        "query": "SELECT community_area_name, side FROM Community_Area WHERE side = 'Far North ' AND population BETWEEN 50000 AND 70000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Give the coordinate of the alleys where a crime was reported and an arrest was made.",
+        "query": "SELECT latitude, longitude FROM Crime WHERE location_description = 'ALLEY' AND arrest = 'TRUE' GROUP BY latitude, longitude"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Find the commander's name, email address, and phone number of the Ogden district.",
+        "query": "SELECT commander, email, phone FROM District WHERE district_name = 'Ogden'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the FBI code and definition of Gambling?",
+        "query": "SELECT fbi_code_no, description FROM FBI_Code WHERE title = 'Gambling'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Among the crimes, what percentage are severe?",
+        "query": "SELECT CAST(COUNT(CASE WHEN index_code = 'I' THEN iucr_no ELSE NULL END) AS REAL) * 100 / COUNT(iucr_no) FROM IUCR"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What kind of location in Austin reported the most number of crimes?",
+        "query": "SELECT T2.location_description FROM District AS T1 INNER JOIN Crime AS T2 ON T2.district_no = T1.district_no WHERE T1.district_name = 'Austin' GROUP BY T2.location_description ORDER BY COUNT(T2.case_number) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "On average, how many community areas are there in a side?",
+        "query": "SELECT CAST(COUNT(T1.ward_no) AS REAL) / COUNT(DISTINCT T3.side) FROM Ward AS T1 INNER JOIN Crime AS T2 ON T2.ward_no = T1.ward_no INNER JOIN Community_Area AS T3 ON T3.community_area_no = T2.community_area_no"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Which community area has the highest number of crimes reported on the street?",
+        "query": "SELECT T1.community_area_no FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T2.community_area_no = T1.community_area_no WHERE T2.location_description = 'STREET' GROUP BY T1.community_area_no ORDER BY COUNT(T2.location_description) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the average number of reckless homicides that happened in a district?",
+        "query": "SELECT CAST(COUNT(T2.report_no) AS REAL) / COUNT(DISTINCT T1.district_name) FROM District AS T1 INNER JOIN Crime AS T2 ON T2.district_no = T1.district_no INNER JOIN IUCR AS T3 ON T3.iucr_no = T2.iucr_no WHERE T3.secondary_description = 'RECKLESS HOMICIDE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Find the ward office's address and phone number of the ward where the most crimes without arrest occurred.",
+        "query": "SELECT T2.ward_office_address, T2.ward_office_phone FROM Crime AS T1 INNER JOIN Ward AS T2 ON T2.ward_no = T1.ward_no WHERE T1.arrest = 'FALSE' GROUP BY T2.ward_office_address, T2.ward_office_phone ORDER BY COUNT(T1.arrest) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Give the case number and coordinates of the places where child abduction is reported.",
+        "query": "SELECT T1.case_number, T1.latitude, T1.longitude FROM Crime AS T1 INNER JOIN IUCR AS T2 ON T2.iucr_no = T1.iucr_no WHERE T2.secondary_description = 'CHILD ABDUCTION'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the most reported crime in the Northwest side?",
+        "query": "SELECT T3.secondary_description FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T2.community_area_no = T1.community_area_no INNER JOIN IUCR AS T3 ON T3.iucr_no = T2.iucr_no WHERE T1.side = 'Northwest ' GROUP BY T3.secondary_description ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Find the community area where the least number of domestic crimes happened.",
+        "query": "SELECT T2.community_area_no FROM Crime AS T1 INNER JOIN Community_Area AS T2 ON T2.community_area_no = T1.community_area_no WHERE T1.domestic = 'TRUE' GROUP BY T2.community_area_no ORDER BY COUNT(T2.community_area_no) ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "In drug abuse crimes, what percentage is related to cannabis?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.secondary_description LIKE '%CANNABIS%' THEN T1.secondary_description END) AS REAL) * 100 / COUNT(T1.secondary_description) FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T2.iucr_no = T1.iucr_no INNER JOIN FBI_Code AS T3 ON T3.fbi_code_no = T2.fbi_code_no WHERE T3.title = 'Drug Abuse'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the average number of less severe crimes reported a day in February of 2018?",
+        "query": "SELECT CAST(COUNT(T2.case_number) AS REAL) / 28 FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T2.iucr_no = T1.iucr_no WHERE T2.date LIKE '2/%/2018%' AND T1.index_code = 'N'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "List the name and population of the communities where more than average solicit for prostitutes were reported.",
+        "query": "SELECT T2.community_area_name, T2.population FROM Crime AS T1 INNER JOIN Community_Area AS T2 ON T2.community_area_no = T1.community_area_no INNER JOIN IUCR AS T3 ON T3.iucr_no = T1.iucr_no WHERE T3.iucr_no = ( SELECT iucr_no FROM IUCR WHERE secondary_description = 'SOLICIT FOR PROSTITUTE' GROUP BY iucr_no HAVING COUNT(iucr_no) > ( SELECT SUM(CASE WHEN secondary_description = 'SOLICIT FOR PROSTITUTE' THEN 1.0 ELSE 0 END) / COUNT(iucr_no) AS average FROM IUCR ) )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Among the incidents reported in Harrison, what percentage are disorderly conduct?",
+        "query": "SELECT COUNT(CASE WHEN T3.title = 'Disorderly Conduct' THEN T2.report_no END) * 100.0 / COUNT(T2.report_no) AS per FROM District AS T1 INNER JOIN Crime AS T2 ON T2.district_no = T1.district_no INNER JOIN FBI_Code AS T3 ON T3.fbi_code_no = T2.fbi_code_no WHERE T1.district_name = 'Harrison'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Calculate the difference in the average number of vehicular hijackings and aggravated vehicular hijackings in the districts.",
+        "query": "SELECT ROUND(CAST(COUNT(CASE WHEN T1.secondary_description = 'VEHICULAR HIJACKING' THEN T1.iucr_no END) AS REAL) / CAST(COUNT(DISTINCT CASE WHEN T1.secondary_description = 'VEHICULAR HIJACKING' THEN T3.district_name END) AS REAL) - CAST(COUNT(CASE WHEN T1.secondary_description = 'AGGRAVATED VEHICULAR HIJACKING' THEN T1.iucr_no END) AS REAL) / CAST(COUNT(DISTINCT CASE WHEN T1.secondary_description = 'AGGRAVATED VEHICULAR HIJACKING' THEN T3.district_name END) AS REAL), 4) AS \"difference\" FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T2.iucr_no = T1.iucr_no INNER JOIN District AS T3 ON T3.district_no = T2.district_no"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many crimes happened in longitude -8772658001?",
+        "query": "SELECT COUNT(*) FROM Crime WHERE longitude = '-87.72658001'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "List all the crimes of the narcotic type that exist.",
+        "query": "SELECT secondary_description FROM IUCR WHERE primary_description = 'NARCOTICS' GROUP BY secondary_description"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the first name of the aldermen of wards with more than 50,000 inhabitants?",
+        "query": "SELECT alderman_first_name FROM Ward WHERE Population > 50000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "List crimes that the FBI has classified as Drug Abuse by their report number.",
+        "query": "SELECT T2.report_no FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T2.fbi_code_no = T1.fbi_code_no WHERE T1.title = 'Drug Abuse'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many weapons violation crimes have occurred in the Calumet district?",
+        "query": "SELECT SUM(CASE WHEN T3.district_name = 'Calumet' THEN 1 ELSE 0 END) FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T2.iucr_no = T1.iucr_no INNER JOIN District AS T3 ON T3.district_no = T2.district_no WHERE T1.primary_description = 'WEAPONS VIOLATION'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the exact location of the crimes that occurred in the Belmont Cragin community?",
+        "query": "SELECT T2.latitude, T2.longitude FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T2.community_area_no = T1.community_area_no WHERE T1.community_area_name = 'Belmont Cragin' GROUP BY T2.latitude, T2.longitude"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many different types of crimes, according to the primary description, have occurred in the Hermosa neighborhood?",
+        "query": "SELECT SUM(CASE WHEN T4.neighborhood_name = 'Hermosa' THEN 1 ELSE 0 END) FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T2.iucr_no = T1.iucr_no INNER JOIN Community_Area AS T3 ON T3.community_area_no = T2.community_area_no INNER JOIN Neighborhood AS T4 ON T4.community_area_no = T3.community_area_no"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many domestic crime cases has Commander Ronald A. Pontecore Jr. been responsible for investigating?",
+        "query": "SELECT SUM(CASE WHEN T2.domestic = 'TRUE' THEN 1 ELSE 0 END) FROM District AS T1 INNER JOIN Crime AS T2 ON T2.district_no = T1.district_no WHERE T1.commander = 'Ronald A. Pontecore Jr.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many crimes against society happened in the Wentworth district according to the FBI?",
+        "query": "SELECT SUM(CASE WHEN T1.crime_against = 'Society' THEN 1 ELSE 0 END) FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T2.fbi_code_no = T1.fbi_code_no INNER JOIN District AS T3 ON T3.district_no = T2.district_no WHERE T3.district_name = 'Wentworth'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What phone number does alderman Emma Mitts have to call if she wants to speak to the commander in charge of the investigation of the crimes that have occurred in her ward?",
+        "query": "SELECT T3.phone FROM Ward AS T1 INNER JOIN Crime AS T2 ON T2.ward_no = T1.ward_no INNER JOIN District AS T3 ON T3.district_no = T2.district_no WHERE T1.alderman_first_name = 'Emma' AND T1.alderman_last_name = 'Mitts'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many crimes described as 'The theft of a motor vehicle' by the FBI have taken place in the Lake View community?",
+        "query": "SELECT SUM(CASE WHEN T3.community_area_name = 'Lake View' THEN 1 ELSE 0 END) FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T2.fbi_code_no = T1.fbi_code_no INNER JOIN Community_Area AS T3 ON T3.community_area_no = T2.community_area_no WHERE T1.description = 'The theft of a motor vehicle.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "In which district have there been more intimidation-type crimes?",
+        "query": "SELECT T3.district_name FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T2.iucr_no = T1.iucr_no INNER JOIN District AS T3 ON T3.district_no = T2.district_no WHERE T1.primary_description = 'INTIMIDATION' GROUP BY T3.district_name ORDER BY COUNT(T1.primary_description) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What types of domestic crimes have occurred the most in the North Lawndale community?",
+        "query": "SELECT T2.domestic FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T2.community_area_no = T1.community_area_no WHERE T1.community_area_name = 'North Lawndale' AND T2.domestic = 'TRUE' GROUP BY T2.domestic ORDER BY COUNT(T2.domestic) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "In which ward of more than 55,000 inhabitants are there more crimes of intimidation with extortion?",
+        "query": "SELECT T3.ward_no FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T2.iucr_no = T1.iucr_no INNER JOIN Ward AS T3 ON T3.ward_no = T2.ward_no WHERE T1.primary_description = 'INTIMIDATION' AND T1.secondary_description = 'EXTORTION' AND T3.Population > 55000 GROUP BY T3.ward_no ORDER BY COUNT(T3.ward_no) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Which commander has had to deal with more cases of criminal sexual abuse?",
+        "query": "SELECT T3.commander FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T2.iucr_no = T1.iucr_no INNER JOIN District AS T3 ON T3.district_no = T2.district_no WHERE T1.secondary_description = 'CRIMINAL SEXUAL ABUSE' GROUP BY T3.commander ORDER BY COUNT(T1.secondary_description) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What percentage of non-domestic crimes have occurred in the Jefferson Park district?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.domestic = 'FALSE' THEN T2.case_number END) AS REAL) * 100 / COUNT(T2.case_number) FROM District AS T1 INNER JOIN Crime AS T2 ON T2.district_no = T1.district_no WHERE T1.district_name = 'Jefferson Park'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the average population of the wards where apartment crimes have been reported without arrests?",
+        "query": "SELECT AVG(T2.Population) FROM Crime AS T1 INNER JOIN Ward AS T2 ON T2.ward_no = T1.ward_no WHERE T1.location_description = 'APARTMENT' AND T1.arrest = 'FALSE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What are the full names of the top 5 most crowded ward aldermen?",
+        "query": "SELECT alderman_first_name, alderman_last_name FROM Ward ORDER BY Population DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many crime against property are there?",
+        "query": "SELECT COUNT(*) AS cnt FROM FBI_Code WHERE crime_against = 'Property'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many districts are there in the police district building with a zip code of 60608?",
+        "query": "SELECT COUNT(*) AS cnt FROM District WHERE zip_code = 60608"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Who is the crime against criminal sexual abuse?",
+        "query": "SELECT crime_against FROM FBI_Code WHERE title = 'Criminal Sexual Abuse'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Which community has the highest number of neighborhoods?",
+        "query": "SELECT T1.community_area_name FROM Community_Area AS T1 INNER JOIN Neighborhood AS T2 ON T1.community_area_no = T2.community_area_no ORDER BY T2.community_area_no DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many severe crime incidents were reported at coordinate 41.64820151, -87.54430496?",
+        "query": "SELECT SUM(CASE WHEN T1.longitude = '-87.54430496' THEN 1 ELSE 0 END) FROM Crime AS T1 INNER JOIN IUCR AS T2 ON T1.report_no = T2.iucr_no WHERE T2.index_code = 'I' AND T1.latitude = '41.64820251'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Who is the commanding officer in the district with the highest number of reported crimes where no arrest has been made?",
+        "query": "SELECT T2.commander FROM Crime AS T1 INNER JOIN District AS T2 ON T1.district_no = T2.district_no WHERE T1.arrest = 'FALSE' GROUP BY T2.commander ORDER BY COUNT(T1.report_no) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What are the general and specific descriptions of the most common crime incidents that happened in an aircraft?",
+        "query": "SELECT T2.primary_description, T2.secondary_description FROM Crime AS T1 INNER JOIN IUCR AS T2 ON T1.iucr_no = T2.iucr_no WHERE T1.location_description = 'AIRCRAFT' GROUP BY T1.iucr_no ORDER BY COUNT(T1.iucr_no) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Between Deering and Near West districts, which district reported the most number of crime incidents that happened in a library?",
+        "query": "SELECT T1.district_name FROM District AS T1 INNER JOIN Crime AS T2 ON T1.district_no = T2.district_no WHERE T1.district_name IN ('Deering', 'Near West') AND T2.location_description = 'LIBRARY' GROUP BY T1.district_name ORDER BY COUNT(T2.district_no) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many arrests have been made due to forcible entry burglary that took place in a day care center?",
+        "query": "SELECT SUM(CASE WHEN T2.arrest = 'TRUE' THEN 1 ELSE 0 END) FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T1.iucr_no = T2.iucr_no WHERE T2.location_description = 'DAY CARE CENTER' AND T1.secondary_description = 'FORCIBLE ENTRY' AND T1.primary_description = 'BURGLARY'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the name of the district with the highest number of domestic violence cases?",
+        "query": "SELECT T2.district_name FROM Crime AS T1 INNER JOIN District AS T2 ON T1.district_no = T2.district_no WHERE T1.domestic = 'TRUE' GROUP BY T2.district_name ORDER BY COUNT(T1.district_no) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "In the least populated community, what is the most common location of all the reported crime incidents?",
+        "query": "SELECT T2.location_description FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T1.community_area_no = T2.community_area_no WHERE T1.population = ( SELECT MIN(population) FROM Community_Area ) AND T2.location_description IS NOT NULL GROUP BY T2.location_description"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many violation of laws are there where no arrest has been made?",
+        "query": "SELECT SUM(CASE WHEN T1.description LIKE '%The violation of laws%' THEN 1 ELSE 0 END) FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T1.fbi_code_no = T2.fbi_code_no WHERE T2.Arrest = 'FALSE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the precise coordinate of the location where simple assault incidents happened the most in Chatham?",
+        "query": "SELECT T2.latitude, T2.longitude FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T1.fbi_code_no = T2.fbi_code_no INNER JOIN Community_Area AS T3 ON T2.community_area_no = T3.community_area_no WHERE T1.title = 'Simple Assault' AND T3.community_area_name = 'Chatham' AND T3.community_area_no = 44 ORDER BY T2.latitude DESC, T2.longitude DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "In the South side community, what is the name of the community with the most reported incidents of unlawful taking, carrying, leading, or riding away of property from the possession or constructive possession of another person?",
+        "query": "SELECT T3.community_area_name FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T1.fbi_code_no = T2.fbi_code_no INNER JOIN Community_Area AS T3 ON T2.community_area_no = T3.community_area_no WHERE T3.side = 'South' AND T1.description = 'The unlawful taking, carrying, leading, or riding away of property FROM the possession or constructive possession of another person.' GROUP BY T3.community_area_name ORDER BY COUNT(T1.fbi_code_no) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many crime against society were reported in Englewood?",
+        "query": "SELECT SUM(CASE WHEN T3.community_area_name = 'Englewood' THEN 1 ELSE 0 END) FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T1.fbi_code_no = T2.fbi_code_no INNER JOIN Community_Area AS T3 ON T2.community_area_no = T3.community_area_no WHERE T1.crime_against = 'Society'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the weekly average number of fraud incidents that were reported in January 2018? Provide the description of the location where the majority of fraud incidents occurred in the said month.",
+        "query": "SELECT CAST(COUNT(T1.fbi_code_no) AS REAL) / 4 FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T1.fbi_code_no = T2.fbi_code_no WHERE SUBSTR(T2.date, 1, 1) = '1' AND SUBSTR(T2.date, 5, 4) = '2018'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Please list any three community areas with a population of more than 50,000.",
+        "query": "SELECT community_area_name FROM Community_Area WHERE population > 50000 LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What are the communities that are grouped together on the central side?",
+        "query": "SELECT community_area_name FROM Community_Area WHERE side = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the difference between the number of communities that are located on the north and south sides with a population of more than 30,000?",
+        "query": "SELECT SUM(CASE WHEN side = 'South ' THEN 1 ELSE 0 END) - SUM(CASE WHEN side = 'North' THEN 1 ELSE 0 END) AS DIFF FROM Community_Area WHERE population > 300000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Please list all of the contact information for the police district Near West.",
+        "query": "SELECT phone, fax, tty, twitter FROM District WHERE district_name = 'Near West'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Who is responsible for crime cases in district Lincoln?",
+        "query": "SELECT commander FROM District WHERE district_name = 'Lincoln'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the general and specific description of incident 275?",
+        "query": "SELECT primary_description, secondary_description FROM IUCR WHERE iucr_no = 275"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the percentage of severe cases that are related to sexual assault?",
+        "query": "SELECT CAST(SUM(CASE WHEN primary_description = 'CRIM SEXUAL ASSAULT' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM IUCR WHERE index_code = 'I'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What are the neighborhoods that are located in the North Center community area?",
+        "query": "SELECT T2.neighborhood_name FROM Community_Area AS T1 INNER JOIN Neighborhood AS T2 ON T1.community_area_no = T2.community_area_no WHERE T1.community_area_name = 'North Center'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many neighborhoods can be found in the Forest Glen community area?",
+        "query": "SELECT SUM(CASE WHEN T2.community_area_name = 'Forest Glen' THEN 1 ELSE 0 END) FROM Neighborhood AS T1 INNER JOIN Community_Area AS T2 ON T1.community_area_no = T2.community_area_no"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the total population of the neighborhoods Avondale Gardens, Irving Park, Kilbourn Park, Merchant Park, Old Irving Park, and The Villa?",
+        "query": "SELECT SUM(T2.population) AS sum FROM Neighborhood AS T1 INNER JOIN Community_Area AS T2 ON T1.community_area_no = T2.community_area_no WHERE T1.neighborhood_name = 'Avondale Gardens' OR T1.neighborhood_name = 'Irving Park' OR T1.neighborhood_name = 'Kilbourn Park' OR T1.neighborhood_name = 'Merchant Park' OR T1.neighborhood_name = 'Old Irving Park' OR T1.neighborhood_name = 'The Villa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many crime cases have been classified as \"Weapons Violation\" by the FBI?",
+        "query": "SELECT SUM(CASE WHEN T2.title = 'Weapons Violation' THEN 1 ELSE 0 END) FROM Crime AS T1 INNER JOIN FBI_Code AS T2 ON T1.fbi_code_no = T2.fbi_code_no"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Please list any three criminal sexual assault cases against persons where the criminals have been arrested.",
+        "query": "SELECT T2.case_number FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T1.fbi_code_no = T2.fbi_code_no WHERE T1.title = 'Criminal Sexual Assault' AND T2.arrest = 'TRUE' AND T1.crime_against = 'Persons' LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Please state the district name where incident number JB106545 took place.",
+        "query": "SELECT T1.case_number FROM Crime AS T1 INNER JOIN FBI_Code AS T2 ON T1.fbi_code_no = T2.fbi_code_no WHERE T2.title = 'Criminal Sexual Assault' AND T2.crime_against = 'Persons' AND T1.arrest = 'TRUE' LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the general description for case number JB106010?",
+        "query": "SELECT T1.primary_description FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T1.iucr_no = T2.iucr_no WHERE T2.case_number = 'JB106010'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Please name three communities that experience the fraud incident.",
+        "query": "SELECT T3.community_area_name FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T1.fbi_code_no = T2.fbi_code_no INNER JOIN Community_Area AS T3 ON T2.community_area_no = T3.community_area_no WHERE T1.title = 'Criminal Sexual Assault' LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What was the major type of crime that happened in the Rogers Park community area?",
+        "query": "SELECT T1.fbi_code_no, T1.title FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T1.fbi_code_no = T2.fbi_code_no INNER JOIN Community_Area AS T3 ON T2.community_area_no = T3.community_area_no WHERE T3.community_area_name = 'Rogers Park' GROUP BY T1.fbi_code_no, T1.title"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "At which district did the multiple homicide case number JB120039 occurred?",
+        "query": "SELECT T1.district_no, T1.district_name FROM District AS T1 INNER JOIN Crime AS T2 ON T1.district_no = T2.district_no WHERE T2.case_number = 'JB120039' GROUP BY T1.district_no, T1.district_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the percentage of crime cases that have been classified as \"drug abuse\" by the FBI and happened on the street?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.title = 'Drug Abuse' AND T1.location_description = 'STREET' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.fbi_code_no) FROM Crime AS T1 INNER JOIN FBI_Code AS T2 ON T1.fbi_code_no = T2.fbi_code_no"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Provide the ward number with the highest population.",
+        "query": "SELECT ward_no FROM Ward ORDER BY Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the beat and location description of the case JB112212?",
+        "query": "SELECT beat, location_description FROM Crime WHERE case_number = 'JB112212'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Give the FBI code for the crime described by \"The killing of one human being by another.\"",
+        "query": "SELECT fbi_code_no FROM FBI_Code WHERE description = 'The killing of one human being by another.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Provide at least 5 ward office addresses associated with the crimes that happened in the community of Montclare.",
+        "query": "SELECT T3.ward_office_address FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T1.community_area_no = T2.community_area_no INNER JOIN Ward AS T3 ON T2.ward_no = T3.ward_no WHERE T1.community_area_name = 'Montclare' GROUP BY T3.ward_office_address LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "List down the district's commander associated with the crime that happened at the yard and has a beat of 532.",
+        "query": "SELECT T2.address, T2.commander FROM Crime AS T1 INNER JOIN District AS T2 ON T1.district_no = T2.district_no WHERE T1.location_description = 'YARD' AND T1.beat = 532"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the neighborhood name in the community area of Lake View?",
+        "query": "SELECT T2.neighborhood_name FROM Community_Area AS T1 INNER JOIN Neighborhood AS T2 ON T1.community_area_no = T2.community_area_no WHERE T1.community_area_name = 'Lake View'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Name the neighborhood of the community area in crime with report number 23843?",
+        "query": "SELECT T3.neighborhood_name FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T1.community_area_no = T2.community_area_no INNER JOIN Neighborhood AS T3 ON T2.community_area_no = T3.community_area_no WHERE T2.report_no = 23778"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the FBI description of the crime for report number 23778?",
+        "query": "SELECT T1.description FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T1.fbi_code_no = T2.fbi_code_no WHERE T2.report_no = 23843"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "List down the report number of crimes associated with the district commander named Jill M. Stevens.",
+        "query": "SELECT SUM(CASE WHEN T1.commander = 'Jill M. Stevens' THEN 1 ELSE 0 END) FROM District AS T1 INNER JOIN Crime AS T2 ON T1.district_no = T2.district_no"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Among the crimes happened in the neighborhood called \"Avalon Park\", what is the percentage of crimes that happened inside the house?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.location_description = 'HOUSE' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.location_description) AS persent FROM Community_Area AS T1 INNER JOIN Crime AS T2 ON T1.community_area_no = T2.community_area_no INNER JOIN Neighborhood AS T3 ON T2.community_area_no = T3.community_area_no WHERE T3.neighborhood_name = 'Avalon Park'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the full name of the alderman of ward no.21?",
+        "query": "SELECT alderman_first_name, alderman_last_name, alderman_name_suffix FROM Ward WHERE ward_no = 21"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the ward ID of the most crowded ward?",
+        "query": "SELECT ward_no FROM Ward ORDER BY Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many incidents have the general description of \"ASSAULT\" in the IUCR classification?",
+        "query": "SELECT COUNT(*) FROM IUCR WHERE primary_description = 'ASSAULT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "How many incidents are considered \"severe\" in the IUCR classification?",
+        "query": "SELECT COUNT(*) FROM IUCR WHERE index_code = 'I'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Among the crimes with no arrest made, how many of them happened in the ward represented by alderman Pat Dowell?",
+        "query": "SELECT SUM(CASE WHEN T1.alderman_last_name = 'Dowell' THEN 1 ELSE 0 END) FROM Ward AS T1 INNER JOIN Crime AS T2 ON T1.ward_no = T2.ward_no WHERE T2.arrest = 'FALSE' AND T1.alderman_first_name = 'Pat'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Which alderman represents the ward with the most number of crimes in January, 2018? Please give his or her full name.",
+        "query": "SELECT T1.ward_no, T1.alderman_first_name, T1.alderman_last_name, T1.alderman_name_suffix FROM Ward AS T1 INNER JOIN Crime AS T2 ON T1.ward_no = T2.ward_no WHERE SUBSTR(T2.date, 1, 1) = '1' AND SUBSTR(T2.date, 5, 4) = '2018' GROUP BY T1.ward_no ORDER BY COUNT(T1.ward_no) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Among the crimes in the ward with the most population, how many of them are cases of domestic violence?",
+        "query": "SELECT COUNT(T1.ward_no) AS num FROM Ward AS T1 INNER JOIN Crime AS T2 ON T1.ward_no = T2.ward_no WHERE T2.domestic = 'TRUE' ORDER BY T1.Population = ( SELECT Population FROM Ward ORDER BY Population DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Please list the location coordinates of all the incidents that had happened in the ward represented by alderman Pat Dowell.",
+        "query": "SELECT T2.latitude, T2.longitude FROM Ward AS T1 INNER JOIN Crime AS T2 ON T1.ward_no = T2.ward_no WHERE T1.alderman_first_name = 'Pat' AND T1.alderman_last_name = 'Dowell' AND T2.latitude IS NOT NULL AND T2.longitude IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "The ward represented by which alderman had more incidents in January, 2018, Pat Dowell or Sophia King?",
+        "query": "SELECT T1.alderman_first_name, T1.alderman_last_name, COUNT(T1.ward_no) AS num FROM Ward AS T1 INNER JOIN Crime AS T2 ON T1.ward_no = T2.ward_no WHERE (SUBSTR(T2.date, 1, 1) = '1' AND SUBSTR(T2.date, 5, 4) = '2018' AND T1.alderman_first_name = 'Pat' AND T1.alderman_last_name = 'Dowell') OR (T1.alderman_first_name = 'Sophia' AND T1.alderman_last_name = 'King') GROUP BY T1.ward_no"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Please list the case numbers of all the incidents with the generic description of \"BATTERY\" in the IUCR classification.",
+        "query": "SELECT T2.case_number FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T1.iucr_no = T2.iucr_no WHERE T1.primary_description = 'BATTERY'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Among the incidents with the generic description of \"BATTERY\" in the IUCR classification, how many of them do not have arrests made?",
+        "query": "SELECT SUM(CASE WHEN T2.arrest = 'FALSE' THEN 1 ELSE 0 END) FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T1.iucr_no = T2.iucr_no WHERE T1.primary_description = 'BATTERY'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Please list the case numbers of all the crimes whose short description of the kind of crime is \"Homicide 1st & 2nd Degree\" in the FBI classification.",
+        "query": "SELECT T2.case_number FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T1.fbi_code_no = T2.fbi_code_no WHERE T1.title = 'Homicide 1st & 2nd Degree'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Among the incidents in January, 2018, how many of them were stated \"against Property\" in the FBI classification?",
+        "query": "SELECT SUM(CASE WHEN SUBSTR(T2.date, 5, 4) = '2018' THEN 1 ELSE 0 END) FROM FBI_Code AS T1 INNER JOIN Crime AS T2 ON T1.fbi_code_no = T2.fbi_code_no WHERE T1.crime_against = 'Property' AND SUBSTR(T2.date, 1, 1) = '1'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "District commander Robert A. Rubio was responsible for how many incidents in January, 2018?",
+        "query": "SELECT SUM(CASE WHEN SUBSTR(T2.date, 5, 4) = '2018' THEN 1 ELSE 0 END) FROM District AS T1 INNER JOIN Crime AS T2 ON T1.district_no = T2.district_no WHERE T1.commander = 'Robert A. Rubio' AND SUBSTR(T2.date, 1, 1) = '1'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Which district commander was responsible for more incidents in January, 2018, Robert A. Rubio or Glenn White?",
+        "query": "SELECT T1.commander FROM District AS T1 INNER JOIN Crime AS T2 ON T1.district_no = T2.district_no WHERE T1.commander IN ('Robert A. Rubio', 'Glenn White') AND SUBSTR(T2.date, 1, 1) = '1' AND SUBSTR(T2.date, 5, 4) = '2018' GROUP BY T1.commander"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Please list the blocks where all the incidents in the district commanded by Robert A. Rubio took place.",
+        "query": "SELECT T2.block FROM District AS T1 INNER JOIN Crime AS T2 ON T1.district_no = T2.district_no WHERE T1.commander = 'Robert A. Rubio'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "What is the average number of incidents per month in 2018 in the ward with the most population?",
+        "query": "SELECT COUNT(T1.ward_no) / 12 AS average FROM Ward AS T1 INNER JOIN Crime AS T2 ON T1.ward_no = T2.ward_no WHERE T2.date LIKE '%2018%' AND T1.Population = ( SELECT MAX(T1.Population) FROM Ward AS T1 INNER JOIN Crime AS T2 ON T1.ward_no = T2.ward_no WHERE T2.date LIKE '%2018%' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "chicago_crime",
+        "question": "Among all the incidents with no arrest made, what is the percentage of them having a generic description of \"BATTERY\" in the IUCR classification?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.primary_description = 'BATTERY' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*)FROM IUCR AS T1 INNER JOIN Crime AS T2 ON T1.iucr_no = T2.iucr_no WHERE T2.arrest = 'FALSE'"
+    }
+]

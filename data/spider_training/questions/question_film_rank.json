@@ -1,0 +1,290 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "How many film are there?",
+        "query": "SELECT count(*) FROM film"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Count the number of films.",
+        "query": "SELECT count(*) FROM film"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "List the distinct director of all films.",
+        "query": "SELECT DISTINCT Director FROM film"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What are the different film Directors?",
+        "query": "SELECT DISTINCT Director FROM film"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What is the average ticket sales gross in dollars of films?",
+        "query": "SELECT avg(Gross_in_dollar) FROM film"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Return the average gross sales in dollars across all films.",
+        "query": "SELECT avg(Gross_in_dollar) FROM film"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What are the low and high estimates of film markets?",
+        "query": "SELECT Low_Estimate ,  High_Estimate FROM film_market_estimation"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Return the low and high estimates for all film markets.",
+        "query": "SELECT Low_Estimate ,  High_Estimate FROM film_market_estimation"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What are the types of film market estimations in year 1995?",
+        "query": "SELECT TYPE FROM film_market_estimation WHERE YEAR  =  1995"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Return the types of film market estimations in 1995.",
+        "query": "SELECT TYPE FROM film_market_estimation WHERE YEAR  =  1995"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What are the maximum and minimum number of cities in all markets.",
+        "query": "SELECT max(Number_cities) ,  min(Number_cities) FROM market"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Return the maximum and minimum number of cities across all markets.",
+        "query": "SELECT max(Number_cities) ,  min(Number_cities) FROM market"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "How many markets have number of cities smaller than 300?",
+        "query": "SELECT count(*) FROM market WHERE Number_cities  <  300"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Count the number of markets that have a number of cities lower than 300.",
+        "query": "SELECT count(*) FROM market WHERE Number_cities  <  300"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "List all countries of markets in ascending alphabetical order.",
+        "query": "SELECT Country FROM market ORDER BY Country ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What are the countries for each market, ordered alphabetically?",
+        "query": "SELECT Country FROM market ORDER BY Country ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "List all countries of markets in descending order of number of cities.",
+        "query": "SELECT Country FROM market ORDER BY Number_cities DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What are the countries for each market ordered by decreasing number of cities?",
+        "query": "SELECT Country FROM market ORDER BY Number_cities DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Please show the titles of films and the types of market estimations.",
+        "query": "SELECT T1.Title ,  T2.Type FROM film AS T1 JOIN film_market_estimation AS T2 ON T1.Film_ID  =  T2.Film_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What are the titles of films and corresponding types of market estimations?",
+        "query": "SELECT T1.Title ,  T2.Type FROM film AS T1 JOIN film_market_estimation AS T2 ON T1.Film_ID  =  T2.Film_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Show the distinct director of films with market estimation in the year of 1995.",
+        "query": "SELECT DISTINCT T1.Director FROM film AS T1 JOIN film_market_estimation AS T2 ON T1.Film_ID  =  T2.Film_ID WHERE T2.Year  =  1995"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Who are the different directors of films which had market estimation in 1995?",
+        "query": "SELECT DISTINCT T1.Director FROM film AS T1 JOIN film_market_estimation AS T2 ON T1.Film_ID  =  T2.Film_ID WHERE T2.Year  =  1995"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What is the average number of cities of markets with low film market estimate bigger than 10000?",
+        "query": "SELECT avg(T2.Number_cities) FROM film_market_estimation AS T1 JOIN market AS T2 ON T1.Market_ID  =  T2.Market_ID WHERE T1.Low_Estimate  >  10000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Give the average number of cities within markets that had a low market estimation larger than 10000?",
+        "query": "SELECT avg(T2.Number_cities) FROM film_market_estimation AS T1 JOIN market AS T2 ON T1.Market_ID  =  T2.Market_ID WHERE T1.Low_Estimate  >  10000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Please list the countries and years of film market estimations.",
+        "query": "SELECT T2.Country ,  T1.Year FROM film_market_estimation AS T1 JOIN market AS T2 ON T1.Market_ID  =  T2.Market_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What are the countries of markets and their corresponding years of market estimation?",
+        "query": "SELECT T2.Country ,  T1.Year FROM film_market_estimation AS T1 JOIN market AS T2 ON T1.Market_ID  =  T2.Market_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Please list the years of film market estimations when the market is in country \"Japan\" in descending order.",
+        "query": "SELECT T1.Year FROM film_market_estimation AS T1 JOIN market AS T2 ON T1.Market_ID  =  T2.Market_ID WHERE T2.Country  =  \"Japan\" ORDER BY T1.Year DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What are the years of film market estimation for the market of Japan, ordered by year descending?",
+        "query": "SELECT T1.Year FROM film_market_estimation AS T1 JOIN market AS T2 ON T1.Market_ID  =  T2.Market_ID WHERE T2.Country  =  \"Japan\" ORDER BY T1.Year DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "List the studios of each film and the number of films produced by that studio.",
+        "query": "SELECT Studio ,  COUNT(*) FROM film GROUP BY Studio"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "How films are produced by each studio?",
+        "query": "SELECT Studio ,  COUNT(*) FROM film GROUP BY Studio"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "List the name of film studio that have the most number of films.",
+        "query": "SELECT Studio FROM film GROUP BY Studio ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What is the name of teh studio that created the most films?",
+        "query": "SELECT Studio FROM film GROUP BY Studio ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "List the names of studios that have at least two films.",
+        "query": "SELECT Studio FROM film GROUP BY Studio HAVING COUNT(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What are the names of studios that have made two or more films?",
+        "query": "SELECT Studio FROM film GROUP BY Studio HAVING COUNT(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "List the title of films that do not have any market estimation.",
+        "query": "SELECT Title FROM film WHERE Film_ID NOT IN (SELECT Film_ID FROM film_market_estimation)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What are the titles of films that do not have a film market estimation?",
+        "query": "SELECT Title FROM film WHERE Film_ID NOT IN (SELECT Film_ID FROM film_market_estimation)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Show the studios that have produced films with director \"Nicholas Meyer\" and \"Walter Hill\".",
+        "query": "SELECT Studio FROM film WHERE Director  =  \"Nicholas Meyer\" INTERSECT SELECT Studio FROM film WHERE Director  =  \"Walter Hill\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What are the names of studios that have produced films with both Nicholas Meyer and Walter Hill?",
+        "query": "SELECT Studio FROM film WHERE Director  =  \"Nicholas Meyer\" INTERSECT SELECT Studio FROM film WHERE Director  =  \"Walter Hill\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Find the titles and studios of the films that are produced by some film studios that contained the word \"Universal\".",
+        "query": "SELECT title ,  Studio FROM film WHERE Studio LIKE \"%Universal%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What are the titles and studios of films that have been produced by a studio whose name contains \"Universal\"?",
+        "query": "SELECT title ,  Studio FROM film WHERE Studio LIKE \"%Universal%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Show the studios that have not produced films with director \"Walter Hill\".",
+        "query": "SELECT Studio FROM film EXCEPT SELECT Studio FROM film WHERE Director  =  \"Walter Hill\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Which studios have never worked with the director Walter Hill?",
+        "query": "SELECT Studio FROM film EXCEPT SELECT Studio FROM film WHERE Director  =  \"Walter Hill\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "List the studios which average gross is above 4500000.",
+        "query": "SELECT Studio FROM film GROUP BY Studio HAVING avg(Gross_in_dollar)  >=  4500000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Which studios have an average gross of over 4500000?",
+        "query": "SELECT Studio FROM film GROUP BY Studio HAVING avg(Gross_in_dollar)  >=  4500000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What is the title of the film that has the highest high market estimation.",
+        "query": "SELECT t1.title FROM film AS T1 JOIN film_market_estimation AS T2  ON T1.Film_ID  =  T2.Film_ID ORDER BY high_estimate DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Return the title of the film with the highest high estimate?",
+        "query": "SELECT t1.title FROM film AS T1 JOIN film_market_estimation AS T2  ON T1.Film_ID  =  T2.Film_ID ORDER BY high_estimate DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "What are the titles and directors of the films were never presented in China?",
+        "query": "SELECT title ,  director FROM film WHERE film_id NOT IN (SELECT film_id FROM film_market_estimation AS T1 JOIN market AS T2 ON T1.market_id  =  T2.Market_ID WHERE country  =  'China')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "film_rank",
+        "question": "Return the titles and directors of films that were never in the market of China.",
+        "query": "SELECT title ,  director FROM film WHERE film_id NOT IN (SELECT film_id FROM film_market_estimation AS T1 JOIN market AS T2 ON T1.market_id  =  T2.Market_ID WHERE country  =  'China')"
+    }
+]

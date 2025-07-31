@@ -1,0 +1,416 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "What is the title of the recipe that is most likely to gain weight?",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id ORDER BY T2.total_fat DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "What is the unsaturated fat content in the recipe \"Raspberry Chiffon Pie\"?",
+        "query": "SELECT T2.total_fat - T2.sat_fat FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T1.title = 'Raspberry Chiffon Pie'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Please list the titles of all the recipes that are salt/sodium-free.",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T2.sodium < 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Please list the titles of all the recipes that may lead to constipation, feeling sick or stomach pain.",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T2.iron > 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Which recipe is more beneficial in wound healing, \"Raspberry Chiffon Pie\" or \"Fresh Apricot Bavarian\"?",
+        "query": "SELECT DISTINCT CASE WHEN CASE WHEN T2.title = 'Raspberry Chiffon Pie' THEN T1.vitamin_c END > CASE WHEN T2.title = 'Fresh Apricot Bavarian' THEN T1.vitamin_c END THEN 'Raspberry Chiffon Pie' ELSE 'Fresh Apricot Bavarian' END AS \"vitamin_c is higher\" FROM Nutrition T1 INNER JOIN Recipe T2 ON T2.recipe_id = T1.recipe_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Among the recipes that take more than 10 minutes to prepare, what is the title of the one with the most calories?",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T1.prep_min > 10 ORDER BY T2.calories DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many calories does the recipe \"Raspberry Chiffon Pie\" contain?",
+        "query": "SELECT T2.calories FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T1.title = 'Raspberry Chiffon Pie'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Is the ingredient \"graham cracker crumbs\" optional in the recipe \"Raspberry Chiffon Pie\"?",
+        "query": "SELECT T2.optional FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T1.title = 'Raspberry Chiffon Pie' AND T3.name = 'graham cracker crumbs'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many ingredients must be rationed in the recipe \"Raspberry Chiffon Pie\"?",
+        "query": "SELECT COUNT(*) FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id WHERE T1.title = 'Raspberry Chiffon Pie' AND T2.max_qty = T2.min_qty"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Please list the names of all the ingredients needed for the recipe \"Raspberry Chiffon Pie\" that do not need preprocessing.",
+        "query": "SELECT T3.name FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T1.title = 'Raspberry Chiffon Pie' AND T2.preparation IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many recipes include the ingredient \"graham cracker crumbs\"?",
+        "query": "SELECT COUNT(*) FROM Ingredient AS T1 INNER JOIN Quantity AS T2 ON T1.ingredient_id = T2.ingredient_id WHERE T1.name = 'graham cracker crumbs'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "At least how many cups of graham cracker crumbs does the recipe \"Raspberry Chiffon Pie\" need?",
+        "query": "SELECT T2.min_qty FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T1.title = 'Raspberry Chiffon Pie' AND T3.name = 'graham cracker crumbs'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many calories from fat are there in the recipe \"Raspberry Chiffon Pie\"?",
+        "query": "SELECT T2.calories * T2.pcnt_cal_fat FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T1.title = 'Raspberry Chiffon Pie'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many calories on average does a recipe that comes from \"Produce for Better Health Foundation and 5 a Day\" contain?",
+        "query": "SELECT AVG(T2.calories) FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T1.source = 'Produce for Better Health Foundation and 5 a Day'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many calories does the turkey tenderloin bundles recipe have?",
+        "query": "SELECT T2.calories FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T1.title = 'Turkey Tenderloin Bundles'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many cups of 1% lowfat milk should be added to no.1436 recipe?",
+        "query": "SELECT COUNT(*) FROM Ingredient AS T1 INNER JOIN Quantity AS T2 ON T1.ingredient_id = T2.ingredient_id WHERE T1.name = '1% lowfat milk' AND T2.unit = 'cup(s)' AND T2.recipe_id = 1436"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Which recipe in the database contains the most total fat? Give its title.",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id ORDER BY T2.total_fat DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many times do seedless red grapes appear in the recipes?",
+        "query": "SELECT COUNT(*) FROM Ingredient AS T1 INNER JOIN Quantity AS T2 ON T1.ingredient_id = T2.ingredient_id WHERE T1.name = 'seedless red grapes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "State the name of the optional ingredient of no.1397 recipe.",
+        "query": "SELECT T1.name FROM Ingredient AS T1 INNER JOIN Quantity AS T2 ON T1.ingredient_id = T2.ingredient_id WHERE T2.recipe_id = 1397 AND T2.optional = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Which recipe needs the most frozen raspberries in light syrup? State its title.",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T3.name = 'frozen raspberries in light syrup' AND T2.max_qty = T2.min_qty"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Give the name of the most widely used ingredient.",
+        "query": "SELECT T1.name FROM Ingredient AS T1 INNER JOIN Quantity AS T2 ON T1.ingredient_id = T2.ingredient_id GROUP BY T1.name ORDER BY COUNT(T1.name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "What kind of preparation is needed for apple juice to make a raspberry-pear couscous cake?",
+        "query": "SELECT T2.preparation FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T1.title = 'Raspberry-Pear Couscous Cake' AND T3.name = 'apple juice'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many cups of almonds do you need for a chicken pocket sandwich?",
+        "query": "SELECT COUNT(*) FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T1.title = 'Chicken Pocket Sandwich' AND T3.name = 'almonds' AND T2.unit = 'cup(s)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Name the recipe with the most Vitamin C.",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id ORDER BY T2.vitamin_c DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How much Vitamin A is in Sherry beef?",
+        "query": "SELECT T2.vitamin_a FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T1.title = 'Sherried Beef'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "State the title of the recipe with most kinds of ingredients.",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id GROUP BY T1.title ORDER BY COUNT(title) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many times is the sodium content in Lasagne-Spinach Spirals to Beef and Spinach Pita Pockets?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.title = 'Lasagne-Spinach Spirals' THEN T2.sodium ELSE 0 END) AS REAL) * 100 / SUM(CASE WHEN T1.title = 'Beef and Spinach Pita Pockets' THEN T2.sodium ELSE 0 END) FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "What is the average calorie count for all recipes using coarsely ground black pepper?",
+        "query": "SELECT AVG(T3.calories) FROM Ingredient AS T1 INNER JOIN Quantity AS T2 ON T2.ingredient_id = T1.ingredient_id INNER JOIN Nutrition AS T3 ON T3.recipe_id = T2.recipe_id WHERE T1.name = 'coarsely ground black pepper'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "What are the names of the recipes that will cause stomach pain?",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T2.iron > 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many ingredients are there in Apricot Yogurt Parfaits?",
+        "query": "SELECT COUNT(*) FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id WHERE T1.title = 'Apricot Yogurt Parfaits'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "What are the names of the ingredients that need to be cook in beef broth?",
+        "query": "SELECT T1.name FROM Ingredient AS T1 INNER JOIN Quantity AS T2 ON T1.ingredient_id = T2.ingredient_id WHERE T2.preparation = 'cooked in beef broth'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many ingredients are there in the recipe that is best in helping your body's natural defence against illness and infection?",
+        "query": "SELECT COUNT(*) FROM Nutrition AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id WHERE T1.vitamin_a > 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "What are the names of the top 5 recipes that are best for wound healing?",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id ORDER BY T2.vitamin_c DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Which ingredient appeared the least in recipes?",
+        "query": "SELECT T1.name FROM Ingredient AS T1 INNER JOIN Quantity AS T2 ON T1.ingredient_id = T2.ingredient_id GROUP BY T2.ingredient_id ORDER BY COUNT(T2.ingredient_id) ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many baking product ingredients are there in the No-Bake Chocolate Cheesecake?",
+        "query": "SELECT COUNT(*) FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T3.category = 'baking products' AND T1.title = 'No-Bake Chocolate Cheesecake'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "List all the ingredients for Strawberry Sorbet.",
+        "query": "SELECT T3.name FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T1.title = 'Strawberry Sorbet'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "What are the optional ingredients for Warm Chinese Chicken Salad?",
+        "query": "SELECT T3.name FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T1.title = 'Warm Chinese Chicken Salad' AND T2.optional = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Among the recipes with alcohol content over 10, which recipe takes the longest to prepare?",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T2.alcohol > 10 ORDER BY T1.prep_min DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many servings does the recipe with the highest unsaturated fat have?",
+        "query": "SELECT COUNT(T1.title) FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id ORDER BY T2.total_fat - T2.sat_fat DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Among the recipes whose source is the National Potato Board, which recipe has the highest calories?",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T1.source = 'National Potato Board' ORDER BY T2.calories DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Which recipe has the highest number of ingredients? Calculate the said recipe's total time of cooking.",
+        "query": "SELECT T2.recipe_id, T1.prep_min + T1.cook_min + T1.stnd_min FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id GROUP BY T2.recipe_id ORDER BY COUNT(T2.ingredient_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Which ingredient appeared the most in recipes? Calculate its amount of appearance in percentage.",
+        "query": "SELECT T1.name, CAST(COUNT(T2.ingredient_id) AS FLOAT) * 100 / ( SELECT COUNT(T2.ingredient_id) FROM Ingredient AS T1 INNER JOIN Quantity AS T2 ON T2.ingredient_id = T1.ingredient_id ) AS \"percentage\" FROM Ingredient AS T1 INNER JOIN Quantity AS T2 ON T2.ingredient_id = T1.ingredient_id GROUP BY T2.ingredient_id ORDER BY COUNT(T2.ingredient_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Provide the title and total time of the recipe which has the highest possibility of gaining weight.",
+        "query": "SELECT T1.title, T1.prep_min + T1.cook_min + T1.stnd_min FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id ORDER BY T2.total_fat DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Which recipes contain almond extract?",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T3.name = 'almond extract'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "List the ingredients in Tomato-Cucumber Relish.",
+        "query": "SELECT T3.name FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T1.title = 'Tomato-Cucumber Relish'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many ingredients are needed to prepare Idaho Potato Supreme?",
+        "query": "SELECT COUNT(*) FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id WHERE T1.title = 'Idaho Potato Supreme'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Provide the ingredients that are rationed in the recipe with the highest carbohydrate content.",
+        "query": "SELECT T1.name FROM Ingredient AS T1 INNER JOIN Quantity AS T2 ON T1.ingredient_id = T2.ingredient_id INNER JOIN Nutrition AS T3 ON T3.recipe_id = T2.recipe_id WHERE T2.max_qty = T2.min_qty ORDER BY T3.carbo DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Name the recipes which can lead to constipation.",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T2.iron > 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Describe the ingredients in the recipe with the highest vitamin that helps vision in dim light.",
+        "query": "SELECT T1.name FROM Ingredient AS T1 INNER JOIN Quantity AS T2 ON T1.ingredient_id = T2.ingredient_id INNER JOIN Nutrition AS T3 ON T3.recipe_id = T2.recipe_id ORDER BY T3.vitamin_a DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Provide the ingredients and maximum quantities of the recipe which can serve 7 people.",
+        "query": "SELECT T3.name, T2.max_qty FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T1.servings = 7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Among the recipes from The California Tree Fruit Agreement, calculate the percentage of sodium-free recipes.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.sodium < 5 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T1.source = 'The California Tree Fruit Agreement'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "List the ingredients which measure in slices.",
+        "query": "SELECT T1.name FROM Ingredient AS T1 INNER JOIN Quantity AS T2 ON T1.ingredient_id = T2.ingredient_id WHERE T2.unit = 'slice(s)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many recipes can be made with canned dairy?",
+        "query": "SELECT COUNT(*) FROM Ingredient AS T1 INNER JOIN Quantity AS T2 ON T1.ingredient_id = T2.ingredient_id WHERE T1.category = 'canned dairy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Provide the title and total time of the recipe which can be made with only lima beans.",
+        "query": "SELECT T1.title, T1.prep_min + T1.cook_min + T1.stnd_min FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T3.name = 'lima beans'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Among the recipes with sea bass, how many percent of recipes can serve 10 people and above?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.servings >= 10 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T3.name = 'sea bass steak'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How much fat does the Raspberry Chiffon Pie have?",
+        "query": "SELECT T2.total_fat FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T1.title = 'Raspberry Chiffon Pie'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "What is the percentage calories protein of Raspberry Chiffon Pie?",
+        "query": "SELECT pcnt_cal_prot FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T1.title = 'Raspberry Chiffon Pie'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many ingredients are required to make the Raspberry Chiffon Pie?",
+        "query": "SELECT COUNT(*) FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T1.title = 'Raspberry Chiffon Pie'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "List the names of alcohol free recipes.",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T2.alcohol = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "What is the average vitamin C amount of all cakes?",
+        "query": "SELECT AVG(T1.vitamin_c) FROM Nutrition AS T1 INNER JOIN Recipe AS T2 ON T2.recipe_id = T1.recipe_id WHERE T2.title LIKE '%cake%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many dairy recipes can serve more than 10 people?",
+        "query": "SELECT COUNT(*) FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T3.category = 'dairy' AND T1.servings > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "List the names of recipes that can lead to constipation.",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id WHERE T2.iron > 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Which recipe has the highest calories?",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id ORDER BY T2.calories DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "How many recipes are non-dairy?",
+        "query": "SELECT COUNT(T2.recipe_id) FROM Ingredient AS T1 INNER JOIN Quantity AS T2 ON T2.ingredient_id = T1.ingredient_id INNER JOIN Nutrition AS T3 ON T3.recipe_id = T2.recipe_id WHERE T1.category NOT LIKE '%dairy%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "List all the ingredients of Apricot Yogurt Parfaits.",
+        "query": "SELECT T3.name, T3.category FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id WHERE T1.title = 'Apricot Yogurt Parfaits'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Identify recipes with different maximum and minimum quantities.",
+        "query": "SELECT T1.title FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id WHERE T2.max_qty <> T2.min_qty"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "What ingredients does the longest cooking time recipe have?",
+        "query": "SELECT T3.name FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id ORDER BY T1.cook_min DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Calculate the percentage of recipes with no cholesterol included and have a cooking time less than 20 minutes among all recipes.",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.cook_min < 20 AND T2.cholestrl = 0 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM Recipe AS T1 INNER JOIN Nutrition AS T2 ON T1.recipe_id = T2.recipe_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "cookbook",
+        "question": "Among all recipes containing cheese, what is the percentage of recipes with calories greater than 200?",
+        "query": "SELECT CAST(SUM(CASE WHEN T4.calories > 200 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM Recipe AS T1 INNER JOIN Quantity AS T2 ON T1.recipe_id = T2.recipe_id INNER JOIN Ingredient AS T3 ON T3.ingredient_id = T2.ingredient_id INNER JOIN Nutrition AS T4 ON T4.recipe_id = T1.recipe_id WHERE T3.category = 'cheese'"
+    }
+]

@@ -1,0 +1,242 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "How many trains are there that run in the east direction?",
+        "query": "SELECT COUNT(id) FROM trains WHERE direction = 'east'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "How many cars are there on train no.1?",
+        "query": "SELECT COUNT(id) FROM cars WHERE train_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "What is the shape of the tail car on train no.1?",
+        "query": "SELECT shape FROM cars WHERE train_id = 1 AND position = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Please list the IDs of all the trains with at least one car in a non-regular shape.",
+        "query": "SELECT train_id FROM cars WHERE shape IN ('elipse', 'bucket') GROUP BY train_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "How many cars on train no.1 have the roof open?",
+        "query": "SELECT COUNT(id) FROM cars WHERE train_id = 1 AND roof = 'none'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Please list the IDs of all the cars on train no.1 that have 2 wheels.",
+        "query": "SELECT id FROM cars WHERE train_id = 1 AND wheels = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Among the trains that run in the east direction, how many of them have at least one car in a non-regular shape?",
+        "query": "SELECT SUM(CASE WHEN T1.shape IN ('bucket', 'elipse') THEN 1 ELSE 0 end)as count FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T2.direction = 'east'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Please list the IDs of all the trains that run in the east direction and have less than 4 cars.",
+        "query": "SELECT T1.id FROM trains AS T1 INNER JOIN ( SELECT train_id, MAX(position) AS carsNum FROM cars GROUP BY train_id ) AS T2 ON T1.id = T2.train_id WHERE T1.direction = 'east' AND T2.carsNum < 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Please list the IDs of all the cars with double sides on trains that run in the west direction.",
+        "query": "SELECT T1.id FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T2.direction = 'east' AND T1.sides = 'double'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Among the trains that run in the east direction, how many of them have more than 2 long cars?",
+        "query": "SELECT SUM(CASE WHEN T2.longCarsNum > 2 THEN 1 ELSE 0 END)as count FROM trains AS T1 INNER JOIN ( SELECT train_id, COUNT(id) AS longCarsNum FROM cars WHERE len = 'long' GROUP BY train_id ) AS T2 ON T1.id = T2.train_id WHERE T1.direction = 'west'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Please list the directions in which the trains with at least one empty-loaded car run.",
+        "query": "SELECT T2.direction FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T1.load_num = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "In which direction does the train with an ellipse-shape car run?",
+        "query": "SELECT T2.direction FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T1.shape = 'ellipse'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "What is the total number of short cars on all the trains that run in the east direction?",
+        "query": "SELECT SUM(CASE WHEN T1.len = 'short' then 1 ELSE 0 END)as count FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T2.direction = 'east'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Please list the shapes of all the head cars on the trains that run in the east direction.",
+        "query": "SELECT T1.shape FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T2.direction = 'east' AND T1.position = 1 GROUP BY T1.shape"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "How many cars on a train that runs in the east direction have a flat roof?",
+        "query": "SELECT SUM(CASE WHEN T1.roof = 'flat' THEN 1 ELSE 0 END)as count FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T2.direction = 'east'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Among the cars on a train that runs in the east direction, how many of them have a flat roof and a circle load shape?",
+        "query": "SELECT SUM(CASE WHEN T1.load_shape = 'circle' THEN 1 ELSE 0 END)as count FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T2.direction = 'east' AND T1.roof = 'flat' "
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Trains that run in which direction have more rectangle-shaped cars in total?",
+        "query": "SELECT T1.direction FROM trains AS T1 INNER JOIN ( SELECT train_id, COUNT(id) AS rectCarsNum FROM cars WHERE shape = 'rectangle' GROUP BY train_id ) AS T2 ON T1.id = T2.train_id ORDER BY T2.rectCarsNum DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Please list the directions in which the trains with 4 short cars run.",
+        "query": "SELECT T2.direction FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T1.len = 'short' AND T1.position = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "What is the average number of cars on trains that run in the east direction?",
+        "query": "SELECT CAST(COUNT(T1.id) AS REAL) / COUNT(DISTINCT T1.train_id) FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T2.direction = 'east'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Among the trains that have at least one non-regular shaped car, what is the percentage of it running in the east direction?",
+        "query": "SELECT CAST(COUNT(DISTINCT CASE WHEN T2.direction = 'east' THEN T1.train_id ELSE NULL END) AS REAL) * 100 / COUNT(DISTINCT T1.train_id) FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T1.shape IN ('bucket', 'ellipse')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "How many short cars are in the shape of hexagon?",
+        "query": "SELECT COUNT(id) FROM cars WHERE shape = 'hexagon' AND len = 'short'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "How many trains are running west?",
+        "query": "SELECT COUNT(id) FROM trains WHERE direction = 'west'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "What are the load shapes of all the short ellipse cars?",
+        "query": "SELECT load_shape FROM cars WHERE shape = 'ellipse' AND len = 'short'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "What are the ids of the train running east?",
+        "query": "SELECT id FROM trains WHERE direction = 'east'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "How many wheels do the long cars have?",
+        "query": "SELECT SUM(wheels) FROM cars WHERE len = 'long'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Which direction do the majority of the trains are running?",
+        "query": "SELECT direction FROM trains GROUP BY direction ORDER BY COUNT(id) DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Among the trains running east, how many trains have at least 4 cars?",
+        "query": "SELECT SUM(CASE WHEN T1.direction = 'east' THEN 1 ELSE 0 END)as count FROM trains AS T1 INNER JOIN ( SELECT train_id, COUNT(id) AS carsNum FROM cars GROUP BY train_id ) AS T2 ON T1.id = T2.train_id WHERE T2.carsNum >= 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Which direction do most of the trains with rectangle-shaped second cars run?",
+        "query": "SELECT T2.direction FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T1.position = 2 AND T1.shape = 'rectangle' GROUP BY T2.direction ORDER BY COUNT(T2.id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "How many trains running west have double sided cars in 3rd position?",
+        "query": "SELECT COUNT(T.train_id) FROM (SELECT T1.train_id FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T1.position = 3 AND T2.direction = 'west' AND T1.sides = 'double' GROUP BY T1.train_id)as T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "How many eastbound trains have rectangular-shaped head cars?",
+        "query": "SELECT COUNT(T.train_id) FROM (SELECT T1.train_id FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T1.position = 1 AND T2.direction = 'east' AND T1.shape = 'rectangle' GROUP BY T1.train_id)as T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Among the trains running west, how many trains have no more than one car with an open roof?",
+        "query": "SELECT SUM(CASE WHEN T1.direction = 'west' THEN 1 ELSE 0 END)as count FROM trains AS T1 INNER JOIN ( SELECT train_id, COUNT(id) FROM cars WHERE roof = 'none' GROUP BY train_id HAVING COUNT(id) = 1 ) AS T2 ON T1.id = T2.train_id "
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Which direction does the majority of the trains that have 3 cars are running?",
+        "query": "SELECT T1.direction FROM trains AS T1 INNER JOIN ( SELECT train_id, COUNT(id) AS carsNum FROM cars GROUP BY train_id HAVING carsNum = 3 ) AS T2 ON T1.id = T2.train_id GROUP BY T1.direction"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "How many trains with fully loaded head cars are running east?",
+        "query": "SELECT COUNT(DISTINCT T1.train_id) FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T1.position = 1 AND T1.load_num = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "How many cars running east have double-sided tail cars?",
+        "query": "SELECT COUNT(T1.id) FROM trains AS T1 INNER JOIN cars AS T2 ON T1.id = T2.train_id INNER JOIN ( SELECT train_id, MAX(position) AS trailPosi FROM cars GROUP BY train_id ) AS T3 ON T1.id = T3.train_id WHERE T1.direction = 'east' AND T2.position = T3.trailPosi AND T2.sides = 'double'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "List all the directions of the trains that have empty cars.",
+        "query": "SELECT T2.direction FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T1.load_num = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "What is the direction of the train with a diamond-shaped load in its 2nd car?",
+        "query": "SELECT T2.direction FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T1.position = 2 AND T1.shape = 'diamond'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Among the trains running west, how many trains have three-wheeled, jagged roof cars?",
+        "query": "SELECT SUM(CASE WHEN T2.direction = 'west' THEN 1 ELSE 0 END)as count FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T1.wheels = 3 AND T1.roof = 'jagged'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "Provide the directions for all the trains that have 2 or less cars.",
+        "query": "SELECT T1.direction FROM trains AS T1 INNER JOIN ( SELECT train_id, MAX(position) AS trailPosi FROM cars GROUP BY train_id ) AS T2 ON T1.id = T2.train_id WHERE T2.trailPosi <= 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "What is the percentage of all the trains with at least 4 cars? List the directions of the said trains.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.trailPosi >= 4 THEN T1.id ELSE NULL END) AS REAL) * 100 / COUNT(T1.id) FROM trains AS T1 INNER JOIN ( SELECT train_id, MAX(position) AS trailPosi FROM cars GROUP BY train_id ) AS T2 ON T1.id = T2.train_id UNION ALL SELECT T1.direction FROM trains AS T1 INNER JOIN ( SELECT train_id, MAX(position) AS trailPosi FROM cars t GROUP BY train_id ) AS T2 ON T1.id = T2.train_id AND T2.trailPosi >= 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "trains",
+        "question": "List all the load shapes of all head cars of each train and identify which load shape has the highest number. Calculate the percentage of the trains with the said head car that are running eas",
+        "query": "SELECT DISTINCT T3.load_shape FROM ( SELECT load_shape, train_id FROM cars WHERE position = 1 ORDER BY train_id DESC ) AS T3 UNION ALL SELECT T4.load_shape FROM ( SELECT load_shape, train_id FROM cars WHERE position = 1 ORDER BY train_id DESC LIMIT 1 ) AS T4 UNION ALL SELECT (CAST(COUNT(DISTINCT CASE WHEN T2.direction = 'east' THEN T2.id ELSE NULL END) AS REAL) * 100 / COUNT(DISTINCT T2.id)) FROM cars AS T1 INNER JOIN trains AS T2 ON T1.train_id = T2.id WHERE T1.position = 1 AND T1.load_shape = ( SELECT T4.load_shape FROM ( SELECT load_shape, train_id FROM cars AS T WHERE position = 1 ORDER BY train_id DESC LIMIT 1 ) AS T4 )"
+    }
+]

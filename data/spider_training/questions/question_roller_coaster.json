@@ -1,0 +1,104 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "How many roller coasters are there?",
+        "query": "SELECT count(*) FROM roller_coaster"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "List the names of roller coasters by ascending order of length.",
+        "query": "SELECT Name FROM roller_coaster ORDER BY LENGTH ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "What are the lengths and heights of roller coasters?",
+        "query": "SELECT LENGTH ,  Height FROM roller_coaster"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "List the names of countries whose language is not \"German\".",
+        "query": "SELECT Name FROM country WHERE Languages != \"German\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "Show the statuses of roller coasters longer than 3300 or higher than 100.",
+        "query": "SELECT Status FROM roller_coaster WHERE LENGTH  >  3300 OR Height  >  100"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "What are the speeds of the longest roller coaster?",
+        "query": "SELECT Speed FROM roller_coaster ORDER BY LENGTH DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "What is the average speed of roller coasters?",
+        "query": "SELECT avg(Speed) FROM roller_coaster"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "Show the different statuses and the numbers of roller coasters for each status.",
+        "query": "SELECT Status ,  COUNT(*) FROM roller_coaster GROUP BY Status"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "Please show the most common status of roller coasters.",
+        "query": "SELECT Status FROM roller_coaster GROUP BY Status ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "List the status shared by more than two roller coaster.",
+        "query": "SELECT Status FROM roller_coaster GROUP BY Status HAVING COUNT(*)  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "Show the park of the roller coaster with the highest speed.",
+        "query": "SELECT Park FROM roller_coaster ORDER BY Speed DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "Show the names of roller coasters and names of country they are in.",
+        "query": "SELECT T2.Name ,  T1.Name FROM country AS T1 JOIN roller_coaster AS T2 ON T1.Country_ID  =  T2.Country_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "Show the names of countries that have more than one roller coaster.",
+        "query": "SELECT T1.Name FROM country AS T1 JOIN roller_coaster AS T2 ON T1.Country_ID  =  T2.Country_ID GROUP BY T1.Name HAVING COUNT(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "Show the name and population of the country that has the highest roller coaster.",
+        "query": "SELECT T1.Name ,  T1.population FROM country AS T1 JOIN roller_coaster AS T2 ON T1.Country_ID  =  T2.Country_ID ORDER BY T2.Height DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "Show the names of countries and the average speed of roller coasters from each country.",
+        "query": "SELECT T1.Name ,  avg(T2.Speed) FROM country AS T1 JOIN roller_coaster AS T2 ON T1.Country_ID  =  T2.Country_ID GROUP BY T1.Name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "How many countries do not have an roller coaster longer than 3000?",
+        "query": "SELECT count(*) FROM country WHERE country_id NOT IN ( SELECT country_id FROM roller_coaster WHERE LENGTH  >  3000 )"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "roller_coaster",
+        "question": "What are the country names, area and population which has both roller coasters with speed higher",
+        "query": "SELECT T1.name ,  T1.area ,  T1.population FROM country AS T1 JOIN roller_coaster AS T2 ON T1.Country_ID  =  T2.Country_ID WHERE T2.speed  >  60 INTERSECT SELECT T1.name ,  T1.area ,  T1.population FROM country AS T1 JOIN roller_coaster AS T2 ON T1.Country_ID  =  T2.Country_ID WHERE T2.speed  <  55"
+    }
+]

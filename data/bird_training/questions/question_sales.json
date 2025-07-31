@@ -1,0 +1,644 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many sales ids are there for customer id 80?",
+        "query": "SELECT COUNT(SalesID) FROM Sales WHERE CustomerID = 80"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Count the total quantity for sales from id 1 to 10.",
+        "query": "SELECT SUM(Quantity) FROM Sales WHERE SalesID BETWEEN 1 AND 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Calculate the average quantity per sales from sales id 20 to 30.",
+        "query": "SELECT AVG(Quantity) FROM Sales WHERE SalesID BETWEEN 20 AND 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List down the product id for products with the highest quantity.",
+        "query": "SELECT DISTINCT ProductID FROM Sales WHERE Quantity = ( SELECT MAX(Quantity) FROM Sales )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many product ids have the lowest price?",
+        "query": "SELECT COUNT(DISTINCT ProductID) FROM Products WHERE Price = ( SELECT MAX(Price) FROM Products )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List down product names of free gifts.",
+        "query": "SELECT Name FROM Products WHERE Price = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List down the product name for products from id 1 to 10.",
+        "query": "SELECT Name FROM Products WHERE ProductID BETWEEN 1 AND 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the name of the product with the lowest quantity?",
+        "query": "SELECT T2.Name FROM Sales AS T1 INNER JOIN Products AS T2 ON T1.ProductID = T2.ProductID ORDER BY T1.Quantity LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many customer ids have purchased Hex Nut 9?",
+        "query": "SELECT COUNT(T1.CustomerID) FROM Sales AS T1 INNER JOIN Products AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Name = 'Hex Nut 9'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Calculate the total sales ids that were sales of Flat Washer 8.",
+        "query": "SELECT COUNT(T1.SalesID) FROM Sales AS T1 INNER JOIN Products AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Name = 'Flat Washer 8'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List down all of the product names that were placed by sales person with id 10.",
+        "query": "SELECT DISTINCT T1.Name FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T2.SalesPersonID = 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List down the first name of customers who placed order for product id 1.",
+        "query": "SELECT T1.FirstName FROM Customers AS T1 INNER JOIN Sales AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN Products AS T3 ON T2.ProductID = T3.ProductID WHERE T2.ProductID = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the last name of the customer who placed an order for sales id 178?",
+        "query": "SELECT T1.LastName FROM Customers AS T1 INNER JOIN Sales AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.SalesID = 178"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List down product ids that were purchased by customers called Abby.",
+        "query": "SELECT DISTINCT T1.ProductID FROM Sales AS T1 INNER JOIN Customers AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.FirstName = 'Abby'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Write down all of the product ids that were placed by Meander.",
+        "query": "SELECT DISTINCT T2.ProductID FROM Employees AS T1 INNER JOIN Sales AS T2 ON T1.EmployeeID = T2.SalesPersonID WHERE T1.FirstName = 'Meander'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the last name of sales person for sales id 100?",
+        "query": "SELECT T1.LastName FROM Employees AS T1 INNER JOIN Sales AS T2 ON T1.EmployeeID = T2.SalesPersonID WHERE T2.SalesID = 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the first name of employee who handled sales for customer called Abigail?",
+        "query": "SELECT DISTINCT T3.FirstName FROM Customers AS T1 INNER JOIN Sales AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN Employees AS T3 ON T2.SalesPersonID = T3.EmployeeID WHERE T1.FirstName = 'Abigail'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many free gifts have customer with id 11782 received?",
+        "query": "SELECT COUNT(T1.ProductID) FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T2.CustomerID = 11782 AND T1.Price = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the full name of customers who dealt with sales person with id 5?",
+        "query": "SELECT T1.FirstName, T1.MiddleInitial, T1.LastName FROM Customers AS T1 INNER JOIN Sales AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.SalesPersonID = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List down all of the sales IDs for sales handled by sales people with first name starting with alphabet \"s\".",
+        "query": "SELECT T1.SalesID FROM Sales AS T1 INNER JOIN Employees AS T2 ON T1.SalesPersonID = T2.EmployeeID WHERE SUBSTR(T2.FirstName, 1, 1) = 's'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Among customers with IDs from 1 to 100, what is the highest price of products they purchased?",
+        "query": "SELECT T1.Price FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T2.CustomerID BETWEEN 1 AND 100 ORDER BY T1.Price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Among customers with the last name of Valdez, who purchased the highest quantity?",
+        "query": "SELECT T1.FirstName FROM Customers AS T1 INNER JOIN Sales AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.LastName = 'Valdez' ORDER BY T2.Quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Sum up the number sales ids handled by employees called Morningstar, Heather and Dean.",
+        "query": "SELECT SUM(IIF(T2.FirstName = 'Morningstar', 1, 0)) + SUM(IIF(T2.FirstName = 'Heather', 1, 0)) + SUM(IIF(T2.FirstName = 'Dean', 1, 0)) AS num FROM Sales AS T1 INNER JOIN Employees AS T2 ON T1.SalesPersonID = T2.EmployeeID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Has Alex purchased product with id 498?",
+        "query": "SELECT IIF(T1.ProductID = 498, 'YES', 'NO') FROM Sales AS T1 INNER JOIN Customers AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.FirstName = 'Alex'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Calculate the total price of products purchased by Adam.",
+        "query": "SELECT SUM(T3.Price * T2.quantity) FROM Customers AS T1 INNER JOIN Sales AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN Products AS T3 ON T2.ProductID = T3.ProductID WHERE T1.FirstName = 'Adam'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Calculate the total price for products from id 400 to 500.",
+        "query": "SELECT SUM(T1.Price * T2.quantity) FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ProductID BETWEEN 400 AND 500"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Calculate the total quantity of products with name starting with alphabet \"c\".",
+        "query": "SELECT SUM(T2.Quantity) FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE SUBSTR(T1.Name, 1, 1) = 'C'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Calculate the total quantity of products purchased by customer called Adrian.",
+        "query": "SELECT SUM(T2.Quantity) FROM Customers AS T1 INNER JOIN Sales AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.FirstName = 'Adam'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List the product ID of the top five products, by descending order, in terms of price.",
+        "query": "SELECT ProductID FROM Products ORDER BY Price DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Among the products, how many of them are freebies?",
+        "query": "SELECT COUNT(ProductID) FROM Products WHERE Price = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Write down the name of products whose sale quantity is more than 950.",
+        "query": "SELECT DISTINCT T1.Name FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Quantity > 950"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the full name of employee who sold 1000 units?",
+        "query": "SELECT DISTINCT T2.FirstName, T2.MiddleInitial, T2.LastName FROM Sales AS T1 INNER JOIN Employees AS T2 ON T1.SalesPersonID = T2.EmployeeID WHERE T1.Quantity = 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Tally the product name and quantity of the first ten sales.",
+        "query": "SELECT T3.Name, T2.Quantity FROM Customers AS T1 INNER JOIN Sales AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN Products AS T3 ON T2.ProductID = T3.ProductID WHERE T2.SalesID BETWEEN 1 AND 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the total sales amount for Reflector?",
+        "query": "SELECT SUM(T1.Price * T2.quantity) FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name = 'Reflector'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the best selling colour for HL Mountain Frame, 42?",
+        "query": "SELECT IIF(SUM(IIF(T1.Name = 'HL Mountain Frame - Silver, 42', T2.SalesID, 0)) - SUM(IIF(T1.Name = 'HL Mountain Frame - Black, 42', T2.SalesID, 0)) > 0, 'Silver', 'Black') FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the difference in price between HL Mountain Frame - Black, 42 and LL Mountain Frame - Black, 42?",
+        "query": "SELECT ( SELECT Price FROM Products WHERE Name = 'HL Mountain Frame - Black, 42' ) - ( SELECT Price FROM Products WHERE Name = 'LL Mountain Frame - Black, 42' ) AS num"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Calculate the total number of sales closed by Michel E. DeFrance?",
+        "query": "SELECT COUNT(T1.SalesID) FROM Sales AS T1 INNER JOIN Employees AS T2 ON T1.SalesPersonID = T2.EmployeeID WHERE T2.FirstName = 'Michel' AND T2.MiddleInitial = 'e' AND T2.LastName = 'DeFrance'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the average number of customers per sales person?",
+        "query": "SELECT CAST(COUNT(T1.CustomerID) AS REAL) / COUNT(T3.EmployeeID) FROM Customers AS T1 INNER JOIN Sales AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN Employees AS T3 ON T2.SalesPersonID = T3.EmployeeID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Among all customers handled by Innes E. del Castillo, how many have purchased Short-Sleeve Classic Jersey, L?",
+        "query": "SELECT COUNT(T2.CustomerID) FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Employees AS T3 ON T2.SalesPersonID = T3.EmployeeID WHERE T3.FirstName = 'Innes' AND T3.LastName = 'del Castillo' AND T1.Name = 'Short-Sleeve Classic Jersey, L' AND T3.MiddleInitial = 'e'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Name the sales person who helped Elizabeth A. White to purchase Road-250 Black, 48.",
+        "query": "SELECT DISTINCT T3.FirstName, T3.MiddleInitial, T3.LastName FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Employees AS T3 ON T2.SalesPersonID = T3.EmployeeID INNER JOIN Customers AS T4 ON T2.CustomerID = T4.CustomerID WHERE T4.MiddleInitial = 'A' AND T4.LastName = 'White' AND T1.Name = 'Road-250 Black, 48' AND T4.FirstName = 'Elizabeth'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many sales people managed to sell Headlights - Weatherproof?",
+        "query": "SELECT COUNT(T2.SalesPersonID) FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name = 'Headlights - Weatherproof'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Calculate the revenue produced through sales of HL Road Frame - Red, 56.",
+        "query": "SELECT SUM(T2.Quantity * T1.Price) FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name = 'HL Road Frame - Red, 56'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many sales transactions were given by the customer named Joe L. Lopez?",
+        "query": "SELECT COUNT(T1.SalesID) FROM Sales AS T1 INNER JOIN Customers AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.FirstName = 'Joe' AND T2.MiddleInitial = 'L' AND T2.LastName = 'Lopez'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Name the customers who received 'Touring Rim' as a free gift.",
+        "query": "SELECT DISTINCT T1.FirstName, T1.MiddleInitial, T1.LastName FROM Customers AS T1 INNER JOIN Sales AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN Products AS T3 ON T2.ProductID = T3.ProductID WHERE T3.Name = 'Touring Rim' AND T3.Price = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Find the number of customers handled by each of the sales people.",
+        "query": "SELECT COUNT(CustomerID) FROM Sales GROUP BY SalesPersonID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many sales people are handling all the customers?",
+        "query": "SELECT COUNT(EmployeeID) FROM Employees"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Identify the name of the sales person with employee ID 7.",
+        "query": "SELECT FirstName, MiddleInitial, LastName FROM Employees WHERE EmployeeID = 7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Name the most expensive and the least expensive products available, excluding free gifts.",
+        "query": "SELECT Name FROM Products WHERE Price IN (( SELECT MAX(Price) FROM Products ), ( SELECT MIN(Price) FROM Products ))"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Among all the customers who have purchased ML Bottom Bracket, identify the percentage of sales by Albert I. Ringer?",
+        "query": "SELECT CAST(SUM(IIF(T3.FirstName = 'Albert' AND T3.MiddleInitial = 'I' AND T3.LastName = 'Ringer', 1, 0)) AS REAL) * 100 / COUNT(T2.CustomerID) FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Employees AS T3 ON T2.SalesPersonID = T3.EmployeeID WHERE T1.Name = 'ML Bottom Bracket'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many customers have the first name Abigail?",
+        "query": "SELECT COUNT(CustomerID) FROM Customers WHERE FirstName = 'Abigail'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Indicate the quantity of Blade products sold.",
+        "query": "SELECT DISTINCT T2.Quantity FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name = 'Blade'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Give the full name of the employee who has sold the most quantity.",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Employees AS T1 INNER JOIN Sales AS T2 ON T1.EmployeeID = T2.SalesPersonID ORDER BY T2.Quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List the full name of the customer who purchased the most quantity of products.",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Customers AS T1 INNER JOIN Sales AS T2 ON T1.CustomerID = T2.CustomerID ORDER BY T2.Quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the name of the product that is most sold by sale person id 20?",
+        "query": "SELECT T1.Name FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T2.SalesPersonID = 20 ORDER BY T2.Quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List the first names of employees with trading quantity for more than 500.",
+        "query": "SELECT DISTINCT T1.FirstName FROM Employees AS T1 INNER JOIN Sales AS T2 ON T1.EmployeeID = T2.SalesPersonID WHERE T2.Quantity > 500"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List the first names of customers who have purchased products from sale person id 1.",
+        "query": "SELECT T1.FirstName FROM Customers AS T1 INNER JOIN Sales AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.SalesPersonID = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Calculate the total trading quantity of Abraham sold to Aaron Alexander.",
+        "query": "SELECT SUM(T2.Quantity) FROM Customers AS T1 INNER JOIN Sales AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN Employees AS T3 ON T2.SalesPersonID = T3.EmployeeID WHERE T2.SalesPersonID = 1 AND T1.FirstName = 'Aaron' AND T1.LastName = 'Alexander' AND T3.FirstName = 'Abraham'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List the full names of customers who have purchased products in quantity over 600.",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Customers AS T1 INNER JOIN Sales AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.Quantity > 600"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Among the customers whose first name is Cameron, who bought the product in the most quantity?",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Customers AS T1 INNER JOIN Sales AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.FirstName = 'Cameron' ORDER BY T2.Quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Please provide sales ID for products named Hex Nut with a price greater than 100.",
+        "query": "SELECT T2.SalesID FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name LIKE 'Hex Nut%' AND T1.Price > 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Identify customer IDs who bought products priced from 1000 to 2000.",
+        "query": "SELECT DISTINCT T2.CustomerID FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Price BETWEEN 1000 AND 2000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Calculate the total quantity of products that are gifts.",
+        "query": "SELECT SUM(T2.Quantity) FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Price = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Calculate the quantity percentage of the gift products in the total trading quantity.",
+        "query": "SELECT CAST(SUM(IIF(T1.Price = 0, T2.Quantity, 0)) AS REAL) * 100 / SUM(T2.Quantity)FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Calculate the percentage of sold blades in the total number of transactions.",
+        "query": "SELECT CAST(SUM(IIF(T1.Name = 'Blade', T2.Quantity, 0)) AS REAL) * 100 / SUM(T2.Quantity) FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many of the employees have the last name \"Ringer\" ?",
+        "query": "SELECT COUNT(LastName) FROM Employees WHERE LastName = 'Ringer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Among the products with product ID lower than 15, how many of them costs 10 and below?",
+        "query": "SELECT COUNT(ProductID) FROM Products WHERE ProductID < 15 AND Price <= 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Give the product's name brought by Aaron Alexander.",
+        "query": "SELECT DISTINCT T1.Name FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Customers AS T3 ON T2.CustomerID = T3.CustomerID WHERE T3.FirstName = 'Aaron' AND T3.LastName = 'Alexander'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Give the product ID and name of the product with the highest prices among the quantity ranges from 400 to 500.",
+        "query": "SELECT T1.ProductID, T1.Name FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T2.quantity BETWEEN 400 AND 500 ORDER BY T1.Price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Among customers named Kate, who has the highest quantity?",
+        "query": "SELECT T2.FirstName, T2.LastName FROM Sales AS T1 INNER JOIN Customers AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.FirstName = 'Kate' ORDER BY T1.Quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Among the products that have price ranges from 100 to 150, what is the customer ID and sales ID of the product with a quantity lower than 25?",
+        "query": "SELECT T2.CustomerID, T2.SalesID FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Price BETWEEN 100 AND 150 AND T2.Quantity < 25"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List the quantity and price of the product bought by Abigail Henderson.",
+        "query": "SELECT T2.Quantity, T1.Price FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Customers AS T3 ON T2.CustomerID = T3.CustomerID WHERE T3.FirstName = 'Abigail' AND T3.LastName = 'Henderson'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "In sales with a quantity of 60, how many of them have a price not greater than 500?",
+        "query": "SELECT COUNT(T1.ProductID) FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T2.quantity = 60 AND T1.Price <= 500"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "In customers with the first name of Erica, how many of them bought a quantity below 200?",
+        "query": "SELECT COUNT(T1.ProductID) FROM Sales AS T1 INNER JOIN Customers AS T2 ON T1.CustomerID = T2.CustomerID WHERE T2.FirstName = 'Erica' AND T1.Quantity < 200"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Among products bought by Kathryn Ashe, what is the name of the product with the highest quantity?",
+        "query": "SELECT T1.Name FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Customers AS T3 ON T2.CustomerID = T3.CustomerID WHERE T3.FirstName = 'Kathryn' AND T3.LastName = 'Ashe' ORDER BY T2.Quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the price and quantity of the product named Seat Tube?",
+        "query": "SELECT DISTINCT T2.Price, T1.Quantity FROM Sales AS T1 INNER JOIN Products AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Name = 'Seat Tube'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the price and name of the product bought by Erica Xu?",
+        "query": "SELECT T3.Price, T3.Name FROM Sales AS T1 INNER JOIN Customers AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN Products AS T3 ON T1.ProductID = T3.ProductID WHERE T2.FirstName = 'Erica' AND T2.LastName = 'Xu'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List the sales ID of the product with a quantity of 590 and named \"External Lock Washer 7\".",
+        "query": "SELECT T1.SalesID FROM Sales AS T1 INNER JOIN Products AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Name = 'External Lock Washer 7' AND T1.Quantity = 590"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "In sales ID between 30 and 40, who is the customer that bought a total quantity of 403?",
+        "query": "SELECT T2.FirstName, T2.LastName FROM Sales AS T1 INNER JOIN Customers AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.Quantity = 403 AND T1.SalesID BETWEEN 30 AND 40"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List the customer's ID and last name of the customer that purchased a product with a quantity greater than 90% of the average quantity of all listed products.",
+        "query": "SELECT T2.CustomerID, T2.LastName FROM Sales AS T1 INNER JOIN Customers AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.Quantity > ( SELECT AVG(Quantity) FROM Sales ) * 0.9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Among the sales ID ranges from 1 to 200, what is the percentage of the products with a price ranging from 200 to 300?",
+        "query": "SELECT CAST(SUM(IIF(T2.Price BETWEEN 200 AND 300, 1, 0)) AS REAL) * 100 / COUNT(T2.Price) FROM Sales AS T1 INNER JOIN Products AS T2 ON T1.ProductID = T2.ProductID WHERE T1.SalesID BETWEEN 1 AND 200"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the name of the most expensive product?",
+        "query": "SELECT Name FROM Products WHERE Price = ( SELECT MAX(Price) FROM Products )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many customers are named Madison?",
+        "query": "SELECT COUNT(CustomerID) FROM Customers WHERE FirstName = 'Madison'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many types of \"HL Touring Frames\" are there?",
+        "query": "SELECT COUNT(ProductID) FROM Products WHERE Name LIKE '%HL Touring Frame%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many customers share the most common last name?",
+        "query": "SELECT COUNT(CustomerID) FROM Customers GROUP BY LastName ORDER BY COUNT(LastName) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many free or gift products are there?",
+        "query": "SELECT COUNT(ProductID) FROM Products WHERE Price = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the name of the sales person who handled the highest number of sales?",
+        "query": "SELECT T1.FirstName, T1.MiddleInitial, T1.LastName FROM Employees AS T1 INNER JOIN Sales AS T2 ON T2.SalesPersonID = T1.EmployeeID GROUP BY T2.SalesPersonID, T1.FirstName, T1.MiddleInitial, T1.LastName ORDER BY COUNT(T2.SalesID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the full name of the customer who purchased the highest amount of total price in a single purchase?",
+        "query": "SELECT T2.FirstName, T2.MiddleInitial, T2.LastName FROM Sales AS T1 INNER JOIN Customers AS T2 ON T1.CustomerID = T2.CustomerID INNER JOIN Products AS T3 ON T1.ProductID = T3.ProductID GROUP BY T1.SalesID, T1.Quantity, T3.Price, FirstName, MiddleInitial, LastName ORDER BY T1.Quantity * T3.Price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many \"Mountain-500 Black 42\" were sold in total?",
+        "query": "SELECT SUM(T2.Quantity) FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name = 'Mountain-500 Black, 42'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How much is the total amount of sales handled by Heather McBadden?",
+        "query": "SELECT SUM(T2.Quantity * T3.Price) FROM Employees AS T1 INNER JOIN Sales AS T2 ON T1.EmployeeID = T2.SalesPersonID INNER JOIN Products AS T3 ON T2.ProductID = T3.ProductID WHERE T1.FirstName = 'Heather' AND T1.LastName = 'McBadden'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many \"Mountain-100 Silver, 38\" were sold by Stearns MacFeather?",
+        "query": "SELECT SUM(T2.Quantity) FROM Employees AS T1 INNER JOIN Sales AS T2 ON T1.EmployeeID = T2.SalesPersonID INNER JOIN Products AS T3 ON T2.ProductID = T3.ProductID WHERE T1.FirstName = 'Stearns' AND T1.LastName = 'MacFeather' AND T3.Name = 'Mountain-100 Silver, 38'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many type of products did Dalton M. Coleman purchase?",
+        "query": "SELECT COUNT(T2.ProductID) FROM Customers AS T1 INNER JOIN Sales AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.FirstName = 'Dalton' AND T1.MiddleInitial = 'M' AND T1.LastName = 'Coleman'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What are the full names of the top 3 employees who handled the highest number of sales?",
+        "query": "SELECT T1.FirstName, T1.MiddleInitial, T1.LastName FROM Employees AS T1 INNER JOIN Sales AS T2 ON T1.EmployeeID = T2.SalesPersonID GROUP BY T2.SalesPersonID, T1.FirstName, T1.MiddleInitial, T1.LastName ORDER BY COUNT(T2.SalesID) DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Among the \"Mountain-500 Black\" product types, which type was purchased the most?",
+        "query": "SELECT T1.Name FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name LIKE 'Mountain-500 Black%' GROUP BY T2.Quantity, T1.Name ORDER BY SUM(T2.Quantity) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many employees sold \"ML Road Frame-W - Yellow, 40\"?",
+        "query": "SELECT COUNT(T2.SalesPersonID) FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name = 'ML Road Frame-W - Yellow, 40'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many chainring bolts were sold under sales ID 551971?",
+        "query": "SELECT T1.Quantity FROM Sales AS T1 INNER JOIN Products AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Name = 'Chainring Bolts' AND T1.SalesID = 551971"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "How many employees sold over 20,000 quantities of \"Touring-2000 Blue, 50\"?",
+        "query": "SELECT COUNT(*) FROM ( SELECT SUM(Quantity) FROM Sales WHERE ProductID IN ( SELECT ProductID FROM Products WHERE Name = 'Touring-2000 Blue, 50' ) GROUP BY Quantity, SalesPersonID HAVING SUM(Quantity) > 20000 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the total cost of all the \"Road-650, Red, 60\" products that Abraham E. Bennet sold?",
+        "query": "SELECT SUM(T2.Quantity * T3.Price) FROM Employees AS T1 INNER JOIN Sales AS T2 ON T1.EmployeeID = T2.SalesPersonID INNER JOIN Products AS T3 ON T2.ProductID = T3.ProductID WHERE T1.FirstName = 'Abraham' AND T1.MiddleInitial = 'e' AND T1.LastName = 'Bennet' AND T3.Name = 'Road-650 Red, 60'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Which product has the highest total amount of quantity sold? Calculate its overall total price.",
+        "query": "SELECT T1.Name, SUM(T2.Quantity * T1.Price) FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID GROUP BY T1.ProductID, T1.Name ORDER BY SUM(T2.Quantity) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List the first name of all the customers whose last name is Chen.",
+        "query": "SELECT FirstName, LastName FROM Customers WHERE LastName = 'Chen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Among the employee names, what is the most common middle initial?",
+        "query": "SELECT MiddleInitial FROM Employees GROUP BY MiddleInitial ORDER BY COUNT(MiddleInitial) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "What is the average price of products that cost between 100 and 200?",
+        "query": "SELECT AVG(Price) FROM Products WHERE Price BETWEEN 100 AND 200"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Find and list the full name of customers who bought products above-average quantity.",
+        "query": "SELECT T2.FirstName, T2.MiddleInitial, T2.LastName FROM Sales AS T1 INNER JOIN Customers AS T2 ON T1.CustomerID = T2.CustomerID GROUP BY T1.Quantity HAVING T1.Quantity > ( SELECT AVG(Quantity) FROM Sales )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Give the full name of the customer who bought the most amount of products.",
+        "query": "SELECT T3.FirstName, T3.MiddleInitial, T3.LastName FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Customers AS T3 ON T2.CustomerID = T3.CustomerID ORDER BY T2.Quantity * T1.Price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Of the employees who sold Blade, who has the most amount of sales?",
+        "query": "SELECT T1.FirstName, T1.MiddleInitial, T1.LastName FROM Employees AS T1 INNER JOIN Sales AS T2 ON T1.EmployeeID = T2.SalesPersonID INNER JOIN Products AS T3 ON T2.ProductID = T3.ProductID ORDER BY T2.Quantity * T3.Price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "List the full name of customers who spend more than 50,000 in descending order the amount spend.",
+        "query": "SELECT DISTINCT T3.FirstName, T3.MiddleInitial, T3.LastName FROM Products AS T1 INNER JOIN Sales AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Customers AS T3 ON T2.CustomerID = T3.CustomerID WHERE T2.Quantity * T1.Price > 50000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Name the product that sold the most quantity.",
+        "query": "SELECT T2.Name FROM Sales AS T1 INNER JOIN Products AS T2 ON T1.ProductID = T2.ProductID ORDER BY T1.Quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales",
+        "question": "Find and list the products that sold below the average quantity.",
+        "query": "SELECT DISTINCT T2.Name FROM Sales AS T1 INNER JOIN Products AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Quantity < ( SELECT AVG(Quantity) FROM Sales )"
+    }
+]

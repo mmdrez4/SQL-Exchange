@@ -1,0 +1,1952 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the description of the film ACADEMY DINOSAUR?",
+        "query": "SELECT description FROM film WHERE title = 'ACADEMY DINOSAUR'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many films have a rental duration of over 6 days?",
+        "query": "SELECT COUNT(film_id) FROM film WHERE rental_duration > 6"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please list the titles of the films that are released in 2006 and have a rental rate of $2.99.",
+        "query": "SELECT title FROM film WHERE release_year = 2006 AND rental_rate = 2.99"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which film has the longest duration of film screening? Please give its title.",
+        "query": "SELECT title FROM film ORDER BY length DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which film has a higher replacement cost, ACE GOLDFINGER or ACADEMY DINOSAUR?",
+        "query": "SELECT title FROM film WHERE title IN ('ACE GOLDFINGER', 'ACADEMY DINOSAUR') ORDER BY replacement_cost DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the films that are released in 2006, how many of them are rated Adults Only in the Motion Picture Association Film Rating?",
+        "query": "SELECT COUNT(film_id) FROM film WHERE rating = 'NC-17' AND release_year = 2006"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many films with the rental rate of $2.99 have the special feature of \"Deleted Scenes\"?",
+        "query": "SELECT COUNT(film_id) FROM film WHERE rental_rate = 2.99 AND special_features = 'Deleted Scenes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please list the titles of all the films that have more than 2 special features.",
+        "query": "SELECT title FROM ( SELECT title, COUNT(special_features) AS num FROM film GROUP BY title ) AS T ORDER BY T.num > 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the email address of the staff Jon Stephens?",
+        "query": "SELECT email FROM staff WHERE first_name = 'Jon' AND last_name = 'Stephens'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please give the full names of all the active staff.",
+        "query": "SELECT first_name, last_name FROM staff WHERE active = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "In which year was the film with the highest replacement cost released?",
+        "query": "SELECT DISTINCT release_year FROM film WHERE replacement_cost = ( SELECT MAX(replacement_cost) FROM film )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please list the titles of the top 3 films with the highest replacement cost.",
+        "query": "SELECT title FROM film WHERE replacement_cost = ( SELECT MAX(replacement_cost) FROM film ) LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the language of the film ACADEMY DINOSAUR?",
+        "query": "SELECT T2.name FROM film AS T1 INNER JOIN language AS T2 ON T1.language_id = T2.language_id WHERE T1.title = 'ACADEMY DINOSAUR'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many films are in English?",
+        "query": "SELECT COUNT(T1.film_id) FROM film AS T1 INNER JOIN language AS T2 ON T1.language_id = T2.language_id WHERE T2.name = 'English'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please list the titles of all the films starring the actor PENELOPE GUINESS.",
+        "query": "SELECT T2.title FROM film_actor AS T1 INNER JOIN film AS T2 ON T1.film_id = T2.film_id INNER JOIN actor AS T3 ON T1.actor_id = T3.actor_id WHERE T3.first_name = 'PENELOPE' AND T3.last_name = 'GUINESS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many actors have starred in the film ACADEMY DINOSAUR?",
+        "query": "SELECT COUNT(T1.actor_id) FROM film_actor AS T1 INNER JOIN film AS T2 ON T1.film_id = T2.film_id WHERE T2.title = 'ACADEMY DINOSAUR'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please list the full names of all the actors that have starred in the film ACADEMY DINOSAUR.",
+        "query": "SELECT T1.first_name, T1.last_name FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T3.title = 'ACADEMY DINOSAUR'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the films starring PENELOPE GUINESS, how many of them are released in 2006?",
+        "query": "SELECT COUNT(T2.film_id) FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T3.release_year = 2006 AND T1.first_name = 'PENELOPE' AND T1.last_name = 'GUINESS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please give the title of the film starring PENELOPE GUINESS and has the highest replacement cost.",
+        "query": "SELECT T3.title FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T1.first_name = 'PENELOPE' AND T1.last_name = 'GUINESS' ORDER BY T3.replacement_cost DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please list the full names of all the actors that have starred in the film with the highest replacement cost.",
+        "query": "SELECT first_name, last_name FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id ORDER BY T3.replacement_cost DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the films starring PENELOPE GUINESS, how many of them are in English?",
+        "query": "SELECT COUNT(T3.film_id) FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id INNER JOIN language AS T4 ON T3.language_id = T4.language_id WHERE T4.name = 'English' AND T1.first_name = 'PENELOPE' AND T1.last_name = 'GUINESS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the title of the film with the longest duration time and stars PENELOPE GUINESS?",
+        "query": "SELECT T3.title FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T1.first_name = 'PENELOPE' AND T1.last_name = 'GUINESS' ORDER BY T3.length DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please list the titles of all the films in the category of \"Horror\".",
+        "query": "SELECT T1.title FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T3.name = 'Horror'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many films are there under the category of \"Horror\"?",
+        "query": "SELECT COUNT(T1.film_id) FROM film_category AS T1 INNER JOIN category AS T2 ON T1.category_id = T2.category_id WHERE T2.name = 'Horror'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please list the titles of all the films under the category of \"Horror\" and has a rental rate of $2.99.",
+        "query": "SELECT T1.title FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T3.name = 'Horror' AND T1.rental_rate = 2.99"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "For how many times has the customer RUTH MARTINEZ rented a film?",
+        "query": "SELECT COUNT(T2.rental_id) FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id WHERE T1.first_name = 'RUTH' AND T1.last_name = 'MARTINEZ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please list the titles of all the films that the customer RUTH MARTINEZ has rented.",
+        "query": "SELECT T4.title FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id INNER JOIN inventory AS T3 ON T2.inventory_id = T3.inventory_id INNER JOIN film AS T4 ON T3.film_id = T4.film_id WHERE T1.first_name = 'RUTH' AND T1.last_name = 'MARTINEZ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the films that the customer RUTH MARTINEZ has rented, how many of them are released in 2006?",
+        "query": "SELECT COUNT(T1.customer_id) FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id INNER JOIN inventory AS T3 ON T2.inventory_id = T3.inventory_id INNER JOIN film AS T4 ON T3.film_id = T4.film_id WHERE T4.release_year = 2006 AND T1.first_name = 'RUTH' AND T1.last_name = 'MARTINEZ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the films that the customer RUTH MARTINEZ has rented, what is the title of the one with the highest replacement cost?",
+        "query": "SELECT T4.title FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id INNER JOIN inventory AS T3 ON T2.inventory_id = T3.inventory_id INNER JOIN film AS T4 ON T3.film_id = T4.film_id WHERE T1.first_name = 'RUTH' AND T1.last_name = 'MARTINEZ' ORDER BY T4.replacement_cost DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please list the full names of all the customers who have rented the film with the highest replacement cost.",
+        "query": "SELECT T1.first_name, T1.last_name FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id INNER JOIN inventory AS T3 ON T2.inventory_id = T3.inventory_id INNER JOIN film AS T4 ON T3.film_id = T4.film_id ORDER BY T4.replacement_cost DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many films rented to the customer RUTH MARTINEZ were returned in August, 2005?",
+        "query": "SELECT COUNT(T1.customer_id) FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id WHERE T1.first_name = 'RUTH' AND T1.last_name = 'MARTINEZ' AND STRFTIME('%m',T2.return_date) = '8' AND STRFTIME('%Y', T2.return_date) = '2005'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please give the full name of the customer that have rented the most films.",
+        "query": "SELECT T.first_name, T.last_name FROM ( SELECT T1.first_name, T1.last_name, COUNT(T2.rental_id) AS num FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id GROUP BY T1.first_name, T1.last_name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the customers who have rented the film ACADEMY DINOSAUR, how many of them are active?",
+        "query": "SELECT COUNT(T1.customer_id) FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id INNER JOIN inventory AS T3 ON T2.inventory_id = T3.inventory_id INNER JOIN film AS T4 ON T3.film_id = T4.film_id WHERE T1.active = 1 AND T4.title = 'ACADEMY DINOSAUR'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which film is rented for the most times by the customers? Please give its title.",
+        "query": "SELECT T.title FROM ( SELECT T1.title, COUNT(T3.rental_id) AS num FROM film AS T1 INNER JOIN inventory AS T2 ON T1.film_id = T2.film_id INNER JOIN rental AS T3 ON T2.inventory_id = T3.inventory_id GROUP BY T1.title ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which customer has rented more movies, RUTH MARTINEZ or LINDA WILLIAMS?",
+        "query": "SELECT T.first_name, T.last_name FROM ( SELECT T1.first_name, T1.last_name, COUNT(T1.customer_id) AS num FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id WHERE (T1.first_name = 'RUTH' AND T1.last_name = 'MARTINEZ') OR (T1.first_name = 'LINDA' AND T1.last_name = 'WILLIAMS') GROUP BY T1.first_name, T1.last_name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among all the films starring PENELOPE GUINESS, what is the title of the one with the highest rental price per day?",
+        "query": "SELECT T3.title FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T1.first_name = 'PENELOPE' AND T1.last_name = 'GUINESS' ORDER BY T3.rental_rate / T3.rental_duration DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the average replacement cost of the films under the category of \"Horror\"?",
+        "query": "SELECT AVG(T3.replacement_cost) FROM film_category AS T1 INNER JOIN category AS T2 ON T1.category_id = T2.category_id INNER JOIN film AS T3 ON T1.film_id = T3.film_id WHERE T2.name = 'Horror'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among all films that the customer RUTH MARTINEZ has rented, what is the percentage of it being a Music film?",
+        "query": "SELECT CAST(SUM(IIF(T3.name = 'Music', 1, 0)) AS REAL) * 100 / COUNT(T1.film_id) FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id INNER JOIN inventory AS T4 ON T1.film_id = T4.film_id INNER JOIN customer AS T5 ON T4.store_id = T5.store_id INNER JOIN rental AS T6 ON T4.inventory_id = T6.inventory_id WHERE T5.first_name = 'RUTH' AND T5.last_name = 'MARTINEZ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the average duration time of the films starring PENELOPE GUINESS?",
+        "query": "SELECT AVG(T3.length) FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T1.first_name = 'PENELOPE' AND T1.last_name = 'GUINESS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is Diane Collins' email address?",
+        "query": "SELECT email FROM customer WHERE first_name = 'DIANE' AND last_name = 'COLLINS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Give the number of inactive customers.",
+        "query": "SELECT COUNT(customer_id) FROM customer WHERE active = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Who is the owner of email address \"JEREMY.HURTADO@sakilacustomer.org\"? Give the full name.",
+        "query": "SELECT first_name, last_name FROM customer WHERE email = 'JEREMY.HURTADO@sakilacustomer.org'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Give the postal code for the address No.65.",
+        "query": "SELECT postal_code FROM address WHERE address_id = 65"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "State the number of addresses in the Nordrhein-Westfalen district.",
+        "query": "SELECT COUNT(address_id) FROM address WHERE district = 'Nordrhein-Westfalen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the phone number of address No.72?",
+        "query": "SELECT phone FROM address WHERE address_id = '72'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "State the number of films that are 178 minutes long.",
+        "query": "SELECT COUNT(film_id) FROM film WHERE length = '178'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Tell the special features of the film Uprising Uptown.",
+        "query": "SELECT special_features FROM film WHERE title = 'UPRISING UPTOWN'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the description of the film Artist Coldblooded?",
+        "query": "SELECT description FROM film WHERE title = 'ARTIST COLDBLOODED'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Give the detailed address for store No.2.",
+        "query": "SELECT T1.address, T1.address2, T1.district FROM address AS T1 INNER JOIN store AS T2 ON T1.address_id = T2.address_id WHERE T2.store_id = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which continent is the mother country of Clarksville city in?",
+        "query": "SELECT T1.country FROM country AS T1 INNER JOIN city AS T2 ON T1.country_id = T2.country_id WHERE T2.city = 'Clarksville'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many actors played a role in the 2006 film whose rental duration is 7 days, rental rate is 4.99 and is 98 minutes duration?",
+        "query": "SELECT COUNT(T1.actor_id) FROM film_actor AS T1 INNER JOIN film AS T2 ON T1.film_id = T2.film_id WHERE T2.release_year = 2006 AND T2.rental_duration = 7 AND T2.rental_duration = 4.99 AND T2.length = 98"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "The actor Dan Harris played in a 77 minute film with replacement cost of 9.99, what was the rating for that film?",
+        "query": "SELECT T3.rating FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T1.first_name = 'DAN' AND T1.last_name = 'HARRIS' AND T3.length = 77 AND T3.replacement_cost = '9.99'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many films did actor Daryl Wahlberg appear in?",
+        "query": "SELECT COUNT(T1.film_id) FROM film_actor AS T1 INNER JOIN actor AS T2 ON T1.actor_id = T2.actor_id WHERE T2.first_name = 'DARYL' AND T2.last_name = 'WAHLBERG'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Sherri Rhodes rented a film at 12:27:27 on 2005/7/28, when did she/he return that film?",
+        "query": "SELECT T2.return_date FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id WHERE T1.first_name = 'SHERRI' AND T1.last_name = 'RHODES' AND T2.rental_date = '2005-07-28 12:27:27'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Give the name of the manager staff for store No.1.",
+        "query": "SELECT T1.first_name, T1.last_name FROM staff AS T1 INNER JOIN store AS T2 ON T1.store_id = T2.store_id WHERE T2.store_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "State the address location of store No.1.",
+        "query": "SELECT T1.address, T1.address2, T1.district FROM address AS T1 INNER JOIN store AS T2 ON T1.address_id = T2.address_id WHERE T2.store_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Where does the staff Jon Stephens live?",
+        "query": "SELECT T1.address, T1.address2 FROM address AS T1 INNER JOIN staff AS T2 ON T1.address_id = T2.address_id WHERE T2.first_name = 'Jon' AND T2.last_name = 'Stephens'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many addresses are there in Woodridge city?",
+        "query": "SELECT COUNT(T1.address_id) FROM address AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id WHERE T2.city = 'Woodridge'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many films are in English?",
+        "query": "SELECT COUNT(T1.film_id) FROM film AS T1 INNER JOIN language AS T2 ON T1.language_id = T2.language_id WHERE T2.name = 'English'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Give the address location of Heather Morris.",
+        "query": "SELECT T1.address FROM address AS T1 INNER JOIN customer AS T2 ON T1.address_id = T2.address_id WHERE T2.first_name = 'HEATHER' AND T2.last_name = 'MORRIS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Give the email address of the person who lives in \"1411 Lillydale Drive\".",
+        "query": "SELECT T2.email FROM address AS T1 INNER JOIN staff AS T2 ON T1.address_id = T2.address_id WHERE T1.address = '1411 Lillydale Drive'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How much money did the customer No.297 pay for the rental which happened at 12:27:27 on 2005/7/28?",
+        "query": "SELECT T1.amount FROM payment AS T1 INNER JOIN rental AS T2 ON T1.rental_id = T2.rental_id WHERE T2.rental_date = '2005-07-28 12:27:27' AND T2.customer_id = 297"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which category does the film Working Microcosmos belong to?",
+        "query": "SELECT T3.name FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T1.title = 'WORKING MICROCOSMOS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Give the number of documentary films.",
+        "query": "SELECT COUNT(T1.film_id) FROM film_category AS T1 INNER JOIN category AS T2 ON T1.category_id = T2.category_id WHERE T2.name = 'Documentary'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "State the name of the category which has the most number of films.",
+        "query": "SELECT T.name FROM ( SELECT T2.name, COUNT(T1.film_id) AS num FROM film_category AS T1 INNER JOIN category AS T2 ON T1.category_id = T2.category_id GROUP BY T2.name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Give the name of the film for inventory No.3479.",
+        "query": "SELECT T1.title FROM film AS T1 INNER JOIN inventory AS T2 ON T1.film_id = T2.film_id WHERE T2.inventory_id = 3479"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the percentage more for the rental payment for store No.2 than store No.1?",
+        "query": "SELECT CAST((SUM(IIF(T2.store_id = 2, T1.amount, 0)) - SUM(IIF(T2.store_id = 1, T1.amount, 0))) AS REAL) * 100 / SUM(IIF(T2.store_id = 1, T1.amount, 0)) FROM payment AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id INNER JOIN store AS T3 ON T2.store_id = T3.store_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many times is the number of Indian cities than Italian cities?",
+        "query": "SELECT CAST(SUM(IIF(T1.country = 'India', 1, 0)) AS REAL) / SUM(IIF(T1.country = 'Italy', 1, 0)) FROM country AS T1 INNER JOIN city AS T2 ON T1.country_id = T2.country_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many times is the number of films Gina DeGeneres acted in than Penelope Guinness?",
+        "query": "SELECT CAST(SUM(IIF(T2.first_name = 'GINA' AND T2.last_name = 'DEGENERES', 1, 0)) AS REAL) * 100 / SUM(IIF(T2.first_name = 'PENELOPE' AND T2.last_name = 'GUINESS', 1, 0)) FROM film_actor AS T1 INNER JOIN actor AS T2 ON T1.actor_id = T2.actor_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "In 2006, how many restricted films were released?",
+        "query": "SELECT COUNT(film_id) FROM film WHERE rating = 'R' AND release_year = 2006"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many actors starred in the film id 508?",
+        "query": "SELECT COUNT(actor_id) FROM film_actor WHERE film_id = 508"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What are the special features for the film \"Smoochy Control\"?",
+        "query": "SELECT special_features FROM film WHERE title = 'SMOOCHY CONTROL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many customers paid over the amount of 10 on August 2005?",
+        "query": "SELECT COUNT(customer_id) FROM payment WHERE SUBSTR(payment_date, 1, 7) LIKE '2005-08'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List the names of the films that are more than 180 minutes long.",
+        "query": "SELECT title FROM film WHERE length > 180"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How much is the total rental payment for the first 10 rentals?",
+        "query": "SELECT SUM(amount) FROM payment WHERE rental_id BETWEEN 1 AND 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What are the full names of all the active employees?",
+        "query": "SELECT first_name, last_name FROM staff WHERE active = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Who is the staff manager in store id 2?",
+        "query": "SELECT manager_staff_id FROM store WHERE store_id = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many rentals were returned on 5/27/2005?",
+        "query": "SELECT COUNT(rental_id) FROM rental WHERE rental_date = '2005-05-27'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What are the names of the movies which Laura Brody starred in?",
+        "query": "SELECT T3.title FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T1.first_name = 'Laura' AND T1.last_name = 'Brody'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List the name of the films that can only be found in store id 2.",
+        "query": "SELECT T1.title FROM film AS T1 INNER JOIN inventory AS T2 ON T1.film_id = T2.film_id WHERE T2.store_id = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the full name of the customer who rented movies for 7 consecutive days?",
+        "query": "SELECT T1.first_name, T1.last_name FROM customer AS T1 INNER JOIN ( SELECT customer_id, COUNT(*) AS num_days FROM ( SELECT *, date(days, '-' || rn || ' day') AS results FROM ( SELECT customer_id, days, row_number() OVER (PARTITION BY customer_id ORDER BY days) AS rn FROM ( SELECT DISTINCT customer_id, date(rental_date) AS days FROM rental ) ) ) GROUP BY customer_id, results HAVING num_days = 7 ) AS T2 ON T1.customer_id = T2.customer_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many films are categorized as horror?",
+        "query": "SELECT COUNT(T1.film_id) FROM film_category AS T1 INNER JOIN category AS T2 ON T1.category_id = T2.category_id WHERE T2.name = 'Horror'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the name of the most rented movie?",
+        "query": "SELECT T.title FROM ( SELECT T1.title, COUNT(T3.rental_id) AS num FROM film AS T1 INNER JOIN inventory AS T2 ON T1.film_id = T2.film_id INNER JOIN rental AS T3 ON T2.inventory_id = T3.inventory_id GROUP BY T1.title ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the most common special features of science-fiction movies?",
+        "query": "SELECT T1.special_features FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T3.name = 'sci-fi' ORDER BY T1.special_features DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the full name of the actor who starred in most movies?",
+        "query": "SELECT T.first_name, T.last_name FROM ( SELECT T2.first_name, T2.last_name, COUNT(T1.film_id) AS num FROM film_actor AS T1 INNER JOIN actor AS T2 ON T1.actor_id = T2.actor_id GROUP BY T2.first_name, T2.last_name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the films with a rental duration of 7 days, how many are comedies?",
+        "query": "SELECT COUNT(T1.film_id) FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T1.rental_duration = 7 AND T3.name = 'Comedy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Who is the staff manager of the store with the most non-active customers?",
+        "query": "SELECT T.first_name, T.last_name FROM ( SELECT T3.first_name, T3.last_name, COUNT(T1.customer_id) AS num FROM customer AS T1 INNER JOIN store AS T2 ON T1.store_id = T2.store_id INNER JOIN staff AS T3 ON T2.store_id = T3.store_id WHERE T1.active = 0 GROUP BY T3.first_name, T3.last_name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the rental price per day of the most expensive children's film?",
+        "query": "SELECT T1.rental_rate FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T3.name = 'Children' ORDER BY T1.rental_rate / T1.rental_duration DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the complete address of store id 1?",
+        "query": "SELECT T3.address, T3.address2, T3.district FROM country AS T1 INNER JOIN city AS T2 ON T1.country_id = T2.country_id INNER JOIN address AS T3 ON T2.city_id = T3.city_id INNER JOIN store AS T4 ON T3.address_id = T4.address_id WHERE T4.store_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many customers are from the city of Lethbridge?",
+        "query": "SELECT COUNT(T3.customer_id) FROM city AS T1 INNER JOIN address AS T2 ON T1.city_id = T2.city_id INNER JOIN customer AS T3 ON T2.address_id = T3.address_id WHERE T1.city = 'Lethbridge'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many cities are there in the United States?",
+        "query": "SELECT COUNT(T2.city) FROM country AS T1 INNER JOIN city AS T2 ON T1.country_id = T2.country_id WHERE T1.country = 'United States'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List the names of the customers from India.",
+        "query": "SELECT T4.first_name, T4.last_name FROM country AS T1 INNER JOIN city AS T2 ON T1.country_id = T2.country_id INNER JOIN address AS T3 ON T2.city_id = T3.city_id INNER JOIN customer AS T4 ON T3.address_id = T4.address_id WHERE T1.country = 'India'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the classic movies, how many movies have a rental rate of less than 1?",
+        "query": "SELECT COUNT(T1.film_id) FROM film_category AS T1 INNER JOIN category AS T2 ON T1.category_id = T2.category_id INNER JOIN film AS T3 ON T1.film_id = T3.film_id WHERE T3.rental_rate < 1 AND T2.name = 'Classics'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the full name of the customer who rented the highest number of movies of all time?",
+        "query": "SELECT T.first_name, T.last_name FROM ( SELECT T2.first_name, T2.last_name, COUNT(T1.rental_id) AS num FROM rental AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id GROUP BY T2.first_name, T2.last_name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many times was \"Blanket Beverly\" rented?",
+        "query": "SELECT COUNT(T3.rental_id) FROM film AS T1 INNER JOIN inventory AS T2 ON T1.film_id = T2.film_id INNER JOIN rental AS T3 ON T2.inventory_id = T3.inventory_id WHERE T1.title = 'Blanket Beverly'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the full name of the actor who has the highest number of restricted films?",
+        "query": "SELECT T.first_name, T.last_name FROM ( SELECT T1.first_name, T1.last_name, COUNT(T2.film_id) AS num FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T3.rating = 'R' GROUP BY T1.first_name, T1.last_name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Who are the top 5 actors with the highest number of films? List their full names and calculate the average number of films for each of the actors.",
+        "query": "SELECT T.first_name, T.last_name, num FROM ( SELECT T1.first_name, T1.last_name, COUNT(T2.film_id) AS num FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id GROUP BY T1.first_name, T1.last_name ) AS T ORDER BY T.num DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List the actors' IDs who have \"KILMER\" as last name.",
+        "query": "SELECT actor_id FROM actor WHERE last_name = 'KILMER'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List down the films titles with the lowest replacement cost under the general audiences rating.",
+        "query": "SELECT title FROM film WHERE replacement_cost = ( SELECT MIN(replacement_cost) FROM film )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the films with the longest duration, list any five title with their descriptions and special features.",
+        "query": "SELECT title, description, special_features FROM film WHERE length = ( SELECT MAX(length) FROM film ) LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many films rented on 26th May, 2005 were returned on 30th May, 2005?",
+        "query": "SELECT COUNT(DISTINCT rental_id) FROM rental WHERE date(rental_date) BETWEEN '2005-05-26' AND '2005-05-30'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Calculate the average payment amount per customer.",
+        "query": "SELECT AVG(amount) FROM payment GROUP BY customer_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the name and email of the staff in store ID 2?",
+        "query": "SELECT first_name, last_name, email FROM staff WHERE store_id = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many percent of customers were inactive?",
+        "query": "SELECT CAST(SUM(IIF(active = 0, 1, 0)) AS REAL) * 100 / COUNT(customer_id) FROM customer"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the description and film title of ID 996?",
+        "query": "SELECT description, title FROM film_text WHERE film_id = 996"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Calculate customers' total payment amount in August, 2005.",
+        "query": "SELECT SUM(amount) FROM payment WHERE SUBSTR(payment_date, 1, 7) = '2005-08'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List down the film titles performed by Emily Dee.",
+        "query": "SELECT T3.title FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T1.first_name = 'Emily' AND T1.last_name = 'Dee'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List down the actors' full names who performed in \"CHOCOLATE DUCK\" film.",
+        "query": "SELECT T3.first_name, T3.last_name FROM film_actor AS T1 INNER JOIN film AS T2 ON T1.film_id = T2.film_id INNER JOIN actor AS T3 ON T1.actor_id = T3.actor_id WHERE T2.title = 'CHOCOLATE DUCK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many films in the horror category were included in PG-13-rated?",
+        "query": "SELECT COUNT(T1.film_id) FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T3.name = 'Horror' AND T1.rating = 'PG-13'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Distinguish the films performed by Judy Dean according to category.",
+        "query": "SELECT T5.name FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id INNER JOIN film_category AS T4 ON T2.film_id = T4.film_id INNER JOIN category AS T5 ON T4.category_id = T5.category_id WHERE T1.first_name = 'Judy' AND T1.last_name = 'Dean'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Write down any five film names under the documentary category.",
+        "query": "SELECT T1.title FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T3.name = 'Documentary' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Mention the language of Untouchables Sunrise film and calculate its rental cost per day.",
+        "query": "SELECT T2.name, T1.replacement_cost / T1.rental_duration AS cost FROM film AS T1 INNER JOIN language AS T2 ON T1.language_id = T2.language_id WHERE T1.title = 'UNTOUCHABLES SUNRISE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List the films' titles which were rented on 24th May,2005.",
+        "query": "SELECT T1.title FROM film AS T1 INNER JOIN inventory AS T2 ON T1.film_id = T2.film_id INNER JOIN rental AS T3 ON T2.inventory_id = T3.inventory_id WHERE SUBSTR(T3.rental_date, 1, 10) = '2005-05-24'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List the films' titles which were rented by Brian Wyman in July, 2005.",
+        "query": "SELECT T4.title FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id INNER JOIN inventory AS T3 ON T2.inventory_id = T3.inventory_id INNER JOIN film AS T4 ON T3.film_id = T4.film_id WHERE T1.first_name = 'BRIAN' AND T1.last_name = 'WYMAN' AND STRFTIME('%Y', T2.rental_date) = '2005' AND STRFTIME('%m',T2.rental_date) = '7'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Write down the inventories' IDs and actors' names of \"STREETCAR INTENTIONS\".",
+        "query": "SELECT T4.inventory_id, T1.first_name, T1.last_name FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id INNER JOIN inventory AS T4 ON T2.film_id = T4.film_id WHERE T3.title = 'STREETCAR INTENTIONS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the films rented by Natalie Meyer, describe the titles and categories of the films which were rented in February 2006.",
+        "query": "SELECT T3.title, T2.name FROM film_category AS T1 INNER JOIN category AS T2 ON T1.category_id = T2.category_id INNER JOIN film AS T3 ON T1.film_id = T3.film_id INNER JOIN inventory AS T4 ON T3.film_id = T4.film_id INNER JOIN customer AS T5 ON T4.store_id = T5.store_id INNER JOIN rental AS T6 ON T4.inventory_id = T6.inventory_id WHERE T5.first_name = 'Natalie' AND T5.last_name = 'Meyer' AND STRFTIME('%Y',T3.rental_rate) = '2006' AND STRFTIME('%m',T3.rental_rate) = '2'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many rental IDs belong to Eleanor Hunt?",
+        "query": "SELECT COUNT(T1.rental_id) FROM rental AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id WHERE T2.first_name = 'Eleanor' AND T2.last_name = 'Hunt'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Describe the full names and cities of the customers who rented \"DREAM PICKUP\".",
+        "query": "SELECT T4.first_name, T4.last_name, T6.city FROM film AS T1 INNER JOIN inventory AS T2 ON T1.film_id = T2.film_id INNER JOIN rental AS T3 ON T2.inventory_id = T3.inventory_id INNER JOIN customer AS T4 ON T3.customer_id = T4.customer_id INNER JOIN address AS T5 ON T4.address_id = T5.address_id INNER JOIN city AS T6 ON T5.city_id = T6.city_id WHERE T1.title = 'DREAM PICKUP'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Calculate how many percent of customers were located in India.",
+        "query": "SELECT CAST(SUM(IIF(T1.country = 'India', 1, 0)) AS REAL) * 100 / COUNT(T4.customer_id) FROM country AS T1 INNER JOIN city AS T2 ON T1.country_id = T2.country_id INNER JOIN address AS T3 ON T2.city_id = T3.city_id INNER JOIN customer AS T4 ON T3.address_id = T4.address_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How much percentage of the film did Mary Keitel perform more than Angela Witherspoon?",
+        "query": "SELECT CAST((SUM(IIF(T1.first_name = 'ANGELA' AND T1.last_name = 'WITHERSPOON', 1, 0)) - SUM(IIF(T1.first_name = 'MARY' AND T1.last_name = 'KEITEL', 1, 0))) AS REAL) * 100 / SUM(IIF(T1.first_name = 'MARY' AND T1.last_name = 'KEITEL', 1, 0)) FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Provide the email, address, city, and country of the customer Lillie Kim.",
+        "query": "SELECT T1.email, T2.address, T3.city, T4.country FROM customer AS T1 INNER JOIN address AS T2 ON T1.address_id = T2.address_id INNER JOIN city AS T3 ON T2.city_id = T3.city_id INNER JOIN country AS T4 ON T3.country_id = T4.country_id WHERE T1.first_name = 'Lillie' AND T1.last_name = 'Kim'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Provide any 5 customers' full names who have rented from Mike Hillyer.",
+        "query": "SELECT T3.first_name, T3.last_name FROM staff AS T1 INNER JOIN address AS T2 ON T1.address_id = T2.address_id INNER JOIN customer AS T3 ON T2.address_id = T3.address_id WHERE T1.first_name = 'Mike' AND T1.last_name = 'Hillyer' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Calculate the total payment amount by Diane Collins.",
+        "query": "SELECT SUM(T2.amount) FROM customer AS T1 INNER JOIN payment AS T2 ON T1.customer_id = T2.customer_id WHERE T1.first_name = 'Diane' AND T1.last_name = 'Collins'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Provide the full names and emails of customers whose payments were greater than 70% of the average.",
+        "query": "SELECT DISTINCT T2.first_name, T2.last_name, T2.email FROM payment AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id INNER JOIN address AS T3 ON T2.address_id = T3.address_id WHERE T1.amount > ( SELECT AVG(amount) FROM payment ) * 0.7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many films have a rental rate of 0.99?",
+        "query": "SELECT COUNT(film_id) FROM film WHERE rental_rate = 0.99"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the customers with customer ID of 100 and below, how many of them have Thomas as their last name?",
+        "query": "SELECT COUNT(customer_id) FROM customer WHERE last_name = 'Thomas' AND customer_id < 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List the actor's last name that starred the film with the description of \"A Thoughtful Drama of a Composer And a Feminist who must Meet a Secret Agent in The Canadian Rockies\".",
+        "query": "SELECT T1.last_name FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T3.description = 'A Thoughtful Drama of a Composer And a Feminist who must Meet a Secret Agent in The Canadian Rockies'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Give the title of the film starred by Liza Bergman with the highest replacement cost.",
+        "query": "SELECT T3.title FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T1.first_name = 'Liza' AND T1.last_name = 'Bergman' ORDER BY replacement_cost DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among films with store ID of 2, list the title of films with the highest rental rate.",
+        "query": "SELECT T1.title FROM film AS T1 INNER JOIN inventory AS T2 ON T1.film_id = T2.film_id WHERE T2.store_id = 2 ORDER BY rental_rate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the films starred by Angelina Astaire, what is the title of the film with a replacement cost of 27.99?",
+        "query": "SELECT T3.title FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T1.first_name = 'Angelina' AND T1.last_name = 'Astaire' AND T3.replacement_cost = 27.99"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List the inventory ID of the film titled \"African Egg\".",
+        "query": "SELECT T2.inventory_id FROM film AS T1 INNER JOIN inventory AS T2 ON T1.film_id = T2.film_id WHERE T1.title = 'African Egg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "In films with a length duration of 113 minutes, how many of the films are starred by Kirk Jovovich?",
+        "query": "SELECT COUNT(T1.actor_id) FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T3.length = 113 AND T1.first_name = 'Kirk' AND T1.last_name = 'Jovovich'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "In the film with an inventory ID between 20 to 60, how many of the films have a G rating?",
+        "query": "SELECT COUNT(T1.film_id) FROM film AS T1 INNER JOIN inventory AS T2 ON T1.film_id = T2.film_id WHERE T2.inventory_id BETWEEN 20 AND 60 AND T1.rating = 'G'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among films with a rental rate of 4.99, what is the total number of films starred by Bob Fawcett?",
+        "query": "SELECT COUNT(T1.actor_id) FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T3.rental_rate = 4.99 AND T1.first_name = 'Bob' AND T1.last_name = 'Fawcett'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the inventory ID of the films starred by Russell Close with a duration between 110 to 150 minutes?",
+        "query": "SELECT T4.inventory_id FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id INNER JOIN inventory AS T4 ON T3.film_id = T4.film_id WHERE T3.length BETWEEN 110 AND 150 AND T1.first_name = 'Russell' AND T1.last_name = 'Close'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the store and inventory ID of the film with the longest duration?",
+        "query": "SELECT T2.store_id, T2.inventory_id FROM film AS T1 INNER JOIN inventory AS T2 ON T1.film_id = T2.film_id ORDER BY T1.length DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List the titles of the films starred by Elvis Marx.",
+        "query": "SELECT T3.title FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T3.length BETWEEN 110 AND 150 AND T1.first_name = 'Russell' AND T1.last_name = 'Close'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "In films with rental rate of 4.99, list down the inventory ID of the films starred by Lucille Dee.",
+        "query": "SELECT T4.inventory_id FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id INNER JOIN inventory AS T4 ON T3.film_id = T4.film_id WHERE T1.first_name = 'Lucille' AND T1.last_name = 'Dee' AND T3.rental_rate = 4.99"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List the store ID of the films with a rental rate greater than the 60% of average rental rate of all listed films.",
+        "query": "SELECT T2.store_id FROM film AS T1 INNER JOIN inventory AS T2 ON T1.film_id = T2.film_id WHERE T1.rental_rate > ( SELECT AVG(T1.rental_rate) * 0.6 FROM film AS T1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the films starred by Nick Wahlberg, what is the percentage of the films with G rating?",
+        "query": "SELECT CAST(SUM(IIF(T3.rating = 'G', 1, 0)) AS REAL) / COUNT(T3.film_id) FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T1.first_name = 'Elvis' AND T1.last_name = 'Marx'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List the address in Texas in the ascending order of city id.",
+        "query": "SELECT address FROM address WHERE district = 'Texas' AND city_id = ( SELECT MIN(city_id) FROM address WHERE district = 'Texas' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Find the full name and email address of inactive customers whose record was created in 2006.",
+        "query": "SELECT first_name, last_name, email FROM customer WHERE STRFTIME('%Y',create_date) = '2006' AND active = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What percentage of the movies are PG-13?",
+        "query": "SELECT CAST(SUM(IIF(rating = 'PG-13', 1, 0)) AS REAL) * 100 / COUNT(film_id) FROM film"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please list the top ten movies with the most price per day in descending order of price per day.",
+        "query": "SELECT title FROM film ORDER BY rental_rate / rental_duration DESC LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Calculate the average rent amount paid by the customer with customer id 15.",
+        "query": "SELECT AVG(amount) FROM payment WHERE customer_id = 15"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many customers rented for an above-average period?",
+        "query": "SELECT COUNT(customer_id) FROM rental WHERE return_date - rental_date > ( SELECT AVG(return_date - rental_date) FROM rental )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the movies, what percentage are horror?",
+        "query": "SELECT CAST(SUM(IIF(T2.name = 'horror', 1, 0)) AS REAL) * 100 / COUNT(T2.category_id) FROM film_category AS T1 INNER JOIN category AS T2 ON T1.category_id = T2.category_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Give the full name of the actor who acted in the most number of movies?",
+        "query": "SELECT T.first_name, T.last_name FROM ( SELECT T2.first_name, T2.last_name, COUNT(T1.film_id) AS num FROM film_actor AS T1 INNER JOIN actor AS T2 ON T1.actor_id = T2.actor_id GROUP BY T2.first_name, T2.last_name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Give the full name of the actor who acted the most in drama movies?",
+        "query": "SELECT T.first_name, T.last_name FROM ( SELECT T1.first_name, T1.last_name, COUNT(T2.film_id) AS num FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film_category AS T3 ON T2.film_id = T3.film_id WHERE T3.category_id = 7 GROUP BY T1.first_name, T1.last_name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the difference in the average number of films rented each day in Australia and Canada?",
+        "query": "SELECT AVG(IIF(T4.country = 'Australia', 1, 0)) - AVG(IIF(T4.country = 'Canada', 1, 0)) AS diff FROM customer AS T1 INNER JOIN address AS T2 ON T1.address_id = T2.address_id INNER JOIN city AS T3 ON T2.city_id = T3.city_id INNER JOIN country AS T4 ON T3.country_id = T4.country_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Of the movies in which Reese Kilmer acted, what percentage are action movies?",
+        "query": "SELECT CAST(SUM(IIF(T4.name = 'Action', 1, 0)) AS REAL) * 100 / COUNT(T1.actor_id) FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film_category AS T3 ON T2.film_id = T3.film_id INNER JOIN category AS T4 ON T3.category_id = T4.category_id WHERE T1.first_name = 'Reese' AND T1.last_name = 'Kilmer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Give the total amount of rent for the movie Clockwork Paradice.",
+        "query": "SELECT SUM(T1.amount) FROM payment AS T1 INNER JOIN rental AS T2 ON T1.rental_id = T2.rental_id INNER JOIN inventory AS T3 ON T2.inventory_id = T3.inventory_id INNER JOIN film AS T4 ON T3.film_id = T4.film_id WHERE T4.title = 'CLOCKWORK PARADICE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Find and list the full name of customers who rented more than five types of movies.",
+        "query": "SELECT T.first_name, T.last_name FROM ( SELECT T1.first_name, T1.last_name, COUNT(T1.customer_id) AS num FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id INNER JOIN inventory AS T3 ON T2.inventory_id = T3.inventory_id INNER JOIN film AS T4 ON T3.film_id = T4.film_id INNER JOIN film_category AS T5 ON T4.film_id = T5.film_id GROUP BY T1.first_name, T1.last_name ) AS T WHERE T.num > 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the average number of actors acted in comedy movies?",
+        "query": "SELECT AVG(T1.actor_id) FROM film_actor AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id INNER JOIN actor AS T4 ON T4.actor_id = T1.actor_id WHERE T3.name = 'comedy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "In children's movies, which was rented the most?",
+        "query": "SELECT T.title FROM ( SELECT T4.title, COUNT(T4.title) AS num FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id INNER JOIN inventory AS T3 ON T2.inventory_id = T3.inventory_id INNER JOIN film AS T4 ON T3.film_id = T4.film_id INNER JOIN film_category AS T5 ON T4.film_id = T5.film_id INNER JOIN category AS T6 ON T5.category_id = T6.category_id WHERE T6.name = 'Children' GROUP BY T4.title ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Calculate the percentage of customers who paid more than the average rent amount in store 1.",
+        "query": "SELECT CAST(( SELECT COUNT(T1.customer_id) FROM customer AS T1 INNER JOIN payment AS T2 ON T1.customer_id = T2.customer_id WHERE T2.amount > ( SELECT AVG(amount) FROM payment ) ) AS REAL) * 100 / ( SELECT COUNT(customer_id) FROM customer )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Find and list the full name of customers who rented more family movies than Sci-Fi movies.",
+        "query": "SELECT DISTINCT IIF(SUM(IIF(T5.name = 'Family', 1, 0)) - SUM(IIF(T5.name = 'Sci-Fi', 1, 0)) > 0, T1.first_name, 0) FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id INNER JOIN inventory AS T3 ON T2.inventory_id = T3.inventory_id INNER JOIN film_category AS T4 ON T4.film_id = T3.film_id INNER JOIN category AS T5 ON T4.category_id = T5.category_id GROUP BY T1.customer_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Indicate the title of all the films rated as 'Adults Only'.",
+        "query": "SELECT title FROM film WHERE rating = 'NC-17'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many actors with the surname Kilmer are there?",
+        "query": "SELECT COUNT(actor_id) FROM actor WHERE last_name = 'Kilmer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many movies have a length longer than 100?",
+        "query": "SELECT COUNT(film_id) FROM film WHERE length > 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many payments were made throughout the month of August 2005?",
+        "query": "SELECT SUM(amount) FROM payment WHERE payment_date LIKE '2005-08%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "To which country does the address '1386 Nakhon Sawan Boulevard' belong?",
+        "query": "SELECT T1.country FROM country AS T1 INNER JOIN city AS T2 ON T1.country_id = T2.country_id INNER JOIN address AS T3 ON T2.city_id = T3.city_id WHERE T3.address = '1386 Nakhon Sawan Boulevard'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What language was the most used in movies released in 2006?",
+        "query": "SELECT T.language_id FROM ( SELECT T1.language_id, COUNT(T1.language_id) AS num FROM film AS T1 INNER JOIN language AS T2 ON T1.language_id = T2.language_id WHERE STRFTIME('%Y',T1.release_year) = '2006' GROUP BY T1.language_id ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Indicate the title of all the films that are in the Classics category.",
+        "query": "SELECT T2.title FROM film_category AS T1 INNER JOIN film AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T1.category_id = T3.category_id WHERE T3.name = 'Classics'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many rentals did Ella Oliver hire in June 2016?",
+        "query": "SELECT COUNT(T1.rental_id) FROM rental AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id WHERE T2.first_name = 'ELLA' AND T2.last_name = 'ELLA' AND date(T1.rental_date) BETWEEN '2005-06-01' AND '2005-06-30'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many different clients have rented materials from Jon Stephens?",
+        "query": "SELECT COUNT(T1.customer_id) FROM rental AS T1 INNER JOIN staff AS T2 ON T1.staff_id = T2.staff_id WHERE T2.first_name = 'Jon' AND T2.last_name = 'Stephens'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the total amount paid for rentals made on July 29, 2005?",
+        "query": "SELECT SUM(T2.amount) FROM rental AS T1 INNER JOIN payment AS T2 ON T1.rental_id = T2.rental_id WHERE date(T1.rental_date) = '2005-07-29%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the first name of the customers whose address is in the postal code that begins with 76?",
+        "query": "SELECT T1.first_name FROM customer AS T1 INNER JOIN address AS T2 ON T1.address_id = T2.address_id WHERE SUBSTR(T2.postal_code, 1, 2) = '76'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "On what date was the rented material for the movie BLOOD ARGONAUTS returned?",
+        "query": "SELECT T1.rental_date FROM rental AS T1 INNER JOIN inventory AS T2 ON T1.inventory_id = T2.inventory_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T3.title = 'BLOOD ARGONAUTS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the title of the films in which Cuba Allen acted?",
+        "query": "SELECT T3.title FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T1.first_name = 'Cuba' AND T1.last_name = 'Allen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many actors acted in movies in the Music category?",
+        "query": "SELECT COUNT(T1.actor_id) FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id INNER JOIN film_category AS T4 ON T3.film_id = T4.film_id INNER JOIN category AS T5 ON T4.category_id = T5.category_id WHERE T5.name = 'Music'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the full name of the actor who has acted the most times in comedy films?",
+        "query": "SELECT T.first_name, T.last_name FROM ( SELECT T4.first_name, T4.last_name, COUNT(T2.actor_id) AS num FROM film_category AS T1 INNER JOIN film_actor AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T1.category_id = T3.category_id INNER JOIN actor AS T4 ON T2.actor_id = T4.actor_id WHERE T3.name = 'Comedy' GROUP BY T4.first_name, T4.last_name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many customers did not rent material at Mike's store?",
+        "query": "SELECT COUNT(T1.customer_id) FROM customer AS T1 INNER JOIN store AS T2 ON T1.store_id = T2.store_id INNER JOIN staff AS T3 ON T2.manager_staff_id = T3.staff_id WHERE T3.first_name != 'Mike'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Indicate the name of the actors of the films rated as 'Parents Strongly Precautioned' with the highest replacement cost.",
+        "query": "SELECT T1.first_name, T1.last_name FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T3.rating = 'PG-13' ORDER BY T3.replacement_cost DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the name of the client who has the largest quantity of rented material without returning it?",
+        "query": "SELECT T.first_name FROM ( SELECT T2.first_name, COUNT(T1.rental_date) AS num FROM rental AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id GROUP BY T2.first_name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many customers live in the city of Miyakonojo?",
+        "query": "SELECT COUNT(T3.customer_id) FROM city AS T1 INNER JOIN address AS T2 ON T1.city_id = T2.city_id INNER JOIN customer AS T3 ON T2.address_id = T3.address_id WHERE T1.city = 'Miyakonojo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many non-active clients have not returned the rented material?",
+        "query": "SELECT COUNT(T2.customer_id) FROM rental AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id WHERE T2.active = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the title of the animated films that have the shortest length?",
+        "query": "SELECT T1.title FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id ORDER BY T1.length LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "In which country is the store where Hector Poinexter rents equipment located?",
+        "query": "SELECT T5.country FROM customer AS T1 INNER JOIN store AS T2 ON T1.store_id = T2.store_id INNER JOIN address AS T3 ON T2.address_id = T3.address_id INNER JOIN city AS T4 ON T3.city_id = T4.city_id INNER JOIN country AS T5 ON T4.country_id = T5.country_id WHERE T1.first_name = 'HECTOR' AND T1.last_name = 'POINDEXTER'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the average rental payment in Horror movies?",
+        "query": "SELECT AVG(T5.amount) FROM category AS T1 INNER JOIN film_category AS T2 ON T1.category_id = T2.category_id INNER JOIN inventory AS T3 ON T2.film_id = T3.film_id INNER JOIN rental AS T4 ON T3.inventory_id = T4.inventory_id INNER JOIN payment AS T5 ON T4.rental_id = T5.rental_id WHERE T1.name = 'Horror'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the average amount of rent that Christy Vargas paid?",
+        "query": "SELECT AVG(T2.amount) FROM customer AS T1 INNER JOIN payment AS T2 ON T1.customer_id = T2.customer_id WHERE T1.first_name = 'CHRISTY' AND T1.Last_name = 'VARGAS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What percentage of films with a length of less than 100 belong to the Drama category?",
+        "query": "SELECT CAST(SUM(IIF(T2.length < 100 AND T3.name = 'Drama', 1, 0)) AS REAL) * 100 / COUNT(T1.film_id) FROM film_category AS T1 INNER JOIN film AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T1.category_id = T3.category_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What are the actors that have the same forename as Johnny? Please include in your answer the full names of these actors.",
+        "query": "SELECT first_name, last_name FROM actor WHERE first_name = 'Johnny'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What are the address numbers that are located in Gansu district?",
+        "query": "SELECT address_id FROM address WHERE district = 'Gansu'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please list three types of film along with their IDs and the latest update.",
+        "query": "SELECT DISTINCT name, category_id, last_update FROM category LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please list the full names of any three inactive customers.",
+        "query": "SELECT first_name, last_name FROM customer WHERE active = 0 LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the rental price per day for Airplane Sierra?",
+        "query": "SELECT rental_rate / rental_duration AS result FROM film WHERE title = 'AIRPLANE SIERRA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Where is store number 2 located?",
+        "query": "SELECT T1.address, T1.address2, T1.district FROM address AS T1 INNER JOIN store AS T2 ON T1.address_id = T2.address_id WHERE T2.store_id = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which city does the address 1623 Kingstown Drive belong to?",
+        "query": "SELECT T1.city FROM city AS T1 INNER JOIN address AS T2 ON T2.city_id = T1.city_id WHERE T2.address = '1623 Kingstown Drive'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please name three cities that belong to Algeria.",
+        "query": "SELECT T2.city FROM country AS T1 INNER JOIN city AS T2 ON T1.country_id = T2.country_id WHERE T1.country = 'Algeria'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the category of the film Agent Truman?",
+        "query": "SELECT T3.name FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T1.title = 'AGENT TRUMAN'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please list the titles of any three action films.",
+        "query": "SELECT T1.title FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T3.name = 'Action' LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the difference between the number of children's films and action films?",
+        "query": "SELECT SUM(IIF(T2.name = 'Children', 1, 0)) - SUM(IIF(T2.name = 'Action', 1, 0)) AS diff FROM film_category AS T1 INNER JOIN category AS T2 ON T1.category_id = T2.category_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which district does Maria Miller live in?",
+        "query": "SELECT T2.district FROM customer AS T1 INNER JOIN address AS T2 ON T1.address_id = T2.address_id WHERE T1.first_name = 'Maria' AND T1.last_name = 'Miller'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Who is the customer that is active and lives at 1795 Santiago de Compostela Way, Texas?",
+        "query": "SELECT T1.first_name, T1.last_name FROM customer AS T1 INNER JOIN address AS T2 ON T1.address_id = T2.address_id WHERE T2.address = '1795 Santiago de Compostela Way' AND T1.active = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many English films have a duration of over 50 minutes and the cost of replacement are under 10.99?",
+        "query": "SELECT COUNT(T1.film_id) FROM film AS T1 INNER JOIN language AS T2 ON T1.language_id = T2.language_id WHERE T2.name = 'English' AND T1.length > 50 AND T1.replacement_cost < 10.99"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Who are the actors that act in the ACADEMY DINOSAUR film?",
+        "query": "SELECT T1.first_name, T1.last_name FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T3.title = 'ACADEMY DINOSAUR'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please list any two films that Penelope Guiness acted in.",
+        "query": "SELECT T3.title FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T1.first_name = 'Penelope' AND T1.last_name = 'Guiness' LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the percentage of documentary films?",
+        "query": "SELECT CAST(SUM(IIF(T2.name = 'Documentary', 1, 0)) AS REAL) * 100 / COUNT(T1.film_id) FROM film_category AS T1 INNER JOIN category AS T2 ON T1.category_id = T2.category_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many films in English are for adults only?",
+        "query": "SELECT COUNT(T1.film_id) FROM film AS T1 INNER JOIN language AS T2 ON T1.language_id = T2.language_id WHERE T2.name = 'English' AND T1.rating = 'NC-17'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which film has the longest duration?",
+        "query": "SELECT title FROM film WHERE length = ( SELECT MAX(length) FROM film )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many of the actors are named \"Dan\"?",
+        "query": "SELECT COUNT(actor_id) FROM actor WHERE first_name = 'Dan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the most common first name among the customers?",
+        "query": "SELECT first_name FROM customer GROUP BY first_name ORDER BY COUNT(first_name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What are the ratings of the film featuring behind the scenes?",
+        "query": "SELECT rating FROM film WHERE special_features LIKE '%Behind the Scenes%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the largest number of films rented per customer?",
+        "query": "SELECT COUNT(rental_id) FROM rental GROUP BY customer_id ORDER BY COUNT(rental_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List all the films with the word \"Lacklusture\" in their description.",
+        "query": "SELECT title FROM film_text WHERE description LIKE '%Lacklusture%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many films did a customer named Francis Sikes rent?",
+        "query": "SELECT COUNT(T1.customer_id) FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id WHERE T1.first_name = 'FRANCIS' AND T1.last_name = 'SIKES'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Who is the manager of the store with the largest collection of films?",
+        "query": "SELECT T.first_name, T.last_name FROM ( SELECT T3.first_name, T3.last_name, COUNT(T1.film_id) AS num FROM inventory AS T1 INNER JOIN store AS T2 ON T1.store_id = T2.store_id INNER JOIN staff AS T3 ON T2.manager_staff_id = T3.staff_id GROUP BY T3.first_name, T3.last_name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What are the addresses of the inactive customers?",
+        "query": "SELECT T2.address FROM customer AS T1 INNER JOIN address AS T2 ON T1.address_id = T2.address_id WHERE T1.active = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which category is the most common?",
+        "query": "SELECT T.name FROM ( SELECT T2.name, COUNT(T2.name) AS num FROM film_category AS T1 INNER JOIN category AS T2 ON T1.category_id = T2.category_id GROUP BY T2.name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Provide the cast for the film \"Jason trap\".",
+        "query": "SELECT T1.first_name, T1.last_name FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T3.title = 'JASON TRAP'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Who is the customer with the largest payment for rental films?",
+        "query": "SELECT T.first_name, T.last_name FROM ( SELECT T1.first_name, T1.last_name, SUM(T2.amount) AS num FROM customer AS T1 INNER JOIN payment AS T2 ON T1.customer_id = T2.customer_id GROUP BY T1.first_name, T1.last_name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List the top 5 most-rented films.",
+        "query": "SELECT T.title FROM ( SELECT T3.title, COUNT(T2.inventory_id) AS num FROM rental AS T1 INNER JOIN inventory AS T2 ON T1.inventory_id = T2.inventory_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id GROUP BY T3.title ) AS T ORDER BY T.num DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which country does Sasebo belong to?",
+        "query": "SELECT T1.country FROM country AS T1 INNER JOIN city AS T2 ON T1.country_id = T2.country_id WHERE T2.city = 'Sasebo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What are the addresses for the stores?",
+        "query": "SELECT T2.address FROM store AS T1 INNER JOIN address AS T2 ON T1.address_id = T2.address_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List all the animation titles.",
+        "query": "SELECT T3.title AS per FROM film_category AS T1 INNER JOIN category AS T2 ON T1.category_id = T2.category_id INNER JOIN film AS T3 ON T1.film_id = T3.film_id WHERE T2.name = 'Animation'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the city with the most customers?",
+        "query": "SELECT T.city FROM ( SELECT T1.city, COUNT(T3.customer_id) AS num FROM city AS T1 INNER JOIN address AS T2 ON T2.city_id = T1.city_id INNER JOIN customer AS T3 ON T2.address_id = T3.address_id GROUP BY T1.city ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which actor acted in the most films?",
+        "query": "SELECT T.first_name, T.last_name FROM ( SELECT T2.first_name, T2.last_name, SUM(T1.film_id) AS num FROM film_actor AS T1 INNER JOIN actor AS T2 ON T1.actor_id = T2.actor_id GROUP BY T2.first_name, T2.last_name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What percentage of films are horror films?",
+        "query": "SELECT CAST(SUM(IIF(T2.name = 'Horror', 1, 0)) AS REAL) * 100 / COUNT(T1.film_id) FROM film_category AS T1 INNER JOIN category AS T2 ON T1.category_id = T2.category_id INNER JOIN film AS T3 ON T1.film_id = T3.film_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please indicate the full name of actor id 5.",
+        "query": "SELECT first_name, last_name FROM actor WHERE actor_id = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many id movies have category id 11?",
+        "query": "SELECT COUNT(film_id) FROM film_category WHERE category_id = 11"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which category does BABY HALL film belong to?",
+        "query": "SELECT T3.`name` FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T3.category_id = T2.category_id WHERE T1.title = 'BABY HALL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Give the full name of the actor with the highest rental rate.",
+        "query": "SELECT T1.first_name, T1.last_name FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T3.film_id = T2.film_id ORDER BY T3.rental_rate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please give the description of the movie starring JENNIFER DAVIS.",
+        "query": "SELECT T3.description FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T3.film_id = T2.film_id WHERE T1.first_name = 'JOHNNY' AND T1.last_name = 'DAVIS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List the full names of customers who have paid more than 10$.",
+        "query": "SELECT T2.first_name, T2.last_name FROM payment AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id WHERE T1.amount > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please provide the address of the customer whose first name is SUSAN with the postal code 77948.",
+        "query": "SELECT T1.address FROM address AS T1 INNER JOIN customer AS T2 ON T1.address_id = T2.address_id WHERE T2.first_name = 'SUSAN' AND T1.postal_code = 77948"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many customers have an address in Abu Dhabi city? List those customer names.",
+        "query": "SELECT COUNT(T1.city_id) FROM city AS T1 INNER JOIN address AS T2 ON T1.city_id = T2.city_id INNER JOIN customer AS T3 ON T2.address_id = T3.address_id WHERE T1.city = 'Abu Dhabi'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please provide the full name of the customer at 692 Joliet Street.",
+        "query": "SELECT T2.first_name, T2.last_name FROM address AS T1 INNER JOIN customer AS T2 ON T1.address_id = T2.address_id WHERE T1.address = '692 Joliet Street'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List movie titles with duration over 120 minutes that are in the action category.",
+        "query": "SELECT T1.title FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T3.category_id = T2.category_id WHERE T3.`name` = 'action' AND T1.length > 120"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which actor acted in ANONYMOUS HUMAN?",
+        "query": "SELECT T1.first_name, T1.last_name FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T3.film_id = T2.film_id WHERE T3.title = 'ANONYMOUS HUMAN'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which movie title has the lowest movie rental in the horror category?",
+        "query": "SELECT T1.title FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T3.`name` = 'Horror' ORDER BY T1.rental_rate LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List the descriptions of movies under the category Travel.",
+        "query": "SELECT T1.description FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T3.`name` = 'Travel'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Calculate the total payment amount of customers in Nagasaki district.",
+        "query": "SELECT SUM(T1.amount) FROM payment AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id INNER JOIN address AS T3 ON T3.address_id = T2.address_id WHERE T3.district = 'Nagasaki'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Calculate the percentage of total payment of MARGARET MOORE customers.",
+        "query": "SELECT CAST(SUM(IIF(T2.first_name = 'MARGARET' AND T2.last_name = 'MOORE', T1.amount, 0)) AS REAL) * 100 / SUM(T1.amount) FROM payment AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Calculate the percentage of movie titles with a screen length of more than 120 minutes that have a category of horror movies.",
+        "query": "SELECT CAST(SUM(IIF(T3.`name` = 'Horror', 1, 0)) * 100 / COUNT(T1.film_id) AS REAL) FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T3.category_id = T2.category_id WHERE T1.length > 120"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many film titles were released in 2006?",
+        "query": "SELECT COUNT(film_id) FROM film WHERE release_year = 2006"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List down film titles from id 1 to 10.",
+        "query": "SELECT title FROM film WHERE film_id BETWEEN 1 AND 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List down all of the film IDs with highest rental duration.",
+        "query": "SELECT film_id FROM film WHERE rental_duration = ( SELECT MAX(rental_duration) FROM film )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which film titles have the most expensive rental rate?",
+        "query": "SELECT title FROM film WHERE rental_rate = ( SELECT MAX(rental_rate) FROM film )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List down all of the film titles that are rated for general audiences.",
+        "query": "SELECT title FROM film WHERE rating = 'G'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the language for film titled \"CHILL LUCK\"?",
+        "query": "SELECT T2.`name` FROM film AS T1 INNER JOIN `language` AS T2 ON T1.language_id = T2.language_id WHERE T1.title = 'CHILL LUCK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What are the last updated date for English film titles that were released in 2006?",
+        "query": "SELECT DISTINCT T1.last_update FROM film AS T1 INNER JOIN `language` AS T2 ON T1.language_id = T2.language_id WHERE T2.`name` = 'English' AND T1.release_year = 2006"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many Italian film titles were special featured with deleted scenes?",
+        "query": "SELECT COUNT(T1.film_id) FROM film AS T1 INNER JOIN `language` AS T2 ON T1.language_id = T2.language_id WHERE T2.`name` = 'Italian' AND T1.special_features = 'deleted scenes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many animation film titles are rated for adults only?",
+        "query": "SELECT COUNT(T1.title) FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T3.name = 'animation' AND T1.rating = 'NC-17'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List down all ratings of action film titles.",
+        "query": "SELECT T1.description FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T3.name = 'action'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List down all film IDs of comedy film titles.",
+        "query": "SELECT T1.film_id FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T3.category_id = T2.category_id WHERE T3.name = 'comedy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "State the documentary film titles with longest length.",
+        "query": "SELECT T1.title FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T3.category_id = T2.category_id WHERE T3.name = 'documentary' ORDER BY T1.length DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the category of film titled \"BLADE POLISH\"?",
+        "query": "SELECT T3.name FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T3.category_id = T2.category_id WHERE T1.title = 'BLADE POLISH'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is Mary Smith's rental ID?",
+        "query": "SELECT T2.rental_id FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id WHERE T1.first_name = 'MARY' AND T1.last_name = 'SMITH'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List down all of the customers' first name who were attended by staff with ID 1.",
+        "query": "SELECT DISTINCT T1.first_name, T1.last_name FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id WHERE T2.staff_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List down email address of customers who were attended by staff with ID 2.",
+        "query": "SELECT DISTINCT T1.email FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id WHERE T2.staff_id = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List down the actor IDs of film titled \"BOUND CHEAPER\".",
+        "query": "SELECT T2.actor_id FROM film AS T1 INNER JOIN film_actor AS T2 ON T1.film_id = T2.film_id WHERE T1.title = 'BOUND CHEAPER'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the inventory ID of Karen Jackson?",
+        "query": "SELECT T2.inventory_id FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id WHERE T1.first_name = 'KAREN' AND T1.last_name = 'JACKSON'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List down all film titles starred by Jane Jackman.",
+        "query": "SELECT T1.title FROM film AS T1 INNER JOIN film_actor AS T2 ON T1.film_id = T2.film_id INNER JOIN actor AS T3 ON T2.actor_id = T3.actor_id WHERE T3.first_name = 'JANE' AND T3.last_name = 'JACKMAN'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Who are the actors of film titled \"BIRD INDEPENDENCE\"?",
+        "query": "SELECT T3.first_name, T3.last_name FROM film AS T1 INNER JOIN film_actor AS T2 ON T1.film_id = T2.film_id INNER JOIN actor AS T3 ON T2.actor_id = T3.actor_id WHERE T1.title = 'BIRD INDEPENDENCE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Calculate the total rental rate for animation film titles.",
+        "query": "SELECT SUM(T1.rental_rate) FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T3.`name` = 'Animation'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the average rental rate of sci-fi film titles?",
+        "query": "SELECT AVG(T1.rental_rate) FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T3.category_id = T2.category_id WHERE T3.`name` = 'Sci-Fi'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the percentage of horror film titles in English film titles?",
+        "query": "SELECT CAST(SUM(IIF(T3.name = 'Horror', 1, 0)) AS REAL) * 100 / COUNT(T1.film_id) FROM film_category AS T1 INNER JOIN film AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T1.category_id = T3.category_id INNER JOIN language AS T4 ON T2.language_id = T4.language_id WHERE T4.name = 'English'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the adult films, how many of them have a rental duration of fewer than 4 days?",
+        "query": "SELECT COUNT(film_id) FROM film WHERE rating = 'NC-17' AND rental_duration < 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the title of the restricted film, whose length is 71 minutes and whose replacement cost is $29.99?",
+        "query": "SELECT title FROM film WHERE replacement_cost = 29.99 AND rating = 'R' AND length = 71"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Write down the email addresses of active customers who rented between 5/25/2005 at 7:37:47 PM and 5/26/2005 at 10:06:49 AM.",
+        "query": "SELECT T2.email FROM rental AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id WHERE T1.rental_date BETWEEN '2005-5-25 07:37:47' AND '2005-5-26 10:06:49' AND T2.active = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Compute the total payment made by Sarah Lewis for film rentals so far.",
+        "query": "SELECT SUM(T3.amount) FROM rental AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id INNER JOIN payment AS T3 ON T1.rental_id = T3.rental_id WHERE T2.first_name = 'SARAH' AND T2.last_name = 'LEWIS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "From 5/30/2005 at 3:43:54 AM to 7/31/2005 at 10:08:29 PM, how many times did Susan Wilson pay for film rentals?",
+        "query": "SELECT COUNT(T1.customer_id) FROM payment AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id WHERE T1.payment_date BETWEEN '2005-05-30 03:43:54' AND '2005-07-31 10:08:29'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Tally the full names of actors in the film \"Alabama Devil.\"",
+        "query": "SELECT T2.first_name, T2.last_name FROM film_actor AS T1 INNER JOIN actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T1.film_id = T3.film_id WHERE T3.title = 'ALABAMA DEVIL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Tell me the title of the film in which Sandra Kilmer is one of the actors.",
+        "query": "SELECT T3.title FROM film_actor AS T1 INNER JOIN actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T1.film_id = T3.film_id WHERE T2.first_name = 'SANDRA' AND T2.last_name = 'KILMER'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many documentary films are rated PG-13?",
+        "query": "SELECT COUNT(T1.film_id) FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T3.name = 'Documentary' AND T1.rating = 'PG-13'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Give me the title and category name of films whose price per day is more than $30. Please include their special features.",
+        "query": "SELECT T1.title, T3.name, T1.special_features FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T1.rental_duration * T1.rental_rate > 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Name the cast members of the movie 'African Egg'.",
+        "query": "SELECT T2.first_name, T2.last_name FROM film_actor AS T1 INNER JOIN actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T1.film_id = T3.film_id WHERE T3.title = 'AFRICAN EGG'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Identify the number of movies rented by Maria Miller.",
+        "query": "SELECT COUNT(T2.rental_id) FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id WHERE T1.first_name = 'Maria' AND T1.last_name = 'Miller'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Name the most recent movie rented by Dorothy Taylor.",
+        "query": "SELECT T4.title FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id INNER JOIN inventory AS T3 ON T2.inventory_id = T3.inventory_id INNER JOIN film AS T4 ON T3.film_id = T4.film_id WHERE T1.first_name = 'DOROTHY' AND T1.last_name = 'TAYLOR' ORDER BY T2.rental_date DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Determine the number of action movies available for rent.",
+        "query": "SELECT COUNT(T2.film_id) FROM category AS T1 INNER JOIN film_category AS T2 ON T1.category_id = T2.category_id WHERE T1.name = 'Action'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Where can you rent the movie 'Wyoming Storm'? Identify the address of the rental store and the rental rate.",
+        "query": "SELECT T2.store_id, T1.address, T4.rental_rate FROM address AS T1 INNER JOIN store AS T2 ON T1.address_id = T2.address_id INNER JOIN inventory AS T3 ON T2.store_id = T3.store_id INNER JOIN film AS T4 ON T3.film_id = T4.film_id WHERE T4.title = 'WYOMING STORM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How long did Austin Cintron take to return the movie 'Destiny Saturday'?",
+        "query": "SELECT T2.rental_date - T2.return_date FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id INNER JOIN inventory AS T3 ON T2.inventory_id = T3.inventory_id INNER JOIN film AS T4 ON T3.film_id = T4.film_id WHERE T1.first_name = 'AUSTIN' AND T4.title = 'DESTINY SATURDAY'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Identify the number of movies that starred Nick Stallone.",
+        "query": "SELECT COUNT(T1.film_id) FROM film_actor AS T1 INNER JOIN actor AS T2 ON T1.actor_id = T2.actor_id AND T2.first_name = 'NICK' AND T2.last_name = 'STALLONE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Name the movie with the highest rental revenue among the shortest films.",
+        "query": "SELECT title FROM film WHERE length = ( SELECT MIN(length) FROM film ) ORDER BY rental_duration * rental_rate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Calculate the total amount paid by Stephanie Mitchell for film rentals in June 2005.",
+        "query": "SELECT SUM(T1.amount) FROM payment AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id WHERE T2.first_name = 'STEPHANIE' AND T2.last_name = 'MITCHELL' AND SUBSTR(T1.payment_date, 1, 7) = '2005-06'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the average replacement cost for the movies with a rental rate of 4.99?",
+        "query": "SELECT AVG(replacement_cost) FROM film WHERE rental_rate = 4.99"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the average rental rate for PG-13 rated movies?",
+        "query": "SELECT AVG(rental_rate) FROM film WHERE rating = 'PG-13'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Indicate the percentage of inactive customers at store no.1.",
+        "query": "SELECT CAST(SUM(CASE WHEN active = 0 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(customer_id) FROM customer WHERE store_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "For how long can you rent the movie 'Dirty Ace'?",
+        "query": "SELECT rental_duration FROM film WHERE title = 'DIRTY ACE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Identify the full name of the customer, who has the following email address: SHEILA.WELLS@sakilacustomer.org.",
+        "query": "SELECT first_name, last_name FROM customer WHERE email = 'SHEILA.WELLS@sakilacustomer.org'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Provide the list of the longest movies. Arrange these titles in alphabetical order.",
+        "query": "SELECT title FROM film WHERE length = ( SELECT MAX(length) FROM film )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many film categories are there?",
+        "query": "SELECT COUNT(DISTINCT category_id) FROM category"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many titles did Mary Smith rent in 2005? Determine the percentage of titles rented in June 2005.",
+        "query": "SELECT COUNT(T2.rental_id) , CAST(SUM(IIF(STRFTIME('%m',T2.rental_date) = '7', 1, 0)) AS REAL) * 100 / COUNT(T2.rental_id) FROM customer AS T1 INNER JOIN rental AS T2 ON T1.customer_id = T2.customer_id WHERE T1.first_name = 'Maria' AND T1.last_name = 'Miller' AND STRFTIME('%Y',T2.rental_date) = '2005'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many customers are still active?",
+        "query": "SELECT COUNT(customer_id) FROM customer WHERE active = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List all the films that are rated as PG-13.",
+        "query": "SELECT title FROM film WHERE rating = 'PG-13'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List at least 10 films that the customers can rent for more than 5 days.",
+        "query": "SELECT T.title FROM ( SELECT T1.title, COUNT(T3.customer_id) AS num FROM film AS T1 INNER JOIN inventory AS T2 ON T1.film_id = T2.film_id INNER JOIN rental AS T3 ON T2.inventory_id = T3.inventory_id WHERE T1.rental_duration > 5 GROUP BY T1.title ) AS T WHERE T.num > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List all the cities that belong to United Arab Emirates.",
+        "query": "SELECT T1.city FROM city AS T1 INNER JOIN country AS T2 ON T2.country_id = T1.country_id WHERE country = 'United Arab Emirates'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List at least 5 customers who paid greater than $10. Provide the full name of the customers.",
+        "query": "SELECT T2.first_name, T2.last_name FROM payment AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id WHERE T1.amount > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What films did Burt Dukakis got star in?",
+        "query": "SELECT T3.title FROM film_actor AS T1 INNER JOIN actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T1.film_id = T3.film_id WHERE T2.first_name = 'BURT' AND T2.last_name = 'DUKAKIS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Provide the full name of all the actors of the film \"Ending Crowds\".",
+        "query": "SELECT T2.first_name, T2.last_name FROM film_actor AS T1 INNER JOIN actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T1.film_id = T3.film_id WHERE T3.title = 'ENDING CROWDS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Who are the actors starred in the film \"Bound Cheaper\"?",
+        "query": "SELECT T1.first_name, T1.last_name FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T3.title = 'BOUND CHEAPER'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List all the films that Karl Berr starred in and rated as PG.",
+        "query": "SELECT T3.title FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T1.first_name = 'KARL' AND T1.last_name = 'BERRY' AND T3.rating = 'PG'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List at least 3 cities under the country of Philippines.",
+        "query": "SELECT T1.city FROM city AS T1 INNER JOIN country AS T2 ON T2.country_id = T1.country_id WHERE country = 'Philippines'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What are the films that are least rented by the customers?",
+        "query": "SELECT T.title FROM ( SELECT T3.title, COUNT(T1.customer_id) AS num FROM rental AS T1 INNER JOIN inventory AS T2 ON T1.inventory_id = T2.inventory_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id GROUP BY T3.title ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List all the description of the films starring Lucille Tracy?",
+        "query": "SELECT T1.film_id FROM film_actor AS T1 INNER JOIN actor AS T2 ON T1.actor_id = T2.actor_id WHERE T2.first_name = 'LUCILLE' AND T2.last_name = 'TRACY'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which category is the film \"Beach Heartbreakers\" falls into?",
+        "query": "SELECT T3.name FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T1.title = 'BEACH HEARTBREAKERS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List at least 10 films that falls into the Horror category.",
+        "query": "SELECT T1.title FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T3.name = 'Horror'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Who among the actors starred in a NC-17 rated film? Provide only the last name of the actors.",
+        "query": "SELECT T1.last_name FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T3.rating = 'NC-17'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Calculate the average rate of renting the film that Lucille Tracy got starred.",
+        "query": "SELECT AVG(T3.rental_rate) FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T1.first_name = 'LUCILLE' AND T1.last_name = 'TRACY'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many films have a duration between 100 to 110 minutes?",
+        "query": "SELECT COUNT(film_id) FROM film WHERE length BETWEEN 100 AND 110"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List down the actor ID of actors with Dee as their last name.",
+        "query": "SELECT actor_id FROM actor WHERE last_name = 'Dee'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the active customers, how many of them have Nina as their first name?",
+        "query": "SELECT COUNT(customer_id) FROM customer WHERE first_name = 'Nina' AND active = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "In store ID 2, how many of the films are R rating?\n",
+        "query": "SELECT COUNT(T1.film_id) FROM film AS T1 INNER JOIN inventory AS T2 ON T1.film_id = T2.film_id WHERE T2.store_id = 2 AND T1.rating = 'R'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List the store ID of the films starred by Reese West with a duration of 100 minutes and below?",
+        "query": "SELECT T4.store_id FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id INNER JOIN inventory AS T4 ON T3.film_id = T4.film_id WHERE T3.length < 100 AND T1.first_name = 'Reese' AND T1.last_name = 'West'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Give the duration of the film starred by Nick Wahlberg with the highest rental rate.",
+        "query": "SELECT T3.title FROM actor AS T1 INNER JOIN film_actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T2.film_id = T3.film_id WHERE T1.first_name = 'Nick' AND T1.last_name = 'Wahlberg' ORDER BY T3.rental_rate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What are the titles of the films starred by Russell Close?",
+        "query": "SELECT T3.title FROM film_actor AS T1 INNER JOIN actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T1.film_id = T3.film_id WHERE T2.first_name = 'Russell' AND T2.last_name = 'Close'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "List the store ID of the film titled \"Amadeus Holy\".",
+        "query": "SELECT T2.store_id FROM film AS T1 INNER JOIN inventory AS T2 ON T1.film_id = T2.film_id WHERE T1.title = 'Amadeus Holy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "In films with a rental rate of 2.99, how many of the films are starred by Nina Soto?",
+        "query": "SELECT COUNT(T1.film_id) FROM film_actor AS T1 INNER JOIN actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T1.film_id = T3.film_id WHERE T3.rental_rate = 2.99 AND T2.first_name = 'Nina' AND T2.last_name = 'Soto'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the films starred by Reese West, what is the difference between the films that have store ID of 1 and store ID of 2?",
+        "query": "SELECT SUM(IIF(T4.film_id = 1, 1, 0)) - SUM(IIF(T4.film_id = 2, 1, 0)) AS diff FROM film_actor AS T1 INNER JOIN actor AS T2 ON T1.actor_id = T2.actor_id INNER JOIN film AS T3 ON T1.film_id = T3.film_id INNER JOIN inventory AS T4 ON T3.film_id = T4.film_id WHERE T2.first_name = 'Reese' AND T2.last_name = 'West'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the postal code of the address 692 Joliet Street?",
+        "query": "SELECT postal_code FROM address WHERE address = '692 Joliet Street'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many customers are active?",
+        "query": "SELECT COUNT(customer_id) FROM customer WHERE active = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among all the customers of store no.1, how many of them are active?",
+        "query": "SELECT COUNT(customer_id) FROM customer WHERE active = 1 AND store_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the address of Mary Smith?",
+        "query": "SELECT T1.address FROM address AS T1 INNER JOIN customer AS T2 ON T1.address_id = T2.address_id WHERE T2.first_name = 'MARY' AND T2.last_name = 'SMITH'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among all the active customers, how many of them live in Arlington?",
+        "query": "SELECT COUNT(T2.customer_id) FROM address AS T1 INNER JOIN customer AS T2 ON T1.address_id = T2.address_id INNER JOIN city AS T3 ON T1.city_id = T3.city_id WHERE T2.active = 1 AND T3.city = 'Arlington'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please list the full names of all the customers who live in Italy.",
+        "query": "SELECT T4.first_name, T4.last_name FROM address AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id INNER JOIN country AS T3 ON T2.country_id = T3.country_id INNER JOIN customer AS T4 ON T1.address_id = T4.address_id WHERE T3.country = 'Italy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Which country does Mary Smith live in?",
+        "query": "SELECT T3.country FROM address AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id INNER JOIN country AS T3 ON T2.country_id = T3.country_id INNER JOIN customer AS T4 ON T1.address_id = T4.address_id WHERE T4.first_name = 'MARY' AND T4.last_name = 'SMITH'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the biggest amount of payment for a rental made by Mary Smith?",
+        "query": "SELECT T1.amount FROM payment AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id WHERE T2.first_name = 'MARY' AND T2.last_name = 'SMITH' ORDER BY T1.amount DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How many times has Mary Smith rented a film?",
+        "query": "SELECT COUNT(T1.customer_id) FROM payment AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id WHERE T2.first_name = 'MARY' AND T2.last_name = 'SMITH'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the total amount of money Mary Smith has spent on film rentals?",
+        "query": "SELECT SUM(T1.amount) FROM payment AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id WHERE T2.first_name = 'MARY' AND T2.last_name = 'SMITH'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the times Mary Smith had rented a movie, how many of them happened in June, 2005?",
+        "query": "SELECT COUNT(T1.customer_id) FROM payment AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id WHERE T2.first_name = 'MARY' AND T2.last_name = 'SMITH' AND STRFTIME('%Y',T1.payment_date) = '2005' AND STRFTIME('%Y', T1.payment_date) = '6'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Please give the full name of the customer who had made the biggest amount of payment in one single film rental.",
+        "query": "SELECT T2.first_name, T2.last_name FROM payment AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id ORDER BY T1.amount DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "How much in total had the customers in Italy spent on film rentals?",
+        "query": "SELECT SUM(T5.amount) FROM address AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id INNER JOIN country AS T3 ON T2.country_id = T3.country_id INNER JOIN customer AS T4 ON T1.address_id = T4.address_id INNER JOIN payment AS T5 ON T4.customer_id = T5.customer_id WHERE T3.country = 'Italy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "Among the payments made by Mary Smith, how many of them are over 4.99?",
+        "query": "SELECT COUNT(T1.amount) FROM payment AS T1 INNER JOIN customer AS T2 ON T1.customer_id = T2.customer_id WHERE T2.first_name = 'MARY' AND T2.last_name = 'SMITH' AND T1.amount > 4.99"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_3",
+        "question": "What is the average amount of money spent by a customer in Italy on a single film rental?",
+        "query": "SELECT AVG(T5.amount) FROM address AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.city_id INNER JOIN country AS T3 ON T2.country_id = T3.country_id INNER JOIN customer AS T4 ON T1.address_id = T4.address_id INNER JOIN payment AS T5 ON T4.customer_id = T5.customer_id WHERE T3.country = 'Italy'"
+    }
+]

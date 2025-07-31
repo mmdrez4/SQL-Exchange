@@ -1,0 +1,134 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "How many artworks are there?",
+        "query": "SELECT count(*) FROM artwork"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "List the name of artworks in ascending alphabetical order.",
+        "query": "SELECT Name FROM artwork ORDER BY Name ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "List the name of artworks whose type is not \"Program Talent Show\".",
+        "query": "SELECT Name FROM artwork WHERE TYPE != \"Program Talent Show\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "What are the names and locations of festivals?",
+        "query": "SELECT Festival_Name ,  LOCATION FROM festival_detail"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "What are the names of the chairs of festivals, sorted in ascending order of the year held?",
+        "query": "SELECT Chair_Name FROM festival_detail ORDER BY YEAR ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "What is the location of the festival with the largest number of audience?",
+        "query": "SELECT LOCATION FROM festival_detail ORDER BY Num_of_Audience DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "What are the names of festivals held in year 2007?",
+        "query": "SELECT Festival_Name FROM festival_detail WHERE YEAR  =  2007"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "What is the average number of audience for festivals?",
+        "query": "SELECT avg(Num_of_Audience) FROM festival_detail"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "Show the names of the three most recent festivals.",
+        "query": "SELECT Festival_Name FROM festival_detail ORDER BY YEAR DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "For each nomination, show the name of the artwork and name of the festival where it is nominated.",
+        "query": "SELECT T2.Name ,  T3.Festival_Name FROM nomination AS T1 JOIN artwork AS T2 ON T1.Artwork_ID  =  T2.Artwork_ID JOIN festival_detail AS T3 ON T1.Festival_ID  =  T3.Festival_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "Show distinct types of artworks that are nominated in festivals in 2007.",
+        "query": "SELECT DISTINCT T2.Type FROM nomination AS T1 JOIN artwork AS T2 ON T1.Artwork_ID  =  T2.Artwork_ID JOIN festival_detail AS T3 ON T1.Festival_ID  =  T3.Festival_ID WHERE T3.Year  =  2007"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "Show the names of artworks in ascending order of the year they are nominated in.",
+        "query": "SELECT T2.Name FROM nomination AS T1 JOIN artwork AS T2 ON T1.Artwork_ID  =  T2.Artwork_ID JOIN festival_detail AS T3 ON T1.Festival_ID  =  T3.Festival_ID ORDER BY T3.Year"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "Show the names of festivals that have nominated artworks of type \"Program Talent Show\".",
+        "query": "SELECT T3.Festival_Name FROM nomination AS T1 JOIN artwork AS T2 ON T1.Artwork_ID  =  T2.Artwork_ID JOIN festival_detail AS T3 ON T1.Festival_ID  =  T3.Festival_ID WHERE T2.Type  =  \"Program Talent Show\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "Show the ids and names of festivals that have at least two nominations for artworks.",
+        "query": "SELECT T1.Festival_ID ,  T3.Festival_Name FROM nomination AS T1 JOIN artwork AS T2 ON T1.Artwork_ID  =  T2.Artwork_ID JOIN festival_detail AS T3 ON T1.Festival_ID  =  T3.Festival_ID GROUP BY T1.Festival_ID HAVING COUNT(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "Show the id, name of each festival and the number of artworks it has nominated.",
+        "query": "SELECT T1.Festival_ID ,  T3.Festival_Name ,  COUNT(*) FROM nomination AS T1 JOIN artwork AS T2 ON T1.Artwork_ID  =  T2.Artwork_ID JOIN festival_detail AS T3 ON T1.Festival_ID  =  T3.Festival_ID GROUP BY T1.Festival_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "Please show different types of artworks with the corresponding number of artworks of each type.",
+        "query": "SELECT TYPE ,  COUNT(*) FROM artwork GROUP BY TYPE"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "List the most common type of artworks.",
+        "query": "SELECT TYPE FROM artwork GROUP BY TYPE ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "List the year in which there are more than one festivals.",
+        "query": "SELECT YEAR FROM festival_detail GROUP BY YEAR HAVING COUNT(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "List the name of artworks that are not nominated.",
+        "query": "SELECT Name FROM Artwork WHERE Artwork_ID NOT IN (SELECT Artwork_ID FROM nomination)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "Show the number of audience in year 2008 or 2010.",
+        "query": "SELECT Num_of_Audience FROM festival_detail WHERE YEAR  =  2008 OR YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "What are the total number of the audiences who visited any of the festivals?",
+        "query": "SELECT sum(Num_of_Audience) FROM festival_detail"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "entertainment_awards",
+        "question": "In which year are there festivals both inside the 'United States' and outside the 'United States'?",
+        "query": "SELECT YEAR FROM festival_detail WHERE LOCATION  =  'United States' INTERSECT SELECT YEAR FROM festival_detail WHERE LOCATION != 'United States'"
+    }
+]

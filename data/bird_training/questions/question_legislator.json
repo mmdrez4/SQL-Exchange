@@ -1,0 +1,1064 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many current legislators do not have an account on ballotpedia.org ?",
+        "query": "SELECT COUNT(*) FROM current WHERE ballotpedia_id = '' OR ballotpedia_id IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Please list the official full names of all the current legislators who do not have an account on C-SPAN's video website.",
+        "query": "SELECT official_full_name FROM current WHERE cspan_id IS NULL OR cspan_id = ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many current legislators were born after the year 1960?",
+        "query": "SELECT COUNT(bioguide_id) FROM current WHERE birthday_bio >= '1961-01-01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among all the current female legislators, how many of them have not been registered in Federal Election Commission data?",
+        "query": "SELECT COUNT(*) FROM current WHERE (fec_id IS NULL OR fec_id = '') AND gender_bio = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the google entity ID of current legislator Sherrod Brown?",
+        "query": "SELECT google_entity_id_id FROM current WHERE official_full_name = 'Sherrod Brown'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Which current legislator is older, Sherrod Brown or Maria Cantwell?",
+        "query": "SELECT official_full_name FROM current WHERE official_full_name = 'Sherrod Brown' OR official_full_name = 'Maria Cantwell' ORDER BY birthday_bio LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the username of the current official Facebook presence of current legislator Todd Young?",
+        "query": "SELECT T1.facebook FROM `social-media` AS T1 INNER JOIN current AS T2 ON T2.bioguide_id = T1.bioguide WHERE T2.official_full_name = 'Todd Young'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many current legislators do not have an account on instagram?",
+        "query": "SELECT COUNT(*) FROM `social-media` AS T1 INNER JOIN current AS T2 ON T1.bioguide = T2.bioguide_id WHERE T1.instagram IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "To which current legislator does twitter ID234128524 belong? Please give his or her full official name.",
+        "query": "SELECT T1.official_full_name FROM current AS T1 INNER JOIN `social-media` AS T2 ON T2.bioguide = T1.bioguide_id WHERE T2.twitter_id = 234128524"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Please list the current official YouTube usernames of all the current female legislators.",
+        "query": "SELECT T2.youtube FROM current AS T1 INNER JOIN `social-media` AS T2 ON T2.bioguide = T1.bioguide_id WHERE T1.gender_bio = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the username of the current official Facebook presence of the oldest current legislator?",
+        "query": "SELECT T2.facebook FROM current AS T1 INNER JOIN `social-media` AS T2 ON T2.bioguide = T1.bioguide_id ORDER BY T1.birthday_bio LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among the current legislators who do not have accounts on OpenSecrets.org., how many of them do not have instagram accounts either?",
+        "query": "SELECT SUM(CASE WHEN T1.instagram IS NULL THEN 1 ELSE 0 END) AS count FROM `social-media` AS T1 INNER JOIN current AS T2 ON T1.bioguide = T2.bioguide_id WHERE T2.opensecrets_id IS NULL OR T2.opensecrets_id = ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Current legislator Roger F. Wicker has not been a representative for how many terms?",
+        "query": "SELECT SUM(CASE WHEN T1.official_full_name = 'Roger F. Wicker' THEN 1 ELSE 0 END) AS count FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.district IS NULL OR T2.district = ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "For how many terms has current legislator Sherrod Brown served?",
+        "query": "SELECT COUNT(*) FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.official_full_name = 'Sherrod Brown'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Please list the official full names of all the current legislators who were once a senator during his or her terms.",
+        "query": "SELECT T2.official_full_name FROM `current-terms` AS T1 INNER JOIN current AS T2 ON T2.bioguide_id = T1.bioguide WHERE T1.state_rank IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "For which state did current legislator Sherrod Brown serve during his term that started on 1993/1/5?",
+        "query": "SELECT T1.state FROM `current-terms` AS T1 INNER JOIN current AS T2 ON T2.bioguide_id = T1.bioguide WHERE T1.start = '1993-01-05' AND T2.official_full_name = 'Sherrod Brown'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among all the female current legislators, how many of them have served for more than 4 terms?",
+        "query": "SELECT COUNT(CID) FROM ( SELECT T1.bioguide_id AS CID FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.gender_bio = 'F' GROUP BY T2.bioguide HAVING COUNT(T2.bioguide) > 4 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among the current legislators who have served for more than 6 terms, how many of them were born after 1960?",
+        "query": "SELECT COUNT(CID) FROM ( SELECT T1.bioguide_id AS CID FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.birthday_bio >= '1960-01-01' GROUP BY T2.bioguide HAVING COUNT(T2.bioguide) > 6 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the average number of terms for a current female legislator?",
+        "query": "SELECT CAST(COUNT(T2.bioguide) AS REAL) / COUNT(DISTINCT T1.bioguide_id) FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.gender_bio = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among all the current legislators whose religion is Roman Catholic, what is the percentage of the ones without an instagram account?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.instagram IS NULL THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM `social-media` AS T1 INNER JOIN current AS T2 ON T1.bioguide = T2.bioguide_id WHERE T2.religion_bio = 'Roman Catholic'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many males were members of the current legislators?",
+        "query": "SELECT COUNT(*) FROM current WHERE gender_bio = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many current legislators chose Republican as their political party?",
+        "query": "SELECT COUNT(*) FROM `current-terms` WHERE party = 'Republican'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many legislators have an Instagram account?",
+        "query": "SELECT COUNT(*) FROM `social-media` WHERE instagram IS NOT NULL AND instagram <> ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many females were members of the past legislators?",
+        "query": "SELECT COUNT(*) FROM historical WHERE gender_bio = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many male legislators are Roman Catholic?",
+        "query": "SELECT COUNT(*) FROM current WHERE religion_bio = 'Roman Catholic' AND gender_bio = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What type of political party Sherrod Brown has in 2005?",
+        "query": "SELECT T1.party FROM `current-terms` AS T1 INNER JOIN current AS T2 ON T2.bioguide_id = T1.bioguide WHERE T2.first_name = 'Sherrod' AND T2.last_name = 'Brown' AND T1.start LIKE '%2005%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List the full name of all the senior senators in year 2013.",
+        "query": "SELECT T2.official_full_name FROM `current-terms` AS T1 INNER JOIN current AS T2 ON T2.bioguide_id = T1.bioguide WHERE T1.state_rank = 'senior' AND T1.type = 'sen' AND T1.start LIKE '2013%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the current official Youtube username of Chris Van Hollen?",
+        "query": "SELECT T2.youtube FROM current AS T1 INNER JOIN `social-media` AS T2 ON T2.bioguide = T1.bioguide_id WHERE T1.official_full_name = 'Chris Van Hollen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many official social media does Mark Warner have?",
+        "query": "SELECT CASE WHEN T1.facebook IS NOT NULL THEN 1 END + CASE WHEN T1.instagram IS NOT NULL THEN 1 END + CASE WHEN T1.twitter IS NOT NULL THEN 1 END + CASE WHEN T1.youtube IS NOT NULL THEN 1 END AS COUNTSOCIAL FROM `social-media` AS T1 INNER JOIN current AS T2 ON T1.bioguide = T2.bioguide_id WHERE T2.first_name = 'Mark' AND T2.last_name = 'Warner'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List the last name of all current legislators who live in California.",
+        "query": "SELECT T1.last_name FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.state = 'CA' GROUP BY T1.last_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List the full name of all current female senators.",
+        "query": "SELECT T2.first_name, T2.last_name FROM `current-terms` AS T1 INNER JOIN current AS T2 ON T2.bioguide_id = T1.bioguide WHERE T1.type = 'sen' AND T2.gender_bio = 'F' GROUP BY T2.ballotpedia_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the numeric ID of Chris Van Hollen on GovTrack.us?",
+        "query": "SELECT T2.govtrack FROM current AS T1 INNER JOIN `social-media` AS T2 ON T2.bioguide = T1.bioguide_id WHERE T1.official_full_name = 'Chris Van Hollen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the current official Twitter handle of Roger F. Wicker?",
+        "query": "SELECT T2.twitter FROM current AS T1 INNER JOIN `social-media` AS T2 ON T2.bioguide = T1.bioguide_id WHERE T1.official_full_name = 'Roger F. Wicker'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List the full name of all past legislators that chose Pro-Administration as their political party in year 1791.",
+        "query": "SELECT T1.first_name, T1.last_name FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.party = 'Pro-Administration' AND CAST(T2.start AS DATE) <= 1791 AND CAST(T2.END AS DATE) >= 1791"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Provide the full name of all current female legislators that chose Republican as their political party.",
+        "query": "SELECT T1.first_name, T1.last_name FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.party = 'Republican' AND T1.gender_bio = 'F' AND T2.END > DATE() GROUP BY T1.bioguide_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the district number that Chris Van Hollen serving?",
+        "query": "SELECT T2.district FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.official_full_name = 'Chris Van Hollen' AND T2.district IS NOT NULL GROUP BY T2.district"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many times did Richard Durbin become a legislator in district 20?",
+        "query": "SELECT SUM(CASE WHEN T2.district = 20 THEN 1 ELSE 0 END) AS count FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.first_name = 'Richard' AND T1.last_name = 'Durbin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Calculate the average number of current male legislators who chose Democrat from 2000 until 2021.",
+        "query": "SELECT CAST(COUNT(T1.bioguide_id) AS REAL) / 22 FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.gender_bio = 'M' AND CAST(T2.start AS DATE) >= 2000 AND CAST(T2.END AS DATE) <= 2021 AND T2.party = 'Democrat'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Calculate the percentage of the total number of current female legislators and past female legislators. State which one has the highest value.",
+        "query": "SELECT CAST(COUNT(CASE WHEN current.gender_bio = 'F' THEN current.bioguide_id ELSE NULL END) AS REAL) * 100 / ( SELECT COUNT(CASE WHEN historical.gender_bio = 'F' THEN historical.bioguide_id ELSE NULL END) FROM historical ) FROM current"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Give the YouTube ID of the channel 'RepWassermanSchultz.'",
+        "query": "SELECT youtube_id FROM `social-media` WHERE youtube = 'RepWassermanSchultz'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What are the Facebook, Twitter and YouTube usernames of Adam Kinzinger?",
+        "query": "SELECT T2.facebook FROM current AS T1 INNER JOIN `social-media` AS T2 ON T2.bioguide = T1.bioguide_id WHERE T1.official_full_name = 'Adam Kinzinger'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Which party does Christopher Henderson Clark belong to?",
+        "query": "SELECT T1.party FROM `historical-terms` AS T1 INNER JOIN historical AS T2 ON T2.bioguide_id = T1.bioguide WHERE T2.first_name OR T2.middle_name OR T2.last_name = 'ChristopherHendersonClark'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List the official full names of 10 legislators who have a YouTube account but no Instagram account.",
+        "query": "SELECT T2.official_full_name FROM `social-media` AS T1 INNER JOIN current AS T2 ON T1.bioguide = T2.bioguide_id WHERE T1.facebook IS NOT NULL AND (T1.instagram IS NULL OR T1.instagram = '') LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Give the official full names of legislators representing Virginia.",
+        "query": "SELECT T1.official_full_name FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.state = 'VA' GROUP BY T1.official_full_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Which historical legislators are members of the National Greenbacker party? Write their first and last names.",
+        "query": "SELECT T2.first_name, T2.last_name FROM `historical-terms` AS T1 INNER JOIN historical AS T2 ON T2.bioguide_id = T1.bioguide WHERE T1.party = 'National Greenbacker'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Which legislator has the YouTube channel 'RoskamIL06?' Write the official full name.",
+        "query": "SELECT T1.official_full_name FROM current AS T1 INNER JOIN `social-media` AS T2 ON T2.bioguide = T1.bioguide_id WHERE T2.youtube = 'RoskamIL06'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List the full names of 10 legislators who only have a Facebook account.",
+        "query": "SELECT T2.official_full_name FROM `social-media` AS T1 INNER JOIN current AS T2 ON T1.bioguide = T2.bioguide_id WHERE (T1.youtube IS NULL OR T1.youtube = '') AND (T1.instagram IS NULL OR T1.instagram = '') AND (T1.twitter IS NULL OR T1.twitter = '') AND T1.facebook IS NOT NULL AND T1.facebook != ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Write the full names of junior ranked Republicans.",
+        "query": "SELECT T1.official_full_name FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.party = 'Republican' AND T2.state_rank = 'junior' GROUP BY T1.official_full_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the contact URL of Claire McCaskill?",
+        "query": "SELECT T2.contact_form FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.official_full_name = 'Claire McCaskill' GROUP BY T2.contact_form"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Give the Wikipedia IDs of historical legislators who are Readjuster Democrats.",
+        "query": "SELECT T2.wikipedia_id FROM `historical-terms` AS T1 INNER JOIN historical AS T2 ON T2.bioguide_id = T1.bioguide WHERE T1.party = 'Readjuster Democrat'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List the full names of Republican legislators who have a nickname.",
+        "query": "SELECT T1.official_full_name FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.party = 'Republican' AND T1.nickname_name IS NOT NULL GROUP BY T1.official_full_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Which state did Veronica Grace Boland represent and which party is she affiliated?",
+        "query": "SELECT T2.state, T2.party FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.first_name OR T1.middle_name OR T1.last_name = 'VeronicaGraceBoland'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many historical legislators were born in 1973?",
+        "query": "SELECT COUNT(*) FROM historical WHERE CAST(birthday_bio AS date) = 1973"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the ratio of males and females among historical legislators?",
+        "query": "SELECT CAST(SUM(CASE WHEN gender_bio = 'M' THEN 1 ELSE 0 END) AS REAL) / SUM(CASE WHEN gender_bio = 'F' THEN 1 ELSE 0 END) FROM historical"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among the legislators who will end in 2009, how many are from the Republican party?",
+        "query": "SELECT `END`, party FROM `current-terms` WHERE STRFTIME('%Y', `END`) = '2009' AND party = 'Republican'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List the official full names and genders of legislators who have Collins as their last name.",
+        "query": "SELECT official_full_name, gender_bio FROM current WHERE last_name = 'Collins'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many percent of senators were from class 1?",
+        "query": "SELECT CAST(SUM(CASE WHEN class = 1 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM `historical-terms` WHERE type = 'sen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Provide the current legislators' official full names who are from the Independent party.",
+        "query": "SELECT T1.official_full_name FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.party = 'Independent' GROUP BY T1.official_full_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many years had Jr. John Conyers served in total?",
+        "query": "SELECT SUM(CAST(T2.END - T2.start AS DATE)) AS sum FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.official_full_name = 'John Conyers, Jr.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How old was Jr. F. James Sensenbrenner when he first started as a legislator?",
+        "query": "SELECT CAST(MIN(T2.start) - T1.birthday_bio AS DATE) AS AGE FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.official_full_name = 'F. James Sensenbrenner, Jr.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List the full names, religions, and parties of legislators who have served in Maine.",
+        "query": "SELECT T1.official_full_name, T2.relation, T2.party FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.state = 'ME' GROUP BY T1.official_full_name, T2.relation, T2.party"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among legislators who have an Instagram account, list down their full names and nicknames who have a Thomas ID of less than 1000.",
+        "query": "SELECT T1.official_full_name, T1.nickname_name FROM current AS T1 INNER JOIN `social-media` AS T2 ON T2.bioguide = T1.bioguide_id WHERE T2.instagram IS NOT NULL AND T1.thomas_id < 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "When was the last serving date of Matt Salmon?",
+        "query": "SELECT T1.END FROM `historical-terms` AS T1 INNER JOIN historical AS T2 ON T2.bioguide_id = T1.bioguide WHERE T2.official_full_name = 'Matt Salmon'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among the legislators who have served in the U.S. House, provide the party and the state of the legislators who were born in 1738.",
+        "query": "SELECT T1.party, T1.state FROM `historical-terms` AS T1 INNER JOIN historical AS T2 ON T2.bioguide_id = T1.bioguide WHERE T2.house_history_id IS NOT NULL AND T2.birthday_bio LIKE '%1738%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List the IDs and full names of legislators from the Liberal Republican party.",
+        "query": "SELECT T2.bioguide_id, T2.first_name, T2.last_name FROM `historical-terms` AS T1 INNER JOIN historical AS T2 ON T2.bioguide_id = T1.bioguide WHERE T1.party = 'Liberal Republican'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among the legislators who started a term on 2nd December 1793, how many of them were males?",
+        "query": "SELECT COUNT(T1.bioguide_id) FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.gender_bio = 'M' AND T2.start = '1793-12-02'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Compare the number of legislators who started the term in 1875 and 2005.",
+        "query": "SELECT SUM(CASE WHEN `current-terms`.start LIKE '2005%' THEN 1 ELSE 0 END) - ( SELECT SUM(CASE WHEN start LIKE '1875%' THEN 1 ELSE 0 END) FROM `historical-terms` ) FROM `current-terms`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List the full names, Twitter IDs, and YouTube IDs of legislators who have Richard as their first name.",
+        "query": "SELECT T2.official_full_name, T1.twitter_id, T1.youtube_id FROM `social-media` AS T1 INNER JOIN current AS T2 ON T1.bioguide = T2.bioguide_id WHERE T2.first_name = 'Richard'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Provide the start date, end date, and party of Pearl Peden Oldfield.",
+        "query": "SELECT T2.start, T2.`end`, T2.party FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.first_name = 'Pearl' AND T1.middle_name = 'Peden' AND T1.last_name = 'Oldfield'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the birthday of Amy Klobuchar?",
+        "query": "SELECT birthday_bio FROM current WHERE first_name = 'Amy' AND last_name = 'Klobuchar'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many legislators have not been registered in Federal Election Commission data?",
+        "query": "SELECT COUNT(*) FROM current WHERE fec_id IS NULL OR fec_id = ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "State the number of female legislators in the list.",
+        "query": "SELECT COUNT(*) FROM current WHERE gender_bio = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Give the full name of legislators who have accounts on OpenSecrets.org.",
+        "query": "SELECT COUNT(*) FROM current WHERE opensecrets_id IS NOT NULL AND opensecrets_id <> ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the middle name of the legislator whose birthday was on 8/24/1956?",
+        "query": "SELECT middle_name FROM current WHERE birthday_bio = '1956-08-24'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many legislators hold the title \"Majority Leader\"?",
+        "query": "SELECT COUNT(bioguide) FROM `current-terms` WHERE title = 'Majority Leader'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the title of legislator whose birthday on 2/20/1942?",
+        "query": "SELECT T2.title FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.birthday_bio = '1942-02-20' GROUP BY T2.title"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the gender of the legislator whose address at 317 Russell Senate Office Building Washington DC 20510?",
+        "query": "SELECT T1.gender_bio FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.address = '317 Russell Senate Office Building Washington DC 20510'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List out the first name of legislators who are senior Senator.",
+        "query": "SELECT T1.first_name FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.state_rank = 'senior' GROUP BY T1.first_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among male legislators, state number of the legislators who are not the senator.",
+        "query": "SELECT COUNT(T3.state) FROM ( SELECT T2.state FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.gender_bio = 'M' AND (T2.class IS NULL OR T2.class = '') GROUP BY T2.state ) T3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Calculate the percentage of legislators who are Senator and were born in 1964.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.class IS NOT NULL THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.birthday_bio LIKE '%1964%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Calculate the percentage of legislators who are not Senator and were born before 1975.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.class IS NULL THEN T1.bioguide_id ELSE NULL END) AS REAL) * 100 / COUNT(T1.bioguide_id) FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE CAST(T1.birthday_bio AS DATE) <= 1975"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the twitter name of the legislator whose birthday was on 5/27/1946?",
+        "query": "SELECT T2.twitter FROM current AS T1 INNER JOIN `social-media` AS T2 ON T2.bioguide = T1.bioguide_id WHERE T1.birthday_bio = '1946-05-27'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "State the opensecrets_id of the legislator whose YouTube name is Bluetkemeyer.",
+        "query": "SELECT T1.opensecrets_id FROM current AS T1 INNER JOIN `social-media` AS T2 ON T2.bioguide = T1.bioguide_id WHERE T2.youtube = 'BLuetkemeyer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Mention the username of Facebook of Ralph Abraham.",
+        "query": "SELECT T2.facebook FROM current AS T1 INNER JOIN `social-media` AS T2 ON T2.bioguide = T1.bioguide_id WHERE T1.first_name = 'Ralph' AND T1.last_name = 'Abraham'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the first name of the legislator whose address at 1005 Longworth HOB; Washington DC 20515-1408?",
+        "query": "SELECT T1.first_name FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.address = '1005 Longworth HOB Washington DC 20515-1408' GROUP BY T1.first_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the Instagram name of the legislator whose birthday was on 8/24/1952?",
+        "query": "SELECT T1.instagram FROM `social-media` AS T1 INNER JOIN current AS T2 ON T1.bioguide = T2.bioguide_id WHERE T2.birthday_bio = '1952-08-24'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "State number of legislators who are not the senator among female legislators.",
+        "query": "SELECT COUNT(*) FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.gender_bio = 'F' AND (T2.class IS NULL OR T2.class = '')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Give the religion of the legislator whose YouTube name is MaxineWaters.",
+        "query": "SELECT T2.religion_bio FROM `social-media` AS T1 INNER JOIN current AS T2 ON T1.bioguide = T2.bioguide_id WHERE T1.youtube = 'MaxineWaters'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many minority leaders have not been registered in Federal Election Commission data?",
+        "query": "SELECT COUNT(*) FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.title = 'Minority Leader' AND (T1.fec_id IS NULL OR T1.fec_id = '')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many of the legislators are male?",
+        "query": "SELECT COUNT(*) FROM current WHERE gender_bio = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Provide the facebook ID of the facebook account named \"RepWilson\".",
+        "query": "SELECT facebook_id FROM `social-media` WHERE facebook = 'RepWilson'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the total number of legislators with \"John\" as their first name?",
+        "query": "SELECT COUNT(*) FROM current WHERE first_name = 'John'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Give the district numbers with an Anti-Administration party.",
+        "query": "SELECT district FROM `historical-terms` WHERE party = 'Anti-Administration' GROUP BY district"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List the full name of legislators whose born in 1960.",
+        "query": "SELECT official_full_name FROM current WHERE birthday_bio LIKE '1960%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the google entity ID of Benjamin Hawkins?",
+        "query": "SELECT google_entity_id_id FROM historical WHERE first_name = 'Benjamin' AND last_name = 'Hawkins'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Who is the Pro-Administration senator that runs from March 4, 1789 to December 31, 1791?",
+        "query": "SELECT T1.first_name, T1.last_name FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.party = 'Pro-Administration' AND T2.start = '1789-03-04' AND T2.end = '1791-12-31'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What are the first and last name of the representatives of the house in district 9?",
+        "query": "SELECT T2.first_name, T2.last_name FROM `historical-terms` AS T1 INNER JOIN historical AS T2 ON T2.bioguide_id = T1.bioguide WHERE T1.district = 9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Give the full name of the legislators with an independent party.",
+        "query": "SELECT T1.official_full_name FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.party = 'Independent' GROUP BY T1.official_full_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List down the open secrets and thomas ID of the democrat senators of New Jersey.",
+        "query": "SELECT T1.opensecrets_id, T1.thomas_id FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.type = 'sen' AND T2.state = 'NJ' GROUP BY T1.opensecrets_id, T1.thomas_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Provide the google entity ID of the senators in New York.",
+        "query": "SELECT T1.google_entity_id_id FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.type = 'sen' AND T2.state = 'NY'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Give the religion of the legislator with RSS url of http://www.corker.senate.gov/public/index.cfm/rss/feed.",
+        "query": "SELECT T1.religion_bio FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.rss_url = 'http://www.corker.senate.gov/public/index.cfm/rss/feed' GROUP BY T1.religion_bio"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the party of the legislator named Susan M. Collins?",
+        "query": "SELECT T2.party FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.official_full_name = 'Susan M. Collins' GROUP BY T2.party"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List down the district number of the representative of the house named Jonathan Grout.",
+        "query": "SELECT T2.district FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.last_name = 'Grout' AND T1.first_name = 'Jonathan' AND T2.type = 'rep'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the party and state of the legislator that has an open secrets ID of N00003689 and thomas ID of 186?",
+        "query": "SELECT T2.party, T2.state FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.opensecrets_id = 'N00003689' AND T1.thomas_id = 186 GROUP BY T2.party, T2.state"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Provide the full name and birth date of the legislator with a contact form of http://www.brown.senate.gov/contact/.",
+        "query": "SELECT T1.official_full_name, T1.birthday_bio FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.contact_form = 'http://www.brown.senate.gov/contact/'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Give the state and type of term of the legislator with the google entity ID of kg:/m/02pyzk.",
+        "query": "SELECT T2.state, T2.type FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.google_entity_id_id = 'kg:/m/02pyzk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Provide the type and end date of the term of the legislator named John Vining.",
+        "query": "SELECT T2.type, T2.end FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.first_name = 'John' AND T1.last_name = 'Vining'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Find the difference between the number of female senators and representatives born between 1930 to 1970.",
+        "query": "SELECT SUM(CASE WHEN T2.type = 'sen' THEN 1 ELSE 0 END) - SUM(CASE WHEN T2.type = 'rep' THEN 1 ELSE 0 END) FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.gender_bio = 'F' AND strftime('%Y', T1.birthday_bio) BETWEEN '1930' AND '1970'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among the male legislators born between 1955 to 1965, what is the percentage of the legislators with an independent party?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.party = 'Independent' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.party) FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.gender_bio = 'M' AND strftime('%Y', T1.birthday_bio) BETWEEN '1955' AND '1965'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the name of the legislator with the ID of W000059?",
+        "query": "SELECT first_name, last_name FROM historical WHERE bioguide_id = 'W000059'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Does Thomas Carnes have an account on ballotpedia.org?",
+        "query": "SELECT CASE WHEN ballotpedia_id IS NULL THEN 'doesn''t have' ELSE 'have' END AS HaveorNot FROM historical WHERE first_name = 'Thomas' AND last_name = 'Carnes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many legislators were born in 1736?",
+        "query": "SELECT COUNT(bioguide_id) FROM historical WHERE birthday_bio LIKE '1736%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Which legislators are woman?",
+        "query": "SELECT first_name, last_name FROM historical WHERE gender_bio = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many districts are in Idaho?",
+        "query": "SELECT COUNT(district) FROM `current-terms` WHERE state = 'ID'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many legislators are not senator?",
+        "query": "SELECT COUNT(bioguide) FROM `current-terms` WHERE class IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the ratio between male and female legislators?",
+        "query": "SELECT CAST(SUM(CASE WHEN gender_bio = 'M' THEN 1 ELSE 0 END) AS REAL) / SUM(CASE WHEN gender_bio = 'F' THEN 1 ELSE 0 END) FROM historical"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Calculate the percentage of famous_legislatorss.",
+        "query": "SELECT CAST(SUM(CASE WHEN wikipedia_id IS NOT NULL THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(bioguide_id) FROM historical"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Which legislators do not have instagram account?",
+        "query": "SELECT T1.first_name, T1.last_name FROM current AS T1 INNER JOIN `social-media` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.instagram IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List all the representatives in 1789 along with the districts and state.",
+        "query": "SELECT T2.district, T2.state FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.start LIKE '1789%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "State all the district that Benjamin Contee has served before.",
+        "query": "SELECT T2.district FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.first_name = 'Benjamin' AND T1.last_name = 'Contee'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "State the address of Amy Klobuchar at the term of 4th of January 2001.",
+        "query": "SELECT T2.address FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.first_name = 'Amy' AND T1.last_name = 'Klobuchar' AND T2.start = '2001-04-01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List all the junior senators in 1997.",
+        "query": "SELECT T1.first_name, T1.last_name FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.start LIKE '1997%' AND T2.state_rank = 'junior'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many female legislators become representatives for California in 2015?",
+        "query": "SELECT COUNT(*) FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE STRFTIME('%Y', T2.start) = '2015' AND T2.state = 'CA' AND T1.gender_bio = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the Twitter ID of Emanuel Cleaver?",
+        "query": "SELECT T1.twitter_id FROM `social-media` AS T1 INNER JOIN current AS T2 ON T2.bioguide_id = T1.bioguide WHERE T2.first_name = 'Emanuel' AND T2.last_name = 'Cleaver'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "State all the Facebook ID for current legislators under the democrat party.",
+        "query": "SELECT T2.facebook_id FROM `current-terms` AS T1 INNER JOIN `social-media` AS T2 ON T1.bioguide = T2.bioguide WHERE T1.party = 'Democrat' GROUP BY T2.facebook_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Which historical female legislator that have their term ended on the 3rd of March 1791?",
+        "query": "SELECT T1.first_name, T1.last_name FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.end = '1791-03-03' AND T1.gender_bio = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List all the Jewish current legislators that had served in Florida.",
+        "query": "SELECT T1.first_name, T1.last_name FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.religion_bio = 'Jewish' AND T2.state = 'FL' GROUP BY T1.first_name, T1.last_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the ratio between famous current legislators and famous historical legislators?",
+        "query": "SELECT CAST(COUNT(CASE WHEN wikipedia_id IS NOT NULL THEN bioguide_id ELSE 0 END) AS REAL) * 100 / ( SELECT COUNT(CASE WHEN wikipedia_id IS NOT NULL THEN bioguide_id ELSE 0 END) FROM historical ) FROM current"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Based on the number of current legislators, calculate the percentage of legislators that served in 21st-Century.",
+        "query": "SELECT CAST(SUM(CASE WHEN strftime('%Y', T2.start) BETWEEN '2000' AND '2017' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.bioguide_id) FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many Catholic legislators do not have an account on ballotpedia.org?",
+        "query": "SELECT COUNT(bioguide_id) FROM historical WHERE religion_bio = 'Catholic' AND ballotpedia_id IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many class 1 senators belong to the Republican party?",
+        "query": "SELECT COUNT(bioguide) FROM `current-terms` WHERE class = 1 AND party = 'Republican'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What are the full names of the non-google female entity legislators that have not been registered in Federal Election Commission data?",
+        "query": "SELECT first_name, last_name FROM historical WHERE gender_bio = 'F' AND google_entity_id_id IS NULL AND fec_id IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "In California, how many representatives ended their term in 1995?",
+        "query": "SELECT COUNT(*) FROM `current-terms` WHERE state = 'CA' AND type = 'rep' AND end LIKE '1995%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the full name of the oldest legislator?",
+        "query": "SELECT first_name, last_name FROM historical ORDER BY birthday_bio LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List all of the ids of the representatives belonging to the Democrat party in district 13 that ended their term on 1/3/2019?",
+        "query": "SELECT bioguide FROM `current-terms` WHERE type = 'rep' AND party = 'Democrat' AND end = '2019-01-03' AND district = 13"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the official Twitter handle of Jason Lewis?",
+        "query": "SELECT T2.twitter FROM current AS T1 INNER JOIN `social-media` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.official_full_name = 'Jason Lewis'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among the Independent senators that started their term in 2011 and onwards, what are the official full names of the senators that caucused with the Democrat?",
+        "query": "SELECT T1.official_full_name FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.party = 'Independent' AND strftime('%Y', T2.start) >= '2011' AND T2.type = 'sen' AND T2.caucus = 'Democrat'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many Jewish legislators do not have facebook?",
+        "query": "SELECT COUNT(T3.bioguide_id) FROM ( SELECT T1.bioguide_id FROM current AS T1 INNER JOIN `social-media` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.facebook IS NULL GROUP BY T1.bioguide_id ) T3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Which party has the highest number of legislators who are Baptist?",
+        "query": "SELECT T2.party FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.religion_bio = 'Baptist' GROUP BY T2.party ORDER BY COUNT(T2.party) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List the official full names of all the legislators who have facebook, instagram, twitter and youtube accounts.",
+        "query": "SELECT T1.official_full_name FROM current AS T1 INNER JOIN `social-media` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.facebook IS NOT NULL AND T2.instagram IS NOT NULL AND T2.twitter IS NOT NULL AND T2.youtube IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many districts did John Conyers, Jr. serve in total?",
+        "query": "SELECT COUNT(T3.district) FROM ( SELECT T2.district FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.official_full_name = 'John Conyers, Jr.' GROUP BY T2.district ) T3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What are the Wikipedia page names of all the anti-administration senators?",
+        "query": "SELECT T1.wikipedia_id FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.type = 'sen' AND T2.party = 'Anti-Administration'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List the official full names of all the legislators that served 13 district for 26 consecutive years.",
+        "query": "SELECT DISTINCT CASE WHEN SUM(CAST(strftime('%Y', T2.end) AS int) - CAST(strftime('%Y', T2.start) AS int)) = 26 THEN T1.official_full_name END FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide GROUP BY T1.official_full_name, T2.district HAVING COUNT(T1.official_full_name) = 13"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many Federalist representatives are there whose first names are Benjamin?",
+        "query": "SELECT COUNT(T.bioguide_id) FROM ( SELECT T1.bioguide_id FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.first_name = 'Benjamin' AND T2.party = 'Federalist' AND T2.type = 'rep' GROUP BY T1.bioguide_id ) AS T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many female representatives served in the state of California for at least 10 years?",
+        "query": "SELECT SUM(T3.result) FROM ( SELECT CASE WHEN SUM(CAST(strftime('%Y', T2.`end`) AS int) - CAST(strftime('%Y', T2.start) AS int)) > 10 THEN 1 ELSE 0 END AS result FROM current AS T1 INNER JOIN \"current-terms\" AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.gender_bio = 'F' AND T2.state = 'CA' AND T2.type = 'rep' ) AS T3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the party of the oldest legislator?",
+        "query": "SELECT T1.party FROM `historical-terms` AS T1 INNER JOIN historical AS T2 ON T2.bioguide_id = T1.bioguide ORDER BY T2.birthday_bio LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Who is the Lutheran representative that served in the state of Ohio for 14 years before becoming a senator?",
+        "query": "SELECT CASE WHEN SUM(CAST(strftime('%Y', T2.end) AS int) - CAST(strftime('%Y', T2.start) AS int)) = 14 THEN official_full_name END FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.religion_bio = 'Lutheran' AND T2.state = 'OH' AND T2.type = 'rep'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among all the current legislators born after the year 1960, how many of them are not google entities?",
+        "query": "SELECT COUNT(*) FROM current WHERE strftime('%Y', birthday_bio) > '1960' AND google_entity_id_id IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Please list the official full names of all the current legislators who have served in the U.S. House.",
+        "query": "SELECT official_full_name FROM current WHERE house_history_id IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many current legislators have both accounts on both VoteView.com and maplight.org?",
+        "query": "SELECT COUNT(*) FROM current WHERE icpsr_id IS NOT NULL AND maplight_id IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among all the current female legislators, how many of them have attended in Senate roll call votes?",
+        "query": "SELECT COUNT(lis_id) FROM current WHERE gender_bio = 'F' AND lis_id IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the religion of current legislator Sherrod Brown?",
+        "query": "SELECT religion_bio FROM current WHERE official_full_name = 'Sherrod Brown'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the religion with the most occurrrence of the current legislators?",
+        "query": "SELECT religion_bio FROM current GROUP BY religion_bio ORDER BY COUNT(religion_bio) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the current official Instagram handle of current legislator Bob Corker?",
+        "query": "SELECT T2.instagram FROM current AS T1 INNER JOIN `social-media` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.official_full_name = 'Bob Corker'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among the current legislators who have accounts on both http://thomas.gov, how many of them have accounts on instagram?",
+        "query": "SELECT COUNT(DISTINCT T1.bioguide_id) FROM current AS T1 INNER JOIN `social-media` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.thomas_id IS NOT NULL AND T2.instagram IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Please list the username of the current official Facebook presence of all the current legislators that are famous or impact.",
+        "query": "SELECT T2.facebook FROM current AS T1 INNER JOIN `social-media` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.wikipedia_id IS NOT NULL GROUP BY T2.facebook"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "For how many terms have the oldest current legislator served?",
+        "query": "SELECT COUNT(T2.bioguide) FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.birthday_bio = ( SELECT MIN(birthday_bio) FROM current )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What was current legislator Sherrod Brown's Washington, D.C. office phone number during his term starting on 2013/1/3?",
+        "query": "SELECT T1.phone FROM `current-terms` AS T1 INNER JOIN current AS T2 ON T2.bioguide_id = T1.bioguide WHERE T2.official_full_name = 'Sherrod Brown' AND T1.start = '2013-01-03'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Current legislator Sherrod Brown has been in the Democrat party during how many terms that he has served?",
+        "query": "SELECT COUNT(*) FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.official_full_name = 'Sherrod Brown' AND T2.party = 'Democrat'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Please list the full official names of all the current legislators who served the term that started on 2013/1/3.",
+        "query": "SELECT T1.official_full_name FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.start = '2013-01-03'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among the current legislators who served the term starting on 2013/1/3, how many of them are female?",
+        "query": "SELECT COUNT(*) FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.start = '2013-01-03' AND T1.gender_bio = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the full official name of the current legislator that has served for the most number of terms?",
+        "query": "SELECT T1.official_full_name FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide GROUP BY T1.official_full_name, T2.bioguide ORDER BY COUNT(T2.bioguide) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "For how many terms has current legislator Sherrod Brown served as a representative for district no.13?",
+        "query": "SELECT COUNT(*) FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.official_full_name = 'Sherrod Brown' AND T2.district = 13"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the official full name of the current legislator whose current official Facebook presence is \"senjoniernst\"?",
+        "query": "SELECT T1.official_full_name FROM current AS T1 INNER JOIN `social-media` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.facebook = 'senjoniernst'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Which current legislator has served for more terms, Sherrod Brown or Maria Cantwell?",
+        "query": "SELECT CASE WHEN SUM(CASE WHEN T1.official_full_name = 'Maria Cantwell' THEN 1 ELSE 0 END) > SUM(CASE WHEN T1.official_full_name = 'Sherrod Brown' THEN 1 ELSE 0 END) THEN 'Maria Cantwell' ELSE 'Sherrod Brown' END FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among all the current legislators who have served for more than 4 terms, what is the percentage of them being female?",
+        "query": "SELECT CAST(SUM(CASE WHEN gender_bio = 'F' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T3.bioguide) FROM ( SELECT T2.bioguide, T1.gender_bio FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide GROUP BY T2.bioguide HAVING COUNT(T2.bioguide) > 4 ) T3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the average number of terms served for a current legislator that's famous or impact?",
+        "query": "SELECT CAST(COUNT(T2.bioguide) AS REAL) / COUNT(DISTINCT T1.bioguide_id) FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.wikipedia_id IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many of the legislators are female?",
+        "query": "SELECT COUNT(gender_bio) FROM current WHERE gender_bio = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the total number of senators New Jersey have?",
+        "query": "SELECT COUNT(type) FROM `historical-terms` WHERE state = 'NJ' AND type = 'rep'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Provide the address of the legislator with the contact form of http://www.carper.senate.gov/contact/.",
+        "query": "SELECT address FROM `current-terms` WHERE contact_form = 'http://www.carper.senate.gov/contact/'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Provide the Instagram username of the legislator named Benjamin Hawkins.",
+        "query": "SELECT T1.instagram FROM `social-media` AS T1 INNER JOIN current AS T2 ON T2.bioguide_id = T1.bioguide WHERE T2.first_name = 'Benjamin' AND T2.last_name = 'Hawkins'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Give the alphanumeric ID of the Catholic legislators in Nebraska.",
+        "query": "SELECT T1.bioguide FROM `current-terms` AS T1 INNER JOIN current AS T2 ON T2.bioguide_id = T1.bioguide WHERE T2.religion_bio = 'Catholic' AND T1.state = 'NE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "List down the MapLight ID of the representatives in Maine.",
+        "query": "SELECT T1.maplight_id FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.type = 'rep' AND T2.state = 'ME' GROUP BY T1.maplight_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Give the type and start date of the term of the legislator born on November 26, 1727.",
+        "query": "SELECT T2.type, T2.start FROM historical AS T1 INNER JOIN `historical-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.birthday_bio = '1727-11-26'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "What is the contact form of the legislator named Rick Crawford?",
+        "query": "SELECT T2.contact_form FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T1.official_full_name = 'Rick Crawford'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "How many female representatives are there in Michigan?",
+        "query": "SELECT COUNT(T.bioguide_id) FROM ( SELECT T1.bioguide_id FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.type = 'rep' AND T2.state = 'MI' AND T1.gender_bio = 'F' GROUP BY T1.bioguide_id ) T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "legislator",
+        "question": "Among the female legislators, what is the percentage of the senators in Maine?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.type = 'sen' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.type) FROM current AS T1 INNER JOIN `current-terms` AS T2 ON T1.bioguide_id = T2.bioguide WHERE T2.state = 'ME' AND T1.gender_bio = 'F'"
+    }
+]

@@ -1,0 +1,92 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "pilot_record",
+        "question": "How many pilots are there?",
+        "query": "SELECT count(*) FROM pilot"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "pilot_record",
+        "question": "List the names of pilots in ascending order of rank.",
+        "query": "SELECT Pilot_name FROM pilot ORDER BY Rank ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "pilot_record",
+        "question": "What are the positions and teams of pilots?",
+        "query": "SELECT POSITION ,  Team FROM pilot"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "pilot_record",
+        "question": "List the distinct positions of pilots older than 30.",
+        "query": "SELECT DISTINCT POSITION FROM pilot WHERE Age  >  30"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "pilot_record",
+        "question": "Show the names of pilots from team \"Bradley\" or \"Fordham\".",
+        "query": "SELECT Pilot_name FROM pilot WHERE Team  =  \"Bradley\" OR Team  =  \"Fordham\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "pilot_record",
+        "question": "What is the joined year of the pilot of the highest rank?",
+        "query": "SELECT Join_Year FROM pilot ORDER BY Rank ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "pilot_record",
+        "question": "What are the different nationalities of pilots? Show each nationality and the number of pilots of each nationality.",
+        "query": "SELECT Nationality ,  COUNT(*) FROM pilot GROUP BY Nationality"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "pilot_record",
+        "question": "Show the most common nationality of pilots.",
+        "query": "SELECT Nationality FROM pilot GROUP BY Nationality ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "pilot_record",
+        "question": "Show the pilot positions that have both pilots joining after year 2005 and pilots joining before 2000.",
+        "query": "SELECT POSITION FROM pilot WHERE Join_Year\t <  2000 INTERSECT SELECT POSITION FROM pilot WHERE Join_Year\t >  2005"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "pilot_record",
+        "question": "Show the names of pilots and models of aircrafts they have flied with.",
+        "query": "SELECT T3.Pilot_name ,  T2.Model FROM pilot_record AS T1 JOIN aircraft AS T2 ON T1.Aircraft_ID  =  T2.Aircraft_ID JOIN pilot AS T3 ON T1.Pilot_ID  =  T3.Pilot_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "pilot_record",
+        "question": "Show the names of pilots and fleet series of the aircrafts they have flied with in ascending order of the rank of the pilot.",
+        "query": "SELECT T3.Pilot_name ,  T2.Fleet_Series FROM pilot_record AS T1 JOIN aircraft AS T2 ON T1.Aircraft_ID  =  T2.Aircraft_ID JOIN pilot AS T3 ON T1.Pilot_ID  =  T3.Pilot_ID ORDER BY T3.Rank"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "pilot_record",
+        "question": "Show the fleet series of the aircrafts flied by pilots younger than 34",
+        "query": "SELECT T2.Fleet_Series FROM pilot_record AS T1 JOIN aircraft AS T2 ON T1.Aircraft_ID  =  T2.Aircraft_ID JOIN pilot AS T3 ON T1.Pilot_ID  =  T3.Pilot_ID WHERE T3.Age  <  34"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "pilot_record",
+        "question": "Show the names of pilots and the number of records they have.",
+        "query": "SELECT T2.Pilot_name ,  COUNT(*) FROM pilot_record AS T1 JOIN pilot AS T2 ON T1.pilot_ID  =  T2.pilot_ID GROUP BY T2.Pilot_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "pilot_record",
+        "question": "Show names of pilots that have more than one record.",
+        "query": "SELECT T2.Pilot_name ,  COUNT(*) FROM pilot_record AS T1 JOIN pilot AS T2 ON T1.pilot_ID  =  T2.pilot_ID GROUP BY T2.Pilot_name HAVING COUNT(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "pilot_record",
+        "question": "List the names of pilots that do not have any record.",
+        "query": "SELECT Pilot_name FROM pilot WHERE Pilot_ID NOT IN (SELECT Pilot_ID FROM pilot_record)"
+    }
+]

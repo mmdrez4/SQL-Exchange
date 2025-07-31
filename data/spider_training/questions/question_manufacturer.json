@@ -1,0 +1,98 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "manufacturer",
+        "question": "How many furniture components are there in total?",
+        "query": "SELECT sum(num_of_component) FROM furniture"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufacturer",
+        "question": "Return the name and id of the furniture with the highest market rate.",
+        "query": "SELECT name ,  furniture_id FROM furniture ORDER BY market_rate DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufacturer",
+        "question": "find the total market rate of the furnitures that have the top 2 market shares.",
+        "query": "SELECT sum(market_rate) FROM furniture ORDER BY market_rate DESC LIMIT 2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufacturer",
+        "question": "Find the component amounts and names of all furnitures that have more than 10 components.",
+        "query": "SELECT Num_of_Component ,  name FROM furniture WHERE Num_of_Component  >  10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufacturer",
+        "question": "Find the name and component amount of the least popular furniture.",
+        "query": "SELECT name ,  Num_of_Component FROM furniture ORDER BY market_rate LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufacturer",
+        "question": "Find the names of furnitures whose prices are lower than the highest price.",
+        "query": "SELECT t1.name FROM furniture AS t1 JOIN furniture_manufacte AS t2 ON t1.Furniture_ID  =  t2.Furniture_ID WHERE t2.Price_in_Dollar  <  (SELECT max(Price_in_Dollar) FROM furniture_manufacte)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufacturer",
+        "question": "Which manufacturer has the most number of shops? List its name and year of opening.",
+        "query": "SELECT open_year ,  name FROM manufacturer ORDER BY num_of_shops DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufacturer",
+        "question": "Find the average number of factories for the manufacturers that have more than 20 shops.",
+        "query": "SELECT avg(Num_of_Factories) FROM manufacturer WHERE num_of_shops  >  20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufacturer",
+        "question": "List all manufacturer names and ids ordered by their opening year.",
+        "query": "SELECT name ,  manufacturer_id FROM manufacturer ORDER BY open_year"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufacturer",
+        "question": "Give me the name and year of opening of the manufacturers that have either less than 10 factories or more than 10 shops.",
+        "query": "SELECT name ,  open_year FROM manufacturer WHERE num_of_shops  >  10 OR Num_of_Factories  <  10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufacturer",
+        "question": "what is the average number of factories and maximum number of shops for manufacturers that opened before 1990.",
+        "query": "SELECT max(num_of_shops) ,  avg(Num_of_Factories) FROM manufacturer WHERE open_year  <  1990"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufacturer",
+        "question": "Find the id and number of shops for the company that produces the most expensive furniture.",
+        "query": "SELECT t1.manufacturer_id ,  t1.num_of_shops FROM manufacturer AS t1 JOIN furniture_manufacte AS t2 ON t1.manufacturer_id  =  t2.manufacturer_id ORDER BY t2.Price_in_Dollar DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufacturer",
+        "question": "Find the number of funiture types produced by each manufacturer as well as the company names.",
+        "query": "SELECT count(*) ,  t1.name FROM manufacturer AS t1 JOIN furniture_manufacte AS t2 ON t1.manufacturer_id  =  t2.manufacturer_id GROUP BY t1.manufacturer_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufacturer",
+        "question": "Give me the names and prices of furnitures which some companies are manufacturing.",
+        "query": "SELECT t1.name ,  t2.price_in_dollar FROM furniture AS t1 JOIN furniture_manufacte AS t2 ON t1.Furniture_ID  =  t2.Furniture_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufacturer",
+        "question": "Find the market shares and names of furnitures which no any company is producing in our records.",
+        "query": "SELECT Market_Rate ,  name FROM furniture WHERE Furniture_ID NOT IN (SELECT Furniture_ID FROM furniture_manufacte)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "manufacturer",
+        "question": "Find the name of the company that produces both furnitures with less than 6 components and furnitures with more than 10 components.",
+        "query": "SELECT t3.name FROM furniture AS t1 JOIN furniture_manufacte AS t2 ON t1.Furniture_ID  =  t2.Furniture_ID JOIN manufacturer AS t3 ON t2.manufacturer_id  =  t3.manufacturer_id WHERE t1.num_of_component  <  6 INTERSECT SELECT t3.name FROM furniture AS t1 JOIN furniture_manufacte AS t2 ON t1.Furniture_ID  =  t2.Furniture_ID JOIN manufacturer AS t3 ON t2.manufacturer_id  =  t3.manufacturer_id WHERE t1.num_of_component  >  10"
+    }
+]

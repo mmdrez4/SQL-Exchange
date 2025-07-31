@@ -1,0 +1,195 @@
+{
+    "Ref_Document_Types": [
+        [
+            "Paper",
+            "u"
+        ],
+        [
+            "CD",
+            "b"
+        ],
+        [
+            "Hard Drive",
+            "f"
+        ]
+    ],
+    "Roles": [
+        [
+            "ED",
+            "Editor"
+        ],
+        [
+            "MG",
+            "Manager"
+        ],
+        [
+            "PT",
+            "Photo"
+        ]
+    ],
+    "Addresses": [
+        [
+            4,
+            "ES"
+        ],
+        [
+            0,
+            "IT"
+        ],
+        [
+            8,
+            "IE"
+        ]
+    ],
+    "Ref_Document_Status": [
+        [
+            "working",
+            "currently working on"
+        ],
+        [
+            "overdue",
+            "mailed late"
+        ],
+        [
+            "done",
+            "mailed"
+        ]
+    ],
+    "Ref_Shipping_Agents": [
+        [
+            "US",
+            "USPS",
+            "q"
+        ],
+        [
+            "UP",
+            "UPS",
+            "g"
+        ],
+        [
+            "SH",
+            "Ship",
+            "t"
+        ]
+    ],
+    "Documents": [
+        [
+            12,
+            "overdue",
+            "Hard Drive",
+            "US",
+            "1996-05-31 06:51:58",
+            "69",
+            "n"
+        ],
+        [
+            23,
+            "working",
+            "Hard Drive",
+            "FE",
+            "1999-04-17 14:19:32",
+            "124",
+            "b"
+        ],
+        [
+            10,
+            "overdue",
+            "Paper",
+            "UP",
+            "1976-09-15 19:24:17",
+            "8",
+            "m"
+        ]
+    ],
+    "Employees": [
+        [
+            5,
+            "PT",
+            "Clemens",
+            "b"
+        ],
+        [
+            3,
+            "PR",
+            "Haley",
+            "b"
+        ],
+        [
+            8,
+            "MG",
+            "Erling",
+            "u"
+        ]
+    ],
+    "Document_Drafts": [
+        [
+            14,
+            14,
+            "x"
+        ],
+        [
+            4,
+            9,
+            "r"
+        ],
+        [
+            1,
+            2,
+            "k"
+        ]
+    ],
+    "Draft_Copies": [
+        [
+            4,
+            9,
+            6
+        ],
+        [
+            1,
+            2,
+            5
+        ],
+        [
+            2,
+            8,
+            5
+        ]
+    ],
+    "Circulation_History": [
+        [
+            20,
+            17,
+            15,
+            8
+        ],
+        [
+            10,
+            20,
+            10,
+            2
+        ],
+        [
+            2,
+            1,
+            4,
+            2
+        ]
+    ],
+    "Documents_Mailed": [
+        [
+            4,
+            3,
+            "1992-11-07 15:03:41"
+        ],
+        [
+            4,
+            9,
+            "1973-02-21 10:17:01"
+        ],
+        [
+            20,
+            7,
+            "1982-01-14 05:50:54"
+        ]
+    ]
+}

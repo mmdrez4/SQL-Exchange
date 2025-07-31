@@ -1,0 +1,818 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Name the longest Catalan language Wikipedia page title and state the number of different words in this page.",
+        "query": "SELECT title, words FROM pages WHERE title = ( SELECT MAX(LENGTH(title)) FROM pages )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "List all the Catalan language wikipedia page title with less than 10 number of different words in these pages.",
+        "query": "SELECT title FROM pages WHERE words < 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "List the page number for Catalan language wikipedia pages containing the word 'Art' in the page title.",
+        "query": "SELECT page FROM pages WHERE title LIKE 'Art%' OR title LIKE '%Art%' OR title LIKE '%Art'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the title of Catalan language wikipedia page with revision page id '16203226'?",
+        "query": "SELECT title FROM pages WHERE revision = 16203226"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "List the titles for all Catalan language wikipedia page from revision page id 106600 to 106700.",
+        "query": "SELECT title FROM pages WHERE revision BETWEEN 106600 AND 106700"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many Catalan language wikipedia pages have between 1000 to 2000 number of different words?",
+        "query": "SELECT COUNT(pid) FROM pages WHERE words BETWEEN 1000 AND 2000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "List the page id of wikipedia about Catalan language which have the appearance of the word 'decimal'?",
+        "query": "SELECT T2.pid FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid WHERE T1.word = 'decimal'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Which word has the most occurrences within the same page of wikipedia about Catalan language?",
+        "query": "SELECT T1.word FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid WHERE T2.occurrences = ( SELECT MAX(occurrences) FROM pages_words )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "List all the first words of the biwords pair where the second word is 'antic'.",
+        "query": "SELECT T1.word FROM words AS T1 INNER JOIN biwords AS T2 ON T1.wid = T2.w1st WHERE T2.w2nd = ( SELECT wid FROM words WHERE word = 'antic' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Show all the title of pages and number of occurences for each page where the word 'quipu' appears.",
+        "query": "SELECT T1.title, T2.occurrences FROM pages AS T1 INNER JOIN pages_words AS T2 ON T1.pid = T2.pid INNER JOIN words AS T3 ON T2.wid = T3.wid WHERE T3.word = 'quipu'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Calculate the average number of the word occurrences in which \u2018system\u2019 appeared as the first word in the pair.",
+        "query": "SELECT AVG(T2.occurrences) FROM words AS T1 INNER JOIN biwords AS T2 ON T1.wid = T2.w1st WHERE T2.w1st = ( SELECT wid FROM words WHERE word = 'sistema' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the total pages of Wikipedia in Catalan language?",
+        "query": "SELECT pages FROM langs WHERE lang = 'ca'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "In the Catalan language, which biwords pair appeared the most in this language/page?",
+        "query": "SELECT w1st, w2nd FROM biwords WHERE occurrences = ( SELECT MAX(occurrences) FROM biwords )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the word id of the catalan language that was repeated no more than 10 times in the said language?",
+        "query": "SELECT wid FROM langs_words WHERE occurrences <= 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the title of the Catalan language Wikipedia page that has the highest number of different words?",
+        "query": "SELECT title FROM pages WHERE words = ( SELECT MAX(words) FROM pages )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the wikipedia page id of Arqueozoologia?",
+        "query": "SELECT page FROM pages WHERE title = 'Arqueozoologia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "In Abadia, what is the word id of the of the Catalan language that appeared the highest amount of times? Indicate the how many times did they said word id appeared.",
+        "query": "SELECT T2.wid, T2.occurrences FROM pages AS T1 INNER JOIN pages_words AS T2 ON T1.pid = T2.pid WHERE T1.title = 'Abadia' ORDER BY T2.occurrences DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What are the titles of the top 5 Catalan language Wikipedia page with the least number of different words? Indicate each title's word id that has appeared the most in the said pages.",
+        "query": "SELECT T1.title FROM pages AS T1 INNER JOIN pages_words AS T2 ON T1.pid = T2.pid ORDER BY T1.words LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many times did the word pair \"i\" and \"a\" appeared in the Cataln language/page?",
+        "query": "SELECT SUM(occurrences) FROM biwords WHERE w1st = 86 AND w2nd = 109"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What are the word pairs that occured only twice?",
+        "query": "SELECT T1.word, T3.word FROM words AS T1 INNER JOIN biwords AS T2 ON T1.wid = T2.w1st INNER JOIN words AS T3 ON T3.wid = T2.w2nd WHERE T2.occurrences = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the word pair that occured the highest amount of times in Addicio? Indicate how many times such word pair occured.",
+        "query": "SELECT T3.w1st, T3.w2nd, T3.occurrences FROM pages AS T1 INNER JOIN pages_words AS T2 ON T1.pid = T2.pid INNER JOIN biwords AS T3 ON T2.wid = T3.w1st OR T2.wid = T3.w2nd WHERE T1.title = 'Addicio' ORDER BY T3.occurrences DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the total word of title \"Adam\" and \"Acampada\"?",
+        "query": "SELECT SUM(words) FROM pages WHERE title IN ('Adam', 'Acampada')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the revision page ID of title \"Aigua dol\u00c3\u00a7a\"?",
+        "query": "SELECT revision FROM pages WHERE title = 'Aigua dol\u00c3\u00a7a'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the title of corpus with most words?",
+        "query": "SELECT title FROM pages WHERE words = ( SELECT MAX(words) FROM pages )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the average words of the 10 fewest words title?",
+        "query": "SELECT CAST(SUM(CASE WHEN words >= 10 THEN words ELSE 0 END) AS REAL) / SUM(CASE WHEN words >= 10 THEN 1 ELSE 0 END) FROM pages"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Among the title with single digit word count, list down 5 revision page ID of these titles.",
+        "query": "SELECT revision FROM pages WHERE words < 10 LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "List down the page id of titles start with alphabet \"b\".",
+        "query": "SELECT pid FROM pages WHERE title LIKE 'b%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the title of corpus where word \"desena\" appear?",
+        "query": "SELECT T1.title FROM pages AS T1 INNER JOIN pages_words AS T2 ON T1.pid = T2.pid INNER JOIN words AS T3 ON T2.wid = T3.wid WHERE T3.word = 'desena'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the word id for title \"Sometent\"?",
+        "query": "SELECT T2.wid FROM pages AS T1 INNER JOIN pages_words AS T2 ON T1.pid = T2.pid WHERE T1.title = 'Sometent'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Is word id \"88\" the word id for title \"Animals\"?",
+        "query": "SELECT CASE WHEN COUNT(T1.pid) > 0 THEN 'YES' ELSE 'NO' END AS YORN FROM pages AS T1 INNER JOIN pages_words AS T2 ON T1.pid = T2.pid WHERE T2.wid = 88 AND T1.title = 'Animals'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What are the occurance of word \"del\" in title \"Any anomal\u00c3\u00adstic\"?",
+        "query": "SELECT T2.occurrences FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid INNER JOIN pages AS T3 ON T2.pid = T3.pid WHERE T1.word = 'del' AND T3.title = 'Any anomal\u00c3\u00adstic'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "State one biword pair with occurence of 4.",
+        "query": "SELECT T1.word, T3.word FROM words AS T1 INNER JOIN biwords AS T2 ON T1.wid = T2.w1st INNER JOIN words AS T3 ON T3.wid = T2.w2nd WHERE T2.occurrences = 4 LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What are the total occurence of words that paired with \"nombre\"?",
+        "query": "SELECT SUM(T2.occurrences) FROM words AS T1 INNER JOIN biwords AS T2 ON T1.wid = T2.w1st OR T1.wid = T2.w2nd WHERE T2.w1st IN (( SELECT wid FROM words WHERE word = 'nombre' ) OR T2.w2nd IN ( SELECT wid FROM words WHERE word = 'nombre' ))"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What are the words that were paired with \"John\", list down 10 of them.",
+        "query": "SELECT w2nd FROM biwords WHERE w1st = ( SELECT wid FROM words WHERE word = 'john' ) LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "List down the revision page id of titles where \"fresc\" appears.",
+        "query": "SELECT T3.revision FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid INNER JOIN pages AS T3 ON T2.pid = T3.pid WHERE T1.word = 'fresc'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "List down the words with word id from 1 to 10 and write down a paired word for each of them.",
+        "query": "SELECT T1.word AS W1, T3.word AS W2 FROM words AS T1 LEFT JOIN biwords AS T2 ON T1.wid = T2.w1st LEFT JOIN words AS T3 ON T3.wid = T2.w2nd WHERE T1.wid <= 10 GROUP BY T1.wid"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "For corpus title \"Atomium\", pick 3 words appear in the title and calculate the total occurence of these words.",
+        "query": "SELECT T1.word, T1.occurrences FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid WHERE T2.pid = ( SELECT pid FROM pages WHERE title = 'Atomium' ) LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Indicate which is the word that is repeated the most times.",
+        "query": "SELECT word FROM words WHERE occurrences = ( SELECT MAX(occurrences) FROM words )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Indicate the page id of Wikipedia about Catalan language of all the pages that have a numeric value in their title.",
+        "query": "SELECT pid, title FROM pages WHERE title LIKE '%0%' OR '%1%' OR '%2%' OR '%3%' OR '%4%' OR '%5%' OR '%6%' OR '%7%' OR '%8%' OR '%9%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the title of the page that has the fewest words?",
+        "query": "SELECT title FROM pages WHERE title = ( SELECT MIN(words) FROM pages )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the pair of words that is repeated the most times? Identify them by their ID.",
+        "query": "SELECT w1st, w2nd FROM biwords WHERE occurrences = ( SELECT MAX(occurrences) FROM biwords )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many total occurrences are there in the three-letter words?",
+        "query": "SELECT SUM(occurrences) FROM words WHERE LENGTH(word) = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Calculate the average number of different words that appear on all pages whose title begins with A.",
+        "query": "SELECT AVG(words) FROM pages WHERE title LIKE 'A%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Calculate the average number of repetitions in the pairs of words in which the first word id is number 34.",
+        "query": "SELECT CAST(SUM(CASE WHEN w1st = 34 THEN 1 ELSE 0 END) AS REAL) / COUNT(w1st) FROM biwords"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Calculate the percentage of pages that have 1500 different words.",
+        "query": "SELECT CAST(COUNT(CASE WHEN words = 1500 THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(page) FROM pages WHERE words > 300 LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Calculate the percentage of times that the same word appears in a pair.",
+        "query": "SELECT CAST(COUNT(CASE WHEN w1st = w2nd THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(w1st) FROM biwords"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Indicate the title of all the pages in which the word comunitat appears.",
+        "query": "SELECT T3.title FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid INNER JOIN pages AS T3 ON T2.pid = T3.pid WHERE T1.word = 'comunitat'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Indicate on how many different pages the word ripoll appears.",
+        "query": "SELECT T3.page FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid INNER JOIN pages AS T3 ON T2.pid = T3.pid WHERE T1.word = 'ripoll'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many words are repeated on the Llista de conflictes armats page?",
+        "query": "SELECT occurrences FROM pages_words WHERE pid = ( SELECT pid FROM pages WHERE title = 'Llista de conflictes armats' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Indicate if there is any pair formed by the words fukunaga and d'egees.",
+        "query": "SELECT CASE WHEN COUNT(T1.wid) > 0 THEN 'yes' ELSE 'no' END FROM words AS T1 INNER JOIN biwords AS T2 ON T1.wid = T2.w1st OR T1.wid = T2.w2nd WHERE T2.w1st = ( SELECT wid FROM words WHERE T1.word = 'fukunaga' ) AND T2.w2nd = ( SELECT wid FROM words WHERE word LIKE 'd%egees' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Calculate the average of repetitions in the pages that have a total of 100 different words.",
+        "query": "SELECT CAST(SUM(T2.occurrences) AS REAL) / COUNT(T1.page) FROM pages AS T1 INNER JOIN pages_words AS T2 ON T1.pid = T2.pid WHERE T1.words = 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Which Wikipedia page number does the Catalan language's name, Acampada, appear on?",
+        "query": "SELECT page FROM pages WHERE title = 'Acampada'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Please list any three Wikipedia pages with more than 300 words.",
+        "query": "SELECT page FROM pages WHERE words > 300 LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many times did the word number 8 appear?",
+        "query": "SELECT occurrences FROM words WHERE wid = 8"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Please list the top three most frequently occurring words and their ids.",
+        "query": "SELECT word, wid FROM words ORDER BY occurrences DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How frequently did the words 1 and 25 appear together?",
+        "query": "SELECT occurrences FROM biwords WHERE w1st = 1 AND w2nd = 25"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What number of words are there on revision page 27457362?",
+        "query": "SELECT words FROM pages WHERE revision = 27457362"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the percentage of words in the Catalan language that have a repetition of more than 16,000 times?",
+        "query": "SELECT CAST(COUNT(CASE WHEN occurrences > 16000 THEN lid ELSE NULL END) AS REAL) * 100 / COUNT(lid) FROM langs_words"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Which Wikipedia page number has the highest number of words in the Catalan language?",
+        "query": "SELECT page FROM pages WHERE words = ( SELECT MAX(words) FROM pages )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What proportion of a pair of words in the Catalan language have been repeated less than 80 times?",
+        "query": "SELECT CAST(COUNT(CASE WHEN occurrences < 80 THEN lid ELSE NULL END) AS REAL) * 100 / COUNT(lid) FROM biwords"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many Catalan-language Wikipedia pages are there overall?",
+        "query": "SELECT pages FROM langs WHERE lang = 'ca'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Please list any three Wikipedia pages that are written in Catalan, together with their titles and revision page numbers.",
+        "query": "SELECT title, revision FROM pages WHERE lid = 1 LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the language of the pair of words numbered 1 and 616?",
+        "query": "SELECT T2.lang FROM biwords AS T1 INNER JOIN langs AS T2 ON T1.lid = T2.lid WHERE T1.w1st = 1 AND T1.w2nd = 616"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many times does the Catalan word \"nombre\" repeat itself?",
+        "query": "SELECT T1.occurrences FROM langs_words AS T1 INNER JOIN words AS T2 ON T1.wid = T2.wid WHERE T2.word = 'nombre'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the second word in the pair of words number 1 and 8968?",
+        "query": "SELECT word FROM words WHERE wid = 8968"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Which word has the most repetitions in the Catalan language?",
+        "query": "SELECT T2.word FROM langs_words AS T1 INNER JOIN words AS T2 ON T1.wid = T2.wid WHERE T1.occurrences = ( SELECT MAX(occurrences) FROM langs_words )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many times on page number 44 does the word \"votives\" appear?",
+        "query": "SELECT T2.occurrences FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid WHERE T1.word = 'votives' AND T2.pid = 44"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many times on page number 16 does the second word in the pair of words 1 and 109 appear?",
+        "query": "SELECT SUM(T1.occurrences) FROM pages_words AS T1 INNER JOIN biwords AS T2 ON T2.w2nd = T1.wid WHERE T2.w2nd = 109 AND T2.w1st = 1 AND T1.pid = 16"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the percentage of the words that have been repeated under 180 times in the Catalan language?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.occurrences < 180 THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T1.lid) FROM langs AS T1 INNER JOIN langs_words AS T2 ON T1.lid = T2.lid WHERE T1.lang = 'ca'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What percentage of Catalan-language Wikipedia pages have more than 10,000 words?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.words > 10000 THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T2.page) FROM langs AS T1 INNER JOIN pages AS T2 ON T1.lid = T2.lid WHERE T1.lang = 'ca'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many times the word \"desena\" occurs?",
+        "query": "SELECT occurrences FROM words WHERE word = 'desena'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many words has the appearance times greater than 10?",
+        "query": "SELECT COUNT(w1st) AS countwords FROM biwords WHERE occurrences > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "List out the total pages of Wikipedia in Catalan language.",
+        "query": "SELECT pages FROM langs"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many words have repetitions greater than 2000 and lower than 5000?",
+        "query": "SELECT COUNT(wid) FROM langs_words WHERE occurrences BETWEEN '2000' AND '5000'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "List out the title of Catalan language Wikipedia page that has wikipedia revision page id as 106601.",
+        "query": "SELECT title FROM pages WHERE revision = 106601"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "State the Wikipedia page title that has revision page id of 28040864.",
+        "query": "SELECT title FROM pages WHERE revision = 28040864"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many times that the word pair of \"barcelona\" and \"precolombina\" occur?",
+        "query": "SELECT SUM(occurrences) FROM biwords WHERE w1st = ( SELECT wid FROM words WHERE word = 'barcelona' ) AND w2nd = ( SELECT wid FROM words WHERE word = 'precolombina' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the locale of the language of the page titled \"Anys 90\"?",
+        "query": "SELECT T1.locale FROM langs AS T1 INNER JOIN pages AS T2 ON T1.lid = T2.lid WHERE T2.title = 'Anys 90'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Which word that has 71303 appearance in the Catalan language?",
+        "query": "SELECT T1.word FROM words AS T1 INNER JOIN langs_words AS T2 ON T1.wid = T2.wid WHERE T2.occurrences = 71303"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the locale of the language of the page titled \"Abril\"?",
+        "query": "SELECT T1.locale FROM langs AS T1 INNER JOIN pages AS T2 ON T1.lid = T2.lid WHERE T2.title = 'Abril'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the total number of words in page containing pair of word id \"100\" and \"317\"?",
+        "query": "SELECT words FROM langs WHERE lid = ( SELECT lid FROM biwords WHERE w1st = 100 AND w2nd = 317 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "State the total pages of the words that has repeated times of 2593.",
+        "query": "SELECT COUNT(T1.pages) FROM langs AS T1 INNER JOIN langs_words AS T2 ON T1.lid = T2.lid WHERE T2.occurrences = 2593"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "List out the title of the word have id less than 20.",
+        "query": "SELECT DISTINCT T1.title FROM pages AS T1 INNER JOIN pages_words AS T2 ON T1.pid = T2.pid WHERE T2.wid < 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many word that has number of different words equal to 3?",
+        "query": "SELECT COUNT(T2.wid) FROM pages AS T1 INNER JOIN pages_words AS T2 ON T1.pid = T2.pid WHERE T1.words = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many word appeared 8 times? State the language id of the page.",
+        "query": "SELECT COUNT(T2.wid), T1.lid FROM pages AS T1 INNER JOIN pages_words AS T2 ON T1.pid = T2.pid WHERE T2.occurrences = 8"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Calculate the average percentage of word appearance in the page that have revision page id smaller than 106680.",
+        "query": "SELECT CAST(SUM(T1.words) AS REAL) * 100 / SUM(T2.occurrences) FROM pages AS T1 INNER JOIN pages_words AS T2 ON T1.pid = T2.pid WHERE T1.revision < 106680"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "List out the total pages of the words that has repeated times more than 3000.",
+        "query": "SELECT T1.pages FROM langs AS T1 INNER JOIN langs_words AS T2 ON T1.lid = T2.lid WHERE T2.occurrences > 3000 GROUP BY T1.pages"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "State the name of the pair of word that have id of 20 and 50?",
+        "query": "SELECT T1.word, T3.word FROM words AS T1 INNER JOIN biwords AS T2 ON T1.wid = T2.w1st INNER JOIN words AS T3 ON T3.wid = T2.w2nd WHERE T2.w1st = 20 AND T2.w2nd = 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many pages of Wikipedia are there in total on the Catalan language?",
+        "query": "SELECT pages FROM langs WHERE lang = 'ca'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Please list the titles of the Wikipedia pages on the Catalan language with more than 4000 words.",
+        "query": "SELECT title FROM pages WHERE lid = 1 AND words > 4000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many words are there on the page titled \"Asclepi\"?",
+        "query": "SELECT words FROM pages WHERE title = 'Asclepi'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Which of these pages have more words, the page titled \"Afluent\" or \"Asclepi\"?",
+        "query": "SELECT CASE WHEN ( SELECT words FROM pages WHERE title = 'Asclepi' ) > ( SELECT words FROM pages WHERE title = 'Afluent' ) THEN 'Asclepi' ELSE 'Afluent' END"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the occurrence of the word \"nombre\"?",
+        "query": "SELECT occurrences FROM words WHERE word = 'nombre'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Please list the Catalan words with an occurrence of over 200000.",
+        "query": "SELECT word FROM words WHERE occurrences > 200000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the locale of the language of the page titled \"Asclepi\"?",
+        "query": "SELECT T2.locale FROM pages AS T1 INNER JOIN langs AS T2 ON T1.lid = T2.lid WHERE T1.title = 'Asclepi'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many times did the word \"grec\" occur on the page titled \"\u00c0bac\"?",
+        "query": "SELECT T2.occurrences FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid INNER JOIN pages AS T3 ON T2.pid = T3.pid WHERE T3.title = '\u00c0bac' AND T1.word = 'grec'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Please list the title of the pages on which the word \"grec\" occurred for over 20 times.",
+        "query": "SELECT T3.title FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid INNER JOIN pages AS T3 ON T2.pid = T3.pid WHERE T1.word = 'grec' AND T2.occurrences > 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many words are there on the page that the word \"grec\" has occurred for 52 times?",
+        "query": "SELECT SUM(T3.words) FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid INNER JOIN pages AS T3 ON T2.pid = T3.pid WHERE T1.word = 'grec' AND T2.occurrences = 52"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What's the occurrence of the biwords pair whose first word is \"\u00e0bac\" and second word is \"xin\u00e8s\"?",
+        "query": "SELECT occurrences FROM biwords WHERE w1st = ( SELECT wid FROM words WHERE word = '\u00e0bac' ) AND w2nd = ( SELECT wid FROM words WHERE word = 'xin\u00e8s' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Which biwords pair has a higher occurrence, \"\u00e0bac-xin\u00e8s\" or \"\u00e0bac-grec\"?",
+        "query": "SELECT CASE WHEN ( SELECT occurrences FROM biwords WHERE w1st = ( SELECT wid FROM words WHERE word = '\u00e0bac' ) AND w2nd = ( SELECT wid FROM words WHERE word = 'xin\u00e8s' ) ) > ( SELECT occurrences FROM biwords WHERE w1st = ( SELECT wid FROM words WHERE word = '\u00e0bac' ) AND w2nd = ( SELECT wid FROM words WHERE word = 'grec' ) ) THEN '\u00e0bac-xin\u00e8s' ELSE '\u00e0bac-grec' END AS CALUS FROM words LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many more times does the first word in the biwords pair \"\u00e0bac-xin\u00e8s\" occur than the biwords pair itself?",
+        "query": "SELECT occurrences - ( SELECT occurrences FROM biwords WHERE w1st = ( SELECT wid FROM words WHERE word = '\u00e0bac' ) AND w2nd = ( SELECT wid FROM words WHERE word = 'xin\u00e8s' ) ) AS CALUS FROM words WHERE word = '\u00e0bac'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Please list all the biwords pairs with \"\u00e0bac\" as its first word.",
+        "query": "SELECT T1.word AS W1, T3.word AS W2 FROM words AS T1 INNER JOIN biwords AS T2 ON T1.wid = T2.w1st INNER JOIN words AS T3 ON T3.wid = T2.w2nd WHERE T1.word = '\u00e0bac'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the total occurrence of the biwords pairs with \"\u00e0bac\" as its first word?",
+        "query": "SELECT COUNT(T2.w1st) FROM words AS T1 INNER JOIN biwords AS T2 ON T1.wid = T2.w1st INNER JOIN words AS T3 ON T3.wid = T2.w2nd WHERE T1.word = '\u00e0bac'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many Wikipedia pages are there on the language of the biwords pair \"\u00e0bac-xin\u00e8s\"?",
+        "query": "SELECT COUNT(T1.pages) FROM langs AS T1 INNER JOIN biwords AS T2 ON T1.lid = T2.lid WHERE T2.w1st = ( SELECT wid FROM words WHERE word = '\u00e0bac' ) AND T2.w2nd = ( SELECT wid FROM words WHERE word = 'xin\u00e8s' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How much higher in percentage does the word \"grec\" occur on the page titled \"\u00c0bac\" than on the page titled \"Astronomia\"?",
+        "query": "SELECT CAST((SUM(CASE WHEN T3.title = '\u00c0bac' THEN T2.occurrences END) - SUM(CASE WHEN T3.title = 'Astronomia' THEN T2.occurrences END)) AS REAL) * 100 / SUM(CASE WHEN T3.title = 'Astronomia' THEN T2.occurrences END) FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid INNER JOIN pages AS T3 ON T2.pid = T3.pid WHERE T1.word = 'grec'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many pages does the Catalan language have in Wikipedia?",
+        "query": "SELECT pages FROM langs WHERE lang = 'ca'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Which word has the most repetitions in the Catalan language? Give the ID of the word.",
+        "query": "SELECT wid FROM langs_words WHERE occurrences = ( SELECT MAX(occurrences) FROM langs_words )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the word ID for the second word for the biwords pair with most repetitions?",
+        "query": "SELECT w2nd FROM biwords WHERE occurrences = ( SELECT MAX(occurrences) FROM biwords )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many occurrences does the word \"panajot\" have?",
+        "query": "SELECT occurrences FROM words WHERE word = 'panajot'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Which word has the time of occurrences as 340691?",
+        "query": "SELECT word FROM words WHERE occurrences = 340691"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "State the word ID for \"periodograma\".",
+        "query": "SELECT wid FROM words WHERE word = 'periodograma'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "For the biwords pair that appears \"116430\" times, what is the second word of the pair?",
+        "query": "SELECT T1.word FROM words AS T1 INNER JOIN biwords AS T2 ON T1.wid = T2.w2nd WHERE T2.occurrences = 116430"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many times does the word \"riu\" appears in the biwords pair?",
+        "query": "SELECT COUNT(T1.wid) FROM words AS T1 INNER JOIN biwords AS T2 ON T1.wid = T2.w1st INNER JOIN words AS T3 ON T3.wid = T2.w2nd WHERE T1.word = 'riu'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Which word has the most appearances in the Wikipedia page with the title of \"Agricultura\"? Give the word ID.",
+        "query": "SELECT T2.wid FROM pages AS T1 INNER JOIN pages_words AS T2 ON T1.pid = T2.pid WHERE T1.title = 'Agricultura' ORDER BY T2.occurrences DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many appearances does the word ID No. 2823 have in the Wikipedia page \"Astre\"?",
+        "query": "SELECT SUM(T2.occurrences) FROM pages AS T1 INNER JOIN pages_words AS T2 ON T1.pid = T2.pid WHERE T1.title = 'Astre' AND T2.wid = 2823"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "In which Wikipedia page does the word ID No. 174 have the most appearances? Give the title.",
+        "query": "SELECT title FROM pages WHERE pid = ( SELECT pid FROM pages_words WHERE wid = 174 ORDER BY occurrences DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many times does the word \"her\u00f2dot\" appear in the Wikipedia page?",
+        "query": "SELECT COUNT(T2.occurrences) FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid WHERE T1.word = 'her\u00f2dot'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Which word has the most appearances in the Wikipedia page revision ID No. 28278070? Give the word ID.",
+        "query": "SELECT pid FROM pages_words WHERE pid = ( SELECT pid FROM pages WHERE revision = 28278070 ) ORDER BY occurrences DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many times does the biwords \"que gregorio\" appear in the language?",
+        "query": "SELECT occurrences FROM biwords WHERE w1st = ( SELECT wid FROM words WHERE word = 'que' ) AND w2nd = ( SELECT wid FROM words WHERE word = 'gregorio' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many biword pairs contain the word \"base\" as the second word?",
+        "query": "SELECT COUNT(w1st) FROM biwords WHERE w2nd = ( SELECT wid FROM words WHERE word = 'base' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many times of repetition does the word \"exemple\" show in the Catalan language?",
+        "query": "SELECT T2.occurrences FROM words AS T1 INNER JOIN langs_words AS T2 ON T1.wid = T2.wid WHERE T1.word = 'exemple' AND T2.lid = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Which word that has 274499 repetitions in the Catalan language?",
+        "query": "SELECT T1.word FROM words AS T1 INNER JOIN langs_words AS T2 ON T1.wid = T2.wid WHERE T2.occurrences = 274499 AND T2.lid = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many times greater is the appearances of the biword pair \"a base\" than \"a decimal\"?",
+        "query": "SELECT CAST(occurrences AS REAL) / ( SELECT occurrences FROM biwords WHERE w1st = ( SELECT wid FROM words WHERE word = 'a' ) AND w2nd = ( SELECT wid FROM words WHERE word = 'decimal' ) ) FROM biwords WHERE w1st = ( SELECT wid FROM words WHERE word = 'a' ) AND w2nd = ( SELECT wid FROM words WHERE word = 'base' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "For the word \"grec\", what is the percentage of the appearances in the \"Art\" Wikipedia page have among all the appearances?",
+        "query": "SELECT CAST(SUM(CASE WHEN T3.title = 'Art' THEN T2.occurrences ELSE 0 END) AS REAL) * 100 / SUM(T2.occurrences) FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid INNER JOIN pages AS T3 ON T2.pid = T3.pid WHERE T1.word = 'grec'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many Wikipedia pages with over 4000 different words are there on the Catalan language?",
+        "query": "SELECT COUNT(lid) FROM pages WHERE lid = 1 AND words > 4000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Please list the titles of all the Wikipedia pages on the Catalan language with 10 different words.",
+        "query": "SELECT title FROM pages WHERE lid = 1 AND words = 10 LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the word that occurs the most in the Catalan language?",
+        "query": "SELECT word FROM words WHERE occurrences = ( SELECT MAX(occurrences) FROM words )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Please list the titles of the top 3 Wikipedia pages with the most different words on the Catalan language.",
+        "query": "SELECT title FROM pages WHERE lid = 1 ORDER BY words DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the revision ID for the page on Catalan titled \"Arqueologia\"?",
+        "query": "SELECT revision FROM pages WHERE lid = 1 AND title = 'Arqueologia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Among the wikipedia pages on Catalan with more than 300 different words, how many of them have a revision ID of over 28330000?",
+        "query": "SELECT COUNT(lid) FROM pages WHERE lid = 1 AND words > 300 AND revision > 28330000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Please list the page IDs of all the Wikipedia pages that have the word \"nombre\" appeared on it.",
+        "query": "SELECT T2.pid FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid WHERE T1.word = 'nombre'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many Wikipedia pages on Catalan are there with the word \"nombre\" appearing for more than 5 times?",
+        "query": "SELECT COUNT(T2.pid) FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid WHERE T1.word = 'nombre' AND T2.occurrences > 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "How many biwords pairs are there whose second word is \"grec\"?",
+        "query": "SELECT COUNT(T2.w1st) FROM words AS T1 INNER JOIN biwords AS T2 ON T1.wid = T2.w2nd WHERE T1.word = 'grec'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the title of the page on which the word \"grec\" has an occurrence of 52 times.",
+        "query": "SELECT T3.title FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid INNER JOIN pages AS T3 ON T2.pid = T3.pid WHERE T1.word = 'grec' AND T2.occurrences = 52"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "Among the biwords pairs with \"\u00e0bac\" as its first word, how many of them have an occurrence of over 10?",
+        "query": "SELECT COUNT(T2.w2nd) FROM words AS T1 INNER JOIN biwords AS T2 ON T1.wid = T2.w1st WHERE T1.word = '\u00e0bac' AND T2.occurrences > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "language_corpus",
+        "question": "What is the average occurrence of the word \"grec\" on each Wikipedia page that has this word?",
+        "query": "SELECT CAST(SUM(T2.occurrences) AS REAL) / COUNT(T1.wid) FROM words AS T1 INNER JOIN pages_words AS T2 ON T1.wid = T2.wid WHERE T1.word = 'grec'"
+    }
+]

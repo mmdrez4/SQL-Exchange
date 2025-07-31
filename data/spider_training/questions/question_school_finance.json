@@ -1,0 +1,158 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "How many schools are there?",
+        "query": "SELECT count(*) FROM school"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "Count the number of schools.",
+        "query": "SELECT count(*) FROM school"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "Show all school names in alphabetical order.",
+        "query": "SELECT school_name FROM school ORDER BY school_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "List the name, location, mascot for all schools.",
+        "query": "SELECT school_name ,  LOCATION ,  mascot FROM school"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "What are the total and average enrollment of all schools?",
+        "query": "SELECT sum(enrollment) ,  avg(enrollment) FROM school"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "What are the mascots for schools with enrollments above the average?",
+        "query": "SELECT mascot FROM school WHERE enrollment  >  (SELECT avg(enrollment) FROM school)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "List the name of the school with the smallest enrollment.",
+        "query": "SELECT school_name FROM school ORDER BY enrollment LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "Show the average, maximum, minimum enrollment of all schools.",
+        "query": "SELECT avg(enrollment) ,  max(enrollment) ,  min(enrollment) FROM school"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "Show each county along with the number of schools and total enrollment in each county.",
+        "query": "SELECT county ,  count(*) ,  sum(enrollment) FROM school GROUP BY county"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "How many donors have endowment for school named \"Glenn\"?",
+        "query": "SELECT count(DISTINCT T1.donator_name) FROM endowment AS T1 JOIN school AS T2 ON T1.school_id  =  T2.school_id WHERE T2.school_name  =  \"Glenn\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "List each donator name and the amount of endowment in descending order of the amount of endowment.",
+        "query": "SELECT donator_name ,  sum(amount) FROM endowment GROUP BY donator_name ORDER BY sum(amount) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "List the names of the schools without any endowment.",
+        "query": "SELECT school_name FROM school WHERE school_id NOT IN (SELECT school_id FROM endowment)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "List all the names of schools with an endowment amount smaller than or equal to 10.",
+        "query": "SELECT T2.school_name FROM endowment AS T1 JOIN school AS T2 ON T1.school_id  =  T2.school_id GROUP BY T1.school_id HAVING sum(T1.amount)  <=  10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "Show the names of donors who donated to both school \"Glenn\" and \"Triton.\"",
+        "query": "SELECT T1.donator_name FROM endowment AS T1 JOIN school AS T2 ON T1.school_id  =  T2.school_id WHERE T2.school_name  =  'Glenn' INTERSECT SELECT T1.donator_name FROM endowment AS T1 JOIN school AS T2 ON T1.school_id  =  T2.school_id WHERE T2.school_name  =  'Triton'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "Show the names of all the donors except those whose donation amount less than 9.",
+        "query": "SELECT donator_name FROM endowment EXCEPT SELECT donator_name FROM endowment WHERE amount  <  9"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "List the amount and donor name for the largest amount of donation.",
+        "query": "SELECT amount ,  donator_name FROM endowment ORDER BY amount DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "How many budgets are above 3000 in year 2001 or before?",
+        "query": "SELECT count(*) FROM budget WHERE budgeted  >  3000 AND YEAR  <=  2001"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "Count the number of budgets in year 2001 or before whose budgeted amount is greater than 3000",
+        "query": "SELECT count(*) FROM budget WHERE budgeted  >  3000 AND YEAR  <=  2001"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "Show each school name, its budgeted amount, and invested amount in year 2002 or after.",
+        "query": "SELECT T2.school_name ,  T1.budgeted ,  T1.invested FROM budget AS T1 JOIN school AS T2 ON T1.school_id  =  T2.school_id WHERE T1.year  >=  2002"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "Show all donor names.",
+        "query": "SELECT DISTINCT donator_name FROM endowment"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "How many budget record has a budget amount smaller than the invested amount?",
+        "query": "SELECT count(*) FROM budget WHERE budgeted  <  invested"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "What is the total budget amount for school \"Glenn\" in all years?",
+        "query": "SELECT sum(T1.budgeted) FROM budget AS T1 JOIN school AS T2 ON T1.school_id  =  T2.school_id WHERE T2.school_name  =  'Glenn'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "Show the names of schools with a total budget amount greater than 100 or a total endowment greater than 10.",
+        "query": "SELECT T2.school_name FROM budget AS T1 JOIN school AS T2 ON T1.school_id  =  T2.school_id JOIN endowment AS T3 ON T2.school_id  =  T3.school_id GROUP BY T2.school_name HAVING sum(T1.budgeted)  >  100 OR sum(T3.amount)  >  10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "Find the names of schools that have more than one donator with donation amount above 8.5.",
+        "query": "SELECT T2.School_name FROM endowment AS T1 JOIN school AS T2 ON T1.school_id  =  T2.school_id WHERE T1.amount  >  8.5 GROUP BY T1.school_id HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "Find the number of schools that have more than one donator whose donation amount is less than 8.5.",
+        "query": "SELECT count(*) FROM (SELECT * FROM endowment WHERE amount  >  8.5 GROUP BY school_id HAVING count(*)  >  1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_finance",
+        "question": "List the name, IHSAA Football Class, and Mascot of the schools that have more than 6000 of budgeted amount or were founded before 2003, in the order of percent of total invested budget and total budgeted budget.",
+        "query": "SELECT T1.School_name ,  T1.Mascot ,  T1.IHSAA_Football_Class FROM school AS T1 JOIN budget AS T2 ON T1.school_id  =  T2.school_id WHERE Budgeted  >  6000 OR YEAR  <  2003 ORDER BY T2.total_budget_percent_invested ,  T2.total_budget_percent_budgeted"
+    }
+]

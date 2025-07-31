@@ -1,0 +1,500 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many restaurants' owners are in California?",
+        "query": "SELECT COUNT(owner_state) FROM businesses WHERE owner_state = 'CA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many restaurants have met all requirements in the inspection?",
+        "query": "SELECT COUNT(score) FROM inspections WHERE score = 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Among the inspections carried out in 2016, how many of them are routine?",
+        "query": "SELECT COUNT(`date`) FROM inspections WHERE STRFTIME('%Y', `date`) = '2016' AND type = 'Routine - Unscheduled'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Please list the names of all the restaurants that have met all requirements in one inspection.",
+        "query": "SELECT DISTINCT T2.name FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.score = 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Among the restaurants being inspected in 2016, how many of them are in San Francisco?",
+        "query": "SELECT COUNT(DISTINCT T2.business_id) FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE STRFTIME('%Y', T1.`date`) = '2016' AND T2.city IN ('San Francisco', 'SAN FRANCISCO', 'SF', 'S.F.')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "What was the type of inspection Tiramisu Kitchen had on 2014/1/14?",
+        "query": "SELECT T1.type FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.`date` = '2014-01-14' AND T2.name = 'Tiramisu Kitchen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many low risk violations were found in the inspection on 2014/1/14 for Tiramisu Kitchen?",
+        "query": "SELECT COUNT(T1.business_id) FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.`date` = '2014-01-14' AND T2.name = 'Tiramisu Kitchen' AND T1.risk_category = 'Low Risk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Please list the names of the restaurants that had a low risk violation in inspections in 2014.",
+        "query": "SELECT DISTINCT T2.name FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE STRFTIME('%Y', T1.`date`) = '2014' AND T1.risk_category = 'Low Risk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "What is the description of the low risk violation of Tiramisu Kitchen on 2014/1/14?",
+        "query": "SELECT T1.description FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.`date` = '2014-01-14' AND T2.name = 'Tiramisu Kitchen' AND T1.risk_category = 'Low Risk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Please list the descriptions of all the high risk violations of Tiramisu Kitchen.",
+        "query": "SELECT DISTINCT T1.description FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.risk_category = 'High Risk' AND T2.name = 'Tiramisu Kitchen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many routine inspections did Tiramisu Kitchen have?",
+        "query": "SELECT COUNT(T1.business_id) FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.type = 'Routine - Unscheduled' AND T2.name = 'Tiramisu Kitchen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Among the routine inspections of Tiramisu Kitchen, how many of them have a score of over 70?",
+        "query": "SELECT COUNT(T2.business_id) FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.name = 'Tiramisu Kitchen' AND T1.type = 'Routine - Unscheduled' AND T1.score > 70"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Which restaurant had more low risk violation in inspections, Tiramisu Kitchen or OMNI S.F. Hotel - 2nd Floor Pantry?",
+        "query": "SELECT CASE WHEN SUM(CASE WHEN T2.name = 'OMNI S.F. Hotel - 2nd Floor Pantry' THEN 1 ELSE 0 END) > SUM(CASE WHEN T2.name = 'Tiramisu Kitchen' THEN 1 ELSE 0 END) THEN 'OMNI S.F. Hotel - 2nd Floor Pantry' ELSE 'Tiramisu Kitchen' END AS result FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.risk_category = 'Low Risk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many high risk violations do the restaurants in San Francisco have in total?",
+        "query": "SELECT COUNT(T2.business_id) FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.city IN ('San Francisco', 'SF', 'S.F.', 'SAN FRANCISCO') AND T1.risk_category = 'High Risk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Which restaurant has the highest total number of high risk violations?",
+        "query": "SELECT T2.name FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.risk_category = 'High Risk' GROUP BY T2.name ORDER BY COUNT(T2.name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "What is the average scores of Tiramisu Kitchen in all inspections?",
+        "query": "SELECT AVG(T1.score) FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.name = 'Tiramisu Kitchen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Which business had the most number of inspections? Give the Id number for that business.",
+        "query": "SELECT business_id FROM inspections GROUP BY business_id ORDER BY COUNT(business_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Tell the Id number of the business with the most number of violations.",
+        "query": "SELECT business_id FROM violations GROUP BY business_id ORDER BY COUNT(business_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Give the name of the business which met all the required standards during the unscheduled routine inspection on 2016/9/28.",
+        "query": "SELECT T2.name FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.score = 100 AND T1.`date` = '2016-09-28' AND T1.type = 'Routine - Unscheduled'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Which business had the most number of high risk violations? Give the name of the business.",
+        "query": "SELECT T2.name FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.risk_category = 'High Risk' GROUP BY T2.name ORDER BY COUNT(T2.name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many kinds of violations did \"Stacks Restaurant\" have on 2016/10/4?",
+        "query": "SELECT COUNT(DISTINCT T1.violation_type_id) FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.name = 'Stacks Restaurant' AND T1.`date` = '2016-10-04'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Give the description of the moderate risk violation which \"Chez Fayala, Inc.\" had on 2016/7/1.",
+        "query": "SELECT T1.description FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.name = 'Chez Fayala, Inc.' AND T1.`date` = '2016-07-01' AND T1.risk_category = 'Moderate Risk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Which business had the lowest score for the unscheduled routine inspection on 2016/9/26? Give the name of the business.",
+        "query": "SELECT T2.name FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE score = ( SELECT MIN(score) FROM inspections WHERE `date` = '2016-09-26' AND type = 'Routine - Unscheduled' ) AND T1.`date` = '2016-09-26' AND T1.type = 'Routine - Unscheduled'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Provide the name of the business which had the most number of inspections because of complaint.",
+        "query": "SELECT T2.name FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.type = 'Complaint' GROUP BY T2.name ORDER BY COUNT(T1.business_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many unscheduled routine inspections did \"Soma Restaurant And Bar\" have?",
+        "query": "SELECT COUNT(T1.business_id) FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.name = 'Soma Restaurant And Bar' AND T1.type = 'Routine - Unscheduled'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Give the address of the business with the most number of the low risk violations.",
+        "query": "SELECT T2.address FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.risk_category = 'Low Risk' GROUP BY T2.address ORDER BY COUNT(T1.business_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Which business was the first one to get a low risk violation because of \"Permit license or inspection report not posted\"? Give the name of the business.",
+        "query": "SELECT T2.name FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.`date` = ( SELECT MIN(`date`) FROM violations WHERE risk_category = 'Low Risk' AND description = 'Permit license or inspection report not posted' ) AND T1.risk_category = 'Low Risk' AND T1.description = 'Permit license or inspection report not posted'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "For the business which got the most number of violations, how many inspections did it have?",
+        "query": "SELECT COUNT(T2.business_id) FROM violations AS T1 INNER JOIN inspections AS T2 ON T1.business_id = T2.business_id GROUP BY T1.business_id ORDER BY COUNT(T1.business_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "For the business whose business certificate number is 304977, how many violations did it have on 2013/10/7?",
+        "query": "SELECT COUNT(T1.business_id) FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.business_certificate = '304977' AND T1.`date` = '2013-10-07'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "What is the average score for \"Chairman Bao\" in all its unscheduled routine inspections?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.name = 'Chairman Bao' THEN T1.score ELSE 0 END) AS REAL) / COUNT(CASE WHEN T1.type = 'Routine - Unscheduled' THEN T1.score ELSE 0 END) FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "What percentage of the violations for \"Melody Lounge\" are moderate risks?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.risk_category = 'Moderate Risk' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.business_id) FROM businesses AS T1 INNER JOIN violations AS T2 ON T1.business_id = T2.business_id WHERE T1.name = 'Melody Lounge'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many eateries are located in Hayward?",
+        "query": "SELECT COUNT(business_id) FROM businesses WHERE city = 'HAYWARD'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many establishments have an inspection score of no more than 50?",
+        "query": "SELECT COUNT(DISTINCT business_id) FROM inspections WHERE score < 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many eateries applied in 2012?",
+        "query": "SELECT COUNT(business_id) FROM businesses WHERE STRFTIME('%Y', application_date) = '2012'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many foodborne illness investigations were done in 2014?",
+        "query": "SELECT COUNT(business_id) FROM inspections WHERE STRFTIME('%Y', `date`) = '2014' AND type = 'Foodborne Illness Investigation'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many owners have 5 or more establishments?",
+        "query": "SELECT COUNT(T1.owner_name) FROM ( SELECT owner_name FROM businesses GROUP BY owner_name HAVING COUNT(owner_name) > 5 ) T1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "What are the names of the establishments that met all of the required standards in 2013?",
+        "query": "SELECT DISTINCT T2.name FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE STRFTIME('%Y', T1.`date`) = '2013' AND T1.score = 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "In 2016, which city has the highest number of establishments with the highest health and safety hazards?",
+        "query": "SELECT T2.city FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE STRFTIME('%Y', T1.`date`) = '2016' AND T1.risk_category = 'High Risk' GROUP BY T2.city ORDER BY COUNT(T2.city) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "What is the name of the establishment with the lowest inspection score of all time?",
+        "query": "SELECT T2.name FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.score = ( SELECT MIN(score) FROM inspections )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many high risks violations did the Tiramisu Kitchen violate?",
+        "query": "SELECT COUNT(T1.business_id) FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.name = 'Tiramisu Kitchen' AND T1.risk_category = 'High Risk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many establishments with the tax code H24 have complaint inspections of 5 or more?",
+        "query": "SELECT COUNT(*) FROM ( SELECT T1.business_id FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.tax_code = 'H24' AND T1.type = 'Complaint' GROUP BY T1.business_id HAVING COUNT(T1.business_id) > 5 ) T3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "In 2013, what are the names of the establishments with contaminated or adulterated food?",
+        "query": "SELECT T2.name FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE STRFTIME('%Y', T1.`date`) = '2013' AND T1.description = 'Contaminated or adulterated food'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Among the establishments with a postal code of 94102, how many establishments have a score of 90 or more in 2015?",
+        "query": "SELECT COUNT(DISTINCT T2.business_id) FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id INNER JOIN inspections AS T3 ON T2.business_id = T3.business_id WHERE STRFTIME('%Y', T1.`date`) = '2015' AND T2.postal_code = '94102' AND T3.score > 90"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "What are the names of the establishments that met all the required standards for 4 consecutive years?",
+        "query": "SELECT DISTINCT T4.name FROM ( SELECT T3.name, T3.years, row_number() OVER (PARTITION BY T3.name ORDER BY T3.years) AS rowNumber FROM ( SELECT DISTINCT name, STRFTIME('%Y', `date`) AS years FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.score = 100 ) AS T3 ) AS T4 GROUP BY T4.name, date(T4.years || '-01-01', '-' || (T4.rowNumber - 1) || ' years') HAVING COUNT(T4.years) = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Between 2014 to 2016, what is the average inpsection score of the establishment owned by Yiu Tim Chan in 808 Pacific Ave, San Francisco?",
+        "query": "SELECT AVG(T1.score) FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE STRFTIME('%Y', T1.`date`) BETWEEN '2014' AND '2016' AND T2.owner_name = 'Yiu Tim Chan' AND T2.address = '808 Pacific Ave' AND T2.city = 'San Francisco'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "What is the average score of the establishments owned by the owner with the highest number of establishments?",
+        "query": "SELECT AVG(T1.score) FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id GROUP BY T2.owner_name ORDER BY COUNT(T2.business_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "What is the name of the establishment with the highest number of low risk violations in 2014?",
+        "query": "SELECT T2.name FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE STRFTIME('%Y', T1.`date`) = '2014' AND T1.risk_category = 'Low Risk' GROUP BY T2.name ORDER BY COUNT(T2.business_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Among the top 5 owners with highest number of establishments, which owner has the highest number of high risk violations? Give the name of the owner.",
+        "query": "SELECT T4.owner_name FROM violations AS T3 INNER JOIN businesses AS T4 ON T3.business_id = T4.business_id INNER JOIN ( SELECT T2.owner_name FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id GROUP BY T2.owner_name ORDER BY COUNT(T1.business_id) DESC LIMIT 5 ) AS T5 ON T4.owner_name = T5.owner_name WHERE T3.risk_category = 'High Risk' GROUP BY T4.owner_name ORDER BY COUNT(T3.risk_category) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Which establishment has the highest number of inspections done? Give the name of the establishment and calculate for its average score per inspection.",
+        "query": "SELECT T2.name, AVG(T1.score) FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id GROUP BY T2.name ORDER BY COUNT(T2.business_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many eateries got highest inspection in 2013?",
+        "query": "SELECT COUNT(DISTINCT business_id) FROM inspections WHERE STRFTIME('%Y', `date`) = '2013' AND score = ( SELECT MAX(score) FROM inspections WHERE STRFTIME('%Y', `date`) = '2013' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "List down the eateries' IDs with structural inspection type in February 2016.",
+        "query": "SELECT business_id FROM inspections WHERE type = 'Structural Inspection' AND `date` LIKE '2016-02%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many eateries had low risk for violation with unpermitted food facility description?",
+        "query": "SELECT COUNT(DISTINCT business_id) FROM violations WHERE risk_category = 'Low Risk' AND description = 'Unpermitted food facility'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Provide eateries' IDs, risk categories and descriptions with violation ID of 103101.",
+        "query": "SELECT business_id, risk_category, description FROM violations WHERE violation_type_id = '103101'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "When did eateries from San Bruno city get highest score in inspection?",
+        "query": "SELECT T1.`date` FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.city = 'SAN BRUNO' ORDER BY T1.score DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Describe the inspection types and violation descriptions under moderate risk category for ART's CAF\u00c9.",
+        "query": "SELECT DISTINCT T2.type, T1.description FROM violations AS T1 INNER JOIN inspections AS T2 ON T1.business_id = T2.business_id INNER JOIN businesses AS T3 ON T2.business_id = T3.business_id WHERE T3.name = 'ART''S CAF\u00c9' AND T1.risk_category = 'Moderate Risk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Mention the violation type ID and description of high risk category for STARBUCKS.",
+        "query": "SELECT DISTINCT T1.violation_type_id, T1.description FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.name = 'STARBUCKS' AND T1.risk_category = 'High Risk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "List the inspection dates, scores and inspection types for the eateries with tax code AA.",
+        "query": "SELECT T1.`date`, T1.score, T1.type FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.tax_code = 'AA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Provide eateries' IDs, names and addresses which were inspected on 30th July, 2016.",
+        "query": "SELECT DISTINCT T2.business_id, T2.name, T2.address FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.date = '2016-07-30'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Describe the violation dates, risk categories, descriptions and names of the eateries under Jade Chocolates LLC.",
+        "query": "SELECT T1.`date`, T1.risk_category, T1.description, T2.name FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.owner_name = 'Jade Chocolates LLC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Provide the names, risk categories and descriptions for the eateries with violation type ID of 103111.",
+        "query": "SELECT T2.name, T1.risk_category, T1.description FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.violation_type_id = '103111'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Among violations on 3rd June, 2014, describe any 5 names, located cities and tax codes of the eateries with high risk category.",
+        "query": "SELECT DISTINCT T2.name, T2.city, T2.tax_code FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.risk_category = 'High Risk' AND T1.`date` = '2014-06-03' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "What was the inspection type when El Aji Peruvian Restaurant got highest inspection score?",
+        "query": "SELECT T1.type FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.name = 'El Aji Peruvian Restaurant' ORDER BY T1.score DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Who were the owners of eateries which had highest health hazard by improper cooking time or temperatures?",
+        "query": "SELECT T2.owner_name FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.risk_category = 'High Risk' AND T1.description = 'Improper cooking time or temperatures'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "List the eateries' names and addresses which had reinspection on 2nd February, 2015.",
+        "query": "SELECT T2.name, T2.address FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.`date` = '2015-02-02' AND T1.type = 'Reinspection/Followup'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "List the names and business certificates of the eateries which got inspection score under 50.",
+        "query": "SELECT T2.name, T2.business_id FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.score < 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "How many of the businesses are located at 1825 POST St #223, San Francisco?",
+        "query": "SELECT COUNT(business_id) FROM businesses WHERE address = '1825 POST St #223' AND city = 'SAN FRANCISCO'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "List down the owner's name with a zip code 94104.",
+        "query": "SELECT DISTINCT owner_name FROM businesses WHERE owner_zip = '94104'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "What is the total number of businesses with a tax code H25?",
+        "query": "SELECT COUNT(tax_code) FROM businesses WHERE tax_code = 'H25'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "In the violations in 2014, how many of them have a low risk category?",
+        "query": "SELECT COUNT(risk_category) FROM violations WHERE STRFTIME('%Y', `date`) = '2014' AND risk_category = 'Low Risk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Give the business ID and risk category of the business owned by San Francisco Madeleine, Inc.",
+        "query": "SELECT DISTINCT T2.business_id, T1.risk_category FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.owner_name = 'San Francisco Madeleine, Inc.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "List owner's name of businesses with a 100 score.",
+        "query": "SELECT DISTINCT T2.owner_name FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.score = 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Among the businesses within the postal code 94117, what is total number of businesses with a high risk category?",
+        "query": "SELECT COUNT(DISTINCT T2.business_id) FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.postal_code = 94117 AND T1.risk_category = 'High Risk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Among the businesses with score that ranges from 70 to 80, list their violation type ID and risk category.",
+        "query": "SELECT DISTINCT T1.violation_type_id, T1.risk_category FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id INNER JOIN inspections AS T3 ON T2.business_id = T3.business_id WHERE T3.score BETWEEN 70 AND 80"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "List the tax code and inspection type of the business named \"Rue Lepic\".",
+        "query": "SELECT DISTINCT T3.tax_code, T2.type FROM violations AS T1 INNER JOIN inspections AS T2 ON T1.business_id = T2.business_id INNER JOIN businesses AS T3 ON T2.business_id = T3.business_id WHERE T3.name = 'Rue Lepic'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "In businesses that violates 103157 on May 27, 2016 , what is the name of the business that has an unscheduled inspection?",
+        "query": "SELECT DISTINCT T3.name FROM violations AS T1 INNER JOIN inspections AS T2 ON T1.business_id = T2.business_id INNER JOIN businesses AS T3 ON T2.business_id = T3.business_id WHERE T1.`date` = '2016-05-27' AND T1.violation_type_id = 103157 AND T2.type = 'Routine - Unscheduled'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Who is the owner of the business that has a high risk violation of 103109 and described as unclean or unsanitary food contact surfaces?",
+        "query": "SELECT DISTINCT T2.owner_name FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.risk_category = 'High Risk' AND T1.violation_type_id = 103109 AND T1.description = 'Unclean or unsanitary food contact surfaces'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Among the owners from Cameron Park, what is the business name of the business with a score of 100?",
+        "query": "SELECT DISTINCT T2.name FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.owner_city = 'Cameron Park' AND T1.score = 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "List the violation type ID of business with business ID from 30 to 50 and located at 747 IRVING St, San Francisco.",
+        "query": "SELECT DISTINCT T1.violation_type_id FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.business_id BETWEEN 30 AND 50 AND T2.address = '747 IRVING St' AND T2.city = 'San Francisco'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "What is the owner's name of the of the business that violates 103156 on June 12, 2014?",
+        "query": "SELECT DISTINCT T2.owner_name FROM violations AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T1.violation_type_id = 103156 AND T1.`date` = '2014-06-12'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "In businesses with an owner address 500 California St, 2nd Floor of Silicon Valley, list the type of inspection of the business with the highest score.",
+        "query": "SELECT T1.type FROM inspections AS T1 INNER JOIN businesses AS T2 ON T1.business_id = T2.business_id WHERE T2.owner_address = '500 California St, 2nd Floor' AND T2.owner_city = 'SAN FRANCISCO' ORDER BY T1.score DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "Among the violations in 2016, how many of them have unscheduled inspections?",
+        "query": "SELECT COUNT(T2.business_id) FROM violations AS T1 INNER JOIN inspections AS T2 ON T1.business_id = T2.business_id WHERE STRFTIME('%Y', T1.`date`) = '2016' AND T2.type = 'Routine - Unscheduled'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "List the business' name and risk category of businesses with a score greater than the 80% of average score of all businesses.",
+        "query": "SELECT DISTINCT T1.name, T3.risk_category FROM businesses AS T1 INNER JOIN inspections AS T2 ON T1.business_id = T2.business_id INNER JOIN violations AS T3 ON T1.business_id = T3.business_id WHERE T2.score > 0.8 * ( SELECT AVG(score) FROM inspections )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection",
+        "question": "In businesses with a score lower than 95 and located around the postal code of 94110, what is the percentage of businesses with a risk category of low risk?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.risk_category = 'Low Risk' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.risk_category) FROM violations AS T1 INNER JOIN inspections AS T2 ON T1.business_id = T2.business_id INNER JOIN businesses AS T3 ON T2.business_id = T3.business_id WHERE T2.score < 95 AND T3.postal_code = 94110"
+    }
+]

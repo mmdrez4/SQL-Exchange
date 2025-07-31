@@ -1,0 +1,149 @@
+{
+    "Ref_Feature_Types": [
+        [
+            "Security",
+            "Securiyt, eg Burglar Alarm."
+        ],
+        [
+            "Amenity",
+            "Amenity, eg Pool."
+        ]
+    ],
+    "Ref_Property_Types": [
+        [
+            "House",
+            "House, Bungalow, etc."
+        ],
+        [
+            "Other",
+            "Other, to be determined."
+        ],
+        [
+            "Field",
+            "Field, Meadow."
+        ]
+    ],
+    "Other_Available_Features": [
+        [
+            2,
+            "Amenity",
+            "AirCon",
+            "Air Conditioning."
+        ],
+        [
+            3,
+            "Amenity",
+            "Pool",
+            "Swimming Pool."
+        ],
+        [
+            4,
+            "Security",
+            "BurglarAlarm",
+            "Burglar Alarm"
+        ]
+    ],
+    "Properties": [
+        [
+            6,
+            "Shop",
+            "1994-02-14 02:27:13",
+            "1995-01-31 11:18:42",
+            "high line",
+            "6837 Darien Views Apt. 475\nSouth Maraview, KS 77770",
+            9,
+            2573,
+            0,
+            476919.3,
+            "sed",
+            "culpa",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        [
+            14,
+            "Other",
+            "1986-12-31 10:05:32",
+            "1987-12-07 07:41:27",
+            "wall street",
+            "1474 Dibbert Fields Suite 055\nSouth Renee, IN 58286-3097",
+            7,
+            78.7208,
+            2449185.2,
+            0,
+            "et",
+            "eos",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        [
+            8,
+            "Apartment",
+            "1976-06-10 20:25:38",
+            "2001-11-09 04:37:33",
+            "vogue",
+            "24365 Ulices Run\nHomenicktown, MD 88485-6198",
+            9,
+            13.4715,
+            0,
+            0,
+            "fuga",
+            "odio",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ]
+    ],
+    "Other_Property_Features": [
+        [
+            7,
+            2,
+            "hic"
+        ],
+        [
+            13,
+            2,
+            "autem"
+        ],
+        [
+            1,
+            2,
+            "ad"
+        ]
+    ]
+}

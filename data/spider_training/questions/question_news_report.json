@@ -1,0 +1,110 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "How many journalists are there?",
+        "query": "SELECT count(*) FROM journalist"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "List the names of journalists in ascending order of years working.",
+        "query": "SELECT Name FROM journalist ORDER BY Years_working ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "What are the nationalities and ages of journalists?",
+        "query": "SELECT Nationality ,  Age FROM journalist"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "Show the names of journalists from \"England\" or \"Wales\".",
+        "query": "SELECT Name FROM journalist WHERE Nationality  =  \"England\" OR Nationality  =  \"Wales\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "What is the average number of years spent working as a journalist?",
+        "query": "SELECT avg(Years_working) FROM journalist"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "What is the nationality of the journalist with the largest number of years working?",
+        "query": "SELECT Nationality FROM journalist ORDER BY Years_working DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "Show the different nationalities and the number of journalists of each nationality.",
+        "query": "SELECT Nationality ,  COUNT(*) FROM journalist GROUP BY Nationality"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "Show the most common nationality for journalists.",
+        "query": "SELECT Nationality FROM journalist GROUP BY Nationality ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "Show the nations that have both journalists with more than 10 years of working and journalists with less than 3 years of working.",
+        "query": "SELECT Nationality FROM journalist WHERE Years_working  >  10 INTERSECT SELECT Nationality FROM journalist WHERE Years_working  <  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "Show the dates, places, and names of events in descending order of the attendance.",
+        "query": "SELECT Date ,  Name ,  venue FROM event ORDER BY Event_Attendance DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "Show the names of journalists and the dates of the events they reported.",
+        "query": "SELECT T3.Name ,  T2.Date FROM news_report AS T1 JOIN event AS T2 ON T1.Event_ID  =  T2.Event_ID JOIN journalist AS T3 ON T1.journalist_ID  =  T3.journalist_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "Show the names of journalists and the names of the events they reported in ascending order",
+        "query": "SELECT T3.Name ,  T2.Name FROM news_report AS T1 JOIN event AS T2 ON T1.Event_ID  =  T2.Event_ID JOIN journalist AS T3 ON T1.journalist_ID  =  T3.journalist_ID ORDER BY T2.Event_Attendance ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "Show the names of journalists and the number of events they reported.",
+        "query": "SELECT T3.Name ,  COUNT(*) FROM news_report AS T1 JOIN event AS T2 ON T1.Event_ID  =  T2.Event_ID JOIN journalist AS T3 ON T1.journalist_ID  =  T3.journalist_ID GROUP BY T3.Name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "Show the names of journalists that have reported more than one event.",
+        "query": "SELECT T3.Name FROM news_report AS T1 JOIN event AS T2 ON T1.Event_ID  =  T2.Event_ID JOIN journalist AS T3 ON T1.journalist_ID  =  T3.journalist_ID GROUP BY T3.Name HAVING COUNT(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "List the names of journalists who have not reported any event.",
+        "query": "SELECT Name FROM journalist WHERE journalist_ID NOT IN (SELECT journalist_ID FROM news_report)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "what are the average and maximum attendances of all events?",
+        "query": "SELECT avg(Event_Attendance) ,  max(Event_Attendance) FROM event"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "Find the average age and experience working length of journalists working on different role type.",
+        "query": "SELECT avg(t1.age) ,  avg(Years_working) ,  t2.work_type FROM journalist AS t1 JOIN news_report AS t2 ON t1.journalist_id  =  t2.journalist_id GROUP BY t2.work_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "news_report",
+        "question": "List the event venues and names that have the top 2 most number of people attended.",
+        "query": "SELECT venue ,  name FROM event ORDER BY Event_Attendance DESC LIMIT 2"
+    }
+]

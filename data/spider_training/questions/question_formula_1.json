@@ -1,0 +1,482 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the name of the race held most recently?",
+        "query": "SELECT name FROM races ORDER BY date DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the name of the race that occurred most recently?",
+        "query": "SELECT name FROM races ORDER BY date DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the name and date of the most recent race?",
+        "query": "SELECT name ,  date FROM races ORDER BY date DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the name and date of the race that occurred most recently?",
+        "query": "SELECT name ,  date FROM races ORDER BY date DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "Find the names of all races held in 2017.",
+        "query": "SELECT name FROM races WHERE YEAR = 2017"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the names of all the races that occurred in the year 2017?",
+        "query": "SELECT name FROM races WHERE YEAR = 2017"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "Find the distinct names of all races held between 2014 and 2017?",
+        "query": "SELECT DISTINCT name FROM races WHERE YEAR BETWEEN 2014 AND 2017"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the unique names of all race held between 2014 and 2017?",
+        "query": "SELECT DISTINCT name FROM races WHERE YEAR BETWEEN 2014 AND 2017"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "List the forename and surname of all distinct drivers who once had laptime less than 93000 milliseconds?",
+        "query": "SELECT DISTINCT T1.forename ,  T1.surname FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid WHERE T2.milliseconds < 93000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the forenames and surnames of all unique drivers who had a lap time of less than 93000 milliseconds?",
+        "query": "SELECT DISTINCT T1.forename ,  T1.surname FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid WHERE T2.milliseconds < 93000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "Find all the distinct id and nationality of drivers who have had laptime more than 100000 milliseconds?",
+        "query": "SELECT DISTINCT T1.driverid ,  T1.nationality FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid WHERE T2.milliseconds >  100000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the different driver ids and nationalities of all drivers who had a laptime of more than 100000 milliseconds?",
+        "query": "SELECT DISTINCT T1.driverid ,  T1.nationality FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid WHERE T2.milliseconds >  100000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the forename and surname of the driver who has the smallest laptime?",
+        "query": "SELECT T1.forename ,  T1.surname FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid ORDER BY T2.milliseconds LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the forename and surname of the driver with the shortest laptime?",
+        "query": "SELECT T1.forename ,  T1.surname FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid ORDER BY T2.milliseconds LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the id and family name of the driver who has the longest laptime?",
+        "query": "SELECT T1.driverid ,  T1.surname FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid ORDER BY T2.milliseconds DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the id and last name of the driver with the longest laptime?",
+        "query": "SELECT T1.driverid ,  T1.surname FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid ORDER BY T2.milliseconds DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the id, forname and surname of the driver who had the first position in terms of laptime at least twice?",
+        "query": "SELECT T1.driverid ,  T1.forename ,  T1.surname FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid WHERE POSITION  =  '1' GROUP BY T1.driverid HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the id, first name, and last name of the driver who was in the first position for laptime at least twice?",
+        "query": "SELECT T1.driverid ,  T1.forename ,  T1.surname FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid WHERE POSITION  =  '1' GROUP BY T1.driverid HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "How many drivers participated in the race Australian Grand Prix held in 2009?",
+        "query": "SELECT count(*) FROM results AS T1 JOIN races AS T2 ON T1.raceid = T2.raceid WHERE T2.name = \"Australian Grand Prix\" AND YEAR = 2009"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "How many drivers were in the Australian Grand Prix held in 2009?",
+        "query": "SELECT count(*) FROM results AS T1 JOIN races AS T2 ON T1.raceid = T2.raceid WHERE T2.name = \"Australian Grand Prix\" AND YEAR = 2009"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "How many drivers did not participate in the races held in 2009?",
+        "query": "SELECT count(DISTINCT driverId) FROM results WHERE raceId NOT IN( SELECT raceId FROM races WHERE YEAR != 2009 )"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "How many drivers did not race in 2009?",
+        "query": "SELECT count(DISTINCT driverId) FROM results WHERE raceId NOT IN( SELECT raceId FROM races WHERE YEAR != 2009 )"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "Give me a list of names and years of races that had any driver whose forename is Lewis?",
+        "query": "SELECT T2.name ,  T2.year FROM results AS T1 JOIN races AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T1.driverid = T3.driverid WHERE T3.forename = \"Lewis\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the names and years of all races that had a driver with the last name Lewis?",
+        "query": "SELECT T2.name ,  T2.year FROM results AS T1 JOIN races AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T1.driverid = T3.driverid WHERE T3.forename = \"Lewis\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "Find the forename and surname of drivers whose nationality is German?",
+        "query": "SELECT forename ,  surname FROM drivers WHERE nationality = \"German\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the first and last name of all the German drivers?",
+        "query": "SELECT forename ,  surname FROM drivers WHERE nationality = \"German\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "Find the id and forenames of drivers who participated both the races with name Australian Grand Prix and the races with name Chinese Grand Prix?",
+        "query": "SELECT T2.driverid ,  T3.forename FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T2.driverid  =  T3.driverid WHERE T1.name = \"Australian Grand Prix\" INTERSECT SELECT T2.driverid ,  T3.forename FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T2.driverid  =  T3.driverid WHERE T1.name = \"Chinese Grand Prix\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the id and first name of all the drivers who participated in the Australian Grand Prix and the Chinese Grand Prix?",
+        "query": "SELECT T2.driverid ,  T3.forename FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T2.driverid  =  T3.driverid WHERE T1.name = \"Australian Grand Prix\" INTERSECT SELECT T2.driverid ,  T3.forename FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T2.driverid  =  T3.driverid WHERE T1.name = \"Chinese Grand Prix\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the forenames and surnames of drivers who participated in the races named Australian Grand Prix but not the races named Chinese Grand Prix?",
+        "query": "SELECT T3.forename ,  T3.surname FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T2.driverid = T3.driverid WHERE T1.name = \"Australian Grand Prix\" EXCEPT SELECT T3.forename ,  T3.surname FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T2.driverid = T3.driverid WHERE T1.name = \"Chinese Grand Prix\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the first and last names of all drivers who participated in the Australian Grand Prix but not the Chinese Grand Prix?",
+        "query": "SELECT T3.forename ,  T3.surname FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T2.driverid = T3.driverid WHERE T1.name = \"Australian Grand Prix\" EXCEPT SELECT T3.forename ,  T3.surname FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T2.driverid = T3.driverid WHERE T1.name = \"Chinese Grand Prix\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "Find all the forenames of distinct drivers who was in position 1 as standing and won?",
+        "query": "SELECT DISTINCT T1.forename FROM drivers AS T1 JOIN driverstandings AS T2 ON T1.driverid = T2.driverid WHERE T2.position = 1 AND T2.wins = 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are all the different first names of the drivers who are in position as standing and won?",
+        "query": "SELECT DISTINCT T1.forename FROM drivers AS T1 JOIN driverstandings AS T2 ON T1.driverid = T2.driverid WHERE T2.position = 1 AND T2.wins = 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "Find all the forenames of distinct drivers who won in position 1 as driver standing and had more than 20 points?",
+        "query": "SELECT DISTINCT T1.forename FROM drivers AS T1 JOIN driverstandings AS T2 ON T1.driverid = T2.driverid WHERE T2.position = 1 AND T2.wins = 1 AND T2.points > 20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the first names of the different drivers who won in position 1 as driver standing and had more than 20 points?",
+        "query": "SELECT DISTINCT T1.forename FROM drivers AS T1 JOIN driverstandings AS T2 ON T1.driverid = T2.driverid WHERE T2.position = 1 AND T2.wins = 1 AND T2.points > 20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the numbers of constructors for different nationalities?",
+        "query": "SELECT count(*) ,  nationality FROM constructors GROUP BY nationality"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "For each nationality, how many different constructors are there?",
+        "query": "SELECT count(*) ,  nationality FROM constructors GROUP BY nationality"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the numbers of races for each constructor id?",
+        "query": "SELECT count(*) ,  constructorid FROM constructorStandings GROUP BY constructorid"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "For each constructor id, how many races are there?",
+        "query": "SELECT count(*) ,  constructorid FROM constructorStandings GROUP BY constructorid"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the names of races that were held after 2017 and the circuits were in the country of Spain?",
+        "query": "SELECT T1.name FROM races AS T1 JOIN circuits AS T2 ON T1.circuitid = T2.circuitid WHERE T2.country = \"Spain\" AND T1.year > 2017"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the names of the races held after 2017 in Spain?",
+        "query": "SELECT T1.name FROM races AS T1 JOIN circuits AS T2 ON T1.circuitid = T2.circuitid WHERE T2.country = \"Spain\" AND T1.year > 2017"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the unique names of races that held after 2000 and the circuits were in Spain?",
+        "query": "SELECT DISTINCT T1.name FROM races AS T1 JOIN circuits AS T2 ON T1.circuitid = T2.circuitid WHERE T2.country = \"Spain\" AND T1.year > 2000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the names of all races held after 2000 in Spain?",
+        "query": "SELECT DISTINCT T1.name FROM races AS T1 JOIN circuits AS T2 ON T1.circuitid = T2.circuitid WHERE T2.country = \"Spain\" AND T1.year > 2000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "Find the distinct driver id and the stop number of all drivers that have a shorter pit stop duration than some drivers in the race with id 841.",
+        "query": "SELECT DISTINCT driverid ,  STOP FROM pitstops WHERE duration  <  (SELECT max(duration) FROM pitstops WHERE raceid  =  841)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the id and stop number for each driver that has a shorter pit stop than the driver in the race with id 841?",
+        "query": "SELECT DISTINCT driverid ,  STOP FROM pitstops WHERE duration  <  (SELECT max(duration) FROM pitstops WHERE raceid  =  841)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "Find the distinct driver id of all drivers that have a longer stop duration than some drivers in the race whose id is 841?",
+        "query": "SELECT DISTINCT driverid ,  STOP FROM pitstops WHERE duration  >  (SELECT min(duration) FROM pitstops WHERE raceid  =  841)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the different ids and stop durations of all the drivers whose stop lasted longer than the driver in the race with the id 841?",
+        "query": "SELECT DISTINCT driverid ,  STOP FROM pitstops WHERE duration  >  (SELECT min(duration) FROM pitstops WHERE raceid  =  841)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "List the forenames of all distinct drivers in alphabetical order?",
+        "query": "SELECT DISTINCT forename FROM drivers ORDER BY forename ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the first names of all the different drivers in alphabetical order?",
+        "query": "SELECT DISTINCT forename FROM drivers ORDER BY forename ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "List the names of all distinct races in reversed  lexicographic order?",
+        "query": "SELECT DISTINCT name FROM races ORDER BY name DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the different names of all the races in reverse alphabetical order?",
+        "query": "SELECT DISTINCT name FROM races ORDER BY name DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the names of races held between 2009 and 2011?",
+        "query": "SELECT name FROM races WHERE YEAR BETWEEN 2009 AND 2011"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the names of all races held between 2009 and 2011?",
+        "query": "SELECT name FROM races WHERE YEAR BETWEEN 2009 AND 2011"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the names of races held after 12:00:00 or before 09:00:00?",
+        "query": "SELECT name FROM races WHERE TIME > \"12:00:00\" OR TIME < \"09:00:00\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the names of all races that occurred after 12:00:00 or before 09:00:00?",
+        "query": "SELECT name FROM races WHERE TIME > \"12:00:00\" OR TIME < \"09:00:00\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the drivers' first, last names and id who had more than 8 pit stops or participated in more than 5 race results?",
+        "query": "SELECT T1.forename ,  T1.surname ,  T1.driverid FROM drivers AS T1 JOIN pitstops AS T2 ON T1.driverid  =  T2.driverid GROUP BY T1.driverid HAVING count(*)  >  8 UNION SELECT T1.forename ,  T1.surname ,  T1.driverid FROM drivers AS T1 JOIN results AS T2 ON T1.driverid  =  T2.driverid GROUP BY T1.driverid HAVING count(*)  >  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the drivers' first names,last names, and ids for all those that had more than 8 stops or participated in more than 5 races?",
+        "query": "SELECT T1.forename ,  T1.surname ,  T1.driverid FROM drivers AS T1 JOIN pitstops AS T2 ON T1.driverid  =  T2.driverid GROUP BY T1.driverid HAVING count(*)  >  8 UNION SELECT T1.forename ,  T1.surname ,  T1.driverid FROM drivers AS T1 JOIN results AS T2 ON T1.driverid  =  T2.driverid GROUP BY T1.driverid HAVING count(*)  >  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the drivers' last names and id who had 11 pit stops and participated in more than 5 race results?",
+        "query": "SELECT T1.surname ,  T1.driverid FROM drivers AS T1 JOIN pitstops AS T2 ON T1.driverid  =  T2.driverid GROUP BY T1.driverid HAVING count(*)  =  11 INTERSECT SELECT T1.surname ,  T1.driverid FROM drivers AS T1 JOIN results AS T2 ON T1.driverid  =  T2.driverid GROUP BY T1.driverid HAVING count(*)  >  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the last names and ids of all drivers who had 11 pit stops and participated in more than 5 races?",
+        "query": "SELECT T1.surname ,  T1.driverid FROM drivers AS T1 JOIN pitstops AS T2 ON T1.driverid  =  T2.driverid GROUP BY T1.driverid HAVING count(*)  =  11 INTERSECT SELECT T1.surname ,  T1.driverid FROM drivers AS T1 JOIN results AS T2 ON T1.driverid  =  T2.driverid GROUP BY T1.driverid HAVING count(*)  >  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the id and last name of the driver who participated in the most races after 2010?",
+        "query": "SELECT T1.driverid ,  T1.surname FROM drivers AS T1 JOIN results AS T2 ON T1.driverid  =  T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid WHERE T3.year > 2010 GROUP BY T1.driverid ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the id and last name of the driver who participated in the most races after 2010?",
+        "query": "SELECT T1.driverid ,  T1.surname FROM drivers AS T1 JOIN results AS T2 ON T1.driverid  =  T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid WHERE T3.year > 2010 GROUP BY T1.driverid ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the names of circuits that belong to UK or Malaysia?",
+        "query": "SELECT name FROM circuits WHERE country = \"UK\" OR country = \"Malaysia\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the names of all the circuits that are in the UK or Malaysia?",
+        "query": "SELECT name FROM circuits WHERE country = \"UK\" OR country = \"Malaysia\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "Find the id and location of circuits that belong to France or Belgium?",
+        "query": "SELECT circuitid ,  LOCATION FROM circuits WHERE country = \"France\" OR country = \"Belgium\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the ids and locations of all circuits in France or Belgium?",
+        "query": "SELECT circuitid ,  LOCATION FROM circuits WHERE country = \"France\" OR country = \"Belgium\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "Find the names of Japanese constructors that have once earned more than 5 points?",
+        "query": "SELECT T1.name FROM constructors AS T1 JOIN constructorstandings AS T2 ON T1.constructorid = T2.constructorid WHERE T1.nationality = \"Japanese\" AND T2.points > 5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the names of all the Japanese constructors that have earned more than 5 points?",
+        "query": "SELECT T1.name FROM constructors AS T1 JOIN constructorstandings AS T2 ON T1.constructorid = T2.constructorid WHERE T1.nationality = \"Japanese\" AND T2.points > 5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the average fastest lap speed in race named 'Monaco Grand Prix' in 2008 ?",
+        "query": "SELECT avg(T2.fastestlapspeed) FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year = 2008 AND T1.name = \"Monaco Grand Prix\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the average fastest lap speed for the Monaco Grand Prix in 2008?",
+        "query": "SELECT avg(T2.fastestlapspeed) FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year = 2008 AND T1.name = \"Monaco Grand Prix\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the maximum fastest lap speed in race named 'Monaco Grand Prix' in 2008 ?",
+        "query": "SELECT max(T2.fastestlapspeed) FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year = 2008 AND T1.name = \"Monaco Grand Prix\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the maximum fastest lap speed in the Monaco Grand Prix in 2008?",
+        "query": "SELECT max(T2.fastestlapspeed) FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year = 2008 AND T1.name = \"Monaco Grand Prix\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the maximum fastest lap speed in races held after 2004 grouped by race name and ordered by year?",
+        "query": "SELECT max(T2.fastestlapspeed) ,  T1.name ,  T1.year FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year > 2014 GROUP BY T1.name ORDER BY T1.year"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "For each race name, What is the maximum fastest lap speed for races after 2004 ordered by year?",
+        "query": "SELECT max(T2.fastestlapspeed) ,  T1.name ,  T1.year FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year > 2014 GROUP BY T1.name ORDER BY T1.year"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the average fastest lap speed in races held after 2004 grouped by race name and ordered by year?",
+        "query": "SELECT avg(T2.fastestlapspeed) ,  T1.name ,  T1.year FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year > 2014 GROUP BY T1.name ORDER BY T1.year"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the average fastest lap speed for races held after 2004, for each race, ordered by year?",
+        "query": "SELECT avg(T2.fastestlapspeed) ,  T1.name ,  T1.year FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year > 2014 GROUP BY T1.name ORDER BY T1.year"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "Find the id, forename and number of races of all drivers who have at least participated in two races?",
+        "query": "SELECT T1.driverid ,  T1.forename ,  count(*) FROM drivers AS T1 JOIN results AS T2 ON T1.driverid = T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid GROUP BY T1.driverid HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What is the id, forename, and number of races for all drivers that have participated in at least 2 races?",
+        "query": "SELECT T1.driverid ,  T1.forename ,  count(*) FROM drivers AS T1 JOIN results AS T2 ON T1.driverid = T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid GROUP BY T1.driverid HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "Find the driver id and number of races of all drivers who have at most participated in 30 races?",
+        "query": "SELECT T1.driverid ,  count(*) FROM drivers AS T1 JOIN results AS T2 ON T1.driverid = T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid GROUP BY T1.driverid HAVING count(*)  <=  30"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "For each id of a driver who participated in at most 30 races, how many races did they participate in?",
+        "query": "SELECT T1.driverid ,  count(*) FROM drivers AS T1 JOIN results AS T2 ON T1.driverid = T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid GROUP BY T1.driverid HAVING count(*)  <=  30"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "Find the id and surname of the driver who participated the most number of races?",
+        "query": "SELECT T1.driverid ,  T1.surname FROM drivers AS T1 JOIN results AS T2 ON T1.driverid = T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid GROUP BY T1.driverid ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "formula_1",
+        "question": "What are the ids and last names of all drivers who participated in the most races?",
+        "query": "SELECT T1.driverid ,  T1.surname FROM drivers AS T1 JOIN results AS T2 ON T1.driverid = T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid GROUP BY T1.driverid ORDER BY count(*) DESC LIMIT 1"
+    }
+]

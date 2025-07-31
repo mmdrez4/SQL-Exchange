@@ -1,0 +1,530 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "How many faculty do we have?",
+        "query": "SELECT count(*) FROM Faculty"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What is the total number of faculty members?",
+        "query": "SELECT count(*) FROM Faculty"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What ranks do we have for faculty?",
+        "query": "SELECT DISTINCT rank FROM Faculty"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Find the list of distinct ranks for faculty.",
+        "query": "SELECT DISTINCT rank FROM Faculty"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show all the distinct buildings that have faculty rooms.",
+        "query": "SELECT DISTINCT building FROM Faculty"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What buildings have faculty offices?",
+        "query": "SELECT DISTINCT building FROM Faculty"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show the rank, first name, and last name for all the faculty.",
+        "query": "SELECT rank ,  Fname ,  Lname FROM Faculty"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What are the rank, first name, and last name of the faculty members?",
+        "query": "SELECT rank ,  Fname ,  Lname FROM Faculty"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show the first name, last name, and phone number for all female faculty members.",
+        "query": "SELECT Fname ,  Lname ,  phone FROM Faculty WHERE Sex  =  'F'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What are the first name, last name, and phone number of all the female faculty members?",
+        "query": "SELECT Fname ,  Lname ,  phone FROM Faculty WHERE Sex  =  'F'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show ids for all the male faculty.",
+        "query": "SELECT FacID FROM Faculty WHERE Sex  =  'M'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What are the faculty ids of all the male faculty members?",
+        "query": "SELECT FacID FROM Faculty WHERE Sex  =  'M'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "How many female Professors do we have?",
+        "query": "SELECT count(*) FROM Faculty WHERE Sex  =  'F' AND Rank  =  \"Professor\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Count the number of female Professors we have.",
+        "query": "SELECT count(*) FROM Faculty WHERE Sex  =  'F' AND Rank  =  \"Professor\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show the phone, room, and building for the faculty named Jerry Prince.",
+        "query": "SELECT phone ,  room ,  building FROM Faculty WHERE Fname  =  \"Jerry\" AND Lname  =  \"Prince\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What are the phone, room, and building of the faculty member called Jerry Prince?",
+        "query": "SELECT phone ,  room ,  building FROM Faculty WHERE Fname  =  \"Jerry\" AND Lname  =  \"Prince\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "How many Professors are in building NEB?",
+        "query": "SELECT count(*) FROM Faculty WHERE Rank  =  \"Professor\" AND building  =  \"NEB\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Count the number of Professors who have office in building NEB.",
+        "query": "SELECT count(*) FROM Faculty WHERE Rank  =  \"Professor\" AND building  =  \"NEB\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show the first name and last name for all the instructors.",
+        "query": "SELECT fname ,  lname FROM Faculty WHERE Rank  =  \"Instructor\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What are the first name and last name of all the instructors?",
+        "query": "SELECT fname ,  lname FROM Faculty WHERE Rank  =  \"Instructor\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show all the buildings along with the number of faculty members the buildings have.",
+        "query": "SELECT building ,  count(*) FROM Faculty GROUP BY building"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "How many faculty members does each building have? List the result with the name of the building.",
+        "query": "SELECT building ,  count(*) FROM Faculty GROUP BY building"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Which building has most faculty members?",
+        "query": "SELECT building FROM Faculty GROUP BY building ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Find the building that has the largest number of faculty members.",
+        "query": "SELECT building FROM Faculty GROUP BY building ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show all the buildings that have at least 10 professors.",
+        "query": "SELECT building FROM Faculty WHERE rank  =  \"Professor\" GROUP BY building HAVING count(*)  >=  10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "In which buildings are there at least ten professors?",
+        "query": "SELECT building FROM Faculty WHERE rank  =  \"Professor\" GROUP BY building HAVING count(*)  >=  10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "For each faculty rank, show the number of faculty members who have it.",
+        "query": "SELECT rank ,  count(*) FROM Faculty GROUP BY rank"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "How many faculty members do we have for each faculty rank?",
+        "query": "SELECT rank ,  count(*) FROM Faculty GROUP BY rank"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show all the ranks and the number of male and female faculty for each rank.",
+        "query": "SELECT rank ,  sex ,  count(*) FROM Faculty GROUP BY rank ,  sex"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "How many faculty members do we have for each rank and gender?",
+        "query": "SELECT rank ,  sex ,  count(*) FROM Faculty GROUP BY rank ,  sex"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Which rank has the smallest number of faculty members?",
+        "query": "SELECT rank FROM Faculty GROUP BY rank ORDER BY count(*) ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Find the faculty rank that has the least members.",
+        "query": "SELECT rank FROM Faculty GROUP BY rank ORDER BY count(*) ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show the number of male and female assistant professors.",
+        "query": "SELECT sex ,  count(*) FROM Faculty WHERE rank  =  \"AsstProf\" GROUP BY sex"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "How many male and female assistant professors do we have?",
+        "query": "SELECT sex ,  count(*) FROM Faculty WHERE rank  =  \"AsstProf\" GROUP BY sex"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What are the first name and last name of Linda Smith's advisor?",
+        "query": "SELECT T1.fname ,  T1.lname FROM Faculty AS T1 JOIN Student AS T2 ON T1.FacID  =  T2.advisor WHERE T2.fname  =  \"Linda\" AND T2.lname  =  \"Smith\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Who is the advisor of Linda Smith? Give me the first name and last name.",
+        "query": "SELECT T1.fname ,  T1.lname FROM Faculty AS T1 JOIN Student AS T2 ON T1.FacID  =  T2.advisor WHERE T2.fname  =  \"Linda\" AND T2.lname  =  \"Smith\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show the ids of students whose advisors are professors.",
+        "query": "SELECT T2.StuID FROM Faculty AS T1 JOIN Student AS T2 ON T1.FacID  =  T2.advisor WHERE T1.rank  =  \"Professor\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Which students have professors as their advisors? Find their student ids.",
+        "query": "SELECT T2.StuID FROM Faculty AS T1 JOIN Student AS T2 ON T1.FacID  =  T2.advisor WHERE T1.rank  =  \"Professor\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show first name and last name for all the students advised by Michael Goodrich.",
+        "query": "SELECT T2.fname ,  T2.lname FROM Faculty AS T1 JOIN Student AS T2 ON T1.FacID  =  T2.advisor WHERE T1.fname  =  \"Michael\" AND T1.lname  =  \"Goodrich\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Which students are advised by Michael Goodrich? Give me their first and last names.",
+        "query": "SELECT T2.fname ,  T2.lname FROM Faculty AS T1 JOIN Student AS T2 ON T1.FacID  =  T2.advisor WHERE T1.fname  =  \"Michael\" AND T1.lname  =  \"Goodrich\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show the faculty id of each faculty member, along with the number of students he or she advises.",
+        "query": "SELECT T1.FacID ,  count(*) FROM Faculty AS T1 JOIN Student AS T2 ON T1.FacID  =  T2.advisor GROUP BY T1.FacID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What are the faculty id and the number of students each faculty has?",
+        "query": "SELECT T1.FacID ,  count(*) FROM Faculty AS T1 JOIN Student AS T2 ON T1.FacID  =  T2.advisor GROUP BY T1.FacID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show all the faculty ranks and the number of students advised by each rank.",
+        "query": "SELECT T1.rank ,  count(*) FROM Faculty AS T1 JOIN Student AS T2 ON T1.FacID  =  T2.advisor GROUP BY T1.rank"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "How many students are advised by each rank of faculty? List the rank and the number of students.",
+        "query": "SELECT T1.rank ,  count(*) FROM Faculty AS T1 JOIN Student AS T2 ON T1.FacID  =  T2.advisor GROUP BY T1.rank"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What are the first and last name of the faculty who has the most students?",
+        "query": "SELECT T1.fname ,  T1.lname FROM Faculty AS T1 JOIN Student AS T2 ON T1.FacID  =  T2.advisor GROUP BY T1.FacID ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Give me the the first and last name of the faculty who advises the most students.",
+        "query": "SELECT T1.fname ,  T1.lname FROM Faculty AS T1 JOIN Student AS T2 ON T1.FacID  =  T2.advisor GROUP BY T1.FacID ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show the ids for all the faculty members who have at least 2 students.",
+        "query": "SELECT T1.FacID FROM Faculty AS T1 JOIN Student AS T2 ON T1.FacID  =  T2.advisor GROUP BY T1.FacID HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Which faculty members advise two ore more students? Give me their faculty ids.",
+        "query": "SELECT T1.FacID FROM Faculty AS T1 JOIN Student AS T2 ON T1.FacID  =  T2.advisor GROUP BY T1.FacID HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show ids for the faculty members who don't advise any student.",
+        "query": "SELECT FacID FROM Faculty EXCEPT SELECT advisor FROM Student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What are the ids of the faculty members who do not advise any student.",
+        "query": "SELECT FacID FROM Faculty EXCEPT SELECT advisor FROM Student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What activities do we have?",
+        "query": "SELECT activity_name FROM Activity"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "List all the activities we have.",
+        "query": "SELECT activity_name FROM Activity"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "How many activities do we have?",
+        "query": "SELECT count(*) FROM Activity"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Find the number of activities available.",
+        "query": "SELECT count(*) FROM Activity"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "How many faculty members participate in an activity?",
+        "query": "SELECT count(DISTINCT FacID) FROM Faculty_participates_in"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Give me the number of faculty members who participate in an activity",
+        "query": "SELECT count(DISTINCT FacID) FROM Faculty_participates_in"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show the ids of the faculty who don't participate in any activity.",
+        "query": "SELECT FacID FROM Faculty EXCEPT SELECT FacID FROM Faculty_participates_in"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Which faculty do not participate in any activity? Find their faculty ids.",
+        "query": "SELECT FacID FROM Faculty EXCEPT SELECT FacID FROM Faculty_participates_in"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show the ids of all the faculty members who participate in an activity and advise a student.",
+        "query": "SELECT FacID FROM Faculty_participates_in INTERSECT SELECT advisor FROM Student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What are ids of the faculty members who not only participate in an activity but also advise a student.",
+        "query": "SELECT FacID FROM Faculty_participates_in INTERSECT SELECT advisor FROM Student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "How many activities does Mark Giuliano participate in?",
+        "query": "SELECT count(*) FROM Faculty AS T1 JOIN Faculty_participates_in AS T2 ON T1.facID  =  T2.facID WHERE T1.fname  =  \"Mark\" AND T1.lname  =  \"Giuliano\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Find the number of activities Mark Giuliano is involved in.",
+        "query": "SELECT count(*) FROM Faculty AS T1 JOIN Faculty_participates_in AS T2 ON T1.facID  =  T2.facID WHERE T1.fname  =  \"Mark\" AND T1.lname  =  \"Giuliano\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show the names of all the activities Mark Giuliano participates in.",
+        "query": "SELECT T3.activity_name FROM Faculty AS T1 JOIN Faculty_participates_in AS T2 ON T1.facID  =  T2.facID JOIN Activity AS T3 ON T3.actid  =  T2.actid WHERE T1.fname  =  \"Mark\" AND T1.lname  =  \"Giuliano\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What are the names of the activities Mark Giuliano is involved in",
+        "query": "SELECT T3.activity_name FROM Faculty AS T1 JOIN Faculty_participates_in AS T2 ON T1.facID  =  T2.facID JOIN Activity AS T3 ON T3.actid  =  T2.actid WHERE T1.fname  =  \"Mark\" AND T1.lname  =  \"Giuliano\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show the first and last name of all the faculty members who participated in some activity, together with the number of activities they participated in.",
+        "query": "SELECT  T1.fname ,  T1.lname ,  count(*) ,  T1.FacID FROM Faculty AS T1 JOIN Faculty_participates_in AS T2 ON T1.facID  =  T2.facID GROUP BY T1.FacID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What is the first and last name of the faculty members who participated in at least one activity? For each of them, also show the number of activities they participated in.",
+        "query": "SELECT  T1.fname ,  T1.lname ,  count(*) ,  T1.FacID FROM Faculty AS T1 JOIN Faculty_participates_in AS T2 ON T1.facID  =  T2.facID GROUP BY T1.FacID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show all the activity names and the number of faculty involved in each activity.",
+        "query": "SELECT T1.activity_name ,  count(*) FROM Activity AS T1 JOIN Faculty_participates_in AS T2 ON T1.actID  =  T2.actID GROUP BY T1.actID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "How many faculty members participate in each activity? Return the activity names and the number of faculty members.",
+        "query": "SELECT T1.activity_name ,  count(*) FROM Activity AS T1 JOIN Faculty_participates_in AS T2 ON T1.actID  =  T2.actID GROUP BY T1.actID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What is the first and last name of the faculty participating in the most activities?",
+        "query": "SELECT  T1.fname ,  T1.lname FROM Faculty AS T1 JOIN Faculty_participates_in AS T2 ON T1.facID  =  T2.facID GROUP BY T1.FacID ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Find the first and last name of the faculty who is involved in the largest number of activities.",
+        "query": "SELECT  T1.fname ,  T1.lname FROM Faculty AS T1 JOIN Faculty_participates_in AS T2 ON T1.facID  =  T2.facID GROUP BY T1.FacID ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What is the name of the activity that has the most faculty members involved in?",
+        "query": "SELECT T1.activity_name FROM Activity AS T1 JOIN Faculty_participates_in AS T2 ON T1.actID  =  T2.actID GROUP BY T1.actID ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Which activity has the most faculty members participating in? Find the activity name.",
+        "query": "SELECT T1.activity_name FROM Activity AS T1 JOIN Faculty_participates_in AS T2 ON T1.actID  =  T2.actID GROUP BY T1.actID ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show the ids of the students who don't participate in any activity.",
+        "query": "SELECT StuID FROM Student EXCEPT SELECT StuID FROM Participates_in"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What are the ids of the students who are not involved in any activity",
+        "query": "SELECT StuID FROM Student EXCEPT SELECT StuID FROM Participates_in"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Show the ids for all the students who participate in an activity and are under 20.",
+        "query": "SELECT StuID FROM Participates_in INTERSECT SELECT StuID FROM Student WHERE age  <  20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What are the ids of the students who are under 20 years old and are involved in at least one activity.",
+        "query": "SELECT StuID FROM Participates_in INTERSECT SELECT StuID FROM Student WHERE age  <  20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What is the first and last name of the student participating in the most activities?",
+        "query": "SELECT T1.fname ,  T1.lname FROM Student AS T1 JOIN Participates_in AS T2 ON T1.StuID  =  T2.StuID GROUP BY T1.StuID ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Tell me the first and last name of the student who has the most activities.",
+        "query": "SELECT T1.fname ,  T1.lname FROM Student AS T1 JOIN Participates_in AS T2 ON T1.StuID  =  T2.StuID GROUP BY T1.StuID ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What is the name of the activity with the most students?",
+        "query": "SELECT T1.activity_name FROM Activity AS T1 JOIN Participates_in AS T2 ON T1.actID  =  T2.actID GROUP BY T1.actID ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Find the name of the activity that has the largest number of student participants.",
+        "query": "SELECT T1.activity_name FROM Activity AS T1 JOIN Participates_in AS T2 ON T1.actID  =  T2.actID GROUP BY T1.actID ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Find the first names of the faculty members who are playing Canoeing or Kayaking.",
+        "query": "SELECT DISTINCT T1.lname FROM Faculty AS T1 JOIN Faculty_participates_in AS T2 ON T1.facID  =  T2.facID JOIN activity AS T3 ON T2.actid  =  T2.actid WHERE T3.activity_name  =  'Canoeing' OR T3.activity_name  =  'Kayaking'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Which faculty members are playing either Canoeing or Kayaking? Tell me their first names.",
+        "query": "SELECT DISTINCT T1.lname FROM Faculty AS T1 JOIN Faculty_participates_in AS T2 ON T1.facID  =  T2.facID JOIN activity AS T3 ON T2.actid  =  T2.actid WHERE T3.activity_name  =  'Canoeing' OR T3.activity_name  =  'Kayaking'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Find the first names of professors who are not playing Canoeing or Kayaking.",
+        "query": "SELECT lname FROM faculty WHERE rank  =  'Professor' EXCEPT SELECT DISTINCT T1.lname FROM Faculty AS T1 JOIN Faculty_participates_in AS T2 ON T1.facID  =  T2.facID JOIN activity AS T3 ON T2.actid  =  T2.actid WHERE T3.activity_name  =  'Canoeing' OR T3.activity_name  =  'Kayaking'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What are the first names of the professors who do not play Canoeing or Kayaking as activities?",
+        "query": "SELECT lname FROM faculty WHERE rank  =  'Professor' EXCEPT SELECT DISTINCT T1.lname FROM Faculty AS T1 JOIN Faculty_participates_in AS T2 ON T1.facID  =  T2.facID JOIN activity AS T3 ON T2.actid  =  T2.actid WHERE T3.activity_name  =  'Canoeing' OR T3.activity_name  =  'Kayaking'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Find the first names of the faculty members who participate in Canoeing and Kayaking.",
+        "query": "SELECT T1.lname FROM Faculty AS T1 JOIN Faculty_participates_in AS T2 ON T1.facID  =  T2.facID JOIN activity AS T3 ON T2.actid  =  T2.actid WHERE T3.activity_name  =  'Canoeing' INTERSECT SELECT T1.lname FROM Faculty AS T1 JOIN Faculty_participates_in AS T2 ON T1.facID  =  T2.facID JOIN activity AS T3 ON T2.actid  =  T2.actid WHERE T3.activity_name  =  'Kayaking'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "What are the first names of the faculty members playing both Canoeing and Kayaking?",
+        "query": "SELECT T1.lname FROM Faculty AS T1 JOIN Faculty_participates_in AS T2 ON T1.facID  =  T2.facID JOIN activity AS T3 ON T2.actid  =  T2.actid WHERE T3.activity_name  =  'Canoeing' INTERSECT SELECT T1.lname FROM Faculty AS T1 JOIN Faculty_participates_in AS T2 ON T1.facID  =  T2.facID JOIN activity AS T3 ON T2.actid  =  T2.actid WHERE T3.activity_name  =  'Kayaking'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Find the ids of the students who participate in Canoeing and Kayaking.",
+        "query": "SELECT T1.stuid FROM participates_in AS T1 JOIN activity AS T2 ON T2.actid  =  T2.actid WHERE T2.activity_name  =  'Canoeing' INTERSECT SELECT T1.stuid FROM participates_in AS T1 JOIN activity AS T2 ON T2.actid  =  T2.actid WHERE T2.activity_name  =  'Kayaking'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "activity_1",
+        "question": "Which students participate in both Canoeing and Kayaking as their activities? Tell me their student ids.",
+        "query": "SELECT T1.stuid FROM participates_in AS T1 JOIN activity AS T2 ON T2.actid  =  T2.actid WHERE T2.activity_name  =  'Canoeing' INTERSECT SELECT T1.stuid FROM participates_in AS T1 JOIN activity AS T2 ON T2.actid  =  T2.actid WHERE T2.activity_name  =  'Kayaking'"
+    }
+]

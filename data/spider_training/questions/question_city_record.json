@@ -1,0 +1,242 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "What is id of the city that hosted events in the most recent year?",
+        "query": "SELECT host_city FROM hosting_city ORDER BY YEAR DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Find the city that hosted some events in the most recent year. What is the id of this city?",
+        "query": "SELECT host_city FROM hosting_city ORDER BY YEAR DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Find the match ids of the cities that hosted competition \"1994 FIFA World Cup qualification\"?",
+        "query": "SELECT match_id FROM MATCH WHERE competition = \"1994 FIFA World Cup qualification\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "What is the match id of the competition called \"1994 FIFA World Cup qualification\"?",
+        "query": "SELECT match_id FROM MATCH WHERE competition = \"1994 FIFA World Cup qualification\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Find the cities which were once a host city after 2010?",
+        "query": "SELECT T1.city FROM city AS T1 JOIN hosting_city AS T2 ON T1.city_id = T2.host_city WHERE T2.year  >  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Which cities served as a host city after 2010?",
+        "query": "SELECT T1.city FROM city AS T1 JOIN hosting_city AS T2 ON T1.city_id = T2.host_city WHERE T2.year  >  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Which city has hosted the most events?",
+        "query": "SELECT T1.city FROM city AS T1 JOIN hosting_city AS T2 ON T1.city_id  =  T2.host_city GROUP BY T2.host_city ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Find the city that hosted the most events.",
+        "query": "SELECT T1.city FROM city AS T1 JOIN hosting_city AS T2 ON T1.city_id  =  T2.host_city GROUP BY T2.host_city ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "What is the venue of the competition \"1994 FIFA World Cup qualification\" hosted by \"Nanjing ( Jiangsu )\"?",
+        "query": "SELECT T3.venue FROM city AS T1 JOIN hosting_city AS T2 ON T1.city_id = T2.host_city JOIN MATCH AS T3 ON T2.match_id = T3.match_id WHERE T1.city = \"Nanjing ( Jiangsu )\" AND T3.competition = \"1994 FIFA World Cup qualification\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Find the venue of the competition \"1994 FIFA World Cup qualification\" which was hosted by \"Nanjing ( Jiangsu )\".",
+        "query": "SELECT T3.venue FROM city AS T1 JOIN hosting_city AS T2 ON T1.city_id = T2.host_city JOIN MATCH AS T3 ON T2.match_id = T3.match_id WHERE T1.city = \"Nanjing ( Jiangsu )\" AND T3.competition = \"1994 FIFA World Cup qualification\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Give me the temperature of Shanghai in January.",
+        "query": "SELECT T2.Jan FROM city AS T1 JOIN temperature AS T2 ON T1.city_id = T2.city_id WHERE T1.city = \"Shanghai\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "What is the temperature of \"Shanghai\" city in January?",
+        "query": "SELECT T2.Jan FROM city AS T1 JOIN temperature AS T2 ON T1.city_id = T2.city_id WHERE T1.city = \"Shanghai\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "What is the host year of city \"Taizhou ( Zhejiang )\"?",
+        "query": "SELECT T2.year FROM city AS T1 JOIN hosting_city AS T2 ON T1.city_id  =  T2.host_city WHERE T1.city  =  \"Taizhou ( Zhejiang )\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "IN which year did city \"Taizhou ( Zhejiang )\" serve as a host city?",
+        "query": "SELECT T2.year FROM city AS T1 JOIN hosting_city AS T2 ON T1.city_id  =  T2.host_city WHERE T1.city  =  \"Taizhou ( Zhejiang )\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Which three cities have the largest regional population?",
+        "query": "SELECT city FROM city ORDER BY regional_population DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "What are the three largest cities in terms of regional population?",
+        "query": "SELECT city FROM city ORDER BY regional_population DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Which city has the lowest GDP? Please list the city name and its GDP.",
+        "query": "SELECT city ,  GDP FROM city ORDER BY GDP LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "What is the city with the smallest GDP? Return the city and its GDP.",
+        "query": "SELECT city ,  GDP FROM city ORDER BY GDP LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Which city has the highest temperature in February?",
+        "query": "SELECT T1.city FROM city AS T1 JOIN temperature AS T2 ON T1.city_id  =  T2.city_id ORDER BY T2.Feb DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "In February, which city marks the highest temperature?",
+        "query": "SELECT T1.city FROM city AS T1 JOIN temperature AS T2 ON T1.city_id  =  T2.city_id ORDER BY T2.Feb DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Give me a list of cities whose temperature in March is lower than that in July or higher than that in Oct?",
+        "query": "SELECT T1.city FROM city AS T1 JOIN temperature AS T2 ON T1.city_id  =  T2.city_id WHERE T2.Mar  <  T2.Jul OR T2.Mar  >  T2.Oct"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Which cities' temperature in March is lower than that in July or higher than that in Oct?",
+        "query": "SELECT T1.city FROM city AS T1 JOIN temperature AS T2 ON T1.city_id  =  T2.city_id WHERE T2.Mar  <  T2.Jul OR T2.Mar  >  T2.Oct"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Give me a list of cities whose temperature in Mar is lower than that in July and which have also served as host cities?",
+        "query": "SELECT T1.city FROM city AS T1 JOIN temperature AS T2 ON T1.city_id  =  T2.city_id WHERE T2.Mar  <  T2.Jul INTERSECT SELECT T3.city FROM city AS T3 JOIN hosting_city AS T4 ON T3.city_id  =  T4.host_city"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Which cities have lower temperature in March than in July and have been once host cities?",
+        "query": "SELECT T1.city FROM city AS T1 JOIN temperature AS T2 ON T1.city_id  =  T2.city_id WHERE T2.Mar  <  T2.Jul INTERSECT SELECT T3.city FROM city AS T3 JOIN hosting_city AS T4 ON T3.city_id  =  T4.host_city"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Give me a list of cities whose temperature in Mar is lower than that in Dec and which have never been host cities.",
+        "query": "SELECT T1.city FROM city AS T1 JOIN temperature AS T2 ON T1.city_id  =  T2.city_id WHERE T2.Mar  <  T2.Dec EXCEPT SELECT T3.city FROM city AS T3 JOIN hosting_city AS T4 ON T3.city_id  =  T4.host_city"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Which cities have lower temperature in March than in Dec and have never served as host cities?",
+        "query": "SELECT T1.city FROM city AS T1 JOIN temperature AS T2 ON T1.city_id  =  T2.city_id WHERE T2.Mar  <  T2.Dec EXCEPT SELECT T3.city FROM city AS T3 JOIN hosting_city AS T4 ON T3.city_id  =  T4.host_city"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Give me a list of cities whose temperature in Feb is higher than that in Jun or cities that were once host cities?",
+        "query": "SELECT T1.city FROM city AS T1 JOIN temperature AS T2 ON T1.city_id  =  T2.city_id WHERE T2.Feb  >  T2.Jun UNION SELECT T3.city FROM city AS T3 JOIN hosting_city AS T4 ON T3.city_id  =  T4.host_city"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Which cities have higher temperature in Feb than in Jun or have once served as host cities?",
+        "query": "SELECT T1.city FROM city AS T1 JOIN temperature AS T2 ON T1.city_id  =  T2.city_id WHERE T2.Feb  >  T2.Jun UNION SELECT T3.city FROM city AS T3 JOIN hosting_city AS T4 ON T3.city_id  =  T4.host_city"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Please give me a list of cities whose regional population is over 10000000.",
+        "query": "SELECT city FROM city WHERE regional_population  >  10000000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Which cities have regional population above 10000000?",
+        "query": "SELECT city FROM city WHERE regional_population  >  10000000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Please give me a list of cities whose regional population is over 8000000 or under 5000000.",
+        "query": "SELECT city FROM city WHERE regional_population  >  10000000 UNION SELECT city FROM city WHERE regional_population  <  5000000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Which cities have regional population above 8000000 or below 5000000?",
+        "query": "SELECT city FROM city WHERE regional_population  >  10000000 UNION SELECT city FROM city WHERE regional_population  <  5000000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Find the number of matches in different competitions.",
+        "query": "SELECT count(*) ,  Competition FROM MATCH GROUP BY Competition"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "For each competition, count the number of matches.",
+        "query": "SELECT count(*) ,  Competition FROM MATCH GROUP BY Competition"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "List venues of all matches in the order of their dates starting from the most recent one.",
+        "query": "SELECT venue FROM MATCH ORDER BY date DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "What are the venues of all the matches? Sort them in the descending order of match date.",
+        "query": "SELECT venue FROM MATCH ORDER BY date DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "what is the GDP of the city with the largest population.",
+        "query": "SELECT gdp FROM city ORDER BY Regional_Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Find the GDP of the city with the largest regional population.",
+        "query": "SELECT gdp FROM city ORDER BY Regional_Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "What are the GDP and population of the city that already served as a host more than once?",
+        "query": "SELECT t1.gdp ,  t1.Regional_Population FROM city AS T1 JOIN hosting_city AS T2 ON T1.city_id  =  T2.host_city GROUP BY t2.Host_City HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "city_record",
+        "question": "Which cities have served as host cities more than once? Return me their GDP and population.",
+        "query": "SELECT t1.gdp ,  t1.Regional_Population FROM city AS T1 JOIN hosting_city AS T2 ON T1.city_id  =  T2.host_city GROUP BY t2.Host_City HAVING count(*)  >  1"
+    }
+]

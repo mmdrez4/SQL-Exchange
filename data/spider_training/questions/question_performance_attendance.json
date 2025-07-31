@@ -1,0 +1,92 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "performance_attendance",
+        "question": "How many performances are there?",
+        "query": "SELECT count(*) FROM performance"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "performance_attendance",
+        "question": "List the hosts of performances in ascending order of attendance.",
+        "query": "SELECT HOST FROM performance ORDER BY Attendance ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "performance_attendance",
+        "question": "What are the dates and locations of performances?",
+        "query": "SELECT Date ,  LOCATION FROM performance"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "performance_attendance",
+        "question": "Show the attendances of the performances at location \"TD Garden\" or \"Bell Centre\"",
+        "query": "SELECT Attendance FROM performance WHERE LOCATION  =  \"TD Garden\" OR LOCATION  =  \"Bell Centre\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "performance_attendance",
+        "question": "What is the average number of attendees for performances?",
+        "query": "SELECT avg(Attendance) FROM performance"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "performance_attendance",
+        "question": "What is the date of the performance with the highest number of attendees?",
+        "query": "SELECT Date FROM performance ORDER BY Attendance DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "performance_attendance",
+        "question": "Show different locations and the number of performances at each location.",
+        "query": "SELECT LOCATION ,  COUNT(*) FROM performance GROUP BY LOCATION"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "performance_attendance",
+        "question": "Show the most common location of performances.",
+        "query": "SELECT LOCATION FROM performance GROUP BY LOCATION ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "performance_attendance",
+        "question": "Show the locations that have at least two performances.",
+        "query": "SELECT LOCATION FROM performance GROUP BY LOCATION HAVING COUNT(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "performance_attendance",
+        "question": "Show the locations that have both performances with more than 2000 attendees and performances with less than 1000 attendees.",
+        "query": "SELECT LOCATION FROM performance WHERE Attendance  >  2000 INTERSECT SELECT LOCATION FROM performance WHERE Attendance  <  1000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "performance_attendance",
+        "question": "Show the names of members and the location of the performances they attended.",
+        "query": "SELECT T2.Name ,  T3.Location FROM member_attendance AS T1 JOIN member AS T2 ON T1.Member_ID  =  T2.Member_ID JOIN performance AS T3 ON T1.Performance_ID  =  T3.Performance_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "performance_attendance",
+        "question": "Show the names of members and the location of performances they attended in ascending alphabetical order of their names.",
+        "query": "SELECT T2.Name ,  T3.Location FROM member_attendance AS T1 JOIN member AS T2 ON T1.Member_ID  =  T2.Member_ID JOIN performance AS T3 ON T1.Performance_ID  =  T3.Performance_ID ORDER BY T2.Name ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "performance_attendance",
+        "question": "Show the dates of performances with attending members whose roles are \"Violin\".",
+        "query": "SELECT T3.Date FROM member_attendance AS T1 JOIN member AS T2 ON T1.Member_ID  =  T2.Member_ID JOIN performance AS T3 ON T1.Performance_ID  =  T3.Performance_ID WHERE T2.Role  =  \"Violin\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "performance_attendance",
+        "question": "Show the names of members and the dates of performances they attended in descending order of attendance of the performances.",
+        "query": "SELECT T2.Name ,  T3.Date FROM member_attendance AS T1 JOIN member AS T2 ON T1.Member_ID  =  T2.Member_ID JOIN performance AS T3 ON T1.Performance_ID  =  T3.Performance_ID ORDER BY T3.Attendance DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "performance_attendance",
+        "question": "List the names of members who did not attend any performance.",
+        "query": "SELECT Name FROM member WHERE Member_ID NOT IN (SELECT Member_ID FROM member_attendance)"
+    }
+]

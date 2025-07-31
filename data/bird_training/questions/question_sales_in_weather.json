@@ -1,0 +1,482 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many units of item no.9 were sold in store no.1 on 2012/1/1?",
+        "query": "SELECT units FROM sales_in_weather WHERE `date` = '2012-01-01' AND store_nbr = 1 AND item_nbr = 9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many units of item no.9 were sold in store no.1 in total in January, 2012?",
+        "query": "SELECT SUM(units) FROM sales_in_weather WHERE SUBSTR(`date`, 6, 2) = '01' AND SUBSTR(`date`, 1, 4) = '2012' AND item_nbr = 9 AND store_nbr = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What is the ID of the item that sold the best on 2012/1/1 in store no.1?",
+        "query": "SELECT item_nbr FROM sales_in_weather WHERE `date` = '2012-01-01' AND store_nbr = 1 ORDER BY units DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What was the temperature range of station no.1 on 2012/1/1?",
+        "query": "SELECT tmax - tmin AS temrange FROM weather WHERE station_nbr = 1 AND `date` = '2012-01-01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Please list the dates on which the temperature of station no.2 was above the 30-year normal.",
+        "query": "SELECT `date` FROM weather WHERE station_nbr = 2 AND depart > 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "On which day was the weather more windy in station no.1, 2012/1/1 or 2012/1/2?",
+        "query": "SELECT CASE WHEN (SUM(CASE WHEN `date` = '2012-01-01' THEN avgspeed ELSE 0 END) - SUM(CASE WHEN `date` = '2012-01-02' THEN avgspeed ELSE 0 END)) > 0 THEN '2012-01-01' ELSE '2012-01-02' END FROM weather WHERE station_nbr = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What is the total number of units of item no.5 sold in store no.3 in 2012 on days when the temperature was below the 30-year normal?",
+        "query": "SELECT SUM(CASE WHEN T3.depart < 0 THEN units ELSE 0 END) AS sum FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T2.station_nbr = T3.station_nbr WHERE T2.store_nbr = 3 AND SUBSTR(T1.`date`, 1, 4) = '2012' AND T1.item_nbr = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many units of item no.5 were sold in store no.3 on the day in 2012 when the max temperature was the highest?",
+        "query": "SELECT T1.units FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T2.station_nbr = T3.station_nbr WHERE T2.store_nbr = 3 AND SUBSTR(T1.`date`, 1, 4) = '2012' AND T1.item_nbr = 5 ORDER BY tmax DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What was the dew point on the day the most units of item no.5 were sold in store no.3 in 2012?",
+        "query": "SELECT dewpoint FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T2.station_nbr = T3.station_nbr WHERE T2.store_nbr = 3 AND SUBSTR(T1.`date`, 1, 4) = '2012' AND T1.item_nbr = 5 ORDER BY units DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "On how many days with the max temperature over 90 did the sale of item no.5 in store no.3 exceed 100?",
+        "query": "SELECT SUM(CASE WHEN units > 100 THEN 1 ELSE 0 END) AS count FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T2.station_nbr = T3.station_nbr WHERE T2.store_nbr = 3 AND SUBSTR(T1.`date`, 1, 4) = '2012' AND T1.item_nbr = 5 AND tmax > 90"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many units of item no.5 were sold in store no.3 on the day the temperature range was the biggest?",
+        "query": "SELECT t2.units FROM relation AS T1 INNER JOIN sales_in_weather AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T1.station_nbr = T3.station_nbr WHERE T2.store_nbr = 3 AND T2.item_nbr = 5 ORDER BY t3.tmax - t3.tmin DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Among the days on which over 100 units of item no.5 were sold in store no.3, on which date was the temperature range the biggest?",
+        "query": "SELECT T2.`date` FROM relation AS T1 INNER JOIN sales_in_weather AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T1.station_nbr = T3.station_nbr WHERE T2.store_nbr = 3 AND T2.item_nbr = 5 AND T2.units > 100 ORDER BY tmax - tmin DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many units of item no.5 were sold in store no.3 in total on days with a total precipitation of over 0.05?",
+        "query": "SELECT SUM(CASE WHEN T3.preciptotal > 0.05 THEN units ELSE 0 END) AS sum FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T2.station_nbr = T3.station_nbr WHERE T2.store_nbr = 3 AND T1.item_nbr = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Please list the dates on which the sale of item no.5 in store no.3 exceeded 100 and the average wind speed exceeded 10.",
+        "query": "SELECT T1.`date` FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T2.station_nbr = T3.station_nbr WHERE T2.store_nbr = 3 AND T1.item_nbr = 5 AND T1.units > 100 AND T3.avgspeed > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What is the total units of products sold on the day with the highest max temperature in store no.3 in 2012?",
+        "query": "SELECT SUM(units) FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T2.station_nbr = T3.station_nbr WHERE T2.store_nbr = 3 AND T1.`date` LIKE '%2012%' GROUP BY T3.tmax ORDER BY T3.tmax DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many more units of item no.16 were sold on the day with the highest max temperature in 2012 in store no.5 than in store no.10?",
+        "query": "SELECT ( SELECT SUM(units) FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T2.station_nbr = T3.station_nbr WHERE T1.item_nbr = 16 AND T1.`date` LIKE '%2012%' AND T1.store_nbr = 5 GROUP BY tmax ORDER BY T3.tmax DESC LIMIT 1 ) - ( SELECT SUM(units) FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T2.station_nbr = T3.station_nbr WHERE T1.item_nbr = 16 AND T1.`date` LIKE '%2012%' AND T1.store_nbr = 6 GROUP BY tmax ORDER BY T3.tmax DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What is the ID of the item that sold the best on the day with the highest max temperature in store no.3 in 2012?",
+        "query": "SELECT T1.item_nbr FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T2.station_nbr = T3.station_nbr WHERE T1.store_nbr = 3 AND T1.`date` LIKE '%2012%' AND tmax = ( SELECT MAX(tmax) FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T2.station_nbr = T3.station_nbr WHERE T1.store_nbr = 3 AND T1.`date` LIKE '%2012%' ) GROUP BY T1.item_nbr ORDER BY SUM(units) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "On the day with the highest max temperature in 2012, how many items in store no.3 had no sales?",
+        "query": "SELECT COUNT(DISTINCT T1.item_nbr) FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T2.station_nbr = T3.station_nbr AND T1.store_nbr = 3 AND SUBSTR(T1.`date`, 1, 4) = '2012' AND T1.units = 0 GROUP BY T3.tmax ORDER BY T3.tmax DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many units of item no.5 were sold in store no.3 on average on the days when the max temperature exceeded 90?",
+        "query": "SELECT CAST(SUM(T1.units) AS REAL) / COUNT(T1.`date`) FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T2.station_nbr = T3.station_nbr WHERE T1.store_nbr = 3 AND T1.item_nbr = 5 AND T3.tmax > 90"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What is the percentage of the units of item no.5 sold among all units of items sold in store no.3 on the day with the highest max temperature in 2012?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.item_nbr = 5 THEN units * 1 ELSE 0 END) AS REAL) * 100 / SUM(units) FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T2.station_nbr = T3.station_nbr WHERE T1.store_nbr = 3 AND T1.`date` LIKE '%2012%' AND T3.tmax = ( SELECT MAX(T3.tmax) FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T2.station_nbr = T3.station_nbr WHERE T1.store_nbr = 3 AND T1.`date` LIKE '%2012%' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Give the id of the bestsellers of store no.1 on 2012/1/1.",
+        "query": "SELECT item_nbr FROM sales_in_weather WHERE `date` = '2012-01-01' AND store_nbr = 1 ORDER BY units DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many no.9 items from store no.11 were sold on 2012/12/7?",
+        "query": "SELECT units FROM sales_in_weather WHERE `date` = '2012-12-07' AND store_nbr = 11 AND item_nbr = 9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Give the average temperature of station no.20 on 2014/10/17.",
+        "query": "SELECT tavg FROM weather WHERE `date` = '2014-10-17' AND station_nbr = 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Tell the resultant wind speed of station no.9 on 2014/1/15.",
+        "query": "SELECT resultspeed FROM weather WHERE `date` = '2014-01-15' AND station_nbr = 9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Give the id of the weather station with most stores.",
+        "query": "SELECT station_nbr FROM relation GROUP BY station_nbr ORDER BY COUNT(station_nbr) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Which weather station does store no.20 belong to?",
+        "query": "SELECT station_nbr FROM relation WHERE store_nbr = 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Tell the temperature range of the home weather station of store no.7 on 2014/4/28.",
+        "query": "SELECT T1.tmax - T1.tmin AS temprange FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr WHERE T2.store_nbr = 7 AND T1.`date` = '2014-04-28'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "For the weather station which recorded the highest temperature above the 30-year normal, how many stores does it have?",
+        "query": "SELECT store_nbr FROM relation WHERE station_nbr = ( SELECT station_nbr FROM weather ORDER BY depart DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "For the home weather station of store no.15, what was the dew point on 2012/2/18?",
+        "query": "SELECT T1.dewpoint FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr WHERE T2.store_nbr = 15 AND T1.`date` = '2012-02-18'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Tell the wet-bulb temperature of the weather station which contained store no.6 on 2012/2/15.",
+        "query": "SELECT T1.wetbulb FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr WHERE T2.store_nbr = 14 AND T1.`date` = '2012-02-15'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Give the number of stores which opened on the weather station that recorded the fastest average wind speed.",
+        "query": "SELECT COUNT(T.store_nbr) FROM ( SELECT DISTINCT store_nbr FROM relation WHERE station_nbr = ( SELECT station_nbr FROM weather ORDER BY avgspeed DESC LIMIT 1 ) ) T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "State the max temperature of the weather station which has the no.21 store on 2012/11/9.",
+        "query": "SELECT tmax FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr WHERE T2.store_nbr = 21 AND T1.`date` = '2012-11-09'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Provide the sunrise time recorded by the home weather station of store no.30 on 2014/2/21.",
+        "query": "SELECT T1.sunrise FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr WHERE T1.`date` = '2014-02-21' AND store_nbr = 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "State the number of stores that belongs to the weather station which recorded the deepest snowfall.",
+        "query": "SELECT T2.store_nbr FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr ORDER BY snowfall DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Provide the code summarization for the weather recorded by the weather station which contained the no.2 store on 2013/2/12.",
+        "query": "SELECT T1.codesum FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr WHERE T1.`date` = '2013-02-12' AND T2.store_nbr = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Show the sea level status recorded by the weather station of store no.19 on 2013/2/24.",
+        "query": "SELECT T1.sealevel FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr WHERE T1.`date` = '2013-02-24' AND T2.store_nbr = 19"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many inches of total precipitation was recorded by the weather station of store no.2 on 2012/12/25?",
+        "query": "SELECT T1.preciptotal FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr WHERE T1.`date` = '2012-12-25' AND T2.store_nbr = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Give the station pressure status recorded by the weather station which contained no.12 store on 2012/5/15.",
+        "query": "SELECT T1.stnpressure FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr WHERE T1.`date` = '2012-05-15' AND T2.store_nbr = 12"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What percentage was the total unit sales of store no.10 to the total sales of its weather station on 2014/10/31?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.store_nbr = 10 THEN units * 1 ELSE 0 END) AS REAL) * 100 / SUM(units) FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr WHERE T1.`date` = '2014-10-31'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "For the weather station has store no.9, what was the increased percentage of the average temperature from 2012/2/2 to 2012/2/3?",
+        "query": "SELECT CAST((SUM(CASE WHEN T1.`date` = '2012-02-03' THEN T1.tavg * 1 ELSE 0 END) - SUM(CASE WHEN T1.`date` = '2012-02-02' THEN T1.tavg * 1 ELSE 0 END)) AS REAL) * 100 / SUM(CASE WHEN T1.`date` = '2012-02-02' THEN T1.tavg * 1 ELSE 0 END) FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr WHERE T2.store_nbr = 9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What is the item number of the product with the highest number of units sold in store number 1 on 1/1/2012?",
+        "query": "SELECT item_nbr FROM sales_in_weather WHERE `date` = '2012-01-01' AND store_nbr = 1 ORDER BY units DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many stores are in weather station 12?",
+        "query": "SELECT SUM(store_nbr) FROM relation WHERE station_nbr = 12"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many items weren't sold in store 2 on 1/1/2012?",
+        "query": "SELECT COUNT(item_nbr) FROM sales_in_weather WHERE store_nbr = 2 AND units = 0 AND `date` = '2012-01-01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Between 1/1/2012 to 12/31/2014, which date recorded the hottest temperature in weather station 1?",
+        "query": "SELECT `date` FROM weather WHERE station_nbr = 1 AND CAST(SUBSTR(`date`, 1, 4) AS int) BETWEEN 2012 AND 2014 ORDER BY tmax DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Which weather station has the highest number of stores?",
+        "query": "SELECT station_nbr FROM relation GROUP BY station_nbr ORDER BY COUNT(store_nbr) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "In March 2014, which weather stations recorded the highest number of days whose temperature is below the 30-year normal?",
+        "query": "SELECT station_nbr FROM weather WHERE SUBSTR(`date`, 1, 4) = '2014' AND SUBSTR(`date`, 6, 2) = '03' AND depart < 0 GROUP BY station_nbr HAVING COUNT(DISTINCT `date`) = ( SELECT COUNT(DISTINCT `date`) FROM weather WHERE SUBSTR(`date`, 1, 4) = '2014' AND SUBSTR(`date`, 6, 2) = '03' AND depart < 0 GROUP BY station_nbr ORDER BY COUNT(`date`) DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Which weather station does the store that sold the highest quantity of item 9 belongs to?",
+        "query": "SELECT station_nbr FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr WHERE T1.item_nbr = 9 GROUP BY T2.station_nbr ORDER BY SUM(T1.units) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many stores belong to the most windy station?",
+        "query": "SELECT COUNT(store_nbr) FROM relation WHERE station_nbr = ( SELECT station_nbr FROM weather ORDER BY avgspeed DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Among the stores in weather station 14 in February 2014, which store had sold no less than 300 quantities for item number 44 in a single day?",
+        "query": "SELECT T1.store_nbr FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr WHERE T2.station_nbr = 14 AND T1.`date` LIKE '%2014-02%' AND T1.item_nbr = 44 AND units >= 300"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What is the most purchased products during the rainy days in June 2013 in weather station 9?",
+        "query": "SELECT T1.item_nbr FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN weather AS T3 ON T2.station_nbr = T3.station_nbr WHERE T3.station_nbr = 9 AND T1.`date` LIKE '%2013-06%' AND codesum = 'RA' ORDER BY T1.units DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Which station sold the highest quantity of item number 5 overall?",
+        "query": "SELECT T2.station_nbr FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr WHERE T1.item_nbr = 5 GROUP BY T2.station_nbr ORDER BY SUM(T1.units) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What is the earliest sunrise recorded in the stations with no more than 1 store in February 2012?",
+        "query": "SELECT T1.station_nbr FROM relation AS T1 INNER JOIN weather AS T2 ON T1.station_nbr = T2.station_nbr WHERE sunrise IS NOT NULL AND T2.`date` LIKE '%2012-02%' AND T1.station_nbr IN ( SELECT station_nbr FROM relation GROUP BY station_nbr HAVING COUNT(store_nbr) = 1 ) ORDER BY sunrise LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "In weather station 17, which store sold the highest quantity of item 45 in October 2012?",
+        "query": "SELECT T1.store_nbr FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr WHERE T1.item_nbr = 45 AND T2.station_nbr = 17 AND T1.`date` LIKE '%2012-10%' GROUP BY T1.store_nbr ORDER BY SUM(T1.units) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What are the items sold by the store during the day whose station recorded the thickest snowfall?",
+        "query": "SELECT T1.item_nbr FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr INNER JOIN ( SELECT station_nbr, `date` FROM weather ORDER BY snowfall DESC LIMIT 1 ) AS T3 ON T2.station_nbr = T3.station_nbr"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What are the top 3 stations that have sold the highest quantities for an item in a single day?",
+        "query": "SELECT T2.station_nbr FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr ORDER BY T1.units DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many stores belong to the station with the highest recorded heat of all time?",
+        "query": "SELECT COUNT(T2.store_nbr) FROM ( SELECT station_nbr FROM weather ORDER BY heat DESC LIMIT 1 ) AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "On February 8, 2014, what is the minimum temperature in the station where store 29 belongs?",
+        "query": "SELECT tmin FROM relation AS T1 INNER JOIN weather AS T2 ON T1.station_nbr = T2.station_nbr WHERE T1.store_nbr = 29 AND T2.`date` = '2014-02-08'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Among the stations with 3 stores, how many stations have a station pressure of no more than 30 on February 18, 2014?",
+        "query": "SELECT COUNT(station_nbr) FROM weather WHERE `date` = '2014-02-18' AND stnpressure < 30 AND station_nbr IN ( SELECT station_nbr FROM relation GROUP BY station_nbr HAVING COUNT(store_nbr) = 3 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Which station has the highest number of stores? Calculate the said station's average maximum temperature in February 2012.",
+        "query": "SELECT CAST(SUM(T2.tmax) AS REAL) / 29 FROM ( SELECT station_nbr FROM relation GROUP BY station_nbr ORDER BY COUNT(store_nbr) DESC LIMIT 1 ) AS T1 INNER JOIN weather AS T2 ON T1.station_nbr = T2.station_nbr WHERE SUBSTR(T2.`date`, 1, 7) = '2012-02'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Between the stores under weather station 12, what is the percentage of item 5 sold in store 10 in 2014?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.store_nbr = 10 THEN units * 1 ELSE 0 END) AS REAL) * 100 / SUM(units) FROM relation AS T1 INNER JOIN sales_in_weather AS T2 ON T1.store_nbr = T2.store_nbr WHERE station_nbr = 12 AND item_nbr = 5 AND T2.`date` LIKE '%2014%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What is the maximum average speed?",
+        "query": "SELECT MAX(avgspeed) FROM weather"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many days did the show fell more than 5 inches?",
+        "query": "SELECT COUNT(DISTINCT `date`) FROM weather WHERE snowfall > 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many days did the sun rise before 5 AM?",
+        "query": "SELECT COUNT(DISTINCT `date`) AS days FROM weather WHERE sunrise < time('05:00:00')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What is the minimum dew point?",
+        "query": "SELECT MIN(dewpoint) FROM weather"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What is the maximum and minimum temperature for station number 1 on 15 January 2012?",
+        "query": "SELECT tmax, tmin FROM weather WHERE station_nbr = 1 AND `date` = '2012-01-15'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many stations were able to sell item 5 on January 2014?",
+        "query": "SELECT COUNT(DISTINCT T2.station_nbr) AS number FROM sales_in_weather AS T1 INNER JOIN relation AS T2 ON T1.store_nbr = T2.store_nbr WHERE SUBSTR(`date`, 1, 7) = '2014-01' AND item_nbr = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What is the lowest minimum temperature recorded in store 16 on January 2012?",
+        "query": "SELECT MIN(tmin) FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr WHERE T2.store_nbr = 16 AND T1.`date` LIKE '%2012-01%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many units of item 7 have been sold by store 7 when the snow is less than 5 inches?",
+        "query": "SELECT SUM(units) FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr INNER JOIN sales_in_weather AS T3 ON T2.store_nbr = T3.store_nbr WHERE T2.store_nbr = 7 AND T3.item_nbr = 7 AND T1.snowfall < 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many items were sold by store 9 during a snowy day?",
+        "query": "SELECT COUNT(DISTINCT item_nbr) FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr INNER JOIN sales_in_weather AS T3 ON T2.store_nbr = T3.store_nbr WHERE T3.store_nbr = 9 AND T1.snowfall <> 0 AND T1.snowfall IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "List out stations number and items sold by store 17.",
+        "query": "SELECT T1.station_nbr, T2.item_nbr FROM relation AS T1 INNER JOIN sales_in_weather AS T2 ON T1.store_nbr = T2.store_nbr WHERE T1.store_nbr = 17 GROUP BY T1.station_nbr, T2.item_nbr"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "List out dates when haze is recorded in store 35.",
+        "query": "SELECT T1.`date` FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr WHERE T2.store_nbr = 35 AND T1.codesum LIKE '%' OR 'HZ' OR '%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What is the sea level and average speed for store number 3 and store number 4?",
+        "query": "SELECT T1.sealevel, T1.avgspeed FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr WHERE T2.store_nbr = 3 OR T2.store_nbr = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "Which items from store 1 have the highest units sold during rainy day?",
+        "query": "SELECT T2.item_nbr FROM weather AS T1 INNER JOIN sales_in_weather AS T2 ON T1.`date` = T2.`date` INNER JOIN relation AS T3 ON T2.store_nbr = T3.store_nbr AND T1.station_nbr = T3.station_nbr WHERE T2.store_nbr = 1 AND T1.codesum LIKE '%' OR 'RA' OR '%' GROUP BY T2.item_nbr ORDER BY T2.units DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What is the ratio of the highest and lowest temperature in store 11?",
+        "query": "SELECT CAST((MAX(T1.tmax) - MIN(T1.tmin)) AS REAL) / MIN(T1.tmin) FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr WHERE T2.store_nbr = 11"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What was the difference of number of units sold in station number 1 and number 2 on year 2012?",
+        "query": "SELECT SUM(CASE WHEN T1.station_nbr = 1 THEN units ELSE 0 END) - SUM(CASE WHEN T1.station_nbr = 2 THEN units ELSE 0 END) FROM relation AS T1 INNER JOIN sales_in_weather AS T2 ON T1.store_nbr = T2.store_nbr WHERE T2.`date` LIKE '%2012%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What was the average temperature difference between store number 18 and 19 on 16 September 2022?",
+        "query": "SELECT SUM(CASE WHEN T1.store_nbr = 18 THEN T2.tavg ELSE 0 END) - SUM(CASE WHEN T1.store_nbr = 19 THEN T2.tavg ELSE 0 END) FROM relation AS T1 INNER JOIN weather AS T2 ON T1.station_nbr = T2.station_nbr WHERE T2.`date` = '2012-09-16'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "How many units are being sold for item 1 when the average temperature is 83?",
+        "query": "SELECT SUM(units) FROM weather AS T1 INNER JOIN sales_in_weather AS T2 ON T1.`date` = T2.`date` INNER JOIN relation AS T3 ON T2.store_nbr = T3.store_nbr WHERE T2.item_nbr = 1 AND T1.tavg = 83"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What is the difference between the units sold for item 1 when the sunset was the earliest and the latest?",
+        "query": "SELECT ( SELECT SUM(T2.units) AS sumunit FROM weather AS T1 INNER JOIN sales_in_weather AS T2 ON T1.`date` = T2.`date` INNER JOIN relation AS T3 ON T2.store_nbr = T3.store_nbr WHERE T2.item_nbr = 5 AND sunset IS NOT NULL GROUP BY T1.sunset ORDER BY T1.sunset LIMIT 1 ) - ( SELECT SUM(T2.units) AS sumunit FROM weather AS T1 INNER JOIN sales_in_weather AS T2 ON T1.`date` = T2.`date` INNER JOIN relation AS T3 ON T2.store_nbr = T3.store_nbr WHERE T2.item_nbr = 5 AND sunset IS NOT NULL GROUP BY T1.sunset ORDER BY T1.sunset DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What was the total unit sold for item 10 when the average temperature was below the median temperature?",
+        "query": "SELECT SUM(T5.units) FROM weather AS T4 INNER JOIN sales_in_weather AS T5 ON T4.`date` = T5.`date` INNER JOIN relation AS T6 ON T5.store_nbr = T6.store_nbr WHERE T5.item_nbr = 10 AND T4.tavg < ( SELECT AVG(T1.tavg) FROM weather AS T1 INNER JOIN sales_in_weather AS T2 ON T1.`date` = T2.`date` INNER JOIN relation AS T3 ON T2.store_nbr = T3.store_nbr WHERE T2.item_nbr = 10 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "sales_in_weather",
+        "question": "What was the average temperature differences during May 2012 for store number 6 and 7?",
+        "query": "SELECT ( SELECT CAST(SUM(tavg) AS REAL) / COUNT(`date`) FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr AND T1.`date` LIKE '%2012-05%' AND T2.store_nbr = 6 ) - ( SELECT CAST(SUM(tavg) AS REAL) / COUNT(`date`) FROM weather AS T1 INNER JOIN relation AS T2 ON T1.station_nbr = T2.station_nbr WHERE T1.`date` LIKE '%2012-05%' AND T2.store_nbr = 7 )"
+    }
+]

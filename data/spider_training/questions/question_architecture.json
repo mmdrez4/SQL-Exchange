@@ -1,0 +1,104 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "How many architects are female?",
+        "query": "SELECT count(*) FROM architect WHERE gender  =  'female'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "List the name, nationality and id of all male architects ordered by their names lexicographically.",
+        "query": "SELECT name ,  nationality ,  id FROM architect WHERE gender  =  'male' ORDER BY name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "What is the maximum length in meters for the bridges and what are the architects' names?",
+        "query": "SELECT max(T1.length_meters) ,  T2.name FROM bridge AS T1 JOIN architect AS T2 ON T1.architect_id  =  T2.id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "What is the average length in feet of the bridges?",
+        "query": "SELECT avg(length_feet) FROM bridge"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "What are the names and year of construction for the mills of 'Grondzeiler' type?",
+        "query": "SELECT name ,  built_year FROM mill WHERE TYPE  =  'Grondzeiler'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "What are the distinct names and nationalities of the architects who have ever built a mill?",
+        "query": "SELECT DISTINCT T1.name ,  T1.nationality FROM architect AS T1 JOIN mill AS t2 ON T1.id  =  T2.architect_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "What are the names of the mills which are not located in 'Donceel'?",
+        "query": "SELECT name FROM mill WHERE LOCATION != 'Donceel'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "What are the distinct types of mills that are built by American or Canadian architects?",
+        "query": "SELECT DISTINCT T1.type FROM mill AS T1 JOIN architect AS t2 ON T1.architect_id  =  T2.id WHERE T2.nationality  =  'American' OR T2.nationality  =  'Canadian'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "What are the ids and names of the architects who built at least 3 bridges ?",
+        "query": "SELECT T1.id ,  T1.name FROM architect AS T1 JOIN bridge AS T2 ON T1.id  =  T2.architect_id GROUP BY T1.id HAVING count(*)  >=  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "What is the id, name and nationality of the architect who built most mills?",
+        "query": "SELECT T1.id ,  T1.name ,  T1.nationality FROM architect AS T1 JOIN mill AS T2 ON T1.id  =  T2.architect_id GROUP BY T1.id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "What are the ids, names and genders of the architects who built two bridges or one mill?",
+        "query": "SELECT T1.id ,  T1.name ,  T1.gender FROM architect AS T1 JOIN bridge AS T2 ON T1.id  =  T2.architect_id GROUP BY T1.id HAVING count(*)  =  2 UNION SELECT T1.id ,  T1.name ,  T1.gender FROM architect AS T1 JOIN mill AS T2 ON T1.id  =  T2.architect_id GROUP BY T1.id HAVING count(*)  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "What is the location of the bridge named 'Kolob Arch' or 'Rainbow Bridge'?",
+        "query": "SELECT LOCATION FROM bridge WHERE name  =  'Kolob Arch' OR name  =  'Rainbow Bridge'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "Which of the mill names contains the french word 'Moulin'?",
+        "query": "SELECT name FROM mill WHERE name LIKE '%Moulin%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "What are the distinct name of the mills built by the architects who have also built a bridge longer than 80 meters?",
+        "query": "SELECT DISTINCT T1.name FROM mill AS T1 JOIN architect AS t2 ON T1.architect_id  =  T2.id JOIN bridge AS T3 ON T3.architect_id  =  T2.id WHERE T3.length_meters  >  80"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "What is the most common mill type, and how many are there?",
+        "query": "SELECT TYPE ,  count(*) FROM mill GROUP BY TYPE ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "How many architects haven't built a mill before year 1850?",
+        "query": "SELECT count(*) FROM architect WHERE id NOT IN ( SELECT architect_id FROM mill WHERE built_year  <  1850 );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "architecture",
+        "question": "show the name of all bridges that was designed by american archtect, and sort the result by the bridge feet length.",
+        "query": "SELECT t1.name FROM bridge AS t1 JOIN architect AS t2 ON t1.architect_id  =  t2.id WHERE t2.nationality  =  'American' ORDER BY t1.length_feet"
+    }
+]

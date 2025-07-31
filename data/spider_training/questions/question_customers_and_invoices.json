@@ -1,0 +1,494 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show the number of accounts.",
+        "query": "SELECT count(*) FROM Accounts"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "How many accounts are there?",
+        "query": "SELECT count(*) FROM Accounts"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "How many customers have opened an account?",
+        "query": "SELECT count(DISTINCT customer_id) FROM Accounts"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Count the number of customers who have an account.",
+        "query": "SELECT count(DISTINCT customer_id) FROM Accounts"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show the id, the date of account opened, the account name, and other account detail for all accounts.",
+        "query": "SELECT account_id ,  date_account_opened ,  account_name ,  other_account_details FROM Accounts"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are the ids, date opened, name, and other details for all accounts?",
+        "query": "SELECT account_id ,  date_account_opened ,  account_name ,  other_account_details FROM Accounts"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show the id, the account name, and other account details for all accounts by the customer with first name 'Meaghan'.",
+        "query": "SELECT T1.account_id ,  T1.date_account_opened ,  T1.account_name ,  T1.other_account_details FROM Accounts AS T1 JOIN Customers AS T2 ON T1.customer_id  =  T2.customer_id WHERE T2.customer_first_name  =  'Meaghan'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are the ids, names, dates of opening, and other details for accounts corresponding to the customer with the first name \"Meaghan\"?",
+        "query": "SELECT T1.account_id ,  T1.date_account_opened ,  T1.account_name ,  T1.other_account_details FROM Accounts AS T1 JOIN Customers AS T2 ON T1.customer_id  =  T2.customer_id WHERE T2.customer_first_name  =  'Meaghan'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show the account name and other account detail for all accounts by the customer with first name Meaghan and last name Keeling.",
+        "query": "SELECT T1.account_name ,  T1.other_account_details FROM Accounts AS T1 JOIN Customers AS T2 ON T1.customer_id  =  T2.customer_id WHERE T2.customer_first_name  =  \"Meaghan\" AND T2.customer_last_name  =  \"Keeling\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are the names and other details for accounts corresponding to the customer named Meaghan Keeling?",
+        "query": "SELECT T1.account_name ,  T1.other_account_details FROM Accounts AS T1 JOIN Customers AS T2 ON T1.customer_id  =  T2.customer_id WHERE T2.customer_first_name  =  \"Meaghan\" AND T2.customer_last_name  =  \"Keeling\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show the first name and last name for the customer with account name 900.",
+        "query": "SELECT T2.customer_first_name ,  T2.customer_last_name FROM Accounts AS T1 JOIN Customers AS T2 ON T1.customer_id  =  T2.customer_id WHERE T1.account_name  =  \"900\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are the full names of customers with the account name 900?",
+        "query": "SELECT T2.customer_first_name ,  T2.customer_last_name FROM Accounts AS T1 JOIN Customers AS T2 ON T1.customer_id  =  T2.customer_id WHERE T1.account_name  =  \"900\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "How many customers don't have an account?",
+        "query": "SELECT count(*) FROM Customers WHERE customer_id NOT IN (SELECT customer_id FROM Accounts)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Count the number of customers who do not have an account.",
+        "query": "SELECT count(*) FROM Customers WHERE customer_id NOT IN (SELECT customer_id FROM Accounts)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show the unique first names, last names, and phone numbers for all customers with any account.",
+        "query": "SELECT DISTINCT T1.customer_first_name ,  T1.customer_last_name ,  T1.phone_number FROM Customers AS T1 JOIN Accounts AS T2 ON T1.customer_id  =  T2.customer_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are the distinct first names, last names, and phone numbers for customers with accounts?",
+        "query": "SELECT DISTINCT T1.customer_first_name ,  T1.customer_last_name ,  T1.phone_number FROM Customers AS T1 JOIN Accounts AS T2 ON T1.customer_id  =  T2.customer_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show customer ids who don't have an account.",
+        "query": "SELECT customer_id FROM Customers EXCEPT SELECT customer_id FROM Accounts"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are the customer ids for customers who do not have an account?",
+        "query": "SELECT customer_id FROM Customers EXCEPT SELECT customer_id FROM Accounts"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "How many accounts does each customer have? List the number and customer id.",
+        "query": "SELECT count(*) ,  customer_id FROM Accounts GROUP BY customer_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Count the number of accounts corresponding to each customer id.",
+        "query": "SELECT count(*) ,  customer_id FROM Accounts GROUP BY customer_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What is the customer id, first and last name with most number of accounts.",
+        "query": "SELECT T1.customer_id ,  T2.customer_first_name ,  T2.customer_last_name FROM Accounts AS T1 JOIN Customers AS T2 ON T1.customer_id  =  T2.customer_id GROUP BY T1.customer_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Return the id and full name of the customer with the most accounts.",
+        "query": "SELECT T1.customer_id ,  T2.customer_first_name ,  T2.customer_last_name FROM Accounts AS T1 JOIN Customers AS T2 ON T1.customer_id  =  T2.customer_id GROUP BY T1.customer_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show id, first name and last name for all customers and the number of accounts.",
+        "query": "SELECT T1.customer_id ,  T2.customer_first_name ,  T2.customer_last_name ,  count(*) FROM Accounts AS T1 JOIN Customers AS T2 ON T1.customer_id  =  T2.customer_id GROUP BY T1.customer_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are the the full names and ids for all customers, and how many accounts does each have?",
+        "query": "SELECT T1.customer_id ,  T2.customer_first_name ,  T2.customer_last_name ,  count(*) FROM Accounts AS T1 JOIN Customers AS T2 ON T1.customer_id  =  T2.customer_id GROUP BY T1.customer_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show first name and id for all customers with at least 2 accounts.",
+        "query": "SELECT T2.customer_first_name ,  T1.customer_id FROM Accounts AS T1 JOIN Customers AS T2 ON T1.customer_id  =  T2.customer_id GROUP BY T1.customer_id HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are the first names and ids for customers who have two or more accounts?",
+        "query": "SELECT T2.customer_first_name ,  T1.customer_id FROM Accounts AS T1 JOIN Customers AS T2 ON T1.customer_id  =  T2.customer_id GROUP BY T1.customer_id HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show the number of customers.",
+        "query": "SELECT count(*) FROM Customers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Count the number of customers.",
+        "query": "SELECT count(*) FROM Customers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show the number of customers for each gender.",
+        "query": "SELECT gender ,  count(*) FROM Customers GROUP BY gender"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "How many customers are there of each gender?",
+        "query": "SELECT gender ,  count(*) FROM Customers GROUP BY gender"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "How many transactions do we have?",
+        "query": "SELECT count(*) FROM Financial_transactions"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Count the number of transactions.",
+        "query": "SELECT count(*) FROM Financial_transactions"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "How many transaction does each account have? Show the number and account id.",
+        "query": "SELECT count(*) ,  account_id FROM Financial_transactions"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Count the number of financial transactions that correspond to each account id.",
+        "query": "SELECT count(*) ,  account_id FROM Financial_transactions"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "How many transaction does account with name 337 have?",
+        "query": "SELECT count(*) FROM Financial_transactions AS T1 JOIN Accounts AS T2 ON T1.account_id  =  T2.account_id WHERE T2.account_name  =  \"337\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Count the number of financial transactions that the account with the name 337 has.",
+        "query": "SELECT count(*) FROM Financial_transactions AS T1 JOIN Accounts AS T2 ON T1.account_id  =  T2.account_id WHERE T2.account_name  =  \"337\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What is the average, minimum, maximum, and total transaction amount?",
+        "query": "SELECT avg(transaction_amount) ,  min(transaction_amount) ,  max(transaction_amount) ,   sum(transaction_amount) FROM Financial_transactions"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Return the average, minimum, maximum, and total transaction amounts.",
+        "query": "SELECT avg(transaction_amount) ,  min(transaction_amount) ,  max(transaction_amount) ,   sum(transaction_amount) FROM Financial_transactions"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show ids for all transactions whose amounts are greater than the average.",
+        "query": "SELECT transaction_id FROM Financial_transactions WHERE transaction_amount  >  (SELECT avg(transaction_amount) FROM Financial_transactions)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are the ids for transactions that have an amount greater than the average amount of a transaction?",
+        "query": "SELECT transaction_id FROM Financial_transactions WHERE transaction_amount  >  (SELECT avg(transaction_amount) FROM Financial_transactions)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show the transaction types and the total amount of transactions.",
+        "query": "SELECT transaction_type ,  sum(transaction_amount) FROM Financial_transactions GROUP BY transaction_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are total transaction amounts for each transaction type?",
+        "query": "SELECT transaction_type ,  sum(transaction_amount) FROM Financial_transactions GROUP BY transaction_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show the account name, id and the number of transactions for each account.",
+        "query": "SELECT T2.account_name ,  T1.account_id ,  count(*) FROM Financial_transactions AS T1 JOIN Accounts AS T2 ON T1.account_id  =  T2.account_id GROUP BY T1.account_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Return the names and ids of each account, as well as the number of transactions.",
+        "query": "SELECT T2.account_name ,  T1.account_id ,  count(*) FROM Financial_transactions AS T1 JOIN Accounts AS T2 ON T1.account_id  =  T2.account_id GROUP BY T1.account_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show the account id with most number of transactions.",
+        "query": "SELECT account_id FROM Financial_transactions GROUP BY account_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What is the id of the account with the most transactions?",
+        "query": "SELECT account_id FROM Financial_transactions GROUP BY account_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show the account id and name with at least 4 transactions.",
+        "query": "SELECT T1.account_id ,  T2.account_name FROM Financial_transactions AS T1 JOIN Accounts AS T2 ON T1.account_id  =  T2.account_id GROUP BY T1.account_id HAVING count(*)  >=  4"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are the ids and names of accounts with 4 or more transactions?",
+        "query": "SELECT T1.account_id ,  T2.account_name FROM Financial_transactions AS T1 JOIN Accounts AS T2 ON T1.account_id  =  T2.account_id GROUP BY T1.account_id HAVING count(*)  >=  4"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show all product sizes.",
+        "query": "SELECT DISTINCT product_size FROM Products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are the different product sizes?",
+        "query": "SELECT DISTINCT product_size FROM Products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show all product colors.",
+        "query": "SELECT DISTINCT product_color FROM Products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are the different product colors?",
+        "query": "SELECT DISTINCT product_color FROM Products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show the invoice number and the number of transactions for each invoice.",
+        "query": "SELECT invoice_number ,  count(*) FROM Financial_transactions GROUP BY invoice_number"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "How many transactions correspond to each invoice number?",
+        "query": "SELECT invoice_number ,  count(*) FROM Financial_transactions GROUP BY invoice_number"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What is the invoice number and invoice date for the invoice with most number of transactions?",
+        "query": "SELECT T2.invoice_number ,  T2.invoice_date FROM Financial_transactions AS T1 JOIN Invoices AS T2 ON T1.invoice_number  =  T2.invoice_number GROUP BY T1.invoice_number ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What is the invoice number and invoice date corresponding to the invoice with the greatest number of transactions?",
+        "query": "SELECT T2.invoice_number ,  T2.invoice_date FROM Financial_transactions AS T1 JOIN Invoices AS T2 ON T1.invoice_number  =  T2.invoice_number GROUP BY T1.invoice_number ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "How many invoices do we have?",
+        "query": "SELECT count(*) FROM Invoices"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Count the number of invoices.",
+        "query": "SELECT count(*) FROM Invoices"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show invoice dates and order id and details for all invoices.",
+        "query": "SELECT T1.invoice_date ,  T1.order_id ,  T2.order_details FROM Invoices AS T1 JOIN Orders AS T2 ON T1.order_id  =  T2.order_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are the invoice dates, order ids, and order details for all invoices?",
+        "query": "SELECT T1.invoice_date ,  T1.order_id ,  T2.order_details FROM Invoices AS T1 JOIN Orders AS T2 ON T1.order_id  =  T2.order_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show the order ids and the number of invoices for each order.",
+        "query": "SELECT order_id ,  count(*) FROM Invoices GROUP BY order_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "How many invoices correspond to each order id?",
+        "query": "SELECT order_id ,  count(*) FROM Invoices GROUP BY order_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What is the order id and order details for the order more than two invoices.",
+        "query": "SELECT T2.order_id ,  T2.order_details FROM Invoices AS T1 JOIN Orders AS T2 ON T1.order_id  =  T2.order_id GROUP BY T2.order_id HAVING count(*)  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Return the order ids and details for orderes with two or more invoices.",
+        "query": "SELECT T2.order_id ,  T2.order_details FROM Invoices AS T1 JOIN Orders AS T2 ON T1.order_id  =  T2.order_id GROUP BY T2.order_id HAVING count(*)  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What is the customer last name, id and phone number with most number of orders?",
+        "query": "SELECT T2.customer_last_name ,  T1.customer_id ,  T2.phone_number FROM Orders AS T1 JOIN Customers AS T2 ON T1.customer_id  =  T2.customer_id GROUP BY T1.customer_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Return the last name, id and phone number of the customer who has made the greatest number of orders.",
+        "query": "SELECT T2.customer_last_name ,  T1.customer_id ,  T2.phone_number FROM Orders AS T1 JOIN Customers AS T2 ON T1.customer_id  =  T2.customer_id GROUP BY T1.customer_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show all product names without an order.",
+        "query": "SELECT product_name FROM Products EXCEPT SELECT T1.product_name FROM Products AS T1 JOIN Order_items AS T2 ON T1.product_id  =  T2.product_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are the names of products that have never been ordered?",
+        "query": "SELECT product_name FROM Products EXCEPT SELECT T1.product_name FROM Products AS T1 JOIN Order_items AS T2 ON T1.product_id  =  T2.product_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show all product names and the total quantity ordered for each product name.",
+        "query": "SELECT T2.product_name ,  sum(T1.product_quantity) FROM Order_items AS T1 JOIN Products AS T2 ON T1.product_id  =  T2.product_id GROUP BY T2.product_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are the different product names, and what is the sum of quantity ordered for each product?",
+        "query": "SELECT T2.product_name ,  sum(T1.product_quantity) FROM Order_items AS T1 JOIN Products AS T2 ON T1.product_id  =  T2.product_id GROUP BY T2.product_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show the order ids and the number of items in each order.",
+        "query": "SELECT order_id ,  count(*) FROM Order_items GROUP BY order_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "How many order items correspond to each order id?",
+        "query": "SELECT order_id ,  count(*) FROM Order_items GROUP BY order_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show the product ids and the number of unique orders containing each product.",
+        "query": "SELECT product_id ,  count(DISTINCT order_id) FROM Order_items GROUP BY product_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "How many distinct order ids correspond to each product?",
+        "query": "SELECT product_id ,  count(DISTINCT order_id) FROM Order_items GROUP BY product_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show all product names and the number of customers having an order on each product.",
+        "query": "SELECT T2.product_name ,  count(*) FROM Order_items AS T1 JOIN Products AS T2 ON T1.product_id  =  T2.product_id JOIN Orders AS T3 ON T3.order_id  =  T1.order_id GROUP BY T2.product_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "What are teh names of the different products, as well as the number of customers who have ordered each product.",
+        "query": "SELECT T2.product_name ,  count(*) FROM Order_items AS T1 JOIN Products AS T2 ON T1.product_id  =  T2.product_id JOIN Orders AS T3 ON T3.order_id  =  T1.order_id GROUP BY T2.product_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show order ids and the number of products in each order.",
+        "query": "SELECT order_id ,  count(DISTINCT product_id) FROM Order_items GROUP BY order_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "How many different products correspond to each order id?",
+        "query": "SELECT order_id ,  count(DISTINCT product_id) FROM Order_items GROUP BY order_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Show order ids and the total quantity in each order.",
+        "query": "SELECT order_id ,  sum(product_quantity) FROM Order_items GROUP BY order_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Give the order ids for all orders, as well as the total product quantity in each.",
+        "query": "SELECT order_id ,  sum(product_quantity) FROM Order_items GROUP BY order_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "How many products were not included in any order?",
+        "query": "SELECT count(*) FROM products WHERE product_id NOT IN ( SELECT product_id FROM Order_items )"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_invoices",
+        "question": "Count the number of products that were never ordered.",
+        "query": "SELECT count(*) FROM products WHERE product_id NOT IN ( SELECT product_id FROM Order_items )"
+    }
+]

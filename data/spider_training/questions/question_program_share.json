@@ -1,0 +1,242 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Find the names of channels that are not owned by CCTV.",
+        "query": "SELECT name FROM channel WHERE OWNER != 'CCTV'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Which channels are not owned by CCTV? Give me the channel names.",
+        "query": "SELECT name FROM channel WHERE OWNER != 'CCTV'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "List all channel names ordered by their rating in percent from big to small.",
+        "query": "SELECT name FROM channel ORDER BY rating_in_percent DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Give me a list of all the channel names sorted by the channel rating in descending order.",
+        "query": "SELECT name FROM channel ORDER BY rating_in_percent DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "What is the owner of the channel that has the highest rating ratio?",
+        "query": "SELECT OWNER FROM channel ORDER BY rating_in_percent DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Show me the owner of the channel with the highest rating.",
+        "query": "SELECT OWNER FROM channel ORDER BY rating_in_percent DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "how many programs are there?",
+        "query": "SELECT count(*) FROM program"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Count the number of programs.",
+        "query": "SELECT count(*) FROM program"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "list all the names of programs, ordering by launch time.",
+        "query": "SELECT name FROM program ORDER BY launch"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "What is the list of program names, sorted by the order of launch date?",
+        "query": "SELECT name FROM program ORDER BY launch"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "List the name, origin and owner of each program.",
+        "query": "SELECT name ,  origin ,  OWNER FROM program"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "What are the name, origin and owner of each program?",
+        "query": "SELECT name ,  origin ,  OWNER FROM program"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "find the name of the program that was launched most recently.",
+        "query": "SELECT name FROM program ORDER BY launch DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Which program was launched most recently? Return the program name.",
+        "query": "SELECT name FROM program ORDER BY launch DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "find the total percentage share of all channels owned by CCTV.",
+        "query": "SELECT sum(Share_in_percent) FROM channel WHERE OWNER  =  'CCTV'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "What is the total share (in percent) of all the channels owned by CCTV?",
+        "query": "SELECT sum(Share_in_percent) FROM channel WHERE OWNER  =  'CCTV'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Find the names of the channels that are broadcast in the morning.",
+        "query": "SELECT t1.name FROM channel AS t1 JOIN broadcast AS t2 ON t1.channel_id  =  t2.channel_id WHERE t2.time_of_day  =  'Morning'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Which channels are broadcast in the morning? Give me the channel names.",
+        "query": "SELECT t1.name FROM channel AS t1 JOIN broadcast AS t2 ON t1.channel_id  =  t2.channel_id WHERE t2.time_of_day  =  'Morning'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "what are the names of the channels that broadcast in both morning and night?",
+        "query": "SELECT t1.name FROM channel AS t1 JOIN broadcast AS t2 ON t1.channel_id  =  t2.channel_id WHERE t2.time_of_day  =  'Morning' INTERSECT SELECT t1.name FROM channel AS t1 JOIN broadcast AS t2 ON t1.channel_id  =  t2.channel_id WHERE t2.time_of_day  =  'Night'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Which channels broadcast both in the morning and at night? Give me the channel names.",
+        "query": "SELECT t1.name FROM channel AS t1 JOIN broadcast AS t2 ON t1.channel_id  =  t2.channel_id WHERE t2.time_of_day  =  'Morning' INTERSECT SELECT t1.name FROM channel AS t1 JOIN broadcast AS t2 ON t1.channel_id  =  t2.channel_id WHERE t2.time_of_day  =  'Night'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "how many programs are broadcast in each time section of the day?",
+        "query": "SELECT count(*) ,  time_of_day FROM broadcast GROUP BY time_of_day"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Count the number of programs broadcast for each time section of a day.",
+        "query": "SELECT count(*) ,  time_of_day FROM broadcast GROUP BY time_of_day"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "find the number of different programs that are broadcast during night time.",
+        "query": "SELECT count(DISTINCT program_id) FROM broadcast WHERE time_of_day  =  'Night'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "How many distinct programs are broadcast at \"Night\" time?",
+        "query": "SELECT count(DISTINCT program_id) FROM broadcast WHERE time_of_day  =  'Night'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Find the names of programs that are never broadcasted in the morning.",
+        "query": "SELECT name FROM program EXCEPT SELECT t1.name FROM program AS t1 JOIN broadcast AS t2 ON t1.program_id  =  t2.program_id WHERE t2.Time_of_day  =  \"Morning\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Which programs are never broadcasted in the morning? Give me the names of the programs.",
+        "query": "SELECT name FROM program EXCEPT SELECT t1.name FROM program AS t1 JOIN broadcast AS t2 ON t1.program_id  =  t2.program_id WHERE t2.Time_of_day  =  \"Morning\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "find the program owners that have some programs in both morning and night time.",
+        "query": "SELECT t1.owner FROM program AS t1 JOIN broadcast AS t2 ON t1.program_id  =  t2.program_id WHERE t2.Time_of_day  =  \"Morning\" INTERSECT SELECT t1.owner FROM program AS t1 JOIN broadcast AS t2 ON t1.program_id  =  t2.program_id WHERE t2.Time_of_day  =  \"Night\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Who are the owners of the programs that broadcast both in the morning and at night?",
+        "query": "SELECT t1.owner FROM program AS t1 JOIN broadcast AS t2 ON t1.program_id  =  t2.program_id WHERE t2.Time_of_day  =  \"Morning\" INTERSECT SELECT t1.owner FROM program AS t1 JOIN broadcast AS t2 ON t1.program_id  =  t2.program_id WHERE t2.Time_of_day  =  \"Night\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "List all program origins in the alphabetical order.",
+        "query": "SELECT origin FROM program ORDER BY origin"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "What is the list of program origins ordered alphabetically?",
+        "query": "SELECT origin FROM program ORDER BY origin"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "what is the number of different channel owners?",
+        "query": "SELECT count(DISTINCT OWNER) FROM channel"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Count the number of distinct channel owners.",
+        "query": "SELECT count(DISTINCT OWNER) FROM channel"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "find the names of programs whose origin is not in Beijing.",
+        "query": "SELECT name FROM program WHERE origin != 'Beijing'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Which programs' origins are not \"Beijing\"? Give me the program names.",
+        "query": "SELECT name FROM program WHERE origin != 'Beijing'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "What are the names of the channels owned by CCTV or HBS?",
+        "query": "SELECT name FROM channel WHERE OWNER  =  'CCTV' OR OWNER  =  'HBS'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "List the names of all the channels owned by either CCTV or HBS",
+        "query": "SELECT name FROM channel WHERE OWNER  =  'CCTV' OR OWNER  =  'HBS'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Find the total rating ratio for each channel owner.",
+        "query": "SELECT sum(Rating_in_percent) ,  OWNER FROM channel GROUP BY OWNER"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "What is the total rating of channel for each channel owner?",
+        "query": "SELECT sum(Rating_in_percent) ,  OWNER FROM channel GROUP BY OWNER"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Find the name of the program that is broadcast most frequently.",
+        "query": "SELECT t1.name FROM program AS t1 JOIN broadcast AS t2 ON t1.program_id  =  t2.program_id GROUP BY t2.program_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "program_share",
+        "question": "Which program is broadcast most frequently? Give me the program name.",
+        "query": "SELECT t1.name FROM program AS t1 JOIN broadcast AS t2 ON t1.program_id  =  t2.program_id GROUP BY t2.program_id ORDER BY count(*) DESC LIMIT 1"
+    }
+]

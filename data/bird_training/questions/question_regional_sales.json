@@ -1,0 +1,986 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Which region has the most number of sales team?",
+        "query": "SELECT Region FROM `Sales Team` GROUP BY Region ORDER BY COUNT(DISTINCT `Sales Team`) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List all the customers with name containing the word 'Group'.",
+        "query": "SELECT T FROM ( SELECT IIF(`Customer Names` LIKE '%Group%', `Customer Names`, NULL) AS T FROM Customers ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the average median income for all City type of stores?",
+        "query": "SELECT AVG(`Median Income`) FROM `Store Locations` WHERE Type = 'City'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Name the sales team and the region of order number 'SO - 000137'.",
+        "query": "SELECT T2.`Sales Team`, T2.Region FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID WHERE T1.OrderNumber = 'SO - 000137'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List all the order numbers along with its product name for each order under the sales team of 'Douglas Tucker'.",
+        "query": "SELECT DISTINCT T1.ProductID, T1.`Product Name` FROM Products AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._ProductID = T1.ProductID INNER JOIN `Sales Team` AS T3 ON T3.SalesTeamID = T2._SalesTeamID WHERE T3.`Sales Team` = 'Douglas Tucker'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Among orders in 2020, name the customers who had the greatest discount applied for 'Cocktail Glasses'",
+        "query": "SELECT DISTINCT T1.`Customer Names` FROM Customers AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._CustomerID = T1.CustomerID INNER JOIN Products AS T3 ON T3.ProductID = T2._ProductID WHERE T3.`Product Name` = 'Cocktail Glasses' AND SUBSTR(T2.OrderDate, -2) = '20' AND T2.`Discount Applied` = ( SELECT T2.`Discount Applied` FROM Customers AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._CustomerID = T1.CustomerID INNER JOIN Products AS T3 ON T3.ProductID = T2._ProductID WHERE T3.`Product Name` = 'Cocktail Glasses' AND T2.OrderDate LIKE '%/%/20' ORDER BY T2.`Discount Applied` DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List all the order numbers for In-Store sales and find the city where the store is located.",
+        "query": "SELECT DISTINCT T1.OrderNumber, T2.`City Name` FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID WHERE T1.`Sales Channel` = 'In-Store'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Name the most expensive ordered? Who, when was it ordered?",
+        "query": "SELECT T2.OrderNumber, T1.`Customer Names`, T2.OrderDate FROM Customers AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._CustomerID = T1.CustomerID INNER JOIN Products AS T3 ON T3.ProductID = T2._ProductID ORDER BY T2.`Unit Cost` DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List all the numbers ordered by 'Rochester Ltd' in 2018.",
+        "query": "SELECT DISTINCT T FROM ( SELECT CASE  WHEN T1.OrderDate LIKE '%/%/18' AND T2.`Customer Names` = 'Rochester Ltd' THEN T1.OrderNumber ELSE NULL END AS T FROM `Sales Orders` T1 INNER JOIN Customers T2 ON T2.CustomerID = T1._CustomerID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Provide all the orders from WARE-NMK1003. Name the product and sales team for each of these order.",
+        "query": "SELECT DISTINCT T1.`Product Name`, T3.`Sales Team` FROM Products AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._ProductID = T1.ProductID INNER JOIN `Sales Team` AS T3 ON T3.SalesTeamID = T2._SalesTeamID WHERE T2.WarehouseCode = 'WARE-NMK1003'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List the name of all customers who had made orders online.",
+        "query": "SELECT T FROM ( SELECT CASE  WHEN T2.`Sales Channel` = 'Online' THEN T1.`Customer Names` ELSE NULL END AS T FROM Customers T1 INNER JOIN `Sales Orders` T2 ON T2._CustomerID = T1.CustomerID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Calculate the average net profit for bakeware product.",
+        "query": "SELECT AVG(REPLACE(T1.`Unit Price`, ',', '') - REPLACE(T1.`Unit Cost`, ',', ''))  FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID WHERE T2.`Product Name` = 'Bakeware'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Name the sales team name who had orders with the greatest net profit in 2020.",
+        "query": "SELECT T2.`Sales Team` FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID WHERE T1.OrderDate LIKE '%/%/20' GROUP BY T2.`Sales Team` ORDER BY SUM(REPLACE(T1.`Unit Price`, ',', '') - REPLACE(T1.`Unit Cost`, ',', '')) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Sate the order number and calculate the net profit for each order under Joshua Bennett.",
+        "query": "SELECT T1.OrderNumber , REPLACE(T1.`Unit Price`, ',', '') - REPLACE(T1.`Unit Cost`, ',', '')  FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID WHERE T2.`Sales Team` = 'Joshua Bennett'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Among the sales order shipped in July 2018, calculate the percentage of orders for home fragrances.",
+        "query": "SELECT SUM(CASE WHEN T2.`Product Name` = 'Home Fragrances' THEN 1 ELSE 0 END) * 100 / COUNT(T1.OrderNumber)  FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID WHERE T1.ShipDate LIKE '7/%/18'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List down the customer IDs and names that start with alphabet \"W\".",
+        "query": "SELECT DISTINCT CustomerID, `Customer Names` FROM Customers WHERE `Customer Names` LIKE 'W%' ORDER BY `Customer Names` DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List down the product IDs and names that include the word \"Outdoor\".",
+        "query": "SELECT ProductID, T FROM ( SELECT ProductID , CASE  WHEN `Product Name` LIKE '%Outdoor%' THEN `Product Name` ELSE NULL END AS T FROM Products ) WHERE T IS NOT NULL ORDER BY T DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Among the sales with 40% discount via in-store channel, how many products were shipped from warehouse code of WARE-NMK1003?",
+        "query": "SELECT COUNT(DISTINCT T) FROM ( SELECT CASE  WHEN `Sales Channel` = 'In-Store' AND WarehouseCode = 'WARE-NMK1003' AND `Discount Applied` = '0.4' THEN OrderNumber ELSE NULL END AS T FROM `Sales Orders` ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Mention the most populated city and median income of the store in Florida state.",
+        "query": "SELECT `City Name`, `Median Income` FROM `Store Locations` WHERE State = 'Florida' ORDER BY Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Describe the ID, city and region of the stores which are in Allen country.",
+        "query": "SELECT DISTINCT T2.StoreID, T2.`City Name`, T1.Region FROM Regions AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StateCode = T1.StateCode WHERE T2.County = 'Allen County'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List the ID, city, state and region for the store type which is fewer between borough and CDP.",
+        "query": "SELECT DISTINCT T2.StoreID, T2.`City Name`, T1.State, T2.Type FROM Regions AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StateCode = T1.StateCode WHERE T2.Type = 'Borough' OR T2.Type = 'CDP'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Write down the region and name of the sale team ID of 18 and compare their orders between in-store and online.",
+        "query": "SELECT T2.Region, T2.`Sales Team` FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID WHERE T2.SalesTeamID = 18 AND T1.`Sales Channel` = 'In-Store' OR T1.`Sales Channel` = 'Online'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Calculate the percentage of order via in-store channel of customer \"Medline\".",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.`Sales Channel` = 'In-Store' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1._CustomerID) FROM `Sales Orders` AS T1 INNER JOIN Customers AS T2 ON T2.CustomerID = T1._CustomerID WHERE T2.`Customer Names` = 'Medline '"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Describe the customer names and lasting delivery periods for the product of \"Bedroom Furniture\" by wholesale channel in 2019.",
+        "query": "SELECT T1.`Customer Names`, T2.DeliveryDate FROM Customers AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._CustomerID = T1.CustomerID INNER JOIN Products AS T3 ON T3.ProductID = T2._ProductID WHERE T2.`Sales Channel` = 'Wholesale' AND T3.`Product Name` = 'Bedroom Furniture' AND T2.OrderDate LIKE '%/%/19'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Describe the customer names and product names which had over 3800 USD in net profit.",
+        "query": "SELECT DISTINCT `Customer Names`, `Product Name` FROM ( SELECT T1.`Customer Names`, T3.`Product Name` , REPLACE(T2.`Unit Price`, ',', '') - REPLACE(T2.`Unit Cost`, ',', '') AS T FROM Customers T1 INNER JOIN `Sales Orders` T2 ON T2._CustomerID = T1.CustomerID INNER JOIN Products T3 ON T3.ProductID = T2._ProductID ) WHERE T > 3800"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List the store located cities with regions in no water area of California state.",
+        "query": "SELECT DISTINCT T2.`City Name` FROM Regions AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StateCode = T1.StateCode WHERE T2.State = 'California' AND T2.`Water Area` = '0'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Calculate the order percentage by \"Carlos Miller\" sales team.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.`Sales Team` = 'Carlos Miller' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.OrderNumber) FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Compare the number of orders between \"Platters\" and \"Serveware\" products.",
+        "query": "SELECT SUM(CASE WHEN T2.`Product Name` = 'Platters' THEN 1 ELSE 0 END) AS num1 , SUM(CASE WHEN T2.`Product Name` = 'Serveware' THEN 1 ELSE 0 END) AS num2 FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Calculate the total net profit of the store located in highest median income city.",
+        "query": "SELECT SUM(REPLACE(T1.`Unit Price`, ',', '') - REPLACE(T1.`Unit Cost`, ',', '')) FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID ORDER BY T2.`Median Income` DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Among the sales team in South region, write down the numbers of orders made by the sales team ID of one digit.",
+        "query": "SELECT COUNT(T1.OrderNumber) FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID WHERE T2.Region = 'South' AND T2.SalesTeamID BETWEEN 1 AND 9 GROUP BY T2.SalesTeamID HAVING COUNT(T1.OrderNumber)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many orders have order date in 5/31/2018?",
+        "query": "SELECT SUM(IIF(OrderDate = '5/31/18', 1, 0)) FROM `Sales Orders`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List out the name of orders which have delivery date of 6/13/2018.",
+        "query": "SELECT DISTINCT T FROM ( SELECT IIF(DeliveryDate = '6/13/18', OrderNumber, NULL) AS T FROM `Sales Orders` ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many orders placed were with more than 5 product quantities?",
+        "query": "SELECT SUM(IIF(`Order Quantity` > 5, 1, 0)) FROM `Sales Orders`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "State the full name of state code \"GA\".",
+        "query": "SELECT T FROM ( SELECT IIF(StateCode = 'GA', State, NULL) AS T FROM Regions ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many states located in the Midwest region?",
+        "query": "SELECT COUNT(DISTINCT T) FROM ( SELECT CASE  WHEN Region = 'Midwest' THEN StateCode ELSE NULL END AS T FROM Regions ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List out the product name of order which has unit cost of 781.22.",
+        "query": "SELECT T FROM ( SELECT DISTINCT IIF(T1.`Unit Cost` = 781.22, T2.`Product Name`, NULL) AS T FROM `Sales Orders` T1 INNER JOIN Products T2 ON T2.ProductID = T1._ProductID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "State the delivery date of cookware.",
+        "query": "SELECT T FROM ( SELECT DISTINCT IIF(T2.`Product Name` = 'Cookware', T1.DeliveryDate, NULL) AS T FROM `Sales Orders` T1 INNER JOIN Products T2 ON T2.ProductID = T1._ProductID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many furniture cushions orders which have date of order in 2018?",
+        "query": "SELECT SUM(CASE WHEN T1.OrderDate LIKE '%/%/18' AND T2.`Product Name` = 'Furniture Cushions' THEN 1 ELSE 0 END) FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List out the name of products which have been applied 10% discount.",
+        "query": "SELECT T FROM ( SELECT DISTINCT IIF(T1.`Discount Applied` = 0.1, T2.`Product Name`, NULL) AS T FROM `Sales Orders` T1 INNER JOIN Products T2 ON T2.ProductID = T1._ProductID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Calculate the average net profit of phones which have sales channel of distributor.",
+        "query": "SELECT SUM(REPLACE(T1.`Unit Price`, ',', '') - REPLACE(T1.`Unit Cost`, ',', '')) / COUNT(T1.OrderNumber) FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID WHERE T2.`Product Name` = 'Phones' AND T1.`Sales Channel` = 'Distributor'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Calculate the average net profit of bar tools which has ordered quantity exceed 5.",
+        "query": "SELECT SUM(REPLACE(T1.`Unit Price`, ',', '') - REPLACE(T1.`Unit Cost`, ',', '')) / COUNT(T1.OrderNumber) FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID WHERE T2.`Product Name` = 'Bar Tools' AND T1.`Order Quantity` > 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List out the city name of states located in South region.",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T1.Region = 'South' THEN T2.`City Name` END AS T FROM Regions T1 INNER JOIN `Store Locations` T2 ON T2.StateCode = T1.StateCode ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the region of stores which have type of \"Town\" in the list?",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T2.Type = 'Town' THEN T1.Region END AS T FROM Regions T1 INNER JOIN `Store Locations` T2 ON T2.StateCode = T1.StateCode ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many orders that Medsep Group had made?",
+        "query": "SELECT SUM(CASE WHEN T1.`Customer Names` = 'Medsep Group' THEN 1 ELSE 0 END) FROM Customers AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._CustomerID = T1.CustomerID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List out the discount levels applied for all orders from Ole Group.",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T1.`Customer Names` = 'Ole Group' THEN T2.`Discount Applied` END AS T FROM Customers T1 INNER JOIN `Sales Orders` T2 ON T2._CustomerID = T1.CustomerID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "State the customer name of orders which has shipped date in 7/8/2018.",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T2.ShipDate = '7/8/18' THEN T1.`Customer Names` END AS T FROM Customers T1 INNER JOIN `Sales Orders` T2 ON T2._CustomerID = T1.CustomerID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Among the orders placed by Ei, how many orders have quantity greater than 4?",
+        "query": "SELECT SUM(CASE WHEN T1.`Order Quantity` > 4 AND T2.`Customer Names` = 'Ei ' THEN 1 ELSE 0 END) FROM `Sales Orders` AS T1 INNER JOIN Customers AS T2 ON T2.CustomerID = T1._CustomerID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Among the orders placed by Pacific Ltd, how many orders have been applied 5% discount ?",
+        "query": "SELECT SUM(CASE WHEN T1.`Discount Applied` = 0.05 AND T2.`Customer Names` = 'Pacific Ltd' THEN 1 ELSE 0 END) FROM `Sales Orders` AS T1 INNER JOIN Customers AS T2 ON T2.CustomerID = T1._CustomerID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the customer names of orders which have unit cost greater than 4000USD?",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T2.`Unit Cost` > 4000 THEN T1.`Customer Names` END AS T FROM Customers T1 INNER JOIN `Sales Orders` T2 ON T2._CustomerID = T1.CustomerID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Please list the id and detailed position of all stores in Birmingham city.",
+        "query": "SELECT StoreID, Latitude, Longitude FROM `Store Locations` WHERE `City Name` = 'Birmingham'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Which city has the largest population?",
+        "query": "SELECT `City Name` FROM `Store Locations` ORDER BY Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many CDP stores are there in California?",
+        "query": "SELECT SUM(CASE WHEN State = 'California' AND Type = 'CDP' THEN 1 ELSE 0 END) FROM `Store Locations`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Please give the order number and product name of the order which has the lowest unit price.",
+        "query": "SELECT T1.OrderNumber, T2.`Product Name` FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID WHERE REPLACE(T1.`Unit Price`, ',', '') = ( SELECT REPLACE(T1.`Unit Price`, ',', '') FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID ORDER BY REPLACE(T1.`Unit Price`, ',', '') LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Which product has the highest net profit in 2019?",
+        "query": "SELECT T2.`Product Name` FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID WHERE T1.OrderDate LIKE '%/%/19' ORDER BY REPLACE(T1.`Unit Price`, ',', '') - REPLACE(T1.`Unit Cost`, ',', '') DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the average unit price of a Cookware product?",
+        "query": "SELECT AVG(REPLACE(T1.`Unit Price`, ',', '')) FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID WHERE T2.`Product Name` = 'Cookware'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Please list all sale team names which had orders on 5/31/2018.",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T1.OrderDate = '5/31/18' THEN T2.`Sales Team` ELSE NULL END AS T FROM `Sales Orders` T1 INNER JOIN `Sales Team` T2 ON T2.SalesTeamID = T1._SalesTeamID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Which sales team name has the least orders in 2019?",
+        "query": "SELECT T2.`Sales Team` FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID WHERE T1.OrderDate LIKE '%/%/19' GROUP BY T2.`Sales Team` ORDER BY COUNT(T1.OrderNumber) ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "From 2018 to 2020, which year did the George Lewis group have the highest number of orders?",
+        "query": "SELECT SUBSTR(T1.OrderDate, -2, 2) FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID WHERE T2.`Sales Team` = 'George Lewis' GROUP BY SUBSTR(T1.OrderDate, -2, 2) ORDER BY COUNT(T1.OrderNumber) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the percentage of total orders from stores in Orange County in 2018?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.County = 'Orange County' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.OrderNumber) FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID WHERE T1.OrderDate LIKE '%/%/18'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Which order number has the highest unit price?",
+        "query": "SELECT OrderNumber FROM `Sales Orders` WHERE REPLACE(`Unit Price`, ',', '') = ( SELECT REPLACE(`Unit Price`, ',', '') FROM `Sales Orders` ORDER BY REPLACE(`Unit Price`, ',', '') DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Which sales team id has the highest number of orders in 2018?",
+        "query": "SELECT _SalesTeamID FROM `Sales Orders` WHERE OrderDate LIKE '%/%/18' GROUP BY _SalesTeamID ORDER BY COUNT(_SalesTeamID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the unit cost of order SO - 000103?",
+        "query": "SELECT DISTINCT T FROM ( SELECT IIF(OrderNumber = 'SO - 000103', `Unit Cost`, NULL) AS T FROM `Sales Orders` ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "In 2020, what were the total orders of all stores in Maricopa County?",
+        "query": "SELECT SUM(CASE WHEN T2.County = 'Maricopa County' AND OrderDate LIKE '%/%/20' THEN 1 ELSE 0 END) FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the detailed position of the store which has order SO - 000115?",
+        "query": "SELECT T2.Latitude, T2.Longitude FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID WHERE T1.OrderNumber = 'SO - 000115'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Please calculate the total number of orders by each city in 2019.",
+        "query": "SELECT COUNT(T1.OrderNumber) FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID WHERE T1.OrderDate LIKE '%/%/19' GROUP BY T2.`City Name` HAVING COUNT(T1.OrderNumber)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Please list the names of customers who have total orders of over 3 in 2018.",
+        "query": "SELECT DISTINCT IIF(COUNT(T2.CustomerID) > 3, T2.`Customer Names`, NULL) FROM `Sales Orders` AS T1 INNER JOIN Customers AS T2 ON T2.CustomerID = T1._CustomerID WHERE T1.OrderDate LIKE '%/%/18' GROUP BY T1._CustomerID HAVING COUNT(T2.CustomerID)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What were the total orders of Medsep Group from 2018 to 2020?",
+        "query": "SELECT SUM(CASE WHEN SUBSTR(T1.OrderDate, -2) IN ('18', '19', '20') AND T2.`Customer Names` = 'Medsep Group' THEN 1 ELSE 0 END) FROM `Sales Orders` AS T1 INNER JOIN Customers AS T2 ON T2.CustomerID = T1._CustomerID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Please list the customer names whose order quantity was more than 5 on 6/1/2018.",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN SUM(T1.`Order Quantity`) > 5 THEN T2.`Customer Names` END AS T FROM `Sales Orders` T1 INNER JOIN Customers T2 ON T2.CustomerID = T1._CustomerID WHERE T1.OrderDate = '6/1/18' GROUP BY T1._CustomerID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the percentage of total orders of Stephen Payne that had a net profit of over 1000?",
+        "query": "SELECT CAST(SUM(CASE WHEN REPLACE(T1.`Unit Price`, ',', '') - REPLACE(T1.`Unit Cost`, ',', '') > 1000 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.OrderNumber) FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID WHERE T2.`Sales Team` = 'Stephen Payne'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many sales team were from Northeast?",
+        "query": "SELECT SUM(CASE WHEN Region = 'Northeast' THEN 1 ELSE 0 END) FROM `Sales Team`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "State the name of all city in Maricopa County along with its latitude and longitude.",
+        "query": "SELECT DISTINCT `City Name`, Latitude, Longitude FROM `Store Locations` WHERE County = 'Maricopa County'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Which order have the highest unit cost?",
+        "query": "SELECT OrderNumber FROM `Sales Orders` WHERE REPLACE(`Unit Cost`, ',', '') = ( SELECT REPLACE(`Unit Cost`, ',', '') FROM `Sales Orders` ORDER BY REPLACE(`Unit Cost`, ',', '') DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List all the name of products with the ID of 30 to 40.",
+        "query": "SELECT T FROM ( SELECT CASE  WHEN ProductID BETWEEN 30 AND 40 THEN `Product Name` ELSE NULL END AS T FROM Products ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Calculate ratio between the highest unit cost and the lowest unit cost?",
+        "query": "SELECT ( SELECT REPLACE(`Unit Cost`, ',', '') FROM `Sales Orders` WHERE REPLACE(`Unit Cost`, ',', '') = ( SELECT REPLACE(`Unit Cost`, ',', '') FROM `Sales Orders` ORDER BY REPLACE(`Unit Cost`, ',', '') DESC LIMIT 1 ) ORDER BY REPLACE(`Unit Cost`, ',', '') DESC LIMIT 1 ) / ( SELECT REPLACE(`Unit Cost`, ',', '') FROM `Sales Orders` WHERE REPLACE(`Unit Cost`, ',', '') = ( SELECT REPLACE(`Unit Cost`, ',', '') FROM `Sales Orders` ORDER BY REPLACE(`Unit Cost`, ',', '') ASC LIMIT 1 ) ORDER BY REPLACE(`Unit Cost`, ',', '') ASC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Which product was ordered the most in 2018?",
+        "query": "SELECT T2.`Product Name` FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID WHERE T1.OrderDate LIKE '%/%/18' GROUP BY T1._ProductID ORDER BY COUNT(T1._ProductID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many products sold by Adam Hernandez?",
+        "query": "SELECT SUM(CASE WHEN T2.`Sales Team` = 'Adam Hernandez' THEN 1 ELSE 0 END) FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List all orders where its products were shipped from Daly City.",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T2.`City Name` = 'Daly City' THEN T1.OrderNumber END AS T FROM `Sales Orders` T1 INNER JOIN `Store Locations` T2 ON T2.StoreID = T1._StoreID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many orders made by Rochester Ltd?",
+        "query": "SELECT SUM(CASE WHEN T1.`Customer Names` = 'Rochester Ltd' THEN 1 ELSE 0 END) FROM Customers AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._CustomerID = T1.CustomerID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "State the order number where Qualitest ordered the highest product quantity.",
+        "query": "SELECT T1.OrderNumber FROM `Sales Orders` AS T1 INNER JOIN Customers AS T2 ON T2.CustomerID = T1._CustomerID WHERE T2.`Customer Names` = 'Qualitest ' ORDER BY T1.`Order Quantity` DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List the order for all in-store sales along with the products sold.",
+        "query": "SELECT DISTINCT T1.OrderNumber, T2.`Product Name` FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID WHERE T1.`Sales Channel` = 'In-Store'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many online sales were made in May 2018 where products were shipped from Norman?",
+        "query": "SELECT SUM(CASE WHEN T1.OrderDate LIKE '5/%/18' AND T1.`Sales Channel` = 'Online' AND T2.`City Name` = 'Norman' THEN 1 ELSE 0 END) FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Among the products sold in Maricopa County, which was the least sold?",
+        "query": "SELECT T1.`Product Name` FROM Products AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._ProductID = T1.ProductID INNER JOIN `Store Locations` AS T3 ON T3.StoreID = T2._StoreID WHERE T3.County = 'Maricopa County' ORDER BY T2.`Order Quantity` ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "State all the order numbers for sales team of Samuel Fowler.",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T2.`Sales Team` = 'Samuel Fowler' THEN T1.OrderNumber ELSE NULL END AS T FROM `Sales Orders` T1 INNER JOIN `Sales Team` T2 ON T2.SalesTeamID = T1._SalesTeamID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Find the number of baseball ordered in December 2017.",
+        "query": "SELECT COUNT(T2.OrderNumber) FROM Products AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._ProductID = T1.ProductID WHERE T1.`Product Name` = 'Baseball' AND T2.OrderDate LIKE '12/%/18'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Find the average number of ornaments sold each month in 2018.",
+        "query": "SELECT CAST(SUM(T2.`Order Quantity`) AS REAL) / 12 FROM Products AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._ProductID = T1.ProductID WHERE T1.`Product Name` = 'Ornaments' AND T2.OrderDate LIKE '%/%/18'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Find the percentage of products that were shipped from Burbank in 2018?",
+        "query": "SELECT CAST(SUM(CASE WHEN T3.`City Name` = 'Burbank' THEN T2.`Order Quantity` ELSE 0 END) AS REAL) * 100 / SUM(T2.`Order Quantity`) FROM Products AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._ProductID = T1.ProductID INNER JOIN `Store Locations` AS T3 ON T3.StoreID = T2._StoreID WHERE T2.OrderDate LIKE '%/%/18'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the difference in order number from \"WARE-MKL1006\" and \"WARE-NBV1002\"?",
+        "query": "SELECT SUM(IIF(WarehouseCode = 'WARE-MKL1006', 1, 0)) - SUM(IIF(WarehouseCode = 'WARE-NBV1002', 1, 0)) AS difference FROM `Sales Orders`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Describe the product names delivered in 2021 for the customer \"Sundial\".",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T2.DeliveryDate LIKE '%/%/21' AND T1.`Customer Names` = 'Sundial ' THEN T3.`Product Name` END AS T FROM Customers T1 INNER JOIN `Sales Orders` T2 ON T2._CustomerID = T1.CustomerID INNER JOIN Products T3 ON T3.ProductID = T2._ProductID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Write down the store IDs and region of the state \"Michigan\".",
+        "query": "SELECT DISTINCT T2.StoreID, T1.Region FROM Regions AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StateCode = T1.StateCode WHERE T2.State = 'Michigan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Compare the total number of orders between customer \"Apollo Ltd\" and \"Pacific Ltd\".",
+        "query": "SELECT SUM(CASE WHEN T2.`Customer Names` = 'Apollo Ltd' THEN 1 ELSE 0 END), SUM(CASE WHEN T2.`Customer Names` = 'Pacific Ltd' THEN 1 ELSE 0 END) FROM `Sales Orders` AS T1 INNER JOIN Customers AS T2 ON T2.CustomerID = T1._CustomerID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Find the store ID with more orders between \"Aurora\" and \"Babylon\" city.",
+        "query": "SELECT T2.StoreID FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID WHERE T2.`City Name` = 'Aurora (Township)' OR T2.`City Name` = 'Babylon (Town)' GROUP BY T2.StoreID ORDER BY COUNT(T1.OrderNumber) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List down the customer names and product names of the order made by \"Anthony Torres\" via distributor channel.",
+        "query": "SELECT DISTINCT T1.`Customer Names`, T4.`Product Name` FROM Customers AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._CustomerID = T1.CustomerID INNER JOIN `Sales Team` AS T3 ON T3.SalesTeamID = T2._SalesTeamID INNER JOIN Products AS T4 ON T4.ProductID = T2._ProductID WHERE T3.`Sales Team` = 'Anthony Torres' AND T2.`Sales Channel` = 'Distributor'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Mention the customer names and IDs which ordered total net profit of above 5000 USD through online channel.",
+        "query": "SELECT DISTINCT `Customer Names`, CustomerID FROM ( SELECT T2.`Customer Names`, T2.CustomerID , SUM(REPLACE(T1.`Unit Price`, ',', '') - REPLACE(T1.`Unit Cost`, ',', '')) AS T FROM `Sales Orders` T1 INNER JOIN Customers T2 ON T2.CustomerID = T1._CustomerID WHERE T1.`Sales Channel` = 'Online' GROUP BY T2.CustomerID ) WHERE T > 5000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Find the net profit of the floral products which were delivered in 2021.",
+        "query": "SELECT SUM(REPLACE(T1.`Unit Price`, ',', '') - REPLACE(T1.`Unit Cost`, ',', '')) FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID WHERE T1.DeliveryDate LIKE '%/%/21' AND T2.`Product Name` = 'Floral'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Count the number of orders made from the store in city with population of 3000000 to 4000000.",
+        "query": "SELECT COUNT(T1.OrderNumber) FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID WHERE T2.Population BETWEEN 3000000 AND 4000000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Name the products via wholesale channel of the store under Pacific/Honolulu time zone.",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T3.`Time Zone` = 'Pacific/Honolulu' AND T2.`Sales Channel` = 'Wholesale' THEN T1.`Product Name` ELSE NULL END AS T FROM Products T1 INNER JOIN `Sales Orders` T2 ON T2._ProductID = T1.ProductID INNER JOIN `Store Locations` T3 ON T3.StoreID = T2._StoreID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List the order numbers and product names which were ordered on 6th June, 2018.",
+        "query": "SELECT DISTINCT OrderNumber, `Product Name` FROM ( SELECT IIF(T2.OrderDate = '6/6/18', T2.OrderNumber, NULL) AS \"OrderNumber\" , IIF(T2.OrderDate = '6/6/18', T1.`Product Name`, NULL) AS \"Product Name\" FROM Products T1 INNER JOIN `Sales Orders` T2 ON T2._ProductID = T1.ProductID ) WHERE OrderNumber IS NOT NULL AND `Product Name` IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Find the average yearly order by customer Weimei Corp for 2018, 2019 and 2020.",
+        "query": "SELECT COUNT(T1.OrderNumber) / 3 FROM `Sales Orders` AS T1 INNER JOIN Customers AS T2 ON T2.CustomerID = T1._CustomerID WHERE (T1.OrderDate LIKE '%/%/18' AND T2.`Customer Names` = 'Weimei Corp') OR (T1.OrderDate LIKE '%/%/19' AND T2.`Customer Names` = 'Weimei Corp') OR (T1.OrderDate LIKE '%/%/20' AND T2.`Customer Names` = 'Weimei Corp')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Calculate the average monthly order and percentage of warehouse \"WARE-NMK1003\" in 2019. Among them, mention number of orders for floor lamps.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.WarehouseCode = 'WARE-NMK1003' THEN 1 ELSE 0 END) AS REAL) / 12 , CAST(SUM(CASE WHEN T2.WarehouseCode = 'WARE-NMK1003' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.OrderNumber), COUNT(CASE WHEN T1.`Product Name` = 'Floor Lamps' AND T2.WarehouseCode = 'WARE-NMK1003' THEN T2.`Order Quantity` ELSE NULL END) FROM Products AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._ProductID = T1.ProductID WHERE T2.OrderDate LIKE '%/%/19'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Indicate the procured dates for the customer whose ID is 11.",
+        "query": "SELECT DISTINCT T FROM ( SELECT IIF(_CustomerID = 11, ProcuredDate, NULL) AS T FROM `Sales Orders` ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many orders through distributor were for the minimum quantity?",
+        "query": "SELECT SUM(CASE WHEN `Order Quantity` = 1 AND `Sales Channel` = 'Distributor' THEN 1 ELSE 0 END) FROM `Sales Orders`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List by ID all sales teams that have sold products at a 10% discount in store.",
+        "query": "SELECT DISTINCT T FROM ( SELECT CASE  WHEN `Discount Applied` = '0.1' AND `Sales Channel` = 'In-Store' THEN _SalesTeamID ELSE NULL END AS T FROM `Sales Orders` ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many Borough-type stores located in the city of Brooklyn have a population of less than 3 million?",
+        "query": "SELECT SUM(CASE WHEN Population < 3000000 AND Type = 'Borough' AND `City Name` = 'Brooklyn' THEN 1 ELSE 0 END) FROM `Store Locations`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many states are in the Midwest region?",
+        "query": "SELECT COUNT(DISTINCT T) FROM ( SELECT CASE  WHEN Region = 'Midwest' THEN State ELSE NULL END AS T FROM Regions ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What are the top 10 products with the highest net profit?",
+        "query": "SELECT T2.`Product Name` FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID GROUP BY T1._ProductID ORDER BY SUM(REPLACE(T1.`Unit Price`, ',', '') - REPLACE(T1.`Unit Cost`, ',', '')) DESC LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Indicate the name of the customers who have placed an order of 3 units in February 2018.",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T2.`Order Quantity` = 3 AND T2.OrderDate LIKE '2/%/18' THEN T1.`Customer Names` END AS T FROM Customers T1 INNER JOIN `Sales Orders` T2 ON T2._CustomerID = T1.CustomerID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What are the names of the sales teams that have served to customer Apotheca, Ltd?",
+        "query": "SELECT DISTINCT T3.`Sales Team` FROM Customers AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._CustomerID = T1.CustomerID INNER JOIN `Sales Team` AS T3 ON T3.SalesTeamID = T2._SalesTeamID WHERE T1.`Customer Names` = 'Apotheca, Ltd'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "In which regions are the stores that have shipped products through the WARE-UHY1004 warehouse?",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T3.WarehouseCode = 'WARE-UHY1004' THEN T1.Region END AS T FROM Regions T1 INNER JOIN `Store Locations` T2 ON T2.StateCode = T1.StateCode INNER JOIN `Sales Orders` T3 ON T3._StoreID = T2.StoreID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List all the cities where Shawn Torres sells Audio products.",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T4.`Product Name` = 'Audio' AND T3.`Sales Team` = 'Shawn Torres' THEN T1.`City Name` ELSE NULL END AS T FROM `Store Locations` T1 INNER JOIN `Sales Orders` T2 ON T2._StoreID = T1.StoreID INNER JOIN `Sales Team` T3 ON T3.SalesTeamID = T2._SalesTeamID INNER JOIN Products T4 ON T4.ProductID = T2._ProductID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Lists the name of the product and customer who placed an order on 10/21/18 and it was delivered on 11/21/19.",
+        "query": "SELECT T3.`Product Name`, T1.`Customer Names` FROM Customers AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._CustomerID = T1.CustomerID INNER JOIN Products AS T3 ON T3.ProductID = T2._ProductID WHERE T2.OrderDate = '10/21/18' AND T2.DeliveryDate = '11/21/19'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many stores procured products on October 27, 2018, in the city of Oregon?",
+        "query": "SELECT SUM(CASE WHEN T1.ProcuredDate = '10/27/18' AND T2.`City Name` = 'Orlando' THEN 1 ELSE 0 END) FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What sales channels are used the most in the 3 places with the highest median income?",
+        "query": "SELECT `Sales Channel` FROM ( SELECT T1.`Sales Channel` FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID ORDER BY T2.`Median Income` DESC LIMIT 3 ) GROUP BY `Sales Channel` ORDER BY COUNT(`Sales Channel`) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List the 5 sales teams that have made sales with the highest net profits.",
+        "query": "SELECT T2.`Sales Team` FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID ORDER BY REPLACE(T1.`Unit Price`, ',', '') - REPLACE(T1.`Unit Cost`, ',', '') DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the highest discount applied by the store located in a city of the state of Colorado whose land area is 111039036.",
+        "query": "SELECT MAX(T1.`Discount Applied`) FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID WHERE T2.State = 'Colorado' AND T2.`Land Area` = 111039036"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many different time zones are there in the Northeast region?",
+        "query": "SELECT COUNT(DISTINCT T2.`Time Zone`) FROM Regions AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StateCode = T1.StateCode WHERE T1.Region = 'Northeast'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What type of store is most popular in the South?",
+        "query": "SELECT DISTINCT CASE WHEN MAX(T2.Population) THEN T2.Type END FROM Regions AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StateCode = T1.StateCode"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "To which region does the sales team that has used the WARE-MKL1006 warehouse the most times for its shipments belong?",
+        "query": "SELECT T2.Region FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID WHERE T1.WarehouseCode = 'WARE-MKL1006' GROUP BY T2.Region ORDER BY COUNT(T1.OrderNumber) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "In which city is the store with the highest sales order unit price located?",
+        "query": "SELECT T2.`City Name` FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID WHERE REPLACE(T1.`Unit Price`, ',', '') = ( SELECT REPLACE(T1.`Unit Price`, ',', '') FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID ORDER BY REPLACE(T1.`Unit Price`, ',', '') DESC LIMIT 1 ) ORDER BY REPLACE(T1.`Unit Price`, ',', '') DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many online purchases did Ole Group make in May 2019?",
+        "query": "SELECT SUM(CASE WHEN T1.`Sales Channel` = 'Online' AND T2.`Customer Names` = 'Ole Group' AND T1.OrderDate LIKE '5/%/19' THEN 1 ELSE 0 END) FROM `Sales Orders` AS T1 INNER JOIN Customers AS T2 ON T2.CustomerID = T1._CustomerID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many stores with less need for products, and purchased through a distributor, are located in Washtenaw County?",
+        "query": "SELECT SUM(CASE WHEN T1.`Order Quantity` = 1 AND T1.`Sales Channel` = 'Distributor' AND T2.County = 'Washtenaw County' THEN 1 ELSE 0 END) FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the least purchased product by stores in the city of Santa Clarita?",
+        "query": "SELECT T1.`Product Name` FROM Products AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._ProductID = T1.ProductID INNER JOIN `Store Locations` AS T3 ON T3.StoreID = T2._StoreID WHERE T3.`City Name` = 'Santa Clarita' GROUP BY T1.`Product Name` ORDER BY COUNT(T1.`Product Name`) ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "At what Latitude and Longitude is the store that has used the WARE-PUJ1005 warehouse the fewest times?",
+        "query": "SELECT T2.Latitude, T2.Longitude FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID WHERE T1.WarehouseCode = 'WARE-PUJ1005' GROUP BY T2.StoreID ORDER BY COUNT(T1.WarehouseCode) ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What percentage of sell orders on 04/04/2020 were for the state of New York?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.State = 'New York' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.OrderNumber) FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID WHERE T1.OrderDate = '4/4/20'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the average land area of \u200b\u200bthe cities in which stores that purchased products for a unit price of 998.30 are located?",
+        "query": "SELECT AVG(T2.`Land Area`) FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID WHERE T1.`Unit Price` = '998.30'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the average household income in cities in the state of New Hampshire where there are stores of the type city?",
+        "query": "SELECT AVG(T2.`Household Income`) FROM Regions AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StateCode = T1.StateCode WHERE T2.State = 'New Hampshire' AND T2.Type = 'City'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many sales teams are there in the Midwest?",
+        "query": "SELECT SUM(CASE WHEN Region = 'Midwest' THEN 1 ELSE 0 END) FROM `Sales Team`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Indicate order numbers with an order date after 1/1/2018.",
+        "query": "SELECT DISTINCT T FROM ( SELECT CASE  WHEN OrderDate > '1/1/18' THEN OrderNumber ELSE NULL END AS T FROM `Sales Orders` ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many sales channels does the sales team have in the Midwest?",
+        "query": "SELECT COUNT(T1.`Sales Channel`) FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID WHERE T2.Region = 'Midwest'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Which sales team has the other with the highest unit price?",
+        "query": "SELECT T2.`Sales Team` FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID WHERE REPLACE(T1.`Unit Price`, ',', '') = ( SELECT REPLACE(T1.`Unit Price`, ',', '') FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID ORDER BY REPLACE(T1.`Unit Price`, ',', '') DESC LIMIT 1 ) ORDER BY REPLACE(T1.`Unit Price`, ',', '') DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Which regions have online sales channels that have the most discounts?",
+        "query": "SELECT T2.Region FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID WHERE T1.`Sales Channel` = 'Online' ORDER BY T1.`Discount Applied` DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Which Apollo Ltd customer's order number has the most expensive unit price, indicating the order date?",
+        "query": "SELECT T1.OrderNumber, T1.OrderDate FROM `Sales Orders` AS T1 INNER JOIN Customers AS T2 ON T2.CustomerID = T1._CustomerID WHERE T2.`Customer Names` = 'Apollo Ltd' ORDER BY T1.`Unit Price` DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Provide order number, warehouse code of customers Elorac, Corp.",
+        "query": "SELECT DISTINCT T1.OrderNumber, T1.WarehouseCode FROM `Sales Orders` AS T1 INNER JOIN Customers AS T2 ON T2.CustomerID = T1._CustomerID WHERE T2.`Customer Names` = 'Elorac, Corp'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Name of customers who have ordered Cocktail Glasses by online sales channel.",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T3.`Product Name` = 'Cocktail Glasses' AND T2.`Sales Channel` = 'Online' THEN T1.`Customer Names` END AS T FROM Customers T1 INNER JOIN `Sales Orders` T2 ON T2._CustomerID = T1.CustomerID INNER JOIN Products T3 ON T3.ProductID = T2._ProductID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Which store in Arizona has the most net profit?",
+        "query": "SELECT T2.StoreID FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID WHERE T2.State = 'Arizona' ORDER BY T1.`Unit Price` - T1.`Unit Cost` DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How much more is the Florida store's computer product unit price than the Texas store?",
+        "query": "SELECT SUM(CASE WHEN T3.State = 'Florida' THEN T2.`Unit Price` ELSE 0 END) - SUM(CASE WHEN T3.State = 'Texas' THEN T2.`Unit Price` ELSE 0 END) FROM Products AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._ProductID = T1.ProductID INNER JOIN `Store Locations` AS T3 ON T3.StoreID = T2._StoreID WHERE T1.`Product Name` = 'Computers'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Among sales teams in Midwest region, which sales team has an order quantity greater than 5?",
+        "query": "SELECT DISTINCT T2.`Sales Team` FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID WHERE T2.Region = 'Midwest' AND T1.`Order Quantity` > 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Please indicate store id in the state of California that have been applied 20% discount in store.",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T2.State = 'California' AND T1.`Sales Channel` = 'In-Store' AND T1.`Discount Applied` = 0.2 THEN T2.StoreID END AS T FROM `Sales Orders` T1 INNER JOIN `Store Locations` T2 ON T2.StoreID = T1._StoreID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "List the name of the customer with the most number of order quantity from 2018 to 2020.",
+        "query": "SELECT T1.`Customer Names` FROM Customers AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._CustomerID = T1.CustomerID WHERE T2.OrderDate LIKE '%/%/18' OR T2.OrderDate LIKE '%/%/19' OR T2.OrderDate LIKE '%/%/20' ORDER BY T2.`Order Quantity` DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Please indicate total order quantity of product Candles and calculate the percentage of such product among all the orders.",
+        "query": "SELECT SUM(CASE WHEN T1.`Product Name` = 'Candles' THEN T2.`Order Quantity` ELSE 0 END), CAST(SUM(CASE WHEN T1.`Product Name` = 'Candles' THEN T2.`Order Quantity` ELSE 0 END) AS REAL) * 100 / SUM(T2.`Order Quantity`) FROM Products AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._ProductID = T1.ProductID INNER JOIN `Store Locations` AS T3 ON T3.StoreID = T2._StoreID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Which region is Joshua Bennet located in?",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN `Sales Team` = 'Joshua Bennett' THEN Region ELSE NULL END AS T FROM `Sales Team` ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the store id of the store located in the most populous county?",
+        "query": "SELECT CASE WHEN MAX(Population) THEN StoreID END FROM `Store Locations`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many sales teams are there in the Midwest?",
+        "query": "SELECT SUM(CASE WHEN Region = 'Midwest' THEN 1 ELSE 0 END) FROM `Sales Team`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the type of store located in the city with the highest amount of water area?",
+        "query": "SELECT CASE WHEN MAX(`Water Area`) THEN Type END FROM `Store Locations`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many online orders were shipped during the month of June 2018?",
+        "query": "SELECT SUM(IIF(ShipDate LIKE '6/%/18' AND `Sales Channel` = 'Online', 1, 0)) FROM `Sales Orders`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How much is the discount applied to the order with the highest unit price?",
+        "query": "SELECT `Discount Applied` FROM `Sales Orders` WHERE REPLACE(`Unit Price`, ',', '') = ( SELECT REPLACE(`Unit Price`, ',', '') FROM `Sales Orders` ORDER BY REPLACE(`Unit Price`, ',', '') DESC LIMIT 1 ) ORDER BY REPLACE(`Unit Price`, ',', '') DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the name of the product with the highest net profit?",
+        "query": "SELECT T2.`Product Name` FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID ORDER BY REPLACE(T1.`Unit Price`, ',', '') - REPLACE(T1.`Unit Cost`, ',', '') DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "In the Northeast region, what is the average household income for each city located in the state with the highest number of stores?",
+        "query": "SELECT AVG(T2.`Household Income`) FROM Regions AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StateCode = T1.StateCode WHERE T1.Region = 'Northeast' GROUP BY T2.State ORDER BY COUNT(T2.StoreID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "In which region can you find the stores located in the state whose median income is no more than 30,000?",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T2.`Median Income` < 30000 THEN T1.Region END AS T FROM Regions T1 INNER JOIN `Store Locations` T2 ON T2.StateCode = T1.StateCode ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "In the West, how many stores are there in the city whose land area is below 20,000,000?",
+        "query": "SELECT SUM(CASE WHEN T1.Region = 'West' AND T2.`Land Area` < 20000000 THEN 1 ELSE 0 END) FROM Regions AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StateCode = T1.StateCode"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the name of the customer who purchased the product with the highest net profiit?",
+        "query": "SELECT `Customer Names` FROM ( SELECT T1.`Customer Names`, T2.`Unit Price` - T2.`Unit Cost` AS \"net profit\" FROM Customers T1 INNER JOIN `Sales Orders` T2 ON T2._CustomerID = T1.CustomerID ) ORDER BY `net profit` DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "In 2019, how many orders were shipped by the sales team with the highest number of orders in the said year? Provide the name of the sales team.",
+        "query": "SELECT COUNT(T1.OrderNumber), T2.`Sales Team` FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID WHERE T1.OrderDate LIKE '%/%/19' AND T1.ShipDate LIKE '%/%/19' GROUP BY T2.`Sales Team` ORDER BY COUNT(T1.OrderNumber) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Among the products with an order quantity of no less than 5 that was shipped in the month of May 2019, what is the name of the product with the lowest net profit?",
+        "query": "SELECT T2.`Product Name` FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID WHERE T1.`Order Quantity` > 5 AND ShipDate LIKE '5/%/19' ORDER BY REPLACE(T1.`Unit Price`, ',', '') - REPLACE(T1.`Unit Cost`, ',', '') ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the detailed coordinates of the store where the product with the 4th highest profit were purchased from?",
+        "query": "SELECT T2.Latitude, T2.Longitude FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID ORDER BY REPLACE(T1.`Unit Price`, ',', '') - REPLACE(T1.`Unit Cost`, ',', '') DESC LIMIT 3, 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many orders were shipped by the sales team with the highest amount of shipped orders in 2020? Give the name of the said sales team.",
+        "query": "SELECT COUNT(T1.OrderNumber), T2.`Sales Team` FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID WHERE T1.ShipDate LIKE '%/%/20' GROUP BY T2.`Sales Team` ORDER BY COUNT(T1.OrderNumber) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Between 2018 to 2020, what is the average amount of shipped orders per year under Carl Nguyen?",
+        "query": "SELECT CAST(COUNT(T1.OrderNumber) AS REAL) / 3 FROM `Sales Orders` AS T1 INNER JOIN `Sales Team` AS T2 ON T2.SalesTeamID = T1._SalesTeamID WHERE (T2.`Sales Team` = 'Carl Nguyen' AND ShipDate LIKE '%/%/18') OR (T2.`Sales Team` = 'Carl Nguyen' AND ShipDate LIKE '%/%/19') OR (T2.`Sales Team` = 'Carl Nguyen' AND ShipDate LIKE '%/%/20')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the amount of discount applied to the product with the highest net profit and what is the name of the said product?",
+        "query": "SELECT T1.`Unit Price` * T1.`Discount Applied`, T2.`Product Name` FROM `Sales Orders` AS T1 INNER JOIN Products AS T2 ON T2.ProductID = T1._ProductID ORDER BY REPLACE(T1.`Unit Price`, ',', '') - REPLACE(T1.`Unit Cost`, ',', '') DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What are the names of the top 3 customers who paid the highest amount of price per order after discount?",
+        "query": "SELECT `Customer Names` FROM ( SELECT T1.`Customer Names` , REPLACE(T2.`Unit Price`, ',', '') * T2.`Order Quantity` - REPLACE(T2.`Unit Price`, ',', '') * T2.`Discount Applied` AS T FROM Customers T1 INNER JOIN `Sales Orders` T2 ON T2._CustomerID = T1.CustomerID ) ORDER BY T DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Which sales channel was most preferred in commercializing products in January 2020 based on the number of orders placed?",
+        "query": "SELECT `Sales Channel` FROM `Sales Orders` WHERE OrderDate LIKE '1/%/20' GROUP BY `Sales Channel` ORDER BY COUNT(`Sales Channel`) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Name the product that was registered in the sales order 'SO - 0005951'.",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE  WHEN T2.OrderNumber = 'SO - 0005951' THEN T1.`Product Name` ELSE NULL END AS T FROM Products T1 INNER JOIN `Sales Orders` T2 ON T2._ProductID = T1.ProductID ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Identify the store location and sales team who processed the sales order 'SO - 0001004'.",
+        "query": "SELECT T3.`Sales Team`, T1.`City Name` FROM `Store Locations` AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._StoreID = T1.StoreID INNER JOIN `Sales Team` AS T3 ON T3.SalesTeamID = T2._SalesTeamID WHERE T2.OrderNumber = 'SO - 0001004'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "Identify the top customer of the store located in Gilbert, Arizona based on net profit associated with the customer relationship in 2019.",
+        "query": "SELECT T1.`Customer Names` FROM Customers AS T1 INNER JOIN `Sales Orders` AS T2 ON T2._CustomerID = T1.CustomerID INNER JOIN `Store Locations` AS T3 ON T3.StoreID = T2._StoreID WHERE T3.`City Name` = 'Gilbert' AND T2.ProcuredDate LIKE '%/%/19' ORDER BY REPLACE(T2.`Unit Price`, ',', '') - REPLACE(T2.`Unit Cost`, ',', '') DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "How many sales orders were processed by the store located in Chandler in 2020?",
+        "query": "SELECT SUM(CASE WHEN T2.`City Name` = 'Chandler' AND T1.OrderDate LIKE '%/%/20' THEN 1 ELSE 0 END) FROM `Sales Orders` AS T1 INNER JOIN `Store Locations` AS T2 ON T2.StoreID = T1._StoreID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What is the average household income of Glendale?",
+        "query": "SELECT AVG(`Household Income`) FROM `Store Locations` WHERE `City Name` = 'Glendale'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "regional_sales",
+        "question": "What was the best discount applied to sales orders in 2020?",
+        "query": "SELECT MAX(`Discount Applied`) FROM `Sales Orders` WHERE OrderDate LIKE '%/%/20'"
+    }
+]

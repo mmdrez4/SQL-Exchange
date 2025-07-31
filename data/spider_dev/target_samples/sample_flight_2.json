@@ -1,0 +1,65 @@
+{
+    "airlines": [
+        [
+            8,
+            "JetBlue Airways",
+            "JetBlue",
+            "USA"
+        ],
+        [
+            1,
+            "United Airlines",
+            "UAL",
+            "USA"
+        ],
+        [
+            7,
+            "Continental Airlines",
+            "Continental",
+            "USA"
+        ]
+    ],
+    "airports": [
+        [
+            "Alakanuk ",
+            "AUK",
+            "Alakanuk ",
+            "United States ",
+            "US"
+        ],
+        [
+            "Anniston ",
+            "RLI",
+            "Reilly AHP ",
+            "United States ",
+            "US"
+        ],
+        [
+            "Adrian ",
+            "ADG",
+            "Lenawee County ",
+            "United States ",
+            "US"
+        ]
+    ],
+    "flights": [
+        [
+            12,
+            1022,
+            " AKI",
+            " AHN"
+        ],
+        [
+            5,
+            688,
+            " ANI",
+            " DYS"
+        ],
+        [
+            11,
+            505,
+            " AKO",
+            " AAF"
+        ]
+    ]
+}

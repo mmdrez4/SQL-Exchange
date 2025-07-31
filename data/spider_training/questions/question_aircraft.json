@@ -1,0 +1,278 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "How many aircrafts are there?",
+        "query": "SELECT count(*) FROM aircraft"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What is the number of aircraft?",
+        "query": "SELECT count(*) FROM aircraft"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "List the description of all aircrafts.",
+        "query": "SELECT Description FROM aircraft"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What are the descriptions for the aircrafts?",
+        "query": "SELECT Description FROM aircraft"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What is the average number of international passengers of all airports?",
+        "query": "SELECT avg(International_Passengers) FROM airport"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What is the average number of international passengers for an airport?",
+        "query": "SELECT avg(International_Passengers) FROM airport"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What are the number of international and domestic passengers of the airport named London \"Heathrow\"?",
+        "query": "SELECT International_Passengers ,  Domestic_Passengers FROM airport WHERE Airport_Name  =  \"London Heathrow\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "How many international and domestic passengers are there in the airport London Heathrow?",
+        "query": "SELECT International_Passengers ,  Domestic_Passengers FROM airport WHERE Airport_Name  =  \"London Heathrow\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What are the total number of Domestic Passengers of airports that contain the word \"London\".",
+        "query": "SELECT sum(Domestic_Passengers) FROM airport WHERE Airport_Name LIKE \"%London%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What are the total number of domestic passengers at all London airports?",
+        "query": "SELECT sum(Domestic_Passengers) FROM airport WHERE Airport_Name LIKE \"%London%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What are the maximum and minimum number of transit passengers of all aiports.",
+        "query": "SELECT max(Transit_Passengers) ,  min(Transit_Passengers) FROM airport"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What is the maximum and mininum number of transit passengers for all airports?",
+        "query": "SELECT max(Transit_Passengers) ,  min(Transit_Passengers) FROM airport"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What are the name of pilots aged 25 or older?",
+        "query": "SELECT Name FROM pilot WHERE Age  >=  25"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "what is the name of every pilot who is at least 25 years old?",
+        "query": "SELECT Name FROM pilot WHERE Age  >=  25"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "List all pilot names in ascending alphabetical order.",
+        "query": "SELECT Name FROM pilot ORDER BY Name ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What are the names of the pilots in alphabetical order?",
+        "query": "SELECT Name FROM pilot ORDER BY Name ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "List names of all pilot aged 30 or younger in descending alphabetical order.",
+        "query": "SELECT Name FROM pilot WHERE Age  <=  30 ORDER BY Name DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What are the names of all pilots 30 years old or young in descending alphabetical order?",
+        "query": "SELECT Name FROM pilot WHERE Age  <=  30 ORDER BY Name DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "Please show the names of aircrafts associated with airport with name \"London Gatwick\".",
+        "query": "SELECT T1.Aircraft FROM aircraft AS T1 JOIN airport_aircraft AS T2 ON T1.Aircraft_ID  =  T2.Aircraft_ID JOIN airport AS T3 ON T2.Airport_ID  =  T3.Airport_ID WHERE T3.Airport_Name  =  \"London Gatwick\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What are the names of all the aircrafts associated with London Gatwick airport?",
+        "query": "SELECT T1.Aircraft FROM aircraft AS T1 JOIN airport_aircraft AS T2 ON T1.Aircraft_ID  =  T2.Aircraft_ID JOIN airport AS T3 ON T2.Airport_ID  =  T3.Airport_ID WHERE T3.Airport_Name  =  \"London Gatwick\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "Please show the names and descriptions of aircrafts associated with airports that have a total number of passengers bigger than 10000000.",
+        "query": "SELECT T1.Aircraft ,  T1.Description FROM aircraft AS T1 JOIN airport_aircraft AS T2 ON T1.Aircraft_ID  =  T2.Aircraft_ID JOIN airport AS T3 ON T2.Airport_ID  =  T3.Airport_ID WHERE T3.Total_Passengers  >  10000000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What are the names and descriptions of aircrafts associated with an airport that has more total passengers than 10000000?",
+        "query": "SELECT T1.Aircraft ,  T1.Description FROM aircraft AS T1 JOIN airport_aircraft AS T2 ON T1.Aircraft_ID  =  T2.Aircraft_ID JOIN airport AS T3 ON T2.Airport_ID  =  T3.Airport_ID WHERE T3.Total_Passengers  >  10000000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What is the average total number of passengers of airports that are associated with aircraft \"Robinson R-22\"?",
+        "query": "SELECT avg(T3.Total_Passengers) FROM aircraft AS T1 JOIN airport_aircraft AS T2 ON T1.Aircraft_ID  =  T2.Aircraft_ID JOIN airport AS T3 ON T2.Airport_ID  =  T3.Airport_ID WHERE T1.Aircraft  =  \"Robinson R-22\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What is the average total number of passengers for all airports that the aircraft \"Robinson R-22\" visits?",
+        "query": "SELECT avg(T3.Total_Passengers) FROM aircraft AS T1 JOIN airport_aircraft AS T2 ON T1.Aircraft_ID  =  T2.Aircraft_ID JOIN airport AS T3 ON T2.Airport_ID  =  T3.Airport_ID WHERE T1.Aircraft  =  \"Robinson R-22\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "Please list the location and the winning aircraft name.",
+        "query": "SELECT T2.Location ,  T1.Aircraft FROM aircraft AS T1 JOIN MATCH AS T2 ON T1.Aircraft_ID  =  T2.Winning_Aircraft"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What is the location and name of the winning aircraft?",
+        "query": "SELECT T2.Location ,  T1.Aircraft FROM aircraft AS T1 JOIN MATCH AS T2 ON T1.Aircraft_ID  =  T2.Winning_Aircraft"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "List the name of the aircraft that has been named winning aircraft the most number of times.",
+        "query": "SELECT T1.Aircraft FROM aircraft AS T1 JOIN MATCH AS T2 ON T1.Aircraft_ID  =  T2.Winning_Aircraft GROUP BY T2.Winning_Aircraft ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What is the name of the aircraft that has won an award the most?",
+        "query": "SELECT T1.Aircraft FROM aircraft AS T1 JOIN MATCH AS T2 ON T1.Aircraft_ID  =  T2.Winning_Aircraft GROUP BY T2.Winning_Aircraft ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "List the names of aircrafts and the number of times it won matches.",
+        "query": "SELECT T1.Aircraft ,  COUNT(*) FROM aircraft AS T1 JOIN MATCH AS T2 ON T1.Aircraft_ID  =  T2.Winning_Aircraft GROUP BY T2.Winning_Aircraft"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "For each aircraft that has won an award, what is its name and how many time has it won?",
+        "query": "SELECT T1.Aircraft ,  COUNT(*) FROM aircraft AS T1 JOIN MATCH AS T2 ON T1.Aircraft_ID  =  T2.Winning_Aircraft GROUP BY T2.Winning_Aircraft"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "List names of all pilot in descending order of age.",
+        "query": "SELECT Name FROM pilot ORDER BY Age DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What are the names of all pilots listed by descending age?",
+        "query": "SELECT Name FROM pilot ORDER BY Age DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "List the names of aircrafts and that won matches at least twice.",
+        "query": "SELECT T1.Aircraft FROM aircraft AS T1 JOIN MATCH AS T2 ON T1.Aircraft_ID  =  T2.Winning_Aircraft GROUP BY T2.Winning_Aircraft HAVING COUNT(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What are the names of all aircrafts that have won a match at least twice?",
+        "query": "SELECT T1.Aircraft FROM aircraft AS T1 JOIN MATCH AS T2 ON T1.Aircraft_ID  =  T2.Winning_Aircraft GROUP BY T2.Winning_Aircraft HAVING COUNT(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "List the names of aircrafts and that did not win any match.",
+        "query": "SELECT Aircraft FROM aircraft WHERE Aircraft_ID NOT IN (SELECT Winning_Aircraft FROM MATCH)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What are the names of all aicrafts that have never won any match?",
+        "query": "SELECT Aircraft FROM aircraft WHERE Aircraft_ID NOT IN (SELECT Winning_Aircraft FROM MATCH)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "Show the names of aircrafts that are associated with both an airport named \"London Heathrow\" and an airport named \"London Gatwick\"",
+        "query": "SELECT T1.Aircraft FROM aircraft AS T1 JOIN airport_aircraft AS T2 ON T1.Aircraft_ID  =  T2.Aircraft_ID JOIN airport AS T3 ON T2.Airport_ID  =  T3.Airport_ID WHERE T3.Airport_Name  =  \"London Heathrow\" INTERSECT SELECT T1.Aircraft FROM aircraft AS T1 JOIN airport_aircraft AS T2 ON T1.Aircraft_ID  =  T2.Aircraft_ID JOIN airport AS T3 ON T2.Airport_ID  =  T3.Airport_ID WHERE T3.Airport_Name  =  \"London Gatwick\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What are the names of all aircrafts that are associated with both London Heathrow and Gatwick airports?",
+        "query": "SELECT T1.Aircraft FROM aircraft AS T1 JOIN airport_aircraft AS T2 ON T1.Aircraft_ID  =  T2.Aircraft_ID JOIN airport AS T3 ON T2.Airport_ID  =  T3.Airport_ID WHERE T3.Airport_Name  =  \"London Heathrow\" INTERSECT SELECT T1.Aircraft FROM aircraft AS T1 JOIN airport_aircraft AS T2 ON T1.Aircraft_ID  =  T2.Aircraft_ID JOIN airport AS T3 ON T2.Airport_ID  =  T3.Airport_ID WHERE T3.Airport_Name  =  \"London Gatwick\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "Show all information on the airport that has the largest number of international passengers.",
+        "query": "SELECT * FROM airport ORDER BY International_Passengers DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What is all the information on the airport with the largest number of international passengers?",
+        "query": "SELECT * FROM airport ORDER BY International_Passengers DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "find the name and age of the pilot who has won the most number of times among the pilots who are younger than 30.",
+        "query": "SELECT t1.name ,  t1.age FROM pilot AS t1 JOIN MATCH AS t2 ON t1.pilot_id  =  t2.winning_pilot WHERE t1.age  <  30 GROUP BY t2.winning_pilot ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What is the name and age of the pilot younger than 30 who has won the most number of times?",
+        "query": "SELECT t1.name ,  t1.age FROM pilot AS t1 JOIN MATCH AS t2 ON t1.pilot_id  =  t2.winning_pilot WHERE t1.age  <  30 GROUP BY t2.winning_pilot ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "what is the name and age of the youngest winning pilot?",
+        "query": "SELECT t1.name ,  t1.age FROM pilot AS t1 JOIN MATCH AS t2 ON t1.pilot_id  =  t2.winning_pilot ORDER BY t1.age LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "How old is the youngest winning pilot and what is their name?",
+        "query": "SELECT t1.name ,  t1.age FROM pilot AS t1 JOIN MATCH AS t2 ON t1.pilot_id  =  t2.winning_pilot ORDER BY t1.age LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "find the name of pilots who did not win the matches held in the country of Australia.",
+        "query": "SELECT name FROM pilot WHERE pilot_id NOT IN (SELECT Winning_Pilot  FROM MATCH WHERE country  =  'Australia')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "aircraft",
+        "question": "What are the names of the pilots that have not won any matches in Australia?",
+        "query": "SELECT name FROM pilot WHERE pilot_id NOT IN (SELECT Winning_Pilot  FROM MATCH WHERE country  =  'Australia')"
+    }
+]

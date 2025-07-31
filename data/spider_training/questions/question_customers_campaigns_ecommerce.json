@@ -1,0 +1,92 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_campaigns_ecommerce",
+        "question": "How many premises are there?",
+        "query": "SELECT count(*) FROM premises"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_campaigns_ecommerce",
+        "question": "What are all the distinct premise types?",
+        "query": "SELECT DISTINCT premises_type FROM premises"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_campaigns_ecommerce",
+        "question": "Find the types and details for all premises and order by the premise type.",
+        "query": "SELECT premises_type ,  premise_details FROM premises ORDER BY premises_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_campaigns_ecommerce",
+        "question": "Show each premise type and the number of premises in that type.",
+        "query": "SELECT premises_type ,  count(*) FROM premises GROUP BY premises_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_campaigns_ecommerce",
+        "question": "Show all distinct product categories along with the number of mailshots in each category.",
+        "query": "SELECT product_category ,  count(*) FROM mailshot_campaigns GROUP BY product_category"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_campaigns_ecommerce",
+        "question": "Show the name and phone of the customer without any mailshot.",
+        "query": "SELECT customer_name ,  customer_phone FROM customers WHERE customer_id NOT IN (SELECT customer_id FROM mailshot_customers)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_campaigns_ecommerce",
+        "question": "Show the name and phone for customers with a mailshot with outcome code 'No Response'.",
+        "query": "SELECT T1.customer_name ,  T1.customer_phone FROM customers AS T1 JOIN mailshot_customers AS T2 ON T1.customer_id  =  T2.customer_id WHERE T2.outcome_code  =  'No Response'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_campaigns_ecommerce",
+        "question": "Show the outcome code of mailshots along with the number of mailshots in each outcome code.",
+        "query": "SELECT outcome_code ,  count(*) FROM mailshot_customers GROUP BY outcome_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_campaigns_ecommerce",
+        "question": "Show the names of customers who have at least 2 mailshots with outcome code 'Order'.",
+        "query": "SELECT T2.customer_name FROM mailshot_customers AS T1 JOIN customers AS T2 ON T1.customer_id  =  T2.customer_id WHERE outcome_code  =  'Order' GROUP BY T1.customer_id HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_campaigns_ecommerce",
+        "question": "Show the names of customers who have the most mailshots.",
+        "query": "SELECT T2.customer_name FROM mailshot_customers AS T1 JOIN customers AS T2 ON T1.customer_id  =  T2.customer_id GROUP BY T1.customer_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_campaigns_ecommerce",
+        "question": "What are the name and payment method of customers who have both mailshots in 'Order' outcome and mailshots in 'No Response' outcome.",
+        "query": "SELECT T2.customer_name ,  T2.payment_method FROM mailshot_customers AS T1 JOIN customers AS T2 ON T1.customer_id  =  T2.customer_id WHERE T1.outcome_code  =  'Order' INTERSECT SELECT T2.customer_name ,  T2.payment_method FROM mailshot_customers AS T1 JOIN customers AS T2 ON T1.customer_id  =  T2.customer_id WHERE T1.outcome_code  =  'No Response'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_campaigns_ecommerce",
+        "question": "Show the premise type and address type code for all customer addresses.",
+        "query": "SELECT T2.premises_type ,  T1.address_type_code FROM customer_addresses AS T1 JOIN premises AS T2 ON T1.premise_id  =  T2.premise_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_campaigns_ecommerce",
+        "question": "What are the distinct address type codes for all customer addresses?",
+        "query": "SELECT DISTINCT address_type_code FROM customer_addresses"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_campaigns_ecommerce",
+        "question": "Show the shipping charge and customer id for customer orders with order status Cancelled or Paid.",
+        "query": "SELECT order_shipping_charges ,  customer_id FROM customer_orders WHERE order_status_code  =  'Cancelled' OR order_status_code  =  'Paid'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_campaigns_ecommerce",
+        "question": "Show the names of customers having an order with shipping method FedEx and order status Paid.",
+        "query": "SELECT T1.customer_name FROM customers AS T1 JOIN customer_orders AS T2 ON T1.customer_id  =  T2.customer_id WHERE shipping_method_code  =  'FedEx' AND order_status_code  =  'Paid'"
+    }
+]

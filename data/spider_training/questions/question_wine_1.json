@@ -1,0 +1,494 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What is the name of the highest rated wine?",
+        "query": "SELECT Name FROM WINE ORDER BY Score LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Give the name of the wine with the highest score.",
+        "query": "SELECT Name FROM WINE ORDER BY Score LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Which winery is the wine that has the highest score from?",
+        "query": "SELECT Winery FROM WINE ORDER BY SCORE LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What is the winery at which the wine with the highest score was made?",
+        "query": "SELECT Winery FROM WINE ORDER BY SCORE LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Find the names of all wines produced in 2008.",
+        "query": "SELECT Name FROM WINE WHERE YEAR  =  \"2008\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the names of all wines produced in 2008?",
+        "query": "SELECT Name FROM WINE WHERE YEAR  =  \"2008\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "List the grapes and appelations of all wines.",
+        "query": "SELECT Grape ,  Appelation FROM WINE"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the grapes and appelations of each wine?",
+        "query": "SELECT Grape ,  Appelation FROM WINE"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "List the names and scores of all wines.",
+        "query": "SELECT Name ,  Score FROM WINE"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the names and scores of all wines?",
+        "query": "SELECT Name ,  Score FROM WINE"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "List the area and county of all appelations.",
+        "query": "SELECT Area ,  County FROM APPELLATIONS"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the areas and counties for all appelations?",
+        "query": "SELECT Area ,  County FROM APPELLATIONS"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the prices of wines produced before the year of 2010?",
+        "query": "SELECT Price FROM WINE WHERE YEAR  <  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Return the prices of wines produced before 2010.",
+        "query": "SELECT Price FROM WINE WHERE YEAR  <  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "List the names of all distinct wines that have scores higher than 90.",
+        "query": "SELECT Name FROM WINE WHERE score  >  90"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the names of wines with scores higher than 90?",
+        "query": "SELECT Name FROM WINE WHERE score  >  90"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "List the names of all distinct wines that are made of red color grape.",
+        "query": "SELECT DISTINCT T2.Name FROM GRAPES AS T1 JOIN WINE AS T2 ON T1.Grape  =  T2.Grape WHERE T1.Color  =  \"Red\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the names of wines made from red grapes?",
+        "query": "SELECT DISTINCT T2.Name FROM GRAPES AS T1 JOIN WINE AS T2 ON T1.Grape  =  T2.Grape WHERE T1.Color  =  \"Red\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Find the names of all distinct wines that have appellations in North Coast area.",
+        "query": "SELECT DISTINCT T2.Name FROM APPELLATIONs AS T1 JOIN WINE AS T2 ON T1.Appelation  =  T2.Appelation WHERE T1.Area  =  \"North Coast\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the distinct names of wines that have appellations in the North Coast area?",
+        "query": "SELECT DISTINCT T2.Name FROM APPELLATIONs AS T1 JOIN WINE AS T2 ON T1.Appelation  =  T2.Appelation WHERE T1.Area  =  \"North Coast\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "How many wines are produced at Robert Biale winery?",
+        "query": "SELECT count(*) FROM WINE WHERE Winery  =  \"Robert Biale\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Count the number of wines produced at Robert Biale winery.",
+        "query": "SELECT count(*) FROM WINE WHERE Winery  =  \"Robert Biale\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "How many appelations are in Napa Country?",
+        "query": "SELECT count(*) FROM APPELLATIONS WHERE County  =  \"Napa\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Count the number of appelations in Napa County.",
+        "query": "SELECT count(*) FROM APPELLATIONS WHERE County  =  \"Napa\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Give me the average prices of wines that are produced by appelations in Sonoma County.",
+        "query": "SELECT AVG(T2.Price) FROM APPELLATIONS AS T1 JOIN WINE AS T2 ON T1.Appelation  =  T2.Appelation WHERE T1.County  =  \"Sonoma\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What is the average price of wines produced in appelations in Sonoma County?",
+        "query": "SELECT AVG(T2.Price) FROM APPELLATIONS AS T1 JOIN WINE AS T2 ON T1.Appelation  =  T2.Appelation WHERE T1.County  =  \"Sonoma\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the names and scores of wines that are made of white color grapes?",
+        "query": "SELECT T2.Name ,   T2.Score FROM GRAPES AS T1 JOIN WINE AS T2 ON T1.Grape  =  T2.Grape WHERE T1.Color  =  \"White\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Give the names and scores of wines made from white grapes.",
+        "query": "SELECT T2.Name ,   T2.Score FROM GRAPES AS T1 JOIN WINE AS T2 ON T1.Grape  =  T2.Grape WHERE T1.Color  =  \"White\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Find the maximum price of wins from the appelations in Central Coast area and produced before the year of 2005.",
+        "query": "SELECT max(T2.Price) FROM APPELLATIONS AS T1 JOIN WINE AS T2 ON T1.Appelation  =  T2.Appelation WHERE T1.Area  =  \"Central Coast\" AND T2.year  <  2005"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What is the maximum price of wines from the appelation in the Central Coast area, which was produced before 2005?",
+        "query": "SELECT max(T2.Price) FROM APPELLATIONS AS T1 JOIN WINE AS T2 ON T1.Appelation  =  T2.Appelation WHERE T1.Area  =  \"Central Coast\" AND T2.year  <  2005"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Find the the grape whose white color grapes are used to produce wines with scores higher than 90.",
+        "query": "SELECT DISTINCT T1.Grape FROM GRAPES AS T1 JOIN WINE AS T2 ON T1.Grape  =  T2.Grape WHERE T1.Color  =  \"White\" AND T2.score  >  90"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Find the white grape used to produce wines with scores above 90.",
+        "query": "SELECT DISTINCT T1.Grape FROM GRAPES AS T1 JOIN WINE AS T2 ON T1.Grape  =  T2.Grape WHERE T1.Color  =  \"White\" AND T2.score  >  90"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the wines that have prices higher than 50 and made of Red color grapes?",
+        "query": "SELECT T2.Name FROM Grapes AS T1 JOIN WINE AS T2 ON T1.Grape  =  T2.Grape WHERE T1.Color  =  \"Red\" AND T2.price  >  50"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the names of wines made from red grapes and with prices above 50?",
+        "query": "SELECT T2.Name FROM Grapes AS T1 JOIN WINE AS T2 ON T1.Grape  =  T2.Grape WHERE T1.Color  =  \"Red\" AND T2.price  >  50"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the wines that have prices lower than 50 and have appelations in Monterey county?",
+        "query": "SELECT T2.Name FROM APPELLATIONS AS T1 JOIN WINE AS T2 ON T1.Appelation  =  T2.Appelation WHERE T1.County  =  \"Monterey\" AND T2.price  <  50"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Give the neames of wines with prices below 50 and with appelations in Monterey county.",
+        "query": "SELECT T2.Name FROM APPELLATIONS AS T1 JOIN WINE AS T2 ON T1.Appelation  =  T2.Appelation WHERE T1.County  =  \"Monterey\" AND T2.price  <  50"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the numbers of wines for different grapes?",
+        "query": "SELECT count(*) ,  Grape FROM WINE GROUP BY Grape"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "How many wines are there for each grape?",
+        "query": "SELECT count(*) ,  Grape FROM WINE GROUP BY Grape"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the average prices of wines for different years?",
+        "query": "SELECT avg(Price) ,  YEAR FROM WINE GROUP BY YEAR"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What is the average prices of wines for each each?",
+        "query": "SELECT avg(Price) ,  YEAR FROM WINE GROUP BY YEAR"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Find the distinct names of all wines that have prices higher than some wines from John Anthony winery.",
+        "query": "SELECT DISTINCT Name FROM WINE WHERE Price  >  (SELECT min(Price) FROM wine WHERE Winery  =  \"John Anthony\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the distinct names of wines with prices higher than any wine from John Anthony winery.",
+        "query": "SELECT DISTINCT Name FROM WINE WHERE Price  >  (SELECT min(Price) FROM wine WHERE Winery  =  \"John Anthony\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "List the names of all distinct wines in alphabetical order.",
+        "query": "SELECT DISTINCT Name FROM WINE ORDER BY Name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the names of wines, sorted in alphabetical order?",
+        "query": "SELECT DISTINCT Name FROM WINE ORDER BY Name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "List the names of all distinct wines ordered by price.",
+        "query": "SELECT DISTINCT Name FROM WINE ORDER BY price"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the names of wines, sorted by price ascending?",
+        "query": "SELECT DISTINCT Name FROM WINE ORDER BY price"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What is the area of the appelation that produces the highest number of wines before the year of 2010?",
+        "query": "SELECT T1.Area FROM APPELLATIONS AS T1 JOIN WINE AS T2 ON T1.Appelation  =  T2.Appelation GROUP BY T2.Appelation HAVING T2.year  <  2010 ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What is the area for the appelation which produced the most wines prior to 2010?",
+        "query": "SELECT T1.Area FROM APPELLATIONS AS T1 JOIN WINE AS T2 ON T1.Appelation  =  T2.Appelation GROUP BY T2.Appelation HAVING T2.year  <  2010 ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What is the color of the grape whose wine products has the highest average price?",
+        "query": "SELECT T1.Color FROM GRAPES AS T1 JOIN WINE AS T2 ON T1.Grape  =  T2.Grape GROUP BY T2.Grape ORDER BY AVG(Price) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Give the color of the grape whose wine products have the highest average price?",
+        "query": "SELECT T1.Color FROM GRAPES AS T1 JOIN WINE AS T2 ON T1.Grape  =  T2.Grape GROUP BY T2.Grape ORDER BY AVG(Price) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Find the distinct names of wines produced before the year of 2000 or after the year of 2010.",
+        "query": "SELECT DISTINCT Name FROM WINE WHERE YEAR  <  2000 OR YEAR  >  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Give the distinct names of wines made before 2000 or after 2010.",
+        "query": "SELECT DISTINCT Name FROM WINE WHERE YEAR  <  2000 OR YEAR  >  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Find the distinct winery of wines having price between 50 and 100.",
+        "query": "SELECT DISTINCT Winery FROM WINE WHERE Price BETWEEN 50 AND 100"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the distinct wineries which produce wines costing between 50 and 100?",
+        "query": "SELECT DISTINCT Winery FROM WINE WHERE Price BETWEEN 50 AND 100"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the average prices and cases of wines produced in the year of 2009 and made of Zinfandel grape?",
+        "query": "SELECT AVG(Price) ,  AVG(Cases) FROM WINE WHERE YEAR  =  2009 AND Grape  =  \"Zinfandel\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Give the average price and case of wines made from Zinfandel grapes in the year 2009.",
+        "query": "SELECT AVG(Price) ,  AVG(Cases) FROM WINE WHERE YEAR  =  2009 AND Grape  =  \"Zinfandel\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the maximum price and score of wines produced by St. Helena appelation?",
+        "query": "SELECT max(Price) ,  max(Score) FROM WINE WHERE Appelation  =  \"St. Helena\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Give the maximum price and score for wines produced in the appelation St. Helena.",
+        "query": "SELECT max(Price) ,  max(Score) FROM WINE WHERE Appelation  =  \"St. Helena\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the maximum price and score of wines in each year?",
+        "query": "SELECT max(Price) ,  max(Score) ,  YEAR FROM WINE GROUP BY YEAR"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the maximum price and score of wines for each year?",
+        "query": "SELECT max(Price) ,  max(Score) ,  YEAR FROM WINE GROUP BY YEAR"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the average price and score of wines grouped by appelation?",
+        "query": "SELECT avg(Price) ,  avg(Score) ,  Appelation FROM WINE GROUP BY Appelation"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the average price and score of wines for each appelation?",
+        "query": "SELECT avg(Price) ,  avg(Score) ,  Appelation FROM WINE GROUP BY Appelation"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Find the wineries that have at least four wines.",
+        "query": "SELECT Winery FROM WINE GROUP BY Winery HAVING count(*)  >=  4"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Which wineries produce at least four wines?",
+        "query": "SELECT Winery FROM WINE GROUP BY Winery HAVING count(*)  >=  4"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Find the country of all appelations who have at most three wines.",
+        "query": "SELECT T1.County FROM APPELLATIONS AS T1 JOIN WINE AS T2 ON T1.Appelation  =  T2.Appelation GROUP BY T2.Appelation HAVING count(*)  <=  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the countries for appelations with at most 3 wines?",
+        "query": "SELECT T1.County FROM APPELLATIONS AS T1 JOIN WINE AS T2 ON T1.Appelation  =  T2.Appelation GROUP BY T2.Appelation HAVING count(*)  <=  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the names of wines whose production year are before the year of all wines by Brander winery?",
+        "query": "SELECT Name FROM WINE WHERE YEAR  <  (SELECT min(YEAR) FROM WINE WHERE Winery  =  \"Brander\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the names of wines produced before any wine from the Brander winery?",
+        "query": "SELECT Name FROM WINE WHERE YEAR  <  (SELECT min(YEAR) FROM WINE WHERE Winery  =  \"Brander\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the names of wines that are more expensive then all wines made in the year 2006?",
+        "query": "SELECT Name FROM WINE WHERE Price  >  (SELECT max(Price) FROM WINE WHERE YEAR  =  2006)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Give the names of wines with prices above any wine produced in 2006.",
+        "query": "SELECT Name FROM WINE WHERE Price  >  (SELECT max(Price) FROM WINE WHERE YEAR  =  2006)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Find the top 3 wineries with the greatest number of wines made of white color grapes.",
+        "query": "SELECT T2.Winery FROM GRAPES AS T1 JOIN WINE AS T2 ON T1.GRAPE  =  T2.GRAPE WHERE T1.Color  =  \"White\" GROUP BY T2.Winery ORDER BY count(*) DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Which 3 wineries produce the most wines made from white grapes?",
+        "query": "SELECT T2.Winery FROM GRAPES AS T1 JOIN WINE AS T2 ON T1.GRAPE  =  T2.GRAPE WHERE T1.Color  =  \"White\" GROUP BY T2.Winery ORDER BY count(*) DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "List the grape, winery and year of the wines whose price is bigger than 100 ordered by year.",
+        "query": "SELECT Grape ,  Winery ,  YEAR FROM WINE WHERE Price  >   100 ORDER BY YEAR"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the grapes, wineries and years for wines with price higher than 100, sorted by year?",
+        "query": "SELECT Grape ,  Winery ,  YEAR FROM WINE WHERE Price  >   100 ORDER BY YEAR"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "List the grape, appelation and name of wines whose score is higher than 93 ordered by Name.",
+        "query": "SELECT Grape ,  Appelation ,  Name FROM WINE WHERE Score  >  93 ORDER BY Name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the grapes, appelations, and wines with scores above 93, sorted by Name?",
+        "query": "SELECT Grape ,  Appelation ,  Name FROM WINE WHERE Score  >  93 ORDER BY Name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Find the appelations that produce wines after the year of 2008 but not in Central Coast area.",
+        "query": "SELECT Appelation FROM WINE WHERE YEAR  >  2008 EXCEPT SELECT Appelation FROM APPELLATIONS WHERE Area  =  \"Central Coast\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What are the appelations for wines produced after 2008 but not in the Central Coast area?",
+        "query": "SELECT Appelation FROM WINE WHERE YEAR  >  2008 EXCEPT SELECT Appelation FROM APPELLATIONS WHERE Area  =  \"Central Coast\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Find the average price of wines that are not produced from Sonoma county.",
+        "query": "SELECT avg(price) FROM wine WHERE Appelation NOT IN (SELECT T1.Appelation FROM APPELLATIONS AS T1 JOIN WINE AS T2 ON T1.Appelation  =  T2.Appelation WHERE T1.County  =  'Sonoma')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What is the average price for wines not produced in Sonoma county?",
+        "query": "SELECT avg(price) FROM wine WHERE Appelation NOT IN (SELECT T1.Appelation FROM APPELLATIONS AS T1 JOIN WINE AS T2 ON T1.Appelation  =  T2.Appelation WHERE T1.County  =  'Sonoma')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "Find the county where produces the most number of wines with score higher than 90.",
+        "query": "SELECT T1.County FROM APPELLATIONS AS T1 JOIN WINE AS T2 ON T1.Appelation  =  T2.Appelation WHERE T2.Score  >  90 GROUP BY T1.County ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wine_1",
+        "question": "What is the county that produces the most wines scoring higher than 90?",
+        "query": "SELECT T1.County FROM APPELLATIONS AS T1 JOIN WINE AS T2 ON T1.Appelation  =  T2.Appelation WHERE T2.Score  >  90 GROUP BY T1.County ORDER BY count(*) DESC LIMIT 1"
+    }
+]

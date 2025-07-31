@@ -1,0 +1,674 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "A list of the top 5 countries by number of invoices. List country name and number of invoices.",
+        "query": "SELECT billing_country ,  COUNT(*) FROM invoices GROUP BY billing_country ORDER BY count(*) DESC LIMIT 5;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the top 5 countries by number of invoices and how many do they have?",
+        "query": "SELECT billing_country ,  COUNT(*) FROM invoices GROUP BY billing_country ORDER BY count(*) DESC LIMIT 5;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "A list of the top 8 countries by gross/total invoice size. List country name and gross invoice size.",
+        "query": "SELECT billing_country ,  SUM(total) FROM invoices GROUP BY billing_country ORDER BY SUM(total) DESC LIMIT 8;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the names of the top 8 countries by total invoice size and what are those sizes?",
+        "query": "SELECT billing_country ,  SUM(total) FROM invoices GROUP BY billing_country ORDER BY SUM(total) DESC LIMIT 8;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "A list of the top 10 countries by average invoice size. List country name and average invoice size.",
+        "query": "SELECT billing_country ,  AVG(total) FROM invoices GROUP BY billing_country ORDER BY AVG(total) DESC LIMIT 10;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the names of the countries and average invoice size of the top countries by size?",
+        "query": "SELECT billing_country ,  AVG(total) FROM invoices GROUP BY billing_country ORDER BY AVG(total) DESC LIMIT 10;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "Find out 5 customers who most recently purchased something. List customers' first and last name.",
+        "query": "SELECT T1.first_name ,  T1.last_name FROM customers AS T1 JOIN invoices AS T2 ON T2.customer_id  =  T1.id ORDER BY T2.invoice_date DESC LIMIT 5;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the first and last names of the 5 customers who purchased something most recently?",
+        "query": "SELECT T1.first_name ,  T1.last_name FROM customers AS T1 JOIN invoices AS T2 ON T2.customer_id  =  T1.id ORDER BY T2.invoice_date DESC LIMIT 5;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "Find out the top 10 customers by total number of orders. List customers' first and last name and the number of total orders.",
+        "query": "SELECT T1.first_name ,  T1.last_name ,  COUNT(*) FROM customers AS T1 JOIN invoices AS T2 ON T2.customer_id  =  T1.id GROUP BY T1.id ORDER BY COUNT(*) DESC LIMIT 10;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the top 10 customers' first and last names by total number of orders and how many orders did they make?",
+        "query": "SELECT T1.first_name ,  T1.last_name ,  COUNT(*) FROM customers AS T1 JOIN invoices AS T2 ON T2.customer_id  =  T1.id GROUP BY T1.id ORDER BY COUNT(*) DESC LIMIT 10;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List the top 10 customers by total gross sales. List customers' first and last name and total gross sales.",
+        "query": "SELECT T1.first_name ,  T1.last_name ,  SUM(T2.total) FROM customers AS T1 JOIN invoices AS T2 ON T2.customer_id  =  T1.id GROUP BY T1.id ORDER BY SUM(T2.total) DESC LIMIT 10;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the top 10 customers' first and last names with the highest gross sales, and also what are the sales?",
+        "query": "SELECT T1.first_name ,  T1.last_name ,  SUM(T2.total) FROM customers AS T1 JOIN invoices AS T2 ON T2.customer_id  =  T1.id GROUP BY T1.id ORDER BY SUM(T2.total) DESC LIMIT 10;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List the top 5 genres by number of tracks. List genres name and total tracks.",
+        "query": "SELECT T1.name ,  COUNT(*) FROM genres AS T1 JOIN tracks AS T2 ON T2.genre_id  =  T1.id GROUP BY T1.id ORDER BY count(*) DESC LIMIT 5;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many tracks does each genre have and what are the names of the top 5?",
+        "query": "SELECT T1.name ,  COUNT(*) FROM genres AS T1 JOIN tracks AS T2 ON T2.genre_id  =  T1.id GROUP BY T1.id ORDER BY count(*) DESC LIMIT 5;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List every album's title.",
+        "query": "SELECT title FROM albums;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the titles of all the albums?",
+        "query": "SELECT title FROM albums;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List every album ordered by album title in ascending order.",
+        "query": "SELECT title FROM albums ORDER BY title;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the titles of all the albums alphabetically ascending?",
+        "query": "SELECT title FROM albums ORDER BY title;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List every album whose title starts with A in alphabetical order.",
+        "query": "SELECT title FROM albums WHERE title LIKE 'A%' ORDER BY title;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the titles of all albums that start with A in alphabetical order?",
+        "query": "SELECT title FROM albums WHERE title LIKE 'A%' ORDER BY title;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List the customers first and last name of 10 least expensive invoices.",
+        "query": "SELECT T1.first_name ,  T1.last_name FROM customers AS T1 JOIN invoices AS T2 ON T2.customer_id  =  T1.id ORDER BY total LIMIT 10;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the first and last names of the customers with the 10 cheapest invoices?",
+        "query": "SELECT T1.first_name ,  T1.last_name FROM customers AS T1 JOIN invoices AS T2 ON T2.customer_id  =  T1.id ORDER BY total LIMIT 10;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List total amount of  invoice from Chicago, IL.",
+        "query": "SELECT sum(total) FROM invoices WHERE billing_city  =  \"Chicago\" AND billing_state  =  \"IL\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the total amount of money in the invoices billed from Chicago, Illinois?",
+        "query": "SELECT sum(total) FROM invoices WHERE billing_city  =  \"Chicago\" AND billing_state  =  \"IL\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List the number of invoices from Chicago, IL.",
+        "query": "SELECT COUNT(*) FROM invoices WHERE billing_city  =  \"Chicago\" AND billing_state  =  \"IL\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many invoices were billed from Chicago, IL?",
+        "query": "SELECT COUNT(*) FROM invoices WHERE billing_city  =  \"Chicago\" AND billing_state  =  \"IL\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List the number of invoices from the US, grouped by state.",
+        "query": "SELECT billing_state ,  COUNT(*) FROM invoices WHERE billing_country  =  \"USA\" GROUP BY billing_state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many invoices were billed from each state?",
+        "query": "SELECT billing_state ,  COUNT(*) FROM invoices WHERE billing_country  =  \"USA\" GROUP BY billing_state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List the state in the US with the most invoices.",
+        "query": "SELECT billing_state ,  COUNT(*) FROM invoices WHERE billing_country  =  \"USA\" GROUP BY billing_state ORDER BY COUNT(*) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the states with the most invoices?",
+        "query": "SELECT billing_state ,  COUNT(*) FROM invoices WHERE billing_country  =  \"USA\" GROUP BY billing_state ORDER BY COUNT(*) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List the number of invoices and the invoice total from California.",
+        "query": "SELECT billing_state ,  COUNT(*) ,  SUM(total) FROM invoices WHERE billing_state  =  \"CA\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the number of invoices and total money billed in them from CA?",
+        "query": "SELECT billing_state ,  COUNT(*) ,  SUM(total) FROM invoices WHERE billing_state  =  \"CA\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List Aerosmith's albums.",
+        "query": "SELECT T1.title FROM albums AS T1 JOIN artists AS T2 ON  T1.artist_id = T2.id WHERE T2.name = \"Aerosmith\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the titles of all the Aerosmith albums?",
+        "query": "SELECT T1.title FROM albums AS T1 JOIN artists AS T2 ON  T1.artist_id = T2.id WHERE T2.name = \"Aerosmith\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many albums does Billy Cobham has?",
+        "query": "SELECT count(*) FROM albums AS T1 JOIN artists AS T2 ON  T1.artist_id = T2.id WHERE T2.name = \"Billy Cobham\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many albums has Billy Cobam released?",
+        "query": "SELECT count(*) FROM albums AS T1 JOIN artists AS T2 ON  T1.artist_id = T2.id WHERE T2.name = \"Billy Cobham\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "Eduardo Martins is a customer at which company?",
+        "query": "SELECT company FROM customers WHERE first_name = \"Eduardo\" AND last_name = \"Martins\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the company where Eduardo Martins is a customer?",
+        "query": "SELECT company FROM customers WHERE first_name = \"Eduardo\" AND last_name = \"Martins\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is Astrid Gruber's email and phone number?",
+        "query": "SELECT email ,  phone FROM customers WHERE first_name = \"Astrid\" AND last_name = \"Gruber\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the email and phone number of Astrid Gruber the customer?",
+        "query": "SELECT email ,  phone FROM customers WHERE first_name = \"Astrid\" AND last_name = \"Gruber\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many customers live in Prague city?",
+        "query": "SELECT count(*) FROM customers WHERE city = \"Prague\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many customers live in the city of Prague?",
+        "query": "SELECT count(*) FROM customers WHERE city = \"Prague\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many customers in state of CA?",
+        "query": "SELECT count(*) FROM customers WHERE state = \"CA\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many customers are from California?",
+        "query": "SELECT count(*) FROM customers WHERE state = \"CA\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What country does Roberto Almeida live?",
+        "query": "SELECT country FROM customers WHERE first_name = \"Roberto\" AND last_name = \"Almeida\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "In which country does Roberto Almeida?",
+        "query": "SELECT country FROM customers WHERE first_name = \"Roberto\" AND last_name = \"Almeida\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List the name of albums that are released by aritist whose name has 'Led'",
+        "query": "SELECT T2.title FROM artists AS T1 JOIN albums AS T2 ON T1.id  =  T2.artist_id WHERE T1.name LIKE '%Led%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the title of the album that was released by the artist whose name has the phrase 'Led'?",
+        "query": "SELECT T2.title FROM artists AS T1 JOIN albums AS T2 ON T1.id  =  T2.artist_id WHERE T1.name LIKE '%Led%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many customers does Steve Johnson support?",
+        "query": "SELECT count(*) FROM employees AS T1 JOIN customers AS T2 ON T2.support_rep_id = T1.id WHERE T1.first_name = \"Steve\" AND T1.last_name = \"Johnson\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the count of customers that Steve Johnson supports?",
+        "query": "SELECT count(*) FROM employees AS T1 JOIN customers AS T2 ON T2.support_rep_id = T1.id WHERE T1.first_name = \"Steve\" AND T1.last_name = \"Johnson\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the title, phone and hire date of Nancy Edwards?",
+        "query": "SELECT title ,  phone ,  hire_date FROM employees WHERE first_name = \"Nancy\" AND last_name = \"Edwards\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the title, phone number and hire date for the employee named Nancy Edwards?",
+        "query": "SELECT title ,  phone ,  hire_date FROM employees WHERE first_name = \"Nancy\" AND last_name = \"Edwards\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "find the full name of employees who report to Nancy Edwards?",
+        "query": "SELECT T2.first_name , T2.last_name FROM employees AS T1 JOIN employees AS T2 ON T1.id = T2.reports_to WHERE T1.first_name = \"Nancy\" AND T1.last_name = \"Edwards\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the first and last name of the employee who reports to Nancy Edwards?",
+        "query": "SELECT T2.first_name , T2.last_name FROM employees AS T1 JOIN employees AS T2 ON T1.id = T2.reports_to WHERE T1.first_name = \"Nancy\" AND T1.last_name = \"Edwards\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the address of employee Nancy Edwards?",
+        "query": "SELECT address FROM employees WHERE first_name = \"Nancy\" AND last_name = \"Edwards\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is Nancy Edwards's address?",
+        "query": "SELECT address FROM employees WHERE first_name = \"Nancy\" AND last_name = \"Edwards\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "Find the full name of employee who supported the most number of customers.",
+        "query": "SELECT T1.first_name , T1.last_name FROM employees AS T1 JOIN customers AS T2 ON T1.id  =  T2.support_rep_id GROUP BY T1.id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the full name of the employee who has the most customers?",
+        "query": "SELECT T1.first_name , T1.last_name FROM employees AS T1 JOIN customers AS T2 ON T1.id  =  T2.support_rep_id GROUP BY T1.id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many employees are living in Canada?",
+        "query": "SELECT count(*) FROM employees WHERE country = \"Canada\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many employees live in Canada?",
+        "query": "SELECT count(*) FROM employees WHERE country = \"Canada\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is employee Nancy Edwards's phone number?",
+        "query": "SELECT phone FROM employees WHERE first_name = \"Nancy\" AND last_name = \"Edwards\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the the phone number of Nancy Edwards?",
+        "query": "SELECT phone FROM employees WHERE first_name = \"Nancy\" AND last_name = \"Edwards\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "Who is the youngest employee in the company? List employee's first and last name.",
+        "query": "SELECT first_name , last_name FROM employees ORDER BY birth_date DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What si the youngest employee's first and last name?",
+        "query": "SELECT first_name , last_name FROM employees ORDER BY birth_date DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List top 10 employee work longest in the company. List employee's first and last name.",
+        "query": "SELECT first_name , last_name FROM employees ORDER BY hire_date ASC LIMIT 10;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the first and last names of the top 10 longest-serving employees?",
+        "query": "SELECT first_name , last_name FROM employees ORDER BY hire_date ASC LIMIT 10;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "Find the number of employees whose title is IT Staff from each city?",
+        "query": "SELECT count(*) ,  city FROM employees WHERE title  =  'IT Staff' GROUP BY city"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many employees who are IT staff are from each city?",
+        "query": "SELECT count(*) ,  city FROM employees WHERE title  =  'IT Staff' GROUP BY city"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "Which employee manage most number of peoples? List employee's first and last name, and number of people report to that employee.",
+        "query": "SELECT T2.first_name , T2.last_name ,  count(T1.reports_to) FROM employees AS T1 JOIN employees AS T2 ON T1.reports_to = T2.id GROUP BY T1.reports_to ORDER BY count(T1.reports_to) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the first and last names of all the employees and how many people report to them?",
+        "query": "SELECT T2.first_name , T2.last_name ,  count(T1.reports_to) FROM employees AS T1 JOIN employees AS T2 ON T1.reports_to = T2.id GROUP BY T1.reports_to ORDER BY count(T1.reports_to) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many orders does Lucas Mancini has?",
+        "query": "SELECT count(*) FROM customers AS T1 JOIN invoices AS T2 ON T1.id = T2.customer_id WHERE T1.first_name = \"Lucas\" AND T1.last_name = \"Mancini\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many orders does Luca Mancini have in his invoices?",
+        "query": "SELECT count(*) FROM customers AS T1 JOIN invoices AS T2 ON T1.id = T2.customer_id WHERE T1.first_name = \"Lucas\" AND T1.last_name = \"Mancini\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the total amount of money spent by Lucas Mancini?",
+        "query": "SELECT sum(T2.total) FROM customers AS T1 JOIN invoices AS T2 ON T1.id = T2.customer_id WHERE T1.first_name = \"Lucas\" AND T1.last_name = \"Mancini\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How much money did Lucas Mancini spend?",
+        "query": "SELECT sum(T2.total) FROM customers AS T1 JOIN invoices AS T2 ON T1.id = T2.customer_id WHERE T1.first_name = \"Lucas\" AND T1.last_name = \"Mancini\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List all media types.",
+        "query": "SELECT name FROM media_types;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the names of all the media types?",
+        "query": "SELECT name FROM media_types;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List all different genre types.",
+        "query": "SELECT DISTINCT name FROM genres;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the different names of the genres?",
+        "query": "SELECT DISTINCT name FROM genres;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List the name of all playlist.",
+        "query": "SELECT name FROM playlists;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the names of all the playlists?",
+        "query": "SELECT name FROM playlists;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "Who is the composer of track Fast As a Shark?",
+        "query": "SELECT composer FROM tracks WHERE name = \"Fast As a Shark\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the composer who created the track \"Fast As a Shark\"?",
+        "query": "SELECT composer FROM tracks WHERE name = \"Fast As a Shark\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How long does track Fast As a Shark has?",
+        "query": "SELECT milliseconds FROM tracks WHERE name = \"Fast As a Shark\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many milliseconds long is Fast As a Shark?",
+        "query": "SELECT milliseconds FROM tracks WHERE name = \"Fast As a Shark\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the name of tracks whose genre is Rock?",
+        "query": "SELECT T2.name FROM genres AS T1 JOIN tracks AS T2 ON T1.id = T2.genre_id WHERE T1.name = \"Rock\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the name of all tracks in the Rock genre?",
+        "query": "SELECT T2.name FROM genres AS T1 JOIN tracks AS T2 ON T1.id = T2.genre_id WHERE T1.name = \"Rock\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is title of album which track Balls to the Wall belongs to?",
+        "query": "SELECT T1.title FROM albums AS T1 JOIN tracks AS T2 ON T1.id = T2.genre_id WHERE T2.name = \"Balls to the Wall\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the name of the album that has the track Ball to the Wall?",
+        "query": "SELECT T1.title FROM albums AS T1 JOIN tracks AS T2 ON T1.id = T2.genre_id WHERE T2.name = \"Balls to the Wall\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List name of all tracks in Balls to the Wall.",
+        "query": "SELECT T2.name FROM albums AS T1 JOIN tracks AS T2 ON T1.id = T2.genre_id WHERE T1.title = \"Balls to the Wall\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the name of all tracks in the album named Balls to the Wall?",
+        "query": "SELECT T2.name FROM albums AS T1 JOIN tracks AS T2 ON T1.id = T2.genre_id WHERE T1.title = \"Balls to the Wall\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List title of albums have the number of tracks greater than 10.",
+        "query": "SELECT T1.title FROM albums AS T1 JOIN tracks AS T2 ON T1.id = T2.album_id GROUP BY T1.id HAVING count(T1.id)  >  10;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the names of the albums that have more than 10 tracks?",
+        "query": "SELECT T1.title FROM albums AS T1 JOIN tracks AS T2 ON T1.id = T2.album_id GROUP BY T1.id HAVING count(T1.id)  >  10;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List the name of tracks belongs to genre Rock and whose media type is MPEG audio file.",
+        "query": "SELECT T2.name FROM genres AS T1 JOIN tracks AS T2 ON T1.id = T2.genre_id JOIN media_types AS T3 ON T3.id = T2.media_type_id WHERE T1.name = \"Rock\" AND T3.name = \"MPEG audio file\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the names of all Rock tracks that are stored on MPEG audio files?",
+        "query": "SELECT T2.name FROM genres AS T1 JOIN tracks AS T2 ON T1.id = T2.genre_id JOIN media_types AS T3 ON T3.id = T2.media_type_id WHERE T1.name = \"Rock\" AND T3.name = \"MPEG audio file\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List the name of tracks belongs to genre Rock or media type is MPEG audio file.",
+        "query": "SELECT T2.name FROM genres AS T1 JOIN tracks AS T2 ON T1.id = T2.genre_id JOIN media_types AS T3 ON T3.id = T2.media_type_id WHERE T1.name = \"Rock\" OR T3.name = \"MPEG audio file\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the names of all tracks that belong to the Rock genre and whose media type is MPEG?",
+        "query": "SELECT T2.name FROM genres AS T1 JOIN tracks AS T2 ON T1.id = T2.genre_id JOIN media_types AS T3 ON T3.id = T2.media_type_id WHERE T1.name = \"Rock\" OR T3.name = \"MPEG audio file\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List the name of tracks belongs to genre Rock or genre Jazz.",
+        "query": "SELECT T2.name FROM genres AS T1 JOIN tracks AS T2 ON T1.id = T2.genre_id WHERE T1.name = \"Rock\" OR T1.name = \"Jazz\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the names of the tracks that are Rock or Jazz songs?",
+        "query": "SELECT T2.name FROM genres AS T1 JOIN tracks AS T2 ON T1.id = T2.genre_id WHERE T1.name = \"Rock\" OR T1.name = \"Jazz\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List the name of all tracks in the playlists of Movies.",
+        "query": "SELECT T1.name FROM tracks AS T1 JOIN playlist_tracks AS T2 ON T1.id = T2.track_id JOIN playlists AS T3 ON T3.id = T2.playlist_id WHERE T3.name = \"Movies\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the names of all tracks that are on playlists titled Movies?",
+        "query": "SELECT T1.name FROM tracks AS T1 JOIN playlist_tracks AS T2 ON T1.id = T2.track_id JOIN playlists AS T3 ON T3.id = T2.playlist_id WHERE T3.name = \"Movies\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List the name of playlist which has number of tracks greater than 100.",
+        "query": "SELECT T2.name FROM playlist_tracks AS T1 JOIN playlists AS T2 ON T2.id = T1.playlist_id GROUP BY T1.playlist_id HAVING count(T1.track_id)  >  100;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the names of all playlists that have more than 100 tracks?",
+        "query": "SELECT T2.name FROM playlist_tracks AS T1 JOIN playlists AS T2 ON T2.id = T1.playlist_id GROUP BY T1.playlist_id HAVING count(T1.track_id)  >  100;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "List all tracks bought by customer Daan Peeters.",
+        "query": "SELECT T1.name FROM tracks AS T1 JOIN invoice_lines AS T2 ON T1.id = T2.track_id JOIN invoices AS T3 ON T3.id = T2.invoice_id JOIN customers AS T4 ON T4.id = T3.customer_id WHERE T4.first_name = \"Daan\" AND T4.last_name = \"Peeters\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the tracks that Dean Peeters bought?",
+        "query": "SELECT T1.name FROM tracks AS T1 JOIN invoice_lines AS T2 ON T1.id = T2.track_id JOIN invoices AS T3 ON T3.id = T2.invoice_id JOIN customers AS T4 ON T4.id = T3.customer_id WHERE T4.first_name = \"Daan\" AND T4.last_name = \"Peeters\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How much is the track Fast As a Shark?",
+        "query": "SELECT unit_price FROM tracks WHERE name = \"Fast As a Shark\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What is the unit price of the tune \"Fast As a Shark\"?",
+        "query": "SELECT unit_price FROM tracks WHERE name = \"Fast As a Shark\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "Find the name of tracks which are in Movies playlist but not in music playlist.",
+        "query": "SELECT T1.name FROM tracks AS T1 JOIN playlist_tracks AS T2 ON T1.id  =  T2.track_id JOIN playlists AS T3 ON T2.playlist_id  =  T3.id WHERE T3.name  =  'Movies' EXCEPT SELECT T1.name FROM tracks AS T1 JOIN playlist_tracks AS T2 ON T1.id  =  T2.track_id JOIN playlists AS T3 ON T2.playlist_id  =  T3.id WHERE T3.name  =  'Music'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the names of all tracks that are on the Movies playlist but not in the music playlist?",
+        "query": "SELECT T1.name FROM tracks AS T1 JOIN playlist_tracks AS T2 ON T1.id  =  T2.track_id JOIN playlists AS T3 ON T2.playlist_id  =  T3.id WHERE T3.name  =  'Movies' EXCEPT SELECT T1.name FROM tracks AS T1 JOIN playlist_tracks AS T2 ON T1.id  =  T2.track_id JOIN playlists AS T3 ON T2.playlist_id  =  T3.id WHERE T3.name  =  'Music'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "Find the name of tracks which are in both Movies and music playlists.",
+        "query": "SELECT T1.name FROM tracks AS T1 JOIN playlist_tracks AS T2 ON T1.id  =  T2.track_id JOIN playlists AS T3 ON T2.playlist_id  =  T3.id WHERE T3.name  =  'Movies' INTERSECT SELECT T1.name FROM tracks AS T1 JOIN playlist_tracks AS T2 ON T1.id  =  T2.track_id JOIN playlists AS T3 ON T2.playlist_id  =  T3.id WHERE T3.name  =  'Music'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "What are the names of all the tracks that are in both the Movies and music playlists?",
+        "query": "SELECT T1.name FROM tracks AS T1 JOIN playlist_tracks AS T2 ON T1.id  =  T2.track_id JOIN playlists AS T3 ON T2.playlist_id  =  T3.id WHERE T3.name  =  'Movies' INTERSECT SELECT T1.name FROM tracks AS T1 JOIN playlist_tracks AS T2 ON T1.id  =  T2.track_id JOIN playlists AS T3 ON T2.playlist_id  =  T3.id WHERE T3.name  =  'Music'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "Find number of tracks in each genre?",
+        "query": "SELECT count(*) ,  T1.name FROM genres AS T1 JOIN tracks AS T2 ON T1.id = T2.genre_id GROUP BY T1.name;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "store_1",
+        "question": "How many tracks are in each genre?",
+        "query": "SELECT count(*) ,  T1.name FROM genres AS T1 JOIN tracks AS T2 ON T1.id = T2.genre_id GROUP BY T1.name;"
+    }
+]

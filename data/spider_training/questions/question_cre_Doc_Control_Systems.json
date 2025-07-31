@@ -1,0 +1,200 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "What document status codes do we have?",
+        "query": "SELECT document_status_code FROM Ref_Document_Status;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "What is the description of document status code 'working'?",
+        "query": "SELECT document_status_description FROM Ref_Document_Status WHERE document_status_code = \"working\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "What document type codes do we have?",
+        "query": "SELECT document_type_code FROM Ref_Document_Types;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "What is the description of document type 'Paper'?",
+        "query": "SELECT document_type_description FROM Ref_Document_Types WHERE document_type_code = \"Paper\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "What are the shipping agent names?",
+        "query": "SELECT shipping_agent_name FROM Ref_Shipping_Agents;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "What is the shipping agent code of shipping agent UPS?",
+        "query": "SELECT shipping_agent_code FROM Ref_Shipping_Agents WHERE shipping_agent_name = \"UPS\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "What are all role codes?",
+        "query": "SELECT role_code FROM ROLES;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "What is the description of role code ED?",
+        "query": "SELECT role_description FROM ROLES WHERE role_code = \"ED\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "How many employees do we have?",
+        "query": "SELECT count(*) FROM Employees;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "What is the role of the employee named Koby?",
+        "query": "SELECT T1.role_description FROM ROLES AS T1 JOIN Employees AS T2 ON T1.role_code = T2.role_code WHERE T2.employee_name = \"Koby\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "List all document ids and receipt dates of documents.",
+        "query": "SELECT document_id ,  receipt_date FROM Documents;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "How many employees does each role have? List role description, id and number of employees.",
+        "query": "SELECT T1.role_description ,  T2.role_code ,  count(*) FROM ROLES AS T1 JOIN Employees AS T2 ON T1.role_code = T2.role_code GROUP BY T2.role_code;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "List roles that have more than one employee. List the role description and number of employees.",
+        "query": "SELECT Roles.role_description , count(Employees.employee_id) FROM ROLES JOIN Employees ON Employees.role_code = Roles.role_code GROUP BY Employees.role_code HAVING count(Employees.employee_id)  >  1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "What is the document status description of the document with id 1?",
+        "query": "SELECT Ref_Document_Status.document_status_description FROM Ref_Document_Status JOIN Documents ON Documents.document_status_code = Ref_Document_Status.document_status_code WHERE Documents.document_id = 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "How many documents have the status code done?",
+        "query": "SELECT count(*) FROM Documents WHERE document_status_code = \"done\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "List the document type code for the document with the id 2.",
+        "query": "SELECT document_type_code FROM Documents WHERE document_id = 2;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "List the document ids for any documents with the status code done and the type code paper.",
+        "query": "SELECT document_id FROM Documents WHERE document_status_code = \"done\" AND document_type_code = \"Paper\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "What is the name of the shipping agent of the document with id 2?",
+        "query": "SELECT Ref_Shipping_Agents.shipping_agent_name FROM Ref_Shipping_Agents JOIN Documents ON Documents.shipping_agent_code = Ref_Shipping_Agents.shipping_agent_code WHERE Documents.document_id = 2;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "How many documents were shipped by USPS?",
+        "query": "SELECT count(*) FROM Ref_Shipping_Agents JOIN Documents ON Documents.shipping_agent_code = Ref_Shipping_Agents.shipping_agent_code WHERE Ref_Shipping_Agents.shipping_agent_name = \"USPS\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "Which shipping agent shipped the most documents? List the shipping agent name and the number of documents.",
+        "query": "SELECT Ref_Shipping_Agents.shipping_agent_name , count(Documents.document_id) FROM Ref_Shipping_Agents JOIN Documents ON Documents.shipping_agent_code = Ref_Shipping_Agents.shipping_agent_code GROUP BY Ref_Shipping_Agents.shipping_agent_code ORDER BY count(Documents.document_id) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "What is the receipt date of the document with id 3?",
+        "query": "SELECT receipt_date FROM Documents WHERE document_id = 3;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "What address was the document with id 4 mailed to?",
+        "query": "SELECT Addresses.address_details FROM Addresses JOIN Documents_Mailed ON Documents_Mailed.mailed_to_address_id = Addresses.address_id WHERE document_id = 4;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "What is the mail date of the document with id 7?",
+        "query": "SELECT mailing_date FROM Documents_Mailed WHERE document_id = 7;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "List the document ids of documents with the status done and type Paper, which not shipped by the shipping agent named USPS.",
+        "query": "SELECT document_id FROM Documents WHERE document_status_code  =  \"done\" AND document_type_code = \"Paper\" EXCEPT SELECT document_id FROM Documents JOIN Ref_Shipping_Agents ON Documents.shipping_agent_code = Ref_Shipping_Agents.shipping_agent_code WHERE Ref_Shipping_Agents.shipping_agent_name = \"USPS\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "List document id of documents status is done and document type is Paper and the document is shipped by shipping agent named USPS.",
+        "query": "SELECT document_id FROM Documents WHERE document_status_code  =  \"done\" AND document_type_code = \"Paper\" INTERSECT SELECT document_id FROM Documents JOIN Ref_Shipping_Agents ON Documents.shipping_agent_code = Ref_Shipping_Agents.shipping_agent_code WHERE Ref_Shipping_Agents.shipping_agent_name = \"USPS\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "What is draft detail of the document with id 7?",
+        "query": "SELECT draft_details FROM Document_Drafts WHERE document_id = 7;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "How many draft copies does the document with id 2 have?",
+        "query": "SELECT count(*) FROM Draft_Copies WHERE document_id = 2;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "Which document has the most draft copies? List its document id and number of draft copies.",
+        "query": "SELECT document_id , count(copy_number) FROM Draft_Copies GROUP BY document_id ORDER BY count(copy_number) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "Which documents have more than 1 draft copies? List document id and number of draft copies.",
+        "query": "SELECT document_id , count(*) FROM Draft_Copies GROUP BY document_id HAVING count(*)  >  1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "List all employees in the circulation history of the document with id 1. List the employee's name.",
+        "query": "SELECT Employees.employee_name FROM Employees JOIN Circulation_History ON Circulation_History.employee_id = Employees.employee_id WHERE Circulation_History.document_id = 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "List the employees who have not showed up in any circulation history of documents. List the employee's name.",
+        "query": "SELECT employee_name FROM Employees EXCEPT SELECT Employees.employee_name FROM Employees JOIN Circulation_History ON Circulation_History.employee_id = Employees.employee_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "Which employee has showed up in most circulation history documents. List the employee's name and the number of drafts and copies.",
+        "query": "SELECT Employees.employee_name , count(*) FROM Employees JOIN Circulation_History ON Circulation_History.employee_id = Employees.employee_id GROUP BY Circulation_History.document_id , Circulation_History.draft_number , Circulation_History.copy_number ORDER BY count(*) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Control_Systems",
+        "question": "For each document, list the number of employees who have showed up in the circulation history of that document. List the document ids and number of employees.",
+        "query": "SELECT document_id ,  count(DISTINCT employee_id) FROM Circulation_History GROUP BY document_id;"
+    }
+]

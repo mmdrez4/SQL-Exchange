@@ -1,0 +1,662 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many of Shakespeare's works were finished before the year 1602?",
+        "query": "SELECT COUNT(id) FROM works WHERE Date < 1602"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many scenes are there in Act 1 in Twelfth Night?",
+        "query": "SELECT COUNT(T1.id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T2.Act = 1 AND T1.Title = 'Twelfth Night'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the description of Act 1, Scene 2 in Twelfth Night?",
+        "query": "SELECT T2.Description FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T1.Title = 'Twelfth Night' AND T2.Act = 1 AND T2.Scene = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many more scenes are there in Act 1 than in Act 5 in Twelfth Night?",
+        "query": "SELECT SUM(IIF(T2.Act = 1, 1, 0)) - SUM(IIF(T2.Act = 5, 1, 0)) AS more FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T1.Title = 'Twelfth Night'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Which work is the character Lord Abergavenny from? Please give its short or abbreviated title.",
+        "query": "SELECT DISTINCT T1.Title FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id INNER JOIN characters AS T4 ON T3.character_id = T4.id WHERE T4.CharName = 'Lord Abergavenny'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Please list the character names of all the characters from the work Twelfth Night.",
+        "query": "SELECT DISTINCT T4.CharName FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id INNER JOIN characters AS T4 ON T3.character_id = T4.id WHERE T1.Title = 'Twelfth Night'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many paragraphs are there in Act 1, Scene 1 in Twelfth Night?",
+        "query": "SELECT SUM(T3.ParagraphNum) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id WHERE T2.Act = 1 AND T2.Scene = 1 AND T1.Title = 'Twelfth Night'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Please list all the paragraphs in Act 1, Scene 1 in Twelfth Night.",
+        "query": "SELECT T3.PlainText FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id WHERE T2.Act = 1 AND T2.Scene = 1 AND T1.Title = 'Twelfth Night'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many paragraphs contain the character Lord Abergavenny?",
+        "query": "SELECT SUM(T1.ParagraphNum) FROM paragraphs AS T1 INNER JOIN characters AS T2 ON T1.character_id = T2.id WHERE T2.CharName = 'Lord Abergavenny'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Please list the IDs of the paragraphs in which the character \"son to Tamora\" appears.",
+        "query": "SELECT T1.id FROM paragraphs AS T1 INNER JOIN characters AS T2 ON T1.character_id = T2.id WHERE T2.Description = 'son to Tamora'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "For how many times has the scene \"OLIVIA\u2019S house.\" appeared in Twelfth Night?",
+        "query": "SELECT COUNT(T2.id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T2.Description = 'OLIVIA\u2019S house.' AND T1.Title = 'Twelfth Night'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many characters are there in Twelfth Night?",
+        "query": "SELECT COUNT(DISTINCT T4.id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id INNER JOIN characters AS T4 ON T3.character_id = T4.id WHERE T1.Title = 'Twelfth Night'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Please give the title of the work of Shakespeare that has the most characters.",
+        "query": "SELECT T.Title FROM ( SELECT T1.Title, COUNT(T3.character_id) AS num FROM works T1 INNER JOIN chapters T2 ON T1.id = T2.work_id INNER JOIN paragraphs T3 ON T2.id = T3.chapter_id INNER JOIN characters T4 ON T3.character_id = T4.id GROUP BY T3.character_id, T1.Title ) T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the average number of characters in all the works of Shakespeare?",
+        "query": "SELECT SUM(DISTINCT T4.id) / COUNT(T1.id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id INNER JOIN characters AS T4 ON T3.character_id = T4.id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many scenes are there on average in one act in Twelfth Night?",
+        "query": "SELECT SUM(T2.Scene) / COUNT(T2.Act) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T1.Title = 'Twelfth Night'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many comedies did Shakespeare create?",
+        "query": "SELECT COUNT(id) FROM works WHERE GenreType = 'Comedy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "When did Shakespeare write the first poem?",
+        "query": "SELECT MIN(Date) FROM works WHERE GenreType = 'Poem'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Give the abbreviation name for the character \"Earl of Westmoreland\".",
+        "query": "SELECT DISTINCT Abbrev FROM characters WHERE CharName = 'Earl of Westmoreland'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Which chapter has the most paragraphs? Give the description of the chapter.",
+        "query": "SELECT T1.Description FROM chapters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.chapter_id ORDER BY T2.ParagraphNum DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Which character was mentioned in the paragraph \"Would he do so, I'ld beg your precious mistress, Which he counts but a trifle.\"? Give the character name.",
+        "query": "SELECT T1.CharName FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id WHERE T2.PlainText = 'Would he do so, I''ld beg your precious mistress,Which he counts but a trifle.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many characters are there in Titus Andronicus?",
+        "query": "SELECT COUNT(DISTINCT T3.character_id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id WHERE T1.Title = 'Titus Andronicus'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "List the number of acts in Two Gentlemen of Verona.",
+        "query": "SELECT DISTINCT T1.Act FROM chapters AS T1 INNER JOIN works AS T2 ON T1.id = T1.work_id WHERE T2.LongTitle = 'Two Gentlemen of Verona'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the description for the character mentioned in paragraph No.640171?",
+        "query": "SELECT T1.Description FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id WHERE T2.id = '640171'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Give the title of the work that contains the character \"Shylock\".",
+        "query": "SELECT DISTINCT T1.Title FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id INNER JOIN characters AS T4 ON T3.character_id = T4.id WHERE T4.CharName = 'Shylock'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many scenes are there in King John?",
+        "query": "SELECT COUNT(T2.Scene) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T1.Title = 'King John'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many chapters does the character Demetrius show in the story?",
+        "query": "SELECT COUNT(DISTINCT T2.chapter_id) FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id WHERE T1.CharName = 'Demetrius'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Which Shakespeare story with character ID 324 has description of 'this friend of Caesar'?",
+        "query": "SELECT T1.Title FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id INNER JOIN characters AS T4 ON T3.character_id = T4.id WHERE T2.id = '324' AND T2.Description = 'friend to Caesar'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Give the description for the Act No.2, Scene No.2 of Midsummer Night's Dream.",
+        "query": "SELECT T2.Description FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T2.Act = '2' AND T2.Scene = '2' AND T1.Title = 'Midsummer Night''s Dream'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Which Shakespeare tragedy has the most scenes? Give the long title.",
+        "query": "SELECT T.LongTitle FROM ( SELECT T1.LongTitle, COUNT(T2.Scene) AS num FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T1.GenreType = 'Tragedy' GROUP BY T1.LongTitle, T2.Scene ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many paragraphs are there in the scene whose description is \"A Sea-port in Cyprus. An open place near the quay.\"?",
+        "query": "SELECT SUM(T2.ParagraphNum) FROM chapters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.chapter_id WHERE T1.Description = 'A Sea-port in Cyprus. An open place near the quay.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What percentage of all scenes are tragic scenes in Shakespeare's work in 1594?",
+        "query": "SELECT CAST(SUM(IIF(T2.GenreType = 'Tragedy', 1, 0)) AS REAL) * 100 / COUNT(T1.Scene) FROM chapters AS T1 INNER JOIN works AS T2 ON T1.work_id = T2.id WHERE T2.Date = '1594'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Gives the average number of chapters in Shakespeare's 1599 work.",
+        "query": "SELECT CAST(COUNT(T1.id) AS REAL) / COUNT(DISTINCT T2.id) FROM chapters AS T1 INNER JOIN works AS T2 ON T1.work_id = T2.id WHERE T2.Date = '1599'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many \"servant to Timon\" characters are there?",
+        "query": "SELECT COUNT(id) FROM characters WHERE Description = 'servant to Timon'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the title of the first ever work of William Shakespeare?",
+        "query": "SELECT Title FROM works WHERE Date = ( SELECT MIN(Date) FROM works )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many poems did Shakespeare write?",
+        "query": "SELECT COUNT(id) FROM works WHERE GenreType = 'Poem'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many scenes are there in work id 7, act 1?",
+        "query": "SELECT COUNT(id) FROM chapters WHERE work_id = 7 AND Act = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "In the year 1500s, how many tragedies did Shakespeare write?",
+        "query": "SELECT COUNT(id) FROM works WHERE GenreType = 'Tragedy' AND Date BETWEEN 1500 AND 1599"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Who is the daughter of Capulet?",
+        "query": "SELECT CharName FROM characters WHERE Description = 'Daughter to Capulet'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many paragraphs are there in \"Ay, surely, mere the truth: I know his lady.\"?",
+        "query": "SELECT ParagraphNum FROM paragraphs WHERE PlainText = 'Ay, surely, mere the truth: I know his lady.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the long title of the work with the highest number of scenes in act 1?",
+        "query": "SELECT T2.LongTitle FROM chapters AS T1 INNER JOIN works AS T2 ON T1.work_id = T2.id WHERE T1.Act = 1 ORDER BY T1.Scene DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the description of the chapter with the longest number of paragraphs?",
+        "query": "SELECT T2.Description FROM paragraphs AS T1 INNER JOIN chapters AS T2 ON T1.chapter_id = T2.id ORDER BY T1.ParagraphNum DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "In \"Twelfth Night, Or What You Will\", what is the description of the chapter in 2nd scene, Act 2?",
+        "query": "SELECT T2.Description FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T1.LongTitle = 'Twelfth Night, Or What You Will' AND T2.Scene = 2 AND T2.Act = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What are the descriptions of the short chapters?",
+        "query": "SELECT DISTINCT T2.Description FROM paragraphs AS T1 INNER JOIN chapters AS T2 ON T1.chapter_id = T2.id WHERE T1.ParagraphNum < 150"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Which of Shakespeare's work has chapter description of \"A field near Windsor\"?",
+        "query": "SELECT T2.Title FROM chapters AS T1 INNER JOIN works AS T2 ON T1.work_id = T2.id WHERE T1.Description = 'A field near Windsor.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many paragraphs are there in the chapter with the highest amount of scenes in act 1?",
+        "query": "SELECT T1.ParagraphNum FROM paragraphs AS T1 INNER JOIN chapters AS T2 ON T1.chapter_id = T2.id WHERE T2.Act = 1 ORDER BY T2.Scene DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Other than \"stage directions\", what is the name of the character that appeared 5 times in \"the sea-coast\"?",
+        "query": "SELECT T.CharName FROM ( SELECT T3.CharName, COUNT(T3.id) AS num FROM paragraphs AS T1 INNER JOIN chapters AS T2 ON T1.chapter_id = T2.id INNER JOIN characters AS T3 ON T1.character_id = T3.id WHERE T2.Description = 'The sea-coast.' AND T3.CharName != '(stage directions)' AND T1.chapter_id = 18709 GROUP BY T3.id, T3.CharName ) AS T WHERE T.num = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Among the chapters in \"As You Like It\", how many chapters have a paragraph number of no more than 50?",
+        "query": "SELECT COUNT(T3.chapter_id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id WHERE T1.Title = 'As You Like It' AND T3.ParagraphNum < 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "In \"Florence. Without the walls. A tucket afar off\", what is the id of the character that was mentioned in \"His name, I pray you.\"?",
+        "query": "SELECT T1.character_id FROM paragraphs AS T1 INNER JOIN chapters AS T2 ON T1.chapter_id = T2.id WHERE T1.PlainText = 'His name, I pray you.' AND T2.Description = 'Florence. Without the walls. A tucket afar off.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many characters are there in Hamlet?",
+        "query": "SELECT COUNT(DISTINCT T3.character_id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id WHERE T1.Title = 'Hamlet'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many scenes are there in the 5th act of \"History of Henry VIII\"?",
+        "query": "SELECT SUM(T2.Scene) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T2.Act = 5 AND T1.LongTitle = 'History of Henry VIII'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Among the history works written by Shakespeare, how many works whose 1st acts have no more than 2 scenes?",
+        "query": "SELECT COUNT(DISTINCT T2.work_id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T2.Act = 1 AND T2.Scene < 2 AND T1.GenreType = 'History'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many acts are there in Sonnets?",
+        "query": "SELECT SUM(DISTINCT T2.Act) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T1.Title = 'Sonnets'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the description of the chapter where the character whose abrreviated name is 1Play appeared first?",
+        "query": "SELECT T2.Description FROM paragraphs AS T1 INNER JOIN chapters AS T2 ON T1.chapter_id = T2.id INNER JOIN characters AS T3 ON T1.character_id = T3.id WHERE T3.Abbrev = '1Play' ORDER BY T1.chapter_id LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What are the titles and genres of the one-act works of Shakespeare?",
+        "query": "SELECT DISTINCT T1.Title, T1.GenreType FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T2.Act = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many paragraphs are there in the longest chapter where Sir Richard Ratcliff appeared?",
+        "query": "SELECT MAX(T2.ParagraphNum) FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id WHERE T1.CharName = 'Sir Richard Ratcliff'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "In \"A Lover's Complaint\", what is the description of Act 1, Scene 1?",
+        "query": "SELECT T2.Description FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T2.Act = 1 AND T2.Scene = 1 AND T1.Title = 'A Lover''s Complaint'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "When did Shakespeare create his work that has 154 scenes?",
+        "query": "SELECT T1.Date, T1.id FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T2.Scene = 154"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "On average, how many scenes are there in each of the comedy works written by Shakespeare?",
+        "query": "SELECT CAST(SUM(T2.Scene) AS REAL) / COUNT(T1.id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T1.GenreType = 'Comedy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Between Rome and Juliet, which character was mentioned the most in the The Tragedy of Romeo and Juliet? Calculate for Romeo and Juliet's individual amount of appearance in percentage against the overall number of characters that appeared in the said work.",
+        "query": "SELECT SUM(IIF(T4.CharName = 'Romeo', 1, 0)), SUM(IIF(T4.CharName = 'Juliet', 1, 0)), CAST(SUM(IIF(T4.CharName = 'Romeo', 1, 0)) + SUM(IIF(T4.CharName = 'Juliet', 1, 0)) AS REAL) * 100 / COUNT(T1.id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id INNER JOIN characters AS T4 ON T3.character_id = T4.id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the paragraph number with plain text \"This is Illyria, lady\"?",
+        "query": "SELECT ParagraphNum FROM paragraphs WHERE PlainText = 'This is Illyria, lady.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many number of paragraphs are there in chapter ID 18881?",
+        "query": "SELECT COUNT(ParagraphNum) FROM paragraphs WHERE chapter_id = 18881"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "List down any 5 titles in the history genre.",
+        "query": "SELECT Title FROM works WHERE GenreType = 'History' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many scenes are there in Act 5 of work ID 9?",
+        "query": "SELECT COUNT(Scene) FROM chapters WHERE work_id = 9 AND Act = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "List the character names and descriptions of chapter ID 18710.",
+        "query": "SELECT DISTINCT T1.CharName, T1.Description FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id WHERE T2.Chapter_id = 18710"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many chapters are there in \"Midsummer Night's Dream\"?",
+        "query": "SELECT COUNT(T2.id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T1.Title = 'Midsummer Night''s Dream'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many paragraphs are there in Act 5 Scene 1 of \"Comedy of Errors\"?",
+        "query": "SELECT COUNT(T3.id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id WHERE T2.Act = 5 AND T2.Scene = 1 AND T1.Title = 'Comedy of Errors'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What are the character names and descriptions of characters in \"Venus and Adonis\"?",
+        "query": "SELECT DISTINCT T4.CharName, T2.Description FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id INNER JOIN characters AS T4 ON T3.character_id = T4.id WHERE T1.Title = 'Venus and Adonis'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the title which has character named \"Froth\"?",
+        "query": "SELECT DISTINCT T1.title FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id INNER JOIN characters AS T4 ON T3.character_id = T4.id WHERE T4.CharName = 'Froth'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many chapters include the character name \"First Witch\"?",
+        "query": "SELECT COUNT(T2.chapter_id) FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id WHERE T1.CharName = 'First Witch'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "List the scenes and descriptions in Act 1 of \" Pericles, Prince of Tyre\".",
+        "query": "SELECT T2.Scene, T2.Description FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T1.LongTitle = 'Pericles, Prince of Tyre' AND T2.Act = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Describe the full title which had the character named Servant to Montague.",
+        "query": "SELECT DISTINCT T1.LongTitle FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id INNER JOIN characters AS T4 ON T3.character_id = T4.id WHERE T4.Description = 'Servant to Montague'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Describe the scene number, act, and title of work which had the description of \"The house of ANTIPHOLUS of Ephesus\" in chapter.",
+        "query": "SELECT T2.Act, T2.Scene, T1.Title FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T2.Description = 'The house of ANTIPHOLUS of Ephesus.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Provide the character name, paragraph number, and plain text of \"cousin to the king\" description.",
+        "query": "SELECT T1.CharName, T2.ParagraphNum, T2.PlainText FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id WHERE T1.Description = 'cousin to the king'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Calculate average scene per act in Antony and Cleopatra.",
+        "query": "SELECT CAST(SUM(T2.Scene) AS REAL) / COUNT(T2.act) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T1.Title = 'Antony and Cleopatra'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Calculate the percentage of paragraphs in all chapters of \"All's Well That Ends Well\".",
+        "query": "SELECT CAST(SUM(IIF(T1.Title = 'All''s Well That Ends Well', 1, 0)) AS REAL) * 100 / COUNT(T3.id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many \"all\" character names have the \"all\" abbreviation?",
+        "query": "SELECT COUNT(id) FROM characters WHERE Abbrev = 'All'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Please name any three comedic works.",
+        "query": "SELECT Title FROM works WHERE GenreType = 'comedy' LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "From 1593 onwards, what is the difference between the number of comedy works and history works?",
+        "query": "SELECT SUM(IIF(GenreType = 'Comedy', 1, 0)) - SUM(IIF(GenreType = 'History', 1, 0)) FROM works WHERE Date > 1593"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Please name the latest historical work.",
+        "query": "SELECT LongTitle FROM works WHERE GenreType = 'History' ORDER BY Date DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What are the work numbers that are related to King Henry?",
+        "query": "SELECT id FROM works WHERE Title LIKE '%Henry%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What are the character names for a senator of Venice?",
+        "query": "SELECT CharName FROM characters WHERE Description = 'a senator of Venice'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the name of the character that can be found in paragraph 8 of chapter 18820?",
+        "query": "SELECT T1.CharName FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id WHERE T2.ParagraphNum = 8 AND T2.chapter_id = 18820"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the description of chapter 18704, where there is a character called Orsino?",
+        "query": "SELECT DISTINCT T3.Description FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id INNER JOIN chapters AS T3 ON T2.chapter_id = T3.id WHERE T1.CharName = 'Orsino' AND T3.ID = 18704"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many scenes can be found in \"Twelfth Night, Or What You Will\"?",
+        "query": "SELECT COUNT(T2.Scene) AS cnt FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T1.LongTitle = 'Cymbeline, King of Britain'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Please list all of the character descriptions in paragraph 20.",
+        "query": "SELECT T1.Description FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id WHERE T2.ParagraphNum = 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many chapters have the name Gratiano as a character for \"friend to Antonio and Bassiano\"?",
+        "query": "SELECT COUNT(DISTINCT T2.chapter_id) FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id WHERE T1.CharName = 'Gratiano' AND T1.Description = 'friend to Antonio and Bassiano'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the description of chapter 18706 in \"All's Well That Ends Well\"?",
+        "query": "SELECT T2.Description FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T2.id = 18706 AND T1.Title = 'All''s Well That Ends Well'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What are the character names in paragraph 3?",
+        "query": "SELECT DISTINCT T1.CharName FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id WHERE T2.ParagraphNum = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Please list all of the paragraphs that have the character name Aedile.",
+        "query": "SELECT T2.ParagraphNum FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id WHERE T1.CharName = 'Aedile'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Please list any two character names in chapter 18708.",
+        "query": "SELECT T1.CharName FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id WHERE T2.chapter_id = 18708 LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many acts can be found in the comedy \"Two Gentlemen of Verona\"?",
+        "query": "SELECT COUNT(T1.ACT) FROM chapters AS T1 LEFT JOIN works AS T2 ON T1.work_id = T2.id WHERE T2.GenreType = 'Comedy' AND T2.Title = 'Two Gentlemen of Verona'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the percentage of historical works that have not fewer than five scenes in the 1500s?",
+        "query": "SELECT CAST(( SELECT COUNT(T1.id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T1.GenreType = 'History' AND T1.DATE BETWEEN 1500 AND 1599 GROUP BY T1.id HAVING COUNT(T2.Scene) >= 5 ) AS REAL) * 100 / COUNT(id) FROM works WHERE GenreType = 'History' AND DATE BETWEEN 1500 AND 1599"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the percentage of act number 5 in Titus Andronicus?",
+        "query": "SELECT CAST(SUM(IIF(T2.act = 5, 1, 0)) AS REAL) * 100 / COUNT(T2.act) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T1.Title = 'Titus Andronicus'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "How many of the works of Shakespeare are Tragedy?",
+        "query": "SELECT COUNT(id) FROM works WHERE GenreType = 'Tragedy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Among the works of Shakespeare, how many of them have the word \"Henry\" on its title?",
+        "query": "SELECT COUNT(id) FROM works WHERE Title LIKE '%Henry%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Give the character's ID of the character that said the paragraph \"O my poor brother! and so perchance may he be.\"",
+        "query": "SELECT character_id FROM paragraphs WHERE PlainText = 'O my poor brother! and so perchance may he be.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "List the paragraph number and paragraphs said by the character named \"Sir Andrew Aguecheek\".",
+        "query": "SELECT T2.ParagraphNum, T2.id FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id WHERE T1.CharName = 'Sir Andrew Aguecheek'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Give the title and the characters name of the most recent work of Shakespeare.",
+        "query": "SELECT T1.Title, T4.CharName FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id INNER JOIN characters AS T4 ON T3.character_id = T4.id ORDER BY T1.Date DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Among paragraphs with paragraph number between 1900 to 1950, list the texts said by a character described as a sea captain, friend to Sebatian.",
+        "query": "SELECT T1.description FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id WHERE T2.PlainText = 'a sea captain, friend to Sebastian' AND T2.ParagraphNum BETWEEN 1500 AND 1950"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the long title of the Shakespeare's work with Act 4 Scene 5 described as \"Mytilene. A street before the brothel.\"?",
+        "query": "SELECT T1.LongTitle FROM works AS T1 RIGHT JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T2.Description = 'Mytilene. A street before the brothel.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Who is the character that said \"This is Illyria, lady.\"?",
+        "query": "SELECT T1.CharName FROM characters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.character_id WHERE T2.PlainText = 'This is Illyria, lady.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "In Shakespeare's works between 1600 to 1610, how many of these have a character as a \"Third Servingman\"?",
+        "query": "SELECT COUNT(DISTINCT T2.work_id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id INNER JOIN characters AS T4 ON T3.character_id = T4.id WHERE T1.DATE BETWEEN 1600 AND 1610 AND T4.CharName = 'Third Servingman'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "In the Venus and Adonis, what is the description of the last scene listed?",
+        "query": "SELECT T2.Description FROM works AS T1 RIGHT JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T1.Title = 'Venus and Adonis' ORDER BY T2.Scene DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "In Act 1 Scene 2 of the Twelfth Night, what is the total number of of lines said by Viola?",
+        "query": "SELECT COUNT(T4.id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id INNER JOIN characters AS T4 ON T3.character_id = T4.id WHERE T2.Act = 1 AND T2.Scene = 2 AND T4.id = 1238 AND T4.CharName = 'Viola' AND T1.Title = 'Twelfth Night'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the character and work ID of the text \"Fear not thou, man, thou shalt lose nothing here.\"?",
+        "query": "SELECT T2.character_id, T1.work_id FROM chapters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.chapter_id WHERE T2.PlainText = 'Fear not thou, man, thou shalt lose nothing here.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "What is the chapter description where the paragraph \"What, wilt thou hear some music, my sweet love?\" belongs?",
+        "query": "SELECT T1.id, T1.Description FROM chapters AS T1 INNER JOIN paragraphs AS T2 ON T1.id = T2.chapter_id WHERE T2.PlainText = 'What, wilt thou hear some music, my sweet love?'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "List the scene numbers involving the character named Sir Toby Belch in the Twelfth Night.",
+        "query": "SELECT DISTINCT T2.Scene FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id INNER JOIN characters AS T4 ON T3.character_id = T4.id WHERE T1.Title = 'Twelfth Night' AND T4.CharName = 'Sir Toby Belch'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "In Shakespeare's works before 1600, list down the title of the tragic story he had written that involved a character named \"Tybalt\".",
+        "query": "SELECT DISTINCT T1.title FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id INNER JOIN characters AS T4 ON T3.character_id = T4.id WHERE T1.DATE < 1600 AND T1.GenreType = 'Tragedy' AND T4.CharName = 'Tybalt'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "List the chapter ID of the works with a year greater than the 89% of average year of all listed works of Shakespeare.",
+        "query": "SELECT T2.id FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id WHERE T1.DATE > ( SELECT AVG(DATE) FROM works ) * 0.89"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "shakespeare",
+        "question": "Among the comedy works of Shakespeare, what is the percentage of his works with a character named \"antonio\"?",
+        "query": "SELECT CAST(SUM(IIF(T4.CharName = 'antonio', 1, 0)) AS REAL) * 100 / COUNT(T1.id) FROM works AS T1 INNER JOIN chapters AS T2 ON T1.id = T2.work_id INNER JOIN paragraphs AS T3 ON T2.id = T3.chapter_id INNER JOIN characters AS T4 ON T3.character_id = T4.id WHERE T1.GenreType = 'Comedy'"
+    }
+]

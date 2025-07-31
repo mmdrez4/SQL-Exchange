@@ -1,0 +1,242 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "How many schools are there?",
+        "query": "SELECT count(*) FROM school"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Count the number of schools.",
+        "query": "SELECT count(*) FROM school"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "List the locations of schools in ascending order of enrollment.",
+        "query": "SELECT LOCATION FROM school ORDER BY Enrollment ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "What is the list of school locations sorted in ascending order of school enrollment?",
+        "query": "SELECT LOCATION FROM school ORDER BY Enrollment ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "List the locations of schools in descending order of founded year.",
+        "query": "SELECT LOCATION FROM school ORDER BY Founded DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "What is the list of school locations sorted in descending order of school foundation year?",
+        "query": "SELECT LOCATION FROM school ORDER BY Founded DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "What are the enrollments of schools whose denomination is not \"Catholic\"?",
+        "query": "SELECT Enrollment FROM school WHERE Denomination != \"Catholic\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "List the enrollment for each school that does not have \"Catholic\" as denomination.",
+        "query": "SELECT Enrollment FROM school WHERE Denomination != \"Catholic\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "What is the average enrollment of schools?",
+        "query": "SELECT avg(Enrollment) FROM school"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Take the average of the school enrollment.",
+        "query": "SELECT avg(Enrollment) FROM school"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "What are the teams of the players, sorted in ascending alphabetical order?",
+        "query": "SELECT Team FROM player ORDER BY Team ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Find the team of each player and sort them in ascending alphabetical order.",
+        "query": "SELECT Team FROM player ORDER BY Team ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "How many different positions of players are there?",
+        "query": "SELECT count(DISTINCT POSITION) FROM player"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Count the number of distinct player positions.",
+        "query": "SELECT count(DISTINCT POSITION) FROM player"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Find the team of the player of the highest age.",
+        "query": "SELECT Team FROM player ORDER BY Age DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Which team has the oldest player?",
+        "query": "SELECT Team FROM player ORDER BY Age DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "List the teams of the players with the top 5 largest ages.",
+        "query": "SELECT Team FROM player ORDER BY Age DESC LIMIT 5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "What are the teams that have the 5 oldest players?",
+        "query": "SELECT Team FROM player ORDER BY Age DESC LIMIT 5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "For each player, show the team and the location of school they belong to.",
+        "query": "SELECT T1.Team ,  T2.Location FROM player AS T1 JOIN school AS T2 ON T1.School_ID  =  T2.School_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "What are the team and the location of school each player belongs to?",
+        "query": "SELECT T1.Team ,  T2.Location FROM player AS T1 JOIN school AS T2 ON T1.School_ID  =  T2.School_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Show the locations of schools that have more than 1 player.",
+        "query": "SELECT T2.Location FROM player AS T1 JOIN school AS T2 ON T1.School_ID  =  T2.School_ID GROUP BY T1.School_ID HAVING COUNT(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Which schools have more than 1 player? Give me the school locations.",
+        "query": "SELECT T2.Location FROM player AS T1 JOIN school AS T2 ON T1.School_ID  =  T2.School_ID GROUP BY T1.School_ID HAVING COUNT(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Show the denomination of the school that has the most players.",
+        "query": "SELECT T2.Denomination FROM player AS T1 JOIN school AS T2 ON T1.School_ID  =  T2.School_ID GROUP BY T1.School_ID ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "What is the denomination of the school the most players belong to?",
+        "query": "SELECT T2.Denomination FROM player AS T1 JOIN school AS T2 ON T1.School_ID  =  T2.School_ID GROUP BY T1.School_ID ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Show locations and nicknames of schools.",
+        "query": "SELECT T1.Location ,  T2.Nickname FROM school AS T1 JOIN school_details AS T2 ON T1.School_ID  =  T2.School_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "What are the location and nickname of each school?",
+        "query": "SELECT T1.Location ,  T2.Nickname FROM school AS T1 JOIN school_details AS T2 ON T1.School_ID  =  T2.School_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Please show different denominations and the corresponding number of schools.",
+        "query": "SELECT Denomination ,  COUNT(*) FROM school GROUP BY Denomination"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "For each denomination, return the denomination and the count of schools with that denomination.",
+        "query": "SELECT Denomination ,  COUNT(*) FROM school GROUP BY Denomination"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Please show different denominations and the corresponding number of schools in descending order.",
+        "query": "SELECT Denomination ,  COUNT(*) FROM school GROUP BY Denomination ORDER BY COUNT(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Order denominations in descending order of the count of schools with the denomination. Return each denomination with the count of schools.",
+        "query": "SELECT Denomination ,  COUNT(*) FROM school GROUP BY Denomination ORDER BY COUNT(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "List the school color of the school that has the largest enrollment.",
+        "query": "SELECT School_Colors FROM school ORDER BY Enrollment DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "What is the school color of the school with the largest enrollment?",
+        "query": "SELECT School_Colors FROM school ORDER BY Enrollment DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "List the locations of schools that do not have any player.",
+        "query": "SELECT LOCATION FROM school WHERE School_ID NOT IN (SELECT School_ID FROM Player)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Which schools do not have any player? Give me the school locations.",
+        "query": "SELECT LOCATION FROM school WHERE School_ID NOT IN (SELECT School_ID FROM Player)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Show the denomination shared by schools founded before 1890 and schools founded after 1900",
+        "query": "SELECT Denomination FROM school WHERE Founded  <  1890 INTERSECT SELECT Denomination FROM school WHERE Founded  >  1900"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "What are the denominations used by both schools founded before 1890 and schools founded  after 1900?",
+        "query": "SELECT Denomination FROM school WHERE Founded  <  1890 INTERSECT SELECT Denomination FROM school WHERE Founded  >  1900"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Show the nicknames of schools that are not in division 1.",
+        "query": "SELECT Nickname FROM school_details WHERE Division != \"Division 1\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "What are the nicknames of schools whose division is not 1?",
+        "query": "SELECT Nickname FROM school_details WHERE Division != \"Division 1\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "Show the denomination shared by more than one school.",
+        "query": "SELECT Denomination FROM school GROUP BY Denomination HAVING COUNT(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "school_player",
+        "question": "What are the denomination more than one school have?",
+        "query": "SELECT Denomination FROM school GROUP BY Denomination HAVING COUNT(*)  >  1"
+    }
+]

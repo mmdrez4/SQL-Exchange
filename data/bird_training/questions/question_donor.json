@@ -1,0 +1,962 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the total amount of donations in 2012.",
+        "query": "SELECT SUM(donation_total) FROM donations WHERE donation_timestamp LIKE '2012%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "When was the highest amount of donated? How much was the amount?",
+        "query": "SELECT donation_timestamp, donation_total FROM donations WHERE donation_total = ( SELECT donation_total FROM donations ORDER BY donation_total DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Calculate the total amount of donations made in 2011 for an honoree with payment via campaign page.",
+        "query": "SELECT SUM(donation_total) FROM donations WHERE donation_timestamp LIKE '2011%' AND via_giving_page = 't' AND for_honoree = 't'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "For each donation not from a teacher, state the donor account id and calculate the percentage of donation given for optional support.",
+        "query": "SELECT donor_acctid, donation_optional_support / donation_total FROM donations WHERE is_teacher_acct = 'f'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Name all the project titles whereby project materials are intended mainly for literary.",
+        "query": "SELECT T1.title FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.primary_focus_subject = 'Literacy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Name the project titles meant for school whereby 65% of the students are on reduced lunch.",
+        "query": "SELECT T1.title FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.poverty_level LIKE 'highest%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "For project titled 'Toot Your Flute!', what is the main subject of the project materials intended for? Name the other projects with the similar focus.",
+        "query": "SELECT T2.primary_focus_subject FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.title = 'Toot Your Flute!'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Name the project titles created by teacher who acquired a doctor degree.",
+        "query": "SELECT T1.title FROM essays AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T2.donation_message LIKE 'Donation on behalf of Matt Carpenter because I''m a strong believer in education.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the project in which 320 students will be impacted if the project is funded? Name the project and state the project cost.",
+        "query": "SELECT T1.title, T2.total_price_excluding_optional_support FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.students_reached = 320"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "For all donors from Texas City, list their donation message and name of the project they donated to.",
+        "query": "SELECT T2.donation_message, T1.title FROM essays AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T2.donor_city = 'Texas City'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Name the vendors who provide resources for project 'Lights, Camera, Action!'. List all the item names and unit price for each.",
+        "query": "SELECT T1.vendor_name, T1.item_name, T1.item_unit_price FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid INNER JOIN essays AS T3 ON T2.projectid = T3.projectid WHERE T3.title = 'Lights, Camera, Action!'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How much donations have been collected for project 'Whistle While We Work!'?",
+        "query": "SELECT SUM(T2.donation_to_project) FROM essays AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.title = 'Whistle While We Work!'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Name and describe all projects created by New York teachers.",
+        "query": "SELECT T1.title, T1.short_description FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.teacher_ny_teaching_fellow = 't'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "If funded, which are the projects that could impact at least 600 students for a school with moderate level of poverty? Name the projects and state the project cost.",
+        "query": "SELECT DISTINCT T2.title, T1.total_price_excluding_optional_support FROM projects AS T1 INNER JOIN essays AS T2 ON T1.projectid = T2.projectid WHERE T1.students_reached >= 600 AND T1.poverty_level LIKE 'moderate poverty'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "From the total amount of donation to projects, what is the percentage of the amount is for school projects located in the rural area?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.school_metro = 'rural' THEN T1.donation_to_project ELSE 0 END) AS REAL) * 100 / SUM(donation_to_project) FROM donations AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Name the project that costs the most. How much has been collected from donation and what is the percentage amount still lacking?",
+        "query": "SELECT T1.title, SUM(T3.donation_to_project), CAST((T2.total_price_excluding_optional_support - SUM(T3.donation_to_project)) AS REAL) * 100 / SUM(T3.donation_to_project) FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid INNER JOIN donations AS T3 ON T2.projectid = T3.projectid ORDER BY T2.total_price_excluding_optional_support DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many schools in the West New York School District have the highest poverty level?",
+        "query": "SELECT COUNT(poverty_level) FROM projects WHERE school_district = 'West New York School District' AND poverty_level = 'highest poverty'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many donations from teachers were done in the state of Colorado?",
+        "query": "SELECT COUNT(donationid) FROM donations WHERE is_teacher_acct = 't' AND donor_state = 'CO'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Which project have the highest total price including optional support? Indicate the project id.",
+        "query": "SELECT projectid FROM projects ORDER BY total_price_including_optional_support DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Which state have the highest number of PayPal donations for an honoree whose portion of a donation included corporate sponsored giftcard?",
+        "query": "SELECT DISTINCT donor_state FROM donations WHERE for_honoree = 't' AND payment_included_campaign_gift_card = 't' AND payment_method = 'paypal' AND donor_state = ( SELECT donor_state FROM donations GROUP BY donor_state ORDER BY SUM(donation_total) DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Who is the largest donor by amount? Give the donation id and the total amount of the donation.",
+        "query": "SELECT donationid, donation_total FROM donations ORDER BY donation_total DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the id of the project that has the highest optional tip? Indicate the names of the resources that were requested.",
+        "query": "SELECT T1.projectid, T1.item_name FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid ORDER BY T2.total_price_including_optional_support - T2.total_price_excluding_optional_support DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What were the resources that were requested by the teacher for project \"d6ef27c07c30c81f0c16c32b6acfa2ff\"? Indicate the quantities as well and whether or not the teacher acquired P.h.D or doctor degree.",
+        "query": "SELECT DISTINCT T1.item_name, T1.item_quantity, T2.teacher_prefix FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.projectid = 'd6ef27c07c30c81f0c16c32b6acfa2ff'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the total price including optional support received by the teacher who posted the essay titled \"Recording Rockin' Readers\"?",
+        "query": "SELECT SUM(T1.total_price_including_optional_support) FROM projects AS T1 INNER JOIN essays AS T2 ON T1.projectid = T2.projectid WHERE T2.title = 'Recording Rockin'' Readers'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the latitude and longitude of the school where the teacher who wrote \"Smile for the Camera!!!\" teaches?",
+        "query": "SELECT T1.school_latitude, T1.school_longitude FROM projects AS T1 INNER JOIN essays AS T2 ON T1.projectid = T2.projectid WHERE T2.title = 'Smile for the Camera!!!'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the total amount of all the donations made by the donor who made the highest donation in a single amount? Indicate the essay title to where he/she made his/her biggest donation.",
+        "query": "SELECT T2.donation_total, T1.title FROM essays AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T2.donation_total = ( SELECT MAX(donation_total) FROM donations )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What are the favorite project types of each of the top 10 donors?",
+        "query": "SELECT project_resource_type FROM ( SELECT T1.donor_acctid, T3.project_resource_type FROM donations AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid INNER JOIN resources AS T3 ON T2.projectid = T3.projectid ORDER BY T1.donation_total DESC LIMIT 10 ) GROUP BY project_resource_type ORDER BY COUNT(project_resource_type) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "When was the first ever project went live on the site and what were the names of the resources being requested? If there are multiple projects that have the same date, indicate each of them and their items.",
+        "query": "SELECT T2.date_posted, T1.item_name FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.date_posted = ( SELECT date_posted FROM projects ORDER BY date_posted ASC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the name of the vendor that supplies resources to the project \"iMath\"?",
+        "query": "SELECT DISTINCT T1.vendor_name FROM resources AS T1 INNER JOIN essays AS T3 ON T1.projectid = T3.projectid WHERE T3.title = 'iMath'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "When was the project with the highest quantity went live on the site? Indicate the grade level for which the project materials are intended.",
+        "query": "SELECT T2.date_posted, T2.grade_level FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid ORDER BY T1.item_quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the average amount of donations by people who donated in the project \"Recording Rockin' Readers\"",
+        "query": "SELECT AVG(T3.donation_to_project) FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid INNER JOIN donations AS T3 ON T2.projectid = T3.projectid WHERE T1.title = 'Recording Rockin'' Readers'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the essay title of the project that have the highest total price excluding optional support and who is the biggest donor? Identify the donor and calculate how many percent did he/she donated in the project.",
+        "query": "SELECT T1.title, T3.donor_acctid, CAST(T3.donation_to_project AS REAL) / T2.total_price_excluding_optional_support FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid INNER JOIN donations AS T3 ON T2.projectid = T3.projectid ORDER BY T3.donation_to_project DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "From which state do the 5 biggest donor, who gave the highest cost of optional support, come from? List their donor_acctid and calculate for their average cost of optional support for every donations they make and identtify the project's type of resource to which they gave the hightest optional support.",
+        "query": "SELECT T1.school_state, T2.donor_acctid, AVG(T2.donation_optional_support), T1.resource_type FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid ORDER BY T2.donation_optional_support DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Which project in Brooklyn that have the highest request of resources? State the the project ID including all of the name of item requested.",
+        "query": "SELECT T1.projectid, T1.item_name FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.school_city LIKE 'Brooklyn' GROUP BY T1.item_name ORDER BY COUNT(T1.item_name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many schools in urban area requested for books resources?",
+        "query": "SELECT COUNT(T2.schoolid) FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.resource_type = 'Books' AND T2.school_metro = 'urban'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Which school requested the highest amount of resources from Amazon? State the school's ID.",
+        "query": "SELECT T2.schoolid FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.vendor_name LIKE 'Amazon' GROUP BY T2.schoolid ORDER BY COUNT(T1.vendor_name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many donors in Los Angeles donated to school in another city?",
+        "query": "SELECT COUNT(T2.schoolid) FROM donations AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.donor_city = 'Los Angeles' AND T2.school_city NOT LIKE 'Los Angeles'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the prefix for the teacher who handled the 'Reading About Other Cultures' project?",
+        "query": "SELECT T2.teacher_prefix FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.title LIKE 'Reading About Other Cultures'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many students will be impacted for the Fit Firsties! Project?",
+        "query": "SELECT T2.students_reached FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.title LIKE 'Fit Firsties!'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "List the title of all projects located in Chicago along with the ID of the donor.",
+        "query": "SELECT T1.title, T3.donor_acctid FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid INNER JOIN donations AS T3 ON T2.projectid = T3.projectid WHERE T2.school_city LIKE 'Chicago'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Which projects created by teachers with Doctor Degree where the project have more than 300 students involved. List down the title of the project.",
+        "query": "SELECT T1.title FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.teacher_prefix LIKE 'Dr.' AND T2.students_reached > 300"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "State the name of vendor that supplies book resources to all school with literacy subject as their primary focus.",
+        "query": "SELECT DISTINCT T1.vendor_name FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.primary_focus_subject LIKE 'Literacy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the title of project that have the most expensive funds?",
+        "query": "SELECT T1.title FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.projectid = ( SELECT projectid FROM resources ORDER BY item_unit_price * item_quantity DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Among all the donors from New York, how many of them are teachers?",
+        "query": "SELECT COUNT(donationid) FROM donations WHERE is_teacher_acct = 't' AND donor_city = 'New York'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many donors from New Jersey have made a donation for an honoree?",
+        "query": "SELECT COUNT(donationid) FROM donations WHERE for_honoree = 't' AND donor_state = 'NJ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the donation message for donation ID a84dace1ff716f6f0c7af8ef9090a5d5?",
+        "query": "SELECT donation_message FROM donations WHERE donationid = 'a84dace1ff716f6f0c7af8ef9090a5d5'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Please list the types of resources that the vendor Lakeshore Learning Materials has provided for the projects.",
+        "query": "SELECT DISTINCT project_resource_type FROM resources WHERE vendor_name = 'Lakeshore Learning Materials'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the name of the item that is provided in the biggest amount by the vendor Lakeshore Learning Materials?",
+        "query": "SELECT item_name FROM resources WHERE vendor_name = 'Lakeshore Learning Materials' ORDER BY item_quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Among the projects created by a teacher from New York, how many of them have a donor from the same city?",
+        "query": "SELECT COUNT(T1.projectid) FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.teacher_ny_teaching_fellow = 't' AND T2.donor_city = 'New York'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many projects have their resources provided by the vendor Lakeshore Learning Materials and are created by a teacher with a doctor degree?",
+        "query": "SELECT COUNT(T1.projectid) FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.vendor_name = 'Lakeshore Learning Materials' AND T2.teacher_prefix = 'Dr.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Please list the vendor providing resources for the projects of a school with the highest poverty level.",
+        "query": "SELECT T1.vendor_name FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.poverty_level = 'highest poverty'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Of the projects whose resources are provided by the vendor Lakeshore Learning Materials, the school of which project has the highest cost of labor fulfillment? Please give its school ID.",
+        "query": "SELECT T2.schoolid FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.vendor_name = 'Lakeshore Learning Materials' ORDER BY T2.fulfillment_labor_materials DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Who is the vendor of the resources needed by the project that had the highest cost of optional tip?",
+        "query": "SELECT T1.vendor_name FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid ORDER BY T2.total_price_including_optional_support - T2.total_price_including_optional_support DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the total donated amount for projects created by a teacher working in a school in Brooklyn?",
+        "query": "SELECT SUM(T2.donation_total) FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.school_city = 'Brooklyn'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Please list the donation messages of the donations for the projects created by a teacher working in a public magnet school in Brooklyn.",
+        "query": "SELECT T2.donation_message FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.school_city = 'Brooklyn' AND T1.school_magnet = 't'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Among the donations with a portion using account credits redemption, how many of them are for projects created by teachers working in a public year-round school?",
+        "query": "SELECT COUNT(T1.projectid) FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T2.payment_included_acct_credit = 't' AND T1.school_year_round = 't'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the total donation amount made for projects whose main subject area are Literacy & Language?",
+        "query": "SELECT SUM(T2.dollar_amount) FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.primary_focus_area = 'Literacy & Language'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Which donor has donated the most for a project whose main subject area is Literacy & Language? Please give his or her ID.",
+        "query": "SELECT T2.donor_acctid FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.primary_focus_area = 'Literacy & Language' ORDER BY T2.donation_total DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the most requested item under the resource type \"Supplies\" for projects whose main subject area is Literacy & Language?",
+        "query": "SELECT T1.item_name FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.primary_focus_area = 'Literacy & Language' AND T1.project_resource_type = 'Supplies' ORDER BY T1.item_quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Which item provided to a project whose main subject area is Literacy & Language has the highest unit price?",
+        "query": "SELECT T1.item_name FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.primary_focus_area = 'Literacy & Language' ORDER BY T1.item_unit_price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the average donation amount to a project created by a teacher working in a school in Brooklyn?",
+        "query": "SELECT SUM(T2.donation_total) / COUNT(donationid) FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.school_city = 'Brooklyn'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "To which city did donor \u201c22cbc920c9b5fa08dfb331422f5926b5\u201d donate?",
+        "query": "SELECT DISTINCT donor_city FROM donations WHERE donor_acctid = '22cbc920c9b5fa08dfb331422f5926b5'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Is donor \u201c22cbc920c9b5fa08dfb331422f5926b5\u201d a teacher?",
+        "query": "SELECT DISTINCT is_teacher_acct FROM donations WHERE donor_acctid = '22cbc920c9b5fa08dfb331422f5926b5'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Have the teacher \"42d43fa6f37314365d08692e08680973\" acquired P.h.D or doctor degree?",
+        "query": "SELECT CASE WHEN teacher_prefix = 'Dr.' THEN 'Yes' ELSE 'NO' END FROM projects WHERE teacher_acctid = '42d43fa6f37314365d08692e08680973'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Is teacher \"42d43fa6f37314365d08692e08680973\" a New York teacher?",
+        "query": "SELECT teacher_ny_teaching_fellow end FROM projects WHERE teacher_acctid = '42d43fa6f37314365d08692e08680973'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Please list the titles of projects by which schools in Abington was donated.",
+        "query": "SELECT T2.title FROM projects AS T1 INNER JOIN essays AS T2 ON T1.projectid = T2.projectid WHERE T1.school_city LIKE 'Abington'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Please list the resource names of project that teacher \"822b7b8768c17456fdce78b65abcc18e\" created.",
+        "query": "SELECT T1.item_name FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.teacher_acctid = '822b7b8768c17456fdce78b65abcc18e'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Among the schools' projects whose donation didn't use account credits redemption,how many schools are public magnet schools?",
+        "query": "SELECT COUNT(T1.schoolid) FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.school_magnet = 't' AND T2.payment_included_acct_credit = 'f'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Please provide the type of resource that donation \"b39547f29dfc25fb13c6e9e8d940dc43\" contain.",
+        "query": "SELECT DISTINCT T1.project_resource_type FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid INNER JOIN donations AS T3 ON T2.projectid = T3.projectid WHERE T3.donationid LIKE 'b39547f29dfc25fb13c6e9e8d940dc43'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Among public magnet schools,what percentage of schools that receive the donated resources as books?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.project_resource_type = 'Books' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.projectid) FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.school_magnet = 't'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "In the schools donated by the project of the resources provided by ABC School Supply, how many schools are public magnet schools?",
+        "query": "SELECT COUNT(T2.schoolid) FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.school_magnet = 't' AND T1.vendor_name = 'ABC School Supply'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Among the schools donated by donor \"000eebf28658900e63b538cf8a73afbd\",how many schools whose poverty level are highest?",
+        "query": "SELECT COUNT(T1.schoolid) FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.poverty_level = 'highest poverty' AND T2.donor_acctid = '000eebf28658900e63b538cf8a73afbd'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the short description of the project that gives donation to school \u201c301c9bf0a45d159d162b65a93fddd74e\u201d?",
+        "query": "SELECT T2.short_description FROM projects AS T1 INNER JOIN essays AS T2 ON T1.projectid = T2.projectid WHERE T1.schoolid = '301c9bf0a45d159d162b65a93fddd74e'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Which city does the school that project \"iMath\" donated to in?",
+        "query": "SELECT T1.school_city FROM projects AS T1 INNER JOIN essays AS T2 ON T1.projectid = T2.projectid WHERE T2.title LIKE 'iMath'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How to pay the donation of the project that teacher \"822b7b8768c17456fdce78b65abcc18e\" created?",
+        "query": "SELECT T2.payment_method FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.teacher_acctid = '822b7b8768c17456fdce78b65abcc18e'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How much did the project that teacher \"822b7b8768c17456fdce78b65abcc18e\" created donate?",
+        "query": "SELECT T2.donation_total FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.teacher_acctid = '822b7b8768c17456fdce78b65abcc18e'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Is the donor who donated to school \"d4af834b1d3fc8061e1ee1b3f1a77b85\" a teacher?",
+        "query": "SELECT T2.is_teacher_acct FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.schoolid = 'd4af834b1d3fc8061e1ee1b3f1a77b85'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Among the schools whose donators are teachers, what is the percentage of schools that are in Brooklyn?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.school_city LIKE 'Brooklyn' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.teacher_acctid) FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T2.is_teacher_acct = 't'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Among the projects whose donators are teachers, what is the percentage of projects that affected more than 30 students?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.students_reached > 30 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.projectid) FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T2.is_teacher_acct = 't'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many schools which have suburban metro are there in Bethlehem?",
+        "query": "SELECT COUNT(schoolid) FROM projects WHERE school_city = 'Bethlehem' AND school_metro = 'suburban'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the number of the year round school in Los Angeles?",
+        "query": "SELECT COUNT(school_year_round) FROM projects WHERE school_city = 'Los Angeles' AND school_year_round = 't'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "State the number of public magnet schools in New York Manhattan.",
+        "query": "SELECT COUNT(schoolid) FROM projects WHERE school_county = 'New York (Manhattan)' AND school_magnet = 't'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many teachers in Twin Falls have Math & Science as their primary focus area?",
+        "query": "SELECT COUNT(teacher_acctid) FROM projects WHERE school_county = 'Twin Falls' AND primary_focus_area = 'Math & Science'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many teachers that have Literature & Writing as their primary focus subject use 'Mr' as their teacher prefix?",
+        "query": "SELECT COUNT(teacher_acctid) FROM projects WHERE teacher_prefix = 'Mr.' AND primary_focus_subject = 'Literature & Writing'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the total number of projects that was created by the teachers that teach 3-5 grades in Boston Public School District?",
+        "query": "SELECT COUNT(projectid) FROM projects WHERE school_district = 'Boston Public School District' AND grade_level = 'Grades 3-5'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "For the teacher who wrote the project 'ABC Read', which city was he/she in?",
+        "query": "SELECT T2.school_city FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.title = 'ABC Read'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the teacher prefix for the teacher who wrote the project 'Creating Memories and Inspiring Dreams'?",
+        "query": "SELECT T2.teacher_prefix FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.title LIKE 'Creating Memories and Inspiring Dreams%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Is the donor of the project 'Calculate, Financial Security For Tomorrow Starts Today! ' a teacher?",
+        "query": "SELECT T2.is_teacher_acct FROM essays AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.title LIKE 'Calculate, Financial Security For Tomorrow Starts Today! '"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the title for the project that got the donation message as \"Donation on behalf of Matt Carpenter because I'm a strong believer in education\".",
+        "query": "SELECT T1.title FROM essays AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T2.donation_message LIKE 'Donation on behalf of Matt Carpenter because I''m a strong believer in education.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many number of donations did the project 'A Rug For Reaching Readers' get?",
+        "query": "SELECT SUM(T2.donation_total) FROM essays AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.title LIKE 'A Rug For Reaching Readers'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the total donation amount for the project 'Engaging Young Readers with a Leveled Classroom Library'?",
+        "query": "SELECT SUM(T2.donation_to_project) + SUM(T2.donation_optional_support) FROM essays AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.title LIKE 'Engaging Young Readers with a Leveled Classroom Library '"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What was the donation optional support amount for the project 'Armenian Genocide'?",
+        "query": "SELECT T2.donation_optional_support FROM essays AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.title LIKE 'Armenian Genocide'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "State the short description for the project which got the donation at 14:44:29 on 2012/9/6.",
+        "query": "SELECT T1.short_description FROM essays AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T2.donation_timestamp LIKE '2012-09-06 14:44:29'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Did the project 'I Can't See It...Can You Help Me???' get the tip for the donation?",
+        "query": "SELECT T2.donation_included_optional_support FROM essays AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.title LIKE 'I Can''t See It...Can You Help Me???'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the teacher's account ID for the project that got the donation at 11:38:43 on 2008/7/29 ?",
+        "query": "SELECT T1.teacher_acctid FROM essays AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T2.donation_timestamp LIKE '2008-07-29 11:38:43.361'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Show the school id for the project 'Virtual Aquarium Needs Help!'.",
+        "query": "SELECT T2.schoolid FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.title LIKE 'Virtual Aquarium Needs Help!'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What was the title for the project which got the biggest donation?",
+        "query": "SELECT T1.title FROM essays AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T2.donation_total = ( SELECT MAX(donation_total) FROM donations )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "For the donation of the project 'Awesome Audiobooks Make Avid Readers', what was the percentage of the tip in the total amount?",
+        "query": "SELECT CAST(SUM(T2.donation_optional_support) AS REAL) * 100 / SUM(T2.donation_total) FROM essays AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.title LIKE 'Awesome Audiobooks Make Avid Readers'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "For the all donations to the project 'Bringing Drama to Life', what is the percentage of the donation is paid by credit card?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.payment_method LIKE 'creditcard' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(donationid) FROM essays AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.title LIKE 'Bringing Drama to Life'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the short description for the title Future Einsteins Of America?",
+        "query": "SELECT short_description FROM essays WHERE title = 'Future Einsteins Of America'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Write down the need statement of Family History Project.",
+        "query": "SELECT need_statement FROM essays WHERE title = 'Family History Project'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many suburban metros are there in Livingston Parish School District?",
+        "query": "SELECT COUNT(projectid) FROM projects WHERE school_district = 'Livingston Parish School Dist' AND school_metro = 'suburban'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Name the vendors that sell the item Classroom Keepers Management Center.",
+        "query": "SELECT DISTINCT vendor_name FROM resources WHERE item_name = 'Classroom Keepers Management Center'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "List the resource types available at Sax Arts & Crafts.",
+        "query": "SELECT DISTINCT project_resource_type FROM resources WHERE vendor_name = 'Sax Arts & Crafts'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Which school county in the state of New York has a high number of low poverty levels?",
+        "query": "SELECT school_county FROM projects WHERE poverty_level = 'low poverty' AND school_state = 'NY' GROUP BY school_state ORDER BY COUNT(poverty_level) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Which school district was Future Einsteins Of America project located at?",
+        "query": "SELECT T1.school_district FROM projects AS T1 INNER JOIN essays AS T2 ON T1.projectid = T2.projectid WHERE T2.title LIKE 'Future Einsteins Of America'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What payment method was used for Needed Resource Materials For My Students?",
+        "query": "SELECT T3.payment_method FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid INNER JOIN donations AS T3 ON T2.projectid = T3.projectid WHERE T1.title = 'Needed Resource Materials For My Students'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many donations were paid via credit card to Memphis City School District?",
+        "query": "SELECT COUNT(T1.projectid) FROM donations AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.payment_method = 'creditcard' AND T2.school_district = 'Memphis City School District'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "List the school districts that have bought resources from Barnes and Noble.",
+        "query": "SELECT T2.school_district FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.vendor_name = 'Barnes and Noble'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Give the coordinates of the buyer of R & A Plant Genetics from Benchmark Education.",
+        "query": "SELECT T2.school_latitude, T2.school_longitude FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.item_name = 'R & A Plant Genetics' AND T1.vendor_name = 'Benchmark Education'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Which payment method is most comonly used by the schools in the state of Georgia for the payment of donations?",
+        "query": "SELECT T1.payment_method FROM donations AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.school_state = 'GA' GROUP BY T2.school_state ORDER BY COUNT(T1.payment_method) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What are the coordinates of the school where project 'Look, Look, We Need a Nook!' Was donated to and what resource type is it?",
+        "query": "SELECT T2.school_latitude, T2.school_longitude, T2.resource_type FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.title LIKE 'Look, Look, We Need a Nook!'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Write the messages of those who donated to the Newark School District in the coordinates of 40.735332, -74.196014.",
+        "query": "SELECT T1.donation_message FROM donations AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.school_latitude = 40.735332 AND T2.school_longitude = -74.196014 AND T2.school_district = 'Newark School District'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What date did the project with he 'Lets Share Ideas essay' went live?",
+        "query": "SELECT T1.date_posted FROM projects AS T1 INNER JOIN essays AS T2 ON T1.projectid = T2.projectid WHERE T2.title LIKE 'Lets Share Ideas'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Write the message of the donor of the project with the title of Lets Share Ideas who paid with a credit card.",
+        "query": "SELECT T3.donation_message FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid INNER JOIN donations AS T3 ON T2.projectid = T3.projectid WHERE T1.title = 'Lets Share Ideas' AND T3.payment_method = 'creditcard'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Which resource type is commonly bought by the Los Angeles Unified School District?",
+        "query": "SELECT T1.project_resource_type FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.school_district = 'Los Angeles Unif Sch Dist' GROUP BY T2.school_district ORDER BY COUNT(T1.project_resource_type) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Which cities in the Los Angeles Unified School District has bought supplies from Quill.com?",
+        "query": "SELECT T2.school_city FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.school_district = 'Los Angeles Unif Sch Dist' AND T1.vendor_name = 'Quill.com'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the total price of items brought from ABC School Supply with a listed type of Other? Also include the list of the buyers' coordinates and school districts they belong to.",
+        "query": "SELECT T2.item_unit_price * T2.item_quantity price, T1.school_latitude, T1.school_longitude FROM projects AS T1 INNER JOIN resources AS T2 ON T1.projectid = T2.projectid WHERE T2.vendor_name = 'ABC School Supply' AND T2.project_resource_type = 'Other' AND T1.school_district = 'Hillsborough Co Pub Sch Dist'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Calculate the sum of all the total amount donated to the essay project titled 'Lets Share Ideas' which were paid through paypal and indicate the city and poverty level.",
+        "query": "SELECT SUM(T3.donation_total), school_city, poverty_level FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid INNER JOIN donations AS T3 ON T2.projectid = T3.projectid WHERE T1.title = 'Lets Share Ideas' AND T3.payment_method = 'paypal'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many donors who donated to the city of Pocatello are not teachers?",
+        "query": "SELECT COUNT(donationid) FROM donations WHERE donor_city = 'Pocatello' AND is_teacher_acct = 'f'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many schools in Suffolk County have Ph.D. teachers?",
+        "query": "SELECT COUNT(schoolid) FROM projects WHERE teacher_prefix = 'Dr.' AND school_county = 'Suffolk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the sum of the total donated amounts paid through Amazon?",
+        "query": "SELECT SUM(donation_to_project) + SUM(donation_optional_support) FROM donations WHERE payment_method = 'amazon'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many donations of more than $100 were made for an honoree?",
+        "query": "SELECT COUNT(donationid) FROM donations WHERE dollar_amount = '100_and_up' AND for_honoree = 't'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many resources with a unit price less than 15 are not technology type? List them by vendor id",
+        "query": "SELECT vendorid FROM resources WHERE project_resource_type = 'Technology' AND item_unit_price <= 15"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "On how many projects where the teacher has ordered between 5 to 10 items are from are from Quill.com?",
+        "query": "SELECT COUNT(projectid) FROM resources WHERE vendor_name = 'Quill.com' AND item_quantity BETWEEN 5 AND 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "List by school id projects from schools located in the Union Pub School District I-9 that have a New York teaching fellow",
+        "query": "SELECT schoolid FROM projects WHERE school_district = 'Union Pub School District I-9' AND teacher_ny_teaching_fellow = 't'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "In which cities are Los Angeles County Suburban Metro Schools located?",
+        "query": "SELECT school_city FROM projects WHERE school_metro = 'suburban' AND school_county = 'Los Angeles'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What are the vendors of the book-type projects? List them with the project ID.",
+        "query": "SELECT DISTINCT vendorid, projectid FROM resources WHERE project_resource_type = 'Books'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What percentage of projects that have not received a cash donation have received a portion of a donation included corporate sponsored giftcard?",
+        "query": "SELECT CAST(SUM(CASE WHEN payment_included_campaign_gift_card = 't' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(donationid) FROM donations WHERE payment_method = 'no_cash_received'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What percentage of projects in the City of Santa Barbara are in suburban metro?",
+        "query": "SELECT CAST(SUM(CASE WHEN school_metro = 'suburban' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(projectid) FROM projects WHERE school_city = 'Santa Barbara'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the percentage of payment methods of donations made in March 2013?",
+        "query": "SELECT payment_method , CAST(COUNT(donationid) AS REAL) * 100 / 51090 FROM donations WHERE donation_timestamp LIKE '2013-03%' GROUP BY payment_method"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the average unit price of AKJ Books items?",
+        "query": "SELECT SUM(item_unit_price) / SUM(item_quantity) FROM resources WHERE vendor_name = 'AKJ Books'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many schools in Brooklyn with urban metro and donations for an honoree have requested TT992 - Refill Pack for Safety Name Tags as a resource?",
+        "query": "SELECT COUNT(T2.schoolid) FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid INNER JOIN donations AS T3 ON T2.projectid = T3.projectid WHERE T2.school_city = 'Brooklyn' AND T2.school_metro = 'urban' AND T3.for_honoree = 't' AND T1.item_name = 'TT992 - Refill Pack for Safety Name Tags'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many schools with the highest level of poverty have received a portion of a donation included corporate sponsored gift card?",
+        "query": "SELECT COUNT(T1.schoolid) FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T2.payment_included_campaign_gift_card = 't' AND T1.poverty_level = 'highest poverty'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "In which city is there a greater number of schools that have received donations of less than 10 dollars?",
+        "query": "SELECT T2.school_city FROM donations AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.dollar_amount = 'under_10' GROUP BY T2.school_city ORDER BY COUNT(T2.schoolid) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the project title of the school located at latitude 42003718 and longitude -87668289?",
+        "query": "SELECT T1.title FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.school_latitude = 42003718 AND T2.school_longitude = -87668289"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Find out if the project with the title Team More Books! has a New York teaching fellow.",
+        "query": "SELECT T2.teacher_ny_teaching_fellow FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.title LIKE 'Team More Books!'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the name of the vendors that serve resources to schools whose primary focus area is Literature?",
+        "query": "SELECT T1.vendor_name FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.primary_focus_area LIKE 'Literacy%' GROUP BY T1.vendor_name ORDER BY COUNT(T2.primary_focus_area) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the name of the vendors serving material for projects for grades 9-12?",
+        "query": "SELECT DISTINCT T1.vendor_name FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.grade_level = 'Grades 9-12'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many teachers have made some type of donation for projects in Chicago?",
+        "query": "SELECT COUNT(DISTINCT T2.teacher_acctid) FROM donations AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.is_teacher_acct = 't' AND T2.school_city = 'Chicago'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many Rock Hill City School projects have teacher donors?",
+        "query": "SELECT COUNT(DISTINCT T1.teacher_acctid) FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.school_city = 'Rock Hill' AND is_teacher_acct = 't'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the total sum of the donations paid with an optional support in projects that reach more than 300 students?",
+        "query": "SELECT SUM(T2.dollar_amount) FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.students_reached > 300 AND t2.donation_included_optional_support = 't'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many total items were requested for the Onslow Co School District urban metro school projects?",
+        "query": "SELECT SUM(T1.item_quantity) FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.school_metro = 'urban' AND T2.school_district = 'Onslow Co School District'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the average total donations received by Fresno County colleges?",
+        "query": "SELECT SUM(T2.donation_optional_support + T2.donation_to_project) / COUNT(donationid) FROM projects AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T1.school_county = 'Fresno'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "In what percentage of counties has the ABC Read project been launched?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.title LIKE 'ABC Read' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.school_county) FROM projects AS T1 INNER JOIN essays AS T2 ON T1.projectid = T2.projectid"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the average amount of resources from projects that have received donations per honoree?",
+        "query": "SELECT AVG(T1.item_quantity) FROM resources AS T1 INNER JOIN donations AS T2 ON T1.projectid = T2.projectid WHERE T2.for_honoree = 't'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "When did the project \"Photojournalists Want to Exhibit Their Best Works\" go live?",
+        "query": "SELECT T1.date_posted FROM projects AS T1 INNER JOIN essays AS T2 ON T1.projectid = T2.projectid WHERE T2.title LIKE 'Photojournalists Want to Exhibit Their Best Works'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Which item provided for projects with Mathematics as a primary subject is the most expensive?",
+        "query": "SELECT T1.item_name FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T2.primary_focus_subject = 'Mathematics' ORDER BY T1.item_unit_price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Where is the school that needs a \"Viewscreen LCD from Texas Instruments, TI-84 Plus\"? Provide the latitude and longitude of that school.",
+        "query": "SELECT T2.school_city, T2.school_latitude, T2.school_longitude FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.item_name = 'Viewscreen LCD FROM Texas Instruments, TI-84 Plus'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "How many donations does the project \"Look, Look, We Need a Nook!\" have?",
+        "query": "SELECT SUM(T3.donation_total) FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid INNER JOIN donations AS T3 ON T2.projectid = T3.projectid WHERE T1.title = 'Look, Look, We Need a Nook!'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "List the poverty level of all the schools that received donations with the zip code \"7079\".",
+        "query": "SELECT DISTINCT T2.poverty_level FROM donations AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.donor_zip = 7079"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the name of the vendor that the project \"Bloody Times\" uses for their resources?",
+        "query": "SELECT T3.vendor_name FROM essays AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid INNER JOIN resources AS T3 ON T2.projectid = T3.projectid WHERE T1.title = 'Bloody Times'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "List all the items from \"Sax Arts & Crafts\" and the zip code of the schools that received them.",
+        "query": "SELECT T2.school_zip, T1.item_name FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.vendor_name = 'Sax Arts & Crafts'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What are the coordinates of the school with the project \"Wiping Away Bad Grades\"?",
+        "query": "SELECT T1.school_longitude, T1.school_latitude FROM projects AS T1 INNER JOIN essays AS T2 ON T1.projectid = T2.projectid WHERE T2.title LIKE 'Wiping Away Bad Grades'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "List the primary subject of all the donations with a corporate sponsored giftcard.",
+        "query": "SELECT DISTINCT T2.primary_focus_subject FROM donations AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.payment_included_campaign_gift_card = 't'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the most expensive book item? Please provide a short description of projects related to those.",
+        "query": "SELECT T1.item_name, T2.short_description FROM resources AS T1 INNER JOIN essays AS T2 ON T1.projectid = T2.projectid WHERE T1.project_resource_type = 'Books' ORDER BY T1.item_unit_price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "For what grade was the project \"Too Close for Comfort\" for?",
+        "query": "SELECT T1.grade_level FROM projects AS T1 INNER JOIN essays AS T2 ON T1.projectid = T2.projectid WHERE T2.title LIKE 'Too Close for Comfort'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What is the total number of students impacted by the projects with a donation from a donor with zip code \"22205\"?",
+        "query": "SELECT SUM(T2.students_reached) FROM donations AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.donor_zip = 22205"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "What percentage of donations are given via a giving or campaign page? List the primary area of those donations.",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.via_giving_page = 't' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(donation_total), ( SELECT T2.primary_focus_area FROM donations AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.via_giving_page = 't' GROUP BY T2.primary_focus_area ORDER BY SUM(T1.donation_total) DESC LIMIT 1 ) result FROM donations AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "donor",
+        "question": "Among the technology items, what percentage of them are from Best Buy for Business? Provide the date of the project related to those items.",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.vendor_name = 'Best Buy for Business' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.projectid) FROM resources AS T1 INNER JOIN projects AS T2 ON T1.projectid = T2.projectid WHERE T1.project_resource_type = 'Technology' UNION ALL SELECT DISTINCT T1.date_posted FROM projects AS T1 INNER JOIN resources AS T2 ON T1.projectid = T2.projectid WHERE T2.vendor_name = 'Best Buy for Business' AND T2.project_resource_type = 'Technology'"
+    }
+]

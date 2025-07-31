@@ -1,0 +1,242 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "How many companies are there?",
+        "query": "SELECT count(*) FROM Companies"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Count the number of companies.",
+        "query": "SELECT count(*) FROM Companies"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "List the names of companies in descending order of market value.",
+        "query": "SELECT name FROM Companies ORDER BY Market_Value_billion DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Sort the company names in descending order of the company's market value.",
+        "query": "SELECT name FROM Companies ORDER BY Market_Value_billion DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "What are the names of companies whose headquarters are not \"USA\"?",
+        "query": "SELECT name FROM Companies WHERE Headquarters != 'USA'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Find the names of the companies whose headquarters are not located in \"USA\".",
+        "query": "SELECT name FROM Companies WHERE Headquarters != 'USA'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "What are the name and assets of each company, sorted in ascending order of company name?",
+        "query": "SELECT name ,  Assets_billion FROM Companies ORDER BY name ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "List the name and assets of each company in ascending order of company name.",
+        "query": "SELECT name ,  Assets_billion FROM Companies ORDER BY name ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "What are the average profits of companies?",
+        "query": "SELECT avg(Profits_billion) FROM Companies"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Compute the average profits companies make.",
+        "query": "SELECT avg(Profits_billion) FROM Companies"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "What are the maximum and minimum sales of the companies whose industries are not \"Banking\".",
+        "query": "SELECT max(Sales_billion) ,  min(Sales_billion) FROM Companies WHERE Industry != \"Banking\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Find the maximum and minimum sales of the companies that are not in the \"Banking\" industry.",
+        "query": "SELECT max(Sales_billion) ,  min(Sales_billion) FROM Companies WHERE Industry != \"Banking\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "How many different industries are the companies in?",
+        "query": "SELECT count(DISTINCT Industry) FROM Companies"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Count the number of distinct company industries.",
+        "query": "SELECT count(DISTINCT Industry) FROM Companies"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "List the names of buildings in descending order of building height.",
+        "query": "SELECT name FROM buildings ORDER BY Height DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "What are the names of buildings sorted in descending order of building height?",
+        "query": "SELECT name FROM buildings ORDER BY Height DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Find the stories of the building with the largest height.",
+        "query": "SELECT Stories FROM buildings ORDER BY Height DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "What is the stories of highest building?",
+        "query": "SELECT Stories FROM buildings ORDER BY Height DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "List the name of a building along with the name of a company whose office is in the building.",
+        "query": "SELECT T3.name ,  T2.name FROM Office_locations AS T1 JOIN buildings AS T2 ON T1.building_id  =  T2.id JOIN Companies AS T3 ON T1.company_id  =  T3.id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "For each company, return the company name and the name of the building its office is located in.",
+        "query": "SELECT T3.name ,  T2.name FROM Office_locations AS T1 JOIN buildings AS T2 ON T1.building_id  =  T2.id JOIN Companies AS T3 ON T1.company_id  =  T3.id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Show the names of the buildings that have more than one company offices.",
+        "query": "SELECT T2.name FROM Office_locations AS T1 JOIN buildings AS T2 ON T1.building_id  =  T2.id JOIN Companies AS T3 ON T1.company_id  =  T3.id GROUP BY T1.building_id HAVING COUNT(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Which buildings have more than one company offices? Give me the building names.",
+        "query": "SELECT T2.name FROM Office_locations AS T1 JOIN buildings AS T2 ON T1.building_id  =  T2.id JOIN Companies AS T3 ON T1.company_id  =  T3.id GROUP BY T1.building_id HAVING COUNT(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Show the name of the building that has the most company offices.",
+        "query": "SELECT T2.name FROM Office_locations AS T1 JOIN buildings AS T2 ON T1.building_id  =  T2.id JOIN Companies AS T3 ON T1.company_id  =  T3.id GROUP BY T1.building_id ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Which building has the largest number of company offices? Give me the building name.",
+        "query": "SELECT T2.name FROM Office_locations AS T1 JOIN buildings AS T2 ON T1.building_id  =  T2.id JOIN Companies AS T3 ON T1.company_id  =  T3.id GROUP BY T1.building_id ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Please show the names of the buildings whose status is \"on-hold\", in ascending order of stories.",
+        "query": "SELECT name FROM buildings WHERE Status  =  \"on-hold\" ORDER BY Stories ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Find the names of the buildings in \"on-hold\" status, and sort them in ascending order of building stories.",
+        "query": "SELECT name FROM buildings WHERE Status  =  \"on-hold\" ORDER BY Stories ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Please show each industry and the corresponding number of companies in that industry.",
+        "query": "SELECT Industry ,  COUNT(*) FROM Companies GROUP BY Industry"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Whah are the name of each industry and the number of companies in that industry?",
+        "query": "SELECT Industry ,  COUNT(*) FROM Companies GROUP BY Industry"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Please show the industries of companies in descending order of the number of companies.",
+        "query": "SELECT Industry FROM Companies GROUP BY Industry ORDER BY COUNT(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Sort all the industries in descending order of the count of companies in each industry",
+        "query": "SELECT Industry FROM Companies GROUP BY Industry ORDER BY COUNT(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "List the industry shared by the most companies.",
+        "query": "SELECT Industry FROM Companies GROUP BY Industry ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Which industry has the most companies?",
+        "query": "SELECT Industry FROM Companies GROUP BY Industry ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "List the names of buildings that have no company office.",
+        "query": "SELECT name FROM buildings WHERE id NOT IN (SELECT building_id FROM Office_locations)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Which buildings do not have any company office? Give me the building names.",
+        "query": "SELECT name FROM buildings WHERE id NOT IN (SELECT building_id FROM Office_locations)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Show the industries shared by companies whose headquarters are \"USA\" and companies whose headquarters are \"China\".",
+        "query": "SELECT Industry FROM Companies WHERE Headquarters  =  \"USA\" INTERSECT SELECT Industry FROM Companies WHERE Headquarters  =  \"China\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Which industries have both companies with headquarter in \"USA\" and companies with headquarter in \"China\"?",
+        "query": "SELECT Industry FROM Companies WHERE Headquarters  =  \"USA\" INTERSECT SELECT Industry FROM Companies WHERE Headquarters  =  \"China\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Find the number of companies whose industry is \"Banking\" or \"Conglomerate\",",
+        "query": "SELECT count(*) FROM Companies WHERE Industry  =  \"Banking\" OR Industry  =  \"Conglomerate\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "How many companies are in either \"Banking\" industry or \"Conglomerate\" industry?",
+        "query": "SELECT count(*) FROM Companies WHERE Industry  =  \"Banking\" OR Industry  =  \"Conglomerate\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Show the headquarters shared by more than two companies.",
+        "query": "SELECT Headquarters FROM Companies GROUP BY Headquarters HAVING COUNT(*)  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_office",
+        "question": "Which headquarter locations are used by more than 2 companies?",
+        "query": "SELECT Headquarters FROM Companies GROUP BY Headquarters HAVING COUNT(*)  >  2"
+    }
+]

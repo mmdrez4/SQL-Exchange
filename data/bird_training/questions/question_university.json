@@ -1,0 +1,902 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many universities have at least 80,000 students in the year 2011?",
+        "query": "SELECT COUNT(*) FROM university_year WHERE num_students > 80000 AND year = 2011"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the ranking system ID of the award criteria?",
+        "query": "SELECT ranking_system_id FROM ranking_criteria WHERE criteria_name = 'Award'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many state universities are there?",
+        "query": "SELECT COUNT(*) FROM university WHERE university_name LIKE '%State%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the student staff ratio of the university with the highest student staff ratio of all time?",
+        "query": "SELECT MAX(student_staff_ratio) FROM university_year WHERE student_staff_ratio = ( SELECT MAX(student_staff_ratio) FROM university_year )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many criteria belong to ranking system ID 3?",
+        "query": "SELECT COUNT(id) FROM ranking_criteria WHERE ranking_system_id = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the ID of the university that has only 1% of international students between 2011 to 2015?",
+        "query": "SELECT university_id FROM university_year WHERE pct_international_students = 1 AND year BETWEEN 2011 AND 2015"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Give the name of the country that has the most universities.",
+        "query": "SELECT T2.country_name FROM university AS T1 INNER JOIN country AS T2 ON T1.country_id = T2.id GROUP BY T2.country_name ORDER BY COUNT(T1.university_name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the name of the university that had the highest number of international students for 6 consecutive years?",
+        "query": "SELECT T2.university_name FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id ORDER BY T1.pct_international_students DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "In 2014, what is the name of the university which was considered a leader in the publications rank?",
+        "query": "SELECT T3.university_name FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id WHERE T1.criteria_name = 'Publications Rank' AND T2.year = 2014 AND T1.id = 17 ORDER BY T2.score DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the name of the university that has the lowest number of students of all time?",
+        "query": "SELECT T2.university_name FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id ORDER BY T1.num_students LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many universities are there in the United States of America?",
+        "query": "SELECT COUNT(*) FROM university AS T1 INNER JOIN country AS T2 ON T1.country_id = T2.id WHERE T2.country_name = 'United States of America'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "In 2016, what is the name of the university in Australia with the highest score in Citations criteria?",
+        "query": "SELECT T3.university_name FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id INNER JOIN country AS T4 ON T4.id = T3.country_id WHERE T1.criteria_name = 'Citations' AND T2.year = 2016 AND T1.id = 4 AND T4.country_name = 'Australia' ORDER BY T2.score DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many universities scored 0 in Awards between 2005 to 2015?",
+        "query": "SELECT COUNT(*) FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id WHERE T1.criteria_name = 'Award' AND T2.year BETWEEN 2005 AND 2015 AND T2.score = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Which country is the University of Oxford located?",
+        "query": "SELECT T2.country_name FROM university AS T1 INNER JOIN country AS T2 ON T1.country_id = T2.id WHERE university_name = 'University of Oxford'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many times did the Yale University achieve a score of no less than 10 in the Quality of Education Rank?",
+        "query": "SELECT COUNT(*) FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id WHERE T3.university_name = 'Yale University' AND T2.score >= 10 AND T1.criteria_name = 'Quality of Education Rank'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What are the names of the criteria under Center for World University Rankings?",
+        "query": "SELECT T2.criteria_name FROM ranking_system AS T1 INNER JOIN ranking_criteria AS T2 ON T1.id = T2.ranking_system_id WHERE T1.system_name = 'Center for World University Rankings'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "List the names of all the universities that have no less than 50,000 students in the year 2012.",
+        "query": "SELECT T2.university_name FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.num_students > 50000 AND T1.year = 2012"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Between 2011 to 2016, in which countries can you find the universities where at least 50% of its students are international students?",
+        "query": "SELECT DISTINCT T3.country_name FROM university AS T1 INNER JOIN university_year AS T2 ON T1.id = T2.university_id INNER JOIN country AS T3 ON T3.id = T1.country_id WHERE T2.pct_international_students > 50 AND T2.year BETWEEN 2011 AND 2016"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many universities have no less than 20,000 female students in 2016? Identify how many of the said universities are located in the United States of America.",
+        "query": "SELECT COUNT(*) , SUM(CASE WHEN T3.country_name = 'United States of America' THEN 1 ELSE 0 END) AS nums_in_usa FROM university AS T1 INNER JOIN university_year AS T2 ON T1.id = T2.university_id INNER JOIN country AS T3 ON T3.id = T1.country_id WHERE T2.year = 2016 AND T2.num_students * T2.pct_female_students / 100 > 20000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What are the names of the top 5 universities with the highest number of international students?",
+        "query": "SELECT DISTINCT T2.university_name FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id ORDER BY (CAST(T1.num_students * T1.pct_international_students AS REAL) / 100) DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the university ID of the university with the largest student staff ratio?",
+        "query": "SELECT university_id FROM university_year ORDER BY student_staff_ratio DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Give the year where a university had the lowest number of students.",
+        "query": "SELECT year FROM university_year ORDER BY num_students ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Compute the average percentage of female students.",
+        "query": "SELECT AVG(pct_female_students) FROM university_year"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Provide the number of international students and number of students in 2013 in university ID 20.",
+        "query": "SELECT pct_international_students * num_students, num_students FROM university_year WHERE year = 2013 AND university_id = 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the university ID of Harvard University?",
+        "query": "SELECT id FROM university WHERE university_name = 'Harvard University'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "List the university ID of the university that scored 100 in 2011.",
+        "query": "SELECT university_id FROM university_ranking_year WHERE score = 100 AND year = 2011"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Provide the ranking system of the ranking criteria named Quality of Education Rank.",
+        "query": "SELECT T1.system_name FROM ranking_system AS T1 INNER JOIN ranking_criteria AS T2 ON T1.id = T2.ranking_system_id WHERE T2.criteria_name = 'Quality of Education Rank'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the student staff ratio of Harvard University in 2012?",
+        "query": "SELECT T1.student_staff_ratio FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T2.university_name = 'Harvard University' AND T1.year = 2012"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Give the location of the university ID 112.",
+        "query": "SELECT T2.country_name FROM university AS T1 INNER JOIN country AS T2 ON T1.country_id = T2.id WHERE T1.id = 112"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Calculate the total number of students in universities located in Sweden.",
+        "query": "SELECT SUM(T2.num_students) FROM university AS T1 INNER JOIN university_year AS T2 ON T1.id = T2.university_id INNER JOIN country AS T3 ON T3.id = T1.country_id WHERE T3.country_name = 'Sweden'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the ranking criteria ID of Brown University in 2014?",
+        "query": "SELECT T1.ranking_criteria_id FROM university_ranking_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T2.university_name = 'Brown University' AND T1.year = 2014"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "List the name of universities located in Spain.",
+        "query": "SELECT T1.university_name FROM university AS T1 INNER JOIN country AS T2 ON T1.country_id = T2.id WHERE T2.country_name = 'Spain'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the criteria name of the university ID 32 in 2015?",
+        "query": "SELECT T1.criteria_name FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id WHERE T2.university_id = 32 AND T2.year = 2015"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Compute the average score of the university located in Brazil.",
+        "query": "SELECT AVG(T2.score) FROM university AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.university_id INNER JOIN country AS T3 ON T3.id = T1.country_id WHERE T3.country_name = 'Brazil'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "In which country does the most populated university in 2014 located ?",
+        "query": "SELECT T2.country_id FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year = 2014 ORDER BY T1.num_students DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Give the score and number of international students in university ID 100 in 2015.",
+        "query": "SELECT CAST(T1.num_students * T1.pct_international_students AS REAL) / 100, T2.score FROM university_year AS T1 INNER JOIN university_ranking_year AS T2 ON T1.university_id = T2.university_id WHERE T2.year = 2015 AND T1.university_id = 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the student population of the university that scored 98 in 2013?",
+        "query": "SELECT SUM(T1.num_students) FROM university_year AS T1 INNER JOIN university_ranking_year AS T2 ON T1.university_id = T2.university_id WHERE T2.score = 98 AND T1.year = 2013"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "List the criteria names under the ranking system called Center for World University Ranking.",
+        "query": "SELECT T2.criteria_name FROM ranking_system AS T1 INNER JOIN ranking_criteria AS T2 ON T1.id = T2.ranking_system_id WHERE T1.system_name = 'Center for World University Rankings'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Provide the country name of universities with the number of students greater than 98% of the average student population of all universities in 2013.",
+        "query": "SELECT DISTINCT T3.country_name FROM university AS T1 INNER JOIN university_year AS T2 ON T1.id = T2.university_id INNER JOIN country AS T3 ON T3.id = T1.country_id WHERE T2.year = 2013 AND T2.num_students * 100 > ( SELECT AVG(num_students) FROM university_year ) * 98"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Among universities that score below 80 in 2015, what is the percentage of international students?",
+        "query": "SELECT SUM(CAST(T1.num_students * T1.pct_international_students AS REAL) / 100) / COUNT(*) * 100 FROM university_year AS T1 INNER JOIN university_ranking_year AS T2 ON T1.university_id = T2.university_id WHERE T2.score < 80 AND T1.year = 2015"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many students attended universities were there in 2011?",
+        "query": "SELECT SUM(num_students) FROM university_year WHERE year = 2011"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Among all universities, how many female students were there in 2011?",
+        "query": "SELECT SUM(CAST(num_students * pct_female_students AS REAL) / 100) FROM university_year WHERE year = 2011"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the student staff ratio at the university with the greatest student staff ratio of all time?",
+        "query": "SELECT MAX(student_staff_ratio) FROM university_year ORDER BY student_staff_ratio DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the university ID with the most students in 2011?",
+        "query": "SELECT university_id FROM university_year WHERE year = 2011 ORDER BY num_students DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many institutions with over 50,000 students in 2011 had a percentage of oversea students of more than 10%?",
+        "query": "SELECT COUNT(*) FROM university_year WHERE year = 2011 AND num_students > 50000 AND pct_international_students > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Provide the ID of the university with the highest percentage of female students in 2012.",
+        "query": "SELECT university_id FROM university_year WHERE year = 2012 ORDER BY pct_female_students DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Which university had the highest reputation in 2012?",
+        "query": "SELECT T2.university_name FROM university_ranking_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year = 2012 ORDER BY T1.score DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Name the university that had the most students in 2011.",
+        "query": "SELECT T2.university_name FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year = 2011 ORDER BY T1.num_students DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Indicate the university's name with the highest ranking score in Teaching.",
+        "query": "SELECT T1.university_name FROM university AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.university_id INNER JOIN ranking_criteria AS T3 ON T3.id = T2.ranking_criteria_id WHERE T3.criteria_name = 'Teaching' ORDER BY T2.score DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the percentage of Harvard university's international students in 2011?",
+        "query": "SELECT T1.pct_international_students FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year = 2011 AND T2.university_name = 'Harvard University'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many female students were there at Stanford University in 2011?",
+        "query": "SELECT CAST(T1.num_students * T1.pct_female_students AS REAL) / 100 FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year = 2011 AND T2.university_name = 'Stanford University'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "In which nation is Harvard University located?",
+        "query": "SELECT T2.country_name FROM university AS T1 INNER JOIN country AS T2 ON T1.country_id = T2.id WHERE T1.university_name = 'Harvard University'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the name of the ranking system for Teaching criteria?",
+        "query": "SELECT T1.system_name FROM ranking_system AS T1 INNER JOIN ranking_criteria AS T2 ON T1.id = T2.ranking_system_id WHERE T2.criteria_name = 'Teaching'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Name the most famous university in Argentina.",
+        "query": "SELECT T1.university_name FROM university AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.university_id INNER JOIN country AS T3 ON T3.id = T1.country_id WHERE T3.country_name = 'Argentina' GROUP BY T1.university_name ORDER BY SUM(T2.score) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "In Argentina, how many universities are there?",
+        "query": "SELECT COUNT(*) FROM university AS T1 INNER JOIN country AS T2 ON T1.country_id = T2.id WHERE T2.country_name = 'Argentina'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Which universities have more than 100,000 students in 2011?",
+        "query": "SELECT T2.university_name FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year = 2011 AND T1.num_students > 100000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many criteria are associated with ranking system Center for World University Rankings?",
+        "query": "SELECT COUNT(T2.criteria_name) FROM ranking_system AS T1 INNER JOIN ranking_criteria AS T2 ON T1.id = T2.ranking_system_id WHERE T1.system_name = 'Center for World University Rankings'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many students at the university earned a score of 90 in 2011?",
+        "query": "SELECT COUNT(*) FROM university_year AS T1 INNER JOIN university_ranking_year AS T2 ON T1.university_id = T2.university_id WHERE T2.score = 90 AND T1.year = 2011"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What are the top three universities with the most international students?",
+        "query": "SELECT DISTINCT T2.university_name FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id GROUP BY T2.university_name ORDER BY SUM(T1.num_students * T1.pct_international_students / 100) DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the difference in overall student enrollment and international student enrollment at the Harvard university from 2011 to 2012?",
+        "query": "SELECT SUM(T1.num_students) - SUM(CAST(T1.num_students * T1.pct_international_students AS REAL) / 100) FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T2.university_name = 'Harvard University' AND T1.year BETWEEN 2011 AND 2012"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many universities had over 30000 students in 2011?",
+        "query": "SELECT COUNT(*) FROM university_year WHERE year = 2011 AND num_students > 30000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the country ID of the University of Tokyo?",
+        "query": "SELECT country_id FROM university WHERE university_name = 'University of Tokyo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Provide the ranking system ID of the Center for World University Rankings.",
+        "query": "SELECT id FROM ranking_system WHERE system_name = 'Center for World University Rankings'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the ID of the Publications Rank criteria?",
+        "query": "SELECT id FROM ranking_criteria WHERE criteria_name = 'Publications Rank'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many universities had above 30% of international students in 2013?",
+        "query": "SELECT COUNT(*) FROM university_year WHERE pct_international_students > 30 AND year = 2013"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many universities got less than 50 scores under ranking criteria ID 6 in 2011?",
+        "query": "SELECT COUNT(*) FROM university_ranking_year WHERE ranking_criteria_id = 6 AND year = 2011 AND score < 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Provide the number of students at Yale University in 2016.",
+        "query": "SELECT T1.num_students FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T2.university_name = 'Yale University' AND T1.year = 2016"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "List the universities in Denmark.",
+        "query": "SELECT T1.university_name FROM university AS T1 INNER JOIN country AS T2 ON T1.country_id = T2.id WHERE T2.country_name = 'Denmark'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Provide the number of staff at the University of Auckland in 2015.",
+        "query": "SELECT CAST(SUM(T1.num_students) AS REAL) / SUM(T1.student_staff_ratio) FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T2.university_name = 'University of Auckland' AND T1.year = 2015"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Which country has the University of S\u00c3\u00a3o Paulo?",
+        "query": "SELECT T2.country_name FROM university AS T1 INNER JOIN country AS T2 ON T1.country_id = T2.id WHERE T1.university_name = 'University of S\u00e3o Paulo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many international students attended Harvard University in 2012?",
+        "query": "SELECT CAST(T2.num_students * T2.pct_international_students AS REAL) / 100 FROM university AS T1 INNER JOIN university_year AS T2 ON T1.id = T2.university_id WHERE T1.university_name = 'Harvard University' AND T2.year = 2012"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Calculate the number of female students at Arizona State University in 2014.",
+        "query": "SELECT CAST(T2.num_students * T2.pct_female_students AS REAL) / 100 FROM university AS T1 INNER JOIN university_year AS T2 ON T1.id = T2.university_id WHERE T1.university_name = 'Arizona State University' AND T2.year = 2014"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Provide the universities which got the highest scores.",
+        "query": "SELECT T1.university_name FROM university AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.university_id GROUP BY T1.university_name ORDER BY SUM(T2.score) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "List the ranking criteria under the Shanghai Ranking system.",
+        "query": "SELECT T2.criteria_name FROM ranking_system AS T1 INNER JOIN ranking_criteria AS T2 ON T1.id = T2.ranking_system_id WHERE T1.system_name = 'Shanghai Ranking'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "In 2011, which university got the lowest score in teaching criteria?",
+        "query": "SELECT T3.university_name FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id WHERE T1.criteria_name = 'Teaching' AND T2.year = 2011 ORDER BY T2.score ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Provide the ranking system name for the \"Quality of Education Rank\" criteria.",
+        "query": "SELECT T1.system_name FROM ranking_system AS T1 INNER JOIN ranking_criteria AS T2 ON T1.id = T2.ranking_system_id WHERE T2.criteria_name = 'Quality of Education Rank'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many percent of universities got a score above 80 under International criteria in 2016? Among them, name the university which got the highest score.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.score > 80 THEN 1 ELSE 0 END) AS REAL) / COUNT(*), ( SELECT T3.university_name FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id WHERE T1.criteria_name = 'International' AND T2.year = 2016 AND T2.score > 80 ORDER BY T2.score DESC LIMIT 1 ) AS max FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id WHERE T1.criteria_name = 'International' AND T2.year = 2016"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Provide the ranking criteria and scores in 2005 that were received by Harvard University.",
+        "query": "SELECT T1.criteria_name, T2.score FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id WHERE T3.university_name = 'Harvard University' AND T2.year = 2005"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Calculate the average score per university under Alumni criteria in 2008.",
+        "query": "SELECT AVG(T2.score) FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id WHERE T1.criteria_name = 'Alumni' AND T2.year = 2008"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Name the university and country which had the highest number of international students in 2015.",
+        "query": "SELECT T1.university_name, T3.country_name FROM university AS T1 INNER JOIN university_year AS T2 ON T1.id = T2.university_id INNER JOIN country AS T3 ON T3.id = T1.country_id WHERE T2.year = 2015 ORDER BY T2.num_students DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many students were there in university ID 1 in 2011?",
+        "query": "SELECT num_students FROM university_year WHERE year = 2011 AND university_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the ID of the university with the most students in 2011?",
+        "query": "SELECT university_id FROM university_year WHERE year = 2011 ORDER BY num_students DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Please list the IDs of the universities with a student staff ratio of over 15 in 2011.",
+        "query": "SELECT university_id FROM university_year WHERE year = 2011 AND student_staff_ratio > 15"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Among the universities with over 20000 students in 2011, how many of them have an international students percentage of over 25% in the same year?",
+        "query": "SELECT COUNT(*) FROM university_year WHERE year = 2011 AND pct_international_students > 25 AND num_students > 20000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Please list the IDs of the universities with the top 3 female students percentage in 2011.",
+        "query": "SELECT university_id FROM university_year WHERE year = 2011 ORDER BY pct_female_students DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "In which year did university ID 1 have the most students?",
+        "query": "SELECT year FROM university_year WHERE university_id = 1 ORDER BY num_students DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many students did Harvard University have in 2011?",
+        "query": "SELECT T1.num_students FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T2.university_name = 'Harvard University' AND T1.year = 2011"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the name of the university with the most international students in 2011?",
+        "query": "SELECT T2.university_name FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year = 2011 ORDER BY T1.pct_international_students DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Please list the names of all the universities in Australia.",
+        "query": "SELECT T1.university_name FROM university AS T1 INNER JOIN country AS T2 ON T1.country_id = T2.id WHERE T2.country_name = 'Australia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Among the universities in Australia, how many of them have more than 15000 students in 2011?",
+        "query": "SELECT COUNT(*) FROM university AS T1 INNER JOIN university_year AS T2 ON T1.id = T2.university_id INNER JOIN country AS T3 ON T3.id = T1.country_id WHERE T3.country_name = 'Australia' AND T2.year = 2011 AND T2.num_students > 15000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Which country is Harvard University in?",
+        "query": "SELECT T2.country_name FROM university AS T1 INNER JOIN country AS T2 ON T1.country_id = T2.id WHERE T1.university_name = 'Harvard University'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the name of the university with the highest score in teaching in the year 2011?",
+        "query": "SELECT T3.university_name FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id WHERE T1.criteria_name = 'Teaching' AND T2.year = 2011 ORDER BY T2.score DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Please list the names of the universities with a score in teaching of over 90 in 2011.",
+        "query": "SELECT T3.university_name FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id WHERE T1.criteria_name = 'Teaching' AND T2.year = 2011 AND T2.score > 90"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Among the universities with a score in teaching of over 90 in 2011, how many of them are in the United States of America?",
+        "query": "SELECT COUNT(*) FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id WHERE T1.criteria_name = 'Teaching' AND T2.year = 2011 AND T2.score > 90"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Please list the names of all the ranking criteria of Harvard University in 2011.",
+        "query": "SELECT T1.criteria_name FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id WHERE T3.university_name = 'Harvard University' AND T2.year = 2011"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What are the names of the universities that got 98 in teaching in 2011?",
+        "query": "SELECT T3.university_name FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id WHERE T1.criteria_name = 'Teaching' AND T2.year = 2011 AND T2.score = 98"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Please list the names of all the universities that scored under 60 in teaching in 2011 and are in the United States of America.",
+        "query": "SELECT T3.university_name FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id INNER JOIN country AS T4 ON T4.id = T3.country_id WHERE T4.country_name = 'United States of America' AND T2.year = 2011 AND T2.score < 60 AND T1.criteria_name = 'Teaching'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Among the universities in Australia, how many of them have a student staff ratio of over 15 in 2011?",
+        "query": "SELECT COUNT(*) FROM university AS T1 INNER JOIN university_year AS T2 ON T1.id = T2.university_id INNER JOIN country AS T3 ON T3.id = T1.country_id WHERE T3.country_name = 'Australia' AND T2.student_staff_ratio > 15 AND T2.year = 2011"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many female students did Stanford University have in 2011?",
+        "query": "SELECT CAST(T1.num_students * T1.pct_female_students AS REAL) / 100 FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year = 2011 AND T2.university_name = 'Stanford University'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Among the universities with a score in teaching of over 90 in 2011, what is the percentage of those in the United States of America?",
+        "query": "SELECT CAST(SUM(CASE WHEN T4.country_name = 'United States of America' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) AS per FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id INNER JOIN country AS T4 ON T4.id = T3.country_id WHERE T1.criteria_name = 'Teaching' AND T2.year = 2011 AND T2.score > 90"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Give the id of \"Center for World University Rankings\".",
+        "query": "SELECT id FROM ranking_system WHERE system_name = 'Center for World University Rankings'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Which country is University of Veterinary Medicine Vienna located in? Give its country id.",
+        "query": "SELECT country_id FROM university WHERE university_name = 'University of Veterinary Medicine Vienna'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the id of the criteria \"Citations Rank\"?",
+        "query": "SELECT id FROM ranking_criteria WHERE criteria_name = 'Citations Rank'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Show the id of University of Orl\u00e9ans.",
+        "query": "SELECT id FROM university WHERE university_name = 'University of Orl\u00e9ans'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "For the university id 268, show its number of students in 2013.",
+        "query": "SELECT num_students FROM university_year WHERE university_id = 268 AND year = 2013"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Show the name of country id 66.",
+        "query": "SELECT country_name FROM country WHERE id = 66"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Which country is McMaster University located in?",
+        "query": "SELECT T2.country_name FROM university AS T1 INNER JOIN country AS T2 ON T1.country_id = T2.id WHERE T1.university_name = 'McMaster University'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many Turkish universities are there in the database?",
+        "query": "SELECT COUNT(*) FROM university AS T1 INNER JOIN country AS T2 ON T1.country_id = T2.id WHERE T2.country_name = 'Turkey'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Which university had the most students in 2011? Show its name.",
+        "query": "SELECT T2.university_name FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year = 2011 ORDER BY T1.num_students DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many students were there in University of Michigan in 2011?",
+        "query": "SELECT COUNT(*) FROM university AS T1 INNER JOIN university_year AS T2 ON T1.id = T2.university_id WHERE T1.university_name = 'University of Michigan' AND T2.year = 2011"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "For Chosun University, what was its score on \"Influence Rank\" in 2015?",
+        "query": "SELECT T2.score FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id WHERE T3.university_name = 'Chosun University' AND T1.criteria_name = 'Influence Rank' AND T2.year = 2015"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the percentage of the international students in University of Oslo in 2015?",
+        "query": "SELECT T2.pct_international_students FROM university AS T1 INNER JOIN university_year AS T2 ON T1.id = T2.university_id WHERE T1.university_name = 'University of Oslo' AND T2.year = 2015"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "For the University of Southampton in 2015, on which criteria did it score the best?",
+        "query": "SELECT T1.criteria_name FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id WHERE T3.university_name = 'University of Southampton' AND T2.year = 2015 ORDER BY T2.score DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Which ranking system is criteria \"Total Shanghai\" in?",
+        "query": "SELECT T1.system_name FROM ranking_system AS T1 INNER JOIN ranking_criteria AS T2 ON T1.id = T2.ranking_system_id WHERE T2.criteria_name = 'Total Shanghai'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many female students were there in Pierre and Marie Curie University in 2015?",
+        "query": "SELECT CAST(T1.num_students * T1.pct_female_students AS REAL) / 100 FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year = 2015 AND T2.university_name = 'Pierre and Marie Curie University'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What was the score for University of Florida in \"N and S\" in 2014?",
+        "query": "SELECT T2.score FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id INNER JOIN university AS T3 ON T3.id = T2.university_id WHERE T3.university_name = 'University of Florida' AND T2.year = 2014 AND T1.criteria_name = 'N and S'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Calculate the number of international students of University of Wisconsin-Madison in 2013.",
+        "query": "SELECT CAST(T1.num_students * T1.pct_international_students AS REAL) / 100 FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year = 2013 AND T2.university_name = 'University of Wisconsin-Madison'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Show the name of the university with the lowest number of students in 2015.",
+        "query": "SELECT T2.university_name FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year = 2015 ORDER BY T1.num_students ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many times more was the number of students of University of Ottawa than Joseph Fourier University in 2013?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.university_name = 'University of Ottawa' THEN T1.num_students ELSE 0 END) AS REAL) / SUM(CASE WHEN T2.university_name = 'Joseph Fourier University' THEN T1.num_students ELSE 0 END) FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year = 2013"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Calculate the average number of criterias among \"Times Higher Education World University Ranking\",\"Shanghai Ranking\" and \"Center for World University Rankings\".",
+        "query": "SELECT (SUM(CASE WHEN T1.system_name = 'Center for World University Rankings' THEN 1 ELSE 0 END) + SUM(CASE WHEN T1.system_name = 'Shanghai Ranking' THEN 1 ELSE 0 END) + SUM(CASE WHEN T1.system_name = 'Times Higher Education World University Ranking' THEN 1 ELSE 0 END)) / 3 FROM ranking_system AS T1 INNER JOIN ranking_criteria AS T2 ON T1.id = T2.ranking_system_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Calculate the average number of students of all universities in 2012.",
+        "query": "SELECT AVG(num_students) FROM university_year WHERE year = 2012"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the score of university ID 68 in 2015?",
+        "query": "SELECT score FROM university_ranking_year WHERE year = 2015 AND university_id = 68"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Provide the country ID of Cyprus.",
+        "query": "SELECT id FROM country WHERE country_name = 'Cyprus'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the ID of university with the largest percentage of international students?",
+        "query": "SELECT university_id FROM university_year ORDER BY pct_international_students DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Provide the criteria name of the ranking criteria ID 13.",
+        "query": "SELECT criteria_name FROM ranking_criteria WHERE id = 13"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the average score of all universities in 2012?",
+        "query": "SELECT AVG(score) FROM university_ranking_year WHERE year = 2012"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "In years 2011 to 2013, what is the total number of female students in university ID 40?",
+        "query": "SELECT SUM(CAST(num_students * pct_female_students AS REAL) / 100) FROM university_year WHERE year BETWEEN 2011 AND 2013 AND university_id = 40"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Calculate the average score of university ID 79 between year 2013 to 2015.",
+        "query": "SELECT AVG(score) FROM university_ranking_year WHERE year BETWEEN 2013 AND 2015 AND university_id = 79"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Give the student staff ratio of university ID 35.",
+        "query": "SELECT student_staff_ratio FROM university_year WHERE university_id = 35"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Provide the score of the most populated university in 2011.",
+        "query": "SELECT T2.score FROM university_year AS T1 INNER JOIN university_ranking_year AS T2 ON T1.university_id = T2.university_id WHERE T1.year = 2011 ORDER BY T1.num_students DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Give the criteria name where Harvard University scored 100.",
+        "query": "SELECT DISTINCT T3.criteria_name FROM university AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.university_id INNER JOIN ranking_criteria AS T3 ON T3.id = T2.ranking_criteria_id WHERE T1.university_name = 'Harvard University' AND T2.score = 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Provide the university name and ID of the university found in Turkey.",
+        "query": "SELECT T1.university_name, T1.id FROM university AS T1 INNER JOIN country AS T2 ON T1.country_id = T2.id WHERE T2.country_name = 'Turkey'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the total number of ranking criteria under the ranking system called Shanghai Ranking?",
+        "query": "SELECT COUNT(*) FROM ranking_system AS T1 INNER JOIN ranking_criteria AS T2 ON T1.id = T2.ranking_system_id WHERE T1.system_name = 'Shanghai Ranking'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Give the name and score of the university ID 124.",
+        "query": "SELECT T2.university_name, T1.score FROM university_ranking_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T2.id = 124"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many female students are there in University of Pennsylvania in 2011?",
+        "query": "SELECT CAST(T1.num_students * T1.pct_female_students AS REAL) / 100 FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year = 2011 AND T2.university_name = 'University of Pennsylvania'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "List down all universities that scored below 50.",
+        "query": "SELECT DISTINCT T2.university_name FROM university_ranking_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.score < 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many universities are located in Japan?",
+        "query": "SELECT COUNT(*) FROM university AS T1 INNER JOIN country AS T2 ON T1.country_id = T2.id WHERE T2.country_name = 'Japan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Provide the name of the university with the highest number of male students.",
+        "query": "SELECT T2.university_name FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id ORDER BY T1.num_students * T1.pct_female_students / 100 - T1.num_students DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "List the countries of universities that scored 70 and below in 2016.",
+        "query": "SELECT DISTINCT T3.country_name FROM university AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.university_id INNER JOIN country AS T3 ON T3.id = T1.country_id WHERE T2.score < 70 AND T2.year = 2016"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Calculate number of male students in Emory University in 2011.",
+        "query": "SELECT CAST((T1.num_students - (T1.num_students * T1.pct_female_students)) AS REAL) / 100 FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T2.university_name = 'Emory University' AND T1.year = 2011"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "In which country does Johns Hopkins University located?",
+        "query": "SELECT T2.country_name FROM university AS T1 INNER JOIN country AS T2 ON T1.country_id = T2.id WHERE T1.university_name = 'Johns Hopkins University'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Give the names of universities with number of students ranges from 400 to 1000.",
+        "query": "SELECT DISTINCT T2.university_name FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.num_students BETWEEN 400 AND 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "In what year does the Brown University score the highest?",
+        "query": "SELECT T1.year FROM university_ranking_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T2.university_name = 'Brown University' ORDER BY T1.score DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Calculate the average score of Emory University from 2011 to 2016.",
+        "query": "SELECT AVG(T1.score) FROM university_ranking_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T2.university_name = 'Emory University' AND T1.year BETWEEN 2011 AND 2016"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Give the name of the university with the most number of students in 2015.",
+        "query": "SELECT T2.university_name FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year = 2015 ORDER BY T1.num_students DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "What is the location and number of female students in university ID 23 in 2011?",
+        "query": "SELECT T3.country_name, CAST(T2.num_students * T2.pct_female_students AS REAL) / 100 FROM university AS T1 INNER JOIN university_year AS T2 ON T1.id = T2.university_id INNER JOIN country AS T3 ON T3.id = T1.country_id WHERE T2.year = 2011 AND T1.id = 23"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "How many universities scored 40 in teaching criteria?",
+        "query": "SELECT COUNT(*) FROM ranking_criteria AS T1 INNER JOIN university_ranking_year AS T2 ON T1.id = T2.ranking_criteria_id WHERE T2.score = 40 AND T1.criteria_name = 'Teaching' AND T2.score = 40"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Among the universities in United States of America, what is the percentage of female students in year 2016?",
+        "query": "SELECT SUM(CAST(T2.pct_female_students * T2.num_students AS REAL) / 100) * 100 / SUM(T2.num_students) FROM university AS T1 INNER JOIN university_year AS T2 ON T1.id = T2.university_id INNER JOIN country AS T3 ON T3.id = T1.country_id WHERE T3.country_name = 'United States of America' AND T2.year = 2016"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "Calculate the difference between the total number of students and the number of international international students in Univeristy of Tokyo from 2011 to 2014.",
+        "query": "SELECT SUM(T1.num_students) - SUM(CAST(T1.num_students * T1.pct_international_students AS REAL) / 100) FROM university_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year BETWEEN 2011 AND 2014 AND T2.university_name = 'University of Tokyo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "university",
+        "question": "List the names of universities with a score less than 28% of the average score of all universities in 2015.",
+        "query": "SELECT T2.university_name FROM university_ranking_year AS T1 INNER JOIN university AS T2 ON T1.university_id = T2.id WHERE T1.year = 2015 AND T1.score * 100 < ( SELECT AVG(score) * 28 FROM university_ranking_year WHERE year = 2015 )"
+    }
+]

@@ -1,0 +1,560 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "List all vehicle id",
+        "query": "SELECT vehicle_id FROM Vehicles;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What are the ids of all vehicles?",
+        "query": "SELECT vehicle_id FROM Vehicles;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many vehicle in total?",
+        "query": "SELECT count(*) FROM Vehicles;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many vehicles exist?",
+        "query": "SELECT count(*) FROM Vehicles;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "Show the detail of vehicle with id 1.",
+        "query": "SELECT vehicle_details FROM Vehicles WHERE vehicle_id = 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What are the details of the car with id 1?",
+        "query": "SELECT vehicle_details FROM Vehicles WHERE vehicle_id = 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "List the first name middle name and last name of all staff.",
+        "query": "SELECT first_name ,  middle_name ,  last_name FROM Staff;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What are the first, middle, and last names of all staff?",
+        "query": "SELECT first_name ,  middle_name ,  last_name FROM Staff;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the birthday of the staff member with first name as Janessa and last name as Sawayn?",
+        "query": "SELECT date_of_birth FROM Staff WHERE first_name = \"Janessa\" AND last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the date of birth for the staff member named Janessa Sawayn?",
+        "query": "SELECT date_of_birth FROM Staff WHERE first_name = \"Janessa\" AND last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "When did the staff member with first name as Janessa and last name as Sawayn join the company?",
+        "query": "SELECT date_joined_staff FROM Staff WHERE first_name = \"Janessa\" AND last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "When did the staff member named Janessa Sawayn join the company?",
+        "query": "SELECT date_joined_staff FROM Staff WHERE first_name = \"Janessa\" AND last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "When did the staff member with first name as Janessa and last name as Sawayn leave the company?",
+        "query": "SELECT date_left_staff FROM Staff WHERE first_name = \"Janessa\" AND last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "When did the staff member Janessa Sawayn leave the company?",
+        "query": "SELECT date_left_staff FROM Staff WHERE first_name = \"Janessa\" AND last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many staff have the first name Ludie?",
+        "query": "SELECT count(*) FROM Staff WHERE first_name = \"Ludie\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many employees have a first name of Ludie?",
+        "query": "SELECT count(*) FROM Staff WHERE first_name = \"Ludie\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the nickname of staff with first name as Janessa and last name as Sawayn?",
+        "query": "SELECT nickname FROM Staff WHERE first_name = \"Janessa\" AND last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the nickname of the employee named Janessa Sawayn?",
+        "query": "SELECT nickname FROM Staff WHERE first_name = \"Janessa\" AND last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many staff in total?",
+        "query": "SELECT count(*) FROM Staff;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many employees are there?",
+        "query": "SELECT count(*) FROM Staff;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "Which city does staff with first name as Janessa and last name as Sawayn live?",
+        "query": "SELECT T1.city FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id = T2.staff_address_id WHERE T2.first_name = \"Janessa\" AND T2.last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "In what city does Janessa Sawayn live?",
+        "query": "SELECT T1.city FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id = T2.staff_address_id WHERE T2.first_name = \"Janessa\" AND T2.last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "Which country and state does staff with first name as Janessa and last name as Sawayn lived?",
+        "query": "SELECT T1.country ,  T1.state_province_county FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id = T2.staff_address_id WHERE T2.first_name = \"Janessa\" AND T2.last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "In which country and state does Janessa Sawayn live?",
+        "query": "SELECT T1.country ,  T1.state_province_county FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id = T2.staff_address_id WHERE T2.first_name = \"Janessa\" AND T2.last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How long is the total lesson time took by customer with first name as Rylan and last name as Goodwin?",
+        "query": "SELECT sum(T1.lesson_time) FROM Lessons AS T1 JOIN Customers AS T2 ON T1.customer_id  = T2.customer_id WHERE T2.first_name = \"Rylan\" AND T2.last_name = \"Goodwin\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How long is the total lesson time took by the customer named Rylan Goodwin?",
+        "query": "SELECT sum(T1.lesson_time) FROM Lessons AS T1 JOIN Customers AS T2 ON T1.customer_id  = T2.customer_id WHERE T2.first_name = \"Rylan\" AND T2.last_name = \"Goodwin\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the zip code of staff with first name as Janessa and last name as Sawayn lived?",
+        "query": "SELECT T1.zip_postcode FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id = T2.staff_address_id WHERE T2.first_name = \"Janessa\" AND T2.last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the zip code of the hosue of the employee named Janessa Sawayn?",
+        "query": "SELECT T1.zip_postcode FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id = T2.staff_address_id WHERE T2.first_name = \"Janessa\" AND T2.last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many staff live in state Georgia?",
+        "query": "SELECT count(*) FROM Addresses WHERE state_province_county = \"Georgia\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many employees live in Georgia?",
+        "query": "SELECT count(*) FROM Addresses WHERE state_province_county = \"Georgia\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "Find out the first name and last name of staff lived in city Damianfort.",
+        "query": "SELECT T2.first_name ,  T2.last_name FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id = T2.staff_address_id WHERE T1.city = \"Damianfort\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the first and last name of all employees who live in the city Damianfort?",
+        "query": "SELECT T2.first_name ,  T2.last_name FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id = T2.staff_address_id WHERE T1.city = \"Damianfort\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "Which city lives most of staffs? List the city name and number of staffs.",
+        "query": "SELECT T1.city ,  count(*) FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id = T2.staff_address_id GROUP BY T1.city ORDER BY count(*) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "In which city do the most employees live and how many of them live there?",
+        "query": "SELECT T1.city ,  count(*) FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id = T2.staff_address_id GROUP BY T1.city ORDER BY count(*) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "List the states which have between 2 to 4 staffs living there.",
+        "query": "SELECT T1.state_province_county FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id = T2.staff_address_id GROUP BY T1.state_province_county HAVING count(*) BETWEEN 2 AND 4;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What are the names of the states that have 2 to 4 employees living there?",
+        "query": "SELECT T1.state_province_county FROM Addresses AS T1 JOIN Staff AS T2 ON T1.address_id = T2.staff_address_id GROUP BY T1.state_province_county HAVING count(*) BETWEEN 2 AND 4;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "List the first name and last name of all customers.",
+        "query": "SELECT first_name ,  last_name FROM Customers;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What are the first and last names for all customers?",
+        "query": "SELECT first_name ,  last_name FROM Customers;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "List email address and birthday of customer whose first name as Carole.",
+        "query": "SELECT email_address ,  date_of_birth FROM Customers WHERE first_name = \"Carole\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What are the email addresses and date of births for all customers who have a first name of Carole?",
+        "query": "SELECT email_address ,  date_of_birth FROM Customers WHERE first_name = \"Carole\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "List phone number and email address of customer with more than 2000 outstanding balance.",
+        "query": "SELECT phone_number ,  email_address FROM Customers WHERE amount_outstanding  >  2000;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What are the phone numbers and email addresses of all customers who have an outstanding balance of more than 2000?",
+        "query": "SELECT phone_number ,  email_address FROM Customers WHERE amount_outstanding  >  2000;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the status code, mobile phone number and email address of customer with last name as Kohler or first name as Marina?",
+        "query": "SELECT customer_status_code ,  cell_mobile_phone_number ,  email_address FROM Customers WHERE first_name = \"Marina\" OR last_name  =  \"Kohler\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the status code, phone number, and email address of the customer whose last name is Kohler or whose first name is Marina?",
+        "query": "SELECT customer_status_code ,  cell_mobile_phone_number ,  email_address FROM Customers WHERE first_name = \"Marina\" OR last_name  =  \"Kohler\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "When are the birthdays of customer who are classified as 'Good Customer' status?",
+        "query": "SELECT date_of_birth FROM Customers WHERE customer_status_code  =  'Good Customer'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the date of birth of every customer whose status code is 'Good Customer'?",
+        "query": "SELECT date_of_birth FROM Customers WHERE customer_status_code  =  'Good Customer'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "When did customer with first name as Carole and last name as Bernhard became a customer?",
+        "query": "SELECT date_became_customer FROM Customers WHERE first_name = \"Carole\" AND last_name = \"Bernhard\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "When did Carole Bernhard first become a customer?",
+        "query": "SELECT date_became_customer FROM Customers WHERE first_name = \"Carole\" AND last_name = \"Bernhard\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many customers in total?",
+        "query": "SELECT count(*) FROM Customers;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many customers are there?",
+        "query": "SELECT count(*) FROM Customers;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "List all customer status codes and the number of customers having each status code.",
+        "query": "SELECT customer_status_code , count(*) FROM Customers GROUP BY customer_status_code;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "For each customer status code, how many customers are classified that way?",
+        "query": "SELECT customer_status_code , count(*) FROM Customers GROUP BY customer_status_code;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "Which customer status code has least number of customers?",
+        "query": "SELECT customer_status_code FROM Customers GROUP BY customer_status_code ORDER BY count(*) ASC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the status code with the least number of customers?",
+        "query": "SELECT customer_status_code FROM Customers GROUP BY customer_status_code ORDER BY count(*) ASC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many lessons taken by customer with first name as Rylan and last name as Goodwin were completed?",
+        "query": "SELECT count(*) FROM Lessons AS T1 JOIN Customers AS T2 ON T1.customer_id  = T2.customer_id WHERE T2.first_name = \"Rylan\" AND T2.last_name = \"Goodwin\" AND T1.lesson_status_code = \"Completed\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many lessons did the customer Ryan Goodwin complete?",
+        "query": "SELECT count(*) FROM Lessons AS T1 JOIN Customers AS T2 ON T1.customer_id  = T2.customer_id WHERE T2.first_name = \"Rylan\" AND T2.last_name = \"Goodwin\" AND T1.lesson_status_code = \"Completed\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is maximum, minimum and average amount of outstanding of customer?",
+        "query": "SELECT max(amount_outstanding) ,  min(amount_outstanding) ,  avg(amount_outstanding) FROM Customers;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the maximum, minimum, and average amount of money outsanding for all customers?",
+        "query": "SELECT max(amount_outstanding) ,  min(amount_outstanding) ,  avg(amount_outstanding) FROM Customers;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "List the first name and last name of customers have the amount of outstanding between 1000 and 3000.",
+        "query": "SELECT first_name ,  last_name FROM Customers WHERE amount_outstanding BETWEEN 1000 AND 3000;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What are the first and last names of all customers with between 1000 and 3000 dollars outstanding?",
+        "query": "SELECT first_name ,  last_name FROM Customers WHERE amount_outstanding BETWEEN 1000 AND 3000;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "List first name and last name of customers lived in city Lockmanfurt.",
+        "query": "SELECT T1.first_name ,  T1.last_name FROM Customers AS T1 JOIN Addresses AS T2 ON T1.customer_address_id = T2.address_id WHERE T2.city = \"Lockmanfurt\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What are the first and last names of all customers who lived in Lockmanfurt?",
+        "query": "SELECT T1.first_name ,  T1.last_name FROM Customers AS T1 JOIN Addresses AS T2 ON T1.customer_address_id = T2.address_id WHERE T2.city = \"Lockmanfurt\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "Which country does customer with first name as Carole and last name as Bernhard lived in?",
+        "query": "SELECT T2.country FROM Customers AS T1 JOIN Addresses AS T2 ON T1.customer_address_id = T2.address_id WHERE T1.first_name = \"Carole\" AND T1.last_name = \"Bernhard\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the country in which the customer Carole Bernhard lived?",
+        "query": "SELECT T2.country FROM Customers AS T1 JOIN Addresses AS T2 ON T1.customer_address_id = T2.address_id WHERE T1.first_name = \"Carole\" AND T1.last_name = \"Bernhard\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is zip code of customer with first name as Carole and last name as Bernhard?",
+        "query": "SELECT T2.zip_postcode FROM Customers AS T1 JOIN Addresses AS T2 ON T1.customer_address_id = T2.address_id WHERE T1.first_name = \"Carole\" AND T1.last_name = \"Bernhard\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the zip code of the customer Carole Bernhard?",
+        "query": "SELECT T2.zip_postcode FROM Customers AS T1 JOIN Addresses AS T2 ON T1.customer_address_id = T2.address_id WHERE T1.first_name = \"Carole\" AND T1.last_name = \"Bernhard\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "Which city does has most number of customers?",
+        "query": "SELECT T2.city FROM Customers AS T1 JOIN Addresses AS T2 ON T1.customer_address_id = T2.address_id GROUP BY T2.city ORDER BY count(*) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the city with the most customers?",
+        "query": "SELECT T2.city FROM Customers AS T1 JOIN Addresses AS T2 ON T1.customer_address_id = T2.address_id GROUP BY T2.city ORDER BY count(*) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How much in total does customer with first name as Carole and last name as Bernhard paid?",
+        "query": "SELECT sum(T1.amount_payment) FROM Customer_Payments AS T1 JOIN Customers AS T2 ON T1.customer_id = T2.customer_id WHERE T2.first_name = \"Carole\" AND T2.last_name = \"Bernhard\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the total amount of moeny paid by the customer Carole Bernhard?",
+        "query": "SELECT sum(T1.amount_payment) FROM Customer_Payments AS T1 JOIN Customers AS T2 ON T1.customer_id = T2.customer_id WHERE T2.first_name = \"Carole\" AND T2.last_name = \"Bernhard\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "List the number of customers that did not have any payment history.",
+        "query": "SELECT count(*) FROM Customers WHERE customer_id NOT IN ( SELECT customer_id FROM Customer_Payments );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many customers have no payment histories?",
+        "query": "SELECT count(*) FROM Customers WHERE customer_id NOT IN ( SELECT customer_id FROM Customer_Payments );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "List first name and last name of customers that have more than 2 payments.",
+        "query": "SELECT T2.first_name ,  T2.last_name FROM Customer_Payments AS T1 JOIN Customers AS T2 ON T1.customer_id = T2.customer_id GROUP BY T1.customer_id HAVING count(*)  >  2;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What are the first and last names of all customers with more than 2 payments?",
+        "query": "SELECT T2.first_name ,  T2.last_name FROM Customer_Payments AS T1 JOIN Customers AS T2 ON T1.customer_id = T2.customer_id GROUP BY T1.customer_id HAVING count(*)  >  2;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "List all payment methods and number of payments using each payment methods.",
+        "query": "SELECT payment_method_code ,  count(*) FROM Customer_Payments GROUP BY payment_method_code;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "For each payment method, how many payments were made?",
+        "query": "SELECT payment_method_code ,  count(*) FROM Customer_Payments GROUP BY payment_method_code;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many lessons were in cancelled state?",
+        "query": "SELECT count(*) FROM Lessons WHERE lesson_status_code = \"Cancelled\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many lessons have been cancelled?",
+        "query": "SELECT count(*) FROM Lessons WHERE lesson_status_code = \"Cancelled\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "List lesson id of all lessons taught by staff with first name as Janessa, last name as Sawayn and nickname containing letter 's'.",
+        "query": "SELECT T1.lesson_id FROM Lessons AS T1 JOIN Staff AS T2 ON T1.staff_id = T2.staff_id WHERE T2.first_name = \"Janessa\" AND T2.last_name = \"Sawayn\" AND nickname LIKE \"%s%\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What are the the lesson ids of all staff taught by Janessa Sawayn whose nickname has the letter s?",
+        "query": "SELECT T1.lesson_id FROM Lessons AS T1 JOIN Staff AS T2 ON T1.staff_id = T2.staff_id WHERE T2.first_name = \"Janessa\" AND T2.last_name = \"Sawayn\" AND nickname LIKE \"%s%\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many lessons taught by staff whose first name has letter 'a' in it?",
+        "query": "SELECT count(*) FROM Lessons AS T1 JOIN Staff AS T2 ON T1.staff_id = T2.staff_id WHERE T2.first_name LIKE \"%a%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many lessons were taught by a staff member whose first name has the letter 'a' in it?",
+        "query": "SELECT count(*) FROM Lessons AS T1 JOIN Staff AS T2 ON T1.staff_id = T2.staff_id WHERE T2.first_name LIKE \"%a%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How long is the total lesson time taught by staff with first name as Janessa and last name as Sawayn?",
+        "query": "SELECT sum(lesson_time) FROM Lessons AS T1 JOIN Staff AS T2 ON T1.staff_id = T2.staff_id WHERE T2.first_name = \"Janessa\" AND T2.last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the total time for all lessons taught by Janessa Sawayn?",
+        "query": "SELECT sum(lesson_time) FROM Lessons AS T1 JOIN Staff AS T2 ON T1.staff_id = T2.staff_id WHERE T2.first_name = \"Janessa\" AND T2.last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is average lesson price taught by staff with first name as Janessa and last name as Sawayn?",
+        "query": "SELECT avg(price) FROM Lessons AS T1 JOIN Staff AS T2 ON T1.staff_id = T2.staff_id WHERE T2.first_name = \"Janessa\" AND T2.last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the average price for a lesson taught by Janessa Sawayn?",
+        "query": "SELECT avg(price) FROM Lessons AS T1 JOIN Staff AS T2 ON T1.staff_id = T2.staff_id WHERE T2.first_name = \"Janessa\" AND T2.last_name = \"Sawayn\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many lesson does customer with first name Ray took?",
+        "query": "SELECT count(*) FROM Lessons AS T1 JOIN Customers AS T2 ON T1.customer_id  = T2.customer_id WHERE T2.first_name = \"Ray\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "How many lessons did the customer with the first name Ray take?",
+        "query": "SELECT count(*) FROM Lessons AS T1 JOIN Customers AS T2 ON T1.customer_id  = T2.customer_id WHERE T2.first_name = \"Ray\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "Which last names are both used by customers and by staff?",
+        "query": "SELECT last_name FROM Customers INTERSECT SELECT last_name FROM Staff"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What are the last names that are used by customers and staff?",
+        "query": "SELECT last_name FROM Customers INTERSECT SELECT last_name FROM Staff"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the first name of the staff who did not give any lesson?",
+        "query": "SELECT first_name FROM Staff EXCEPT SELECT T2.first_name FROM Lessons AS T1 JOIN Staff AS T2 ON T1.staff_id  =  T2.staff_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the first name of all employees who do not give any lessons?",
+        "query": "SELECT first_name FROM Staff EXCEPT SELECT T2.first_name FROM Lessons AS T1 JOIN Staff AS T2 ON T1.staff_id  =  T2.staff_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "driving_school",
+        "question": "What is the id and detail of the vehicle used in lessons for most of the times?",
+        "query": "SELECT T1.vehicle_id ,  T1.vehicle_details FROM Vehicles AS T1 JOIN Lessons AS T2 ON T1.vehicle_id  =  T2.vehicle_id GROUP BY T1.vehicle_id ORDER BY count(*) DESC LIMIT 1"
+    }
+]

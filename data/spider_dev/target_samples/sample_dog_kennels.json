@@ -1,0 +1,213 @@
+{
+    "Breeds": [
+        [
+            "HUS",
+            "Husky"
+        ],
+        [
+            "ESK",
+            "Eskimo"
+        ],
+        [
+            "BUL",
+            "Bulldog"
+        ]
+    ],
+    "Charges": [
+        [
+            3,
+            "Health Check",
+            640
+        ],
+        [
+            1,
+            "Daily Accommodation",
+            98
+        ],
+        [
+            2,
+            "Drugs",
+            322
+        ]
+    ],
+    "Sizes": [
+        [
+            "LGE",
+            "Large"
+        ],
+        [
+            "MED",
+            "Medium"
+        ],
+        [
+            "SML",
+            "Small"
+        ]
+    ],
+    "Treatment_Types": [
+        [
+            "VAC",
+            "Vaccination"
+        ],
+        [
+            "EXAM",
+            "Physical examination"
+        ],
+        [
+            "WALK",
+            "Take for a Walk"
+        ]
+    ],
+    "Owners": [
+        [
+            11,
+            "Gay",
+            "Feil",
+            "60352 Kayleigh Crossing Suite 700",
+            "Port Zackery",
+            "Indiana",
+            "35747",
+            "pearlie18@example.com",
+            "130-796-4589x05454",
+            "762.589.6117x1328"
+        ],
+        [
+            2,
+            "Melisa",
+            "DuBuque",
+            "1204 Mae Highway Apt. 107",
+            "Port Reannamouth",
+            "Virginia",
+            "45244",
+            "ykris@example.com",
+            "(799)563-0260x454",
+            "(722)768-5439x484"
+        ],
+        [
+            8,
+            "Rolando",
+            "Prohaska",
+            "57382 Yost Ridges",
+            "South Afton",
+            "Arkansas",
+            "86010",
+            "kturner@example.net",
+            "01802479758",
+            "(783)271-6744x4507"
+        ]
+    ],
+    "Dogs": [
+        [
+            15,
+            10,
+            "1",
+            "BUL",
+            "MED",
+            "Evangeline",
+            "1",
+            "2008-05-30 12:51:34",
+            "1",
+            "4.01",
+            "2017-12-29 23:24:13",
+            "2018-03-10 15:06:43",
+            "2018-03-24 19:36:59"
+        ],
+        [
+            6,
+            5,
+            "0",
+            "HUS",
+            "MED",
+            "Merritt",
+            "9",
+            "2015-02-26 21:31:22",
+            "1",
+            "9.8",
+            "2017-04-15 09:25:31",
+            "2018-03-08 15:03:00",
+            "2018-03-25 13:07:04"
+        ],
+        [
+            10,
+            6,
+            "0",
+            "HUS",
+            "MED",
+            "Troy",
+            "9",
+            "2012-07-11 17:15:10",
+            "0",
+            "8.96",
+            "2017-12-29 06:08:26",
+            "2018-03-18 07:47:40",
+            "2018-03-25 04:42:14"
+        ]
+    ],
+    "Professionals": [
+        [
+            1,
+            "Employee",
+            "Taryn",
+            "6915 Oberbrunner Point Suite 491\nGleasonville, LA ",
+            "West Heidi",
+            "Indiana",
+            "06646",
+            "Braun",
+            "deanna.schuster@example.com",
+            "+71(6)2898266914",
+            "(275)939-2435x80863"
+        ],
+        [
+            11,
+            "Employee",
+            "Brady",
+            "09615 McKenzie Stravenue Apt. 128\nWest Elliottview",
+            "Raynorfort",
+            "Alabama",
+            "07412",
+            "Pouros",
+            "west.eula@example.net",
+            "(920)304-4499x59146",
+            "609-405-2990"
+        ],
+        [
+            3,
+            "Employee",
+            "Olaf",
+            "68589 Bradly Manor\nNew Audrey, IN 91497",
+            "Jaceton",
+            "Wisconsin",
+            "77129",
+            "Watsica",
+            "uboehm@example.org",
+            "325-155-0801x7005",
+            "(369)908-7311x065"
+        ]
+    ],
+    "Treatments": [
+        [
+            3,
+            14,
+            4,
+            "EXAM",
+            "2018-03-08 05:26:23",
+            429
+        ],
+        [
+            13,
+            7,
+            8,
+            "VAC",
+            "2018-02-26 09:08:53",
+            945
+        ],
+        [
+            5,
+            12,
+            14,
+            "VAC",
+            "2018-03-23 13:52:10",
+            668
+        ]
+    ]
+}

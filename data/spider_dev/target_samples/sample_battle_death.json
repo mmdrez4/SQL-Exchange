@@ -1,0 +1,80 @@
+{
+    "battle": [
+        [
+            2,
+            "Battle of Serres",
+            "June 1205",
+            "Kaloyan",
+            "Unknown",
+            "Bulgarian victory"
+        ],
+        [
+            4,
+            "Battle of Rodosto",
+            "February 1206",
+            "Kaloyan",
+            "Unknown",
+            "Bulgarian victory"
+        ],
+        [
+            3,
+            "Battle of Rusion",
+            "31 January 1206",
+            "Kaloyan",
+            "Thierry de Termond",
+            "Bulgarian victory"
+        ]
+    ],
+    "ship": [
+        [
+            4,
+            6,
+            "Bacchus",
+            "t",
+            "Brig",
+            "English Channel",
+            "Sank"
+        ],
+        [
+            8,
+            1,
+            "Lettice",
+            "t",
+            "Brig",
+            "English Channel",
+            "Captured"
+        ],
+        [
+            6,
+            3,
+            "Mary",
+            "t",
+            "Brig",
+            "English Channel",
+            "Captured"
+        ]
+    ],
+    "death": [
+        [
+            5,
+            6,
+            "Dantewada, Chhattisgarh",
+            0,
+            0
+        ],
+        [
+            1,
+            9,
+            "Dantewada, Chhattisgarh",
+            29,
+            0
+        ],
+        [
+            6,
+            8,
+            "Kanker, Chhattisgarh",
+            0,
+            0
+        ]
+    ]
+}

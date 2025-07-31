@@ -1,0 +1,530 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the name of all customers.",
+        "query": "SELECT customer_name FROM customers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What are the names of all the customers?",
+        "query": "SELECT customer_name FROM customers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "How many customers are there?",
+        "query": "SELECT count(*) FROM customers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Return the total number of distinct customers.",
+        "query": "SELECT count(*) FROM customers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What is the average amount of items ordered in each order?",
+        "query": "SELECT avg(order_quantity) FROM order_items"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the average order quantity per order.",
+        "query": "SELECT avg(order_quantity) FROM order_items"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What are the names of customers who use payment method \"Cash\"?",
+        "query": "SELECT customer_name FROM customers WHERE payment_method  =  \"Cash\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Which customers use \"Cash\" for payment method? Return the customer names.",
+        "query": "SELECT customer_name FROM customers WHERE payment_method  =  \"Cash\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the \"date became customers\" of the customers whose ID is between 10 and 20.",
+        "query": "SELECT date_became_customer FROM customers WHERE customer_id BETWEEN 10 AND 20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What are the dates when customers with ids between 10 and 20 became customers?",
+        "query": "SELECT date_became_customer FROM customers WHERE customer_id BETWEEN 10 AND 20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Which payment method is used by most customers?",
+        "query": "SELECT payment_method FROM customers GROUP BY payment_method ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the payment method that is used most frequently.",
+        "query": "SELECT payment_method FROM customers GROUP BY payment_method ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What are the names of customers using the most popular payment method?",
+        "query": "SELECT customer_name FROM customers WHERE payment_method  =  (SELECT payment_method FROM customers GROUP BY payment_method ORDER BY count(*) DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the name of the customers who use the most frequently used payment method.",
+        "query": "SELECT customer_name FROM customers WHERE payment_method  =  (SELECT payment_method FROM customers GROUP BY payment_method ORDER BY count(*) DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What are all the payment methods?",
+        "query": "SELECT DISTINCT payment_method FROM customers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Return all the distinct payment methods used by customers.",
+        "query": "SELECT DISTINCT payment_method FROM customers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What are the details of all products?",
+        "query": "SELECT DISTINCT product_details FROM products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Return the the details of all products.",
+        "query": "SELECT DISTINCT product_details FROM products"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the name of all customers whose name contains \"Alex\".",
+        "query": "SELECT customer_name FROM customers WHERE customer_name LIKE \"%Alex%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Which customer's name contains \"Alex\"? Find the full name.",
+        "query": "SELECT customer_name FROM customers WHERE customer_name LIKE \"%Alex%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the detail of products whose detail contains the word \"Latte\" or the word \"Americano\"",
+        "query": "SELECT product_details FROM products WHERE product_details LIKE \"%Latte%\" OR product_details LIKE \"%Americano%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Which product's detail contains the word \"Latte\" or \"Americano\"? Return the full detail.",
+        "query": "SELECT product_details FROM products WHERE product_details LIKE \"%Latte%\" OR product_details LIKE \"%Americano%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What is the address content of the customer named \"Maudie Kertzmann\"?",
+        "query": "SELECT t3.address_content FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id WHERE t1.customer_name  =  \"Maudie Kertzmann\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Return the address content for the customer whose name is \"Maudie Kertzmann\".",
+        "query": "SELECT t3.address_content FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id WHERE t1.customer_name  =  \"Maudie Kertzmann\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "How many customers are living in city \"Lake Geovannyton\"?",
+        "query": "SELECT count(*) FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id WHERE t3.city  =  \"Lake Geovannyton\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the number of customers who live in the city called Lake Geovannyton.",
+        "query": "SELECT count(*) FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id WHERE t3.city  =  \"Lake Geovannyton\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the name of customers who are living in Colorado?",
+        "query": "SELECT t1.customer_name FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id WHERE t3.state_province_county  =  \"Colorado\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What are the names of customers who live in Colorado state?",
+        "query": "SELECT t1.customer_name FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id WHERE t3.state_province_county  =  \"Colorado\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the list of cities that no customer is living in.",
+        "query": "SELECT city FROM addresses WHERE city NOT IN ( SELECT DISTINCT t3.city FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What are the cities no customers live in?",
+        "query": "SELECT city FROM addresses WHERE city NOT IN ( SELECT DISTINCT t3.city FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Which city has the most customers living in?",
+        "query": "SELECT t3.city FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id GROUP BY t3.city ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the city where the most customers live.",
+        "query": "SELECT t3.city FROM customers AS t1 JOIN customer_addresses AS t2 ON t1.customer_id  =  t2.customer_id JOIN addresses AS t3 ON t2.address_id  =  t3.address_id GROUP BY t3.city ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Retrieve the list of all cities.",
+        "query": "SELECT DISTINCT city FROM addresses"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "List all the distinct cities",
+        "query": "SELECT DISTINCT city FROM addresses"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the city with post code 255.",
+        "query": "SELECT city FROM addresses WHERE zip_postcode  =  255"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Which city is post code 255 located in?",
+        "query": "SELECT city FROM addresses WHERE zip_postcode  =  255"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the state and country of all cities with post code starting with 4.",
+        "query": "SELECT state_province_county ,  country FROM addresses WHERE zip_postcode LIKE \"4%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What are the state and country of all the cities that have post codes starting with 4.\\",
+        "query": "SELECT state_province_county ,  country FROM addresses WHERE zip_postcode LIKE \"4%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "List the countries having more than 4 addresses listed.",
+        "query": "SELECT country FROM addresses GROUP BY country HAVING count(address_id)  >  4"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "For which countries are there more than four distinct addresses listed?",
+        "query": "SELECT country FROM addresses GROUP BY country HAVING count(address_id)  >  4"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "List all the contact channel codes that were used less than 5 times.",
+        "query": "SELECT channel_code FROM customer_contact_channels GROUP BY channel_code HAVING count(customer_id)  <  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Which contact channel codes were used less than 5 times?",
+        "query": "SELECT channel_code FROM customer_contact_channels GROUP BY channel_code HAVING count(customer_id)  <  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Which contact channel has been used by the customer with name \"Tillman Ernser\"?",
+        "query": "SELECT DISTINCT channel_code FROM customers AS t1 JOIN customer_contact_channels AS t2 ON t1.customer_id  =  t2.customer_id WHERE t1.customer_name  =  \"Tillman Ernser\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the contact channel code that was used by the customer named \"Tillman Ernser\".",
+        "query": "SELECT DISTINCT channel_code FROM customers AS t1 JOIN customer_contact_channels AS t2 ON t1.customer_id  =  t2.customer_id WHERE t1.customer_name  =  \"Tillman Ernser\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What is the \"active to date\" of the latest contact channel used by \"Tillman Ernser\"?",
+        "query": "SELECT max(t2.active_to_date) FROM customers AS t1 JOIN customer_contact_channels AS t2 ON t1.customer_id  =  t2.customer_id WHERE t1.customer_name  =  \"Tillman Ernser\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Return the the \"active to date\" of the latest contact channel used by the customer named \"Tillman Ernser\".",
+        "query": "SELECT max(t2.active_to_date) FROM customers AS t1 JOIN customer_contact_channels AS t2 ON t1.customer_id  =  t2.customer_id WHERE t1.customer_name  =  \"Tillman Ernser\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What is the average time span of contact channels in the database?",
+        "query": "SELECT avg(active_to_date - active_from_date) FROM customer_contact_channels"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Compute the average active time span of contact channels.",
+        "query": "SELECT avg(active_to_date - active_from_date) FROM customer_contact_channels"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What is the channel code and contact number of the customer contact channel that was active for the longest time?",
+        "query": "SELECT channel_code ,  contact_number FROM customer_contact_channels WHERE active_to_date - active_from_date  =  (SELECT active_to_date - active_from_date FROM customer_contact_channels ORDER BY (active_to_date - active_from_date) DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Return the channel code and contact number of the customer contact channel whose active duration was the longest.",
+        "query": "SELECT channel_code ,  contact_number FROM customer_contact_channels WHERE active_to_date - active_from_date  =  (SELECT active_to_date - active_from_date FROM customer_contact_channels ORDER BY (active_to_date - active_from_date) DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the name and active date of the customer that use email as the contact channel.",
+        "query": "SELECT t1.customer_name ,  t2.active_from_date FROM customers AS t1 JOIN customer_contact_channels AS t2 ON t1.customer_id  =  t2.customer_id WHERE t2.channel_code  =  'Email'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What are the name and active date of the customers whose contact channel code is email?",
+        "query": "SELECT t1.customer_name ,  t2.active_from_date FROM customers AS t1 JOIN customer_contact_channels AS t2 ON t1.customer_id  =  t2.customer_id WHERE t2.channel_code  =  'Email'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What is the name of the customer that made the order with the largest quantity?",
+        "query": "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id WHERE t3.order_quantity  =  ( SELECT max(order_quantity) FROM order_items)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the name of the customer who made the order of the largest amount of goods.",
+        "query": "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id WHERE t3.order_quantity  =  ( SELECT max(order_quantity) FROM order_items)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What is the name of the customer that has purchased the most items?",
+        "query": "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id GROUP BY t1.customer_name ORDER BY sum(t3.order_quantity) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Give me the name of the customer who ordered the most items in total.",
+        "query": "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id GROUP BY t1.customer_name ORDER BY sum(t3.order_quantity) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What is the payment method of the customer that has purchased the least quantity of items?",
+        "query": "SELECT t1.payment_method FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id GROUP BY t1.customer_name ORDER BY sum(t3.order_quantity) LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Tell me the payment method used by the customer who ordered the least amount of goods in total.",
+        "query": "SELECT t1.payment_method FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id GROUP BY t1.customer_name ORDER BY sum(t3.order_quantity) LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "How many types of products have Rodrick Heaney bought in total?",
+        "query": "SELECT count(DISTINCT t3.product_id) FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id WHERE t1.customer_name  =  \"Rodrick Heaney\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the number of distinct products Rodrick Heaney has bought so far.",
+        "query": "SELECT count(DISTINCT t3.product_id) FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id WHERE t1.customer_name  =  \"Rodrick Heaney\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What is the total quantity of products purchased by \"Rodrick Heaney\"?",
+        "query": "SELECT sum(t3.order_quantity) FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id WHERE t1.customer_name  =  \"Rodrick Heaney\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Tell me the total quantity of products bought by the customer called \"Rodrick Heaney\".",
+        "query": "SELECT sum(t3.order_quantity) FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id WHERE t1.customer_name  =  \"Rodrick Heaney\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "How many customers have at least one order with status \"Cancelled\"?",
+        "query": "SELECT count(DISTINCT customer_id) FROM customer_orders WHERE order_status  =  \"Cancelled\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Return the number of customers who have at least one order with \"Cancelled\" status.",
+        "query": "SELECT count(DISTINCT customer_id) FROM customer_orders WHERE order_status  =  \"Cancelled\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "How many orders have detail \"Second time\"?",
+        "query": "SELECT count(*) FROM customer_orders WHERE order_details  =  \"Second time\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Tell me the number of orders with \"Second time\" as order detail.",
+        "query": "SELECT count(*) FROM customer_orders WHERE order_details  =  \"Second time\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the customer name and date of the orders that have the status \"Delivered\".",
+        "query": "SELECT t1.customer_name ,  t2.order_date FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id WHERE order_status  =  \"Delivered\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What are the customer name and date of the orders whose status is \"Delivered\".",
+        "query": "SELECT t1.customer_name ,  t2.order_date FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id WHERE order_status  =  \"Delivered\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What is the total number of products that are in orders with status \"Cancelled\"?",
+        "query": "SELECT sum(t2.order_quantity) FROM customer_orders AS t1 JOIN order_items AS t2 ON t1.order_id  =  t2.order_id WHERE t1.order_status  =  \"Cancelled\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the total quantity of products associated with the orders in the \"Cancelled\" status.",
+        "query": "SELECT sum(t2.order_quantity) FROM customer_orders AS t1 JOIN order_items AS t2 ON t1.order_id  =  t2.order_id WHERE t1.order_status  =  \"Cancelled\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the total amount of products ordered before 2018-03-17 07:13:53.",
+        "query": "SELECT sum(t2.order_quantity) FROM customer_orders AS t1 JOIN order_items AS t2 ON t1.order_id  =  t2.order_id WHERE t1.order_date  <  \"2018-03-17 07:13:53\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What is the total amount of products purchased before 2018-03-17 07:13:53?",
+        "query": "SELECT sum(t2.order_quantity) FROM customer_orders AS t1 JOIN order_items AS t2 ON t1.order_id  =  t2.order_id WHERE t1.order_date  <  \"2018-03-17 07:13:53\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Who made the latest order?",
+        "query": "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id ORDER BY t2.order_date DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the name of the customer who made an order most recently.",
+        "query": "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id ORDER BY t2.order_date DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Which product has been ordered most number of times?",
+        "query": "SELECT t2.product_details FROM order_items AS t1 JOIN products AS t2 ON t1.product_id  =  t2.product_id GROUP BY t1.product_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What is the most frequently ordered product? Tell me the detail of the product",
+        "query": "SELECT t2.product_details FROM order_items AS t1 JOIN products AS t2 ON t1.product_id  =  t2.product_id GROUP BY t1.product_id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the name and ID of the product whose total order quantity is the largest.",
+        "query": "SELECT t2.product_details ,  t2.product_id FROM order_items AS t1 JOIN products AS t2 ON t1.product_id  =  t2.product_id GROUP BY t1.product_id ORDER BY sum(t1.order_quantity) LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What are the name and ID of the product bought the most.",
+        "query": "SELECT t2.product_details ,  t2.product_id FROM order_items AS t1 JOIN products AS t2 ON t1.product_id  =  t2.product_id GROUP BY t1.product_id ORDER BY sum(t1.order_quantity) LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find all the addresses in East Julianaside, Texas or in Gleasonmouth, Arizona.",
+        "query": "SELECT address_content FROM addresses WHERE city  =  \"East Julianaside\" AND state_province_county  =  \"Texas\" UNION SELECT address_content FROM addresses WHERE city  =  \"Gleasonmouth\" AND state_province_county  =  \"Arizona\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What are all the addresses in East Julianaside, Texas or in Gleasonmouth, Arizona.",
+        "query": "SELECT address_content FROM addresses WHERE city  =  \"East Julianaside\" AND state_province_county  =  \"Texas\" UNION SELECT address_content FROM addresses WHERE city  =  \"Gleasonmouth\" AND state_province_county  =  \"Arizona\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the name of customers who did not pay with Cash.",
+        "query": "SELECT customer_name FROM customers WHERE payment_method != 'Cash'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What is the name of customers who do not use Cash as payment method.",
+        "query": "SELECT customer_name FROM customers WHERE payment_method != 'Cash'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the names of customers who never ordered product Latte.",
+        "query": "SELECT customer_name FROM customers EXCEPT SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id JOIN products AS t4 ON t3.product_id  =  t4.product_id WHERE t4.product_details  =  'Latte'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What are names of customers who never ordered product Latte.",
+        "query": "SELECT customer_name FROM customers EXCEPT SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id JOIN products AS t4 ON t3.product_id  =  t4.product_id WHERE t4.product_details  =  'Latte'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the names of customers who never placed an order.",
+        "query": "SELECT customer_name FROM customers EXCEPT SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What are the names of customers who never made an order.",
+        "query": "SELECT customer_name FROM customers EXCEPT SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "Find the names of customers who ordered both products Latte and Americano.",
+        "query": "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id JOIN products AS t4 ON t3.product_id  =  t4.product_id WHERE t4.product_details  =  'Latte' INTERSECT SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id JOIN products AS t4 ON t3.product_id  =  t4.product_id WHERE t4.product_details  =  'Americano'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "customers_and_addresses",
+        "question": "What are the names of customers who have purchased both products Latte and Americano?",
+        "query": "SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id JOIN products AS t4 ON t3.product_id  =  t4.product_id WHERE t4.product_details  =  'Latte' INTERSECT SELECT t1.customer_name FROM customers AS t1 JOIN customer_orders AS t2 ON t1.customer_id  =  t2.customer_id JOIN order_items AS t3 ON t2.order_id  =  t3.order_id JOIN products AS t4 ON t3.product_id  =  t4.product_id WHERE t4.product_details  =  'Americano'"
+    }
+]

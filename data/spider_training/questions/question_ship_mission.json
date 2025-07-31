@@ -1,0 +1,182 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "How many ships are there?",
+        "query": "SELECT count(*) FROM ship"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "What is the number of ships?",
+        "query": "SELECT count(*) FROM ship"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "List the name of ships in ascending order of tonnage.",
+        "query": "SELECT Name FROM ship ORDER BY Tonnage ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "what are the names of the ships ordered by ascending tonnage?",
+        "query": "SELECT Name FROM ship ORDER BY Tonnage ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "What are the type and nationality of ships?",
+        "query": "SELECT TYPE ,  Nationality FROM ship"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "What are the types and nationalities of every ship?",
+        "query": "SELECT TYPE ,  Nationality FROM ship"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "List the name of ships whose nationality is not \"United States\".",
+        "query": "SELECT Name FROM ship WHERE Nationality != \"United States\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "What are the names of the ships that are not from the United States?",
+        "query": "SELECT Name FROM ship WHERE Nationality != \"United States\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "Show the name of ships whose nationality is either United States or United Kingdom.",
+        "query": "SELECT Name FROM ship WHERE Nationality  =  \"United States\" OR Nationality  =  \"United Kingdom\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "What are the names of the ships  that are from either the US or the UK?",
+        "query": "SELECT Name FROM ship WHERE Nationality  =  \"United States\" OR Nationality  =  \"United Kingdom\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "What is the name of the ship with the largest tonnage?",
+        "query": "SELECT Name FROM ship ORDER BY Tonnage DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "What is the ship with the largest amount of tonnage called?",
+        "query": "SELECT Name FROM ship ORDER BY Tonnage DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "Show different types of ships and the number of ships of each type.",
+        "query": "SELECT TYPE ,  COUNT(*) FROM ship GROUP BY TYPE"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "For each type, how many ships are there?",
+        "query": "SELECT TYPE ,  COUNT(*) FROM ship GROUP BY TYPE"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "Please show the most common type of ships.",
+        "query": "SELECT TYPE FROM ship GROUP BY TYPE ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "What is the most common type of ships?",
+        "query": "SELECT TYPE FROM ship GROUP BY TYPE ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "List the nations that have more than two ships.",
+        "query": "SELECT Nationality FROM ship GROUP BY Nationality HAVING COUNT(*)  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "What are the nations that have more than two ships?",
+        "query": "SELECT Nationality FROM ship GROUP BY Nationality HAVING COUNT(*)  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "Show different types of ships and the average tonnage of ships of each type.",
+        "query": "SELECT TYPE ,  avg(Tonnage) FROM ship GROUP BY TYPE"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "For each type, what is the average tonnage?",
+        "query": "SELECT TYPE ,  avg(Tonnage) FROM ship GROUP BY TYPE"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "Show codes and fates of missions, and names of ships involved.",
+        "query": "SELECT T1.Code ,  T1.Fate ,  T2.Name FROM mission AS T1 JOIN ship AS T2 ON T1.Ship_ID  =  T2.Ship_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "What are the mission codes, fates, and names of the ships involved?",
+        "query": "SELECT T1.Code ,  T1.Fate ,  T2.Name FROM mission AS T1 JOIN ship AS T2 ON T1.Ship_ID  =  T2.Ship_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "Show names of ships involved in a mission launched after 1928.",
+        "query": "SELECT T2.Name FROM mission AS T1 JOIN ship AS T2 ON T1.Ship_ID  =  T2.Ship_ID WHERE T1.Launched_Year  >  1928"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "What are the names of ships that were involved in a mission launched after 1928?",
+        "query": "SELECT T2.Name FROM mission AS T1 JOIN ship AS T2 ON T1.Ship_ID  =  T2.Ship_ID WHERE T1.Launched_Year  >  1928"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "Show the distinct fate of missions that involve ships with nationality \"United States\"",
+        "query": "SELECT DISTINCT T1.Fate FROM mission AS T1 JOIN ship AS T2 ON T1.Ship_ID  =  T2.Ship_ID WHERE T2.Nationality  =  \"United States\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "What are the different fates of the mission that involved ships from the United States?",
+        "query": "SELECT DISTINCT T1.Fate FROM mission AS T1 JOIN ship AS T2 ON T1.Ship_ID  =  T2.Ship_ID WHERE T2.Nationality  =  \"United States\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "List the name of ships that are not involved in any mission",
+        "query": "SELECT Name FROM ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM mission)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "What are the names of the ships that are not involved in any missions?",
+        "query": "SELECT Name FROM ship WHERE Ship_ID NOT IN (SELECT Ship_ID FROM mission)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "Show the types of ships that have both ships with tonnage larger than 6000 and ships with tonnage smaller than 4000.",
+        "query": "SELECT TYPE FROM ship WHERE Tonnage  >  6000 INTERSECT SELECT TYPE FROM ship WHERE Tonnage  <  4000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "ship_mission",
+        "question": "What are the types of the ships that have both shiips with tonnage more than 6000 and those with tonnage less than 4000?",
+        "query": "SELECT TYPE FROM ship WHERE Tonnage  >  6000 INTERSECT SELECT TYPE FROM ship WHERE Tonnage  <  4000"
+    }
+]

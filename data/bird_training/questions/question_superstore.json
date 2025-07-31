@@ -1,0 +1,698 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Please list the names of all the products ordered in order CA-2011-112326 in superstores in the center.",
+        "query": "SELECT DISTINCT T2.`Product Name` FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T1.`Order ID` = 'CA-2011-112326'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Among all the orders made by Aimee Bixby, what was the longest shipment time?",
+        "query": "SELECT MAX(strftime('%J', `Ship Date`) - strftime('%J', `Order Date`)) AS longestTimeDays FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.`Customer Name` = 'Aimee Bixby'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Among all the orders made by Aimee Bixby, how many of them chose the slowest delivery speed?",
+        "query": "SELECT COUNT(DISTINCT T2.`Order ID`) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.`Customer Name` = 'Aimee Bixby' AND T2.`Ship Mode` = 'Standard Class'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How many orders has Aimee Bixby made?",
+        "query": "SELECT COUNT(DISTINCT T2.`Order ID`) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.`Customer Name` = 'Aimee Bixby'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Please list the IDs of the orders made by Aimee Bixby with more than 3 kinds of products ordered.",
+        "query": "SELECT DISTINCT T2.`Order ID` FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.`Customer Name` = 'Aimee Bixby' GROUP BY T2.`Product ID` HAVING COUNT(T2.`Product ID`) > 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Among the orders made by Aimee Bixby, how many of them included at least one kind of product under the category \"Furniture\"?",
+        "query": "SELECT COUNT(DISTINCT T2.`Order ID`) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T2.`Product ID` WHERE T3.Category = 'Furniture' AND T1.`Customer Name` = 'Aimee Bixby'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Please list the names of all the products ordered by Aimee Bixby in 2016.",
+        "query": "SELECT DISTINCT T3.`Product Name` FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T2.`Product ID` WHERE T1.`Customer Name` = 'Aimee Bixby' AND STRFTIME('%Y', T2.`Ship Date`) = '2016'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the total quantity of \"Telescoping Adjustable Floor Lamp\" ordered from central superstores?",
+        "query": "SELECT SUM(T1.Quantity) FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.`Product Name` = 'Telescoping Adjustable Floor Lamp'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Please list the names of all the customers who had ordered the product \"Telescoping Adjustable Floor Lamp\".",
+        "query": "SELECT DISTINCT T1.`Customer Name` FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T2.`Product ID` WHERE T3.`Product Name` = 'Telescoping Adjustable Floor Lamp'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Among the customers who have ordered the product \"Telescoping Adjustable Floor Lamp\", how many of them are consumers?",
+        "query": "SELECT COUNT(DISTINCT T1.`Customer Name`) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T2.`Product ID` WHERE T3.`Product Name` = 'Telescoping Adjustable Floor Lamp' AND T1.Segment = 'Consumer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What was the quantity of Xerox 1952 ordered by Aimee Bixby on 2014/9/10?",
+        "query": "SELECT SUM(T2.Quantity) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T2.`Product ID` WHERE T1.`Customer Name` = 'Aimee Bixby' AND T3.`Product Name` = 'Xerox 1952' AND T2.`Order Date` = '2014-09-10'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "For how many times has Aimee Bixby ordered the product Xerox 1952?",
+        "query": "SELECT COUNT(DISTINCT T2.`Order ID`) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T2.`Product ID` WHERE T1.`Customer Name` = 'Aimee Bixby' AND T3.`Product Name` = 'Xerox 1952'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What was the original price of Xerox 1952 ordered by Aimee Bixby on 2014/9/10?",
+        "query": "SELECT DISTINCT T2.Sales / (1 - T2.Discount) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T2.`Product ID` WHERE T1.`Customer Name` = 'Aimee Bixby' AND T3.`Product Name` = 'Xerox 1952' AND T2.`Order Date` = '2014-09-10'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What was the total cost of Xerox 1952 ordered by Aimee Bixby on 2014/9/10?",
+        "query": "SELECT DISTINCT (T2.Sales / (1 - T2.discount)) * T2.Quantity - Profit FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T2.`Product ID` WHERE T1.`Customer Name` = 'Aimee Bixby' AND T3.`Product Name` = 'Xerox 1952' AND T2.`Order Date` = '2014-09-10'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How many art products were ordered in 2013 in the east superstore?",
+        "query": "SELECT COUNT(DISTINCT T1.`Product ID`) FROM east_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.`Sub-Category` = 'Art' AND T1.Region = 'East' AND STRFTIME('%Y', T1.`Order Date`) = '2013'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Who is the customer who purchased the largest total cost of products in a single order?",
+        "query": "SELECT T2.`Customer Name` FROM east_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` GROUP BY T1.`Order ID`, T2.`Customer Name` ORDER BY SUM((T1.Sales / (1 - T1.Discount)) * T1.Quantity - T1.Profit) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the name of the product that has the highest original price?",
+        "query": "SELECT T2.`Product Name` FROM east_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` ORDER BY (T1.Sales / (1 - T1.Discount)) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the name of the product that was ordered recently by Darren Powers?",
+        "query": "SELECT T3.`Product Name` FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T2.`Product ID` WHERE T1.`Customer Name` = 'Darren Powers' ORDER BY T2.`Order Date` DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How many quantities of Advantus plastic paper clips were ordered overall?",
+        "query": "SELECT SUM(T1.Quantity) FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.`Product Name` = 'Advantus Plastic Paper Clips'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Which order of Logitech G600 MMO Gaming Mouse has the highest total cost?",
+        "query": "SELECT T1.`Order ID` FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.`Product Name` = 'Logitech G600 MMO Gaming Mouse' GROUP BY T1.`Order ID` ORDER BY SUM((T1.Sales / (1 - T1.Discount)) * T1.Quantity - T1.Profit) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What are the names of the products that were ordered by Alejandro Grove?",
+        "query": "SELECT DISTINCT T3.`Product Name` FROM west_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T2.`Customer Name` = 'Alejandro Grove'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How many customers in Chicago ordered at least 10 Cardinal EasyOpen D-Ring Binders in a single order?",
+        "query": "SELECT COUNT(DISTINCT T1.`Customer ID`) FROM west_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T3.`Product Name` = 'Cardinal EasyOpen D-Ring Binders' AND T2.City = 'Chicago' AND T1.Quantity > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What are the names of the products with a profit of no less than 1,000 in one single order?",
+        "query": "SELECT DISTINCT T2.`Product Name` FROM west_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T1.Profit > 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Name 10 products that were shipped first class from the East region.",
+        "query": "SELECT T2.`Product Name` FROM east_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T1.`Ship Mode` = 'First Class' AND T2.Region = 'East' LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "List the products ordered by Becky Martin around the Central region.",
+        "query": "SELECT DISTINCT T3.`Product Name` FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T2.`Product ID` WHERE T1.`Customer Name` = 'Becky Martin' AND T3.Region = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "List 5 customers in the West region who had their item shipped 'Second Class.'",
+        "query": "SELECT DISTINCT T2.`Customer Name` FROM west_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.Region = 'West' AND T1.`Ship Mode` = 'Second Class' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Add the total profit of Patrick Gardner in the Central region.",
+        "query": "SELECT SUM(T2.Profit) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.`Customer Name` = 'Patrick Gardner' AND T1.Region = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Which item was shipped on 3/4/2013 and scheduled for same day delivery in the South region?",
+        "query": "SELECT T2.`Product Name` FROM south_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T1.`Ship Date` = '2013-03-04' AND T2.Region = 'South' AND T1.`Order Date` = '2013-03-04'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the total sales of 'Avery Hi-Liter EverBold Pen Style Fluorescent Highlighters, 4/Pack' in the Central region?",
+        "query": "SELECT SUM(T1.Sales) FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.`Product Name` = 'Avery Hi-Liter EverBold Pen Style Fluorescent Highlighters, 4/Pack' AND T2.Region = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Name the item ordered by Jonathan Doherty with the highest quantity in the East region.",
+        "query": "SELECT T3.`Product Name` FROM east_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T2.`Customer Name` = 'Jonathan Doherty' AND T2.Region = 'East' ORDER BY T1.Quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How much is the total quantity of items from the East region shipped on 3/25/2015? Name the products.",
+        "query": "SELECT SUM(T1.Quantity), T2.`Product Name` FROM east_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T1.`Ship Date` = '2015-03-25' AND T2.Region = 'East'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Which customer ordered 'Global High-Back Leather Tilter, Burgundy' on 10/13/2013 in the East region?",
+        "query": "SELECT DISTINCT T2.`Customer Name` FROM east_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T3.`Product Name` = 'Global High-Back Leather Tilter, Burgundy' AND T1.`Order Date` = '2013-10-13' AND T1.Region = 'East'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What category does the item ordered by Katherine Murray on 11/4/2018 in the South region belong to?",
+        "query": "SELECT DISTINCT T3.Category FROM south_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T2.`Customer Name` = 'Katherine Murray' AND T1.`Order Date` = '2018-11-04' AND T2.Region = 'South'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What percentage do items under the category of 'Furniture' make up the total number of items ordered that are shipped as standard in the West region?",
+        "query": "SELECT CAST(SUM(CASE  WHEN T2.Category = 'Furniture' THEN 1 ELSE 0 END) AS REAL) * 100 / SUM(T1.Quantity) FROM west_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.Region = 'West' AND T1.`Ship Mode` = 'Standard Class'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the ship date of the order by the customer named Ann Chong in the central region?",
+        "query": "SELECT T2.`Ship Date` FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.`Customer Name` = 'Ann Chong' AND T1.Region = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Give the customer segment from the West region that orders the order ID CA-2011-108189.",
+        "query": "SELECT DISTINCT T2.Segment FROM west_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.Region = 'West' AND T1.`Order ID` = 'CA-2011-108189'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What are the total sales of the accumulated orders of Hon Valutask Swivel Chairs in the West region?",
+        "query": "SELECT SUM(T1.Sales) FROM west_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.`Product Name` = 'Hon Valutask Swivel Chairs' AND T1.Region = 'West'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Provide the order ID of Frank Olsen of the South region.",
+        "query": "SELECT T1.`Order ID` FROM south_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T2.Region = 'South' AND T2.`Customer Name` = 'Frank Olsen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What product was ordered in the Central region on April 26, 2018, and shipped by April 27, 2018?",
+        "query": "SELECT T2.`Product Name` FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T1.`Order Date` = '2018-04-26' AND T1.`Ship Date` = '2018-04-27' AND T2.Region = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "From which city and state does the customer that bought the product with the highest sales?",
+        "query": "SELECT T5.City, T5.State FROM west_superstore AS T1 INNER JOIN east_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN central_superstore AS T3 ON T3.`Customer ID` = T2.`Customer ID` INNER JOIN south_superstore AS T4 ON T4.`Customer ID` = T3.`Customer ID` INNER JOIN people AS T5 ON T5.`Customer ID` = T4.`Customer ID` ORDER BY T2.Sales DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Who is the customer from the East region that purchased the order with the highest profit?",
+        "query": "SELECT T2.`Customer Name` FROM east_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.Region = 'East' ORDER BY T1.Profit DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Among the customers from Chicago, Illinois, what is the highest quantity of products bought in a single order?",
+        "query": "SELECT T1.Quantity FROM west_superstore AS T1 INNER JOIN east_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN central_superstore AS T3 ON T3.`Customer ID` = T2.`Customer ID` INNER JOIN south_superstore AS T4 ON T4.`Customer ID` = T3.`Customer ID` INNER JOIN people AS T5 ON T5.`Customer ID` = T4.`Customer ID` WHERE T5.City = 'Chicago' AND T5.State = 'Illinois' ORDER BY T1.Quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What are the order date and product name of the order ID CA-2011-137274 from the Central region?",
+        "query": "SELECT T1.`Order Date`, T2.`Product Name` FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T1.`Order ID` = 'CA-2011-137274' AND T2.Region = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "List down the customers that purchased the product named Xerox 23 in the South region.",
+        "query": "SELECT DISTINCT T2.`Customer Name` FROM south_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T1.Region = 'South' AND T3.`Product Name` = 'Xerox 23'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Among the products under the office supplies category, what is the product that made the highest sales in the Central region?",
+        "query": "SELECT T2.`Product Name` FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.Category = 'Office Supplies' AND T2.Region = 'Central' ORDER BY T1.Sales DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Who is the customer from the West region that received the highest discount?",
+        "query": "SELECT T2.`Customer Name` FROM west_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.Region = 'West' ORDER BY T1.Discount DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Provide the names of the products with a profit greater than 98% of the average profit of all products in the East region.",
+        "query": "SELECT DISTINCT T2.`Product Name` FROM east_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.Region = 'East' AND T1.Profit > ( SELECT AVG(Profit) * 0.98 FROM east_superstore )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Name the customers from the Eastern region whose orders cost above 80000.",
+        "query": "SELECT DISTINCT T2.`Customer Name` FROM east_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.Region = 'East' AND T1.Sales / (1 - T1.Discount) * T1.Quantity - T1.Profit > 80000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How many orders were made by Maxwell Schwartz in 2015?",
+        "query": "SELECT COUNT(DISTINCT T1.`Order ID`) FROM east_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T2.`Customer Name` = 'Maxwell Schwartz' AND STRFTIME('%Y', T1.`Order Date`) = '2015'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Who ordered the Bush Mission Pointe Library in the Central Region?",
+        "query": "SELECT DISTINCT T2.`Customer Name` FROM central_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T3.`Product Name` = 'Bush Mission Pointe Library' AND T3.Region = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Calculate the total profit by Cisco SPA301 for all regions.",
+        "query": "SELECT SUM(T1.Profit) + SUM(T2.Profit) + SUM(T3.Profit) + SUM(T4.Profit) AS totalProfit FROM west_superstore AS T1 INNER JOIN east_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN central_superstore AS T3 ON T3.`Customer ID` = T2.`Customer ID` INNER JOIN south_superstore AS T4 ON T4.`Customer ID` = T3.`Customer ID` INNER JOIN product AS T5 ON T5.`Product ID` = T4.`Product ID` WHERE T5.`Product Name` = 'Cisco SPA301'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "List the products that were ordered by Anne McFarland from the Western store.",
+        "query": "SELECT DISTINCT T3.`Product Name` FROM west_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T2.`Customer Name` = 'Anne McFarland'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "List the products ordered by customers in Coachella.",
+        "query": "SELECT DISTINCT T3.`Product Name` FROM west_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T2.City = 'Coachella'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Compare the numbers of orders between the Eastern and Western stores in 2015.",
+        "query": "SELECT east, west FROM ( SELECT COUNT(`Order ID`) AS east , ( SELECT COUNT(`Order ID`) FROM west_superstore WHERE `Order Date` LIKE '2015%' ) AS west FROM east_superstore WHERE `Order Date` LIKE '2015%' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "List the products ordered by Matt Abelman from the Western store in 2013.",
+        "query": "SELECT DISTINCT T3.`Product Name` FROM west_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T2.`Customer Name` = 'Matt Abelman' AND STRFTIME('%Y', T1.`Order Date`) = '2013'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Calculate the total cost of the orders by Brad Thomas in 2016.",
+        "query": "SELECT SUM((T1.Sales / (1 - T1.Discount)) * T1.Quantity - T1.Profit) AS cost FROM east_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T1.`Product ID` = T3.`Product ID` AND T1.Region = T3.Region WHERE T1.Region = 'East' AND T2.`Customer Name` = 'Brad Thomas' AND strftime('%Y', T1.`Order Date`) = '2016'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Provide the names, cities, and countries of the customers who ordered the Plantronics single ear headset.",
+        "query": "SELECT DISTINCT T2.`Customer Name`, T2.City, T2.Country FROM west_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T3.`Product Name` = 'Plantronics Single Ear Headset'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Provide the shipping dates and products of the orders by Gene Hale.",
+        "query": "SELECT DISTINCT T2.`Ship Date`, T3.`Product Name` FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T2.`Product ID` WHERE T1.`Customer Name` = 'Gene Hale'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How many orders in the south superstore with the fastest delivery are items of furniture?",
+        "query": "SELECT COUNT(T1.`Order ID`) FROM south_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T1.`Ship Mode` = 'First Class' AND T2.Category = 'Furniture'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How many office supply orders were made by Cindy Stewart in the south superstore?",
+        "query": "SELECT COUNT(*) FROM south_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T3.Category = 'Office Supplies' AND T2.`Customer Name` = 'Cindy Stewart'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What product category got the highest profit in the south superstore?",
+        "query": "SELECT T2.Category FROM south_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` ORDER BY T1.Profit DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "List the name of all products that Cindy Stewart ordered in the east superstore.",
+        "query": "SELECT T3.`Product Name` FROM south_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T2.`Customer Name` = 'Cindy Stewart'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "List the name of all products in the west superstore that customers chose for same-day shipment in the year 2013.",
+        "query": "SELECT T2.`Product Name` FROM west_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T1.`Ship Mode` = 'Same Day' AND T1.`Ship Date` LIKE '2013%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What product category that Sam Craven ordered from the central and east superstore?",
+        "query": "SELECT DISTINCT T3.Category FROM east_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` LEFT JOIN central_superstore AS T4 ON T3.`Product ID` = T4.`Product ID` WHERE T2.`Customer Name` = 'Sam Craven'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the total quantity that Cindy Stewart order \"Lexmark X 9575 Professional All-in-One Color Printer\" in the south superstore?",
+        "query": "SELECT SUM(T1.Quantity) FROM south_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T2.`Customer Name` = 'Cindy Stewart' AND T3.`Product Name` = 'Lexmark X 9575 Professional All-in-One Color Printer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "List the name of all the products with order quantities greater than or equal to 10 in the central superstore that has been shipped by the slowest delivery method.",
+        "query": "SELECT DISTINCT T2.`Product Name` FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T1.`Ship Mode` = 'Standard Class' AND T1.Quantity >= 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What product category got the least sales in the west superstore?",
+        "query": "SELECT T2.Category FROM west_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` ORDER BY T1.Sales LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the total profit of \"Memorex Froggy Flash Drive 8 GB in south superstore?",
+        "query": "SELECT SUM(T1.Profit) FROM south_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` GROUP BY T2.`Product Name` = 'Memorix Froggy Flash Drive 8 GB'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the total sales of furniture products in the east superstore in the year 2016.\n",
+        "query": "SELECT SUM(T1.Sales) FROM east_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE STRFTIME('%Y', T1.`Order Date`) = '2016' AND T2.Category = 'Furniture'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Calculate the average sales of \"\"Sharp AL-1530CS Digital Copier in the east and the west superstore.",
+        "query": "SELECT AVG(T1.Sales) FROM west_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T3.`Product Name` = 'Sharp AL-1530CS Digital Copier'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Calculate the percentage of ordered office supplies products in the central and the south superstore.",
+        "query": "SELECT CAST(SUM(CASE  WHEN T3.Category = 'Office Supplies' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T3.Category) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T2.`Product ID`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the ratio between customers who live in Texas and customers who live in Indiana?",
+        "query": "SELECT CAST(SUM(CASE  WHEN State = 'Texas' THEN 1 ELSE 0 END) AS REAL) * 100 / SUM(CASE  WHEN State = 'Indiana' THEN 1 ELSE 0 END) FROM people"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Among the orders in Central superstore, which art product were ordered the most?",
+        "query": "SELECT T2.`Product Name` FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.`Sub-Category` = 'Art' GROUP BY T2.`Product Name` ORDER BY COUNT(T2.`Product ID`) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Among the customers in South superstore, which customers ordered more than 3 times in 2015? State the name of the customers.",
+        "query": "SELECT DISTINCT T2.`Customer Name` FROM south_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE STRFTIME('%Y', T1.`Order Date`) = '2015' GROUP BY T2.`Customer Name` HAVING COUNT(T2.`Customer Name`) > 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "State the highest profit made by Anna Chung's orders in the Central Superstore.",
+        "query": "SELECT MAX(T2.Profit) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.`Customer Name` = 'Anna Chung'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How many orders were made by Corey Roper in 2015?",
+        "query": "SELECT COUNT(T2.`Customer ID`) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.`Customer Name` = 'Corey Roper' AND STRFTIME('%Y', T2.`Ship Date`) = '2015'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Calculate the difference between the total sales in the East superstore and the total sales in the West superstore.",
+        "query": "SELECT SUM(T1.Sales) - SUM(T2.Sales) AS difference FROM east_superstore AS T1 INNER JOIN west_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What are the names of the ordered products that have profit deficiency in central superstore?",
+        "query": "SELECT DISTINCT T2.`Product Name` FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.Region = 'Central' AND T1.Profit < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "In west superstore, what is the name and the shipping mode of the product that was ordered with the shortest shipment time?",
+        "query": "SELECT DISTINCT T2.`Product Name`, T1.`Ship Mode` FROM west_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.Region = 'West' ORDER BY T1.`Ship Date` - T1.`Order Date` LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How many orders of O'Sullivan Plantations 2-Door Library in Landvery Oak in central superstore were shipped through the shipping mode with the fastest delivery speed?",
+        "query": "SELECT COUNT(DISTINCT T1.`Order ID`) FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.`Product Name` = 'O''Sullivan Plantations 2-Door Library in Landvery Oak' AND T2.Region = 'Central' AND T1.`Ship Mode` = 'First Class'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the name of the corporate customer from Rhode Island who had the highest number of orders in 2016 from the east superstore?",
+        "query": "SELECT T2.`Customer Name` FROM east_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T2.Segment = 'Corporate' AND T2.State = 'Rhode Island' AND T2.Region = 'East' AND STRFTIME('%Y', T1.`Order Date`) = '2016' GROUP BY T2.`Customer Name` ORDER BY COUNT(T2.`Customer Name`) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Among the orders with sales value of no less than 5,000 in west superstore, how many were bought by the customers in California?",
+        "query": "SELECT COUNT(DISTINCT T1.`Order ID`) FROM west_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` INNER JOIN people AS T3 ON T3.`Customer ID` = T1.`Customer ID` WHERE T1.Sales > 5000 AND T3.State = 'California' AND T2.Region = 'West'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "In which segment does the customer who purchased the product from the east superstore with the highest original price belong?",
+        "query": "SELECT T2.Segment FROM east_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T1.Region = 'East' ORDER BY (T1.Sales / (1 - T1.Discount)) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the shipment duration for order number CA-2011-134103?",
+        "query": "SELECT DISTINCT strftime('%J', `Ship Date`) - strftime('%J', `Order Date`) AS duration FROM central_superstore WHERE `Order ID` = 'CA-2011-134103'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How many orders with a quantity greater than 5 have been shipped by the fastest delivery method?",
+        "query": "SELECT COUNT(DISTINCT `Order ID`) FROM central_superstore WHERE Quantity > 5 AND `Ship Mode` = 'First Class'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Please list any three orders that caused a loss to the company.",
+        "query": "SELECT `Order ID` FROM central_superstore WHERE Profit < 0 LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Which product did Phillina Ober buy?",
+        "query": "SELECT DISTINCT T3.`Product Name` FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T2.`Product ID` WHERE T1.`Customer Name` = 'Phillina Ober'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Who was the customer in the South Region superstore who bought the most \u201cHon Multipurpose Stacking Arm Chairs\"?",
+        "query": "SELECT T2.`Customer Name` FROM south_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T3.`Product Name` = 'Hon Multipurpose Stacking Arm Chairs' GROUP BY T2.`Customer Name` ORDER BY COUNT(T2.`Customer Name`) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the profit from selling the \"O'Sullivan Living Dimensions 2-Shelf Bookcases\"?",
+        "query": "SELECT DISTINCT T1.Profit FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.`Product Name` = 'O''Sullivan Living Dimensions 2-Shelf Bookcases'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How many of the \"Hon Pagoda Stacking Chairs\" have been sold in total in the west superstore?",
+        "query": "SELECT SUM(T1.Quantity) FROM west_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.`Product Name` = 'Hon Pagoda Stacking Chairs'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How many orders purchased by Aaron Bergman have been delivered with the slowest shipping speed?",
+        "query": "SELECT COUNT(*) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.`Customer Name` = 'Aaron Bergman' AND T2.`Ship Mode` = 'Standard Class'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the original price of the \"Black Avery Flip-Chart Easel Binder\"?",
+        "query": "SELECT T1.Sales / (1 - T1.Discount) FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.`Product Name` = 'Blackstonian Pencils'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the name of the product that Aimee Bixby bought?",
+        "query": "SELECT DISTINCT T3.`Product Name` FROM east_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T1.`Product ID` WHERE T2.`Customer Name` = 'Aimee Bixby'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Indicate the profit of product Sauder Camden County Barrister Bookcase, Planked Cherry Finish.",
+        "query": "SELECT DISTINCT T1.Profit FROM south_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.`Product Name` = 'Sauder Camden County Barrister Bookcase, Planked Cherry Finish'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How many furniture products had been shipped by standard class in the East superstore?",
+        "query": "SELECT COUNT(T2.Category) FROM east_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T1.`Ship Mode` = 'Standard Class'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the highest profit order in the East superstore of customers from Houston, Texas?",
+        "query": "SELECT T1.`Order ID` FROM east_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T2.City = 'Houston' AND T2.State = 'Texas' ORDER BY T1.Profit DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How many furniture products were ordered at central superstore?",
+        "query": "SELECT COUNT(*) FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.Category = 'Furniture'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What are the names of the products that had been shipped in March 2013 at central superstore?",
+        "query": "SELECT DISTINCT T2.`Product Name` FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE strftime('%Y-%m', T1.`Ship Date`) = '2013-03'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How many orders were made by customers who live in Texas at the Central superstore?",
+        "query": "SELECT COUNT(DISTINCT T2.`Order ID`) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.State = 'Texas'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "How many orders were made by Alan Barnes in 2015 at the Central superstore?",
+        "query": "SELECT COUNT(DISTINCT T2.`Order ID`) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.`Customer Name` = 'Alan Barnes' AND STRFTIME('%Y', T2.`Order Date`) = '2015'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the product name of order CA-2011-115791 in the East superstore?",
+        "query": "SELECT DISTINCT T2.`Product Name` FROM east_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T1.`Order ID` = 'CA-2011-141817'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the percentage of orders with 0.2 discount in the Central superstore were purchased by customers who live in Texas?",
+        "query": "SELECT CAST(SUM(CASE  WHEN T2.Discount = 0.2 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.State = 'Texas'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the percentage of furniture orders that were shipped through first class in 2013 at the Central superstore?",
+        "query": "SELECT CAST(SUM(CASE  WHEN T1.`Ship Mode` = 'First Class' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.Category = 'Furniture' AND STRFTIME('%Y', T1.`Ship Date`) = '2013'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Who order from the west region on August 12, 2013, and received a discount of 0.2?",
+        "query": "SELECT DISTINCT T2.`Customer Name` FROM west_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.`Order Date` = '2013-08-12' AND T1.Discount = 0.2 AND T1.Region = 'West'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the order ID of the security-Tint Envelopes product ordered on June 3, 2013, in the Central region?",
+        "query": "SELECT DISTINCT T1.`Order ID` FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.`Product Name` = 'Security-Tint Envelopes' AND T1.`Order Date` = '2013-06-03'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "List the product's name bought by the customer named Bill Shonely from the Central region.",
+        "query": "SELECT DISTINCT T3.`Product Name` FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T2.`Product ID` WHERE T1.`Customer Name` = 'Bill Shonely' AND T2.Region = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Please give the name of customers from the West region that bought exactly 8 items in their purchase.",
+        "query": "SELECT DISTINCT T2.`Customer Name` FROM west_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.Quantity = 8 AND T1.Region = 'West'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Among the customers from Houston, Texas, what is the total profit of their orders in the Central region?",
+        "query": "SELECT SUM(T2.Profit) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` INNER JOIN product AS T3 ON T3.`Product ID` = T2.`Product ID` WHERE T1.City = 'Houston' AND T1.State = 'Texas' AND T2.Region = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Who is the customer with an order shipped on March 5, 2013, in the eastern region?",
+        "query": "SELECT DISTINCT T2.`Customer Name` FROM east_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.`Ship Date` = '2013-03-05'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Among the orders from 2016 in the Central region, what is the product with the lowest profit?",
+        "query": "SELECT T2.`Product Name` FROM central_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.Region = 'Central' AND STRFTIME('%Y', T1.`Order Date`) = '2016' ORDER BY T1.Profit ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Who ordered the order ID CA-2011-118976 from the East region?",
+        "query": "SELECT DISTINCT T2.`Customer Name` FROM east_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T1.`Order ID` = 'CA-2011-118976' AND T2.Region = 'East'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Provide the product's name of the product with the highest sales in the South region.",
+        "query": "SELECT T2.`Product Name` FROM south_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.Region = 'South' ORDER BY T1.Sales DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "List down the sales, profit, and subcategories of the product ordered in the order ID US-2011-126571 in the East region.",
+        "query": "SELECT T1.Sales, T1.Profit, T2.`Sub-Category` FROM east_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T1.`Order ID` = 'US-2011-126571' AND T2.Region = 'East'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "What is the product's name in the highest quantity in a single purchase?",
+        "query": "SELECT T2.`Product Name` FROM east_superstore AS T1 INNER JOIN product AS T2 ON T1.`Product ID` = T2.`Product ID` WHERE T2.Region = 'East' ORDER BY T1.Quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "List the customer's name from the South region with a standard class ship mode and sales greater than the 88% of the average sales of all orders.",
+        "query": "SELECT DISTINCT T2.`Customer Name` FROM south_superstore AS T1 INNER JOIN people AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T2.Region = 'South' AND T1.`Ship Mode` = 'Standard Class' AND 100 * T1.Sales / ( SELECT AVG(Sales) FROM south_superstore ) > 88"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "superstore",
+        "question": "Among the customers from Indiana, what is the percentage of their purchased orders in the Central region with no discount?",
+        "query": "SELECT CAST(SUM(CASE  WHEN T2.Discount = 0 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM people AS T1 INNER JOIN central_superstore AS T2 ON T1.`Customer ID` = T2.`Customer ID` WHERE T2.Region = 'Central' AND T1.State = 'Indiana'"
+    }
+]

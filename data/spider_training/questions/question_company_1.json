@@ -1,0 +1,44 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "company_1",
+        "question": "List all department names ordered by their starting date.",
+        "query": "SELECT dname FROM department ORDER BY mgr_start_date"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_1",
+        "question": "find all dependent names who have a spouse relation with some employee.",
+        "query": "SELECT Dependent_name FROM dependent WHERE relationship  =  'Spouse'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_1",
+        "question": "how many female dependents are there?",
+        "query": "SELECT count(*) FROM dependent WHERE sex  =  'F'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_1",
+        "question": "Find the names of departments that are located in Houston.",
+        "query": "SELECT t1.dname FROM department AS t1 JOIN dept_locations AS t2 ON t1.dnumber  =  t2.dnumber WHERE t2.dlocation  =  'Houston'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_1",
+        "question": "Return the first names and last names of employees who earn more than 30000 in salary.",
+        "query": "SELECT fname ,  lname FROM employee WHERE salary  >  30000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_1",
+        "question": "Find the number of employees of each gender whose salary is lower than 50000.",
+        "query": "SELECT count(*) ,  sex FROM employee WHERE salary  <  50000 GROUP BY sex"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "company_1",
+        "question": "list the first and last names, and the addresses of all employees in the ascending order of their birth date.",
+        "query": "SELECT fname ,  lname ,  address FROM employee ORDER BY Bdate"
+    }
+]

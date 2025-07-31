@@ -1,0 +1,602 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Which department has the largest number of employees?",
+        "query": "SELECT name FROM department GROUP BY departmentID ORDER BY count(departmentID) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the department with the most employees.",
+        "query": "SELECT name FROM department GROUP BY departmentID ORDER BY count(departmentID) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What is the employee id of the head whose department has the least number of employees?",
+        "query": "SELECT head FROM department GROUP BY departmentID ORDER BY count(departmentID) LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Tell me the employee id of the head of the department with the least employees.",
+        "query": "SELECT head FROM department GROUP BY departmentID ORDER BY count(departmentID) LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "what is the name and position of the head whose department has least number of employees?",
+        "query": "SELECT T2.name ,  T2.position FROM department AS T1 JOIN physician AS T2 ON T1.head  =  T2.EmployeeID GROUP BY departmentID ORDER BY count(departmentID) LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the name and position of the head of the department with the least employees.",
+        "query": "SELECT T2.name ,  T2.position FROM department AS T1 JOIN physician AS T2 ON T1.head  =  T2.EmployeeID GROUP BY departmentID ORDER BY count(departmentID) LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What are names of patients who made an appointment?",
+        "query": "SELECT name FROM appointment AS T1 JOIN patient AS T2 ON T1.patient  =  T2.ssn"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "List the names of patients who have made appointments.",
+        "query": "SELECT name FROM appointment AS T1 JOIN patient AS T2 ON T1.patient  =  T2.ssn"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "what are name and phone number of patients who had more than one appointment?",
+        "query": "SELECT name ,  phone FROM appointment AS T1 JOIN patient AS T2 ON T1.patient  =  T2.ssn GROUP BY T1.patient HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Which patients made more than one appointment? Tell me the name and phone number of these patients.",
+        "query": "SELECT name ,  phone FROM appointment AS T1 JOIN patient AS T2 ON T1.patient  =  T2.ssn GROUP BY T1.patient HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the id of the appointment with the most recent start date?",
+        "query": "SELECT appointmentid FROM appointment ORDER BY START DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What is the id of the appointment that started most recently?",
+        "query": "SELECT appointmentid FROM appointment ORDER BY START DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "List the name of physicians who took some appointment.",
+        "query": "SELECT T2.name FROM appointment AS T1 JOIN physician AS T2 ON T1.Physician  =  T2.EmployeeID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What are the names of all the physicians who took appointments.",
+        "query": "SELECT T2.name FROM appointment AS T1 JOIN physician AS T2 ON T1.Physician  =  T2.EmployeeID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "List the name of physicians who never took any appointment.",
+        "query": "SELECT name FROM physician EXCEPT SELECT T2.name FROM appointment AS T1 JOIN physician AS T2 ON T1.Physician  =  T2.EmployeeID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Which physicians have never taken any appointment? Find their names.",
+        "query": "SELECT name FROM physician EXCEPT SELECT T2.name FROM appointment AS T1 JOIN physician AS T2 ON T1.Physician  =  T2.EmployeeID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the names of all physicians and their primary affiliated departments' names.",
+        "query": "SELECT T1.name ,  T3.name FROM physician AS T1 JOIN affiliated_with AS T2 ON T1.EmployeeID  =  T2.physician JOIN department AS T3 ON T2.department  =  T3.DepartmentID WHERE T2.PrimaryAffiliation  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What are the name and primarily affiliated department name of each physician?",
+        "query": "SELECT T1.name ,  T3.name FROM physician AS T1 JOIN affiliated_with AS T2 ON T1.EmployeeID  =  T2.physician JOIN department AS T3 ON T2.department  =  T3.DepartmentID WHERE T2.PrimaryAffiliation  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What is the name of the patient who made the most recent appointment?",
+        "query": "SELECT T1.name FROM patient AS T1 JOIN appointment AS T2 ON T1.ssn = T2.patient ORDER BY T2.start DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the name of the patient who made the appointment with the most recent start date.",
+        "query": "SELECT T1.name FROM patient AS T1 JOIN appointment AS T2 ON T1.ssn = T2.patient ORDER BY T2.start DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "How many patients stay in room 112?",
+        "query": "SELECT count(patient) FROM stay WHERE room  =  112"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Count the number of patients who stayed in room 112.",
+        "query": "SELECT count(patient) FROM stay WHERE room  =  112"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "How many patients' prescriptions are made by physician John Dorian?",
+        "query": "SELECT count(T1.SSN) FROM patient AS T1 JOIN prescribes AS T2 ON T1.SSN  =  T2.patient JOIN physician AS T3 ON T2.physician  =  T3.employeeid WHERE T3.name = \"John Dorian\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the number of patients' prescriptions physician John Dorian made.",
+        "query": "SELECT count(T1.SSN) FROM patient AS T1 JOIN prescribes AS T2 ON T1.SSN  =  T2.patient JOIN physician AS T3 ON T2.physician  =  T3.employeeid WHERE T3.name = \"John Dorian\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the name of medication used on the patient who stays in room 111?",
+        "query": "SELECT T4.name FROM stay AS T1 JOIN patient AS T2 ON T1.Patient  =  T2.SSN JOIN Prescribes AS T3 ON T3.Patient  =  T2.SSN JOIN Medication AS T4 ON T3.Medication  =  T4.Code WHERE room  =  111"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What is the name of the medication used for the patient staying in room 111?",
+        "query": "SELECT T4.name FROM stay AS T1 JOIN patient AS T2 ON T1.Patient  =  T2.SSN JOIN Prescribes AS T3 ON T3.Patient  =  T2.SSN JOIN Medication AS T4 ON T3.Medication  =  T4.Code WHERE room  =  111"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the patient who most recently stayed in room 111.",
+        "query": "SELECT patient FROM stay WHERE room  =  111 ORDER BY staystart DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What is the id of the patient who stayed in room 111 most recently?",
+        "query": "SELECT patient FROM stay WHERE room  =  111 ORDER BY staystart DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What is the name of the nurse has the most appointments?",
+        "query": "SELECT T1.name FROM nurse AS T1 JOIN appointment AS T2 ON T1.employeeid  =  T2.prepnurse GROUP BY T1.employeeid ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the name of the nurse who has the largest number of appointments.",
+        "query": "SELECT T1.name FROM nurse AS T1 JOIN appointment AS T2 ON T1.employeeid  =  T2.prepnurse GROUP BY T1.employeeid ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "How many patients do each physician take care of? List their names and number of patients they take care of.",
+        "query": "SELECT T1.name ,  count(*) FROM physician AS T1 JOIN patient AS T2 ON T1.employeeid  =  T2.PCP GROUP BY T1.employeeid"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Return the name of each physician and the number of patients he or she treats.",
+        "query": "SELECT T1.name ,  count(*) FROM physician AS T1 JOIN patient AS T2 ON T1.employeeid  =  T2.PCP GROUP BY T1.employeeid"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the name of physicians who are in charge of more than one patient.",
+        "query": "SELECT T1.name FROM physician AS T1 JOIN patient AS T2 ON T1.employeeid  =  T2.PCP GROUP BY T1.employeeid HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Which physicians are in charge of more than one patient? Give me their names.",
+        "query": "SELECT T1.name FROM physician AS T1 JOIN patient AS T2 ON T1.employeeid  =  T2.PCP GROUP BY T1.employeeid HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the number of rooms located on each block floor.",
+        "query": "SELECT count(*) ,  T1.blockfloor FROM BLOCK AS T1 JOIN room AS T2 ON T1.blockfloor  =  T2.blockfloor AND T1.blockcode  =  T2.blockcode GROUP BY T1.blockfloor"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "How many rooms does each block floor have?",
+        "query": "SELECT count(*) ,  T1.blockfloor FROM BLOCK AS T1 JOIN room AS T2 ON T1.blockfloor  =  T2.blockfloor AND T1.blockcode  =  T2.blockcode GROUP BY T1.blockfloor"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the number of rooms for different block code?",
+        "query": "SELECT count(*) ,  T1.blockcode FROM BLOCK AS T1 JOIN room AS T2 ON T1.blockfloor  =  T2.blockfloor AND T1.blockcode  =  T2.blockcode GROUP BY T1.blockcode"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "How many rooms are located for each block code?",
+        "query": "SELECT count(*) ,  T1.blockcode FROM BLOCK AS T1 JOIN room AS T2 ON T1.blockfloor  =  T2.blockfloor AND T1.blockcode  =  T2.blockcode GROUP BY T1.blockcode"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What are the unique block codes that have available rooms?",
+        "query": "SELECT DISTINCT blockcode FROM room WHERE unavailable  =  0"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Tell me the distinct block codes where some rooms are available.",
+        "query": "SELECT DISTINCT blockcode FROM room WHERE unavailable  =  0"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "How many different types of rooms are there?",
+        "query": "SELECT count(DISTINCT roomtype) FROM room"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the number of distinct room types available.",
+        "query": "SELECT count(DISTINCT roomtype) FROM room"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What is the names of the physicians who prescribe medication Thesisin?",
+        "query": "SELECT DISTINCT T1.name FROM physician AS T1 JOIN prescribes AS T2 ON T1.employeeid = T2.physician JOIN medication AS T3 ON T3.code = T2.medication WHERE T3.name  =  \"Thesisin\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "List the names of all the physicians who prescribe Thesisin as medication.",
+        "query": "SELECT DISTINCT T1.name FROM physician AS T1 JOIN prescribes AS T2 ON T1.employeeid = T2.physician JOIN medication AS T3 ON T3.code = T2.medication WHERE T3.name  =  \"Thesisin\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the name and position of physicians who prescribe some medication whose brand is X?",
+        "query": "SELECT DISTINCT T1.name ,  T1.position FROM physician AS T1 JOIN prescribes AS T2 ON T1.employeeid = T2.physician JOIN medication AS T3 ON T3.code = T2.medication WHERE T3.Brand  =  \"X\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Which physicians prescribe a medication of brand X? Tell me the name and position of those physicians.",
+        "query": "SELECT DISTINCT T1.name ,  T1.position FROM physician AS T1 JOIN prescribes AS T2 ON T1.employeeid = T2.physician JOIN medication AS T3 ON T3.code = T2.medication WHERE T3.Brand  =  \"X\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the number of medications prescribed for each brand.",
+        "query": "SELECT count(*) ,  T1.name FROM medication AS T1 JOIN prescribes AS T2 ON T1.code = T2.medication GROUP BY T1.brand"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "How many medications are prescribed for each brand?",
+        "query": "SELECT count(*) ,  T1.name FROM medication AS T1 JOIN prescribes AS T2 ON T1.code = T2.medication GROUP BY T1.brand"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the name of physicians whose position title contains the word 'senior'.",
+        "query": "SELECT name FROM physician WHERE POSITION LIKE '%senior%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What are the names of the physicians who have 'senior' in their titles.",
+        "query": "SELECT name FROM physician WHERE POSITION LIKE '%senior%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the patient who has the most recent undergoing treatment?",
+        "query": "SELECT patient FROM undergoes ORDER BY dateundergoes LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Which patient is undergoing the most recent treatment?",
+        "query": "SELECT patient FROM undergoes ORDER BY dateundergoes LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the names of all patients who have an undergoing treatment and are staying in room 111.",
+        "query": "SELECT DISTINCT T2.name FROM undergoes AS T1 JOIN patient AS T2 ON T1.patient = T2.SSN JOIN stay AS T3 ON T1.Stay  =  T3.StayID WHERE T3.room  =  111"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What are the names of patients who are staying in room 111 and have an undergoing treatment?",
+        "query": "SELECT DISTINCT T2.name FROM undergoes AS T1 JOIN patient AS T2 ON T1.patient = T2.SSN JOIN stay AS T3 ON T1.Stay  =  T3.StayID WHERE T3.room  =  111"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "List the names of all distinct nurses ordered by alphabetical order?",
+        "query": "SELECT DISTINCT name FROM nurse ORDER BY name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What is the alphabetically ordered list of all the distinct names of nurses?",
+        "query": "SELECT DISTINCT name FROM nurse ORDER BY name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the names of nurses who are nursing an undergoing treatment.",
+        "query": "SELECT DISTINCT T2.name FROM undergoes AS T1 JOIN nurse AS T2 ON T1.AssistingNurse  =  T2.EmployeeID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Which nurses are in charge of patients undergoing treatments?",
+        "query": "SELECT DISTINCT T2.name FROM undergoes AS T1 JOIN nurse AS T2 ON T1.AssistingNurse  =  T2.EmployeeID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "List the names of all distinct medications, ordered in an alphabetical order.",
+        "query": "SELECT DISTINCT name FROM medication ORDER BY name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What is the alphabetically ordered list of all distinct medications?",
+        "query": "SELECT DISTINCT name FROM medication ORDER BY name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What are the names of the physician who prescribed the highest dose?",
+        "query": "SELECT T1.name FROM physician AS T1 JOIN prescribes AS T2 ON T1.employeeid = T2.physician ORDER BY T2.dose DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the physician who prescribed the highest dose. What is his or her name?",
+        "query": "SELECT T1.name FROM physician AS T1 JOIN prescribes AS T2 ON T1.employeeid = T2.physician ORDER BY T2.dose DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "List the physicians' employee ids together with their primary affiliation departments' ids.",
+        "query": "SELECT physician ,  department FROM affiliated_with WHERE primaryaffiliation  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What are each physician's employee id and department id primarily affiliated.",
+        "query": "SELECT physician ,  department FROM affiliated_with WHERE primaryaffiliation  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "List the names of departments where some physicians are primarily affiliated with.",
+        "query": "SELECT DISTINCT T2.name FROM affiliated_with AS T1 JOIN department AS T2 ON T1.department = T2.departmentid WHERE PrimaryAffiliation  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What are the names of departments that have primarily affiliated physicians.",
+        "query": "SELECT DISTINCT T2.name FROM affiliated_with AS T1 JOIN department AS T2 ON T1.department = T2.departmentid WHERE PrimaryAffiliation  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What nurses are on call with block floor 1 and block code 1? Tell me their names.",
+        "query": "SELECT nurse FROM on_call WHERE blockfloor  =  1 AND blockcode  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the ids of the nurses who are on call in block floor 1 and block code 1.",
+        "query": "SELECT nurse FROM on_call WHERE blockfloor  =  1 AND blockcode  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What are the highest cost, lowest cost and average cost of procedures?",
+        "query": "SELECT MAX(cost) ,  MIN(cost) ,  AVG(cost) FROM procedures"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Tell me the highest, lowest, and average cost of procedures.",
+        "query": "SELECT MAX(cost) ,  MIN(cost) ,  AVG(cost) FROM procedures"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "List the name and cost of all procedures sorted by the cost from the highest to the lowest.",
+        "query": "SELECT name ,  cost FROM procedures ORDER BY cost DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Sort the list of names and costs of all procedures in the descending order of cost.",
+        "query": "SELECT name ,  cost FROM procedures ORDER BY cost DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the three most expensive procedures.",
+        "query": "SELECT name FROM procedures ORDER BY cost LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What are the three most costly procedures?",
+        "query": "SELECT name FROM procedures ORDER BY cost LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the physicians who are trained in a procedure that costs more than 5000.",
+        "query": "SELECT T1.name FROM physician AS T1 JOIN trained_in AS T2 ON T1.employeeid  =  T2.physician JOIN procedures AS T3 ON T3.code  =  T2.treatment WHERE T3.cost  >  5000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Which physicians are trained in procedures that are more expensive than 5000?",
+        "query": "SELECT T1.name FROM physician AS T1 JOIN trained_in AS T2 ON T1.employeeid  =  T2.physician JOIN procedures AS T3 ON T3.code  =  T2.treatment WHERE T3.cost  >  5000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the physician who was trained in the most expensive procedure?",
+        "query": "SELECT T1.name FROM physician AS T1 JOIN trained_in AS T2 ON T1.employeeid  =  T2.physician JOIN procedures AS T3 ON T3.code  =  T2.treatment ORDER BY T3.cost DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Which physician was trained in the procedure that costs the most.",
+        "query": "SELECT T1.name FROM physician AS T1 JOIN trained_in AS T2 ON T1.employeeid  =  T2.physician JOIN procedures AS T3 ON T3.code  =  T2.treatment ORDER BY T3.cost DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What is the average cost of procedures that physician John Wen was trained in?",
+        "query": "SELECT avg(T3.cost) FROM physician AS T1 JOIN trained_in AS T2 ON T1.employeeid  =  T2.physician JOIN procedures AS T3 ON T3.code  =  T2.treatment WHERE T1.name  =  \"John Wen\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Compute the mean price of procedures physician John Wen was trained in.",
+        "query": "SELECT avg(T3.cost) FROM physician AS T1 JOIN trained_in AS T2 ON T1.employeeid  =  T2.physician JOIN procedures AS T3 ON T3.code  =  T2.treatment WHERE T1.name  =  \"John Wen\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the names of procedures which physician John Wen was trained in.",
+        "query": "SELECT T3.name FROM physician AS T1 JOIN trained_in AS T2 ON T1.employeeid  =  T2.physician JOIN procedures AS T3 ON T3.code  =  T2.treatment WHERE T1.name  =  \"John Wen\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What are the names of procedures physician John Wen was trained in?",
+        "query": "SELECT T3.name FROM physician AS T1 JOIN trained_in AS T2 ON T1.employeeid  =  T2.physician JOIN procedures AS T3 ON T3.code  =  T2.treatment WHERE T1.name  =  \"John Wen\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find all procedures which cost more than 1000 or which physician John Wen was trained in.",
+        "query": "SELECT name FROM procedures WHERE cost  >  1000 UNION SELECT T3.name FROM physician AS T1 JOIN trained_in AS T2 ON T1.employeeid  =  T2.physician JOIN procedures AS T3 ON T3.code  =  T2.treatment WHERE T1.name  =  \"John Wen\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What are the procedures that cost more than 1000 or are specialized in by physician John Wen?",
+        "query": "SELECT name FROM procedures WHERE cost  >  1000 UNION SELECT T3.name FROM physician AS T1 JOIN trained_in AS T2 ON T1.employeeid  =  T2.physician JOIN procedures AS T3 ON T3.code  =  T2.treatment WHERE T1.name  =  \"John Wen\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the names of all procedures which cost more than 1000 but which physician John Wen was not trained in?",
+        "query": "SELECT name FROM procedures WHERE cost  >  1000 EXCEPT SELECT T3.name FROM physician AS T1 JOIN trained_in AS T2 ON T1.employeeid  =  T2.physician JOIN procedures AS T3 ON T3.code  =  T2.treatment WHERE T1.name  =  \"John Wen\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Among the procedures that cost more than 1000, which were not specialized in by physician John Wen?",
+        "query": "SELECT name FROM procedures WHERE cost  >  1000 EXCEPT SELECT T3.name FROM physician AS T1 JOIN trained_in AS T2 ON T1.employeeid  =  T2.physician JOIN procedures AS T3 ON T3.code  =  T2.treatment WHERE T1.name  =  \"John Wen\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the names of all procedures such that the cost is less than 5000 and physician John Wen was trained in.",
+        "query": "SELECT name FROM procedures WHERE cost  <  5000 INTERSECT SELECT T3.name FROM physician AS T1 JOIN trained_in AS T2 ON T1.employeeid  =  T2.physician JOIN procedures AS T3 ON T3.code  =  T2.treatment WHERE T1.name  =  \"John Wen\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What procedures cost less than 5000 and have John Wen as a trained physician?",
+        "query": "SELECT name FROM procedures WHERE cost  <  5000 INTERSECT SELECT T3.name FROM physician AS T1 JOIN trained_in AS T2 ON T1.employeeid  =  T2.physician JOIN procedures AS T3 ON T3.code  =  T2.treatment WHERE T1.name  =  \"John Wen\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the name of physicians who are affiliated with both Surgery and Psychiatry departments.",
+        "query": "SELECT T1.name FROM physician AS T1 JOIN affiliated_with AS T2 ON T1.EmployeeID  =  T2.physician JOIN department AS T3 ON T2.department  =  T3.DepartmentID WHERE T3.name  =  'Surgery' INTERSECT SELECT T1.name FROM physician AS T1 JOIN affiliated_with AS T2 ON T1.EmployeeID  =  T2.physician JOIN department AS T3 ON T2.department  =  T3.DepartmentID WHERE T3.name  =  'Psychiatry'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Which physicians are affiliated with both Surgery and Psychiatry departments? Tell me their names.",
+        "query": "SELECT T1.name FROM physician AS T1 JOIN affiliated_with AS T2 ON T1.EmployeeID  =  T2.physician JOIN department AS T3 ON T2.department  =  T3.DepartmentID WHERE T3.name  =  'Surgery' INTERSECT SELECT T1.name FROM physician AS T1 JOIN affiliated_with AS T2 ON T1.EmployeeID  =  T2.physician JOIN department AS T3 ON T2.department  =  T3.DepartmentID WHERE T3.name  =  'Psychiatry'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the name of physicians who are affiliated with Surgery or Psychiatry department.",
+        "query": "SELECT T1.name FROM physician AS T1 JOIN affiliated_with AS T2 ON T1.EmployeeID  =  T2.physician JOIN department AS T3 ON T2.department  =  T3.DepartmentID WHERE T3.name  =  'Surgery' OR T3.name  =  'Psychiatry'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Which physicians are affiliated with either Surgery or Psychiatry department? Give me their names.",
+        "query": "SELECT T1.name FROM physician AS T1 JOIN affiliated_with AS T2 ON T1.EmployeeID  =  T2.physician JOIN department AS T3 ON T2.department  =  T3.DepartmentID WHERE T3.name  =  'Surgery' OR T3.name  =  'Psychiatry'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the names of patients who are not using the medication of Procrastin-X.",
+        "query": "SELECT name FROM patient EXCEPT SELECT T1.name FROM patient AS T1 JOIN Prescribes AS T2 ON T2.Patient  =  T1.SSN JOIN Medication AS T3 ON T2.Medication  =  T3.Code WHERE T3.name  =  'Procrastin-X'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What are the names of patients who are not taking the medication of Procrastin-X.",
+        "query": "SELECT name FROM patient EXCEPT SELECT T1.name FROM patient AS T1 JOIN Prescribes AS T2 ON T2.Patient  =  T1.SSN JOIN Medication AS T3 ON T2.Medication  =  T3.Code WHERE T3.name  =  'Procrastin-X'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the number of patients who are not using the medication of Procrastin-X.",
+        "query": "SELECT count(*) FROM patient WHERE SSN NOT IN ( SELECT T1.patient FROM Prescribes AS T1 JOIN Medication AS T2 ON T1.Medication  =  T2.Code WHERE T2.name  =  'Procrastin-X' )"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "How many patients are not using Procrastin-X as medication?",
+        "query": "SELECT count(*) FROM patient WHERE SSN NOT IN ( SELECT T1.patient FROM Prescribes AS T1 JOIN Medication AS T2 ON T1.Medication  =  T2.Code WHERE T2.name  =  'Procrastin-X' )"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "How many appointments are there?",
+        "query": "SELECT count(*) FROM appointment"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Count how many appointments have been made in total.",
+        "query": "SELECT count(*) FROM appointment"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "Find the names of nurses who are on call.",
+        "query": "SELECT DISTINCT T1.name FROM nurse AS T1 JOIN on_call AS T2 ON T1.EmployeeID  =  T2.nurse"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "hospital_1",
+        "question": "What are the distinct names of nurses on call?",
+        "query": "SELECT DISTINCT T1.name FROM nurse AS T1 JOIN on_call AS T2 ON T1.EmployeeID  =  T2.nurse"
+    }
+]

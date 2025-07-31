@@ -1,0 +1,1004 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Name movie titles released in year 1945. Sort the listing by the descending order of movie popularity.",
+        "query": "SELECT movie_title FROM movies WHERE movie_release_year = 1945 ORDER BY movie_popularity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "State the most popular movie? When was it released and who is the director for the movie?",
+        "query": "SELECT movie_title, movie_release_year, director_name FROM movies ORDER BY movie_popularity DESC LIMIT 1 "
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the name of the longest movie title? When was it released?",
+        "query": "SELECT movie_title, movie_release_year FROM movies ORDER BY LENGTH(movie_popularity) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Name the movie with the most ratings.",
+        "query": "SELECT movie_title FROM movies GROUP BY movie_title ORDER BY COUNT(movie_title) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the average number of Mubi users who love movies directed by Stanley Kubrick?",
+        "query": "SELECT AVG(movie_popularity) FROM movies WHERE director_name = 'Stanley Kubrick'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the average rating for movie titled 'When Will I Be Loved'?",
+        "query": "SELECT AVG(T2.rating_score) FROM movies AS T1 INNER JOIN ratings AS T2 ON T1.movie_id = T2.movie_id WHERE T1.movie_title = 'When Will I Be Loved'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the user avatar url for user 41579158? What is the latest movie rated by him / her?",
+        "query": "SELECT T3.user_avatar_image_url, T3.rating_date_utc FROM movies AS T1 INNER JOIN ratings AS T2 ON T1.movie_id = T2.movie_id INNER JOIN ratings_users AS T3 ON T3.user_id = T2.user_id WHERE T3.user_id = 41579158 ORDER BY T3.rating_date_utc DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the percentage of the ratings were rated by user who was a subcriber?",
+        "query": "SELECT CAST(SUM(CASE WHEN user_subscriber = 1 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM ratings"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "List all movie title rated in April 2020 from user who was a trialist.",
+        "query": "SELECT T1.movie_title FROM movies AS T1 INNER JOIN ratings AS T2 ON T1.movie_id = T2.movie_id WHERE T2.user_trialist = 1 AND T2.rating_timestamp_utc LIKE '2020-04%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "List ther users who gave the worst rating for movie 'Love Will Tear Us Apart'.",
+        "query": "SELECT T1.user_id FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'Love Will Tear Us Apart' AND T1.rating_score = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "List all movies with the best rating score. State the movie title and number of Mubi user who loves the movie.",
+        "query": "SELECT DISTINCT T2.movie_title, T2.movie_popularity FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T1.rating_score = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "For all ratings which are rated in year 2020, name the movies which has the rating scored 4 and above.",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE CAST(SUBSTR(T1.rating_timestamp_utc, 1, 4) AS INTEGER) = 2020 AND CAST(SUBSTR(T1.rating_timestamp_utc, 6, 2) AS INTEGER) > 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "For all movies where users left a critic, find the movie name, user, rating and critics comments from the user.",
+        "query": "SELECT T2.movie_title, T1.user_id, T1.rating_score, T1.critic FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T1.critic IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "For movie titled 'Welcome to the Dollhouse', how many percentage of the ratings were rated with highest score.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.rating_score = 5 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM movies AS T1 INNER JOIN ratings AS T2 ON T1.movie_id = T2.movie_id WHERE T1.movie_title = 'Welcome to the Dollhouse'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the percentage of rated movies were released in year 2021?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.movie_release_year = 2021 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM movies AS T1 INNER JOIN ratings AS T2 ON T1.movie_id = T2.movie_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Who is the director of the movie Sex, Drink and Bloodshed?",
+        "query": "SELECT director_name FROM movies WHERE movie_title = 'Sex, Drink and Bloodshed'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the name of the most followed list?",
+        "query": "SELECT list_title FROM lists ORDER BY list_followers DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What are the URL to the list page on Mubi of the lists with followers between 1-2 and whose last update timestamp was on 2012?",
+        "query": "SELECT list_url FROM lists WHERE list_update_timestamp_utc LIKE '2012%' AND list_followers BETWEEN 1 AND 2 ORDER BY list_update_timestamp_utc DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the list ID that was first created by user 85981819?",
+        "query": "SELECT list_id FROM lists_users WHERE user_id = 85981819 ORDER BY list_creation_date_utc ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "For movie id 1269, how many users, who was a paying subscriber and was eligible for trial when he rated the movie, gave the movie a rating score of less than or equal to 2?",
+        "query": "SELECT COUNT(*) FROM ratings WHERE movie_id = 1269 AND rating_score <= 2 AND user_eligible_for_trial = 1 AND user_has_payment_method = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What are the movie popularity of the movies released in 2021 that were directed by Steven Spielberg? List the names of the movies and their corresponding popularity.",
+        "query": "SELECT movie_title, movie_popularity FROM movies WHERE movie_release_year = 2021 AND director_name = 'Steven Spielberg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "When was the first movie released and who directed it?",
+        "query": "SELECT movie_release_year, director_name FROM movies WHERE movie_release_year IS NOT NULL ORDER BY movie_release_year ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the user ID of the user, who was a subscriber when he created the list, who created a list for 10 consecutive years? If there are multiple users, indicate each of their user IDs.",
+        "query": "SELECT user_id FROM lists_users WHERE user_subscriber = 1 GROUP BY user_id HAVING MAX(SUBSTR(list_creation_date_utc, 1, 4)) - MIN(SUBSTR(list_creation_date_utc, 1, 4)) >= 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many users gave \"Pavee Lackeen: The Traveller Girl\" movie a rating score of 4?",
+        "query": "SELECT COUNT(T2.user_id) FROM movies AS T1 INNER JOIN ratings AS T2 ON T1.movie_id = T2.movie_id WHERE T1.movie_title = 'Pavee Lackeen: The Traveller Girl' AND T2.rating_score = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Was the user who created the \"World War 2 and Kids\" list eligible for trial when he created the list? Indicate how many followers does the said list has.",
+        "query": "SELECT T2.user_eligible_for_trial, T1.list_followers FROM lists AS T1 INNER JOIN lists_users AS T2 ON T1.user_id = T1.user_id AND T1.list_id = T2.list_id WHERE T1.list_title = 'World War 2 and Kids'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Which year was the third movie directed by Quentin Tarantino released? Indicate the user ids of the user who gave it a rating score of 4.",
+        "query": "SELECT T2.movie_release_year, T1.user_id FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T1.movie_id = ( SELECT movie_id FROM movies WHERE director_name = 'Quentin Tarantino' ORDER BY movie_release_year ASC LIMIT 2, 1 ) AND T1.rating_score = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the URL to the movie director page on Mubi of the director whose movie was critic by user 2452551 and was given 39 likes?",
+        "query": "SELECT T2.director_url FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T1.user_id = 2452551 AND T1.critic_likes = 39"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the average rating score of the movie \"When Will I Be Loved\" and who was its director?",
+        "query": "SELECT AVG(T1.rating_score), T2.director_name FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'When Will I Be Loved'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many movies were added to the list with the most number of movies? Indicate whether the user was a paying subscriber or not when he created the list.",
+        "query": "SELECT T1.list_movie_number, T2.user_has_payment_method FROM lists AS T1 INNER JOIN lists_users AS T2 ON T1.list_id = T2.list_id ORDER BY T1.list_movie_number DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the name of the movie whose critic received the highest number of likes related to the critic made by the user rating the movie?",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id ORDER BY T1.critic_likes DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How much is the popularity of the movie that has the highest popularity between 1920 to 1929 and when did the movie received its first rating score of 1 from the users who were a paying subscriber when they rated the movie ?",
+        "query": "SELECT MAX(T2.movie_popularity), MIN(T1.rating_timestamp_utc) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_release_year BETWEEN 1920 AND 1929 AND T1.rating_score = 1 AND T1.user_has_payment_method = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many movies directed by Francis Ford Coppola have a popularity of more than 1,000? Indicate what is the highest amount of likes that each critic per movie has received, if there's any.",
+        "query": "SELECT COUNT(T2.movie_title), T1.critic FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.director_name = 'Francis Ford Coppola' AND T2.movie_popularity > 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the URL to the user profile image on Mubi of the user who gave the movie id of 1103 a 5 ratinng score on 4/19/2020?",
+        "query": "SELECT T2.user_avatar_image_url FROM ratings AS T1 INNER JOIN ratings_users AS T2 ON T1.user_id = T2.user_id WHERE T2.user_id = 1103 AND rating_score = 5 AND T2.rating_date_utc = '2020-04-19'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Among the lists created by user 4208563, which one has the highest number of followers? Indicate how many followers it has and whether the user was a subscriber or not when he created the list.",
+        "query": "SELECT T1.list_followers, T2.user_subscriber = 1 FROM lists AS T1 INNER JOIN lists_users AS T2 ON T1.user_id = T2.user_id AND T2.list_id = T2.list_id WHERE T2.user_id = 4208563 ORDER BY T1.list_followers DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Which year has the least number of movies that was released and what is the title of the movie in that year that has the highest number of rating score of 1?",
+        "query": "SELECT DISTINCT T1.movie_release_year, T1.movie_title FROM movies AS T1 INNER JOIN ratings AS T2 ON T1.movie_id = T2.movie_id WHERE T1.movie_release_year = ( SELECT movie_release_year FROM movies GROUP BY movie_release_year ORDER BY COUNT(movie_id) DESC LIMIT 1 ) AND T2.rating_score = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many users, who were a paying subscriber when they rated the movie, gave the movie that was released in 1924 and directed by Erich von Stroheim a rating score of 5?",
+        "query": "SELECT COUNT(T2.user_id) FROM movies AS T1 INNER JOIN ratings AS T2 ON T1.movie_id = T2.movie_id WHERE T1.movie_release_year = 1924 AND T1.director_name = 'Erich von Stroheim' AND T2.rating_score = 5 AND T2.user_has_payment_method = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the average number of movies added to the lists of user 8516503? Give the user profile image URL on Mubi.",
+        "query": "SELECT AVG(T1.list_movie_number), T2.user_avatar_image_url FROM lists AS T1 INNER JOIN lists_users AS T2 ON T1.list_id = T2.list_id AND T1.user_id = T2.user_id WHERE T2.user_id = 8516503"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many users rated the movie \"The Magnificent Ambersons\" gave a rating score of no more than 2? List all the URL to the rating on Mubi.",
+        "query": "SELECT COUNT(T2.user_id), T2.rating_url FROM movies AS T1 INNER JOIN ratings AS T2 ON T1.movie_id = T2.movie_id WHERE T1.movie_title = 'The Magnificent Ambersons' AND T2.rating_score <= 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many users who created a list in the February of 2016 were eligible for trial when they created the list? Indicate the user id of the user who has the most number of followers in his list in February of 2016.",
+        "query": "SELECT T1.list_followers FROM lists AS T1 INNER JOIN lists_users AS T2 ON T1.user_id = T2.user_id AND T1.list_id = T2.list_id WHERE T2.list_creation_date_utc BETWEEN '2016-02-01' AND '2016-02-29' AND T2.user_eligible_for_trial = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the URL to the rating on Mubi of the Riff-Raff movie that was given the highest rating score by user 22030372?",
+        "query": "SELECT T2.rating_url FROM movies AS T1 INNER JOIN ratings AS T2 ON T1.movie_id = T2.movie_id WHERE T2.user_id = 22030372 AND T2.rating_score = 5 AND T1.movie_title = 'Riff-Raff'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many directors have directed atleast 10 movies between 1960 to 1985? Indicate the name of the movie in those years of each director that received the highest amount of 5 rating score.",
+        "query": "SELECT T2.director_name FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_release_year BETWEEN 1960 AND 1985 GROUP BY T2.director_name HAVING COUNT(T2.movie_id) > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many users, who were not a a trialist when they rated the movie, gave the movie \"The South\" a rating score of not more than 2?",
+        "query": "SELECT COUNT(T2.user_id) FROM movies AS T1 INNER JOIN ratings AS T2 ON T1.movie_id = T2.movie_id WHERE T2.user_trialist = 0 AND T2.rating_score <= 2 AND T1.movie_title = 'The South'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many likes did the critic of the movie \"Apocalypse Now\" received after giving the movie a rating score of 5?",
+        "query": "SELECT T2.critic_likes FROM movies AS T1 INNER JOIN ratings AS T2 ON T1.movie_id = T2.movie_id WHERE T2.user_trialist = 0 AND T2.rating_score = 5 AND T1.movie_title = 'Apocalypse Now'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the average rating score of the movie \"The Crowd\" and who was its director?",
+        "query": "SELECT AVG(T2.rating_score), T1.director_name FROM movies AS T1 INNER JOIN ratings AS T2 ON T1.movie_id = T2.movie_id WHERE T1.movie_title = 'The Crowd'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "When was the first movie of the director who directed the highest number of movies released and what is the user id of the user who received the highest number of comments related to the critic made by the user rating the movie?",
+        "query": "SELECT MIN(movie_release_year) FROM movies WHERE director_name = ( SELECT T2.director_name FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_release_year BETWEEN 1960 AND 1985 GROUP BY T2.director_name ORDER BY COUNT(T2.director_name) DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many movies have a popularity of more than 400 but less than 500? Indicate the name of the movies and the highest rating score each movie has received.",
+        "query": "SELECT T1.movie_title, MAX(T2.rating_score) FROM movies AS T1 INNER JOIN ratings AS T2 ON T1.movie_id = T2.movie_id WHERE T1.movie_popularity BETWEEN 400 AND 500 GROUP BY T1.movie_title"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the URL to the rating on Mubi made by user 45579900 for the movie \"The Vertical Ray of the Sun\" that received 20 likes?",
+        "query": "SELECT T2.rating_url FROM movies AS T1 INNER JOIN ratings AS T2 ON T1.movie_id = T2.movie_id WHERE T2.user_id = 45579900 AND T1.movie_title = 'The Vertical Ray of the Sun' AND T2.critic_likes = 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the average popularity of each movie that was directed by Christopher Nolan? Indicate which movie directed by him has received the highest number of 5 rating scores.",
+        "query": "SELECT AVG(T2.movie_popularity) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.director_name = 'Christopher Nolan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What are the names of the movie that was rated by the user between 1/1/2013 to 12/31/2013 by the user who created the list \"100 Greatest Living American Filmmakers\"? Calculate for the average rating score of those movies in 2013.",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id INNER JOIN lists AS T3 ON T3.user_id = T1.user_id WHERE T1.rating_timestamp_utc BETWEEN '2013-01-01' AND '2013-12-31' AND T3.list_title = '100 Greatest Living American Filmmakers'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the average rating score of the 'Pavee Lackeen: The Traveller Girl' movie and what year was it released?",
+        "query": "SELECT AVG(T1.rating_score), T2.movie_release_year FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'Pavee Lackeen: The Traveller Girl'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many movie lists were still updated 10 years after it was created?",
+        "query": "SELECT COUNT(*) FROM lists WHERE SUBSTR(list_update_timestamp_utc, 1, 4) - SUBSTR(list_creation_timestamp_utc, 1, 4) > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What's the description for the movie list \"Short and pretty damn sweet\"?",
+        "query": "SELECT list_description FROM lists WHERE list_title = 'Short and pretty damn sweet'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Where can I find the movie list \"Short and pretty damn sweet\"?",
+        "query": "SELECT list_url FROM lists WHERE list_title = 'Short and pretty damn sweet'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Among the movie lists created after 2010/1/1, how many of them have over 200 followers?",
+        "query": "SELECT COUNT(*) FROM lists WHERE list_followers > 200 AND list_update_timestamp_utc > '2010-01-01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many movie lists were created by user 83373278 when he or she was a subscriber?",
+        "query": "SELECT COUNT(*) FROM lists_users WHERE user_id = 83373278 AND user_subscriber = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "In which year was the movie \"La Antena\" released?",
+        "query": "SELECT movie_release_year FROM movies WHERE movie_title = 'La Antena'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Please give me the url of the movie \"La Antena\".",
+        "query": "SELECT movie_url FROM movies WHERE movie_title = 'La Antena'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Which movie is more popular, \"The General\" or \"Il grido\"?",
+        "query": "SELECT movie_title FROM movies WHERE movie_title = 'The General' OR movie_title = 'Il grido' ORDER BY movie_popularity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many movies registered on Mubi are directed by Hong Sang-soo?",
+        "query": "SELECT COUNT(movie_id) FROM movies WHERE director_name = 'Hong Sang-soo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Was the user who created the list \"250 Favourite Films\" a trialist when he or she created the list?",
+        "query": "SELECT T2.user_trialist FROM lists AS T1 INNER JOIN lists_users AS T2 ON T1.list_id = T2.list_id AND T1.user_id = T2.user_id WHERE T1.list_title = '250 Favourite Films'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Please list the titles of the movie lists user 32172230 created when he or she was eligible for trial.",
+        "query": "SELECT T1.list_title FROM lists AS T1 INNER JOIN lists_users AS T2 ON T1.list_id = T2.list_id AND T1.user_id = T2.user_id WHERE T1.user_id = 32172230 AND T2.user_eligible_for_trial = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many movie lists with over 100 movies had user 85981819 created when he or she was a paying subscriber?",
+        "query": "SELECT COUNT(*) FROM lists AS T1 INNER JOIN lists_users AS T2 ON T1.list_id = T2.list_id AND T1.user_id = T2.user_id WHERE T1.user_id = 85981819 AND T1.list_movie_number > 100 AND T2.user_has_payment_method = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What's the description of user 85981819's movie list with the most followers?",
+        "query": "SELECT T1.list_description FROM lists AS T1 INNER JOIN lists_users AS T2 ON T1.list_id = T2.list_id AND T1.user_id = T2.user_id WHERE T1.user_id = 85981819 ORDER BY T1.list_followers DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "When did the creator of the list \"250 Favourite Films\" last updated a movie list?",
+        "query": "SELECT T2.list_update_date_utc FROM lists AS T1 INNER JOIN lists_users AS T2 ON T1.list_id = T2.list_id AND T1.user_id = T2.user_id WHERE T1.list_title = '250 Favourite Films' ORDER BY T2.list_update_date_utc DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What's the avatar image of the user who created the movie list \"250 Favourite Films\"?",
+        "query": "SELECT T2.user_avatar_image_url FROM lists AS T1 INNER JOIN lists_users AS T2 ON T1.list_id = T2.list_id AND T1.user_id = T2.user_id WHERE T1.list_title = '250 Favourite Films'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many more movie lists were created by the user who created the movie list \"250 Favourite Films\"?",
+        "query": "SELECT COUNT(list_id) FROM lists_users WHERE user_id = ( SELECT user_id FROM lists WHERE list_title = '250 Favourite Films' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many users liked the movie \"A Way of Life\" to the highest extent?",
+        "query": "SELECT COUNT(T1.user_id) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'A Way of Life' AND T1.rating_score = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Please list all the critics made by the user rating the movie \"A Way of Life\".",
+        "query": "SELECT T1.critic FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'A Way of Life'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many critics of the movie \"Imitation of Life\" got more than 1 like?",
+        "query": "SELECT COUNT(*) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'Imitation of Life' AND T1.critic_likes > 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Which user made a critic for the film \"When Will I Be Loved\" and got 2 comments for the critic?",
+        "query": "SELECT T1.user_id FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'When Will I Be Loved' AND T1.critic_comments = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "When did user 39115684 rate the movie \"A Way of Life\"?",
+        "query": "SELECT T1.rating_score FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'A Way of Life' AND T1.user_id = 39115684"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What's the url of user 39115684's rating on the movie 'When Will I Be Loved'?",
+        "query": "SELECT T1.rating_url FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'A Way of Life' AND T1.user_id = 39115684"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Was user 39115684 a trialist when he or she rated the movie \"A Way of Life\"?",
+        "query": "SELECT T1.user_trialist FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'A Way of Life' AND T1.user_id = 39115684"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many users were trialists when they rated the movie \"A Way of Life\"?",
+        "query": "SELECT COUNT(T1.user_id) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'When Will I Be Loved' AND T1.user_trialist = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Please list all the links to the ratings on the movie \"A Way of Life\" with a critic.",
+        "query": "SELECT T1.rating_url FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'A Way of Life' AND T1.critic IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many users have rated the most popular movie?",
+        "query": "SELECT COUNT(rating_id) FROM ratings WHERE movie_id = ( SELECT movie_id FROM movies ORDER BY movie_popularity DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "User 58149469's critic on which film got 1 like and 2 comments?",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T1.user_id = 58149469 AND T1.critic_likes = 1 AND T1.critic_comments = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Among the users who are trailists when rating the movie \"When Will I Be Loved\", how many of them have rated \"1\" on the movie?",
+        "query": "SELECT COUNT(T1.user_id) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'When Will I Be Loved' AND T1.rating_score = 1 AND T1.user_trialist = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many ratings on the movie \"A Way of Life\" are made after the year 2011?",
+        "query": "SELECT COUNT(T1.rating_id) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'A Way of Life' AND T1.rating_timestamp_utc >= '2012-01-01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What's of rating on the movie \"Innocence Unprotected\" by the user who created the movie list \"250 Favourite Films\"?",
+        "query": "SELECT T1.rating_score FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id INNER JOIN lists AS T3 ON T3.user_id = T1.user_id WHERE T2.movie_title = 'Innocence Unprotected' AND T3.list_title = '250 Favourite Films'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Please list the movies rated by the user who created the movie list \"250 Favourite Films\".",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id INNER JOIN lists AS T3 ON T3.user_id = T1.user_id WHERE T3.list_title = '250 Favourite Films'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What's the average rating score of the movie \"A Way of Life\"?",
+        "query": "SELECT AVG(T1.rating_score) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'A Way of Life'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What's the percentage of the users who have rated \"1\" on the movie \"When Will I Be Loved\"?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.rating_score = 1 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'When Will I Be Loved'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How much higher is the average rating score of the movie \"Innocence Unprotected\" than the movie \"When Will I Be Loved\"?",
+        "query": "SELECT SUM(CASE WHEN T2.movie_title = 'Innocence Unprotected' THEN T1.rating_score ELSE 0 END) / SUM(CASE WHEN T2.movie_title = 'Innocence Unprotected' THEN 1 ELSE 0 END) - SUM(CASE WHEN T2.movie_title = 'When Will I Be Loved' THEN T1.rating_score ELSE 0 END) / SUM(CASE WHEN T2.movie_title = 'When Will I Be Loved' THEN 1 ELSE 0 END) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Who was the director of the movie \"Tokyo Eyes\"\uff1f",
+        "query": "SELECT director_name FROM movies WHERE movie_title = 'Tokyo Eyes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many films were released in 2007?",
+        "query": "SELECT COUNT(*) FROM movies WHERE movie_release_year = 2007"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Which of the films released in 2006 was the most popular among Mubi users?",
+        "query": "SELECT movie_title FROM movies WHERE movie_release_year = 2006 ORDER BY movie_popularity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many films did \u00c5ke Sandgren direct?",
+        "query": "SELECT COUNT(movie_title) FROM movies WHERE director_name = '\u00c5ke Sandgren'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Which of the films directed by \u00c1lex de la Iclesia is the most popular among Mubi users?",
+        "query": "SELECT movie_title FROM movies WHERE director_name = '\u00c5ke Sandgren' ORDER BY movie_popularity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "When was the movie Cops released?",
+        "query": "SELECT movie_release_year FROM movies WHERE movie_title = 'Cops'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Please list the id of the director of the movie \"It's Winter\".",
+        "query": "SELECT director_id FROM movies WHERE movie_title = 'It''s Winter'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Please provide the ID of the user with the most followers on the list.",
+        "query": "SELECT user_id FROM lists ORDER BY list_followers DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Please provide the title of the list with the most comments on the list.",
+        "query": "SELECT list_title FROM lists GROUP BY list_title ORDER BY COUNT(list_comments) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Which of the film released in 2008 scored the highest?",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_release_year = 2008 ORDER BY T1.rating_score DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Please list the names of the top three movies in the number of likes related to the critic made by the user rating the movie.",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id ORDER BY T1.critic_likes DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many users have more than 100 followers in the list created by users in 2009?",
+        "query": "SELECT COUNT(T1.user_id) FROM lists_users AS T1 INNER JOIN lists AS T2 ON T1.list_id = T2.list_id WHERE T2.list_followers > 100 AND T1.list_creation_date_utc LIKE '2009%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many users in Mubi give the movie \"White Night Wedding for 5\"?",
+        "query": "SELECT COUNT(T1.user_id) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T1.rating_score = 5 AND T2.movie_title = 'White Night Wedding'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What's the cover image of the user who created the movie list 'Georgia related films'?",
+        "query": "SELECT T1.user_cover_image_url FROM lists_users AS T1 INNER JOIN lists AS T2 ON T1.list_id = T2.list_id WHERE T2.list_title LIKE 'Georgia related films'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many followers does the list created by the user whose user_avatar_image_url is https://assets.mubicdn.net/images/avatars/74983/images-w150.jpg?1523895214 have?",
+        "query": "SELECT SUM(T2.list_followers) FROM lists_users AS T1 INNER JOIN lists AS T2 ON T1.list_id = T2.list_id WHERE T1.user_avatar_image_url = 'https://assets.mubicdn.net/images/avatars/74983/images-w150.jpg?1523895214'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Please list the names of the movies that user 94978 scored as 5.",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T1.rating_score = 5 AND T1.user_id = 94978"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Please list the names of the films released in 2003 among the films scored by user 2941 .",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_release_year = 2003 AND T1.user_id = 2941"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many users were not trialists when they rated the movie \"Patti Smith: Dream of Life\"?",
+        "query": "SELECT COUNT(T1.user_id) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'Patti Smith: Dream of Life' AND T1.user_trialist = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Which movie has the highest average score in Mubi?",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id GROUP BY T2.movie_title ORDER BY SUM(T1.rating_score) / COUNT(T1.rating_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Please list the names of the top three movies in the number comments related to the critic made by the user rating the movie.",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id ORDER BY T1.critic_comments DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What was the title of the first list created by a user 85981819? And please provide the user_avatar_image_url.",
+        "query": "SELECT T2.list_title, T1.user_avatar_image_url FROM lists_users AS T1 INNER JOIN lists AS T2 ON T1.list_id = T2.list_id WHERE T1.user_id = 85981819 ORDER BY T2.list_creation_timestamp_utc LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Please list the names of the movies that have been rated the most times in 2020.",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T1.rating_timestamp_utc LIKE '2020%' GROUP BY T2.movie_title ORDER BY COUNT(T2.movie_title) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the average score for the movie Versailles Rive-Gauche?",
+        "query": "SELECT AVG(T1.rating_score) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title LIKE 'Versailles Rive-Gauche'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Which film rated by user 59988436 that received 21 comments?",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T1.user_id = 59988436 AND T1.critic_comments = 21"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Please list the names of the movies that received more than 20 likes?",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T1.critic_likes > 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the average score of the movie \"The Fall of Berlin\" in 2019?",
+        "query": "SELECT SUM(T1.rating_score) / COUNT(T1.rating_id) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T1.rating_timestamp_utc LIKE '2019%' AND T2.movie_title LIKE 'The Fall of Berlin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What percentage of users rated the movie \"Patti Smith: Dream of Life\" by more than 3?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.rating_score > 3 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.rating_score) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title LIKE 'Patti Smith: Dream of Life'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Which of the film directed by director Abbas Kiarostami has the highest average score?",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.director_name = 'Abbas Kiarostami' GROUP BY T2.movie_title ORDER BY SUM(T1.rating_score) / COUNT(T1.rating_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Which year had the most released films?",
+        "query": "SELECT movie_release_year FROM movies GROUP BY movie_release_year ORDER BY COUNT(movie_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Who is the director that made the most movies? Give the director's id.",
+        "query": "SELECT director_id FROM movies GROUP BY director_id ORDER BY COUNT(movie_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many movies did the director of the highest movie popularity make?",
+        "query": "SELECT COUNT(movie_id) FROM movies WHERE director_id = ( SELECT director_id FROM movies ORDER BY movie_popularity DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What's the number of the paying subscribers when rating a movie after the year 2014?",
+        "query": "SELECT COUNT(user_subscriber) FROM ratings_users WHERE user_has_payment_method = 1 AND rating_date_utc > '2014%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Who was the earliest user created a list but didn't get any followers? Give the user ID.",
+        "query": "SELECT user_id FROM lists_users WHERE user_subscriber = 0 ORDER BY list_creation_date_utc LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Give the number of followers for the user who posted the most lists.",
+        "query": "SELECT SUM(T1.list_followers) FROM lists AS T1 INNER JOIN lists_users AS T2 ON T1.list_id = T2.list_id GROUP BY T1.user_id ORDER BY COUNT(T1.list_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many followers did the user who posted the list \"Non-American Films about World War II\" have?",
+        "query": "SELECT SUM(T2.list_followers) FROM lists_users AS T1 INNER JOIN lists AS T2 ON T1.list_id = T2.list_id WHERE T2.list_title LIKE 'Non-American Films about World War II'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What's the number of users gave the movie \"Downfall\" a rating of \"4\"?",
+        "query": "SELECT COUNT(T1.user_id) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'Downfall' AND T1.rating_score = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Give the name of the movie that got the most \"5\" ratings.",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T1.rating_score = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Which movie got the most critic comments? Give the name of the movie.",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id GROUP BY T2.movie_title ORDER BY COUNT(T1.critic_comments) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Show the avatar of the user who gave the rating at 2019/10/17 1:36:36.",
+        "query": "SELECT T2.user_avatar_image_url FROM ratings AS T1 INNER JOIN lists_users AS T2 ON T1.user_id = T2.user_id WHERE T1.rating_timestamp_utc LIKE '2019-10-17 01:36:36'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Show the portrait picture of the user who created the list \"Vladimir Vladimirovich Nabokov\".",
+        "query": "SELECT T1.user_avatar_image_url FROM lists_users AS T1 INNER JOIN lists AS T2 ON T1.list_id = T2.list_id WHERE T2.list_title LIKE 'Vladimir Vladimirovich Nabokov'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "For the user who post the list that contained the most number of the movies, is he/she a paying subscriber when creating that list?",
+        "query": "SELECT T1.user_has_payment_method FROM lists_users AS T1 INNER JOIN lists AS T2 ON T1.list_id = T2.list_id WHERE T2.list_movie_number = ( SELECT MAX(list_movie_number) FROM lists )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Show the head portrait of the user who gave the most \"5\" ratings.",
+        "query": "SELECT T2.user_avatar_image_url FROM ratings AS T1 INNER JOIN lists_users AS T2 ON T1.user_id = T2.user_id WHERE T1.rating_score = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many critics were given to the movie that got the most movie popularity number.",
+        "query": "SELECT COUNT(T1.critic) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_popularity = ( SELECT MAX(movie_popularity) FROM movies )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Who gave a \"4\" rating to the movie \"Freaks\" at 2013/5/4 6:33:32? Give his/her user id.",
+        "query": "SELECT T1.user_id FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE rating_score = 4 AND rating_timestamp_utc LIKE '2013-05-04 06:33:32' AND T2.movie_title LIKE 'Freaks'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Give the url of movie which was rated 5 on 2013/5/3 5:11:17.",
+        "query": "SELECT T2.movie_url FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE rating_score = 5 AND rating_timestamp_utc LIKE '2013-05-03 05:11:17'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "For the 1998 movie which got the highest popularity, how many \"4\" rating did the movie get?",
+        "query": "SELECT COUNT(T2.movie_title) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T1.rating_score = 4 AND T2.movie_release_year = 1998 ORDER BY T2.movie_popularity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "From all the movies that got more than 13000 popularity number, which one had the least ratings.",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_popularity > 13000 ORDER BY T1.rating_score LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many paying subscribers gave a rating to the movie \"One Flew Over the Cuckoo's Nest\"?",
+        "query": "SELECT COUNT(T1.user_id) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id INNER JOIN ratings_users AS T3 ON T1.user_id = T3.user_id WHERE T2.movie_title = 'One Flew Over the Cuckoo''s Nest' AND T3.user_has_payment_method = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "For the lists that got more than 3000 followers, how many did the users who created those lists are paying subscribers?",
+        "query": "SELECT COUNT(T1.user_id) FROM lists_users AS T1 INNER JOIN lists AS T2 ON T1.list_id = T2.list_id WHERE T2.list_followers > 3000 AND T1.user_has_payment_method = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Which 1988 movie got the most ratings?",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_release_year = 1988 ORDER BY T1.rating_score DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "For all the movies that were released in 1995, how many lower than 3 ratings did the most popularity movie had?",
+        "query": "SELECT COUNT(T1.rating_score) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T1.rating_score < 3 AND T2.movie_release_year = 1995 AND T2.movie_popularity = ( SELECT MAX(movie_popularity) FROM movies WHERE movie_release_year = 1995 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the percentage of users gave \"5\" to the movie \"Go Go Tales\"?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.rating_score = 5 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.user_id) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'Go Go Tales'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Give the percentage of subscribers who rated who rated the movie \"G.I. Jane\".",
+        "query": "SELECT CAST(SUM(CASE WHEN T3.user_subscriber = 1 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id INNER JOIN lists_users AS T3 ON T1.user_id = T3.user_id WHERE T2.movie_title = 'G.I. Jane'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "For all the users who gave \"A Shot in the Dark\" a rating, how many percent of them is a paying subscriber?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.user_has_payment_method = 1 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id INNER JOIN lists_users AS T3 ON T1.user_id = T3.user_id WHERE T2.movie_title = 'A Shot in the Dark'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Name all the list titles created by user 4208563.",
+        "query": "SELECT list_title FROM lists WHERE user_id LIKE 4208563"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Among the lists created in 2016, which is the list that was updated most recently.",
+        "query": "SELECT list_title FROM lists WHERE strftime('%Y', list_update_timestamp_utc) = '2016' ORDER BY list_update_timestamp_utc DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the percentage of list created by user who was a subscriber when he created the list?",
+        "query": "SELECT CAST(SUM(CASE WHEN user_subscriber = 1 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(list_id) FROM lists_users"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Name all lists created by a user who was a subcriber when created the list.",
+        "query": "SELECT DISTINCT T2.list_id FROM lists_users AS T1 INNER JOIN lists AS T2 ON T1.list_id = T2.list_id WHERE T1.user_subscriber = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Provide list titles created by user who are eligible for trial when he created the list.",
+        "query": "SELECT DISTINCT T2.list_title FROM lists_users AS T1 INNER JOIN lists AS T2 ON T1.list_id = T2.list_id WHERE T1.user_eligible_for_trial = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Among the lists with at least one follower, how many were created by user who was subscriber when created the list?",
+        "query": "SELECT COUNT(T1.list_id) FROM lists_users AS T1 INNER JOIN lists AS T2 ON T1.list_id = T2.list_id WHERE T2.list_followers >= 1 AND T1.user_subscriber = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "For all list titles with at least 200 movies in the list, what is their average number of followers?",
+        "query": "SELECT AVG(list_followers) FROM lists WHERE list_movie_number > 200"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "List all the titles created by user who was a subsriber when he created the list and have less than 50 movies in the list.",
+        "query": "SELECT DISTINCT T2.list_title FROM lists_users AS T1 INNER JOIN lists AS T2 ON T1.list_id = T2.list_id WHERE T2.list_movie_number < 50 AND T1.user_subscriber = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Which title list has not been updated for the longest period of time? State how long it has not been updated?",
+        "query": "SELECT list_title , datetime(CURRENT_TIMESTAMP, 'localtime') - datetime(list_update_timestamp_utc) FROM lists ORDER BY list_update_timestamp_utc LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Who is the user who created the list titled 'Sound and Vision'? Was he a subcriber when he created the list?",
+        "query": "SELECT T1.user_id, T1.user_subscriber FROM lists_users AS T1 INNER JOIN lists AS T2 ON T1.list_id = T2.list_id WHERE T2.list_title LIKE 'Sound and Vision'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "For the list with more than 200 followers, state the title and how long the list has been created?",
+        "query": "SELECT list_title , 365 * (strftime('%Y', 'now') - strftime('%Y', list_creation_timestamp_utc)) + 30 * (strftime('%m', 'now') - strftime('%m', list_creation_timestamp_utc)) + strftime('%d', 'now') - strftime('%d', list_creation_timestamp_utc) FROM lists WHERE list_followers > 200"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Among all movies in the list, calculate the percentage of movies that were never been rated?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.movie_id IS NULL THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.movie_id) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "List all movies rated by user 39115684. State the title, rating date and rating score.",
+        "query": "SELECT T2.movie_title, T1.rating_timestamp_utc, T1.rating_score FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T1.user_id = 39115684"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Between 1970 to 1980, how many movies with a popularity of more than 11,000 were released?",
+        "query": "SELECT COUNT(movie_id) FROM movies WHERE movie_release_year BETWEEN '1970' AND '1980' AND movie_popularity > 11000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "How many movies directed by Felipe Cazals was realeased on 1976?",
+        "query": "SELECT COUNT(movie_id) FROM movies WHERE movie_release_year = 1976 AND director_name LIKE 'Felipe Cazals'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the URL to the movie director page on Mubi of the movie titled \"Red Blooded American Girl\"",
+        "query": "SELECT director_url FROM movies WHERE movie_title LIKE 'Red Blooded American Girl'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the name of the list that was updated most recently?",
+        "query": "SELECT list_title FROM lists WHERE list_update_timestamp_utc = ( SELECT list_update_timestamp_utc FROM lists ORDER BY list_update_timestamp_utc DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Who created the list that has 142 comments? Indicate the user id of the user, if there are multiple lists with 142 comments, list the user id of the person who created the list",
+        "query": "SELECT user_id FROM lists WHERE list_comments = 142"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is Jeannot Szwarc's most popular movie and what is its average rating score?",
+        "query": "SELECT T2.movie_title, AVG(T1.rating_score) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.director_name = 'Jeannot Szwarc' ORDER BY T2.movie_popularity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Who is the director that directed the highest number of movies in the 70s? If there are multiple directors with the same amount of movies, list all of their names and indicate the highest rating score that those movies got from the users.",
+        "query": "SELECT T2.director_name, T1.rating_score FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_release_year BETWEEN 1970 AND 1979 GROUP BY T2.director_id ORDER BY COUNT(T2.movie_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Between 1/1/2010 to 12/31/2020, how many users, who were a trialist when they created the list, gave the movie \"The Secret Life of Words\" a rating score of 3?",
+        "query": "SELECT COUNT(T1.user_id) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T2.movie_title = 'The Secret Life of Words' AND T1.rating_score = 3 AND T1.user_trialist = 0 AND T1.rating_timestamp_utc BETWEEN '2010%' AND '2020%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the name of the movie whose critic received the highest amount of likes? Indicate the URL to the rating on Mubi.",
+        "query": "SELECT T2.movie_title, T1.rating_url FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id ORDER BY T1.critic_likes DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What are the top 5 most popular movies of the 21st century? Indicate how many users gave it a rating score of 5.",
+        "query": "SELECT DISTINCT T2.movie_id, SUM(T1.rating_score = 5) FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id ORDER BY T2.movie_popularity DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the average number of followers of the lists created by the user who rated the movie \"Pavee Lackeen: The Traveller Girl\" on 3/27/2011 at 2:06:34 AM?",
+        "query": "SELECT CAST(SUM(T4.list_followers) AS REAL) / COUNT(T2.list_id) FROM ratings AS T1 INNER JOIN lists_users AS T2 ON T1.user_id = T2.user_id INNER JOIN movies AS T3 ON T1.movie_id = T3.movie_id INNER JOIN lists AS T4 ON T2.list_id = T4.list_id WHERE T3.movie_title LIKE 'Pavee Lackeen: The Traveller Girl' AND T1.rating_timestamp_utc LIKE '2011-03-27 02:06:34'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Between 1/1/2017 to 12/31/2017, how many users who were eligible for trial when they rated the movie \"Patti Smith: Dream of Life\"and what is the image URL to the movie on Mubi?",
+        "query": "SELECT COUNT(T1.user_id), T2.movie_image_url FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE datetime(T1.rating_timestamp_utc) BETWEEN '2017-01-01 00:00:00' AND '2017-12-31 00:00:00'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the average number of number of movies added to the lists of user 8516503? Indicate how many movies did he/she give a rating score of 5.",
+        "query": "SELECT AVG(T3.list_movie_number) , SUM(CASE WHEN T1.rating_score = 5 THEN 1 ELSE 0 END) FROM ratings AS T1 INNER JOIN lists_users AS T2 ON T1.user_id = T2.user_id INNER JOIN lists AS T3 ON T2.user_id = T3.user_id WHERE T1.user_id = 8516503"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "Who is the director of the most popular movie of all time and when was it released? Indicate the average rating score of the users who were on a trialist when they rated the movie.",
+        "query": "SELECT T1.director_name, T1.movie_release_year , SUM(T2.rating_score) / COUNT(T2.user_id) FROM movies AS T1 INNER JOIN ratings AS T2 ON T1.movie_id = T2.movie_id WHERE T2.user_trialist = 1 ORDER BY T1.movie_popularity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What is the name of the movie that was rated recently by user 57756708?",
+        "query": "SELECT T2.movie_title FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id WHERE T1.user_id = 57756708 ORDER BY T1.rating_timestamp_utc DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie_platform",
+        "question": "What are the top 10 oldest movies and what are the average rating score for each movie? Indicate the name of the director and when the movies were released.",
+        "query": "SELECT T2.movie_id, AVG(T1.rating_score), T2.director_name, T2.movie_release_year FROM ratings AS T1 INNER JOIN movies AS T2 ON T1.movie_id = T2.movie_id ORDER BY T1.rating_timestamp_utc ASC LIMIT 10"
+    }
+]

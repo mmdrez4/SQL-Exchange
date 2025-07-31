@@ -1,0 +1,836 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Please list the full names of all the sanitarians under the supervision of Darlisha Jacobs.",
+        "query": "SELECT first_name, last_name FROM employee WHERE title = 'Sanitarian' AND supervisor = ( SELECT employee_id FROM employee WHERE first_name = 'Darlisha' AND last_name = 'Jacobs' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Please list the full names of the sanitarians who did at least one inspection in May, 2010.",
+        "query": "SELECT DISTINCT T1.first_name, T1.last_name FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE strftime('%Y-%m', T2.inspection_date) = '2010-05' AND T1.title = 'Sanitarian'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many inspections were sanitarian Joshua Rosa responsible for in 2010?",
+        "query": "SELECT COUNT(T2.inspection_id) FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE strftime('%Y', T2.inspection_date) = '2010' AND T1.first_name = 'Joshua' AND T1.last_name = 'Rosa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Please list the assumed name of all the facilities inspected by Joshua Rosa.",
+        "query": "SELECT DISTINCT T3.dba_name FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id INNER JOIN establishment AS T3 ON T2.license_no = T3.license_no WHERE T1.first_name = 'Joshua' AND T1.last_name = 'Rosa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Among the facilities that have undergone at least one inspection in 2010, how many of them are restaurants or cafeterias?",
+        "query": "SELECT COUNT(DISTINCT T1.license_no) FROM inspection AS T1 INNER JOIN establishment AS T2 ON T1.license_no = T2.license_no WHERE strftime('%Y', T1.inspection_date) = '2010' AND T2.facility_type = 'Restaurant'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Please list the location coordinates of all the facilities that had an inspection on 2010/5/11.",
+        "query": "SELECT DISTINCT T2.latitude, T2.longitude FROM inspection AS T1 INNER JOIN establishment AS T2 ON T1.license_no = T2.license_no WHERE T1.inspection_date = '2010-05-11'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Among the facilities that have undergone at least one inspection in 2010, how many of them are in ward no.42?",
+        "query": "SELECT COUNT(DISTINCT T1.license_no) FROM inspection AS T1 INNER JOIN establishment AS T2 ON T1.license_no = T2.license_no WHERE strftime('%Y', T1.inspection_date) = '2010' AND T2.ward = 42"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Please list the full names of all the sanitarians who have inspected the facility Burbank.",
+        "query": "SELECT DISTINCT T1.first_name, T1.last_name FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id INNER JOIN establishment AS T3 ON T2.license_no = T3.license_no WHERE T3.dba_name = 'Burbank' AND T1.title = 'Sanitarian'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Please list the assumed name of all the facilities that failed an inspection in 2010.",
+        "query": "SELECT DISTINCT T2.dba_name FROM inspection AS T1 INNER JOIN establishment AS T2 ON T1.license_no = T2.license_no WHERE T1.results = 'Fail' AND strftime('%Y', T1.inspection_date) = '2010'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the full name of the sanitarian who inspected Amundsen High School on 2010/5/11?",
+        "query": "SELECT T1.first_name, T1.last_name FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id INNER JOIN establishment AS T3 ON T2.license_no = T3.license_no WHERE T2.inspection_date = '2010-05-11' AND T3.dba_name = 'AMUNDSEN HIGH SCHOOL' AND T1.title = 'Sanitarian'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Among the inspections done by sanitarian Joshua Rosa, how many of them have the result of \"pass\"?",
+        "query": "SELECT COUNT(T2.inspection_id) FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T2.results = 'Pass' AND T1.first_name = 'Joshua' AND T1.last_name = 'Rosa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "After Azha Restaurant Inc. passed the inspection on 2010/1/21, when was the follow-up inspection done?",
+        "query": "SELECT T1.followup_to FROM inspection AS T1 INNER JOIN establishment AS T2 ON T1.license_no = T2.license_no WHERE T2.dba_name = 'Azha Restaurant Inc.' AND T1.results = 'Pass' AND T1.inspection_date = '2010-01-21'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Among the facilities that had undergone at least one inspection in 2010, how many of them have the most serious food safety issues?",
+        "query": "SELECT COUNT(DISTINCT T2.license_no) FROM inspection AS T1 INNER JOIN establishment AS T2 ON T1.license_no = T2.license_no WHERE strftime('%Y', T1.inspection_date) = '2010' AND T2.risk_level = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the average number of inspections carried out in the year 2010 by a sanitarian whose salary is over 70000?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.inspection_date LIKE '2010%' THEN 1 ELSE 0 END) AS REAL) / SUM(CASE WHEN T1.salary > 70000 THEN 1 ELSE 0 END) FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the point level of \"Refrigeration and metal stem thermometers provided and conspicuous\"?",
+        "query": "SELECT point_level FROM inspection_point WHERE Description = 'Refrigeration and metal stem thermometers provided and conspicuous '"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Which employee was responsible for inspection no.48224? Give the full name.",
+        "query": "SELECT T2.first_name, T2.last_name FROM inspection AS T1 INNER JOIN employee AS T2 ON T1.employee_id = T2.employee_id WHERE T1.inspection_id = 48224"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many inspections did All Style Buffet Restaurant have?",
+        "query": "SELECT COUNT(T2.inspection_id) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.facility_type = 'Restaurant' AND T1.dba_name = 'All Style Buffet'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "When did Wing Hung Chop Suey Restaurant have its first inspection?",
+        "query": "SELECT MIN(T2.inspection_date) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.aka_name = 'WING HUNG CHOP SUEY RESTAURANT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many restaurants were inspected on 2015/5/8?",
+        "query": "SELECT COUNT(T2.license_no) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T2.inspection_date = '2015-05-08' AND T1.facility_type = 'Restaurant'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many \"food maintenance\" related violations did inspection no.1454071 have?",
+        "query": "SELECT COUNT(T2.point_id) FROM inspection_point AS T1 INNER JOIN violation AS T2 ON T1.point_id = T2.point_id WHERE T2.inspection_id = '1454071' AND T1.category = 'Food Maintenance'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "State the number of violations did Royal Thai Cuisine has during the 2015/5/8 inspection.",
+        "query": "SELECT COUNT(T3.point_id) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN violation AS T3 ON T2.inspection_id = T3.inspection_id WHERE T2.inspection_date = '2015-05-08' AND T1.dba_name = 'ROYAL THAI CUISINE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "For the grocery store located at \"3635 W DIVERSEY AVE\", how many inspections did it have?",
+        "query": "SELECT COUNT(T2.inspection_id) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.address = '3635 W DIVERSEY AVE ' AND T1.facility_type = 'Grocery Store'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Who is responsible for most of the inspections? Give the full name.",
+        "query": "SELECT T.first_name, T.last_name FROM ( SELECT T2.employee_id, T2.first_name, T2.last_name, COUNT(T1.inspection_id) FROM inspection AS T1 INNER JOIN employee AS T2 ON T1.employee_id = T2.employee_id GROUP BY T2.employee_id, T2.first_name, T2.last_name ORDER BY COUNT(T1.inspection_id) DESC LIMIT 1 ) AS T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many inspections done by Lisa Tillman ended up with the result of \"Out of Business\"?",
+        "query": "SELECT COUNT(T1.inspection_id) FROM inspection AS T1 INNER JOIN employee AS T2 ON T1.employee_id = T2.employee_id WHERE T2.first_name = 'Lisa' AND T2.last_name = 'Tillman' AND T1.results = 'Out of Business'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "For the sanitarian who lives on 5000 N Wolcott Ave, how many establishments did he/she inspect in the May of 2011?",
+        "query": "SELECT COUNT(T1.inspection_id) FROM inspection AS T1 INNER JOIN employee AS T2 ON T1.employee_id = T2.employee_id WHERE T2.address = '5000 N Wolcott Ave' AND T2.title = 'Sanitarian' AND strftime('%Y-%m', T1.inspection_date) = '2011-05'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Show the phone number of the sanitarian who was responsible for inspection no.634597.",
+        "query": "SELECT T2.phone FROM inspection AS T1 INNER JOIN employee AS T2 ON T1.employee_id = T2.employee_id WHERE T1.inspection_id = 634597 AND T2.title = 'Sanitarian'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "State the salary of the employee who did the most inspections.",
+        "query": "SELECT T1.salary FROM employee AS T1 INNER JOIN ( SELECT T.employee_id, COUNT(T.inspection_id) FROM inspection AS T GROUP BY T.employee_id ORDER BY COUNT(T.inspection_id) DESC LIMIT 1 ) AS T2 ON T1.employee_id = T2.employee_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the average number of inspections did risk level 3 taverns have?",
+        "query": "SELECT CAST(COUNT(T2.inspection_id) AS REAL) / COUNT(DISTINCT T1.license_no) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.risk_level = 3 AND T1.facility_type = 'TAVERN'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "State the inspection pass rate of Pockets Restaurant.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.results = 'Pass' THEN T2.inspection_id ELSE NULL END) AS REAL) * 100 / COUNT(T2.inspection_id) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.dba_name = 'POCKETS' AND T1.facility_type = 'Restaurant'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many sanitarian employees in Chicago are from the zip code 60617?",
+        "query": "SELECT COUNT(employee_id) FROM employee WHERE zip = '60617'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the assumed name of the business located at 2903 W Irving Park Rd?",
+        "query": "SELECT DISTINCT dba_name FROM establishment WHERE address = '2903 W IRVING PARK RD '"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the full name of the employee with the lowest salary?",
+        "query": "SELECT first_name, last_name FROM employee ORDER BY salary ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many establishments that are doing business as Homemade Pizza have a risk level of 2?",
+        "query": "SELECT COUNT(license_no) FROM establishment WHERE risk_level = 2 AND dba_name = 'HOMEMADE PIZZA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many inspections with critical food safety problems are under inspection point id 3?",
+        "query": "SELECT COUNT(inspection_id) FROM violation WHERE point_id = 3 AND fine = 500"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many employees are under Gregory Cardenas?",
+        "query": "SELECT COUNT(T1.employee_id) FROM employee AS T1 WHERE T1.supervisor = ( SELECT employee_id FROM employee WHERE first_name = 'Gregory' AND last_name = 'Cardenas' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "When did Renaldi's Pizza had its first inspection?",
+        "query": "SELECT MIN(T2.inspection_date) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.dba_name = 'RENALDI''S PIZZA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the full name of the employee who was responsible for the most inspection in March 2016?",
+        "query": "SELECT T3.first_name, T3.last_name FROM ( SELECT T1.employee_id, COUNT(T1.inspection_id) FROM inspection AS T1 WHERE strftime('%Y-%m', T1.inspection_date) = '2016-03' GROUP BY T1.employee_id ORDER BY COUNT(T1.inspection_id) DESC LIMIT 1 ) AS T2 INNER JOIN employee AS T3 ON T2.employee_id = T3.employee_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What are the names of the businesses that passed with conditions in May 2012?",
+        "query": "SELECT DISTINCT T2.dba_name FROM inspection AS T1 INNER JOIN establishment AS T2 ON T1.license_no = T2.license_no WHERE strftime('%Y-%m', T1.inspection_date) = '2012-05' AND T1.results = 'Pass w/ Conditions'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Out of all the short form complaint inspections done by David Hodges, how many businesses passed?",
+        "query": "SELECT COUNT(DISTINCT T2.license_no) FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T1.first_name = 'David' AND T1.last_name = 'Hodges' AND T1.employee_id = 153225 AND T2.inspection_type = 'Short Form Complaint' AND T2.results = 'Pass'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many businesses from ward 42 have at least 5 failed inspection results between 1/1/2010 to 12/31/2015?",
+        "query": "SELECT COUNT(DISTINCT T1.license_no) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T2.inspection_date BETWEEN '2010-01-01' AND '2015-12-31' AND T1.ward = 42 AND T1.license_no IN ( SELECT license_no FROM ( SELECT license_no FROM inspection WHERE results = 'Fail' GROUP BY license_no HAVING COUNT(results) >= 5 ) )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How much is the salary of the employee who has the highest number of inspections done of all time?",
+        "query": "SELECT T1.salary FROM employee AS T1 INNER JOIN ( SELECT employee_id, COUNT(inspection_id) FROM inspection GROUP BY employee_id ORDER BY COUNT(inspection_id) DESC LIMIT 1 ) AS T2 ON T1.employee_id = T2.employee_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the assumed name of the business that has the highest total fine in 2014?",
+        "query": "SELECT T.dba_name FROM ( SELECT T1.dba_name, SUM(T3.fine) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN violation AS T3 ON T2.inspection_id = T3.inspection_id WHERE strftime('%Y', T2.inspection_date) = '2014' GROUP BY T1.dba_name ORDER BY SUM(T3.fine) DESC LIMIT 1 ) AS T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the precise location of the establishment with the highest number of failed inspections?",
+        "query": "SELECT T1.latitude, T1.longitude FROM establishment AS T1 INNER JOIN ( SELECT license_no FROM inspection WHERE results = 'Fail' GROUP BY license_no ORDER BY COUNT(results) DESC LIMIT 1 ) AS T2 ON T1.license_no = T2.license_no"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What are the comments of the inspector during the inspection of Taqueria La Fiesta on 1/25/2010?",
+        "query": "SELECT T3.inspector_comment FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN violation AS T3 ON T2.inspection_id = T3.inspection_id WHERE T2.inspection_date = '2010-01-25' AND T1.dba_name = 'TAQUERIA LA FIESTA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How much is the total fine given to Ron of Japan Inc in its inspection done on February 2014?",
+        "query": "SELECT SUM(T3.fine) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN violation AS T3 ON T2.inspection_id = T3.inspection_id WHERE strftime('%Y-%m', T2.inspection_date) = '2014-02' AND T1.dba_name = 'RON OF JAPAN INC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "List the full names of the employees who were responsible for inspecting Taqueria La Paz.",
+        "query": "SELECT DISTINCT T3.first_name, T3.last_name FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN employee AS T3 ON T2.employee_id = T3.employee_id WHERE T1.dba_name = 'TAQUERIA LA PAZ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the full name of the employee who gave the highest amount of fine of all time?",
+        "query": "SELECT T.first_name, T.last_name FROM ( SELECT T1.first_name, T1.last_name, SUM(T3.fine) FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id INNER JOIN violation AS T3 ON T2.inspection_id = T3.inspection_id GROUP BY T1.first_name, T1.last_name ORDER BY SUM(T3.fine) DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the average number of inspections done by the top 5 employees with the highest salary? List the names of the said employees.",
+        "query": "SELECT CAST(COUNT(DISTINCT T2.inspection_id) AS REAL) / 5, T1.first_name, T1.last_name FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T1.title = 'Sanitarian' ORDER BY T1.salary DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Which business had the highest number of inspections done? Calculate the percentage of passed and failed inspections of the said business.",
+        "query": "SELECT T2.dba_name , CAST(SUM(CASE WHEN T1.results = 'Pass' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.inspection_id) AS percentagePassed , CAST(SUM(CASE WHEN T1.results = 'Fail' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.inspection_id) FROM inspection AS T1 INNER JOIN establishment AS T2 ON T1.license_no = T2.license_no GROUP BY T2.dba_name ORDER BY COUNT(T1.license_no) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the employee's last name at 7211 S Hermitage Ave, Chicago, IL?",
+        "query": "SELECT last_name FROM employee WHERE address = '7211 S Hermitage Ave' AND city = 'Chicago' AND state = 'IL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the establishment's name and employee involved in the inspection ID 44256 on May 5, 2010?",
+        "query": "SELECT T1.dba_name, T3.first_name, T3.last_name FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN employee AS T3 ON T2.employee_id = T3.employee_id WHERE T2.inspection_date = '2010-05-05' AND T2.inspection_id = 44256"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Give the address of the schools that passed the inspection in March 2010.",
+        "query": "SELECT DISTINCT T1.address FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE strftime('%Y-%m', T2.inspection_date) = '2010-03' AND T2.results = 'Pass' AND T1.facility_type = 'School'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the employee's full name involved in the canvass inspection type on March 09, 2010?",
+        "query": "SELECT DISTINCT T1.first_name, T1.last_name FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T2.inspection_date = '2010-03-09' AND T2.inspection_type = 'Canvass'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Provide the inspection ID of the establishment named \"PIZZA RUSTICA, INC.\"",
+        "query": "SELECT DISTINCT T2.inspection_id FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.dba_name = 'PIZZA RUSTICA, INC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many restaurants with the highest risk level still passed the inspection?",
+        "query": "SELECT COUNT(DISTINCT T1.license_no) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.risk_level = 3 AND T2.results = 'Pass' AND T1.facility_type = 'Restaurant'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "List the names of employees involved in an inspection with the Display of Inspection Report Summary category.",
+        "query": "SELECT DISTINCT T1.first_name, T1.last_name FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id INNER JOIN violation AS T3 ON T2.inspection_id = T3.inspection_id INNER JOIN inspection_point AS T4 ON T3.point_id = T4.point_id WHERE T4.category = 'Display of Inspection Report Summary'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the title of the employee involved in inspection ID 60332?",
+        "query": "SELECT T1.title FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T2.inspection_id = 60332"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many of the restaurants with the lowest risk level failed the complaint inspection type?",
+        "query": "SELECT COUNT(DISTINCT T1.license_no) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.risk_level = '1' AND T2.inspection_type = 'Complaint' AND T1.facility_type = 'Restaurant' AND T2.results = 'Fail'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Provide the fine paid and the complete address of the establishment with inspection ID 48216.",
+        "query": "SELECT DISTINCT T3.fine, T1.state, T1.city, T1.address FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN violation AS T3 ON T2.inspection_id = T3.inspection_id WHERE T2.inspection_id = 48216"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the inspection ID of the inspection with critical point level, $500 fine, and inspector comment \"CDI ON 5-17-10\"?",
+        "query": "SELECT T2.inspection_id FROM inspection_point AS T1 INNER JOIN violation AS T2 ON T1.point_id = T2.point_id WHERE T2.fine = 500 AND T1.point_level = 'Critical' AND T2.inspector_comment = 'CDI ON 5-17-10'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What are the inspection description and inspector's comments in the inspection ID 164795?",
+        "query": "SELECT T1.Description, T2.inspector_comment FROM inspection_point AS T1 INNER JOIN violation AS T2 ON T1.point_id = T2.point_id WHERE T2.inspection_id = 44247"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What are the inspector's comments and clean operating requirement code for inspection ID 54216 and point ID 34?",
+        "query": "SELECT T2.inspector_comment, T1.code FROM inspection_point AS T1 INNER JOIN violation AS T2 ON T1.point_id = T2.point_id WHERE T2.inspection_id = 54216 AND T2.point_id = 34"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Among the establishments that failed in the inspection, what is the percentage of establishments with the highest risk level?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.risk_level = 3 THEN T1.license_no END) AS REAL) * 100 / COUNT(T1.risk_level) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T2.results = 'Fail'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Among the employees that receive a salary between $75000 to $85000, what is the difference between the number of employees which undergone an inspection that fined 100 and 500?",
+        "query": "SELECT SUM(CASE WHEN T3.fine = 100 THEN 1 ELSE 0 END) - SUM(CASE WHEN T3.fine = 500 THEN 1 ELSE 0 END) FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id INNER JOIN violation AS T3 ON T2.inspection_id = T3.inspection_id WHERE T1.salary BETWEEN 75000 AND 80000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many inspections were done in January 2011?",
+        "query": "SELECT COUNT(inspection_id) FROM inspection WHERE strftime('%Y-%m', inspection_date) = '2011-01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many inspections failed in 2014?",
+        "query": "SELECT COUNT(inspection_id) FROM inspection WHERE strftime('%Y', inspection_date) = '2014' AND results = 'Fail'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Calculate the percentage of inspections with the fine for a minor food safety problem.",
+        "query": "SELECT CAST(COUNT(CASE WHEN fine = 100 THEN inspection_id END) AS REAL) * 100 / COUNT(inspection_id) FROM violation"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "List the point IDs and fines of the inspections done on 7th August 2010.",
+        "query": "SELECT T2.point_id, T2.fine FROM inspection AS T1 INNER JOIN violation AS T2 ON T1.inspection_id = T2.inspection_id WHERE T1.inspection_date = '2010-08-07'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many inspections were done under the personnel category?",
+        "query": "SELECT COUNT(T1.inspection_id) FROM violation AS T1 INNER JOIN inspection_point AS T2 ON T1.point_id = T2.point_id WHERE T2.category = 'Personnel'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Provide the names and inspection results of the facilities located in Burnham.",
+        "query": "SELECT DISTINCT T1.dba_name, T2.results FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.city = 'BURNHAM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Compare the number of inspections under toxic items and no-smoking regulations.",
+        "query": "SELECT COUNT(CASE WHEN T2.category = 'Toxic Items' THEN T1.inspection_id END) AS Tox_nums , COUNT(CASE WHEN T2.category = 'No Smoking Regulations' THEN T1.inspection_id END) AS NosmoNums FROM violation AS T1 INNER JOIN inspection_point AS T2 ON T1.point_id = T2.point_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Which facilities were inspected by Sarah Lindsey on 20th November 2012?",
+        "query": "SELECT DISTINCT T1.dba_name FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN employee AS T3 ON T2.employee_id = T3.employee_id WHERE T2.inspection_date = '2012-11-20' AND T3.first_name = 'Sarah' AND T3.last_name = 'Lindsey'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Provide the categories and fines for the inspections done by Lisa Tillman in January 2014.",
+        "query": "SELECT DISTINCT T4.category, T3.fine FROM inspection AS T1 INNER JOIN employee AS T2 ON T1.employee_id = T2.employee_id INNER JOIN violation AS T3 ON T1.inspection_id = T3.inspection_id INNER JOIN inspection_point AS T4 ON T3.point_id = T4.point_id WHERE T2.first_name = 'Lisa' AND T2.last_name = 'Tillman' AND strftime('%Y-%m', T1.inspection_date) = '2014-01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many inspections were done under the display of inspection report summary category?",
+        "query": "SELECT COUNT(T2.inspection_id) FROM inspection_point AS T1 INNER JOIN violation AS T2 ON T1.point_id = T2.point_id WHERE T1.category = 'Display of Inspection Report Summary'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "List the types and results of the inspections done on Riverwalk caf\u00e9.",
+        "query": "SELECT T2.inspection_type, T2.results FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.facility_type = 'RIVERWALK CAFE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Who inspected Jean Samocki and what was the result?",
+        "query": "SELECT T3.first_name, T3.last_name, T2.results FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN employee AS T3 ON T2.employee_id = T3.employee_id WHERE T1.dba_name = 'JEAN SAMOCKI'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How much did Hacienda Los Torres from ward 36 fine for failing an inspection?",
+        "query": "SELECT SUM(T3.fine) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN violation AS T3 ON T2.inspection_id = T3.inspection_id WHERE T1.dba_name = 'HACIENDA LOS TORRES' AND T1.ward = 36 AND T2.results = 'Fail'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Calculate the total amount of fine under the food equipment and utensil category.",
+        "query": "SELECT SUM(T2.fine) FROM inspection_point AS T1 INNER JOIN violation AS T2 ON T1.point_id = T2.point_id WHERE T1.category = 'Food Equipment and Utensil'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Provide the names and locations of the facilities that failed inspections on 29th July 2013.",
+        "query": "SELECT T2.dba_name, T2.longitude, T2.latitude FROM inspection AS T1 INNER JOIN establishment AS T2 ON T1.license_no = T2.license_no WHERE T1.inspection_date = '2013-07-29' AND T1.results = 'Fail'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Calculate the percentage of inspections with verified quality. Among them, how many businesses were from Chicago?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.results LIKE '%Pass%' THEN T2.inspection_id END) AS REAL) * 100 / COUNT(T2.inspection_id), COUNT(DISTINCT T2.license_no) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.city = 'CHICAGO'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Calculate the average inspections per year done by Jessica Anthony from 2010 to 2017.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.first_name = 'Jessica' AND T1.last_name = 'Anthony' THEN T2.inspection_id ELSE 0 END) AS REAL) / 8 FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE strftime('%Y', T2.inspection_date) BETWEEN '2010' AND '2017'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Provide the first name of employee who did inspection ID 48225?",
+        "query": "SELECT T1.first_name FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T2.inspection_id = 48225"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Tell the address of employee who did inspection ID 52238?",
+        "query": "SELECT T1.address FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T2.inspection_id = 52238"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Write down the last name of employee who did inspection ID 52238?",
+        "query": "SELECT T1.last_name FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T2.inspection_id = 52238"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the inspection result for inspection done by Thomas Langley?",
+        "query": "SELECT DISTINCT T2.results FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T1.first_name = 'Thomas' AND T1.last_name = 'Langley'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "List down the address of employees who did inspection dated 11/5/2010.",
+        "query": "SELECT DISTINCT T1.address FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T2.inspection_date = '2010-11-05'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "List down the phone numbers of employees who did Canvass inspection.",
+        "query": "SELECT DISTINCT T1.phone FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T2.inspection_type = 'Canvass'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the job title of employee who did inspection ID 52269?",
+        "query": "SELECT T1.title FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T2.inspection_id = 52269"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What are the inspection results for Xando Coffee & Bar / Cosi Sandwich Bar?",
+        "query": "SELECT DISTINCT T2.results FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.dba_name = 'XANDO COFFEE & BAR / COSI SANDWICH BAR'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What type of inspection was done at John Schaller?",
+        "query": "SELECT DISTINCT T2.inspection_type FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.dba_name = 'JOHN SCHALLER'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "List down the dba name of restaurants that were inspected due to license.",
+        "query": "SELECT T1.dba_name FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T2.inspection_type = 'License'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many inspections done in 2010 had serious food safety issue?",
+        "query": "SELECT COUNT(T2.inspection_id) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE strftime('%Y', T2.inspection_date) = '2010' AND T1.risk_level = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "State the name of dbas with verified quality.",
+        "query": "SELECT DISTINCT T1.dba_name FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T2.results LIKE '%Pass%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Calculate the total salary for employees who did inspection from ID 52270 to 52272.",
+        "query": "SELECT SUM(T2.salary) FROM inspection AS T1 INNER JOIN employee AS T2 ON T1.employee_id = T2.employee_id WHERE T1.inspection_id BETWEEN 52270 AND 52272"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Calculate the average salary for employees who did inspection on License Re-Inspection.",
+        "query": "SELECT AVG(T2.salary) FROM inspection AS T1 INNER JOIN employee AS T2 ON T1.employee_id = T2.employee_id WHERE T1.inspection_type = 'License Re-Inspection'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Did license number 1222441 pass the inspection and what is the zip code number of it?",
+        "query": "SELECT DISTINCT T2.results, T1.zip FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.license_no = 1222441"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "When did restaurant John Schaller has its first inspection in 2010?",
+        "query": "SELECT MIN(T2.inspection_date) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.dba_name = 'JOHN SCHALLER' AND strftime('%Y', T2.inspection_date) = '2010'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the full name of the employee that inspected establishments with license 1334073?",
+        "query": "SELECT DISTINCT T1.first_name, T1.last_name FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T2.license_no = 1334073"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Which establishments did Joshua Rosa inspect?",
+        "query": "SELECT DISTINCT T3.dba_name FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id INNER JOIN establishment AS T3 ON T2.license_no = T3.license_no WHERE T1.first_name = 'Joshua' AND T1.last_name = 'Rosa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many employees have salary greater than 70000 but fail the inspection?",
+        "query": "SELECT COUNT(DISTINCT T1.employee_id) FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T2.results = 'Fail' AND T1.salary > 70000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Name the food businesses that passed the inspection in 2010.",
+        "query": "SELECT DISTINCT T1.dba_name FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE strftime('%Y', T2.inspection_date) = '2010' AND T2.results = 'Pass' AND T1.facility_type = 'Liquor'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the name of the establishment that Joshua Rosa inspected?",
+        "query": "SELECT DISTINCT T3.dba_name FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id INNER JOIN establishment AS T3 ON T2.license_no = T3.license_no WHERE T1.first_name = 'Joshua' AND T1.last_name = 'Rosa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many taverns failed in July 2010?",
+        "query": "SELECT COUNT(DISTINCT T1.license_no) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE strftime('%Y-%m', T2.inspection_date) = '2010-07' AND T2.results = 'Fail' AND T1.facility_type = 'Restaurant'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the risk level of the establishment that Bob Benson inspected?",
+        "query": "SELECT DISTINCT T3.risk_level FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id INNER JOIN establishment AS T3 ON T2.license_no = T3.license_no WHERE T1.first_name = 'Bob' AND T1.last_name = 'Benson'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Which establishments did Bob Benson inspect in 2010 and what was the results?",
+        "query": "SELECT DISTINCT T3.dba_name, T2.results FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id INNER JOIN establishment AS T3 ON T2.license_no = T3.license_no WHERE T1.first_name = 'Bob' AND T1.last_name = 'Benson' AND strftime('%Y', T2.inspection_date) = '2010'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the title of the employee that inspected the establishment with license number 1576687?",
+        "query": "SELECT DISTINCT T1.title FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T2.license_no = 1576687"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many inspection points with serious point level that have no fine?",
+        "query": "SELECT COUNT(DISTINCT T2.point_id) FROM inspection_point AS T1 INNER JOIN violation AS T2 ON T1.point_id = T2.point_id WHERE T1.point_level = 'Serious ' AND T2.fine = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the percentage of restaurants that paid a fine of 250 among all establishments?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T3.fine = 250 THEN T1.license_no END) AS REAL) * 100 / COUNT(T1.license_no) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN violation AS T3 ON T2.inspection_id = T3.inspection_id WHERE T1.facility_type = 'Restaurant'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the percentage of establishments with a risk level of 1 among all of the establishments that passed the inspection?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.risk_level = 1 THEN T1.license_no END) AS REAL) * 100 / COUNT(T1.license_no) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T2.results = 'Pass'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Where does the employee named \"Standard Murray\" live?",
+        "query": "SELECT address, city, state FROM employee WHERE first_name = 'Standard' AND last_name = 'Murray'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the facility type of the establishment named \"Kinetic Playground\"?",
+        "query": "SELECT facility_type FROM establishment WHERE dba_name = 'Kinetic Playground'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How much salary does Jessica Anthony receive?",
+        "query": "SELECT salary FROM employee WHERE first_name = 'Jessica' AND last_name = 'Anthony'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the restaurant's name at \"41.9532864854\" latitude and \"-87.7673790701422\" longitude?",
+        "query": "SELECT dba_name FROM establishment WHERE latitude = 41.9532864854 AND longitude = -87.7673790701422 AND facility_type = 'Restaurant'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Among the list of employees, what is the total number of supervisors?",
+        "query": "SELECT COUNT(employee_id) FROM employee WHERE title = 'Supervisor'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Where in Chicago does the restaurant named \"Old Timers Rest & Lounge\" located?",
+        "query": "SELECT address FROM establishment WHERE city = 'CHICAGO' AND dba_name = 'OLD TIMERS REST & LOUNGE' AND facility_type = 'Restaurant'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many employees are living in Hoffman Estates, IL?",
+        "query": "SELECT COUNT(employee_id) FROM employee WHERE state = 'IL' AND city = 'Hoffman Estates'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the total number of establishments with the highest risk level?",
+        "query": "SELECT COUNT(license_no) FROM establishment WHERE risk_level = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Who is the employee that receives 82700 as their salary?",
+        "query": "SELECT first_name, last_name FROM employee WHERE salary = 82700"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Provide the last name of the employee involved in the inspection ID 52256.",
+        "query": "SELECT DISTINCT T1.last_name FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T2.inspection_id = 52256"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Please list the names of taverns that paid a $100 fine upon inspection.",
+        "query": "SELECT DISTINCT T1.dba_name FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN violation AS T3 ON T2.inspection_id = T3.inspection_id WHERE T1.facility_type = 'Tavern' AND T3.fine = 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "List point level of inspections with no fine.",
+        "query": "SELECT DISTINCT T1.point_level FROM inspection_point AS T1 INNER JOIN violation AS T2 ON T1.point_id = T2.point_id WHERE T2.fine = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Provide the facility type and license number of establishments with the lowest risk level but failed the inspection.",
+        "query": "SELECT DISTINCT T1.facility_type, T1.license_no FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.risk_level = 1 AND T2.results = 'Fail'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the result of the February 24, 2010 inspection involving the employee named \"Arnold Holder\"?",
+        "query": "SELECT DISTINCT T2.results FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T2.inspection_date = '2010-02-24' AND T1.first_name = 'Arnold' AND T1.last_name = 'Holder'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many restaurants failed the inspection in April 2010?",
+        "query": "SELECT COUNT(DISTINCT T1.license_no) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE strftime('%Y-%m', T2.inspection_date) = '2010-04' AND T1.facility_type = 'Restaurant' AND T2.results = 'Fail'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "List all inspection IDs where the employee named \"Rosemary Kennedy\" was involved.",
+        "query": "SELECT DISTINCT T2.inspection_id FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T1.first_name = 'Rosemary' AND T1.last_name = 'Kennedy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What type of inspection was done on July 07, 2010, involving the employee named \"Lisa Tillman\"?",
+        "query": "SELECT DISTINCT T2.inspection_type FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T1.first_name = 'Lisa' AND T1.last_name = 'Tillman' AND T2.inspection_date = '2010-07-07'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Provide the inspection ID of the inspection with the comment \"MUST CLEAN AND BETTER ORGANIZE HALLWAY AREA\" and sanitary operating requirement code of 7-38-030, 015, 010 (A), 005 (A).",
+        "query": "SELECT T2.inspection_id FROM inspection_point AS T1 INNER JOIN violation AS T2 ON T1.point_id = T2.point_id WHERE T2.inspector_comment = 'MUST CLEAN AND BETTER ORGANIZE HALLWAY AREA' AND T1.code = '7-38-030, 015, 010 (A), 005 (A)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "List down the names of the establishments with the highest risk level and failed the inspection.",
+        "query": "SELECT DISTINCT T1.dba_name FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T1.risk_level = 3 AND T2.results = 'Fail'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the inspection ID where the employee named \"David Hodges\" is currently employed in the \"Kamayan Express\" establishment?",
+        "query": "SELECT T2.inspection_id FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN employee AS T3 ON T2.employee_id = T3.employee_id WHERE T3.first_name = 'David' AND T3.last_name = 'Hodges' AND T1.dba_name = 'KAMAYAN EXPRESS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Provide the salary range of the employee involved in the inspection ID 58424.",
+        "query": "SELECT T1.salary, T3.salary FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id INNER JOIN employee AS T3 WHERE T2.inspection_id = 58424 ORDER BY T1.salary, T3.salary DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "List down the inspection ID with the inspector's comment \"A certified food service manager must be present in all establishments at which potentially hazardous food is prepared or served. NO CERTIFIED FOOD MANAGER ON DUTY AT THIS TIME FOODS ARE COOKED AND SERVED SERIOUS CITATION ISSUED\" and inspection category of Personnel.",
+        "query": "SELECT T2.inspection_id FROM inspection_point AS T1 INNER JOIN violation AS T2 ON T1.point_id = T2.point_id WHERE T1.category = 'Personnel' AND T2.inspector_comment = 'A certified food service manager must be present in all establishments at which potentially hazardous food is prepared or served.FOUND NO CITY OF CHICAGO SANITATION CERTIFICATE POSTED OR VALID DOCUMENTATION DURING THIS INSPECTION.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many grocery stores paid $250 fine upon their inspection?",
+        "query": "SELECT COUNT(DISTINCT T1.license_no) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN violation AS T3 ON T2.inspection_id = T3.inspection_id WHERE T1.facility_type = 'Grocery Store' AND T3.fine = 250"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the category of the inspection of the establishment named \"J & J FOOD\"?",
+        "query": "SELECT DISTINCT T4.category FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN violation AS T3 ON T2.inspection_id = T3.inspection_id INNER JOIN inspection_point AS T4 ON T3.point_id = T4.point_id WHERE T1.dba_name = 'J & J FOOD'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Name the taverns that failed the inspection in January 2010.",
+        "query": "SELECT DISTINCT T1.dba_name FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN violation AS T3 ON T2.inspection_id = T3.inspection_id WHERE strftime('%Y-%m', T2.inspection_date) = '2010-01' AND T2.results = 'Fail' AND T1.facility_type = 'TAVERN'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "How many of the inspections with serious point levels have no fines?",
+        "query": "SELECT COUNT(DISTINCT T2.inspection_id) FROM inspection_point AS T1 INNER JOIN violation AS T2 ON T1.point_id = T2.point_id WHERE T1.point_level = 'Serious ' AND T2.fine = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the establishment's name with an inspection category of No Smoking Regulations?",
+        "query": "SELECT DISTINCT T1.dba_name FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN violation AS T3 ON T2.inspection_id = T3.inspection_id INNER JOIN inspection_point AS T4 ON T3.point_id = T4.point_id WHERE T4.category = 'No Smoking Regulations'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "What is the difference in the number of restaurants that passed and failed the canvass inspection type?",
+        "query": "SELECT COUNT(CASE WHEN T2.results = 'Pass' THEN T1.license_no END) - COUNT(CASE WHEN T2.results = 'Fail' THEN T1.license_no END) AS diff FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no WHERE T2.inspection_type = 'Canvass' AND T1.facility_type = 'Restaurant'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Among the establishments that failed the inspection in February 2010, list the names of the employees with a salary greater than 70% of the average salary of all employees.",
+        "query": "SELECT DISTINCT T1.employee_id FROM employee AS T1 INNER JOIN inspection AS T2 ON T1.employee_id = T2.employee_id WHERE T2.results = 'Fail' AND strftime('%Y-%m', T2.inspection_date) = '2010-02' AND T1.salary > 0.7 * ( SELECT AVG(salary) FROM employee )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "food_inspection_2",
+        "question": "Among the establishments that paid a 500 fine, what is the percentage of restaurants?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.facility_type = 'Restaurant' THEN T1.license_no END) AS REAL) * 100 / COUNT(T1.facility_type) FROM establishment AS T1 INNER JOIN inspection AS T2 ON T1.license_no = T2.license_no INNER JOIN violation AS T3 ON T2.inspection_id = T3.inspection_id WHERE T3.fine = 500"
+    }
+]

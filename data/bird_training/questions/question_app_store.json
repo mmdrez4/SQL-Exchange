@@ -1,0 +1,380 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "How many apps were last updated in January of 2018? Please write one translated review with positive sentiment for each app, if there's any.",
+        "query": "SELECT DISTINCT Translated_Review FROM user_reviews WHERE App IN ( SELECT App FROM playstore WHERE `Last Updated` BETWEEN 'January 1, 2018' AND 'January 31, 2018' ) AND Sentiment = 'Positive'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "How many users mildly likes the 7 Minute Workout app and when was it last updated?",
+        "query": "SELECT COUNT(T2.Sentiment_Polarity), T1.\"Last Updated\" FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.App = '7 Minute Workout' AND T2.Sentiment_Polarity BETWEEN 0 AND 0.5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "How many users holds neutral attitude towards the HTC Weather app? Indicate the app's rating on the Google Play Store.",
+        "query": "SELECT COUNT(T1.Rating), T1.Rating FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.App = 'HTC Weather' AND T2.Sentiment = 'Neutral'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the name and category of the app with the highest amount of -1 sentiment polarity score?",
+        "query": "SELECT DISTINCT T1.App, T1.Category FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T2.Sentiment_Polarity = '-1.0'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the average sentiment polarity score of the Cooking Fever app? Indicate the age group that the app is targeted at.",
+        "query": "SELECT AVG(T2.Sentiment_Polarity), T1.\"Content Rating\" FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.App = 'Cooking Fever'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the lowest sentiment polarity score of the Basketball Stars app for people who dislikes the app pretty much and how many downloads does it have?",
+        "query": "SELECT MIN(T2.Sentiment_Polarity), T1.Installs FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.App = 'Basketball Stars'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "For the Akinator app, how many reviews have sentiment subjectivity of no more than 0.5 and what is its current version?",
+        "query": "SELECT COUNT(T2.Sentiment_Subjectivity), T1.\"Current Ver\" FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.App = 'Akinator' AND T2.Sentiment_Subjectivity < 0.5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "How many apps have rating of 5?",
+        "query": "SELECT COUNT(App) FROM playstore WHERE Rating = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What are the top 5 installed free apps?",
+        "query": "SELECT App FROM playstore WHERE Price = 0 ORDER BY CAST(REPLACE(REPLACE(Installs, ',', ''), '+', '') AS INTEGER) DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "Name the top 10 most reviewed apps.",
+        "query": "SELECT DISTINCT App FROM playstore ORDER BY Reviews DESC LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "How many of the users hold neutral attitude on \"10 Best Foods for You\" app and what category is this app?",
+        "query": "SELECT COUNT(T2.App), T1.Category FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.App = '10 Best Foods for You' AND T2.Sentiment = 'Neutral'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What are the apps that users pretty like this app and how many installs amount of these apps?",
+        "query": "SELECT DISTINCT T1.App, T1.Installs FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T2.Sentiment_Polarity > 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "List apps whose rating is 3.9 and state the translated review of each app.",
+        "query": "SELECT T1.App, T2.Translated_Review FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.Rating = 3.9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "How many apps that are only compatible with Android ver 8.0 and above? List down the users' sentiment of these apps.",
+        "query": "SELECT DISTINCT Sentiment FROM user_reviews WHERE App IN ( SELECT App FROM playstore WHERE `Android Ver` = '8.0 and up' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "Which apps have multiple genres and what is the total sentiment subjectivity of these apps?",
+        "query": "SELECT SUM(T2.Sentiment_Subjectivity) FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.Genres > 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "Which apps have not been updated since year 2015 and what kind of sentiment users hold on it?",
+        "query": "SELECT DISTINCT App, Sentiment FROM user_reviews WHERE App IN ( SELECT App FROM playstore WHERE CAST(SUBSTR('Last Updated', -4, 4) AS INTEGER) < 2015 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the total installs of apps with content rating of adults only 18+ and what are the translated reviews of it?",
+        "query": "SELECT SUM(T1.Installs), T2.Translated_Review FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.\"Content Rating\" = 'Adults only 18+'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "Which of the app is the best selling app and what is the sentiments polarity of it?",
+        "query": "SELECT T1.App, T2.Sentiment_Polarity FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App ORDER BY T1.Price * CAST(REPLACE(REPLACE(Installs, ',', ''), '+', '') AS INTEGER) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the average rating of comic category apps? How many users hold positive attitude towards this app?",
+        "query": "SELECT AVG(T1.Rating) , COUNT(CASE WHEN T2.Sentiment = 'Positive' THEN 1 ELSE NULL END) FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.Category = 'COMICS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the rating for \"Draw A Stickman\"?",
+        "query": "SELECT Rating FROM playstore WHERE APP = 'Draw A Stickman'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "How many of the reviews for the app \"Brit + Co\" have a comment?",
+        "query": "SELECT COUNT(App) FROM user_reviews WHERE App = 'Brit + Co' AND Translated_Review IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "List the top 5 shopping apps with the most reviews.",
+        "query": "SELECT DISTINCT App FROM playstore WHERE Genres = 'Shopping' GROUP BY App ORDER BY COUNT(App) DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "How many neutral reviews does the app \"Dino War: Rise of Beasts\" have?",
+        "query": "SELECT COUNT(App) FROM user_reviews WHERE App = 'Dino War: Rise of Beasts' AND Sentiment = 'Neutral'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What are the apps with only 5,000+ installs?",
+        "query": "SELECT DISTINCT App FROM playstore WHERE Installs = '5,000+'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "List all the negative comments on the \"Dog Run - Pet Dog Simulator\" app.",
+        "query": "SELECT Translated_Review FROM user_reviews WHERE App = 'Dog Run - Pet Dog Simulator' AND Sentiment = 'Negative'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "Which free app has the most Negative comments?",
+        "query": "SELECT T1.App FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.Type = 'Free' AND T2.Sentiment = 'Negative' GROUP BY T1.App ORDER BY COUNT(T2.Sentiment) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "How many negative comments are there in all the apps with 100,000,000+ installs?",
+        "query": "SELECT COUNT(T2.Sentiment) FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.Installs = '100,000,000+' AND T2.Sentiment = 'Negative'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What are the content ratings for the apps that have \"gr8\" in their comments?",
+        "query": "SELECT DISTINCT T1.`Content Rating` FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T2.Translated_Review LIKE '%gr8%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the total Sentiment polarity score of the most expensive app?",
+        "query": "SELECT SUM(T2.Sentiment_Polarity) FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.Price = ( SELECT MAX(Price) FROM playstore )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the rating for \"Garden Coloring Book\"? List all of its reviews.",
+        "query": "SELECT T1.Rating, T2.Translated_Review FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.App = 'Garden Coloring Book'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "Which Photography app has the highest total Sentiment subjectivity score?",
+        "query": "SELECT T1.App FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.Genres = 'Photography' GROUP BY T1.App ORDER BY SUM(T2.Sentiment_Subjectivity) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "List all the comments on the lowest rated Mature 17+ app.",
+        "query": "SELECT T2.Translated_Review FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.\"Content Rating\" = 'Mature 17+' ORDER BY T1.Rating LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the number of installments of the app with the highest total Sentiment polarity score?",
+        "query": "SELECT T1.Installs FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App GROUP BY T1.App ORDER BY SUM(T2.Sentiment_Polarity) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the number of neutral comments from all the weather apps?",
+        "query": "SELECT COUNT(T2.Sentiment) FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.Genres = 'Weather' AND T2.Sentiment = 'Neutral'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "Which 1,000,000,000+ intalls apps has the most no comment reviews?",
+        "query": "SELECT T1.App FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.Installs = '1,000,000+' AND T2.Translated_Review = 'nan' GROUP BY T1.App ORDER BY COUNT(T2.Translated_Review) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the rating and the total Sentiment subjectivity score of \"Onefootball - Soccer Scores\"?",
+        "query": "SELECT T1.Rating, SUM(T2.Sentiment_Subjectivity) FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.App = 'Onefootball - Soccer Scores'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What percentage of no comment reviews are from \"Teen\" content rating apps?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.`Content Rating` = 'Teen' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T1.App) FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T2.Translated_Review = 'nan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "Which apps have 5 rating? List out then application name.",
+        "query": "SELECT DISTINCT App FROM playstore WHERE Rating = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "Which apps have been reviewed more than 75 000 000 times and the content is suitable for teenagers?",
+        "query": "SELECT DISTINCT App FROM playstore WHERE Reviews > 75000000 AND `Content Rating` = 'Teen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "List out genre that have downloads more than 1000000000.",
+        "query": "SELECT Genres FROM playstore WHERE Installs = '1,000,000,000+' GROUP BY Genres"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the average price for a dating application?",
+        "query": "SELECT AVG(Price) FROM playstore WHERE Genres = 'Dating'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the average download for entertainment apps with size no more than 1.0 M?",
+        "query": "SELECT AVG(CAST(REPLACE(REPLACE(Installs, ',', ''), '+', '') AS INTEGER)) FROM playstore WHERE Category = 'ENTERTAINMENT' AND Size < '1.0M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the average review number for application with 5 rating?",
+        "query": "SELECT AVG(Reviews) FROM playstore WHERE Rating = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "List out the top 3 genre for application with a sentiment review greater than 0.5.",
+        "query": "SELECT Genres FROM playstore WHERE App IN ( SELECT App FROM user_reviews WHERE Sentiment = 'Positive' AND Sentiment_Polarity > 0.5 ORDER BY Sentiment_Polarity DESC LIMIT 3 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the percentage of application with 4.7 rating having more positives sentiment than negative sentiment?",
+        "query": "SELECT CAST(COUNT(CASE WHEN ( SELECT COUNT(CASE WHEN Sentiment = 'Positive' THEN 1 ELSE NULL END) - COUNT(CASE WHEN Sentiment = 'Negative' THEN 1 ELSE NULL END) FROM user_reviews GROUP BY App ) > 0 THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T2.Sentiment) FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.Rating = 4.7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "List down app that does not have negative sentiment and give their average rating?",
+        "query": "SELECT T1.App, AVG(T2.Sentiment_Polarity) FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T2.Sentiment != 'Negative' GROUP BY T1.App"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "List down application that have not been updated since 2015. What is the percentage of this application having more negative sentiment than positive sentiment?",
+        "query": "SELECT CAST((( SELECT COUNT(*) Po FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE SUBSTR(T1.\"Last Updated\", -4, 4) > '2015' AND T2.Sentiment = 'Positive' ) - ( SELECT COUNT(*) Ne FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE SUBSTR(T1.\"Last Updated\", -4, 4) > '2015' AND T2.Sentiment = 'Negative' )) AS REAL) * 100 / ( SELECT COUNT(*) NUM FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE SUBSTR(T1.\"Last Updated\", -4, 4) > '2015' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the percentage for free application with a rating 4.5 and above have not been updated since 2018?",
+        "query": "SELECT CAST(SUM(CASE WHEN SUBSTR('Last Updated', -4) > '2018' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(App) PER FROM playstore WHERE Type = 'Free' AND Rating >= 4.5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What genre does Honkai Impact 3rd belong to?",
+        "query": "SELECT DISTINCT Genres FROM playstore WHERE App = 'Honkai Impact 3rd'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "List down the rating for the App Learn C++.",
+        "query": "SELECT DISTINCT Rating FROM playstore WHERE App = 'Learn C++'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the average price of games belonging in the arcade genre which has a content rating of Everyone 10+?",
+        "query": "SELECT AVG(Price) FROM playstore WHERE 'Content Rating' = 'Everyone 10+' AND Genres = 'Arcade'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "How much is the size of Browser 4G and how many users have a pretty positive favorability on it?",
+        "query": "SELECT T1.Size, COUNT(T1.App) FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.App = 'Browser 4G' AND T2.Sentiment_Polarity >= 0.5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "Name the Apps with a sentiment objectivity of 0.3 and include their number of installs.",
+        "query": "SELECT DISTINCT T1.App, T1.Installs FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T2.Sentiment_Polarity = 0.3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "How much is the average sentiment polarity score of Golf GPS Rangefinder: Golf Pad and what is it's rating in the Google Play Store?",
+        "query": "SELECT AVG(T2.Sentiment_Polarity), T1.Rating FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.App = 'Golf GPS Rangefinder: Golf Pad'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "List the top 5 lowest rated puzzle games and count the number of negative sentiments the games received.",
+        "query": "SELECT T1.App, COUNT(T1.App) COUNTNUMBER FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T2.Sentiment = 'Negative' GROUP BY T1.App ORDER BY T1.Rating LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the percentage ratio between positive sentiments and negative sentiments that are in Fate/Grand Order? Also indicate the current version.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.Sentiment = 'Positive' THEN 1 ELSE 0 END) AS REAL) * 100 / SUM(CASE WHEN T2.Sentiment = 'Negative' THEN 1 ELSE 0 END), T1.`Current Ver` FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.App = 'Fate/Grand Order (English)' AND T1.`Current Ver` = '1.18.0'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "Indicate the number of installs and include the percentage of positive sentiments of FREEDOME VPN Unlimited anonymous Wifi Security.",
+        "query": "SELECT T1.Installs , CAST(SUM(CASE WHEN T2.Sentiment = 'Positive' THEN 1 ELSE 0 END) * 100 / SUM(CASE WHEN T2.Sentiment IS NOT NULL THEN 1.0 ELSE 0 END) AS REAL) FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.App = 'FREEDOME VPN Unlimited anonymous Wifi Security'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "For the Honkai Impact 3rd App, what is the highest sentiment polarity score and what genre does it belong to?",
+        "query": "SELECT MAX(T2.Sentiment_Polarity), T1.Genres FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.App = 'Honkai Impact 3rd' AND T2.Sentiment_Polarity > 0.5 GROUP BY T1.Genres"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the rating of Dragon Ball Legends and how many users dislike this App?",
+        "query": "SELECT T1.Rating, COUNT(T2.Sentiment_Polarity) FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.App = 'Dragon Ball Legends' AND CAST(Sentiment_Polarity AS INTEGER) < -0.5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "Which education App has the worst rating and state the translated review if available.",
+        "query": "SELECT T1.App, T2.Translated_Review FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.Category = 'EDUCATION' GROUP BY T1.App, T2.Translated_Review ORDER BY T1.Rating ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "List all free sports Apps and their translated review.",
+        "query": "SELECT T1.App, T2.Translated_Review FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.Type = 'Free' AND T1.Category = 'SPORTS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "Among the role playing game genre, how many are targeted to teens and what is their average sentiment polarity score?",
+        "query": "SELECT COUNT(T1.App), AVG(T2.Sentiment_Polarity) FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.\"Content Rating\" = 'Teen' AND T1.Genres = 'Role Playing'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "app_store",
+        "question": "What is the average rating of Apps falling under the racing genre and what is the percentage ratio of positive sentiment reviews?",
+        "query": "SELECT AVG(T1.Rating), CAST(COUNT(CASE WHEN T2.Sentiment = 'Positive' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T2.Sentiment) FROM playstore AS T1 INNER JOIN user_reviews AS T2 ON T1.App = T2.App WHERE T1.Genres = 'Racing'"
+    }
+]

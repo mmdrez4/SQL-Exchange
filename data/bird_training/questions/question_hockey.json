@@ -1,0 +1,1244 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "List the first Name and last name of all players not from USA and who are born in 1990 .",
+        "query": "SELECT firstName, lastName FROM Master WHERE birthYear = 1990 AND birthCountry != 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "List all players' given name who are good at both left and right hand and playing the forward position.",
+        "query": "SELECT nameGiven FROM Master WHERE shootCatch IS NULL AND pos = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Who are the players who were not in the Hall of Fame list.",
+        "query": "SELECT firstName, lastName FROM Master WHERE hofID IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Who is the youngest player who is still living. State the given name and date of birth.",
+        "query": "SELECT nameGiven , nameGiven , birthYear, birthMon, birthDay FROM Master WHERE deathYear IS NULL ORDER BY birthYear DESC, birthMon DESC, birthday DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For all the deceased players who are good at both left and right hand, list the player's name and the age when he died.",
+        "query": "SELECT firstName, lastName, deathYear - birthYear FROM Master WHERE shootCatch IS NULL AND deathYear IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Name the goalies who played for more than two teams from Year 2000 to 2005.",
+        "query": "SELECT T1.firstName, T1.lastName FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE T2.year >= 2000 AND T2.year <= 2005 GROUP BY T2.playerID HAVING COUNT(DISTINCT T2.tmID) > 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the average weight of players who have height greater than 72 inches.",
+        "query": "SELECT AVG(weight) FROM Master WHERE height > 72"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Name the goalies who have played more than total of 5000 minutes in the all the season played. State given name of the player and from which country was he born.",
+        "query": "SELECT DISTINCT T1.nameGiven, T1.birthCountry FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID GROUP BY T1.nameGiven, T1.birthCountry HAVING SUM(T2.Min) > 5000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Name the goaltenders who had played in both PCHA and NHL league.",
+        "query": "SELECT T1.firstName, T1.lastName FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE T2.lgID IN ('PCHA', 'NHL') GROUP BY T2.playerID HAVING COUNT(DISTINCT T2.lgID) > 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "List all deceased goalies by last name. List the season where he had the most time played.",
+        "query": "SELECT T1.playerID, T2.year, Min FROM Master AS T1 INNER JOIN Goalies AS T2 ON T2.playerID = T1.playerID WHERE T1.deathYear IS NOT NULL ORDER BY T2.Min DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "List all goalies from year 2000 to 2010 for team COL. State their given name, height, weight and age of today.",
+        "query": "SELECT T1.nameGiven, T1.height , T1.weight, STRFTIME('%Y', CURRENT_TIMESTAMP) - birthYear FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE T2.tmID = 'COL' AND T2.year >= 2000 AND T2.year <= 2010 GROUP BY T1.playerID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Name all goalies with 10 or more empty net goals. Name the players and season where he played.",
+        "query": "SELECT T1.firstName, T1.lastName , T2.year FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE T2.ENG >= 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "State the goalie who has the lowest percentage of goals against among all the shots against recorded. Name the players and season where he played.",
+        "query": "SELECT T1.firstName, T1.lastName, T2.year FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE CAST(T2.GA AS REAL) / T2.SA IS NOT NULL ORDER BY CAST(T2.GA AS REAL) / T2.SA LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "List all goalies who played in the year 2005 season and shorter than 72 inches. List all the team names he play for.",
+        "query": "SELECT DISTINCT T1.firstName, T1.lastName, T3.name FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID INNER JOIN Teams AS T3 ON T2.tmID = T3.tmID WHERE T2.year = 2005 AND T1.height < 72"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "State the nick name of player ID 'aubinje01'. List all the teams and season he played for.",
+        "query": "SELECT DISTINCT T1.nameNick, T3.year, T3.name FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID INNER JOIN Teams AS T3 ON T2.tmID = T3.tmID WHERE T1.playerID = 'aubinje01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Name the goalies with the most seasons played. State the average time he played for each season.",
+        "query": "SELECT T1.firstName, T1.lastName, T2.year, AVG(T2.Min) FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE T1.playerID = ( SELECT playerID FROM Goalies GROUP BY playerID ORDER BY COUNT(playerID) DESC LIMIT 1 ) GROUP BY T1.firstName, T1.lastName, T2.year"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Name the goalie and the season he played where he had 5% shutouts among the number of goals recorded while the goalie was on the ice.",
+        "query": "SELECT DISTINCT T1.firstName, T1.lastName, T2.year FROM Master AS T1 INNER JOIN ( SELECT playerID, year FROM Goalies WHERE CAST(SHO AS REAL) / GA > 0.05 ) AS T2 ON T2.playerID = T1.playerID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Name the deceased players whose death country is different from his birth country order by birth year.",
+        "query": "SELECT firstName, lastName FROM Master WHERE birthCountry != deathCountry ORDER BY birthYear"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Who are the players played both in NHL and WHA. List the given name and first year they were in NHL and first year in WHA.",
+        "query": "SELECT nameGiven, firstNHL, firstWHA FROM Master WHERE firstNHL IS NOT NULL AND firstWHA IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "List the living players who have two positions. State their given name the position they play.",
+        "query": "SELECT firstName, lastName, pos FROM Master WHERE deathYear IS NULL AND pos LIKE '%/%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "State the nick name of the tallest player? If the player had left NHL, mention the last season he was with NHL.",
+        "query": "SELECT nameNick, lastNHL FROM Master ORDER BY height DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the average height of player who were born in 1990 and after? Compare the average height with players who were born before 1990.",
+        "query": "SELECT AVG(IIF(birthYear < 1990, height, NULL)) - AVG(IIF(birthYear >= 1990, height, NULL)) FROM Master"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Name the goalies who are good at left hand and also has become a coach after retirement. Name all teams he had played before.",
+        "query": "SELECT DISTINCT firstName, lastName, T3.name FROM Goalies AS T1 INNER JOIN Master AS T2 ON T2.playerID = T1.playerID INNER JOIN Teams AS T3 ON T1.lgID = T3.lgID WHERE T1.playerID IS NOT NULL AND T2.coachID IS NOT NULL AND T2.shootCatch = 'L' AND T2.pos = 'G'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "List all the deceased goalies and the teams he had played whose birth country was in Canada.",
+        "query": "SELECT DISTINCT firstName, lastName, T3.name FROM Goalies AS T1 INNER JOIN Master AS T2 ON T2.playerID = T1.playerID INNER JOIN Teams AS T3 ON T1.lgID = T3.lgID WHERE T2.birthCountry = 'Canada' AND T2.deathYear IS NOT NULL AND T2.pos = 'G'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Name the goalies and season they played when Boston Bruins won number 1 in rank.",
+        "query": "SELECT T1.firstName, T1.lastName, T3.year FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID INNER JOIN Teams AS T3 ON T2.year = T3.year AND T2.tmID = T3.tmID WHERE T1.deathYear IS NOT NULL AND T3.name = 'Boston Bruins' AND T3.rank = 1 AND T1.pos = 'G'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among all goalies who are still alive, whose first season in NHL in before 1950. List the team names they were in.",
+        "query": "SELECT DISTINCT T3.name FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID INNER JOIN Teams AS T3 ON T2.lgID = T3.lgID AND T2.year = T3.year WHERE T1.deathYear IS NOT NULL AND T1.firstNHL < 1950"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For all players who becomes coach after retirement, state the given name of coach and which teams and years did they coach?",
+        "query": "SELECT DISTINCT T2.nameGiven, T3.name, T3.year FROM Coaches AS T1 INNER JOIN Master AS T2 ON T2.coachID = T1.coachID INNER JOIN Teams AS T3 ON T1.lgID = T3.lgID WHERE T2.playerID IS NOT NULL AND T2.coachID IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the coaches who was never a player, who has highest percentage of game winning? Provide the given name of the coach and team he coached.",
+        "query": "SELECT T2.nameGiven, T3.name FROM Coaches AS T1 INNER JOIN Master AS T2 ON T2.coachID = T1.coachID INNER JOIN Teams AS T3 ON T1.lgID = T3.lgID WHERE T1.coachID IS NOT NULL ORDER BY CAST(T1.w AS REAL) / T1.g DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which coach has the best performance for team DET in history? What was the winning percentage? Name the coach and the year he coached.",
+        "query": "SELECT CAST(T2.W AS REAL) / T2.G, T1.firstName, T1.lastName, T2.year FROM Master AS T1 INNER JOIN Coaches AS T2 ON T1.coachID = T2.coachID INNER JOIN ( SELECT coachID FROM Coaches ORDER BY CAST(w AS REAL) / g DESC LIMIT 1 ) AS T3 ON T2.coachID = T3.coachID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Who is the coach who had coached the the most seasons in MTL? State his given name, date of birth and all teams he had coaches before.",
+        "query": "SELECT T2.nameGiven , T2.birthYear, T2.birthMon, T2.birthDay, T3.name FROM Goalies AS T1 INNER JOIN Master AS T2 ON T2.playerID = T1.playerID INNER JOIN Teams AS T3 ON T3.lgID = T1.lgID WHERE T3.tmID = 'MTL' GROUP BY T2.nameGiven, T2.birthYear, T2.birthMon, T2.birthDay, T3.name ORDER BY COUNT(T2.coachID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "List all goalies with more lost than won games for two seasons or more. State the name of the player and team he played.",
+        "query": "SELECT DISTINCT T1.firstName, T1.lastName, T3.name FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID INNER JOIN Teams AS T3 ON T2.year = T3.year AND T2.tmID = T3.tmID WHERE T1.pos = 'G' AND T2.L > T2.W GROUP BY T1.firstName, T1.lastName, T3.name HAVING COUNT(T3.year) > 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For all the goalies born in year 1987, who are good in both right hand and left hand? Calculate his percentage of winning for every season he played.",
+        "query": "SELECT T1.firstName, T1.lastName, T2.year, CAST(T2.W AS REAL) / T2.GP FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE T1.birthYear = 1987 AND T1.shootCatch IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is given name for player 'aebisda01'. Calculate the average time in minutes for the all his games played as goaltender.",
+        "query": "SELECT T1.nameGiven, CAST(SUM(T2.Min) AS REAL) / SUM(T2.GP) FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE T1.playerID = 'aebisda01' GROUP BY T1.nameGiven"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "List all living goalies who have greater than 50% wins among all games played. State their last name and first name.",
+        "query": "SELECT T1.firstName, T1.lastName FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE T1.deathYear IS NOT NULL GROUP BY T1.playerID HAVING CAST(SUM(T2.Min) AS REAL) / SUM(T2.GP) > 0.5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many players and coaches are awarded after death?",
+        "query": "SELECT COUNT(note) FROM AwardsMisc WHERE note IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the players who won an award in the year 1983, how many of them play the position of goalie?",
+        "query": "SELECT COUNT(playerID) FROM AwardsPlayers WHERE pos = 'G' AND year = 1983"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many coaches worked a temporary term in the year 2007?",
+        "query": "SELECT COUNT(coachID) FROM Coaches WHERE year = 2007 AND notes = 'interim'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many shoutouts are there in the regular season of 1977?",
+        "query": "SELECT COUNT(year) FROM CombinedShutouts WHERE year = 1977 AND `R/P` = 'R'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many teams scored against their opponent who had pulled their goalie in the year 2005?",
+        "query": "SELECT COUNT(tmID) FROM Goalies WHERE year = 2005 AND ENG IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the years in which the NHL League had shots recorded while the goalie was on the ice.",
+        "query": "SELECT DISTINCT year FROM Goalies WHERE lgID = 'NHL' AND SA IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many teams have the same total number of postseason wins and postseason loses?",
+        "query": "SELECT DISTINCT COUNT(tmID) FROM Goalies WHERE PostW = PostL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the name of the person who was in the Hall of Fame in the year 1978.",
+        "query": "SELECT name FROM HOF WHERE year = 1978"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many people were in the Hall of Fame's Builder category?",
+        "query": "SELECT COUNT(hofID) FROM HOF WHERE category = 'Builder'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the people who got into the Hall of Fame after the year 1980, how many of them belong to the category of \"Player\"?",
+        "query": "SELECT COUNT(hofID) FROM HOF WHERE year > 1980 AND category = 'Player'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the Nicknames of the players who got in the Hall of Fame in 2007.",
+        "query": "SELECT DISTINCT T1.nameNick FROM Master AS T1 INNER JOIN HOF AS T2 ON T1.hofID = T2.hofID WHERE T2.year = 2007"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Did the tallest player got in the Hall of Fame? If yes, please list the year when he got in the Hall of Fame.",
+        "query": "SELECT CASE WHEN T1.hofID IS NULL THEN 'NO' ELSE T2.year END FROM Master AS T1 LEFT JOIN HOF AS T2 ON T1.hofID = T2.hofID WHERE T1.height = ( SELECT MAX(height) FROM Master )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the awards the coaches who are born in Canada have won.",
+        "query": "SELECT DISTINCT T2.award FROM Master AS T1 INNER JOIN AwardsCoaches AS T2 ON T1.coachID = T2.coachID WHERE T1.birthCountry = 'Canada'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the coaches whose team has over 30 wins in a year, how many of them are born in the USA?",
+        "query": "SELECT COUNT(T2.coachID) FROM Master AS T1 INNER JOIN Coaches AS T2 ON T1.coachID = T2.coachID WHERE T2.W > 30 AND T1.birthCountry = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the coaches who have taught teams from the NHL League, how many of them are from Canada?",
+        "query": "SELECT COUNT(T2.coachID) FROM Master AS T1 INNER JOIN Coaches AS T2 ON T1.coachID = T2.coachID WHERE T2.lgID = 'NHL' AND T1.birthCountry = 'Canada'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the awards won by coaches who were born in 1952.",
+        "query": "SELECT T2.award FROM Master AS T1 INNER JOIN AwardsCoaches AS T2 ON T1.coachID = T2.coachID WHERE T1.birthYear = 1952"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the coaches who have received an award in 1940, how many of them are born in Toronto?",
+        "query": "SELECT COUNT(T1.coachID) FROM Master AS T1 INNER JOIN AwardsCoaches AS T2 ON T1.coachID = T2.coachID WHERE T2.year = 1940 AND T1.birthCity = 'Toronto'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the coaches who have received an award after the year 1940, how many of them have already died?",
+        "query": "SELECT COUNT(T1.coachID) FROM Master AS T1 INNER JOIN AwardsCoaches AS T2 ON T1.coachID = T2.coachID WHERE T1.deathYear IS NOT NULL AND T2.year > 1940"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the awards won by coaches who taught the NHL League and have already died.",
+        "query": "SELECT DISTINCT T2.award FROM Master AS T1 INNER JOIN AwardsCoaches AS T2 ON T1.coachID = T2.coachID WHERE T1.deathYear IS NOT NULL AND T2.lgID = 'NHL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the coaches who have gotten in the Hall of Fame, how many of them have a weight of over 195?",
+        "query": "SELECT COUNT(DISTINCT T1.coachID) FROM Master AS T1 INNER JOIN HOF AS T2 ON T1.hofID = T2.hofID WHERE T1.weight > 195"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the first name of the players who are good at both left hands and right hands for goalie and have gotten in the Hall of Fame.",
+        "query": "SELECT DISTINCT T1.firstName, T1.lastName FROM Master AS T1 INNER JOIN HOF AS T2 ON T1.hofID = T2.hofID WHERE T1.shootCatch IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the players who became coaches, how many of them have gotten in the Hall of Fame?",
+        "query": "SELECT COUNT(T1.playerID) FROM Master AS T1 INNER JOIN HOF AS T2 ON T1.hofID = T2.hofID WHERE T1.playerID IS NOT NULL AND T1.coachID IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the birth cities of the players who have won an award in the year 1970.",
+        "query": "SELECT DISTINCT T1.birthCity FROM Master AS T1 INNER JOIN AwardsPlayers AS T2 ON T1.playerID = T2.playerID WHERE T2.year = 1970"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many players born in Toronto have won the All-Rookie award?",
+        "query": "SELECT COUNT(T1.playerID) FROM Master AS T1 INNER JOIN AwardsPlayers AS T2 ON T1.playerID = T2.playerID WHERE T2.award = 'All-Rookie' AND T1.birthCity = 'Toronto'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the players who have won the All-Rookie award, how many of them have died?",
+        "query": "SELECT COUNT(T1.playerID) FROM Master AS T1 INNER JOIN AwardsPlayers AS T2 ON T1.playerID = T2.playerID WHERE T2.award = 'All-Rookie' AND T1.deathYear IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the players who died in Massachussets, how many of them have won an award?",
+        "query": "SELECT COUNT(DISTINCT T1.playerID) FROM Master AS T1 INNER JOIN AwardsPlayers AS T2 ON T1.playerID = T2.playerID WHERE T1.deathState = 'MA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the awards the players who died in Arlington have won.",
+        "query": "SELECT T2.award FROM Master AS T1 INNER JOIN AwardsPlayers AS T2 ON T1.playerID = T2.playerID WHERE T1.deathCity = 'Kemptville'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the nicknames of the players who have won the All-Rookie award and are born in March.",
+        "query": "SELECT DISTINCT T1.nameNick FROM Master AS T1 INNER JOIN AwardsPlayers AS T2 ON T1.playerID = T2.playerID WHERE T2.award = 'All-Rookie' AND T1.birthMon = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the players who were born in July and August, how many of them got in the Hall of Fame?",
+        "query": "SELECT COUNT(T1.playerID) FROM Master AS T1 INNER JOIN HOF AS T2 ON T1.hofID = T2.hofID WHERE T1.birthMon IN (7, 8)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "In which month was the player who has won the most awards born?",
+        "query": "SELECT T1.birthMon FROM Master AS T1 INNER JOIN AwardsPlayers AS T2 ON T1.playerID = T2.playerID GROUP BY T2.playerID ORDER BY COUNT(T2.award) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Players born in which year have received the most awards in total?",
+        "query": "SELECT T1.birthYear FROM Master AS T1 INNER JOIN AwardsPlayers AS T2 ON T1.playerID = T2.playerID GROUP BY T1.birthYear ORDER BY COUNT(T2.award) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which country is the most award-winning player from?",
+        "query": "SELECT T1.birthCountry FROM Master AS T1 INNER JOIN AwardsPlayers AS T2 ON T1.playerID = T2.playerID GROUP BY T1.birthCountry ORDER BY COUNT(T2.award) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which country has the most players in the Hall of Fame?",
+        "query": "SELECT T1.birthCountry FROM Master AS T1 INNER JOIN HOF AS T2 ON T1.hofID = T2.hofID GROUP BY T1.birthCountry ORDER BY COUNT(T1.playerID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the positions of the players who were born in Canada and have won the All-Rookie award.",
+        "query": "SELECT DISTINCT T1.pos FROM Master AS T1 INNER JOIN AwardsPlayers AS T2 ON T1.playerID = T2.playerID WHERE T1.birthCountry = 'Canada' AND T2.award = 'All-Rookie'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the average BMI of all the coaches who have gotten in the Hall of Fame?",
+        "query": "SELECT SUM(T1.weight / (T1.height * T1.height)) / COUNT(T1.coachID) FROM Master AS T1 INNER JOIN HOF AS T2 ON T1.hofID = T2.hofID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the percentage of American players among all the players who have gotten in the Hall of Fame?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.birthCountry = 'USA' THEN T1.playerID ELSE NULL END) AS REAL) * 100 / COUNT(T1.playerID) FROM Master AS T1 INNER JOIN HOF AS T2 ON T1.hofID = T2.hofID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many years did player Id \"healygl01\" play?",
+        "query": "SELECT COUNT(year) FROM Goalies WHERE playerID = 'healygl01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which team did player Id \"roypa01\" play in 1992? Give the team id.",
+        "query": "SELECT tmID FROM Goalies WHERE playerID = 'roypa01' AND year = 1992"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What was the total number of the games that player Id \"rutlewa01\" played in 1967?",
+        "query": "SELECT GP FROM Goalies WHERE playerID = 'rutlewa01' AND year = 1967"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Show me how many minutes player Id \"valiqst01\" played in the game in 2007 season.",
+        "query": "SELECT Min FROM Goalies WHERE playerID = 'valiqst01' AND year = 2007"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many games did player Id \"vanbijo01\" win in the 1990 season?",
+        "query": "SELECT W FROM Goalies WHERE playerID = 'vanbijo01' AND year = 1990"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "In how many games did player Id \"vernomi01\" end up with a tie or an overtime loss in the 1998 season?",
+        "query": "SELECT `T/OL` FROM Goalies WHERE playerID = 'vernomi01' AND year = 1998"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For the coach who won Second Team All-Star in 1933, how many wins did he have that year?",
+        "query": "SELECT SUM(T1.W) FROM Coaches AS T1 INNER JOIN AwardsCoaches AS T2 ON T1.coachID = T2.coachID WHERE T2.year = 1933 AND T2.award = 'Second Team All-Star'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Did legendsID \"P194502\" personally attend his Hall of Fame dedication?",
+        "query": "SELECT IIF(T1.note = 'posthumous', 'YES', 'NO') FROM AwardsMisc AS T1 RIGHT JOIN Master AS T2 ON T1.ID = T2.playerID WHERE T2.legendsID = 'P194502'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which position did Mike Antonovich play?",
+        "query": "SELECT T1.pos FROM Master AS T1 INNER JOIN AwardsPlayers AS T2 ON T1.playerID = T2.playerID WHERE T1.firstName = 'Mike' AND T1.lastName = 'Antonovich'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For the coach who co-coached with Dave Lewis in 1998, where was his birth place?",
+        "query": "SELECT T1.birthCountry FROM Master AS T1 INNER JOIN Coaches AS T2 ON T1.coachID = T2.coachID WHERE T2.year = 1998 AND T2.notes = 'co-coach with Dave Lewis'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which player who showed as the third goalie in a game has the biggest weight? Give the full name of the player.",
+        "query": "SELECT T1.firstName, T1.lastName FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE T2.stint = 3 ORDER BY T1.weight DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the players who had 10 empty net goals in their career, who is the tallest? Show his full name.",
+        "query": "SELECT T1.firstName, T1.lastName FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID GROUP BY T2.playerID, T1.height HAVING SUM(T2.ENG) > 10 ORDER BY T1.height DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For the goalie who had the most shutouts in 2010, what's his catching hand?",
+        "query": "SELECT T1.shootCatch FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE T2.year = 2010 GROUP BY T2.playerID ORDER BY SUM(T2.SHO) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Who is the youngest goalie among those who had more than 150 goal againsts in 2002 season?",
+        "query": "SELECT T1.firstName, T1.lastName FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE T2.year = 2002 AND T2.GA > 150 GROUP BY T2.playerID, T1.birthYear, T1.birthMon, T1.birthMon HAVING SUM(T2.GA) ORDER BY T1.birthYear DESC, T1.birthMon DESC, SUM(T1.birthDay) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "In the history of team id NJD, which goalie saved the most goal attempts? Give his full name.",
+        "query": "SELECT T1.firstName, T1.lastName FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE T2.tmID = 'NJD' GROUP BY T2.playerID ORDER BY SUM(T2.SA - T2.GA) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which teams had the most postseason empty net goals in 2010 season? List their team names.",
+        "query": "SELECT T2.name FROM Goalies AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID WHERE T1.year = 2010 GROUP BY T2.name ORDER BY SUM(PostENG) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For the team which had the most postseason shutouts in 1995, how many points did they have that year?",
+        "query": "SELECT SUM(T2.SHO) FROM Scoring AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE T2.year = 1995 GROUP BY T2.tmID ORDER BY SUM(T2.PostSHO) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which coach had the highest winning rates in the 2009 season? What's coach's nickname.",
+        "query": "SELECT T2.coachID, T1.nameNick FROM Master AS T1 INNER JOIN Coaches AS T2 ON T1.coachID = T2.coachID WHERE T2.year = 2009 ORDER BY CAST(T2.W AS REAL) / (T2.W + T2.L) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For the team had the biggest power play percentage in 2011, who was their coach that season? Give the full name.",
+        "query": "SELECT T1.coachID FROM Coaches AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID WHERE T2.year = 2011 ORDER BY CAST(T2.PPG AS REAL) / T2.PPC DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "In the Stanley Cup finals history, how many games did player id \"broadpu01\" play in 1922?",
+        "query": "SELECT GP FROM ScoringSC WHERE playerID = 'broadpu01' AND YEAR = 1922"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many years did player Id \"cleghsp01\" make to the Stanley Cup finals?",
+        "query": "SELECT COUNT(year) FROM ScoringSC WHERE playerID = 'cleghsp01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What was the number of goals did player Id \"dyeba01\" make in the 1921 Stanley Cup finals?",
+        "query": "SELECT G FROM ScoringSC WHERE playerID = 'dyeba01' AND year = 1921"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Who made the most assists in a single game in the Stanley Cup finals ?",
+        "query": "SELECT playerID FROM ScoringSC ORDER BY A DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which league did player id\"adamsja01\" play in 1920?",
+        "query": "SELECT lgID FROM ScoringSC WHERE playerID = 'adamsja01' AND year = 1920"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What position did player id \"hartgi01\" play in his Stanley Cup finals performance?",
+        "query": "SELECT DISTINCT pos FROM ScoringSC WHERE playerID = 'hartgi01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For the team which had three different goalies in the 2011 postseason games, how many games did they win in the regular season?",
+        "query": "SELECT SUM(T2.W) FROM Goalies AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID WHERE T2.year = 2011 GROUP BY T1.tmID HAVING COUNT(DISTINCT T1.playerID) = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which year was the goalie who had the most postseaon shots Against in 2008 born?",
+        "query": "SELECT T1.birthYear FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE T2.year = 2008 ORDER BY T2.PostSA DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many years were there after Don Waddell retired and became a coach in NHL?",
+        "query": "SELECT MAX(T2.year) - MIN(T2.year) FROM Master AS T1 INNER JOIN Coaches AS T2 ON T1.coachID = T2.coachID WHERE T1.firstName = 'Don' AND T1.lastName = 'Waddell'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which is the catching hand for the goaltender who had the most shutouts in 1996?",
+        "query": "SELECT T1.shootCatch FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE T2.year = 1996 ORDER BY T2.SHO DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "When was the birthday for the goalie who had most goal againsts in 1965 season?",
+        "query": "SELECT T1.birthYear, T1.birthMon, birthDay FROM Master AS T1 INNER JOIN Goalies AS T2 ON T1.playerID = T2.playerID WHERE T2.year = 1965 ORDER BY T2.GA DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For he who had the highest plus / minus on the court in the 1981 season, what's his full name?",
+        "query": "SELECT T1.firstName, T1.lastName FROM Master AS T1 INNER JOIN Scoring AS T2 ON T1.playerID = T2.playerID WHERE T2.year = 1981 GROUP BY T2.playerID ORDER BY SUM(T2.`+/-`) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What's the weight of the player who had the most Power Play Goals in the 21st century?",
+        "query": "SELECT T1.weight FROM Master AS T1 INNER JOIN Scoring AS T2 ON T1.playerID = T2.playerID WHERE T2.year > 2000 GROUP BY T1.playerID, T1.weight ORDER BY SUM(T2.PPG) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For the player who scored 7 shorthanded goals in 1989, what's his dominant hand?",
+        "query": "SELECT T1.shootCatch FROM Master AS T1 INNER JOIN Scoring AS T2 ON T1.playerID = T2.playerID WHERE T2.year = 1989 GROUP BY T2.playerID HAVING SUM(T2.SHG) = 7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Who was the most clutch player in 1986? Give his full name.",
+        "query": "SELECT T1.firstName, T1.lastName FROM Master AS T1 INNER JOIN Scoring AS T2 ON T1.playerID = T2.playerID WHERE T2.year = 1986 GROUP BY T2.playerID ORDER BY SUM(T2.GWG) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many shots on goal did Cam Neely had in the year of 1990?",
+        "query": "SELECT T2.SOG FROM Master AS T1 INNER JOIN Scoring AS T2 ON T1.playerID = T2.playerID WHERE T1.firstName = 'Cam' AND T1.lastName = 'Neely' AND T2.year = '1990'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Who was the coach for the team which had the most bench minors penalty in 2003\uff1f",
+        "query": "SELECT DISTINCT T3.firstName, T3.lastName FROM Teams AS T1 INNER JOIN Coaches AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year INNER JOIN Master AS T3 ON T2.coachID = T3.coachID WHERE T1.year = '2003' GROUP BY T3.firstName, T3.lastName ORDER BY SUM(T1.BenchMinor) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For the goalies whose weight are above 190, who had most goal againsts in 1978 season?",
+        "query": "SELECT T1.playerID FROM Goalies AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID WHERE T1.year = '1978' AND T2.weight > 190 ORDER BY T1.GA DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the percentage of winning rate of improvement since Alain Vigneault became the coach of Vancouver Canucks in 2006 season?",
+        "query": "SELECT SUM(CASE WHEN T1.year = 2006 THEN CAST(T1.W AS REAL) * 100 / (T1.W + T1.L) ELSE 0 END) - ( SELECT CAST(W AS REAL) * 100 / (W + L) FROM Teams WHERE year = '2005' AND name = 'Vancouver Canucks' ) FROM Teams AS T1 INNER JOIN Coaches AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year INNER JOIN Master AS T3 ON T2.coachID = T3.coachID WHERE T1.name = 'Vancouver Canucks' AND T3.firstName = 'Alain' AND T3.lastName = 'Vigneault'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For the goalie who had the highest defensive success rate in the postseason of 2011, what's his legends ID ?",
+        "query": "SELECT T2.legendsID FROM Goalies AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID WHERE T1.year = 2011 ORDER BY 1 - CAST(T1.PostGA AS REAL) / T1.PostSA DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many former athletes go on to become coaches after retiring?",
+        "query": "SELECT COUNT(playerID) FROM Master WHERE playerID IS NOT NULL AND coachID IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the teams with the most number of ties, how many penalty was committed by a player or coach that is not on the ice? Indicate the name of the team.",
+        "query": "SELECT BenchMinor, name FROM Teams ORDER BY T DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which NHL award was most frequently won by the coach with the most wins?",
+        "query": "SELECT award FROM Teams AS T1 INNER JOIN AwardsCoaches AS T2 ON T1.lgID = T2.lgID WHERE T1.lgID = 'NHL' GROUP BY T2.coachID, T2.award ORDER BY COUNT(T2.award) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the power play percentage of the team with the most number of loses?",
+        "query": "SELECT CAST(SUM(PPG) AS REAL) * 100 / SUM(PPC) FROM Teams GROUP BY tmID ORDER BY SUM(L) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many players were included in the Hall of Fame on average between 1950 and 1980?",
+        "query": "SELECT CAST(COUNT(name) AS REAL) / 30 FROM HOF WHERE year BETWEEN 1950 AND 1980 AND category = 'Player'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which country produced the most number of hockey players? Identify which year was most of the hockey players are born.",
+        "query": "SELECT DISTINCT birthCountry, birthYear FROM Master GROUP BY birthCountry, birthYear ORDER BY COUNT(birthCountry) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many wins does the team have whose goaltender have the most number of successfully stopping the other team from scoring during the entire game?",
+        "query": "SELECT SUM(W) FROM Goalies GROUP BY tmID ORDER BY SUM(SHO) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which team recorded the most number of road victories in 2005? Indicate the team ID.",
+        "query": "SELECT tmID FROM TeamSplits WHERE YEAR = '2005' ORDER BY rW DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the position of the 9th oldest hockey player?",
+        "query": "SELECT pos FROM Master WHERE birthYear IS NOT NULL ORDER BY birthYear, birthMon, birthDay LIMIT 8"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many goals were scored while the goalkeeper was on the ice in the 1924 WCHL by the goalie with the most goals scored?",
+        "query": "SELECT SUM(PostGA) FROM Goalies WHERE lgID = 'WCHL' AND year = '1924' GROUP BY playerID ORDER BY SUM(PostGA) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "In 2006, what is the overall number of october defeats for the team with the most October defeats? Indicate the team ID.",
+        "query": "SELECT OctL, tmID FROM TeamSplits WHERE year = '2006' ORDER BY OctL DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many players, whose shooting/catching hand is both left and right, debuted their first NHL in 2011?",
+        "query": "SELECT COUNT(playerID) FROM Master WHERE shootCatch IS NULL AND firstNHL = '2011'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which year recorded the most number of goals by a player and how old was the player at the time the most number of goals was achieved by him?",
+        "query": "SELECT T1.year, T1.year - T2.birthYear FROM Scoring AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID GROUP BY T1.year, T1.year - T2.birthYear ORDER BY SUM(T1.G) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the average height of all the goalies born in the 70s who's a left shooting/catching dominant and to which team do the tallest player/s play for most recently?",
+        "query": "SELECT CAST(SUM(T2.height) AS REAL) / COUNT(*) FROM AwardsPlayers AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID WHERE T2.height IS NOT NULL AND (T2.pos = 'LW' OR T2.pos = 'L/C')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the total amount of assists of the NHL player with the most assists in history? Please indicate his/her full name.",
+        "query": "SELECT SUM(T1.A), T2.firstName, T2.lastName FROM Scoring AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID WHERE T1.lgID = 'NHL' GROUP BY T2.firstName, T2.lastName ORDER BY SUM(T1.A) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the power play percentage of the team with the least number of penalty kill chances and to which team were they playing against? Indicate whether the team lost or victorious.",
+        "query": "SELECT SUM(T1.A), T2.firstName, T2.lastName FROM Scoring AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID WHERE T1.lgID = 'NHL' GROUP BY T2.firstName, T2.lastName ORDER BY SUM(T1.A) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What are the awards won by the coach who coached the team with the most number of victories of all time? Indicate the choach ID.",
+        "query": "SELECT DISTINCT T2.coachID, T1.award FROM AwardsCoaches AS T1 INNER JOIN Coaches AS T2 ON T1.coachID = T2.coachID GROUP BY T2.coachID, T1.award ORDER BY SUM(T2.w) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the name of the losing team during an exhibition game in 1912?",
+        "query": "SELECT T2.name FROM SeriesPost AS T1 INNER JOIN Teams AS T2 ON T1.year = T2.year AND tmIDLoser = tmID WHERE T1.note = 'EX' AND T2.year = '1912'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How long has the NHL player been playing during the year when he recorded the least number of times being on the ice when a goal is scored for the team versus against the team? Indicate his full name.",
+        "query": "SELECT DISTINCT T3.firstNHL - T1.year, T3.nameGiven , T3.firstName, T3.lastName FROM Scoring AS T1 INNER JOIN Teams AS T2 ON T2.tmID = T1.tmID INNER JOIN Master AS T3 ON T1.playerID = T3.playerID GROUP BY T3.firstName, T3.lastName, T3.nameGiven, T3.firstNHL - T1.year, T3.firstName, T3.lastName ORDER BY SUM(T1.`+/-`) ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Between 2003 to 2005, what are the given names of the players with the most number of games played whose Penalty minutes is between 200 to 250?",
+        "query": "SELECT T2.nameGiven FROM Scoring AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID AND T1.PIM BETWEEN 200 AND 250 AND T1.year BETWEEN 2003 AND 2005 ORDER BY T1.GP DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How old was the goaltender who scored the fewest goals while on the ice when he retired from the NHL?",
+        "query": "SELECT T2.lastNHL - T2.birthYear FROM GoaliesSC AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID WHERE T2.lastNHL IS NOT NULL GROUP BY T2.lastNHL, T2.birthYear ORDER BY SUM(GA) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which position has won the most awards and who is the most recent player that was awarded with an award in that position? Indicate the name of the award and the full name of the player.",
+        "query": "SELECT T1.pos, T2.award, T1.nameGiven, T1.lastName FROM Master AS T1 INNER JOIN AwardsCoaches AS T2 ON T2.coachID = T1.coachID GROUP BY T1.pos, T2.award, T1.nameGiven, T1.lastName ORDER BY COUNT(T2.award) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many games did the coach who received the first-ever Second Team All-Star award play before receiving such award?",
+        "query": "SELECT SUM(T1.g) FROM Coaches AS T1 INNER JOIN ( SELECT coachID, year FROM AwardsCoaches WHERE award = 'Second Team All-Star' ORDER BY year LIMIT 1 ) AS T2 ON T1.coachID = T2.coachID AND T1.year < T2.year"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many teams did the team with the most victories in 1915 play against?\nIndicate the name of the team who won the most games in 1915, as well as the names of the opposing team.",
+        "query": "SELECT COUNT(DISTINCT oppID), T2.tmID, T2.oppID FROM Teams AS T1 INNER JOIN TeamVsTeam AS T2 ON T1.year = T2.year AND T1.tmID = T2.tmID WHERE T2.year = 1915 GROUP BY T2.tmID, T2.oppID ORDER BY SUM(T2.W) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the teams whose shorthanded goals are between 1 to 5, which player is the most trustworthy in the critical moment?",
+        "query": "SELECT T2.nameGiven, T2.lastName FROM Scoring AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID WHERE T1.SHG BETWEEN 1 AND 5 ORDER BY T1.GWG DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "In 1997, how many loss did the coach have who temporary coached Tampa Bay Lightning? Indicate his/her coach ID.",
+        "query": "SELECT SUM(T1.l), T1.coachID FROM Coaches AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.notes = 'interim' AND T1.year = '1997' AND T2.name = 'Tampa Bay Lightning' GROUP BY T1.coachID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the players whose short handed assists are greater or equal to 7, what is the final standing of the team with the most number of assists? Indicate the year to which the most number of assists was achieved and the name of the team.",
+        "query": "SELECT T2.rank, T2.year, T2.name FROM Scoring AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.SHA >= 7 ORDER BY T1.A DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the name of the coach whose team placed 4th in the 1969 game? Indicate their coachID.",
+        "query": "SELECT T1.coachID FROM Coaches AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.year = 1969 AND T2.rank = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Between 1917 to 1920, what are the names of the team who ranked first in the first half of the season each year?",
+        "query": "SELECT DISTINCT T2.name FROM TeamsHalf AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.half = 1 AND T1.rank = 1 AND T1.year BETWEEN 1917 AND 1920"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many Canadian players, between the ages of 18 and 24 when they initially played their first NHL, had a cumulative goal total of no more than 5? Indicate their complete names, the year, and the team for which they scored the specified amount of goals.",
+        "query": "SELECT T2.nameGiven, T2.lastName, T2.birthYear, birthMon, birthDay , T3.tmID FROM Scoring AS T1 INNER JOIN Master AS T2 ON T2.playerID = T1.playerID INNER JOIN Teams AS T3 ON T3.tmID = T1.tmID WHERE (T2.firstNHL - T2.birthYear) BETWEEN 18 AND 24 AND T3.G < 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many bench minor penalties did the team St. Louis Blues got in total in all the games?",
+        "query": "SELECT CAST(SUM(BenchMinor) AS REAL) / 2 FROM Teams WHERE name = 'St. Louis Blues'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the power play chances of New York Rangers in 2009?",
+        "query": "SELECT CAST(PPG AS REAL) / PPC FROM Teams WHERE year = 2009 AND name = 'New York Rangers'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the highest total points a team got in a year?",
+        "query": "SELECT SUM(Pts), year FROM Teams GROUP BY year, tmID ORDER BY SUM(Pts) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the teams that had more wins than loses in the year 2006, how many of them have over 100 points?",
+        "query": "SELECT COUNT(tmID) FROM Teams WHERE year = 2006 AND W > L AND Pts > 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which team got the most bench minor penalties in 2006?",
+        "query": "SELECT name FROM Teams WHERE year = 2006 GROUP BY tmID, name ORDER BY CAST(SUM(BenchMinor) AS REAL) / 2 DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the first 3 teams that got the most penalty minutes in 2006.",
+        "query": "SELECT name FROM Teams WHERE year = 2006 GROUP BY tmID, name ORDER BY SUM(PIM) DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which team had the highest penalty kill chances in 1995, Florida Panthers, Edmonton Oilers or Los Angeles Kings?",
+        "query": "SELECT name FROM Teams WHERE year = 1995 AND name IN ('Florida Panthers', 'Edmonton Oilers', 'Los Angeles Kings') ORDER BY PKC DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the name of the team that got more wins than loses in the Stanley Cup finals in 1917?",
+        "query": "SELECT T2.name FROM TeamsSC AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.year = '1917' AND T1.W > T1.L"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the teams that have played in 1922's Stanley Cup finals.",
+        "query": "SELECT T2.name FROM TeamsSC AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.year = '1922'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the teams that played in 1922's Stanley Cup finals, how many of them had over 20 points in that year?",
+        "query": "SELECT COUNT(T1.tmID) FROM TeamsSC AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.year = '1922' AND T2.Pts > 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What were the penalty minutes in 1923's Stanley Cup finals of the team that ranked second in that year?",
+        "query": "SELECT T1.PIM FROM TeamsSC AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.year = '1923' AND T2.rank = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which team got the most wins in the Stanley Cup finals?",
+        "query": "SELECT T2.name FROM TeamsSC AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year GROUP BY T2.name ORDER BY SUM(T1.W) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many wins did the Philadelphia Flyers have over the Boston Bruins in 1985?",
+        "query": "SELECT T1.W FROM TeamVsTeam AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.year = 1985 AND T1.tmID = ( SELECT DISTINCT tmID FROM Teams WHERE name = 'Philadelphia Flyers' ) AND T1.oppID = ( SELECT DISTINCT tmID FROM Teams WHERE name = 'Boston Bruins' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the names of the teams that had a tie in 1909.",
+        "query": "SELECT T2.name, T3.name FROM TeamVsTeam AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year INNER JOIN Teams AS T3 ON T1.year = T3.year AND T1.oppID = T3.tmID WHERE T1.year = 1909 AND T1.T = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the first names of the coaches who have taught the Montreal Canadiens.",
+        "query": "SELECT DISTINCT T3.firstName FROM Coaches AS T1 INNER JOIN Teams AS T2 ON T1.year = T2.year AND T1.tmID = T2.tmID INNER JOIN Master AS T3 ON T1.coachID = T3.coachID WHERE T2.name = 'Montreal Canadiens'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many coaches of the Montreal Canadiens have gotten in the Hall of Fame?",
+        "query": "SELECT COUNT(DISTINCT hofID) FROM Coaches AS T1 INNER JOIN Teams AS T2 ON T1.year = T2.year AND T1.tmID = T2.tmID INNER JOIN Master AS T3 ON T1.coachID = T3.coachID WHERE T2.name = 'Montreal Canadiens'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please give the height of the tallest coach of the Montreal Canadiens.",
+        "query": "SELECT T3.height FROM Coaches AS T1 INNER JOIN Teams AS T2 ON T1.year = T2.year AND T1.tmID = T2.tmID INNER JOIN Master AS T3 ON T1.coachID = T3.coachID WHERE T2.name = 'Montreal Canadiens' AND T3.coachID IS NOT NULL ORDER BY T3.height DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the first names of the coaches whose team played in 1922's Stanley Cup finals.",
+        "query": "SELECT T3.firstName FROM Coaches AS T1 INNER JOIN TeamsSC AS T2 ON T1.year = T2.year AND T1.tmID = T2.tmID INNER JOIN Master AS T3 ON T1.coachID = T3.coachID WHERE T2.year = 1922"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the coaches who have taught the Philadelphia Flyers, how many of them are born in March?",
+        "query": "SELECT COUNT(DISTINCT T3.coachID) FROM Coaches AS T1 INNER JOIN Teams AS T2 ON T1.year = T2.year AND T1.tmID = T2.tmID INNER JOIN Master AS T3 ON T1.coachID = T3.coachID WHERE T2.name = 'Philadelphia Flyers' AND T3.birthMon = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the coaches who are born in the USA, how many of them used to train the Philadelphia Flyers?",
+        "query": "SELECT COUNT(DISTINCT T3.coachID) FROM Coaches AS T1 INNER JOIN Teams AS T2 ON T1.year = T2.year AND T1.tmID = T2.tmID INNER JOIN Master AS T3 ON T1.coachID = T3.coachID WHERE T2.name = 'Philadelphia Flyers' AND T3.birthCountry = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many coaches who have taught the Buffalo Sabres have died?",
+        "query": "SELECT COUNT(DISTINCT T3.coachID) FROM Coaches AS T1 INNER JOIN Teams AS T2 ON T1.year = T2.year AND T1.tmID = T2.tmID INNER JOIN Master AS T3 ON T1.coachID = T3.coachID WHERE T2.name = 'Buffalo Sabres' AND T3.deathYear IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the nick names of the coaches who are from the USA and have taught the Buffalo Sabres.",
+        "query": "SELECT DISTINCT nameNick FROM Coaches AS T1 INNER JOIN Teams AS T2 ON T1.year = T2.year AND T1.tmID = T2.tmID INNER JOIN Master AS T3 ON T1.coachID = T3.coachID WHERE T2.name = 'Buffalo Sabres' AND T3.birthCountry = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the coaches who taught the teams in 1922's Stanley Cup finals, how many of them are from the USA?",
+        "query": "SELECT COUNT(DISTINCT T3.coachID) FROM Coaches AS T1 INNER JOIN TeamsSC AS T2 ON T1.year = T2.year AND T1.tmID = T2.tmID INNER JOIN Master AS T3 ON T1.coachID = T3.coachID WHERE T2.year = 1922 AND T3.birthCountry = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "In the year 2000, which team has played the most games against the Buffalo Sabres?",
+        "query": "SELECT T3.name FROM TeamVsTeam AS T1 INNER JOIN Teams AS T2 ON T1.year = T2.year AND T1.oppID = T2.tmID INNER JOIN Teams AS T3 ON T1.year = T3.year AND T1.tmID = T3.tmID WHERE T1.year = 2000 AND T2.name = 'Buffalo Sabres' GROUP BY T3.name ORDER BY SUM(T2.G) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Please list the names of all the teams that have played against the Buffalo Sabres.",
+        "query": "SELECT DISTINCT T3.name FROM TeamVsTeam AS T1 INNER JOIN Teams AS T2 ON T1.year = T2.year AND T1.oppID = T2.tmID INNER JOIN Teams AS T3 ON T1.year = T3.year AND T1.tmID = T3.tmID WHERE T2.name = 'Buffalo Sabres'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many penalty minutes did the Montreal Canadiens have in the 1918's Stanley Cup Finals?",
+        "query": "SELECT T2.PIM FROM Teams AS T1 INNER JOIN TeamsSC AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.name = 'Montreal Canadiens' AND T1.year = 1918"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "In the year that the Montreal Canadiens had 24 penalty minutes in the Stanley Cup finals, how many wins did the team had in total?",
+        "query": "SELECT T2.W FROM Teams AS T1 INNER JOIN TeamsSC AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.name = 'Montreal Canadiens' AND T2.PIM = 24"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "In which year did the Montreal Canadiens have 49 penalty minutes in the Stanley Cup finals? Was it 1924, 1923 or 1918?",
+        "query": "SELECT T1.year FROM Teams AS T1 INNER JOIN TeamsSC AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.name = 'Montreal Canadiens' AND T2.PIM = 49"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which coach was the first one to teach the Montreal Canadiens, please give his first name.",
+        "query": "SELECT T3.firstName FROM Coaches AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year INNER JOIN Master AS T3 ON T1.coachID = T3.coachID WHERE T2.name = 'Montreal Canadiens' ORDER BY T1.year LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the average winning rate of the Buffalo Sabres in 2000?",
+        "query": "SELECT SUM(CAST(T2.W AS REAL) / T2.G) / COUNT(T1.oppID) FROM TeamVsTeam AS T1 INNER JOIN Teams AS T2 ON T1.year = T2.year AND T1.tmID = T2.tmID WHERE T2.name = 'Buffalo Sabres' AND T1.year = 2000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many penalty minutes did the Montreal Canadiens have on average in the Stanley Cup Finals?",
+        "query": "SELECT CAST(SUM(T2.PIM) AS REAL) / COUNT(T2.PIM) FROM Teams AS T1 INNER JOIN TeamsSC AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.name = 'Montreal Canadiens'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the average winning rate of the Montreal Canadiens in the Stanley Cup finals?",
+        "query": "SELECT SUM(T2.W / T2.G) / SUM(T2.G + T2.W) FROM Teams AS T1 INNER JOIN TeamsSC AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.name = 'Montreal Canadiens'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the percentage of American coaches among all the coaches who taught the Montreal Canadiens?",
+        "query": "SELECT SUM(CAST(T2.W AS REAL) / T2.G) / SUM(T2.G + T2.W) FROM Teams AS T1 INNER JOIN TeamsSC AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.name = 'Montreal Canadiens'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Who was the latest non player/builder to become the hall of famer? Give the full name.",
+        "query": "SELECT name FROM HOF WHERE category IN ('Player', 'Builder') ORDER BY year DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For all the referees, who became a hall of famer in the 1970s? What's his hofID?",
+        "query": "SELECT name, hofID FROM HOF WHERE category = 'Builder' AND year BETWEEN 1970 AND 1979"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "In the year 1958, what is the total number of players that became hall of famers?",
+        "query": "SELECT COUNT(hofID) FROM HOF WHERE category = 'Player' AND year = 1958"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many hall of famers both played and coached in the league?",
+        "query": "SELECT COUNT(playerID) FROM Master WHERE hofID IS NOT NULL AND playerID IS NOT NULL AND coachID IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the number of players whose last name is Green that played in the league but not coached?",
+        "query": "SELECT COUNT(playerID) FROM Master WHERE lastName = 'Green' AND coachID IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For the team that Scotty Bowman coached in 1982, how many bench minor penalties did they have that year?",
+        "query": "SELECT T2.BenchMinor FROM Coaches AS T1 INNER JOIN Teams AS T2 ON T1.year = T2.year AND T1.tmID = T2.tmID INNER JOIN Master AS T3 ON T1.coachID = T3.coachID WHERE T3.firstName = 'Scotty' AND T3.lastName = 'Bowman' AND T1.year = 1982"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Among the players who had 10 empty net goals in their career, who is the tallest? Show his full name.",
+        "query": "SELECT T2.firstName, T2.lastName FROM Goalies AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID WHERE T1.ENG = 10 ORDER BY T2.height DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which was the dominant hand for the goaltender who played 32 games for QUN in 1973? Give the full name.",
+        "query": "SELECT T2.shootCatch, T2.firstName, T2.lastName FROM Goalies AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID AND T1.year = 1973 WHERE T1.tmID = 'QUN' AND T1.GP = 32"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For the goalie whose last name is \"Young\", how many teams did he play in?",
+        "query": "SELECT COUNT(DISTINCT T1.tmID) FROM Goalies AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID WHERE T2.lastName = 'Young'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For the goalkeeper that became a coach than a Hall of Famer, who played for BOS in 1972?",
+        "query": "SELECT T2.firstName, T2.lastName , IIF(T1.tmID = 'BOS', 'YES', 'NO') FROM Goalies AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID WHERE T1.year = 1972 AND T1.tmID = 'BOS' AND T2.coachID IS NOT NULL AND T2.hofID IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For the goalie whose legendsID is \"P196402\" , how many games did he play in the league?",
+        "query": "SELECT SUM(T1.GP) FROM Goalies AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID WHERE T2.legendsID = 'P196402'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "In the history of all the Quebec Bulldogs, which goalie had the most play minutes for the team? Give the full name.",
+        "query": "SELECT T2.firstName, T2.lastName FROM Goalies AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID INNER JOIN Teams AS T3 ON T1.tmID = T3.tmID AND T1.year = T3.year WHERE T3.name = 'Quebec Bulldogs' AND T2.pos = 'D' GROUP BY T1.playerID, T2.firstName, T2.lastName ORDER BY SUM(T1.Min) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many goalies played for Calgary Flames?",
+        "query": "SELECT COUNT(DISTINCT playerID) FROM Goalies AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T2.name = 'Calgary Flames'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which Minnesota North Stars' goalkeeper had the most Goal Againsts in his play time?",
+        "query": "SELECT playerID FROM Goalies AS T1 INNER JOIN Teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T2.name = 'Minnesota North Stars' GROUP BY T1.playerID ORDER BY SUM(T1.GA) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How many Haileybury Hockey Club goalies became a hall of famer?",
+        "query": "SELECT COUNT(DISTINCT T1.playerID) FROM Goalies AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID INNER JOIN Teams AS T3 ON T1.tmID = T3.tmID AND T1.year = T3.year WHERE T3.name = 'Haileybury Hockey Club' AND T2.hofID IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "For the goalie who had the most shutouts in 2010, what's his catching hand?",
+        "query": "SELECT T2.shootCatch FROM Goalies AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID WHERE T1.year = 2010 GROUP BY T2.shootCatch ORDER BY SUM(T1.SHO) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What's the decrease rate of the game plays did David Aebischer after he got traded in 2005?",
+        "query": "SELECT CAST((SUM(CASE WHEN T1.year = 2005 THEN T1.GP ELSE 0 END) - SUM(CASE WHEN T1.year = 2006 THEN T1.GP ELSE 0 END)) AS REAL) * 100 / SUM(CASE WHEN T1.year = 2005 THEN T1.GP ELSE 0 END) FROM Goalies AS T1 INNER JOIN Master AS T2 ON T1.playerID = T2.playerID WHERE T2.firstName = 'David' AND T2.lastName = 'Aebischer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "State the player ID and coach ID of person who have become coach after retirement.",
+        "query": "SELECT playerID, coachID FROM Master WHERE playerID IS NOT NULL AND coachID IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "State the player ID of player with average height of 75.",
+        "query": "SELECT DISTINCT playerID FROM Master GROUP BY playerID HAVING AVG(height) = 75"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Who is the heaviest player? State player ID of 5 heaviest players.",
+        "query": "SELECT playerID FROM Master ORDER BY weight DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the full name of players origin from Finland?",
+        "query": "SELECT DISTINCT firstName, lastName FROM Master WHERE birthCountry = 'Finland'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "List down player ID of players who have passed away.",
+        "query": "SELECT DISTINCT playerID FROM Master WHERE deathYear IS NOT NULL AND playerID IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "List down the first name of coaches who still coach after year 2000.",
+        "query": "SELECT DISTINCT T1.firstName FROM Master AS T1 INNER JOIN Coaches AS T2 ON T1.coachID = T2.coachID WHERE T2.year > 2000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the height and weight for coaches who have won awards in 1930?",
+        "query": "SELECT T1.height, T1.weight FROM Master AS T1 INNER JOIN AwardsCoaches AS T2 ON T1.coachID = T2.coachID WHERE T2.year = '1930'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "How much is the total goals for player with player ID aaltoan01 and how old is this person?",
+        "query": "SELECT SUM(T2.G), STRFTIME('%Y', CURRENT_TIMESTAMP) - T1.birthyear FROM Master AS T1 INNER JOIN Scoring AS T2 ON T1.playerID = T2.playerID WHERE T1.playerID = 'aaltoan01' GROUP BY T1.birthyear"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Is there any coach who has not been a player before but has won award? State the ID.",
+        "query": "SELECT DISTINCT T2.coachID FROM Master AS T1 INNER JOIN AwardsCoaches AS T2 ON T1.coachID = T2.coachID WHERE T1.playerID IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which player ID are left winger and weight more than 200?",
+        "query": "SELECT DISTINCT playerID FROM Master WHERE pos LIKE '%L%' AND weight > 200 AND playerID IS NOT NULL AND pos = 'L'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What is the total number of game played for players from USA?",
+        "query": "SELECT COUNT(T2.GP) FROM Master AS T1 INNER JOIN Scoring AS T2 ON T1.playerID = T2.playerID WHERE T1.birthCountry = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Calculate the total points scored by team ID ANA and list down the coashes of the team.",
+        "query": "SELECT SUM(T2.Pts), T1.coachID FROM Coaches AS T1 INNER JOIN Teams AS T2 ON T2.tmID = T1.tmID WHERE T2.tmID = 'ANA' GROUP BY T1.coachID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "In 1976, how many goals achieved by team 'BIR' in Division 'EW'?",
+        "query": "SELECT SUM(T2.G) FROM Teams AS T1 INNER JOIN Scoring AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.divID = 'EW' AND T1.tmID = 'BIR' AND T1.year = 1976"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "In 2010, how many loses made by team 'BOS' and how many assists were made by the players?",
+        "query": "SELECT SUM(T1.L), SUM(T2.A) FROM Teams AS T1 INNER JOIN Scoring AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.tmID = 'BOS' AND T1.year = 2010"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "What are the total weights of players for team 'ANA' as per year 1997?",
+        "query": "SELECT SUM(T1.weight) FROM Master AS T1 INNER JOIN Scoring AS T2 ON T1.playerID = T2.playerID WHERE T2.year = 1997 AND T2.tmID = 'ANA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Who is the shortest player and state the team ID of that player from 1925 to 1936.",
+        "query": "SELECT T2.playerID, T2.tmID FROM ( SELECT playerID FROM Master WHERE height IS NOT NULL ORDER BY height ASC LIMIT 1 ) AS T1 INNER JOIN ( SELECT DISTINCT playerID, tmID FROM Scoring WHERE year BETWEEN 1925 AND 1936 ) AS T2 ON T1.playerID = T2.playerID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "Which team has the highest winning rate in year 2000? State the team ID and list down the birth country of it's players.",
+        "query": "SELECT DISTINCT T3.tmID, T1.birthCountry FROM Master AS T1 INNER JOIN Scoring AS T2 ON T1.playerID = T2.playerID INNER JOIN ( SELECT year, tmID FROM Teams WHERE year = 2000 ORDER BY W / (W + L) DESC LIMIT 1 ) AS T3 ON T2.tmID = T3.tmID AND T2.year = T3.year"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "hockey",
+        "question": "In 1998, How many wins were made by team 'CAR' per game played? Who contributed the most goals? State the player ID.",
+        "query": "SELECT CAST(T1.W AS REAL) / T1.G, T2.playerID FROM Teams AS T1 INNER JOIN Scoring AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.tmID = 'CAR' AND T1.year = 1998 GROUP BY T1.W / T1.G, T2.playerID ORDER BY SUM(T2.G) DESC LIMIT 1"
+    }
+]

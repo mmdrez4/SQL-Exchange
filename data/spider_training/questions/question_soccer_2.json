@@ -1,0 +1,638 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the total enrollment number of all colleges?",
+        "query": "SELECT sum(enr) FROM College"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many students are enrolled in college?",
+        "query": "SELECT sum(enr) FROM College"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the average enrollment number?",
+        "query": "SELECT avg(enr) FROM College"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many students, on average, does each college have enrolled?",
+        "query": "SELECT avg(enr) FROM College"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many colleges in total?",
+        "query": "SELECT count(*) FROM College"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many different colleges are there?",
+        "query": "SELECT count(*) FROM College"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many players have more than 1000 hours of training?",
+        "query": "SELECT count(*) FROM Player WHERE HS  >  1000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many different players trained for more than 1000 hours?",
+        "query": "SELECT count(*) FROM Player WHERE HS  >  1000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many colleges has more than 15000 students?",
+        "query": "SELECT count(*) FROM College WHERE enr  >  15000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the number of colleges with a student population greater than 15000?",
+        "query": "SELECT count(*) FROM College WHERE enr  >  15000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the average training hours of all players?",
+        "query": "SELECT avg(HS) FROM Player"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many hours do the players train on average?",
+        "query": "SELECT avg(HS) FROM Player"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the name and training hours of players whose hours are below 1500.",
+        "query": "SELECT pName ,  HS FROM Player WHERE HS  <  1500"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names and number of hours spent training for each player who trains for less than 1500 hours?",
+        "query": "SELECT pName ,  HS FROM Player WHERE HS  <  1500"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many different colleges do attend the tryout test?",
+        "query": "SELECT count(DISTINCT cName) FROM tryout"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many different colleges were represented at tryouts?",
+        "query": "SELECT count(DISTINCT cName) FROM tryout"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the unique types of player positions in the tryout?",
+        "query": "SELECT count(DISTINCT pPos) FROM tryout"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the different types of player positions?",
+        "query": "SELECT count(DISTINCT pPos) FROM tryout"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many students got accepted after the tryout?",
+        "query": "SELECT count(*) FROM tryout WHERE decision  =  'yes'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many students received a yes from tryouts?",
+        "query": "SELECT count(*) FROM tryout WHERE decision  =  'yes'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many students whose are playing the role of goalie?",
+        "query": "SELECT count(*) FROM tryout WHERE pPos  =  'goalie'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the number of students playing as a goalie?",
+        "query": "SELECT count(*) FROM tryout WHERE pPos  =  'goalie'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the max, average and min training hours of all players.",
+        "query": "SELECT avg(HS) ,  max(HS) ,  min(HS) FROM Player"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the average, maximum, and minimum for the number of hours spent training?",
+        "query": "SELECT avg(HS) ,  max(HS) ,  min(HS) FROM Player"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is average enrollment of colleges in the state FL?",
+        "query": "SELECT avg(enr) FROM College WHERE state  =  'FL'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is average number of students enrolled in Florida colleges?",
+        "query": "SELECT avg(enr) FROM College WHERE state  =  'FL'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names of players whose training hours is between 500 and 1500?",
+        "query": "SELECT pName FROM Player WHERE HS BETWEEN 500 AND 1500"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names of players who train between 500 and 1500 hours?",
+        "query": "SELECT pName FROM Player WHERE HS BETWEEN 500 AND 1500"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the players whose names contain letter 'a'.",
+        "query": "SELECT DISTINCT pName FROM Player WHERE pName LIKE '%a%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Who are the players that have names containing the letter a?",
+        "query": "SELECT DISTINCT pName FROM Player WHERE pName LIKE '%a%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the name, enrollment of the colleges whose size is bigger than 10000 and location is in state LA.",
+        "query": "SELECT cName ,  enr FROM College WHERE enr  >  10000 AND state = \"LA\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names and enrollment numbers for colleges that have more than 10000 enrolled and are located in Louisiana?",
+        "query": "SELECT cName ,  enr FROM College WHERE enr  >  10000 AND state = \"LA\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "List all information about college sorted by enrollment number in the ascending order.",
+        "query": "SELECT * FROM College ORDER BY enr"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What information do you have on colleges sorted by increasing enrollment numbers?",
+        "query": "SELECT * FROM College ORDER BY enr"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "List the name of the colleges whose enrollment is greater 18000 sorted by the college's name.",
+        "query": "SELECT cName FROM College WHERE enr  >  18000 ORDER BY cName"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the name of every college in alphabetical order that has more than 18000 students enrolled?",
+        "query": "SELECT cName FROM College WHERE enr  >  18000 ORDER BY cName"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the name of players whose card is yes in the descending order of training hours.",
+        "query": "SELECT pName FROM Player WHERE yCard  =  'yes' ORDER BY HS DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the name of the players who received a card in descending order of the hours of training?",
+        "query": "SELECT pName FROM Player WHERE yCard  =  'yes' ORDER BY HS DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the name of different colleges involved in the tryout in alphabetical order.",
+        "query": "SELECT DISTINCT cName FROM tryout ORDER BY cName"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the different names of the colleges involved in the tryout in alphabetical order?",
+        "query": "SELECT DISTINCT cName FROM tryout ORDER BY cName"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Which position is most popular among players in the tryout?",
+        "query": "SELECT pPos FROM tryout GROUP BY pPos ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What was the most popular position at tryouts?",
+        "query": "SELECT pPos FROM tryout GROUP BY pPos ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the number of students who participate in the tryout for each college ordered by descending count.",
+        "query": "SELECT count(*) ,  cName FROM tryout GROUP BY cName ORDER BY count(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many students participated in tryouts for each college by descennding count?",
+        "query": "SELECT count(*) ,  cName FROM tryout GROUP BY cName ORDER BY count(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is minimum hours of the students playing in different position?",
+        "query": "SELECT min(T2.HS) ,   T1.pPos FROM tryout AS T1 JOIN player AS T2 ON T1.pID  =  T2.pID GROUP BY T1.pPos"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "For each position, what is the minimum time students spent practicing?",
+        "query": "SELECT min(T2.HS) ,   T1.pPos FROM tryout AS T1 JOIN player AS T2 ON T1.pID  =  T2.pID GROUP BY T1.pPos"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names of schools with the top 3 largest size?",
+        "query": "SELECT cName FROM college ORDER BY enr DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names of the schools with the top 3 largest class sizes?",
+        "query": "SELECT cName FROM college ORDER BY enr DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the name of school that has the smallest enrollment in each state?",
+        "query": "SELECT cName ,  state ,  min(enr) FROM college GROUP BY state"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the name of the school with smallest enrollment size per state?",
+        "query": "SELECT cName ,  state ,  min(enr) FROM college GROUP BY state"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the states where have some college students in tryout.",
+        "query": "SELECT DISTINCT state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the different states that have students trying out?",
+        "query": "SELECT DISTINCT state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the states where have some college students in tryout and their decisions are yes.",
+        "query": "SELECT DISTINCT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.decision  =  'yes'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the different states that had students successfully try out?",
+        "query": "SELECT DISTINCT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.decision  =  'yes'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the name and college of students whose decisions are yes in the tryout.",
+        "query": "SELECT T1.pName ,  T2.cName FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names of all the players who received a yes during tryouts, and also what are the names of their colleges?",
+        "query": "SELECT T1.pName ,  T2.cName FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the name of all students who were in the tryout sorted in alphabetic order.",
+        "query": "SELECT T1.pName FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID ORDER BY T1.pName"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names of all students who tried out in alphabetical order?",
+        "query": "SELECT T1.pName FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID ORDER BY T1.pName"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the name and hours of the students whose tryout decision is yes.",
+        "query": "SELECT T1.pName ,  T1.HS FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names and hours spent practicing of every student who received a yes at tryouts?",
+        "query": "SELECT T1.pName ,  T1.HS FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the states of the colleges that have students in the tryout who played in striker position.",
+        "query": "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'striker'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the states of the colleges where students who tried out for the striker position attend?",
+        "query": "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'striker'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the names of the students who are in the position of striker and got a yes tryout decision.",
+        "query": "SELECT T1.pName FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes' AND T2.pPos  =  'striker'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names of all students who successfully tried out for the position of striker?",
+        "query": "SELECT T1.pName FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes' AND T2.pPos  =  'striker'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the state of the college which player Charles is attending.",
+        "query": "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName JOIN player AS T3 ON T2.pID  =  T3.pID WHERE T3.pName  =  'Charles'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "In which state is the college that Charles attends?",
+        "query": "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName JOIN player AS T3 ON T2.pID  =  T3.pID WHERE T3.pName  =  'Charles'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the average and maximum hours for the students whose tryout decision is yes.",
+        "query": "SELECT avg(T1.HS) ,  max(T1.HS) FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the average and maximum number of hours students who made the team practiced?",
+        "query": "SELECT avg(T1.HS) ,  max(T1.HS) FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'yes'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the average hours for the students whose tryout decision is no.",
+        "query": "SELECT avg(T1.HS) FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'no'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the average number of hours spent practicing for students who got rejected?",
+        "query": "SELECT avg(T1.HS) FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T2.decision  =  'no'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the maximum training hours for the students whose training hours is greater than 1000 in different positions?",
+        "query": "SELECT max(T1.HS) ,  pPos FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T1.HS  >  1000 GROUP BY T2.pPos"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "For each position, what is the maximum number of  hours for students who spent more than 1000 hours training?",
+        "query": "SELECT max(T1.HS) ,  pPos FROM player AS T1 JOIN tryout AS T2 ON T1.pID  =  T2.pID WHERE T1.HS  >  1000 GROUP BY T2.pPos"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Which colleges do the tryout players whose name starts with letter D go to?",
+        "query": "SELECT T1.cName FROM  tryout AS T1 JOIN player AS T2 ON T1.pID  =  T2.pID WHERE T2.pName LIKE 'D%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Which colleges does each player with a name that starts with the letter D  who tried out go to?",
+        "query": "SELECT T1.cName FROM  tryout AS T1 JOIN player AS T2 ON T1.pID  =  T2.pID WHERE T2.pName LIKE 'D%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Which college has any student who is a goalie and succeeded in the tryout.",
+        "query": "SELECT cName FROM  tryout WHERE decision  =  'yes' AND pPos  =  'goalie'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What college has a student who successfully made the team in the role of a goalie?",
+        "query": "SELECT cName FROM  tryout WHERE decision  =  'yes' AND pPos  =  'goalie'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the name of the tryout players who are from the college with largest size.",
+        "query": "SELECT T2.pName FROM  tryout AS T1 JOIN player AS T2 ON T1.pID  =  T2.pID WHERE T1.cName  =  (SELECT cName FROM college ORDER BY enr DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names of all tryout participants who are from the largest college?",
+        "query": "SELECT T2.pName FROM  tryout AS T1 JOIN player AS T2 ON T1.pID  =  T2.pID WHERE T1.cName  =  (SELECT cName FROM college ORDER BY enr DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the state and enrollment of the colleges where have any students who got accepted in the tryout decision.",
+        "query": "SELECT DISTINCT T1.state ,  T1.enr FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.decision  =  'yes'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many students are enrolled in colleges that have student accepted during tryouts, and in which states are those colleges?",
+        "query": "SELECT DISTINCT T1.state ,  T1.enr FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.decision  =  'yes'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the names of either colleges in LA with greater than 15000 size or in state AZ with less than 13000 enrollment.",
+        "query": "SELECT cName FROM College WHERE enr  <  13000 AND state = \"AZ\" UNION SELECT cName FROM College WHERE enr  >  15000 AND state = \"LA\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names of colleges in LA that have more than 15,000 students and of colleges in AZ with less than 13,000 students?",
+        "query": "SELECT cName FROM College WHERE enr  <  13000 AND state = \"AZ\" UNION SELECT cName FROM College WHERE enr  >  15000 AND state = \"LA\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the names of schools that have some students playing in goalie and mid positions.",
+        "query": "SELECT cName FROM  tryout WHERE pPos  =  'goalie' INTERSECT SELECT cName FROM  tryout WHERE pPos  =  'mid'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names of all schools that have students trying out for the position of goal and 'mid'-field.",
+        "query": "SELECT cName FROM  tryout WHERE pPos  =  'goalie' INTERSECT SELECT cName FROM  tryout WHERE pPos  =  'mid'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the names of states that have some college students playing in goalie and mid positions.",
+        "query": "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'goalie' INTERSECT SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'mid'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names of the states that have some college students playing in the positions of goalie and mid-field?",
+        "query": "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'goalie' INTERSECT SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'mid'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many schools have some students playing in goalie and mid positions.",
+        "query": "SELECT COUNT(*) FROM (SELECT cName FROM  tryout WHERE pPos  =  'goalie' INTERSECT SELECT cName FROM  tryout WHERE pPos  =  'mid')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many schools have students playing in goalie and mid-field positions?",
+        "query": "SELECT COUNT(*) FROM (SELECT cName FROM  tryout WHERE pPos  =  'goalie' INTERSECT SELECT cName FROM  tryout WHERE pPos  =  'mid')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the names of schools that have some players in the mid position but not in the goalie position.",
+        "query": "SELECT cName FROM  tryout WHERE pPos  =  'mid' EXCEPT SELECT cName FROM  tryout WHERE pPos  =  'goalie'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names of the schools with some players in the mid position but no goalies?",
+        "query": "SELECT cName FROM  tryout WHERE pPos  =  'mid' EXCEPT SELECT cName FROM  tryout WHERE pPos  =  'goalie'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the names of states that have some college students playing in the mid position but not in the goalie position.",
+        "query": "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'mid' EXCEPT SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'goalie'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names of all the states with college students playing in the mid position but no goalies?",
+        "query": "SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'mid' EXCEPT SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'goalie'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many states that have some college students playing in the mid position but not in the goalie position.",
+        "query": "SELECT COUNT(*) FROM (SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'mid' EXCEPT SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'goalie')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the count of states with college students playing in the mid position but not as goalies?",
+        "query": "SELECT COUNT(*) FROM (SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'mid' EXCEPT SELECT T1.state FROM college AS T1 JOIN tryout AS T2 ON T1.cName  =  T2.cName WHERE T2.pPos  =  'goalie')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find the states where have the colleges whose enrollments are less than the largest size.",
+        "query": "SELECT DISTINCT state FROM college WHERE enr  <  (SELECT max(enr) FROM college)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the states with colleges that have enrollments less than the some other college?",
+        "query": "SELECT DISTINCT state FROM college WHERE enr  <  (SELECT max(enr) FROM college)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find names of colleges with enrollment greater than that of some (at least one) college in the FL state.",
+        "query": "SELECT DISTINCT cName FROM college WHERE enr  >  (SELECT min(enr) FROM college WHERE state  =  'FL')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names of the colleges that are larger than at least one college in Florida?",
+        "query": "SELECT DISTINCT cName FROM college WHERE enr  >  (SELECT min(enr) FROM college WHERE state  =  'FL')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "Find names of all colleges whose enrollment is greater than that of all colleges in the FL state.",
+        "query": "SELECT cName FROM college WHERE enr  >  (SELECT max(enr) FROM college WHERE state  =  'FL')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What are the names of all colleges with a larger enrollment than the largest college in Florida?",
+        "query": "SELECT cName FROM college WHERE enr  >  (SELECT max(enr) FROM college WHERE state  =  'FL')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the total number of enrollment of schools that do not have any goalie player?",
+        "query": "SELECT sum(enr) FROM college WHERE cName NOT IN (SELECT cName FROM tryout WHERE pPos  =  \"goalie\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the total number of students enrolled in schools without any goalies?",
+        "query": "SELECT sum(enr) FROM college WHERE cName NOT IN (SELECT cName FROM tryout WHERE pPos  =  \"goalie\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the number of states that has some college whose enrollment is larger than the average enrollment?",
+        "query": "SELECT count(DISTINCT state) FROM college WHERE enr  >  (SELECT avg(enr) FROM college)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many states have a college with more students than average?",
+        "query": "SELECT count(DISTINCT state) FROM college WHERE enr  >  (SELECT avg(enr) FROM college)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "What is the number of states that has some colleges whose enrollment is smaller than the average enrollment?",
+        "query": "SELECT count(DISTINCT state) FROM college WHERE enr  <  (SELECT avg(enr) FROM college)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "soccer_2",
+        "question": "How many states have smaller colleges than average?",
+        "query": "SELECT count(DISTINCT state) FROM college WHERE enr  <  (SELECT avg(enr) FROM college)"
+    }
+]

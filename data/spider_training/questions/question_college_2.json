@@ -1,0 +1,1022 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the buildings which have rooms with capacity more than 50.",
+        "query": "SELECT DISTINCT building FROM classroom WHERE capacity  >  50"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the distinct buildings with capacities of greater than 50?",
+        "query": "SELECT DISTINCT building FROM classroom WHERE capacity  >  50"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Count the number of rooms that are not in the Lamberton building.",
+        "query": "SELECT count(*) FROM classroom WHERE building != 'Lamberton'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "How many classrooms are not in Lamberton?",
+        "query": "SELECT count(*) FROM classroom WHERE building != 'Lamberton'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the name and building of the departments whose budget is more than the average budget?",
+        "query": "SELECT dept_name ,  building FROM department WHERE budget  >  (SELECT avg(budget) FROM department)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Give the name and building of the departments with greater than average budget.",
+        "query": "SELECT dept_name ,  building FROM department WHERE budget  >  (SELECT avg(budget) FROM department)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the room number of the rooms which can sit 50 to 100 students and their buildings.",
+        "query": "SELECT building ,  room_number FROM classroom WHERE capacity BETWEEN 50 AND 100"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the room numbers and corresponding buildings for classrooms which can seat between 50 to 100 students?",
+        "query": "SELECT building ,  room_number FROM classroom WHERE capacity BETWEEN 50 AND 100"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name and building of the department with the highest budget.",
+        "query": "SELECT dept_name ,  building FROM department ORDER BY budget DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the department name and corresponding building for the department with the greatest budget?",
+        "query": "SELECT dept_name ,  building FROM department ORDER BY budget DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the name of the student who has the highest total credits in the History department.",
+        "query": "SELECT name FROM student WHERE dept_name  =  'History' ORDER BY tot_cred DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Give the name of the student in the History department with the most credits.",
+        "query": "SELECT name FROM student WHERE dept_name  =  'History' ORDER BY tot_cred DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "How many rooms does the Lamberton building have?",
+        "query": "SELECT count(*) FROM classroom WHERE building  =  'Lamberton'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Count the number of classrooms in Lamberton.",
+        "query": "SELECT count(*) FROM classroom WHERE building  =  'Lamberton'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "How many students have advisors?",
+        "query": "SELECT count(DISTINCT s_id) FROM advisor"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Count the number of students who have advisors.",
+        "query": "SELECT count(DISTINCT s_id) FROM advisor"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "How many departments offer courses?",
+        "query": "SELECT count(DISTINCT dept_name) FROM course"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Count the number of departments which offer courses.",
+        "query": "SELECT count(DISTINCT dept_name) FROM course"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "How many different courses offered by Physics department?",
+        "query": "SELECT count(DISTINCT course_id) FROM course WHERE dept_name  =  'Physics'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Count the number of courses in the Physics department.",
+        "query": "SELECT count(DISTINCT course_id) FROM course WHERE dept_name  =  'Physics'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the title of courses that have two prerequisites?",
+        "query": "SELECT T1.title FROM course AS T1 JOIN prereq AS T2 ON T1.course_id  =  T2.course_id GROUP BY T2.course_id HAVING count(*)  =  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the titles for courses with two prerequisites?",
+        "query": "SELECT T1.title FROM course AS T1 JOIN prereq AS T2 ON T1.course_id  =  T2.course_id GROUP BY T2.course_id HAVING count(*)  =  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the title, credit, and department name of courses that have more than one prerequisites?",
+        "query": "SELECT T1.title ,  T1.credits , T1.dept_name FROM course AS T1 JOIN prereq AS T2 ON T1.course_id  =  T2.course_id GROUP BY T2.course_id HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the title, credit value, and department name for courses with more than one prerequisite?",
+        "query": "SELECT T1.title ,  T1.credits , T1.dept_name FROM course AS T1 JOIN prereq AS T2 ON T1.course_id  =  T2.course_id GROUP BY T2.course_id HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "How many courses that do not have prerequisite?",
+        "query": "SELECT count(*) FROM course WHERE course_id NOT IN (SELECT course_id FROM prereq)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Count the number of courses without prerequisites.",
+        "query": "SELECT count(*) FROM course WHERE course_id NOT IN (SELECT course_id FROM prereq)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name of the courses that do not have any prerequisite?",
+        "query": "SELECT title FROM course WHERE course_id NOT IN (SELECT course_id FROM prereq)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the titles of courses without prerequisites?",
+        "query": "SELECT title FROM course WHERE course_id NOT IN (SELECT course_id FROM prereq)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "How many different instructors have taught some course?",
+        "query": "SELECT COUNT (DISTINCT id) FROM teaches"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Count the number of distinct instructors who have taught a course.",
+        "query": "SELECT COUNT (DISTINCT id) FROM teaches"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the total budgets of the Marketing or Finance department.",
+        "query": "SELECT sum(budget) FROM department WHERE dept_name  =  'Marketing' OR dept_name  =  'Finance'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the sum of budgets of the Marketing and Finance departments?",
+        "query": "SELECT sum(budget) FROM department WHERE dept_name  =  'Marketing' OR dept_name  =  'Finance'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the department name of the instructor whose name contains 'Soisalon'.",
+        "query": "SELECT dept_name FROM instructor WHERE name LIKE '%Soisalon%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the name of the department with an instructure who has a name like 'Soisalon'?",
+        "query": "SELECT dept_name FROM instructor WHERE name LIKE '%Soisalon%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "How many rooms whose capacity is less than 50 does the Lamberton building have?",
+        "query": "SELECT count(*) FROM classroom WHERE building  =  'Lamberton' AND capacity  <  50"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Count the number of rooms in Lamberton with capacity lower than 50.",
+        "query": "SELECT count(*) FROM classroom WHERE building  =  'Lamberton' AND capacity  <  50"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name and budget of departments whose budgets are more than the average budget.",
+        "query": "SELECT dept_name ,  budget FROM department WHERE budget  >  (SELECT avg(budget) FROM department)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names and budgets of departments with budgets greater than the average?",
+        "query": "SELECT dept_name ,  budget FROM department WHERE budget  >  (SELECT avg(budget) FROM department)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "what is the name of the instructor who is in Statistics department and earns the lowest salary?",
+        "query": "SELECT name FROM instructor WHERE dept_name  =  'Statistics' ORDER BY salary LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Give the name of the lowest earning instructor in the Statistics department.",
+        "query": "SELECT name FROM instructor WHERE dept_name  =  'Statistics' ORDER BY salary LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the title of course that is provided by both Statistics and Psychology departments.",
+        "query": "SELECT title FROM course WHERE dept_name  =  'Statistics' INTERSECT SELECT title FROM course WHERE dept_name  =  'Psychology'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the title of a course that is listed in both the Statistics and Psychology departments?",
+        "query": "SELECT title FROM course WHERE dept_name  =  'Statistics' INTERSECT SELECT title FROM course WHERE dept_name  =  'Psychology'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the title of course that is provided by Statistics but not Psychology departments.",
+        "query": "SELECT title FROM course WHERE dept_name  =  'Statistics' EXCEPT SELECT title FROM course WHERE dept_name  =  'Psychology'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the titles of courses that are in the Statistics department but not the Psychology department?",
+        "query": "SELECT title FROM course WHERE dept_name  =  'Statistics' EXCEPT SELECT title FROM course WHERE dept_name  =  'Psychology'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the id of instructors who taught a class in Fall 2009 but not in Spring 2010.",
+        "query": "SELECT id FROM teaches WHERE semester  =  'Fall' AND YEAR  =  2009 EXCEPT SELECT id FROM teaches WHERE semester  =  'Spring' AND YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the ids of instructors who taught in the Fall of 2009 but not in the Spring of 2010?",
+        "query": "SELECT id FROM teaches WHERE semester  =  'Fall' AND YEAR  =  2009 EXCEPT SELECT id FROM teaches WHERE semester  =  'Spring' AND YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name of students who took any class in the years of 2009 and 2010.",
+        "query": "SELECT DISTINCT T1.name FROM student AS T1 JOIN takes AS T2 ON T1.id  =  T2.id WHERE YEAR  =  2009 OR YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of the students who took classes in 2009 or 2010?",
+        "query": "SELECT DISTINCT T1.name FROM student AS T1 JOIN takes AS T2 ON T1.id  =  T2.id WHERE YEAR  =  2009 OR YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the names of the top 3 departments that provide the largest amount of courses?",
+        "query": "SELECT dept_name FROM course GROUP BY dept_name ORDER BY count(*) DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of the 3 departments with the most courses?",
+        "query": "SELECT dept_name FROM course GROUP BY dept_name ORDER BY count(*) DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name of the department that offers the highest total credits?",
+        "query": "SELECT dept_name FROM course GROUP BY dept_name ORDER BY sum(credits) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the name of the department with the most credits?",
+        "query": "SELECT dept_name FROM course GROUP BY dept_name ORDER BY sum(credits) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "List the names of all courses ordered by their titles and credits.",
+        "query": "SELECT title FROM course ORDER BY title ,  credits"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Given the titles of all courses, in order of titles and credits.",
+        "query": "SELECT title FROM course ORDER BY title ,  credits"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Which department has the lowest budget?",
+        "query": "SELECT dept_name FROM department ORDER BY budget LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Give the name of the department with the lowest budget.",
+        "query": "SELECT dept_name FROM department ORDER BY budget LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "List the names and buildings of all departments sorted by the budget from large to small.",
+        "query": "SELECT dept_name ,  building FROM department ORDER BY budget DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names and buildings of the deparments, sorted by budget descending?",
+        "query": "SELECT dept_name ,  building FROM department ORDER BY budget DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Who is the instructor with the highest salary?",
+        "query": "SELECT name FROM instructor ORDER BY salary DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Give the name of the highest paid instructor.",
+        "query": "SELECT name FROM instructor ORDER BY salary DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "List the information of all instructors ordered by their salary in ascending order.",
+        "query": "SELECT * FROM instructor ORDER BY salary"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Give all information regarding instructors, in order of salary from least to greatest.",
+        "query": "SELECT * FROM instructor ORDER BY salary"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name of the students and their department names sorted by their total credits in ascending order.",
+        "query": "SELECT name ,  dept_name FROM student ORDER BY tot_cred"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of students and their respective departments, ordered by number of credits from least to greatest?",
+        "query": "SELECT name ,  dept_name FROM student ORDER BY tot_cred"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "list in alphabetic order all course names and their instructors' names in year 2008.",
+        "query": "SELECT T1.title ,  T3.name FROM course AS T1 JOIN teaches AS T2 ON T1.course_id  =  T2.course_id JOIN instructor AS T3 ON T2.id  =  T3.id WHERE YEAR  =  2008 ORDER BY T1.title"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Show all titles and their instructors' names for courses in 2008, in alphabetical order by title.",
+        "query": "SELECT T1.title ,  T3.name FROM course AS T1 JOIN teaches AS T2 ON T1.course_id  =  T2.course_id JOIN instructor AS T3 ON T2.id  =  T3.id WHERE YEAR  =  2008 ORDER BY T1.title"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name of instructors who are advising more than one student.",
+        "query": "SELECT T1.name FROM instructor AS T1 JOIN advisor AS T2 ON T1.id  =  T2.i_id GROUP BY T2.i_id HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of instructors who advise more than one student?",
+        "query": "SELECT T1.name FROM instructor AS T1 JOIN advisor AS T2 ON T1.id  =  T2.i_id GROUP BY T2.i_id HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name of the students who have more than one advisor?",
+        "query": "SELECT T1.name FROM student AS T1 JOIN advisor AS T2 ON T1.id  =  T2.s_id GROUP BY T2.s_id HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of students who have more than one advisor?",
+        "query": "SELECT T1.name FROM student AS T1 JOIN advisor AS T2 ON T1.id  =  T2.s_id GROUP BY T2.s_id HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the number of rooms with more than 50 capacity for each building.",
+        "query": "SELECT count(*) ,  building FROM classroom WHERE capacity  >  50 GROUP BY building"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "How many rooms in each building have a capacity of over 50?",
+        "query": "SELECT count(*) ,  building FROM classroom WHERE capacity  >  50 GROUP BY building"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the maximum and average capacity among rooms in each building.",
+        "query": "SELECT max(capacity) ,  avg(capacity) ,  building FROM classroom GROUP BY building"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the greatest and average capacity for rooms in each building?",
+        "query": "SELECT max(capacity) ,  avg(capacity) ,  building FROM classroom GROUP BY building"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the title of the course that is offered by more than one department.",
+        "query": "SELECT title FROM course GROUP BY title HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the titles of courses that are offered in more than one department?",
+        "query": "SELECT title FROM course GROUP BY title HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the total credits of courses provided by different department.",
+        "query": "SELECT sum(credits) ,  dept_name FROM course GROUP BY dept_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "How many total credits are offered by each department?",
+        "query": "SELECT sum(credits) ,  dept_name FROM course GROUP BY dept_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the minimum salary for the departments whose average salary is above the average payment of all instructors.",
+        "query": "SELECT min(salary) ,  dept_name FROM instructor GROUP BY dept_name HAVING avg(salary)  >  (SELECT avg(salary) FROM instructor)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the lowest salary in departments with average salary greater than the overall average.",
+        "query": "SELECT min(salary) ,  dept_name FROM instructor GROUP BY dept_name HAVING avg(salary)  >  (SELECT avg(salary) FROM instructor)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the number of courses provided in each semester and year.",
+        "query": "SELECT count(*) ,  semester ,  YEAR FROM SECTION GROUP BY semester ,  YEAR"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "How many courses are provided in each semester and year?",
+        "query": "SELECT count(*) ,  semester ,  YEAR FROM SECTION GROUP BY semester ,  YEAR"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the year which offers the largest number of courses.",
+        "query": "SELECT YEAR FROM SECTION GROUP BY YEAR ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Which year had the greatest number of courses?",
+        "query": "SELECT YEAR FROM SECTION GROUP BY YEAR ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the year and semester when offers the largest number of courses.",
+        "query": "SELECT semester ,  YEAR FROM SECTION GROUP BY semester ,  YEAR ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the year and semester with the most courses?",
+        "query": "SELECT semester ,  YEAR FROM SECTION GROUP BY semester ,  YEAR ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name of department has the highest amount of students?",
+        "query": "SELECT dept_name FROM student GROUP BY dept_name ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the name of the deparment with the highest enrollment?",
+        "query": "SELECT dept_name FROM student GROUP BY dept_name ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the total number of students in each department.",
+        "query": "SELECT count(*) ,  dept_name FROM student GROUP BY dept_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "How many students are in each department?",
+        "query": "SELECT count(*) ,  dept_name FROM student GROUP BY dept_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the semester and year which has the least number of student taking any class.",
+        "query": "SELECT semester ,  YEAR FROM takes GROUP BY semester ,  YEAR ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Which semeseter and year had the fewest students?",
+        "query": "SELECT semester ,  YEAR FROM takes GROUP BY semester ,  YEAR ORDER BY count(*) LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the id of the instructor who advises of all students from History department?",
+        "query": "SELECT i_id FROM advisor AS T1 JOIN student AS T2 ON T1.s_id  =  T2.id WHERE T2.dept_name  =  'History'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Give id of the instructor who advises students in the History department.",
+        "query": "SELECT i_id FROM advisor AS T1 JOIN student AS T2 ON T1.s_id  =  T2.id WHERE T2.dept_name  =  'History'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name and salary of the instructors who are advisors of any student from History department?",
+        "query": "SELECT T2.name ,  T2.salary FROM advisor AS T1 JOIN instructor AS T2 ON T1.i_id  =  T2.id JOIN student AS T3 ON T1.s_id  =  T3.id WHERE T3.dept_name  =  'History'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names and salaries of instructors who advises students in the History department?",
+        "query": "SELECT T2.name ,  T2.salary FROM advisor AS T1 JOIN instructor AS T2 ON T1.i_id  =  T2.id JOIN student AS T3 ON T1.s_id  =  T3.id WHERE T3.dept_name  =  'History'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the id of the courses that do not have any prerequisite?",
+        "query": "SELECT course_id FROM course EXCEPT SELECT course_id FROM prereq"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the ids of courses without prerequisites?",
+        "query": "SELECT course_id FROM course EXCEPT SELECT course_id FROM prereq"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name of the courses that do not have any prerequisite?",
+        "query": "SELECT title FROM course WHERE course_id NOT IN (SELECT course_id FROM prereq)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of courses without prerequisites?",
+        "query": "SELECT title FROM course WHERE course_id NOT IN (SELECT course_id FROM prereq)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the title of the prerequisite class of International Finance course?",
+        "query": "SELECT title FROM course WHERE course_id IN (SELECT T1.prereq_id FROM prereq AS T1 JOIN course AS T2 ON T1.course_id  =  T2.course_id WHERE T2.title  =  'International Finance')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Give the title of the prerequisite to the course International Finance.",
+        "query": "SELECT title FROM course WHERE course_id IN (SELECT T1.prereq_id FROM prereq AS T1 JOIN course AS T2 ON T1.course_id  =  T2.course_id WHERE T2.title  =  'International Finance')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the title of course whose prerequisite is course Differential Geometry.",
+        "query": "SELECT title FROM course WHERE course_id IN (SELECT T1.course_id FROM prereq AS T1 JOIN course AS T2 ON T1.prereq_id  =  T2.course_id WHERE T2.title  =  'Differential Geometry')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the title of the course with Differential Geometry as a prerequisite?",
+        "query": "SELECT title FROM course WHERE course_id IN (SELECT T1.course_id FROM prereq AS T1 JOIN course AS T2 ON T1.prereq_id  =  T2.course_id WHERE T2.title  =  'Differential Geometry')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the names of students who have taken any course in the fall semester of year 2003.",
+        "query": "SELECT name FROM student WHERE id IN (SELECT id FROM takes WHERE semester  =  'Fall' AND YEAR  =  2003)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of students who took a course in the Fall of 2003?",
+        "query": "SELECT name FROM student WHERE id IN (SELECT id FROM takes WHERE semester  =  'Fall' AND YEAR  =  2003)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the title of the course that was offered at building Chandler during the fall semester in the year of 2010?",
+        "query": "SELECT T1.title FROM course AS T1 JOIN SECTION AS T2 ON T1.course_id  =  T2.course_id WHERE building  =  'Chandler' AND semester  =  'Fall' AND YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Give the title of the course offered in Chandler during the Fall of 2010.",
+        "query": "SELECT T1.title FROM course AS T1 JOIN SECTION AS T2 ON T1.course_id  =  T2.course_id WHERE building  =  'Chandler' AND semester  =  'Fall' AND YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name of the instructors who taught C Programming course before.",
+        "query": "SELECT T1.name FROM instructor AS T1 JOIN teaches AS T2 ON T1.id  =  T2.id JOIN course AS T3 ON T2.course_id  =  T3.course_id WHERE T3.title  =  'C Programming'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of instructors who have taught C Programming courses?",
+        "query": "SELECT T1.name FROM instructor AS T1 JOIN teaches AS T2 ON T1.id  =  T2.id JOIN course AS T3 ON T2.course_id  =  T3.course_id WHERE T3.title  =  'C Programming'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name and salary of instructors who are advisors of the students from the Math department.",
+        "query": "SELECT T2.name ,  T2.salary FROM advisor AS T1 JOIN instructor AS T2 ON T1.i_id  =  T2.id JOIN student AS T3 ON T1.s_id  =  T3.id WHERE T3.dept_name  =  'Math'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names and salaries of instructors who advise students in the Math department?",
+        "query": "SELECT T2.name ,  T2.salary FROM advisor AS T1 JOIN instructor AS T2 ON T1.i_id  =  T2.id JOIN student AS T3 ON T1.s_id  =  T3.id WHERE T3.dept_name  =  'Math'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name of instructors who are advisors of the students from the Math department, and sort the results by students' total credit.",
+        "query": "SELECT T2.name FROM advisor AS T1 JOIN instructor AS T2 ON T1.i_id  =  T2.id JOIN student AS T3 ON T1.s_id  =  T3.id WHERE T3.dept_name  =  'Math' ORDER BY T3.tot_cred"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of all instructors who advise students in the math depart sorted by total credits of the student.",
+        "query": "SELECT T2.name FROM advisor AS T1 JOIN instructor AS T2 ON T1.i_id  =  T2.id JOIN student AS T3 ON T1.s_id  =  T3.id WHERE T3.dept_name  =  'Math' ORDER BY T3.tot_cred"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the course title of the prerequisite of course Mobile Computing?",
+        "query": "SELECT title FROM course WHERE course_id IN (SELECT T1.prereq_id FROM prereq AS T1 JOIN course AS T2 ON T1.course_id  =  T2.course_id WHERE T2.title  =  'Mobile Computing')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the title of the course that is a prerequisite for Mobile Computing?",
+        "query": "SELECT title FROM course WHERE course_id IN (SELECT T1.prereq_id FROM prereq AS T1 JOIN course AS T2 ON T1.course_id  =  T2.course_id WHERE T2.title  =  'Mobile Computing')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name of instructor who is the advisor of the student who has the highest number of total credits.",
+        "query": "SELECT T2.name FROM advisor AS T1 JOIN instructor AS T2 ON T1.i_id  =  T2.id JOIN student AS T3 ON T1.s_id  =  T3.id ORDER BY T3.tot_cred DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the name of the instructor who advises the student with the greatest number of total credits?",
+        "query": "SELECT T2.name FROM advisor AS T1 JOIN instructor AS T2 ON T1.i_id  =  T2.id JOIN student AS T3 ON T1.s_id  =  T3.id ORDER BY T3.tot_cred DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name of instructors who didn't teach any courses?",
+        "query": "SELECT name FROM instructor WHERE id NOT IN (SELECT id FROM teaches)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of instructors who didn't teach?",
+        "query": "SELECT name FROM instructor WHERE id NOT IN (SELECT id FROM teaches)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the id of instructors who didn't teach any courses?",
+        "query": "SELECT id FROM instructor EXCEPT SELECT id FROM teaches"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the ids of instructors who didnt' teach?",
+        "query": "SELECT id FROM instructor EXCEPT SELECT id FROM teaches"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the names of instructors who didn't each any courses in any Spring semester.",
+        "query": "SELECT name FROM instructor WHERE id NOT IN (SELECT id FROM teaches WHERE semester  =  'Spring')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of instructors who didn't teach courses in the Spring?",
+        "query": "SELECT name FROM instructor WHERE id NOT IN (SELECT id FROM teaches WHERE semester  =  'Spring')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name of the department which has the highest average salary of professors.",
+        "query": "SELECT dept_name FROM instructor GROUP BY dept_name ORDER BY avg(salary) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Which department has the highest average instructor salary?",
+        "query": "SELECT dept_name FROM instructor GROUP BY dept_name ORDER BY avg(salary) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the number and averaged salary of all instructors who are in the department with the highest budget.",
+        "query": "SELECT avg(T1.salary) ,  count(*) FROM instructor AS T1 JOIN department AS T2 ON T1.dept_name  =  T2.dept_name ORDER BY T2.budget DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "How many instructors are in the department with the highest budget, and what is their average salary?",
+        "query": "SELECT avg(T1.salary) ,  count(*) FROM instructor AS T1 JOIN department AS T2 ON T1.dept_name  =  T2.dept_name ORDER BY T2.budget DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What is the title and credits of the course that is taught in the largest classroom (with the highest capacity)?",
+        "query": "SELECT T3.title ,  T3.credits FROM classroom AS T1 JOIN SECTION AS T2 ON T1.building  =  T2.building AND T1.room_number  =  T2.room_number JOIN course AS T3 ON T2.course_id  =  T3.course_id WHERE T1.capacity  =  (SELECT max(capacity) FROM classroom)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Give the title and credits for the course that is taught in the classroom with the greatest capacity.",
+        "query": "SELECT T3.title ,  T3.credits FROM classroom AS T1 JOIN SECTION AS T2 ON T1.building  =  T2.building AND T1.room_number  =  T2.room_number JOIN course AS T3 ON T2.course_id  =  T3.course_id WHERE T1.capacity  =  (SELECT max(capacity) FROM classroom)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name of students who didn't take any course from Biology department.",
+        "query": "SELECT name FROM student WHERE id NOT IN (SELECT T1.id FROM takes AS T1 JOIN course AS T2 ON T1.course_id  =  T2.course_id WHERE T2.dept_name  =  'Biology')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of students who haven't taken any Biology courses?",
+        "query": "SELECT name FROM student WHERE id NOT IN (SELECT T1.id FROM takes AS T1 JOIN course AS T2 ON T1.course_id  =  T2.course_id WHERE T2.dept_name  =  'Biology')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the total number of students and total number of instructors for each department.",
+        "query": "SELECT count(DISTINCT T2.id) ,  count(DISTINCT T3.id) ,  T3.dept_name FROM department AS T1 JOIN student AS T2 ON T1.dept_name  =  T2.dept_name JOIN instructor AS T3 ON T1.dept_name  =  T3.dept_name GROUP BY T3.dept_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "How many students and instructors are in each department?",
+        "query": "SELECT count(DISTINCT T2.id) ,  count(DISTINCT T3.id) ,  T3.dept_name FROM department AS T1 JOIN student AS T2 ON T1.dept_name  =  T2.dept_name JOIN instructor AS T3 ON T1.dept_name  =  T3.dept_name GROUP BY T3.dept_name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name of students who have taken the prerequisite course of the course with title International Finance.",
+        "query": "SELECT T1.name FROM student AS T1 JOIN takes AS T2 ON T1.id  =  T2.id WHERE T2.course_id IN (SELECT T4.prereq_id FROM course AS T3 JOIN prereq AS T4 ON T3.course_id  =  T4.course_id WHERE T3.title  =  'International Finance')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of students who have taken the prerequisite for the course International Finance?",
+        "query": "SELECT T1.name FROM student AS T1 JOIN takes AS T2 ON T1.id  =  T2.id WHERE T2.course_id IN (SELECT T4.prereq_id FROM course AS T3 JOIN prereq AS T4 ON T3.course_id  =  T4.course_id WHERE T3.title  =  'International Finance')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name and salary of instructors whose salary is below the average salary of the instructors in the Physics department.",
+        "query": "SELECT name ,  salary FROM instructor WHERE salary  <  (SELECT avg(salary) FROM instructor WHERE dept_name  =  'Physics')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names and salaries for instructors who earn less than the average salary of instructors in the Physics department?",
+        "query": "SELECT name ,  salary FROM instructor WHERE salary  <  (SELECT avg(salary) FROM instructor WHERE dept_name  =  'Physics')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the name of students who took some course offered by Statistics department.",
+        "query": "SELECT T3.name FROM course AS T1 JOIN takes AS T2 ON T1.course_id  =  T2.course_id JOIN student AS T3 ON T2.id  =  T3.id WHERE T1.dept_name  =  'Statistics'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of students who have taken Statistics courses?",
+        "query": "SELECT T3.name FROM course AS T1 JOIN takes AS T2 ON T1.course_id  =  T2.course_id JOIN student AS T3 ON T2.id  =  T3.id WHERE T1.dept_name  =  'Statistics'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the building, room number, semester and year of all courses offered by Psychology department sorted by course titles.",
+        "query": "SELECT T2.building ,  T2.room_number ,  T2.semester ,  T2.year FROM course AS T1 JOIN SECTION AS T2 ON T1.course_id  =  T2.course_id WHERE T1.dept_name  =  'Psychology' ORDER BY T1.title"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the building, room number, semester and year of courses in the Psychology department, sorted using course title?",
+        "query": "SELECT T2.building ,  T2.room_number ,  T2.semester ,  T2.year FROM course AS T1 JOIN SECTION AS T2 ON T1.course_id  =  T2.course_id WHERE T1.dept_name  =  'Psychology' ORDER BY T1.title"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the names of all instructors in computer science department",
+        "query": "SELECT name FROM instructor WHERE dept_name  =  'Comp. Sci.'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of all instructors in the Comp. Sci. department?",
+        "query": "SELECT name FROM instructor WHERE dept_name  =  'Comp. Sci.'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the names of all instructors in Comp. Sci. department with salary > 80000.",
+        "query": "SELECT name FROM instructor WHERE dept_name  =  'Comp. Sci.'  AND salary  >  80000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of the instructors in the Comp. Sci. department who earn more than 80000?",
+        "query": "SELECT name FROM instructor WHERE dept_name  =  'Comp. Sci.'  AND salary  >  80000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the names of all instructors who have taught some course and the course_id.",
+        "query": "SELECT name ,  course_id FROM instructor AS T1 JOIN teaches AS T2 ON T1.ID  =  T2.ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of all instructors who have taught a course, as well as the corresponding course id?",
+        "query": "SELECT name ,  course_id FROM instructor AS T1 JOIN teaches AS T2 ON T1.ID  =  T2.ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the names of all instructors in the Art department who have taught some course and the course_id.",
+        "query": "SELECT name ,  course_id FROM instructor AS T1 JOIN teaches AS T2 ON T1.ID  =  T2.ID WHERE T1.dept_name  =  'Art'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of Art instructors who have taught a course, and the corresponding course id?",
+        "query": "SELECT name ,  course_id FROM instructor AS T1 JOIN teaches AS T2 ON T1.ID  =  T2.ID WHERE T1.dept_name  =  'Art'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the names of all instructors whose name includes the substring \u201cdar\u201d.",
+        "query": "SELECT name FROM instructor WHERE name LIKE '%dar%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of all instructors with names that include \"dar\"?",
+        "query": "SELECT name FROM instructor WHERE name LIKE '%dar%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "List in alphabetic order the names of all distinct instructors.",
+        "query": "SELECT DISTINCT name FROM  instructor ORDER BY name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "List the distinct names of the instructors, ordered by name.",
+        "query": "SELECT DISTINCT name FROM  instructor ORDER BY name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find courses that ran in Fall 2009 or in Spring 2010.",
+        "query": "SELECT course_id FROM SECTION WHERE semester  =  'Fall' AND YEAR  =  2009 UNION SELECT course_id FROM SECTION WHERE semester  =  'Spring' AND YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the ids for courses in the Fall of 2009 or the Spring of 2010?",
+        "query": "SELECT course_id FROM SECTION WHERE semester  =  'Fall' AND YEAR  =  2009 UNION SELECT course_id FROM SECTION WHERE semester  =  'Spring' AND YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find courses that ran in Fall 2009 and in Spring 2010.",
+        "query": "SELECT course_id FROM SECTION WHERE semester  =  'Fall' AND YEAR  =  2009 INTERSECT SELECT course_id FROM SECTION WHERE semester  =  'Spring' AND YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the ids for courses that were offered in both Fall of 2009 and Spring of 2010?",
+        "query": "SELECT course_id FROM SECTION WHERE semester  =  'Fall' AND YEAR  =  2009 INTERSECT SELECT course_id FROM SECTION WHERE semester  =  'Spring' AND YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find courses that ran in Fall 2009 but not in Spring 2010.",
+        "query": "SELECT course_id FROM SECTION WHERE semester  =  'Fall' AND YEAR  =  2009 EXCEPT SELECT course_id FROM SECTION WHERE semester  =  'Spring' AND YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the ids of courses offered in Fall of 2009 but not in Spring of 2010?",
+        "query": "SELECT course_id FROM SECTION WHERE semester  =  'Fall' AND YEAR  =  2009 EXCEPT SELECT course_id FROM SECTION WHERE semester  =  'Spring' AND YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the salaries of all distinct instructors that are less than the largest salary.",
+        "query": "SELECT DISTINCT salary FROM instructor WHERE salary  <  (SELECT max(salary) FROM instructor)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the distinct salaries of all instructors who earned less than the maximum salary?",
+        "query": "SELECT DISTINCT salary FROM instructor WHERE salary  <  (SELECT max(salary) FROM instructor)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the total number of instructors who teach a course in the Spring 2010 semester.",
+        "query": "SELECT COUNT (DISTINCT ID) FROM teaches WHERE semester  =  'Spring' AND YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "How many instructors teach a course in the Spring of 2010?",
+        "query": "SELECT COUNT (DISTINCT ID) FROM teaches WHERE semester  =  'Spring' AND YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the names and average salaries of all departments whose average salary is greater than 42000.",
+        "query": "SELECT dept_name ,  AVG (salary) FROM instructor GROUP BY dept_name HAVING AVG (salary)  >  42000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names and average salaries for departments with average salary higher than 42000?",
+        "query": "SELECT dept_name ,  AVG (salary) FROM instructor GROUP BY dept_name HAVING AVG (salary)  >  42000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find names of instructors with salary greater than that of some (at least one) instructor in the Biology department.",
+        "query": "SELECT name FROM instructor WHERE salary  >  (SELECT min(salary) FROM instructor WHERE dept_name  =  'Biology')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of instructors who earn more than at least one instructor from the Biology department?",
+        "query": "SELECT name FROM instructor WHERE salary  >  (SELECT min(salary) FROM instructor WHERE dept_name  =  'Biology')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "Find the names of all instructors whose salary is greater than the salary of all instructors in the Biology department.",
+        "query": "SELECT name FROM instructor WHERE salary  >  (SELECT max(salary) FROM instructor WHERE dept_name  =  'Biology')"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "college_2",
+        "question": "What are the names of all instructors with a higher salary than any of the instructors in the Biology department?",
+        "query": "SELECT name FROM instructor WHERE salary  >  (SELECT max(salary) FROM instructor WHERE dept_name  =  'Biology')"
+    }
+]

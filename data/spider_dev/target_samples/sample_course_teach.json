@@ -1,0 +1,56 @@
+{
+    "course": [
+        [
+            5,
+            "10 May",
+            "Bible"
+        ],
+        [
+            8,
+            "14 May",
+            "French"
+        ],
+        [
+            10,
+            "17 May",
+            "Music"
+        ]
+    ],
+    "teacher": [
+        [
+            5,
+            "Kearsley Brown",
+            "45",
+            "Kearsley Urban District"
+        ],
+        [
+            6,
+            "Anne Walker",
+            "41",
+            "Little Lever Urban District"
+        ],
+        [
+            7,
+            "Lucy Wong",
+            "39",
+            "Turton Urban District"
+        ]
+    ],
+    "course_arrange": [
+        [
+            4,
+            6,
+            7
+        ],
+        [
+            2,
+            5,
+            1
+        ],
+        [
+            5,
+            6,
+            1
+        ]
+    ]
+}

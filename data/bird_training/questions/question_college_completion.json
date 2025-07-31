@@ -1,0 +1,458 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "List the all the institutes from the state with the most number of American Indian in 2007.",
+        "query": "SELECT T1.chronname FROM institution_details AS T1 INNER JOIN state_sector_grads AS T2 ON T1.state = T2.state WHERE T2.year = 2007 AND T2.race = 'Ai' GROUP BY T1.chronname ORDER BY COUNT(T1.chronname) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "State the name and website of the institutes from the state with 209 graduate cohort in 2011.",
+        "query": "SELECT T1.chronname, T1.site FROM institution_details AS T1 INNER JOIN state_sector_grads AS T2 ON T1.state = T2.state WHERE T2.year = 2011 AND T2.grad_cohort = 209"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "What is the number of female graduates between 2011 to 2013 from the state where 'Gateway Community College' is located?",
+        "query": "SELECT COUNT(T2.grad_cohort) FROM institution_details AS T1 INNER JOIN state_sector_grads AS T2 ON T1.state = T2.state WHERE T2.year BETWEEN 2011 AND 2013 AND T1.chronname = 'Gateway Community College' AND T2.gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "What is the total male graduates in 2012 in the state whereby the institute with the highest average amount of student aid going to undergraduate recipients is located?",
+        "query": "SELECT COUNT(T2.grad_cohort) FROM institution_details AS T1 INNER JOIN state_sector_grads AS T2 ON T1.state = T2.state WHERE T2.year = 2012 AND T2.gender = 'M' ORDER BY T1.aid_value DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "State the average median SAT value for institutes in the state with the most male graduate cohort in 2013.",
+        "query": "SELECT AVG(T1.med_sat_value) FROM institution_details AS T1 INNER JOIN state_sector_grads AS T2 ON T1.state = T2.state WHERE T2.year = 2013 AND T2.gender = 'M' GROUP BY T2.grad_cohort ORDER BY COUNT(T2.grad_cohort) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Name the state with the most number of graduate cohort in 2012 from private institute for profit? List all such institutes in the mentioned state.",
+        "query": "SELECT T1.state, T1.chronname FROM institution_details AS T1 INNER JOIN state_sector_grads AS T2 ON T1.state = T2.state WHERE T2.year = 2012 AND T1.control = 'Private for-profit' GROUP BY T2.grad_cohort ORDER BY COUNT(T2.grad_cohort) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "List all the public institutes from the state with the least number of graduate cohort in 2013.",
+        "query": "SELECT T1.chronname FROM institution_details AS T1 INNER JOIN state_sector_grads AS T2 ON T1.state = T2.state WHERE T2.year = 2013 AND T1.control = 'Public' ORDER BY T2.grad_cohort LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Provide the institute name with less than 200 graduate cohort of all races and genders in 2013. Also, please state the total number of full-time equivalent undergraduates for the institute.",
+        "query": "SELECT T1.chronname, T2.grad_cohort FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T1.unitid = T2.unitid WHERE T2.year = 2013 AND T2.gender = 'B' AND T2.race = 'X' AND T2.grad_cohort < 200"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "What is the number of female graduate for all students cohort from Oakwood University in 2013?",
+        "query": "SELECT COUNT(*) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T1.unitid = T2.unitid WHERE T2.year = 2013 AND T2.gender = 'F' AND T2.race = 'X' AND T1.chronname = 'Oakwood University'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "In 2012, how many Asian female graduates were seeking another type of degree or certificate at the 4-year institution at University of Alaska at Anchorage?",
+        "query": "SELECT COUNT(*) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T1.unitid = T2.unitid WHERE T2.gender = 'F' AND T2.race = 'A' AND T1.chronname = 'University of Alaska at Anchorage' AND T2.cohort = '4y other'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Compare the graduate cohort for Auburn University from 2011 to 2013?",
+        "query": "SELECT SUM(CASE WHEN T2.year = 2011 THEN T2.grad_cohort ELSE 0 END), SUM(CASE WHEN T2.year = 2012 THEN T2.grad_cohort ELSE 0 END), SUM(CASE WHEN T2.year = 2013 THEN T2.grad_cohort ELSE 0 END) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T1.unitid = T2.unitid WHERE T2.gender = 'B' AND T2.race = 'X' AND T1.chronname = 'Auburn University'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Calculate the percentage of Black students in all private for profit institutions.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.race = 'B' THEN 1 ELSE 0 END) AS REAL) * 100 / SUM(T2.grad_cohort) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T1.unitid = T2.unitid WHERE T2.race = 'B' AND T1.control = 'Private for-profit'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Calculate the percentage of Asian students among students of other races who graduated from institution in Alabama in year 2013 within 100 percent of normal / expected time.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.race = 'A' THEN 1 ELSE 0 END) AS REAL) * 100 / SUM(T2.grad_cohort) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T1.unitid = T2.unitid WHERE T2.year = 2013 AND T1.state = 'Alabama'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "What is the ratio of Asian male graduates to Asian female graduates from Harvard University in 2013?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.Gender = 'M' THEN T2.grad_cohort ELSE 0 END) AS REAL) / SUM(CASE WHEN T2.Gender = 'F' THEN T2.grad_cohort ELSE 0 END) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T1.unitid = T2.unitid WHERE T1.chronname = 'Harvard University' AND T2.year = 2013 AND T2.race = 'A'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "From which institute is harder to graduate for a bachelor, Amridge University or Auburn University?",
+        "query": "SELECT chronname FROM institution_details WHERE chronname IN ('Amridge University', 'Auburn University') ORDER BY grad_100_value LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "How many institutes are private and not-for profit?",
+        "query": "SELECT COUNT(*) FROM institution_details WHERE control = 'Private not-for-profit'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "In total, how many Hispanic male students graduated from Amridge University?",
+        "query": "SELECT SUM(T2.grad_cohort) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T1.unitid = T2.unitid WHERE T1.chronname = 'Amridge University' AND T2.gender = 'M' AND T2.race = 'H'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "How many students that graduated from Lincoln College in 2011 belong to the cohort type of Bachelor's/equivalent seeking cohort at 4-year institutions?",
+        "query": "SELECT COUNT(T1.unitid) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T1.unitid = T2.unitid WHERE T1.chronname = 'Lincoln College' AND T2.year = 2011 AND T2.cohort = '4y bach'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "What's the number of male Hispanic students who graduated from Central Alabama Community College in 2011 within 100 percent of normal/expected time?",
+        "query": "SELECT SUM(T2.grad_100) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T1.unitid = T2.unitid WHERE T1.chronname = 'Central Alabama Community College' AND T2.year = 2011 AND T2.gender = 'M' AND T2.race = 'H'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "How many students graduated from Central Alabama Community College in 2011 in total?",
+        "query": "SELECT T2.grad_cohort FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T1.unitid = T2.unitid WHERE T1.chronname = 'Central Alabama Community College' AND T2.year = 2011"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Which cohort had the higher percentage of students who graduated from Central Alabama Community College in 2011 within 150 percent of normal/expected time, female White students or male White students?",
+        "query": "SELECT IIF(SUM(CASE WHEN T2.gender = 'F' THEN T2.grad_150 ELSE 0 END) > SUM(CASE WHEN T2.gender = 'M' THEN T2.grad_150 ELSE 0 END), 'female White students', 'male White students') FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.chronname = 'Central Alabama Community College' AND T2.year = 2011 AND T2.race = 'W'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Which institute has the highest percentage of male White students graduating in 2011 within 150 percent of normal/expected time?",
+        "query": "SELECT T1.chronname FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T2.year = 2011 AND T2.gender = 'M' AND T2.race = 'W' AND T2.grad_150 = ( SELECT MAX(T2.grad_150) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T2.year = 2011 AND T2.gender = 'M' AND T2.race = 'W' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Please list the names of the institutes with the percentage of male White students graduating in 2011 within 150 percent of normal/expected time over 20.",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE WHEN T2.grad_150 > 20 THEN T1.chronname ELSE NULL END AS T FROM institution_details T1 INNER JOIN institution_grads T2 ON T2.unitid = T1.unitid WHERE T2.year = 2011 AND T2.gender = 'M' AND T2.race = 'W' ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "How many students for both genders graduated from a 2-year institute in Alabama in 2011?",
+        "query": "SELECT SUM(T2.grad_cohort) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE  T2.cohort = '2y all' AND T2.year = 2011 AND T1.state = 'Alabama'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "How many more students in total graduated from Central Alabama Community College in 2012 than in 2011?",
+        "query": "SELECT SUM(CASE WHEN T2.year = 2012 THEN T2.grad_cohort ELSE 0 END) - SUM(CASE WHEN T2.year = 2011 THEN T2.grad_cohort ELSE 0 END) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.chronname = 'Central Alabama Community College'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Among the institutes in the state of Alabama whose percent rank for median SAT value within sector is 77, how many of them have over 500 graduates in total in 2011?",
+        "query": "SELECT COUNT(DISTINCT T1.chronname) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.state = 'Alabama' AND T1.med_sat_percentile = '100' AND T2.year = 2011 AND T2.grad_cohort > 500"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Among the public institutes in the state of Alabama, how many of them have over 30 students who graduated within 100 percent of normal/expected time in 2011?",
+        "query": "SELECT COUNT(T1.chronname) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.state = 'Alabama' AND T1.control = 'Public' AND T2.year = 2011 AND T2.grad_100 > 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Please list the names of the institutes in the state of Alabama whose all graduates in total exceeded 500 in 2011?",
+        "query": "SELECT DISTINCT T1.chronname FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.state = 'Alabama' AND T2.year = 2011 AND T2.race = 'X' AND T2.grad_cohort > 500"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "What's the average number of graduates for Central Alabama Community College in the 3 consecutive years from 2011 to 2013?",
+        "query": "SELECT AVG(T2.grad_cohort) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.chronname = 'Central Alabama Community College' AND T2.year IN (2011, 2012, 2013) AND T2.gender = 'B' AND T2.race = 'X'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "What is the average percentage of students graduating within 100 percent of normal/expected time for Central Alabama Community College?",
+        "query": "SELECT AVG(T2.grad_100_rate) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.chronname = 'Central Alabama Community College'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Give the web site address for \"Swarthmore College\".",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE WHEN chronname = 'Swarthmore College' THEN site ELSE NULL END AS T FROM institution_details ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Which state is \"Mercer University\" located in?",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE WHEN chronname = 'Mercer University' THEN state ELSE NULL END AS T FROM institution_details ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Which city is \"Rensselaer Polytechnic Institute\" located in?",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE WHEN chronname = 'Rensselaer Polytechnic Institute' THEN city ELSE NULL END AS T FROM institution_details ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Tell the abbreviation for \"Delaware\" state.",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE WHEN state = 'Delaware' THEN state_abbr ELSE NULL END AS T FROM state_sector_grads ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "How many 2-year public schools are there in \"California\"?",
+        "query": "SELECT COUNT(stateid) FROM state_sector_details WHERE state = 'California' AND level = '2-year' AND control = 'Public'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Give the post name of \"Idaho\" state.",
+        "query": "SELECT T FROM ( SELECT DISTINCT CASE WHEN state = 'Idaho' THEN state_post ELSE NULL END AS T FROM state_sector_details ) WHERE T IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Tell the name of school in \"NJ\" that could get the bachelor's degree with highest students number.",
+        "query": "SELECT DISTINCT T1.chronname FROM institution_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.state = T1.state WHERE T2.state_abbr = 'NJ' AND T1.level = '4-year' AND T1.student_count = ( SELECT MAX(T1.student_count) FROM institution_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.state = T1.state WHERE T2.state_abbr = 'NJ' AND T1.level = '4-year' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Give the web site address for the school in \"PA\" state with the highest latitude.",
+        "query": "SELECT DISTINCT T1.site FROM institution_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.state = T1.state WHERE T2.state_abbr = 'PA' AND T1.lat_y = ( SELECT MAX(T1.lat_y) FROM institution_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.state = T1.state WHERE T2.state_abbr = 'PA' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Tell the number of 4-year public schools in UT whose graduation rate exceeds the average for the state.",
+        "query": "SELECT COUNT(DISTINCT T1.chronname) FROM institution_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.state = T1.state WHERE T2.state_abbr = 'UT' AND T1.level = '4-year' AND T1.control = 'Public' AND T1.awards_per_value > T1.awards_per_state_value"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "How many 2-year private nonprofit schools in \"CT\" whose graduation rate falls below the average for the state?",
+        "query": "SELECT COUNT(DISTINCT T1.chronname) FROM institution_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.state = T1.state WHERE T2.state_abbr = 'CT' AND T2.level = '2-year' AND T1.control = 'Private not-for-profit' AND T1.awards_per_value < T1.awards_per_natl_value"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Give the name of the 4-year public school in \"ID\" with the lowest graduation 100 value.",
+        "query": "SELECT T1.chronname FROM institution_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.state = T1.state WHERE T2.state_abbr = 'ID' AND T1.level = '4-year' AND T1.control = 'Public' GROUP BY T1.chronname ORDER BY SUM(T1.grad_100_value) ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Which 4-year private for-profit school in \"KY\" has the highest graudation 150 value? Give the ID for the school.",
+        "query": "SELECT T1.chronname, T1.unitid FROM institution_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.state = T1.state WHERE T2.state_abbr = 'KY' AND T1.level = '4-year' AND T1.control = 'Private for-profit' GROUP BY T1.chronname ORDER BY SUM(T1.grad_150_value) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "What was the number of female Hispanic students who graduated within 100 percent of expected time for \"Pennsylvania State University-Altoona\"?",
+        "query": "SELECT SUM(T2.grad_100) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.chronname = 'Pennsylvania State University-Altoona' AND T2.gender = 'F' AND T2.race = 'H'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Give the cohort name for the school with biggest cohort size.",
+        "query": "SELECT DISTINCT T1.chronname FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.cohort_size = ( SELECT MAX(T1.cohort_size) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Tell the number of 4-year private not-for-profit schools in the home state of \"Brevard Community College\".",
+        "query": "SELECT COUNT(T1.chronname) FROM institution_details AS T1 INNER JOIN state_sector_details AS T2 ON T2.state = T1.state WHERE T2.level = '4-year' AND T2.control = 'Private not-for-profit' AND T1.chronname = 'Brevard Community College'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Give the total number of all graduated students from a 2-year public schools in Alabama in 2011.",
+        "query": "SELECT SUM(T2.grad_cohort) FROM state_sector_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.stateid = T1.stateid WHERE T1.state = 'Alabama' AND T2.year = 2011 AND T1.level = '2-year' AND T1.control = 'Public' AND T2.race = 'X'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "For the state which has the 113 2-year public schools, tell the number of graduated Asian students who seeks another type of degree or certificate at a 2-year institution in 2013.",
+        "query": "SELECT COUNT(T2.grad_cohort) FROM state_sector_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.stateid = T1.stateid WHERE T2.level = '2-year' AND T2.control = 'Public' AND T2.gender = 'B' AND T2.race = 'A' AND T2.cohort = '2y all' AND T1.schools_count = 113"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "What is the percentage of the number of 4-year public schools from Madison Area Technical College's home state in the Alabama?",
+        "query": "SELECT CAST(COUNT(DISTINCT CASE WHEN T1.state = ( SELECT T1.state FROM institution_details AS T1 INNER JOIN state_sector_details AS T2 ON T2.state = T1.state WHERE T1.chronname = 'Madison Area Technical College' ) AND T1.level = '4-year' AND T1.control = 'Public' THEN T1.chronname ELSE NULL END) AS REAL) * 100 / COUNT(DISTINCT CASE WHEN T2.state = 'Alabama' THEN T1.chronname ELSE NULL END) FROM institution_details AS T1 INNER JOIN state_sector_details AS T2 ON T2.state = T1.state"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Give the state and name of institutions in year of data release from 2010 to 2012 with black students.",
+        "query": "SELECT DISTINCT T1.state, T1.chronname FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T2.race = 'B' AND T2.year BETWEEN 2010 AND 2012"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "List down the states in 2011 with a national sector average of 20 and below.",
+        "query": "SELECT DISTINCT T1.state FROM state_sector_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.stateid = T1.stateid WHERE T2.year = 2011 AND T1.awards_per_natl_value <= 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Among the race of all students, what is the control of institution and level of institution with highest number of students?",
+        "query": "SELECT DISTINCT T1.control, T1.level FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T2.race = 'X' AND T1.student_count = ( SELECT MAX(T1.student_count) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T2.race = 'X' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Among the states with a public school count of 20 and below, list their race.",
+        "query": "SELECT DISTINCT T2.race FROM state_sector_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.stateid = T1.stateid WHERE T1.schools_count <= 20 AND T1.control = 'Public'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "List the basic of the institution in 2012 with race of all male students.",
+        "query": "SELECT DISTINCT T1.basic, T2.race FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T2.year = 2012 AND T2.gender = 'M' AND t2.race = 'X'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "In Alaska with school count of 1 from year 2011 to 2013, how many of the students are white?",
+        "query": "SELECT COUNT(T2.race) FROM state_sector_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.stateid = T1.stateid WHERE T1.schools_count = 1 AND T2.year BETWEEN 2011 AND 2013 AND T2.race = 'W' AND T1.state = 'Alaska'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "What is the institution's name of american students within the number of degree-seeking students in the cohort that ranges from 1 to 3?",
+        "query": "SELECT DISTINCT T1.chronname FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T2.grad_cohort BETWEEN 1 AND 3 AND T2.race = 'Ai'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Among the states that start with letter A and attained a national sector average of 16.5, give the number of degree-seeking students in the cohort of those students in 2012 .",
+        "query": "SELECT SUM(T2.grad_cohort) FROM state_sector_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.stateid = T1.stateid WHERE T2.state LIKE 'A%' AND T1.awards_per_natl_value = 16.5 AND T2.year = 2012"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "List the site of institution within the student count of 500 to 1000 that has the recent year of data release.",
+        "query": "SELECT DISTINCT T1.site FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.student_count BETWEEN 500 AND 1000 AND T2.year = ( SELECT MAX(T2.year) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "What is the state name of male graduate in 2011 from a private for profit institution with black students?",
+        "query": "SELECT DISTINCT T1.state FROM state_sector_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.stateid = T1.stateid WHERE T2.gender = 'M' AND T2.race = 'B' AND T1.control = 'Private for-profit' AND T2.year = 2011"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Among the black students in 2011, list the institution site and name of those who has 20 t0 30 degree-seeking students in the cohort.",
+        "query": "SELECT DISTINCT T1.site, T1.chronname FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T2.year = 2011 AND T2.race = 'B' AND T2.grad_cohort BETWEEN 20 AND 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "In female students in year 2012, how many of them from a state with number of schools ranges from 10 to 20?",
+        "query": "SELECT COUNT(T2.race) FROM state_sector_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.stateid = T1.stateid WHERE T2.gender = 'F' AND schools_count BETWEEN 10 AND 20 AND T2.year = 2012"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "List the race of institutions in Alabama with number of students greater than the 90% of average number of students of all institutions?",
+        "query": "SELECT DISTINCT T2.race FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.student_count > ( SELECT AVG(T1.student_count) * 0.9 FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.state = 'Alabama' ) AND T1.state = 'Alabama'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "In year 2010 at schools located in Hawaii, what is the percentage of schools offers an associate's degree?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.level = '2-year' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.level) FROM state_sector_details AS T1 INNER JOIN state_sector_grads AS T2 ON T2.stateid = T1.stateid WHERE T2.state = 'Hawaii' AND T2.year = 2010"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "In the state of Connecticut, what is the name of the instution with the highest percent rank for freshman retention percentage within the sector?",
+        "query": "SELECT chronname FROM institution_details WHERE state = 'Connecticut' AND retain_percentile = ( SELECT MAX(retain_percentile) FROM institution_details WHERE state = 'Connecticut' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "What is the website address of the institution with the highest number of White degree-seeking students at 2-year institutions in 2008?",
+        "query": "SELECT T1.site FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T2.race = 'W' AND T2.cohort = '2y all' AND T2.year = 2008 ORDER BY T2.grad_cohort DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "In Harvard University, which year recorded the highest number of first-time, full-time, degree-seeking students in the cohort being tracked, minus any exclusions?",
+        "query": "SELECT T2.year FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.chronname = 'Harvard University' GROUP BY T2.year ORDER BY SUM(T2.grad_cohort) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "In the state with the highest state appropriations to higher education in fiscal year 2011 per resident, which institution has the lowest number of undergraduates in 2010?",
+        "query": "SELECT T1.chronname FROM institution_details AS T1 INNER JOIN state_sector_details AS T2 ON T2.state = T1.state INNER JOIN institution_grads AS T3 ON T3.unitid = T1.unitid WHERE T1.student_count = ( SELECT MIN(T1.student_count) FROM institution_details AS T1 INNER JOIN state_sector_details AS T2 ON T2.state = T1.state INNER JOIN institution_grads AS T3 ON T3.unitid = T1.unitid WHERE T3.year = 2010 ) AND T3.year = 2010 GROUP BY T1.state ORDER BY SUM(T2.state_appr_value) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "In Yale University, what is the average number of Black students per year who were bachelor's/equivalent-seeking cohort at 4-year institutions between 2002 to 2005?",
+        "query": "SELECT AVG(T2.grad_cohort) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.chronname = 'Yale University' AND T2.year BETWEEN 2002 AND 2005 AND T2.race = 'B' AND T2.cohort = '4y bach'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Among the Ivy League Schools, which school have the highest number of Hispanic graduates of all time?",
+        "query": "SELECT T1.chronname FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.chronname IN ( 'Brown University', 'Columbia University', 'Cornell University', 'Dartmouth College', 'Harvard University', 'Princeton University', 'University of Pennsylvania', 'Yale University' ) AND T2.race = 'H' GROUP BY T1.chronname ORDER BY SUM(T2.grad_cohort) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "How many 4-year public institutions are there in the state of Florida? Give all of their names.",
+        "query": "SELECT T1.chronname FROM institution_details AS T1 INNER JOIN state_sector_details AS T2 WHERE T2.level = '4-year' AND T2.control = 'Public' AND T2.state = 'Florida'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Between the Ivy League Schools, which school's state have the lowest sate appropriations to higher education in fiscal year 2011 per resident?",
+        "query": "SELECT T1.state FROM institution_details AS T1 INNER JOIN state_sector_details AS T2 ON T2.state = T1.state WHERE T1.chronname IN ( 'Brown University', 'Columbia University', 'Cornell University', 'Dartmouth College', 'Harvard University', 'Princeton University', 'University of Pennsylvania', 'Yale University' ) GROUP BY T1.state ORDER BY SUM(T2.state_appr_value) ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "In the state with the highest number of schools, how many institutions have a percentage of no less than 90 of undergraduates who attend full-time? List all of the institutions' names.",
+        "query": "SELECT COUNT(t1.unitid), t1.chronname FROM institution_details AS T1 INNER JOIN state_sector_details AS T2 ON t1.state = t2.state WHERE t1.ft_pct > 90 ORDER BY t2.schools_count DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "What is the average SAT value for incoming students in all of the schools located in the state with the lowest state appropriations to higher education in fiscal year 2011 per resident?",
+        "query": "SELECT AVG(t1.med_sat_value) FROM institution_details AS T1 INNER JOIN state_sector_details AS T2 ON t1.state = t2.state ORDER BY t2.state_appr_value LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "What is the name of the school with the highest number of first-time, full-time, degree-seeking female students in the cohort being tracked, minus any exclusions who were seeking another type of degree or certificate at a 4-year institution?",
+        "query": "SELECT T1.chronname FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T2.gender = 'F' AND T2.cohort = '4y other' ORDER BY T2.grad_cohort DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Among the Ivy League Schools in 2013, which schools have the highest number of Black students who graduated within 150 percent of normal/expected time who were seeking a bachelor's/equivalent cohort at 4-year institutions?",
+        "query": "SELECT T1.chronname FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.chronname IN ( 'Brown University', 'Columbia University', 'Cornell University', 'Dartmouth College', 'Harvard University', 'Princeton University', 'University of Pennsylvania', 'Yale University' ) AND T2.year = 2013 AND T2.race = 'B' AND T2.cohort = '4y bach' ORDER BY T2.grad_cohort DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "Between 2011 to 2013, what is the average number of male Hispanic degree-seeking students at 2-year institutions who graduated within 150 percent of normal/expected time in United Education Institute-Huntington Park Campus?",
+        "query": "SELECT AVG(T2.grad_150) FROM institution_details AS T1 INNER JOIN institution_grads AS T2 ON T2.unitid = T1.unitid WHERE T1.chronname = 'United Education Institute-Huntington Park Campus' AND T2.year BETWEEN 2011 AND 2013 AND T2.gender = 'M' AND T2.race = 'H'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "college_completion",
+        "question": "What is the name of the school with the highest difference in the average completion rate for the national in which it belongs? Indicate the state appropriations to higher education in fiscal year 2011 per resident to which the school belongs.",
+        "query": "SELECT T1.chronname, T2.state_appr_value FROM institution_details AS T1 INNER JOIN state_sector_details AS T2 ON T2.state = T1.state ORDER BY T1.awards_per_value - T2.awards_per_natl_value DESC LIMIT 1"
+    }
+]

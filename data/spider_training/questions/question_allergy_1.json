@@ -1,0 +1,590 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many allergies are there?",
+        "query": "SELECT count(DISTINCT allergy) FROM Allergy_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many allergy entries are there?",
+        "query": "SELECT count(DISTINCT allergy) FROM Allergy_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many different allergy types exist?",
+        "query": "SELECT count(DISTINCT allergytype) FROM Allergy_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many distinct allergies are there?",
+        "query": "SELECT count(DISTINCT allergytype) FROM Allergy_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show all allergy types.",
+        "query": "SELECT DISTINCT allergytype FROM Allergy_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the different allergy types?",
+        "query": "SELECT DISTINCT allergytype FROM Allergy_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show all allergies and their types.",
+        "query": "SELECT allergy ,  allergytype FROM Allergy_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the allergies and their types?",
+        "query": "SELECT allergy ,  allergytype FROM Allergy_type"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show all allergies with type food.",
+        "query": "SELECT DISTINCT allergy FROM Allergy_type WHERE allergytype  =  \"food\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are all the different food allergies?",
+        "query": "SELECT DISTINCT allergy FROM Allergy_type WHERE allergytype  =  \"food\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What is the type of allergy Cat?",
+        "query": "SELECT allergytype FROM Allergy_type WHERE allergy  =  \"Cat\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What is allergy type of a cat allergy?",
+        "query": "SELECT allergytype FROM Allergy_type WHERE allergy  =  \"Cat\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many allergies have type animal?",
+        "query": "SELECT count(*) FROM Allergy_type WHERE allergytype  =  \"animal\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many animal type allergies exist?",
+        "query": "SELECT count(*) FROM Allergy_type WHERE allergytype  =  \"animal\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show all allergy types and the number of allergies in each type.",
+        "query": "SELECT allergytype ,  count(*) FROM Allergy_type GROUP BY allergytype"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the allergy types and how many allergies correspond to each one?",
+        "query": "SELECT allergytype ,  count(*) FROM Allergy_type GROUP BY allergytype"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Which allergy type has most number of allergies?",
+        "query": "SELECT allergytype FROM Allergy_type GROUP BY allergytype ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Which allergy type is most common?",
+        "query": "SELECT allergytype FROM Allergy_type GROUP BY allergytype ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Which allergy type has least number of allergies?",
+        "query": "SELECT allergytype FROM Allergy_type GROUP BY allergytype ORDER BY count(*) ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Which allergy type is the least common?",
+        "query": "SELECT allergytype FROM Allergy_type GROUP BY allergytype ORDER BY count(*) ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many students are there?",
+        "query": "SELECT count(*) FROM Student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What is the total number of students?",
+        "query": "SELECT count(*) FROM Student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show first name and last name for all students.",
+        "query": "SELECT Fname ,  Lname FROM Student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the full names of all students",
+        "query": "SELECT Fname ,  Lname FROM Student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many different advisors are listed?",
+        "query": "SELECT count(DISTINCT advisor) FROM Student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many advisors are there?",
+        "query": "SELECT count(DISTINCT advisor) FROM Student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show all majors.",
+        "query": "SELECT DISTINCT Major FROM Student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the different majors?",
+        "query": "SELECT DISTINCT Major FROM Student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show all cities where students live.",
+        "query": "SELECT DISTINCT city_code FROM Student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What cities do students live in?",
+        "query": "SELECT DISTINCT city_code FROM Student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show first name, last name, age for all female students. Their sex is F.",
+        "query": "SELECT Fname ,  Lname ,  Age FROM Student WHERE Sex  =  'F'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the full names and ages for all female students whose sex is F?",
+        "query": "SELECT Fname ,  Lname ,  Age FROM Student WHERE Sex  =  'F'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show student ids for all male students.",
+        "query": "SELECT StuID FROM Student WHERE Sex  =  'M'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the student ids for all male students?",
+        "query": "SELECT StuID FROM Student WHERE Sex  =  'M'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many students are age 18?",
+        "query": "SELECT count(*) FROM Student WHERE age  =  18"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many students are 18 years old?",
+        "query": "SELECT count(*) FROM Student WHERE age  =  18"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show all student ids who are older than 20.",
+        "query": "SELECT StuID FROM Student WHERE age  >  20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the student ids for students over 20 years old?",
+        "query": "SELECT StuID FROM Student WHERE age  >  20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Which city does the student whose last name is \"Kim\" live in?",
+        "query": "SELECT city_code FROM Student WHERE LName  =  \"Kim\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Give the city that the student whose family name is Kim lives in.",
+        "query": "SELECT city_code FROM Student WHERE LName  =  \"Kim\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Who is the advisor of student with ID 1004?",
+        "query": "SELECT Advisor FROM Student WHERE StuID  =  1004"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Who advises student 1004?",
+        "query": "SELECT Advisor FROM Student WHERE StuID  =  1004"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many students live in HKG or CHI?",
+        "query": "SELECT count(*) FROM Student WHERE city_code  =  \"HKG\" OR city_code  =  \"CHI\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Give the number of students living in either HKG or CHI.",
+        "query": "SELECT count(*) FROM Student WHERE city_code  =  \"HKG\" OR city_code  =  \"CHI\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show the minimum, average, and maximum age of all students.",
+        "query": "SELECT min(age) ,  avg(age) ,  max(age) FROM Student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What is the minimum, mean, and maximum age across all students?",
+        "query": "SELECT min(age) ,  avg(age) ,  max(age) FROM Student"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What is the last name of the youngest student?",
+        "query": "SELECT LName FROM Student WHERE age  =  (SELECT min(age) FROM Student)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Provide the last name of the youngest student.",
+        "query": "SELECT LName FROM Student WHERE age  =  (SELECT min(age) FROM Student)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show the student id of the oldest student.",
+        "query": "SELECT StuID FROM Student WHERE age  =  (SELECT max(age) FROM Student)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What student id corresponds to the oldest student?",
+        "query": "SELECT StuID FROM Student WHERE age  =  (SELECT max(age) FROM Student)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show all majors and corresponding number of students.",
+        "query": "SELECT major ,  count(*) FROM Student GROUP BY major"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many students are there for each major?",
+        "query": "SELECT major ,  count(*) FROM Student GROUP BY major"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Which major has most number of students?",
+        "query": "SELECT major FROM Student GROUP BY major ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What is the largest major?",
+        "query": "SELECT major FROM Student GROUP BY major ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show all ages and corresponding number of students.",
+        "query": "SELECT age ,  count(*) FROM Student GROUP BY age"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How old is each student and how many students are each age?",
+        "query": "SELECT age ,  count(*) FROM Student GROUP BY age"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show the average age for male and female students.",
+        "query": "SELECT avg(age) ,  sex FROM Student GROUP BY sex"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the average ages for male and female students?",
+        "query": "SELECT avg(age) ,  sex FROM Student GROUP BY sex"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show all cities and corresponding number of students.",
+        "query": "SELECT city_code ,  count(*) FROM Student GROUP BY city_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many students live in each city?",
+        "query": "SELECT city_code ,  count(*) FROM Student GROUP BY city_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show all advisors and corresponding number of students.",
+        "query": "SELECT advisor ,  count(*) FROM Student GROUP BY advisor"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many students does each advisor have?",
+        "query": "SELECT advisor ,  count(*) FROM Student GROUP BY advisor"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Which advisor has most number of students?",
+        "query": "SELECT advisor FROM Student GROUP BY advisor ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Give the advisor with the most students.",
+        "query": "SELECT advisor FROM Student GROUP BY advisor ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many students have cat allergies?",
+        "query": "SELECT count(*) FROM Has_allergy WHERE Allergy  =  \"Cat\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many students are affected by cat allergies?",
+        "query": "SELECT count(*) FROM Has_allergy WHERE Allergy  =  \"Cat\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show all student IDs who have at least two allergies.",
+        "query": "SELECT StuID FROM Has_allergy GROUP BY StuID HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the students ids of students who have more than one allergy?",
+        "query": "SELECT StuID FROM Has_allergy GROUP BY StuID HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the student ids of students who don't have any allergies?",
+        "query": "SELECT StuID FROM Student EXCEPT SELECT StuID FROM Has_allergy"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Which students are unaffected by allergies?",
+        "query": "SELECT StuID FROM Student EXCEPT SELECT StuID FROM Has_allergy"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many female students have milk or egg allergies?",
+        "query": "SELECT count(*) FROM has_allergy AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T2.sex  =  \"F\" AND T1.allergy  =  \"Milk\" OR T1.allergy  =  \"Eggs\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many students who are female are allergic to milk or eggs?",
+        "query": "SELECT count(*) FROM has_allergy AS T1 JOIN Student AS T2 ON T1.StuID  =  T2.StuID WHERE T2.sex  =  \"F\" AND T1.allergy  =  \"Milk\" OR T1.allergy  =  \"Eggs\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many students have a food allergy?",
+        "query": "SELECT count(*) FROM Has_allergy AS T1 JOIN Allergy_type AS T2 ON T1.allergy  =  T2.allergy WHERE T2.allergytype  =  \"food\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many students are affected by food related allergies?",
+        "query": "SELECT count(*) FROM Has_allergy AS T1 JOIN Allergy_type AS T2 ON T1.allergy  =  T2.allergy WHERE T2.allergytype  =  \"food\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Which allergy has most number of students affected?",
+        "query": "SELECT Allergy FROM Has_allergy GROUP BY Allergy ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Which allergy is the most common?",
+        "query": "SELECT Allergy FROM Has_allergy GROUP BY Allergy ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show all allergies with number of students affected.",
+        "query": "SELECT Allergy ,  count(*) FROM Has_allergy GROUP BY Allergy"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many students have each different allergy?",
+        "query": "SELECT Allergy ,  count(*) FROM Has_allergy GROUP BY Allergy"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Show all allergy type with number of students affected.",
+        "query": "SELECT T2.allergytype ,  count(*) FROM Has_allergy AS T1 JOIN Allergy_type AS T2 ON T1.allergy  =  T2.allergy GROUP BY T2.allergytype"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many students are affected by each allergy type?",
+        "query": "SELECT T2.allergytype ,  count(*) FROM Has_allergy AS T1 JOIN Allergy_type AS T2 ON T1.allergy  =  T2.allergy GROUP BY T2.allergytype"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Find the last name and age of the student who has allergy to both milk and cat.",
+        "query": "SELECT lname ,  age FROM Student WHERE StuID IN (SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Milk\" INTERSECT SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Cat\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the last names and ages of the students who are allergic to milk and cat?",
+        "query": "SELECT lname ,  age FROM Student WHERE StuID IN (SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Milk\" INTERSECT SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Cat\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the allergies and their types that the student with first name Lisa has? And order the result by name of allergies.",
+        "query": "SELECT T1.Allergy ,  T1.AllergyType FROM Allergy_type AS T1 JOIN Has_allergy AS T2 ON T1.Allergy  =  T2.Allergy JOIN Student AS T3 ON T3.StuID  =  T2.StuID WHERE T3.Fname  =  \"Lisa\" ORDER BY T1.Allergy"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the allergies the girl named Lisa has? And what are the types of them? Order the result by allergy names.",
+        "query": "SELECT T1.Allergy ,  T1.AllergyType FROM Allergy_type AS T1 JOIN Has_allergy AS T2 ON T1.Allergy  =  T2.Allergy JOIN Student AS T3 ON T3.StuID  =  T2.StuID WHERE T3.Fname  =  \"Lisa\" ORDER BY T1.Allergy"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Find the first name and gender of the student who has allergy to milk but not cat.",
+        "query": "SELECT fname ,  sex FROM Student WHERE StuID IN (SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Milk\" EXCEPT SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Cat\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the first name and gender of the students who have allergy to milk but can put up with cats?",
+        "query": "SELECT fname ,  sex FROM Student WHERE StuID IN (SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Milk\" EXCEPT SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Cat\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Find the average age of the students who have allergies with food and animal types.",
+        "query": "SELECT avg(age) FROM Student WHERE StuID IN ( SELECT T1.StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\" INTERSECT SELECT T1.StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"animal\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How old are the students with allergies to food and animal types on average?",
+        "query": "SELECT avg(age) FROM Student WHERE StuID IN ( SELECT T1.StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\" INTERSECT SELECT T1.StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"animal\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "List the first and last name of the students who do not have any food type allergy.",
+        "query": "SELECT fname ,  lname FROM Student WHERE StuID NOT IN (SELECT T1.StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What is the full name of each student who is not allergic to any type of food.",
+        "query": "SELECT fname ,  lname FROM Student WHERE StuID NOT IN (SELECT T1.StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Find the number of male (sex is 'M') students who have some food type allery.",
+        "query": "SELECT count(*) FROM Student WHERE sex  =  \"M\" AND StuID IN (SELECT StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many male students (sex is 'M') are allergic to any type of food?",
+        "query": "SELECT count(*) FROM Student WHERE sex  =  \"M\" AND StuID IN (SELECT StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Find the different first names and cities of the students who have allergy to milk or cat.",
+        "query": "SELECT DISTINCT T1.fname ,  T1.city_code FROM Student AS T1 JOIN Has_Allergy AS T2 ON T1.stuid  =  T2.stuid WHERE T2.Allergy  =  \"Milk\" OR T2.Allergy  =  \"Cat\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the distinct first names and cities of the students who have allergy either to milk or to cat?",
+        "query": "SELECT DISTINCT T1.fname ,  T1.city_code FROM Student AS T1 JOIN Has_Allergy AS T2 ON T1.stuid  =  T2.stuid WHERE T2.Allergy  =  \"Milk\" OR T2.Allergy  =  \"Cat\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Find the number of students who are older than 18 and do not have allergy to either food or animal.",
+        "query": "SELECT count(*) FROM Student WHERE age  >  18 AND StuID NOT IN ( SELECT StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\" OR T2.allergytype  =  \"animal\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "How many students are over 18 and do not have allergy to food type or animal type?",
+        "query": "SELECT count(*) FROM Student WHERE age  >  18 AND StuID NOT IN ( SELECT StuID FROM Has_allergy AS T1 JOIN Allergy_Type AS T2 ON T1.Allergy  =  T2.Allergy WHERE T2.allergytype  =  \"food\" OR T2.allergytype  =  \"animal\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "Find the first name and major of the students who are not allegry to soy.",
+        "query": "SELECT fname ,  major FROM Student WHERE StuID NOT IN (SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Soy\")"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "allergy_1",
+        "question": "What are the first name and major of the students who are able to consume soy?",
+        "query": "SELECT fname ,  major FROM Student WHERE StuID NOT IN (SELECT StuID FROM Has_allergy WHERE Allergy  =  \"Soy\")"
+    }
+]

@@ -1,0 +1,470 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "How many tweets are in English?",
+        "query": "SELECT COUNT(TweetID) AS tweet_number FROM twitter WHERE Lang = 'en'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Please list the texts of all the tweets that are reshared.",
+        "query": "SELECT text FROM twitter WHERE IsReshare = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "How many tweets are seen by more than 1000 unique users?",
+        "query": "SELECT COUNT(TweetID) AS tweet_number FROM twitter WHERE Reach > 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Among all the tweets that have a positive sentiment, how many of them are posted on Thursday?",
+        "query": "SELECT COUNT(TweetID) AS tweet_number FROM twitter WHERE Sentiment > 0 AND Weekday = 'Thursday'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "What is the text of the tweet that got the most `likes`?",
+        "query": "SELECT text FROM twitter WHERE Likes = ( SELECT MAX( Likes) FROM twitter )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Please list all the cities in Argentina.",
+        "query": "SELECT City FROM location WHERE City IS NOT NULL AND Country = 'Argentina'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "How many tweets in total were posted by a user in Argentina?",
+        "query": "SELECT COUNT(T1.TweetID) FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID WHERE T2.Country = 'Argentina' LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Users in which city of Argentina post the most tweets?",
+        "query": "SELECT T2.City FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID WHERE T2.Country = 'Argentina' GROUP BY T2.City ORDER BY COUNT(T1.TweetID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Among all the tweets that are reshared, how many of them are posted by a user in Buenos Aires?",
+        "query": "SELECT COUNT(T1.TweetID) FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID WHERE T2.City = 'Buenos Aires' AND T1.IsReshare = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Please list the texts of all the tweets posted from Buenos Aires with a positive sentiment.",
+        "query": "SELECT T1.text FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID WHERE T1.Sentiment > 0 AND T2.City = 'Buenos Aires'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "From which country is the tweet with the most likes posted?",
+        "query": "SELECT T2.Country FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID ORDER BY T1.Likes DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Users in which country has posted more numbers of positive tweets, Argentina or Australia?",
+        "query": "SELECT T2.Country FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID WHERE T2.Country IN ('Argentina', 'Australia') AND T1.Sentiment > 0 GROUP BY T2.Country ORDER BY COUNT(T1.TweetID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Among all the tweets posted from Buenos Aires, how many of them were posted on Thursdays?",
+        "query": "SELECT COUNT(T1.TweetID) FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID WHERE T2.City = 'Buenos Aires' AND T1.Weekday = 'Thursday'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Among all the users that have posted a tweet with over 1000 likes, how many of them are male?",
+        "query": "SELECT COUNT(T1.TweetID) FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T1.Likes > 10 AND T2.Gender = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "How many tweets have the male users posted in total?",
+        "query": "SELECT COUNT(T1.TweetID) FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T2.Gender = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "What is the gender of the user who has posted the tweet that is seen by the most number of unique users?",
+        "query": "SELECT T2.Gender FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID ORDER BY T1.Reach DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "How many tweets are posted by male users in Argentina?",
+        "query": "SELECT COUNT(T1.TweetID) FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID INNER JOIN user AS T3 ON T1.UserID = T3.UserID WHERE T3.Gender = 'Male' AND T2.Country = 'Argentina'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Please list the texts of all the tweets posted by male users from Buenos Aires.",
+        "query": "SELECT T1.text FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID INNER JOIN user AS T2 ON T2.UserID = T1.UserID INNER JOIN user AS T3 ON T1.UserID = T3.UserID WHERE T2.City = 'Buenos Aires' AND T3.Gender = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "What is the average number of tweets posted by the users in a city in Argentina?",
+        "query": "SELECT SUM(CASE WHEN T2.City = 'Buenos Aires' THEN 1.0 ELSE 0 END) / COUNT(T1.TweetID) AS avg FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID WHERE T2.Country = 'Argentina'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Among all the tweets with a positive sentiment, what is the percentage of those posted by a male user?",
+        "query": "SELECT SUM(CASE WHEN T2.Gender = 'Male' THEN 1.0 ELSE 0 END) / COUNT(T1.TweetID) AS per FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T1.Sentiment > 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Give the number of users who do not show their genders.",
+        "query": "SELECT COUNT(UserID) AS user_number FROM user WHERE Gender = 'Unknown'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "State the number of states in the United Kingdom.",
+        "query": "SELECT COUNT(State) AS State_number FROM location WHERE Country = 'United Kingdom'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "What is the code of Gwynedd State?",
+        "query": "SELECT DISTINCT StateCode FROM location WHERE State = 'Gwynedd'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Give the location id of West Sussex State.",
+        "query": "SELECT DISTINCT LocationID FROM location WHERE State = 'West Sussex'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "How many reshared tweets are there in Texas?",
+        "query": "SELECT COUNT(T1.TweetID) FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID WHERE T2.State = 'Texas' AND T1.IsReshare = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "For the tweet which got a reach number of 547851, which country did it come from?",
+        "query": "SELECT T2.Country FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID WHERE T1.Reach = 547851"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "State the number of positive tweets from Ha Noi.",
+        "query": "SELECT COUNT(T1.TweetID) FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID WHERE T1.Sentiment > 0 AND T2.State = 'Ha Noi'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Show the text of the tweet with the highest klout from Connecticut.",
+        "query": "SELECT T1.text FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID WHERE T2.State = 'Connecticut' ORDER BY T1.Klout DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "How many female Twitter users are there from Wisconsin?",
+        "query": "SELECT COUNT(T1.Likes) FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID INNER JOIN user AS T3 ON T3.UserID = T1.UserID WHERE T2.State = 'Wisconsin' AND T3.Gender = 'Female'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "What is the gender of the user who tweeted `tw-715909161071091712`?",
+        "query": "SELECT T2.Gender FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T1.TweetID = 'tw-715909161071091712'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Give the name of the city of the user who tweeted `One of our favorite stories is @FINRA_News's move to the cloud with AWS Enterprise Support! https://amp.twimg.com/v/991837f1-4815-4edc-a88f-e68ded09a02a`.",
+        "query": "SELECT T2.City FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID WHERE T1.text = 'One of our favorite stories is @FINRA_News''s move to the cloud with AWS Enterprise Support! https://amp.twimg.com/v/991837f1-4815-4edc-a88f-e68ded09a02a'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "What is the gender of the user whose tweet got 535 retweets?",
+        "query": "SELECT T2.Gender FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T1.RetweetCount = 535"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Give the gender of the user who made the highest klout tweet on Wednesdays.",
+        "query": "SELECT T2.Gender FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T1.Weekday = 'Wednesday' ORDER BY T1.Klout DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "For the tweet which got the most likes, state the gender of the user who tweeted it.",
+        "query": "SELECT T2.Gender FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID ORDER BY T1.Likes DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "State the number of tweets from Michigan on Thursdays.",
+        "query": "SELECT COUNT(T1.TweetID) FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID WHERE T1.Weekday = 'Thursday' AND T2.State = 'Michigan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Which state was the tweet `tw-685681052912873473` from? Give the state code.",
+        "query": "SELECT T2.StateCode FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID WHERE T1.TweetID = 'tw-685681052912873473'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "What is the percentage of male Twitter users from Florida?",
+        "query": "SELECT SUM(CASE WHEN T3.Gender = 'Male' THEN 1.0 ELSE 0 END) / COUNT(T1.TweetID) AS percentage FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID INNER JOIN user AS T3 ON T3.UserID = T1.UserID WHERE T2.State = 'Florida'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "What is the percentage of the tweets from California are positive?",
+        "query": "SELECT SUM(CASE WHEN T1.Sentiment > 0 THEN 1.0 ELSE 0 END) / COUNT(T1.TweetID) AS percentage FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID WHERE State = 'California'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "What is the day of the week that tweet with ID tw-682712873332805633 was posted?",
+        "query": "SELECT Weekday FROM twitter WHERE TweetID = 'tw-682712873332805633'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "How many unique users have seen tweet with text `Happy New Year to all those AWS instances of ours!`?",
+        "query": "SELECT Reach FROM twitter WHERE text = 'Happy New Year to all those AWS instances of ours!'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Count the total number of tweet IDs in `en`.",
+        "query": "SELECT COUNT(DISTINCT TweetID) FROM twitter WHERE Lang = 'en'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Is 3751 the location ID for tweet with ID tw-682714048199311366?",
+        "query": "SELECT LocationID FROM twitter WHERE TweetID = 'tw-682714048199311366'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "How many tweets have been posted on Wednesday?",
+        "query": "SELECT COUNT(TweetID) FROM twitter WHERE Weekday = 'Wednesday'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "List down all of the texts posted on Twitter on Thursday.",
+        "query": "SELECT text FROM twitter WHERE Weekday = 'Thursday'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "What is the gender of the user who posted a tweet with ID tw-682714583044243456?",
+        "query": "SELECT T2.Gender FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T1.TweetID = 'tw-682714583044243456'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "List down the text of tweets posted by unknown gender users.",
+        "query": "SELECT T1.text FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T2.Gender = 'Unknown'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Calculate the total number of male tweet IDs.",
+        "query": "SELECT COUNT(T1.TweetID) FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T2.Gender = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "What gender of users posted the most tweets in `en`?",
+        "query": "SELECT T.Gender FROM ( SELECT T2.Gender, COUNT( text) AS num FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T1.Lang = 'en' GROUP BY T2.Gender ) T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "What gender of users retweet more than 30 times?",
+        "query": "SELECT DISTINCT T2.Gender FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T1.RetweetCount > 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "How many female users reshared their tweets?",
+        "query": "SELECT COUNT(T1.UserID) FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T2.Gender = 'Female' AND T1.IsReshare = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Which country's tweets collected the most likes?",
+        "query": "SELECT T.Country FROM ( SELECT T2.Country, SUM(T1.Likes) AS num FROM twitter AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID GROUP BY T2.Country ) T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Tweet with ID tw-682723090279841798 was posted from which country?",
+        "query": "SELECT T2.Country FROM twitter AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE T1.TweetID = 'tw-682723090279841798'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "List down all the tweet text posted from Australia.",
+        "query": "SELECT T1.text FROM twitter AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE T2.Country = 'Australia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Write down the tweet text posted from Rawang, Selangor, Malaysia.",
+        "query": "SELECT T1.text FROM twitter AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE T2.City = 'Rawang' AND T2.State = 'Selangor' AND T2.Country = 'Malaysia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Tweets that were posted from Brazil are in what languague?",
+        "query": "SELECT DISTINCT T1.Lang FROM twitter AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE T2.Country = 'Brazil'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "State the country where the most positive sentiment tweets were posted.",
+        "query": "SELECT T.Country FROM ( SELECT T2.Country, SUM(T1.Sentiment) AS num FROM twitter AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE T1.Sentiment > 0 GROUP BY T2.Country ) T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Calculate the total likes collected by tweets in `ru` posted by male users.",
+        "query": "SELECT SUM(T1.Likes) FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T1.Lang = 'ru' AND T2.Gender = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Calculate the average number of male users who posted tweets in a week.",
+        "query": "SELECT COUNT(DISTINCT T1.TweetID) / COUNT(DISTINCT T1.UserID) / 7 AS avg FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T2.Gender = 'Male' AND T1.Day BETWEEN 1 AND 31"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "How many tweets have a klout of over 50?",
+        "query": "SELECT COUNT(DISTINCT TweetID) FROM twitter WHERE Klout > 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Please list the texts of all the tweets that are not in English.",
+        "query": "SELECT text FROM twitter WHERE Lang != 'en'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Please give the user ID of the user who has posted the most tweets.",
+        "query": "SELECT UserID FROM twitter GROUP BY UserID ORDER BY COUNT(DISTINCT TweetID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Among all the tweets posted on Mondays, how many of them are reshared?",
+        "query": "SELECT COUNT(DISTINCT TweetID) FROM twitter WHERE Weekday = 'Monday' AND IsReshare = 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Please list the texts of the top 3 tweets with the most number of unique users seeing the tweet.",
+        "query": "SELECT text FROM twitter ORDER BY Reach DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "How many reshared tweets have over 100 likes?",
+        "query": "SELECT COUNT(DISTINCT TweetID) FROM twitter WHERE IsReshare = 'TRUE' AND Likes > 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "What is the total number of tweets sent by male users on Mondays?",
+        "query": "SELECT COUNT(DISTINCT T1.TweetID) FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T2.Gender = 'Male' AND T1.Weekday = 'Monday'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "What is the gender of the user who has posted the tweet that got the most likes?",
+        "query": "SELECT T2.Gender FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID ORDER BY T1.Likes DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Please list the texts of all the tweets in French posted by male users.",
+        "query": "SELECT T1.text FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T2.Gender = 'Male' AND T1.Lang = 'fr'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "How many tweets in French were posted from Australia?",
+        "query": "SELECT COUNT(DISTINCT T1.TweetID) FROM twitter AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE T1.Lang = 'fr' AND T2.Country = 'Australia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Among all the tweets with a positive sentiment, how many of them were posted by male users in Australia?",
+        "query": "SELECT COUNT(T1.TweetID) FROM twitter AS T1 INNER JOIN location AS T2 ON T2.LocationID = T1.LocationID INNER JOIN user AS T3 ON T3.UserID = T1.UserID WHERE T2.Country = 'Australia' AND T3.Gender = 'Male' AND T1.Sentiment > 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "How many more tweets with a positive sentiment than the tweets with a neutral sentiment were posted by male users?",
+        "query": "SELECT SUM(CASE WHEN T1.Sentiment > 0 THEN 1 ELSE 0 END) - SUM(CASE WHEN T1.Sentiment = 0 THEN 1 ELSE 0 END) AS diff FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T2.Gender = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "From which city was the tweet with the most number of retweets posted?",
+        "query": "SELECT T2.City FROM twitter AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID ORDER BY T1.RetweetCount DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "From which city were more tweets posted, Bangkok or Chiang Mai?",
+        "query": "SELECT SUM(CASE WHEN T2.City = 'Bangkok' THEN 1 ELSE 0 END) AS bNum , SUM(CASE WHEN T2.City = 'Chiang Mai' THEN 1 ELSE 0 END) AS cNum FROM twitter AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE T2.City IN ('Bangkok', 'Chiang Mai')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Among the tweets posted from Santa Fe state in Argentina, how many of them were posted on 31st?",
+        "query": "SELECT COUNT(T1.TweetID) FROM twitter AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE T1.Day = 31 AND T2.State = 'Santa' AND T2.Country = 'Argentina'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Please list the top 3 cities with the most number of tweets posted in Canada.",
+        "query": "SELECT T.City FROM ( SELECT T2.City, COUNT(T1.TweetID) AS num FROM twitter AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE T2.Country = 'Canada' GROUP BY T2.City ) T ORDER BY T.num DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Please list all the cities from where tweets with neutral sentiments were posted.",
+        "query": "SELECT DISTINCT T2.City FROM twitter AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE Sentiment = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Among all the tweets sent by male users in Argentina, what is the text of the one with the most number of likes?",
+        "query": "SELECT T2.text FROM user AS T1 INNER JOIN twitter AS T2 ON T1.UserID = T2.UserID INNER JOIN location AS T3 ON T2.LocationID = T3.LocationID WHERE T3.Country = 'Argentina' AND T1.Gender = 'Male' ORDER BY T2.Likes DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "What is the average number of likes for a tweet posted by a male user on Mondays?",
+        "query": "SELECT SUM(T1.Likes) / COUNT(T1.TweetID) FROM twitter AS T1 INNER JOIN user AS T2 ON T1.UserID = T2.UserID WHERE T2.Gender = 'Male' AND T1.Weekday = 'Monday'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "social_media",
+        "question": "Tweets posted from which city has a higher number of average likes, Bangkok or Chiang Mai?",
+        "query": "SELECT SUM(CASE WHEN T2.City = 'Bangkok' THEN Likes ELSE NULL END) / COUNT(CASE WHEN T2.City = 'Bangkok' THEN 1 ELSE 0 END) AS bNum , SUM(CASE WHEN City = 'Chiang Mai' THEN Likes ELSE NULL END) / COUNT(CASE WHEN City = 'Chiang Mai' THEN TweetID ELSE NULL END) AS cNum FROM twitter AS T1 INNER JOIN location AS T2 ON T1.LocationID = T2.LocationID WHERE T2.City IN ('Bangkok', 'Chiang Mai')"
+    }
+]

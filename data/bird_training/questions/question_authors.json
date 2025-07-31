@@ -1,0 +1,1046 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many authors are affiliated with University of California Berkeley?",
+        "query": "SELECT COUNT(Id) FROM Author WHERE Affiliation = 'University of California Berkeley'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the paper \"Stitching videos streamed by mobile phones in real-time\" about?",
+        "query": "SELECT Keyword FROM Paper WHERE Title = 'Stitching videos streamed by mobile phones in real-time'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Please list the titles of the papers published in the journal \"Concepts in Magnetic Resonance Part A\" in 2008.",
+        "query": "SELECT T2.Title FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T1.FullName = 'Concepts in Magnetic Resonance Part A' AND T2.Year = 2008"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many papers were published in the journal \"Concepts in Magnetic Resonance Part A\"?",
+        "query": "SELECT COUNT(T2.Id) FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T1.FullName = 'Concepts in Magnetic Resonance Part A'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the url of the journal in which the paper \"Area Effects in Cepaea\" was published?",
+        "query": "SELECT T1.HomePage FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T2.Title = 'Area Effects in Cepaea'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Among the papers published in the journal \"Molecular Brain\", how many of them were published in the year 2011?",
+        "query": "SELECT COUNT(T2.Id) FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T2.Year = 2011 AND T1.FullName = 'Molecular Brain'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many papers were published in 2011 in the journal whose short name is \"Mol Brain\"?",
+        "query": "SELECT COUNT(T2.Id) FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T2.Year = 2011 AND T1.ShortName = 'Mol Brain'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many authors does the paper \"Equation Solving in Geometrical Theories\" have?",
+        "query": "SELECT COUNT(T1.AuthorId) FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id WHERE T2.Title = 'Equation Solving in Geometrical Theories'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Please list the names of the authors of the paper \"Area Effects in Cepaea\".",
+        "query": "SELECT T1.Name FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id WHERE T2.Title = 'Area Effects in Cepaea'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Among the authors of the paper \"Stitching videos streamed by mobile phones in real-time\", how many of them are affiliated with Cairo Microsoft Innovation Lab?",
+        "query": "SELECT COUNT(T1.AuthorId) FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id WHERE T1.Affiliation = 'University of Tokyo' AND T2.Title = 'FIBER: A Generalized Framework for Auto-tuning Software'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Please list the titles of the paper whose authors include Klaus Zimmermann.",
+        "query": "SELECT T2.Title FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id WHERE T1.Name = 'Klaus Zimmermann'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Which author of the paper \"Incremental Extraction of Keyterms for Classifying Multilingual Documents in the Web\" is affiliated with National Taiwan University Department of Computer Science and Information Engineering Taiwan?",
+        "query": "SELECT T1.Name FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id WHERE T2.Title = 'Incremental Extraction of Keyterms for Classifying Multilingual Documents in the Web' AND T1.Affiliation = 'National Taiwan University Department of Computer Science and Information Engineering Taiwan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the title of the paper published in 1995 and whose author included Thomas Wiegand?",
+        "query": "SELECT T2.Title FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id WHERE T1.Name = 'Thomas Wiegand' AND T2.Year = 1995"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many papers whose authors include Thomas Wiegand were published in 1995?",
+        "query": "SELECT COUNT(T2.Title) FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id WHERE T1.Name = 'Thomas Wiegand' AND T2.Year = 1995"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the average number of papers published in the journal \"Molecular Brain\" every year from 2008 to 2011?",
+        "query": "SELECT CAST(COUNT(T2.Id) AS REAL) / COUNT(DISTINCT T2.Year) FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T1.FullName = 'Molecular Brain' AND T2.Year BETWEEN 2008 AND 2011"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many more papers in total were published in the journal \"Cases Journal\" than in the journal \"Molecular Brain\" in percentage?",
+        "query": "SELECT SUM(CASE WHEN T1.FullName = 'Cases Journal' THEN 1 ELSE 0 END) - SUM(CASE WHEN T1.FullName = 'Molecular Brain' THEN 1 ELSE 0 END) AS DIFF FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many journals have a word \"computing\" in its full name?",
+        "query": "SELECT COUNT(Id) FROM Journal WHERE FullName LIKE '%computing%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Enumerate the paper and author ID of authors with affiliation with Cairo Microsoft Innovation Lab.",
+        "query": "SELECT PaperId, AuthorId FROM PaperAuthor WHERE Affiliation LIKE 'Cairo Microsoft Innovation Lab%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the short name and full name of conference uses the homepage \"http://www.informatik.uni-trier.de/~ley/db/conf/ices/index.html\"?",
+        "query": "SELECT ShortName, FullName FROM Conference WHERE HomePage = 'http://www.informatik.uni-trier.de/~ley/db/conf/ices/index.html'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List down the author ID of authors with a name of \"Peter\".",
+        "query": "SELECT AuthorId FROM PaperAuthor WHERE Name = 'Peter'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List the title of papers with a conference ID from 160 to 170, include their conference short name.",
+        "query": "SELECT DISTINCT T1.Title, T2.ShortName FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T1.ConferenceId BETWEEN 160 AND 170"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the title and journal homepage of the latest published paper?",
+        "query": "SELECT T1.Title, T2.HomePage FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id ORDER BY T1.Year DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "In year 1999, list the titles and conference's short name of paper authored by someone named \"Philip\".",
+        "query": "SELECT T1.Title, T3.ShortName FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId INNER JOIN Conference AS T3 ON T1.ConferenceId = T3.Id WHERE T1.Year = 1999 AND T2.Name LIKE 'Philip%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the total number and conference's homepage of papers held in a conference with an ID of 187 during 1990 to 2000?",
+        "query": "SELECT COUNT(T2.ConferenceId), T1.HomePage FROM Conference AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.ConferenceId WHERE T2.Year BETWEEN 1990 AND 2000 AND T2.ConferenceId = 187"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the title of the paper published in 2003 by an author with affiliation with Department of Network Science, Graduate School of Information Systems, The University of Electro-Communications?",
+        "query": "SELECT DISTINCT T2.Title FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id WHERE T1.Affiliation = 'Department of Network Science, Graduate School of Information Systems, The University of Electro-Communications' AND T2.Year = 2003"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List the authors and journal short name of the papers with \"chemiluminescence\" in its title and has a journal ID from 245 to 250.",
+        "query": "SELECT T2.Name, T3.ShortName FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId INNER JOIN Journal AS T3 ON T1.JournalId = T3.Id WHERE T1.JournalId BETWEEN 245 AND 250 AND T1.Title LIKE '%chemiluminescence%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Among the papers with conference ID of 0, list down the authors of papers with a journal ID less than 100.",
+        "query": "SELECT DISTINCT T2.Name FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.ConferenceId = 0 AND T1.JournalId < 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the title and author ID of paper with conference ID less than 100 in year 2006?",
+        "query": "SELECT DISTINCT T1.Title, T2.AuthorId FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Year = 2006 AND T1.ConferenceId < 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What are the paper IDs of papers presented in conferences has a homepage starts with \"http://www.informatik.uni-trier.de/~ley/db/conf/\"?",
+        "query": "SELECT T1.Id FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T2.HomePage LIKE 'http://www.informatik.uni-trier.de/~ley/db/conf/%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What are the journal homepages and author ID of the papers published in 2000 to 2005 with a word \"social\" in its title?",
+        "query": "SELECT T3.HomePage, T2.AuthorId FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId INNER JOIN Journal AS T3 ON T1.JournalId = T3.Id WHERE T1.Year BETWEEN 2000 AND 2005 AND T1.Title LIKE '%SOCIAL%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the author ID and their affiliations of authors of the papers with a journal ID of 0 and published in 2009.",
+        "query": "SELECT DISTINCT T2.AuthorId, T2.Affiliation FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.JournalId = 0 AND T1.Year = 2009 AND T2.Affiliation IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "In papers with journal IDs from 200 to 300 and with its short name starts with A, what is the percentage of papers with conference ID of 0?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.ConferenceId = 0 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.ConferenceId) FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id WHERE T1.JournalId BETWEEN 200 AND 300 AND T2.ShortName LIKE 'A%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Within the year of 2001 to 2010, find the paper published rate of 2001.",
+        "query": "SELECT CAST(SUM(CASE WHEN Year = 2001 THEN 1 ELSE 0 END) AS REAL) / COUNT(Id) FROM Paper WHERE Year >= 2001 AND Year < 2011"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Write down the conference full name of \"ICWE\" and it's homepage address.",
+        "query": "SELECT FullName, Homepage FROM Conference WHERE ShortName = 'ICWE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Between \"Standford University\" and \"Massachusetts Institute of Technolgy\", which organization had affiliated with more author.?",
+        "query": "SELECT Affiliation FROM Author WHERE Affiliation IN ('Stanford University', 'Massachusetts Institute of Technology') GROUP BY Affiliation ORDER BY COUNT(Id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the ratio of author with affiliation and without affiliation?",
+        "query": "SELECT CAST(SUM(CASE WHEN Affiliation IS NULL THEN 1 ELSE 0 END) AS REAL) / COUNT(*) FROM Author"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Write down the author's name and IDs who are affiliated with Univeristiy of Oulu.",
+        "query": "SELECT Name, id FROM Author WHERE Affiliation = 'University of Oulu'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Write down the title and affiliation of the preprinted paper written by \"Roger J.Marshal\".",
+        "query": "SELECT T1.Title, T2.Affiliation FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T2.Name = 'Roger J. Marshall' AND T1.ConferenceID = 0 AND T1.JournalID = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Find the paper ID, title, published year and journal's full name of the paper which included the most number in author.",
+        "query": "SELECT T1.Id, T1.Title, T1.Year, T3.FullName FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId INNER JOIN Journal AS T3 ON T1.JournalId = T3.Id GROUP BY T2.AuthorId ORDER BY COUNT(T2.AuthorId) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Describe the paper title, published year, conference's short name and included author names in the paper ID of 15.",
+        "query": "SELECT DISTINCT T1.Title, T1.Year, T3.ShortName, T2.Name FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId INNER JOIN Conference AS T3 ON T1.ConferenceId = T3.Id WHERE T1.Id = 15"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Among author ID of under 1000, who published the paper in affiliation with Zurich, ETH, provide paper ID, year and keyword if any.",
+        "query": "SELECT T2.Id, T2.Year, T2.Keyword FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id WHERE T1.AuthorId < 1000 AND T1.Affiliation = 'Zurich, ETH'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Among the author included in the paper of \"Inspection resistant memory: Architectural support for security from physical examination\", write down the author name and ID who were affiliated with Microsoft Research, USA.",
+        "query": "SELECT T2.Name, T1.Id FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Title = 'Inspection resistant memory: Architectural support for security FROM physical examination' AND T2.Affiliation = 'Microsoft Research, USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Write down the author name, affiliation, jounal short name and full name of the paper \"Decreased Saliva Secretion and Down-Regulation of AQP5 in Submandibular Gland in Irradiated Rats\".",
+        "query": "SELECT T2.Name, T2.Affiliation, T3.ShortName, T3.FullName FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId INNER JOIN Journal AS T3 ON T1.JournalId = T3.Id WHERE T1.Title = 'Decreased Saliva Secretion and Down-Regulation of AQP5 in Submandibular Gland in Irradiated Rats'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List the paper title and journal ID which were published under the conference name of \"International Symposium of Robotics Research\".",
+        "query": "SELECT DISTINCT T2.Title, T2.JournalId FROM Conference AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.ConferenceId WHERE T1.FullName = 'International Symposium of Robotics Research' AND T2.Year = 2003"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Name the title, year and keyword of the paper which were written by the author ID of 661002 with the affiliation of \"Scientific Computing and Imaging Institute, University of Utah, UT 84112, USA\" organization.",
+        "query": "SELECT T2.Title, T2.Year, T2.Keyword FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id WHERE T1.AuthorId = 661002 AND T1.Affiliation = 'Scientific Computing and Imaging Institute, University of Utah, UT 84112, USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Calculate the differences of the paper number with the journal name of IWC in 2000 and 2010.",
+        "query": "SELECT SUM(CASE WHEN T2.Year = 2000 THEN 1 ELSE 0 END) - SUM(CASE WHEN T2.Year = 2010 THEN 1 ELSE 0 END) AS DIFF FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T1.ShortName = 'IWC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Provide any four valid Journal ID along with short name and full name of the papers which were made in 2013.",
+        "query": "SELECT DISTINCT T2.JournalId, T1.ShortName, T1.FullName FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T2.Year = 2013 AND T2.JournalId != 0 AND T2.JournalId != -1 LIMIT 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Under the conference name of MICRO, calculate how many more paper is needed to published in 1971 to 1980 in average by yearly to get equivalent to the number of paper from 1991 to 2000. Write down the title and author name of the paper that were actually published during 1971 to 1980 with the conference name with MICRO.",
+        "query": "SELECT T2.title, T3.name, T1.FullName FROM Conference AS T1 INNER JOIN Paper AS T2 ON T1.id = T2.ConferenceId INNER JOIN PaperAuthor AS T3 ON T1.id = T3.PaperId WHERE T1.ShortName = 'MICRO' AND T2.Year BETWEEN '1971' AND '1980'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many of the papers are preprinted or not published?",
+        "query": "SELECT COUNT(Id) FROM Paper WHERE Year = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "State the full name of conference for paper \"The Dissimilarity Representation as a Tool for Three-Way Data Classification: A 2D Measure\".",
+        "query": "SELECT T2.FullName FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T1.Title = 'The Dissimilarity Representation as a Tool for Three-Way Data Classification: A 2D Measure'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the homepage address for paper \"Energy-efficiency bounds for noise-tolerant dynamic circuits\"?",
+        "query": "SELECT T2.HomePage FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T1.Title = 'Energy-efficiency bounds for noise-tolerant dynamic circuits'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Write down the name of authors for paper with id from 101 to 105.",
+        "query": "SELECT T2.Name FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Id > 100 AND T1.Id < 106"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Among the papers published in 2009, pick 10 and list down the conference's short name of these papers.",
+        "query": "SELECT T2.PaperId, T4.ShortName FROM Author AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.AuthorId INNER JOIN Paper AS T3 ON T2.PaperId = T3.Id INNER JOIN Conference AS T4 ON T3.ConferenceId = T4.Id WHERE T3.Year = 2009 LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Write down homepage URL of journal for paper \"364: Induction of Mixed Chimerism and Transplantation Tolerance in a Non-Human Primate Lung Allograft Model: Early Results\".",
+        "query": "SELECT T2.HomePage FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id WHERE T1.Title = '364: Induction of Mixed Chimerism and Transplantation Tolerance in a Non-Human Primate Lung Allograft Model: Early Results'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List down all paper name that were published in conference \"International Conference on Internet Computing\".",
+        "query": "SELECT T1.Title FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T2.FullName = 'International Conference on Internet Computing' AND T1.Title <> ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Among papers that were published in 2005, provide the author name of paper with key words of \"LOAD; IDE; SNP; haplotype; asso- ciation studies\".",
+        "query": "SELECT T2.Name FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Year = 2005 AND T1.Keyword = 'KEY WORDS: LOAD IDE SNP haplotype asso- ciation studies'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many authors have written paper \"145 GROWTH HORMONE RECEPTORS AND THE ONSET OF HYPERINSULINEMIA IN THE OBESE ZUCKER RAT: \"?",
+        "query": "SELECT COUNT(DISTINCT T2.Name) FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Title = '145 GROWTH HORMONE RECEPTORS AND THE ONSET OF HYPERINSULINEMIA IN THE OBESE ZUCKER RAT: '"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Who are the co-authors for Jei Keon Chae and what is the title of paper written by them?",
+        "query": "SELECT T2.AuthorId, T1.Title FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T2.Name = 'Jei Keon Chae'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What are the conference name and journal name of paper written by Shueh-Lin Yau? List down the name of co-authors and provide the title of that paper.",
+        "query": "SELECT T1.ConferenceId, T1.JournalId, T2.Name, T1.Title FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId INNER JOIN Conference AS T3 ON T1.ConferenceId = T3.Id INNER JOIN Journal AS T4 ON T1.JournalId = T4.Id WHERE T2.Name = 'Shueh-Lin Yau'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many papers were preprinted between the years 1990 and 2000?",
+        "query": "SELECT COUNT(id) FROM Paper WHERE Year BETWEEN '1990' AND '2000' AND ConferenceId = 0 AND JournalId = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List the names of all authors affiliated with Birkbeck University of London.",
+        "query": "SELECT Name FROM Author WHERE Affiliation = 'Birkbeck University of London'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List the short name of all conferences whose full name begins with International Symposium.",
+        "query": "SELECT ShortName FROM Conference WHERE FullName LIKE 'International Symposium%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many journals do not have a website?",
+        "query": "SELECT COUNT(HomePage) FROM Journal WHERE HomePage = ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List author name for articles that are preprinted but not published.",
+        "query": "SELECT T2.Name FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Year = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List author affiliation for papers whose topic is Quantum Physics.",
+        "query": "SELECT T2.Affiliation FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Keyword = 'Quantum Physics'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Identify by conference full name all papers in which a journal was not published but a conference.",
+        "query": "SELECT T2.FullName FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T1.ConferenceId != 0 AND T1.JournalId = 0 AND T1.Year != 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Identify by papers title those in which conferences have been published that do not have a website..",
+        "query": "SELECT T2.Title FROM Conference AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.ConferenceId WHERE T1.HomePage = '' AND T2.Title <> ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Identify by publication year in the paper database all journals that don't have short name.",
+        "query": "SELECT DISTINCT T2.Year, FullName FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T1.ShortName = ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the affiliation of the author writing in the journal 'A combined search for the standard model Higgs boson at s = 1.96 \u00c2 TeV'?",
+        "query": "SELECT T1.Affiliation FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id WHERE T2.Title = 'A combined search for the standard model Higgs boson at s = 1.96 \u00c2 TeV'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Indicate the name of all the journals published in the paper database in the year 2001.",
+        "query": "SELECT T2.FullName FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id WHERE T1.Year = 2001 AND T1.ConferenceId > 0 AND T1.JournalId > 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the name of the co-authors of the paper titled 'Particle identification using the time-over-threshold method in the ATLAS Transition Radiation Tracker'?",
+        "query": "SELECT T1.Name FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id WHERE T2.Title = 'Particle identification using the time-over-threshold method in the ATLAS Transition Radiation Tracker'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "In how many papers and in what years was the International Conference on Database Theory published?",
+        "query": "SELECT COUNT(T1.Id) AS PAPER, COUNT(DISTINCT T1.Year) AS YEARS FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE year != 0 AND T2.FullName = 'International Conference on Database Theory'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the full name of the journals that are published in the database papers whose topic is Sustainability?",
+        "query": "SELECT T2.FullName FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id WHERE T1.Keyword = 'Sustainability'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the name of the authors of papers in which conferences have been published whose full name includes the word Workshop?",
+        "query": "SELECT T2.Name FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId INNER JOIN Conference AS T3 ON T1.ConferenceId = T3.Id WHERE T3.FullName LIKE '%Workshop%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What percentage of authors of the paper about Charged particle multiplicity are affiliated with INFN?",
+        "query": "SELECT CAST((SUM(CASE WHEN T1.Affiliation LIKE '%INFN%' THEN 1 ELSE 0 END)) AS REAL) * 100 / COUNT(T2.Id) FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id WHERE T2.Title LIKE '%Charged particle multiplicity%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What percentage of journals whose short name begins with ANN were published in the paper database in 1989?",
+        "query": "SELECT CAST((SUM(CASE WHEN T1.ShortName LIKE 'ANN%' THEN 1 ELSE 0 END)) AS REAL) * 100 / COUNT(T1.ShortName) FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T2.Year = 1989"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many authors were associated with the Microsoft Research when paper number 1 was written?",
+        "query": "SELECT COUNT(PaperId) FROM PaperAuthor WHERE Affiliation LIKE '%Microsoft Research%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What was the topic of the article \"A Formal Approach to Service Component Architecture\" and when was it published?",
+        "query": "SELECT Keyword, Year FROM Paper WHERE Title = 'A Formal Approach to Service Component Architecture'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What percentage of papers were preprinted after the year 2000?",
+        "query": "SELECT CAST(SUM(CASE WHEN Year > 2000 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(Id) FROM Paper"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Please list the names of the authors of the paper \"Hypermethylation of the <I>TPEF/HPP1</I> Gene in Primary and Metastatic Colorectal Cancers\".",
+        "query": "SELECT T2.Name FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Title = 'Hypermethylation of the <I>TPEF/HPP1</I> Gene in Primary and Metastatic Colorectal Cancers'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the full name of the journal that published the paper \"Multiple paternity in a natural population of a salamander with long-term sperm storage\"?",
+        "query": "SELECT T2.FullName FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id WHERE T1.Title = 'Multiple paternity in a natural population of a salamander with long-term sperm storage'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many papers were in the journal \"Iet Software/iee Proceedings - Software\"?",
+        "query": "SELECT COUNT(T1.JournalId) FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id WHERE T2.FullName = 'Iet Software/iee Proceedings - Software'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the full name of the conference where paper number 5 was published?",
+        "query": "SELECT T2.FullName FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T1.Id = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Please list the titles of any two papers that Jundu has written.",
+        "query": "SELECT T1.Title FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T2.Name LIKE 'Jun du%' LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the title of the paper that was written by Cheng Huang and affiliated with Microsoft?",
+        "query": "SELECT T1.Title FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T2.Name = 'Cheng Huang' AND T2.Affiliation = 'Microsoft'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Please provide the full name of the conference where one of the papers of Jean-luc Hainaut were published.",
+        "query": "SELECT DISTINCT T3.FullName FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId INNER JOIN Conference AS T3 ON T1.ConferenceId = T3.Id WHERE T2.Name = 'Jean-luc Hainaut' LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What are the three journals that the papers written by Andrew Cain were published in? Please provide your answer with the full name of each journal.",
+        "query": "SELECT T3.FullName FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId INNER JOIN Journal AS T3 ON T1.JournalId = T3.Id WHERE T2.Name = 'Andrew Cain'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Please list all of the associations that the authors of the paper \"FIBER: A Generalized Framework for Auto-tuning Software\" are affiliated with.",
+        "query": "SELECT DISTINCT T2.Affiliation FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Title = 'FIBER: A Generalized Framework for Auto-tuning Software'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Please provide the titles of any two papers that are either preprinted or unpublished along with the full name of the journal to which those papers belong.",
+        "query": "SELECT T1.Title, T2.FullName FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id WHERE T1.Year < 1 LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the journal's short and full names that feature papers on the \"Materials\" topic?",
+        "query": "SELECT T2.ShortName, T2.FullName FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id WHERE T1.Keyword LIKE '%Materials%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List the names of authors affiliated with the University of Oxford in alphabetical order.",
+        "query": "SELECT Name FROM Author WHERE Affiliation = 'University of Oxford' ORDER BY Name ASC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List the short name and home page URL of all the international conferences on artificial intelligence.",
+        "query": "SELECT ShortName, HomePage FROM Conference WHERE FullName LIKE 'International Conference on Artificial Intelligence%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Find the names of papers which are published in the year 1996.",
+        "query": "SELECT Title FROM Paper WHERE year = 1996"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List the title and author's name of papers published in the 2007 Neoplasia journal.",
+        "query": "SELECT T1.Title, T2.Name FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId INNER JOIN Journal AS T3 ON T1.JournalId = T3.Id WHERE T3.FullName = 'Neoplasia' AND T1.Year = 2007"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Among the authors affiliated with Soongsil University, list the authors' names and papers published during the year 2000.",
+        "query": "SELECT T2.Title, T1.Name FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id WHERE T1.Affiliation = 'Soongsil University' AND T2.Year = 2000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Give the title and author's name of the papers published between 2000 and 2005 that include the topic optical properties.",
+        "query": "SELECT T1.Title, T2.Name FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Keyword LIKE '%optical properties%' AND T1.Year BETWEEN 2000 AND 2005 AND T1.Title <> ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the average number of papers published in the World Computer Congress each year?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.FullName = 'International Congress Series' THEN 1 ELSE 0 END) AS REAL) / COUNT(T1.Id) AS Div1, T1.Year FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id GROUP BY T1.YEAR HAVING Div1 != 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Give the Title and author's name of the books that were preprint in 1997.",
+        "query": "SELECT DISTINCT T2.Name, T1.Title FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.ConferenceId = 0 AND T1.JournalId = 0 AND T1.Year = 1997 AND T1.Title <> ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Write the titles of papers published by Adam Jones and the journal name in which it was published from 2005 to 2010.",
+        "query": "SELECT T1.Title FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId INNER JOIN Journal AS T3 ON T1.JournalId = T3.Id WHERE T2.Name = 'Adam Jones' AND T1.Year BETWEEN 2005 AND 2010"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many authors is affiliated to the organization \"Otterbein University\"?",
+        "query": "SELECT COUNT(Name) FROM Author WHERE Affiliation = 'Otterbein University'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many authors drafted the paper \"Subcellular localization of nuclease in barley aleurone\"?",
+        "query": "SELECT COUNT(DISTINCT T2.Name) FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Title = 'Subcellular localization of nuclease in barley aleurone'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the full name of the conference in which the paper titled \"Extended Fuzzy Regression Models\" was published?",
+        "query": "SELECT T2.FullName FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T1.Title = 'Extended Fuzzy Regression Models'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many papers are published under the conference \"Mathematics of Program Construction\n\"?",
+        "query": "SELECT COUNT(T1.Id) FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T2.FullName = 'Mathematics of Program Construction'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Who is the author of the paper titled \"Open Sourcing Social Solutions (Building Communities of Change)\"?",
+        "query": "SELECT T2.Name FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Title = 'Open Sourcing Social Solutions (Building Communities of Change)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List all the title of the paper that Jianli Hua published.",
+        "query": "SELECT T1.Title FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T2.Name = 'Jianli Hua'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Who authored the paper titled \"Testing timed automata\n\"?",
+        "query": "SELECT T2.Name FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Title = 'Testing timed automata'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many papers are published in year 2000 under the conference \"SSPR\"?",
+        "query": "SELECT COUNT(T1.Id) FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T1.Year = 2000 AND T2.ShortName = 'SSPR'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List all the paper that the journal \"Theoretical Computer Science\n\" published in 2003.",
+        "query": "SELECT DISTINCT T1.Title FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id WHERE T2.FullName = 'Theoretical Computer Science' AND T1.Year = 2003 AND T1.Title <> ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the conference homepage URL of the paper titled \"Quality evaluation of long duration audiovisual content\"?",
+        "query": "SELECT T2.HomePage FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T1.Title = 'Quality evaluation of long duration audiovisual content'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Among the author who drafted the paper \"A Randomized Comparison of Sirolimus- Versus Paclitaxel-Eluting Stent Implantation in Patients With Diabetes Mellitus\", which of them is/are affiliated with the Asan Medical Center, University of Ulsan College of Medicine, Seoul, Korea\n?",
+        "query": "SELECT T2.Name FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T2.Affiliation = 'Asan Medical Center, University of Ulsan College of Medicine, Seoul, Korea' AND T1.Title = 'A Randomized Comparison of Sirolimus- Versus Paclitaxel-Eluting Stent Implantation in Patients With Diabetes Mellitus'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many papers are published under the journal \"Software - Practice and Experience\"?",
+        "query": "SELECT COUNT(T1.Id) FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id WHERE T2.FullName = 'Software - Practice and Experience'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List all the paper that were under the conference homepage URL \"http://www.irma-international.org/\".",
+        "query": "SELECT T1.Title FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T2.HomePage = 'http://www.irma-international.org/'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Calculate the total average number of papers published from 2002 to 2010 under the conference \"Information and Knowledge Engineering\".",
+        "query": "SELECT CAST(COUNT(T1.Id) AS REAL) / COUNT(DISTINCT T1.Year) FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T2.FullName = 'Information and Knowledge Engineering' AND T1.Year >= 2002 AND T1.Year <= 2010"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "From year 1991 to 2000, calculate the difference betweeen the total number of papers published under the conference \"International Conference on Supercomputing \" and \"Informatik & Schule\"?",
+        "query": "SELECT SUM(CASE WHEN T2.FullName = 'Informatik & Schule' THEN 1 ELSE 0 END) - SUM(CASE WHEN T2.FullName = 'International Conference on Supercomputing' THEN 1 ELSE 0 END) AS DIFF FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T1.Year > 1990 AND T1.Year < 2001"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the short name for \"Software - Concepts and Tools / Structured Programming\"?",
+        "query": "SELECT ShortName FROM Journal WHERE FullName = 'Software - Concepts and Tools / Structured Programming'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Which journal was the paper \"Education, democracy and growth\" published on? Give the full name of the journal.",
+        "query": "SELECT T1.FullName FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T2.Title = 'Education, democracy and growth'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Give the number of papers that were published on \"IEEE Transactions on Nuclear Science\" in 1999.",
+        "query": "SELECT COUNT(T2.Id) FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T1.FullName = 'IEEE Transactions on Nuclear Science' AND T2.Year = 1999"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What was the name of the paper that was published on \"IEEE Transactions on Pattern Analysis and Machine Intelligence\" in 2011?",
+        "query": "SELECT T2.Title FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T1.FullName = 'IEEE Transactions on Pattern Analysis and Machine Intelligence' AND T2.Year = 2011 AND T2.Title <> ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What are the keywords for the paper which was published on \"Modeling Identification and Control\" in 1994?",
+        "query": "SELECT T2.Keyword FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T1.FullName = 'Modeling Identification and Control' AND T2.Year = 1994"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "For the paper which was presented by \"Zvezdan Proti\u0107\", was it preprinted?",
+        "query": "SELECT CASE WHEN T1.Year = 0 THEN 'TRUE' ELSE 'FALSE' END FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T2.Name = 'Zvezdan Proti\u0107' AND T1.ConferenceId = 0 AND T1.JournalId = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "At which conference was the paper \"Skew-Circulant Preconditioners for Systems of LMF-Based ODE Codes\" presented?",
+        "query": "SELECT T2.FullName FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T1.Title = 'Skew-Circulant Preconditioners for Systems of LMF-Based ODE Codes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Tell the number of papers that were presented at \"International Symposium on Software Testing and Analysis\" conference.",
+        "query": "SELECT COUNT(T1.Id) FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T2.FullName = 'International Symposium on Software Testing and Analysis'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Gives the home page of the conference where the paper \"Increasing the Concurrency in Estelle\" is presented.",
+        "query": "SELECT DISTINCT T2.HomePage FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T1.Title = 'Increasing the Concurrency in Estelle'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many authors finished the paper \"An Improved Active Suspension Model for Attitude Control of Electric Vehicles\" together?",
+        "query": "SELECT COUNT(T2.AuthorId) FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Title = 'An Improved Active Suspension Model for Attitude Control of Electric Vehicles'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "In the year 2012, which conference had the most papers presented? Give the short name of the conference.",
+        "query": "SELECT T2.ShortName FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T1.Year = '2012' GROUP BY T1.ConferenceId ORDER BY COUNT(T1.Id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many papers were presented at 'ECSQARU' in 2003?",
+        "query": "SELECT COUNT(T1.Id) FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T2.ShortName = 'ECSQARU' AND T1.Year = '2003'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Show the keywords of the paper that was presented at \"International Radar Symposium\" in 2012.",
+        "query": "SELECT T1.Keyword FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T2.FullName = 'International Radar Symposium' AND T1.Year = 2012"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many times more for the papers that were presented at the \"International Conference on Thermoelectrics\" conference than \"International Conference on Wireless Networks, Communications and Mobile Computing\u201c conference?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.FullName = 'International Conference on Thermoelectrics' THEN 1 ELSE 0 END) AS REAL) / SUM(CASE WHEN T2.FullName = 'International Conference on Wireless Networks, Communications and Mobile Computing' THEN 1 ELSE 0 END) FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the percentage of preprints of John Van Reenen's papers?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.ConferenceId = 0 AND T1.JournalId = 0 THEN 1 ELSE 0 END) AS REAL) / COUNT(T1.Id) FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T2.Name = 'John Van Reenen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the oldest published book?",
+        "query": "SELECT Title FROM Paper WHERE Year > 0 ORDER BY Year ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Which conference has the longest name?",
+        "query": "SELECT FullName FROM Conference ORDER BY LENGTH(FullName) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many authors are affiliated with NASA Langley Research Center?",
+        "query": "SELECT COUNT(Name) FROM Author WHERE Affiliation = 'NASA Langley Research Center'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many journals don\u2019t have a short name?",
+        "query": "SELECT COUNT(ShortName) FROM Journal WHERE ShortName = ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many of the papers are preprinted?",
+        "query": "SELECT COUNT(Id) FROM Paper WHERE ConferenceId = 0 AND JournalId = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the title of the paper with the most authors?",
+        "query": "SELECT T2.Title FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id GROUP BY T1.PaperId ORDER BY COUNT(T1.PaperId) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Which paper published by the \"TUBERCLE LUNG DIS\" journal is the oldest?",
+        "query": "SELECT T2.Title FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T1.ShortName = 'TUBERCLE LUNG DIS' ORDER BY T2.Year ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List all of the papers written by the author \"Karin Rengefors.\"",
+        "query": "SELECT T2.Title FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id WHERE T1.Name = 'Karin Rengefors'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many papers were published by the \"Virtual Reality, IEEE Annual International Symposium\" conference in 2012?",
+        "query": "SELECT COUNT(T2.Id) FROM Conference AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.ConferenceId WHERE T1.FullName = 'Virtual Reality, IEEE Annual International Symposium' AND T2.Year = 2012"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the short name for the journal that published the paper \"A Case of Unilateral Ashy Dermatosis\"?",
+        "query": "SELECT T2.ShortName FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id WHERE T1.Title = 'A Case of Unilateral Ashy Dermatosis'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What are the affiliations of the author \"Mark A. Musen\" written on and off paper?",
+        "query": "SELECT T1.Affiliation FROM PaperAuthor AS T1 INNER JOIN Author AS T2 ON T1.AuthorId = T2.Id WHERE T2.Name = 'Mark A. Musen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Who are the authors of the paper \"Determination of Planetary Meteorology from Aerobot Flight Sensors\"?",
+        "query": "SELECT T2.Name FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Title = 'Determination of Planetary Meteorology FROM Aerobot Flight Sensors'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List all the titles and their publishing journals from the 60's.",
+        "query": "SELECT T1.Title, T1.JournalId FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id WHERE T1.Year >= 1960 AND T1.Year <= 1970"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Which year did the \"Internet, Multimedia Systems and Applications\" conference publish the most papers?",
+        "query": "SELECT T2.Year FROM Conference AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.ConferenceId WHERE T1.FullName = 'Internet, Multimedia Systems and Applications' GROUP BY T2.Year ORDER BY COUNT(T2.Id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What are the different ways the name of the author, Randall Davis, is written on their papers?",
+        "query": "SELECT DISTINCT T1.Name FROM PaperAuthor AS T1 INNER JOIN Author AS T2 ON T1.AuthorId = T2.Id WHERE T2.Name = 'Randall Davis' AND T1.Name != 'Randall Davis'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List all of the conferences where a paper was published in 2008.",
+        "query": "SELECT DISTINCT T2.FullName FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T1.Year = 2008"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the homepage URL for the journal that published the most papers?",
+        "query": "SELECT T2.HomePage FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id GROUP BY T1.JournalId ORDER BY COUNT(T1.JournalId) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the proportion of the papers that have the keyword \"cancer\"? Please provide a list of authors and their affiliations.",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.Keyword = 'cancer' THEN 1 ELSE 0 END) AS REAL) / COUNT(T1.Id), T2.Name, T2.Affiliation FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the name of author with the ID of 1722?",
+        "query": "SELECT Name FROM Author WHERE Id = 1722"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many papers are preprint or not published?",
+        "query": "SELECT COUNT(Id) FROM Paper WHERE Year = 0 OR (ConferenceId = 0 AND JournalId = 0)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List the name of the author that affiliated with University of Illinois Chicago?",
+        "query": "SELECT Name FROM Author WHERE Affiliation = 'University of Illinois Chicago'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many papers were published in 2005. Calculate the difference between the number of paper published in 2005 and the number of paper published in the previous year.",
+        "query": "SELECT SUM(CASE WHEN Year = 2005 THEN 1 ELSE 0 END) , SUM(CASE WHEN year = 2005 THEN 1 ELSE 0 END) - SUM(CASE WHEN year = 2004 THEN 1 ELSE 0 END) AS diff FROM Paper"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "State the title of papers published in the Ibm Journal of Research and Development.",
+        "query": "SELECT T2.Title FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T1.FullName = 'Ibm Journal of Research and Development'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "State the name and affiliation of author for the 'Education, democracy and growth' paper?",
+        "query": "SELECT T2.Name, T2.Affiliation FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Title = 'Education, democracy and growth'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many author published papers in the 'IEEE Computer' journal?",
+        "query": "SELECT COUNT(T2.Name) FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId INNER JOIN Journal AS T3 ON T1.JournalId = T3.Id WHERE T3.FullName = 'IEEE Computer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Where was the 'A context-based navigation paradigm for accessing Web data' paper published? State the name of the conference.",
+        "query": "SELECT T2.FullName FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T1.Title = 'A context-based navigation paradigm for accessing Web data'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many papers were published in International Workshop on Inductive Logic Programming from 2001 to 2009?",
+        "query": "SELECT COUNT(T1.Id) FROM Paper AS T1 INNER JOIN Conference AS T2 ON T1.ConferenceId = T2.Id WHERE T2.FullName = 'International Workshop on Inductive Logic Programming' AND T1.Year BETWEEN 2001 AND 2009"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Calculate the average of authors for each paper from the year of 1990 to 2000.",
+        "query": "SELECT CAST(COUNT(DISTINCT T2.AuthorId) AS REAL) / COUNT(DISTINCT T1.Title) FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Year BETWEEN 1990 AND 2000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Indicate the year and a full name of the journal in which the publication named 'Area Effects in Cepaea' was published.",
+        "query": "SELECT T1.Year, T2.FullName FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id WHERE T1.Title = 'Area Effects in Cepaea'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Who is the author of the publication named 'Real-Time Automata'?",
+        "query": "SELECT T2.Name FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T1.Title = 'Real-Time Automata'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Provide the name of the author who is affiliated with the organization named 'ABB Electrical Machines'.",
+        "query": "SELECT Name FROM Author WHERE Affiliation = 'ABB Electrical Machines'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Provide the number of publications published in the journal named 'Academic Medicine' between 2005 and 2010.",
+        "query": "SELECT COUNT(T2.JournalId) FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T1.FullName = 'Academic Medicine' AND T2.Year BETWEEN 2005 AND 2010"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Provide the title of the latest publication published by it's author 'Zuliang Du'.",
+        "query": "SELECT T2.Title FROM PaperAuthor AS T1 INNER JOIN Paper AS T2 ON T1.PaperId = T2.Id WHERE T1.Name = 'Zuliang Du' ORDER BY T2.Year DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many publications were published in relation to the conference 'Adaptive Multimedia Retrieval' in 2007?",
+        "query": "SELECT COUNT(T2.ConferenceId) FROM Conference AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.ConferenceId WHERE T1.FullName = 'Adaptive Multimedia Retrieval' AND T2.Year = 2007"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Provide the average number of papers that are published in the journal named 'Information Sciences' annually.",
+        "query": "SELECT CAST(COUNT(T2.JournalId) AS REAL) / COUNT(DISTINCT T2.Year) FROM Journal AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.JournalId WHERE T1.FullName = 'Information Sciences'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many publications were published by author named 'Howard F. Lipson'?",
+        "query": "SELECT COUNT(PaperId) FROM PaperAuthor WHERE Name = 'Howard F. Lipson'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Among all publications containing keywords 'Turbulent Fluids', what percentage of them was published in the journal named 'Physics of Fluids'?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.Keyword = 'Turbulent Fluids' THEN 1 ELSE 0 END) AS REAL) / SUM(CASE WHEN T2.FullName = 'Physics of Fluids' THEN 1 ELSE 0 END) FROM Paper AS T1 INNER JOIN Journal AS T2 ON T1.JournalId = T2.Id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Indicate the number of authors affiliated with the organization named 'Arizona State University'.",
+        "query": "SELECT COUNT(Name) FROM Author WHERE Affiliation = 'Arizona State University'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "List out the full name and URL link of ICCI?",
+        "query": "SELECT FullName, HomePage FROM Conference WHERE ShortName = 'ICCI'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Mention the titile of paper writen by Joe Lograsso.",
+        "query": "SELECT T1.Title FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T2.Name = 'Joe Lograsso'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "How many papers were written by authors who cooperated with University of Hong Kong?",
+        "query": "SELECT COUNT(T2.PaperId) FROM Author AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.AuthorId WHERE T1.Affiliation = 'University of Hong Kong'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "State the year and title of papers written by Barrasa.",
+        "query": "SELECT T1.Year, T1.Title FROM Paper AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.PaperId WHERE T2.Name = 'Barrasa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Sate the author name and published year for paper id 2?",
+        "query": "SELECT T1.Name, T3.Year FROM Author AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.AuthorId INNER JOIN Paper AS T3 ON T2.PaperId = T3.Id WHERE T2.PaperId = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "Mention the name of author for paper id 5 and state the keyword of this page.",
+        "query": "SELECT T1.Name, T3.Keyword FROM Author AS T1 INNER JOIN PaperAuthor AS T2 ON T1.Id = T2.AuthorId INNER JOIN Paper AS T3 ON T2.PaperId = T3.Id WHERE T2.PaperId = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "authors",
+        "question": "What is the full name of the conference in which the paper \"2004 YD5\" was published?",
+        "query": "SELECT T1.FullName FROM Conference AS T1 INNER JOIN Paper AS T2 ON T1.Id = T2.ConferenceId WHERE T2.Title = '2004 YD5'"
+    }
+]

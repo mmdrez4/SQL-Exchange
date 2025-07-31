@@ -1,0 +1,344 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "What is the most consecutive games tied by Ebbsfleet as an away team in the 2008 season?",
+        "query": "SELECT COUNT(*) FROM matchs WHERE season = 2008 AND AwayTeam = 'Ebbsfleet' AND FTR = 'D'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Of all the divisions in the world, what percentage of them belong to England?",
+        "query": "SELECT CAST(COUNT(CASE WHEN country = 'England' THEN division ELSE NULL END) AS REAL) * 100 / COUNT(division) FROM divisions"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "What percentage of games won, games lost and games drawn does Cittadella have as a home team in total?",
+        "query": "SELECT CAST(COUNT(CASE WHEN FTR = 'H' THEN 1 ELSE NULL END) / COUNT(HomeTeam) AS REAL) * 100, CAST(COUNT(CASE WHEN FTR = 'A' THEN 1 ELSE NULL END) AS REAL) / COUNT(HomeTeam), CAST(COUNT(CASE WHEN FTR = 'D' THEN 1 ELSE NULL END) AS REAL) / COUNT(HomeTeam) FROM matchs WHERE HomeTeam = 'Cittadella'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Of all the teams that played as a team away against Caen in the 2010 season, which one has the highest winning percentage?",
+        "query": "SELECT AwayTeam FROM matchs WHERE HomeTeam = 'Caen' AND season = 2010 AND FTR = 'A' GROUP BY AwayTeam ORDER BY COUNT(AwayTeam) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "What percentage of matches played on 2005/07/30 belong to the F1 division?",
+        "query": "SELECT CAST(SUM(CASE WHEN Div = 'F1' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(Div) FROM matchs WHERE Date = '2005-07-30' "
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "What percentage of all tied games did the Sassuolo team play in?",
+        "query": "SELECT CAST(SUM(CASE WHEN HomeTeam = 'Sassuolo' OR AwayTeam = 'Sassuolo' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(FTR) FROM matchs WHERE FTR = 'D'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "What is the percentage whereby the away team scored 2 goals during the 2017 seasons?",
+        "query": "SELECT CAST(SUM(CASE WHEN FTAG = 2 THEN 1 ELSE 0 END) / COUNT(FTAG) AS REAL) * 100 FROM matchs WHERE season = 2017"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "What is the name of all the teams that played in the EFL League One division?",
+        "query": "SELECT T1.HomeTeam,T1.AwayTeam FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div=T2.division WHERE T2.name = 'EFL League One' and T1.Div = 'E2' "
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "How many teams playing in divisions in Greece have ever scored 4 or more goals?",
+        "query": "SELECT COUNT(DISTINCT CASE WHEN T1.FTHG >= 4 THEN HomeTeam ELSE NULL end) + COUNT(DISTINCT CASE WHEN T1.FTAG >= 4 THEN AwayTeam ELSE NULL end) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.country = 'Greece' "
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "How many matches played in the 2019 season of Scottish Championship league were ended with an equal result of 2-2?",
+        "query": "SELECT COUNT(T1.Div) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.season = 2019 AND T2.name = 'Scottish Championship' AND T1.FTAG = 2 AND T1.FTHG = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Which 2 Scottish teams scored 10 goals playing as a local team and in which seasons?",
+        "query": "SELECT T1.HomeTeam FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.country = 'Scotland' AND T1.FTHG = 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "From the Spanish LaLiga division in the 2017 season, which team won the most times as a local team and by what percentage?",
+        "query": "SELECT T1.HomeTeam HWHT , CAST(COUNT(CASE WHEN T1.FTR = 'H' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(HomeTeam) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.name = 'LaLiga' AND T2.country = 'Spain' AND T1.season = 2017"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "How many teams that played in the 2012 season belong to any of the English divisions and what percentage play in each of the divisions?",
+        "query": "SELECT ( SELECT COUNT(T1.Div) AS total FROM matchs T1 INNER JOIN divisions T2 ON T2.division = T1.Div WHERE T2.country = 'England' AND T1.season = 2012 ) AS num , CASE WHEN 1 THEN T.result END AS percentage FROM ( SELECT 100.0 * COUNT(T1.Div) / ( SELECT COUNT(T1.Div) FROM matchs T1 INNER JOIN divisions T2 ON T2.division = T1.Div WHERE T2.country = 'England' AND T1.season = 2012 ) AS result FROM matchs T1 INNER JOIN divisions T2 ON T2.division = T1.Div WHERE T2.country = 'England' AND T1.season = 2012 GROUP BY T2.division ) AS T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "What is the highest final-time score across all divisions in the 2021 season? Which team was the team that made up that score?",
+        "query": "SELECT ( SELECT MAX(MAX(FTAG), MAX(FTHG)) FROM matchs WHERE season = 2021 ) AS T1, AwayTeam FROM matchs WHERE season = 2021 AND FTHG = T1 OR FTAG = T1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "What is the name of the home team in division P1 with the highest final time goal in all seasons?",
+        "query": "SELECT HomeTeam FROM matchs WHERE Div = 'P1' AND season = 2021 ORDER BY FTHG DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "What was the difference in home team and away team win percentages across all divisions in 2010?",
+        "query": "SELECT CAST(COUNT(CASE WHEN FTR = 'H' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(FTR) - CAST(COUNT(CASE WHEN FTR = 'A' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(FTR) DIFFERENCE FROM matchs WHERE season = 2010"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Which division had the most draft matches in the 2008 season?",
+        "query": "SELECT Div FROM matchs WHERE season = 2008 AND FTR = 'D' GROUP BY Div ORDER BY COUNT(FTR) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Which team won the match in the EC division on January 20, 2008 at home?",
+        "query": "SELECT HomeTeam FROM matchs WHERE Div = 'EC' AND Date = '2008-01-20' AND FTR = 'H'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "What is the name of the division in which Club Brugge and Genk competed on September 13, 2009?",
+        "query": "SELECT T2.name FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.Date = '2009-09-13' and T1.HomeTeam = 'Club Brugge' AND T1.AwayTeam = 'Genk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "How many matches were played in the Scottish Premiership division from 2006 to 2008?",
+        "query": "SELECT COUNT(T1.Div) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.name = 'Scottish Premiership' AND (T1.season BETWEEN 2006 AND 2008)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "In which division was the match between Hibernian, the away team, and Hearts, the home team, played? To which country does this division belong?",
+        "query": "SELECT DISTINCT T2.division,T2.country FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.HomeTeam = 'Hearts' AND T1.AwayTeam = 'Hibernian'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Which away team in the division of Bundesliga has the highest final time goals?",
+        "query": "SELECT T1.AwayTeam FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div=T2.division WHERE T2.name = 'Bundesliga' ORDER BY T1.FTAG DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Please provide the names of any three away teams that competed in the Italian divisions.",
+        "query": "SELECT T1.AwayTeam FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div=T2.division WHERE T2.country = 'Italy' LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "What is the name of the division that has had the lowest number of draft matches in the 2019 season?",
+        "query": "SELECT T2.name FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.season = 2019 AND T1.FTR = 'D' GROUP BY T2.division ORDER BY COUNT(FTR) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "How many times did Valencia's home team win in the LaLiga division?",
+        "query": "SELECT COUNT(T1.HomeTeam) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.name = 'LaLiga' AND T1.HomeTeam = 'Valencia' AND T1.FTR = 'H'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "In how many matches in the Seria A division did both teams have equal goals?",
+        "query": "SELECT COUNT(T1.FTR) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.name = 'Seria A' AND T1.FTR = 'D'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "How many football divisions does England have?",
+        "query": "SELECT COUNT(division) FROM divisions WHERE country = 'England'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "What's the name of the football division in the Netherlands?",
+        "query": "SELECT name FROM divisions WHERE country = 'Netherlands'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Who is the winner of the game happened on 2009/10/10, between \"East Fife\" and \"Dumbarton\"?",
+        "query": "SELECT CASE WHEN FTR = 'H' THEN 'East Fife' ELSE 'Dumbarton' END WINNER FROM matchs WHERE Date = '2009-10-10' AND HomeTeam = 'East Fife' AND AwayTeam = 'Dumbarton'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "What was the final score for the game Bursaspor vs Denizlispor on 2009/4/26?",
+        "query": "SELECT FTHG, FTAG FROM matchs WHERE Date = '2009-04-26' AND HomeTeam = 'Bursaspor' AND AwayTeam = 'Denizlispor'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "When did the first match that score more than 10 goals happen?",
+        "query": "SELECT MIN(Date) FROM matchs WHERE FTHG + FTAG > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "For the Ligue 2 game that made the most goals, who is the winner of that game?",
+        "query": "SELECT CASE WHEN T1.FTR = 'H' THEN T1.HomeTeam ELSE T1.AwayTeam END WINNER FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.name = 'Ligue 2' ORDER BY T1.FTAG + T1.FTHG DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "How many Away Victories happened on 2016/3/27 in the LaLiga 2 division?",
+        "query": "SELECT COUNT(T1.FTR) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.name = 'LaLiga 2' AND T1.Date = '2016-03-27' AND T1.FTR = 'A'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "How many draw games happened on 2018/8/7 for National League?",
+        "query": "SELECT COUNT(T1.FTR) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.name = 'National League' AND T1.Date = '2018-08-07' AND T1.FTR = 'D'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Which country had the game that Away team made the most goals?",
+        "query": "SELECT T2.country FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division GROUP BY T2.country ORDER BY SUM(T1.FTAG) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "For a game had a score of 1-8 in the year of 2011, what division was that game in? Give the full name of the division.",
+        "query": "SELECT T2.division, T2.name FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.season = 2011 AND T1.FTHG = 1 AND T1.FTAG = 8"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Which division had the most games with more than 5 total field goals on 2020/2/22? Give the full name of the division?",
+        "query": "SELECT T2.division, T2.name FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.Date = '2020-02-22' AND T1.FTAG + T1.FTHG > 5 ORDER BY T1.FTAG + T1.FTHG DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Give the full name of the divison that had the most 0-0 games.",
+        "query": "SELECT T2.name FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.FTAG = 0 AND T1.FTHG = 0 GROUP BY T2.division ORDER BY COUNT(T1.FTAG) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "How many Scottish League One games took place on the day that \"Pro Vercelli\" and \"Pescara\"had a 5-2 game?",
+        "query": "SELECT COUNT(T1.Date) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.name = 'Scottish League One' AND T1.Date = ( SELECT Date FROM matchs WHERE FTHG = 5 AND FTAG = 2 AND HomeTeam = 'Pro Vercelli' AND AwayTeam = 'Pescara' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "List the number of games that ended up with 5-0 in Greece.",
+        "query": "SELECT COUNT(T1.Div) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.country = 'Greece' AND T1.FTHG = 5 AND T1.FTAG = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Which country did Bradford Team belongs to?",
+        "query": "SELECT DISTINCT T2.country FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.HomeTeam = 'Bradford' OR T1.AwayTeam = 'Bradford'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "How many Eredivisie teams have played in 2008?",
+        "query": "SELECT COUNT(DISTINCT T1.HomeTeam) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.name = 'Eredivisie' AND T1.season = 2008"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "What's the home win ratio of the Bundesliga division in 2021?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.FTR = 'H' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T1.FTR) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.season = 2021 AND T2.name = 'Bundesliga'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "For all the games ended up with 1-1, what percentage of them are from Liga NOS division?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.name = 'Liga NOS' THEN T1.Div ELSE NULL END) AS REAL) * 100 / COUNT(T1.Div) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.FTHG = 1 AND FTAG = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "How many matches were held during the 2021 season's Premier League?",
+        "query": "SELECT COUNT(T1.Div) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.season = 2021 AND T2.name = 'Premier League'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Which team was the home team in the match of the Bundesliga division on 2020/10/2?",
+        "query": "SELECT T1.HomeTeam FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.Date = '2020-10-02' AND T2.name = 'Bundesliga'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Which team won the match of the Bundesliga division on 2020/10/2?",
+        "query": "SELECT CASE WHEN T1.FTR = 'H' THEN T1.HomeTeam WHEN T1.FTR = 'A' THEN T1.AwayTeam END WINNER FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.Date = '2020-10-02' AND T2.name = 'Bundesliga'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Which team has the most victories as the home team in matches of the Bundesliga division?",
+        "query": "SELECT T1.HomeTeam FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.name = 'Bundesliga' AND T1.FTR = 'H' GROUP BY T1.HomeTeam ORDER BY COUNT(T1.FTR) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "How many times did the team Werder Bremen win as the away team in matches of the Bundesliga division?",
+        "query": "SELECT COUNT(T1.Div) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.name = 'Bundesliga' AND T1.AwayTeam = 'Werder Bremen' AND T1.FTR = 'A'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "How many matches of the Bundesliga division ended with an away victory in the 2021 season?",
+        "query": "SELECT COUNT(T1.Div) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.name = 'Bundesliga' AND T1.FTR = 'A' AND T1.season = 2021"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Of the matches in all seasons of the Bundesliga division, how many of them ended with a tie?",
+        "query": "SELECT COUNT(T1.Div) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.name = 'Bundesliga' AND T1.FTR = 'D'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "How many home victories does the Bundesliga division have in more or less than the Premier League division in the 2021 season?",
+        "query": "SELECT COUNT(CASE WHEN T2.name = 'Bundesliga' THEN 1 ELSE NULL END) - COUNT(CASE WHEN T2.name = 'Premier League' THEN 1 ELSE NULL END) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.season = 2021 AND T1.FTR = 'H'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Please list the home teams in the matches of the Bundesliga division that ended with a home victory in the 2021 season.",
+        "query": "SELECT DISTINCT T1.HomeTeam FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.season = 2021 AND T1.FTR = 'H' AND T2.name = 'Bundesliga'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Which team had more home victories in the 2021 season's matches of the Bundesliga division, Augsburg or Mainz?",
+        "query": "SELECT CASE WHEN COUNT(CASE WHEN T1.HomeTeam = 'Augsburg' THEN 1 ELSE NULL END) - COUNT(CASE WHEN T1.HomeTeam = ' Mainz' THEN 1 ELSE NULL END) > 0 THEN 'Augsburg' ELSE 'Mainz' END FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.season = 2021 AND T1.FTR = 'H'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "Which team had the most final-time home-team goals in the 2021 season's matches of the Bundesliga division?",
+        "query": "SELECT T1.HomeTeam FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.name = 'Bundesliga' AND T1.season = 2021 ORDER BY T1.FTHG DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "How many final-time home-team goals were there in total in all the matches of the Bundesliga division in the 2021 season?",
+        "query": "SELECT SUM(T1.FTHG) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T2.name = 'Bundesliga' AND T1.season = 2021"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "european_football_1",
+        "question": "What's the winning rate of Club Brugge in the 2021 Premier League?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.FTR = 'H' THEN 1 ELSE NULL END) + COUNT(CASE WHEN T1.FTR = 'A' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(t1.FTR) FROM matchs AS T1 INNER JOIN divisions AS T2 ON T1.Div = T2.division WHERE T1.season = 2021 AND T1.AwayTeam = 'Club Brugge' OR T1.HomeTeam = 'Club Brugge'"
+    }
+]

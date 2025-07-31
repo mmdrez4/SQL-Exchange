@@ -1,0 +1,258 @@
+{
+    "Addresses": [
+        [
+            7,
+            "193 Marlin Brook",
+            "Apt. 406",
+            null,
+            "Herzoghaven",
+            "068",
+            "Arkansas",
+            "Cook Islands",
+            null
+        ],
+        [
+            3,
+            "67942 Carlotta Ferry Apt. 686",
+            "Apt. 583",
+            null,
+            "Goodwinhaven",
+            "541",
+            "Kansas",
+            "Saudi Arabia",
+            null
+        ],
+        [
+            2,
+            "3999 Aufderhar Ways Suite 593",
+            "Apt. 388",
+            null,
+            "Lake Laishafurt",
+            "943",
+            "Kentucky",
+            "Burundi",
+            null
+        ]
+    ],
+    "Courses": [
+        [
+            13,
+            "rs",
+            "v",
+            null
+        ],
+        [
+            15,
+            "oop",
+            "d",
+            null
+        ],
+        [
+            8,
+            "nlp",
+            "q",
+            null
+        ]
+    ],
+    "Departments": [
+        [
+            10,
+            "economics",
+            "non",
+            null
+        ],
+        [
+            11,
+            "biology",
+            "consequatur",
+            null
+        ],
+        [
+            3,
+            "art",
+            "aliquam",
+            null
+        ]
+    ],
+    "Degree_Programs": [
+        [
+            8,
+            15,
+            "Master",
+            "earum",
+            null
+        ],
+        [
+            2,
+            2,
+            "Master",
+            "cumque",
+            null
+        ],
+        [
+            9,
+            3,
+            "Bachelor",
+            "voluptas",
+            null
+        ]
+    ],
+    "Sections": [
+        [
+            5,
+            5,
+            "e",
+            "ex",
+            null
+        ],
+        [
+            4,
+            1,
+            "d",
+            "voluptas",
+            null
+        ],
+        [
+            12,
+            4,
+            "o",
+            "et",
+            null
+        ]
+    ],
+    "Semesters": [
+        [
+            2,
+            "summer 2010",
+            "g",
+            null
+        ],
+        [
+            14,
+            "winter 2018",
+            "t",
+            null
+        ],
+        [
+            15,
+            "spring 2019",
+            "o",
+            null
+        ]
+    ],
+    "Students": [
+        [
+            3,
+            9,
+            5,
+            "Warren",
+            "Violet",
+            "Gleichner",
+            "07661787471",
+            "johns.unique@example.net",
+            "3",
+            "2007-08-29 23:25:41",
+            "2007-03-31 09:53:19",
+            "facilis"
+        ],
+        [
+            8,
+            1,
+            5,
+            "Delaney",
+            "Judd",
+            "Ankunding",
+            "03174364122",
+            "dell43@example.net",
+            "402",
+            "1982-02-14 08:46:35",
+            "2004-12-08 05:29:11",
+            "voluptatem"
+        ],
+        [
+            2,
+            12,
+            5,
+            "Hobart",
+            "Lorenz",
+            "Balistreri",
+            "1-009-710-5151",
+            "swift.kolby@example.com",
+            "304246",
+            "1976-10-26 02:33:06",
+            "2013-10-05 17:41:28",
+            "autem"
+        ]
+    ],
+    "Student_Enrolment": [
+        [
+            1,
+            12,
+            13,
+            14,
+            null
+        ],
+        [
+            14,
+            9,
+            15,
+            6,
+            null
+        ],
+        [
+            6,
+            3,
+            13,
+            1,
+            null
+        ]
+    ],
+    "Student_Enrolment_Courses": [
+        [
+            83814225,
+            12,
+            14
+        ],
+        [
+            28982908,
+            8,
+            9
+        ],
+        [
+            76,
+            10,
+            13
+        ]
+    ],
+    "Transcripts": [
+        [
+            3,
+            "1984-12-19 00:37:21",
+            null
+        ],
+        [
+            15,
+            "1998-11-22 12:18:29",
+            null
+        ],
+        [
+            4,
+            "1999-01-06 20:06:46",
+            null
+        ]
+    ],
+    "Transcript_Contents": [
+        [
+            0,
+            5
+        ],
+        [
+            7,
+            4
+        ],
+        [
+            70882679,
+            6
+        ]
+    ]
+}

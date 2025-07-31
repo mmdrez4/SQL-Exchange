@@ -1,0 +1,482 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "How many apartment bookings are there in total?",
+        "query": "SELECT count(*) FROM Apartment_Bookings"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Count the total number of apartment bookings.",
+        "query": "SELECT count(*) FROM Apartment_Bookings"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the start dates and end dates of all the apartment bookings.",
+        "query": "SELECT booking_start_date ,  booking_end_date FROM Apartment_Bookings"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What are the start date and end date of each apartment booking?",
+        "query": "SELECT booking_start_date ,  booking_end_date FROM Apartment_Bookings"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show all distinct building descriptions.",
+        "query": "SELECT DISTINCT building_description FROM Apartment_Buildings"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Give me a list of all the distinct building descriptions.",
+        "query": "SELECT DISTINCT building_description FROM Apartment_Buildings"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the short names of the buildings managed by \"Emma\".",
+        "query": "SELECT building_short_name FROM Apartment_Buildings WHERE building_manager\t =  \"Emma\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Which buildings does \"Emma\" manage? Give me the short names of the buildings.",
+        "query": "SELECT building_short_name FROM Apartment_Buildings WHERE building_manager\t =  \"Emma\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the addresses and phones of all the buildings managed by \"Brenden\".",
+        "query": "SELECT building_address ,  building_phone FROM Apartment_Buildings WHERE building_manager\t =  \"Brenden\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What are the address and phone number of the buildings managed by \"Brenden\"?",
+        "query": "SELECT building_address ,  building_phone FROM Apartment_Buildings WHERE building_manager\t =  \"Brenden\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What are the building full names that contain the word \"court\"?",
+        "query": "SELECT building_full_name FROM Apartment_Buildings WHERE building_full_name LIKE \"%court%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Find all the building full names containing the word \"court\".",
+        "query": "SELECT building_full_name FROM Apartment_Buildings WHERE building_full_name LIKE \"%court%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What is the minimum and maximum number of bathrooms of all the apartments?",
+        "query": "SELECT min(bathroom_count) ,  max(bathroom_count) FROM Apartments"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Give me the minimum and maximum bathroom count among all the apartments.",
+        "query": "SELECT min(bathroom_count) ,  max(bathroom_count) FROM Apartments"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What is the average number of bedrooms of all apartments?",
+        "query": "SELECT avg(bedroom_count) FROM Apartments"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Find the average number of bedrooms of all the apartments.",
+        "query": "SELECT avg(bedroom_count) FROM Apartments"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Return the apartment number and the number of rooms for each apartment.",
+        "query": "SELECT apt_number ,  room_count FROM Apartments"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What are the apartment number and the room count of each apartment?",
+        "query": "SELECT apt_number ,  room_count FROM Apartments"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What is the average number of rooms of apartments with type code \"Studio\"?",
+        "query": "SELECT avg(room_count) FROM Apartments WHERE apt_type_code  =  \"Studio\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Find the average room count of the apartments that have the \"Studio\" type code.",
+        "query": "SELECT avg(room_count) FROM Apartments WHERE apt_type_code  =  \"Studio\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Return the apartment numbers of the apartments with type code \"Flat\".",
+        "query": "SELECT apt_number FROM Apartments WHERE apt_type_code  =  \"Flat\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Which apartments have type code \"Flat\"? Give me their apartment numbers.",
+        "query": "SELECT apt_number FROM Apartments WHERE apt_type_code  =  \"Flat\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Return the first names and last names of all guests",
+        "query": "SELECT guest_first_name ,  guest_last_name FROM Guests"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What are the first names and last names of all the guests?",
+        "query": "SELECT guest_first_name ,  guest_last_name FROM Guests"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Return the date of birth for all the guests with gender code \"Male\".",
+        "query": "SELECT date_of_birth FROM Guests WHERE gender_code  =  \"Male\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What are dates of birth of all the guests whose gender is \"Male\"?",
+        "query": "SELECT date_of_birth FROM Guests WHERE gender_code  =  \"Male\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the apartment numbers, start dates, and end dates of all the apartment bookings.",
+        "query": "SELECT T2.apt_number ,  T1.booking_start_date ,  T1.booking_start_date FROM Apartment_Bookings AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What are the apartment number, start date, and end date of each apartment booking?",
+        "query": "SELECT T2.apt_number ,  T1.booking_start_date ,  T1.booking_start_date FROM Apartment_Bookings AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What are the booking start and end dates of the apartments with type code \"Duplex\"?",
+        "query": "SELECT T1.booking_start_date ,  T1.booking_start_date FROM Apartment_Bookings AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T2.apt_type_code  =  \"Duplex\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Return the booking start date and end date for the apartments that have type code \"Duplex\".",
+        "query": "SELECT T1.booking_start_date ,  T1.booking_start_date FROM Apartment_Bookings AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T2.apt_type_code  =  \"Duplex\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What are the booking start and end dates of the apartments with more than 2 bedrooms?",
+        "query": "SELECT T1.booking_start_date ,  T1.booking_start_date FROM Apartment_Bookings AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T2.bedroom_count  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Find the booking start date and end date for the apartments that have more than two bedrooms.",
+        "query": "SELECT T1.booking_start_date ,  T1.booking_start_date FROM Apartment_Bookings AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T2.bedroom_count  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What is the booking status code of the apartment with apartment number \"Suite 634\"?",
+        "query": "SELECT T1.booking_status_code FROM Apartment_Bookings AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T2.apt_number  =  \"Suite 634\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Tell me the booking status code for the apartment with number \"Suite 634\".",
+        "query": "SELECT T1.booking_status_code FROM Apartment_Bookings AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T2.apt_number  =  \"Suite 634\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the distinct apartment numbers of the apartments that have bookings with status code \"Confirmed\".",
+        "query": "SELECT DISTINCT T2.apt_number FROM Apartment_Bookings AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T1.booking_status_code  =  \"Confirmed\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Which apartments have bookings with status code \"Confirmed\"? Return their apartment numbers.",
+        "query": "SELECT DISTINCT T2.apt_number FROM Apartment_Bookings AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T1.booking_status_code  =  \"Confirmed\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the average room count of the apartments that have booking status code \"Provisional\".",
+        "query": "SELECT avg(room_count) FROM Apartment_Bookings AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T1.booking_status_code  =  \"Provisional\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What is the average room count of the apartments whose booking status code is \"Provisional\"?",
+        "query": "SELECT avg(room_count) FROM Apartment_Bookings AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T1.booking_status_code  =  \"Provisional\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the guest first names, start dates, and end dates of all the apartment bookings.",
+        "query": "SELECT T2.guest_first_name ,  T1.booking_start_date ,  T1.booking_start_date FROM Apartment_Bookings AS T1 JOIN Guests AS T2 ON T1.guest_id  =  T2.guest_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What are the guest first name, start date, and end date of each apartment booking?",
+        "query": "SELECT T2.guest_first_name ,  T1.booking_start_date ,  T1.booking_start_date FROM Apartment_Bookings AS T1 JOIN Guests AS T2 ON T1.guest_id  =  T2.guest_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the start dates and end dates of all the apartment bookings made by guests with gender code \"Female\".",
+        "query": "SELECT T1.booking_start_date ,  T1.booking_start_date FROM Apartment_Bookings AS T1 JOIN Guests AS T2 ON T1.guest_id  =  T2.guest_id WHERE T2.gender_code  =  \"Female\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What are the start date and end date of the apartment bookings made by female guests (gender code \"Female\")?",
+        "query": "SELECT T1.booking_start_date ,  T1.booking_start_date FROM Apartment_Bookings AS T1 JOIN Guests AS T2 ON T1.guest_id  =  T2.guest_id WHERE T2.gender_code  =  \"Female\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the first names and last names of all the guests that have apartment bookings with status code \"Confirmed\".",
+        "query": "SELECT T2.guest_first_name ,  T2.guest_last_name FROM Apartment_Bookings AS T1 JOIN Guests AS T2 ON T1.guest_id  =  T2.guest_id WHERE T1.booking_status_code  =  \"Confirmed\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Which guests have apartment bookings with status code \"Confirmed\"? Return their first names and last names.",
+        "query": "SELECT T2.guest_first_name ,  T2.guest_last_name FROM Apartment_Bookings AS T1 JOIN Guests AS T2 ON T1.guest_id  =  T2.guest_id WHERE T1.booking_status_code  =  \"Confirmed\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the facility codes of apartments with more than 4 bedrooms.",
+        "query": "SELECT T1.facility_code FROM Apartment_Facilities AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T2.bedroom_count  >  4"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What are the facility codes of the apartments with more than four bedrooms?",
+        "query": "SELECT T1.facility_code FROM Apartment_Facilities AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T2.bedroom_count  >  4"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the total number of rooms of all apartments with facility code \"Gym\".",
+        "query": "SELECT sum(T2.room_count) FROM Apartment_Facilities AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T1.facility_code  =  \"Gym\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Find the total number of rooms in the apartments that have facility code \"Gym\".",
+        "query": "SELECT sum(T2.room_count) FROM Apartment_Facilities AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T1.facility_code  =  \"Gym\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the total number of rooms of the apartments in the building with short name \"Columbus Square\".",
+        "query": "SELECT sum(T2.room_count) FROM Apartment_Buildings AS T1 JOIN Apartments AS T2 ON T1.building_id  =  T2.building_id WHERE T1.building_short_name  =  \"Columbus Square\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "How many rooms in total are there in the apartments in the building with short name \"Columbus Square\"?",
+        "query": "SELECT sum(T2.room_count) FROM Apartment_Buildings AS T1 JOIN Apartments AS T2 ON T1.building_id  =  T2.building_id WHERE T1.building_short_name  =  \"Columbus Square\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the addresses of the buildings that have apartments with more than 2 bathrooms.",
+        "query": "SELECT T1.building_address FROM Apartment_Buildings AS T1 JOIN Apartments AS T2 ON T1.building_id  =  T2.building_id WHERE T2.bathroom_count  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Which buildings have apartments that have more than two bathrooms? Give me the addresses of the buildings.",
+        "query": "SELECT T1.building_address FROM Apartment_Buildings AS T1 JOIN Apartments AS T2 ON T1.building_id  =  T2.building_id WHERE T2.bathroom_count  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the apartment type codes and apartment numbers in the buildings managed by \"Kyle\".",
+        "query": "SELECT T2.apt_type_code ,  T2.apt_number FROM Apartment_Buildings AS T1 JOIN Apartments AS T2 ON T1.building_id  =  T2.building_id WHERE T1.building_manager  =  \"Kyle\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What apartment type codes and apartment numbers do the buildings managed by \"Kyle\" have?",
+        "query": "SELECT T2.apt_type_code ,  T2.apt_number FROM Apartment_Buildings AS T1 JOIN Apartments AS T2 ON T1.building_id  =  T2.building_id WHERE T1.building_manager  =  \"Kyle\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the booking status code and the corresponding number of bookings.",
+        "query": "SELECT \tbooking_status_code ,  COUNT(*) FROM Apartment_Bookings GROUP BY booking_status_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "How many bookings does each booking status have? List the booking status code and the number of corresponding bookings.",
+        "query": "SELECT \tbooking_status_code ,  COUNT(*) FROM Apartment_Bookings GROUP BY booking_status_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Return all the apartment numbers sorted by the room count in ascending order.",
+        "query": "SELECT apt_number FROM Apartments ORDER BY room_count ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Sort the apartment numbers in ascending order of room count.",
+        "query": "SELECT apt_number FROM Apartments ORDER BY room_count ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Return the apartment number with the largest number of bedrooms.",
+        "query": "SELECT apt_number FROM Apartments ORDER BY bedroom_count DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What is the apartment number of the apartment with the most beds?",
+        "query": "SELECT apt_number FROM Apartments ORDER BY bedroom_count DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the apartment type codes and the corresponding number of apartments sorted by the number of apartments in ascending order.",
+        "query": "SELECT apt_type_code ,  COUNT(*) FROM Apartments GROUP BY apt_type_code ORDER BY COUNT(*) ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Return each apartment type code with the number of apartments having that apartment type, in ascending order of the number of apartments.",
+        "query": "SELECT apt_type_code ,  COUNT(*) FROM Apartments GROUP BY apt_type_code ORDER BY COUNT(*) ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the top 3 apartment type codes sorted by the average number of rooms in descending order.",
+        "query": "SELECT apt_type_code FROM Apartments GROUP BY apt_type_code ORDER BY avg(room_count) DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "What are the top three apartment types in terms of the average room count? Give me the",
+        "query": "SELECT apt_type_code FROM Apartments GROUP BY apt_type_code ORDER BY avg(room_count) DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the apartment type code that has the largest number of total rooms, together with the number of bathrooms and number of bedrooms.",
+        "query": "SELECT apt_type_code ,  bathroom_count ,  bedroom_count FROM Apartments GROUP BY apt_type_code ORDER BY sum(room_count) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Which apartment type has the largest number of total rooms? Return the apartment type code, its number of bathrooms and number of bedrooms.",
+        "query": "SELECT apt_type_code ,  bathroom_count ,  bedroom_count FROM Apartments GROUP BY apt_type_code ORDER BY sum(room_count) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the most common apartment type code.",
+        "query": "SELECT apt_type_code FROM Apartments GROUP BY apt_type_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Which apartment type code appears the most often?",
+        "query": "SELECT apt_type_code FROM Apartments GROUP BY apt_type_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the most common apartment type code among apartments with more than 1 bathroom.",
+        "query": "SELECT apt_type_code FROM Apartments WHERE bathroom_count  >  1 GROUP BY apt_type_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Which apartment type code is the most common among apartments with more than one bathroom?",
+        "query": "SELECT apt_type_code FROM Apartments WHERE bathroom_count  >  1 GROUP BY apt_type_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show each apartment type code, and the maximum and minimum number of rooms for each type.",
+        "query": "SELECT apt_type_code ,  max(room_count) ,  min(room_count) FROM Apartments GROUP BY apt_type_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Return each apartment type code along with the maximum and minimum number of rooms among each type.",
+        "query": "SELECT apt_type_code ,  max(room_count) ,  min(room_count) FROM Apartments GROUP BY apt_type_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show each gender code and the corresponding count of guests sorted by the count in descending order.",
+        "query": "SELECT gender_code ,  COUNT(*) FROM Guests GROUP BY gender_code ORDER BY COUNT(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Sort the gender codes in descending order of their corresponding number of guests. Return both the gender codes and counts.",
+        "query": "SELECT gender_code ,  COUNT(*) FROM Guests GROUP BY gender_code ORDER BY COUNT(*) DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "How many apartments do not have any facility?",
+        "query": "SELECT count(*) FROM Apartments WHERE apt_id NOT IN (SELECT apt_id FROM Apartment_Facilities)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Find the number of apartments that have no facility.",
+        "query": "SELECT count(*) FROM Apartments WHERE apt_id NOT IN (SELECT apt_id FROM Apartment_Facilities)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the apartment numbers of apartments with bookings that have status code both \"Provisional\" and \"Confirmed\"",
+        "query": "SELECT T2.apt_number FROM Apartment_Bookings AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T1.booking_status_code  =  \"Confirmed\" INTERSECT SELECT T2.apt_number FROM Apartment_Bookings AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T1.booking_status_code  =  \"Provisional\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Which apartments have bookings with both status codes \"Provisional\" and \"Confirmed\"? Give me the apartment numbers.",
+        "query": "SELECT T2.apt_number FROM Apartment_Bookings AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T1.booking_status_code  =  \"Confirmed\" INTERSECT SELECT T2.apt_number FROM Apartment_Bookings AS T1 JOIN Apartments AS T2 ON T1.apt_id  =  T2.apt_id WHERE T1.booking_status_code  =  \"Provisional\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Show the apartment numbers of apartments with unit status availability of both 0 and 1.",
+        "query": "SELECT T1.apt_number FROM Apartments AS T1 JOIN View_Unit_Status AS T2 ON T1.apt_id  =  T2.apt_id WHERE T2.available_yn  =  0 INTERSECT SELECT T1.apt_number FROM Apartments AS T1 JOIN View_Unit_Status AS T2 ON T1.apt_id  =  T2.apt_id WHERE T2.available_yn  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "apartment_rentals",
+        "question": "Which apartments have unit status availability of both 0 and 1? Return their apartment numbers.",
+        "query": "SELECT T1.apt_number FROM Apartments AS T1 JOIN View_Unit_Status AS T2 ON T1.apt_id  =  T2.apt_id WHERE T2.available_yn  =  0 INTERSECT SELECT T1.apt_number FROM Apartments AS T1 JOIN View_Unit_Status AS T2 ON T1.apt_id  =  T2.apt_id WHERE T2.available_yn  =  1"
+    }
+]

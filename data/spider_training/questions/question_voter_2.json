@@ -1,0 +1,434 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the number of students in total.",
+        "query": "SELECT count(*) FROM STUDENT"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "How many students are there in total?",
+        "query": "SELECT count(*) FROM STUDENT"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the number of voting records in total.",
+        "query": "SELECT count(*) FROM VOTING_RECORD"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "How many voting records do we have?",
+        "query": "SELECT count(*) FROM VOTING_RECORD"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the distinct number of president votes.",
+        "query": "SELECT count(DISTINCT President_Vote) FROM VOTING_RECORD"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "How many distinct president votes are recorded?",
+        "query": "SELECT count(DISTINCT President_Vote) FROM VOTING_RECORD"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the maximum age of all the students.",
+        "query": "SELECT max(Age) FROM STUDENT"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What is the oldest age among the students?",
+        "query": "SELECT max(Age) FROM STUDENT"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the last names of students with major 50.",
+        "query": "SELECT LName FROM STUDENT WHERE Major  =  50"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the last names of students studying major 50?",
+        "query": "SELECT LName FROM STUDENT WHERE Major  =  50"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the first names of students with age above 22.",
+        "query": "SELECT Fname FROM STUDENT WHERE Age  >  22"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the first names of all the students aged above 22?",
+        "query": "SELECT Fname FROM STUDENT WHERE Age  >  22"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the majors of male (sex is M) students?",
+        "query": "SELECT Major FROM STUDENT WHERE Sex  =  \"M\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "List the major of each male student.",
+        "query": "SELECT Major FROM STUDENT WHERE Sex  =  \"M\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What is the average age of female (sex is F) students?",
+        "query": "SELECT avg(Age) FROM STUDENT WHERE Sex  =  \"F\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the average age of female students.",
+        "query": "SELECT avg(Age) FROM STUDENT WHERE Sex  =  \"F\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the maximum and minimum age of students with major 600?",
+        "query": "SELECT max(Age) ,  min(Age) FROM STUDENT WHERE Major  =  600"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Tell me the ages of the oldest and youngest students studying major 600.",
+        "query": "SELECT max(Age) ,  min(Age) FROM STUDENT WHERE Major  =  600"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Who are the advisors for students that live in a city with city code \"BAL\"?",
+        "query": "SELECT Advisor FROM STUDENT WHERE city_code  =  \"BAL\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Show the advisors of the students whose city of residence has city code \"BAL\".",
+        "query": "SELECT Advisor FROM STUDENT WHERE city_code  =  \"BAL\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the distinct secretary votes in the fall election cycle?",
+        "query": "SELECT DISTINCT Secretary_Vote FROM VOTING_RECORD WHERE ELECTION_CYCLE  =  \"Fall\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Return all the distinct secretary votes made in the fall election cycle.",
+        "query": "SELECT DISTINCT Secretary_Vote FROM VOTING_RECORD WHERE ELECTION_CYCLE  =  \"Fall\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the distinct president votes on 08/30/2015?",
+        "query": "SELECT DISTINCT PRESIDENT_Vote FROM VOTING_RECORD WHERE Registration_Date  =  \"08/30/2015\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Show all the distinct president votes made on 08/30/2015.",
+        "query": "SELECT DISTINCT PRESIDENT_Vote FROM VOTING_RECORD WHERE Registration_Date  =  \"08/30/2015\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Report the distinct registration date and the election cycle.",
+        "query": "SELECT DISTINCT Registration_Date ,  Election_Cycle FROM VOTING_RECORD"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the distinct registration dates and the election cycles?",
+        "query": "SELECT DISTINCT Registration_Date ,  Election_Cycle FROM VOTING_RECORD"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Report the distinct president vote and the vice president vote.",
+        "query": "SELECT DISTINCT President_Vote ,  VICE_President_Vote FROM VOTING_RECORD"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "List all the distinct president votes and the vice president votes.",
+        "query": "SELECT DISTINCT President_Vote ,  VICE_President_Vote FROM VOTING_RECORD"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the distinct last names of the students who have class president votes.",
+        "query": "SELECT DISTINCT T1.LName FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  T2.CLASS_President_VOTE"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the distinct last names of the students who have class president votes?",
+        "query": "SELECT DISTINCT T1.LName FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  T2.CLASS_President_VOTE"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the distinct first names of the students who have class senator votes.",
+        "query": "SELECT DISTINCT T1.Fname FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  T2.CLASS_Senator_VOTE"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the distinct first names of the students who have class president votes?",
+        "query": "SELECT DISTINCT T1.Fname FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  T2.CLASS_Senator_VOTE"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the distinct ages of students who have secretary votes in the fall election cycle.",
+        "query": "SELECT DISTINCT T1.Age FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  T2.Secretary_Vote WHERE T2.Election_Cycle  =  \"Fall\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the distinct ages of students who have secretary votes in the fall election cycle?",
+        "query": "SELECT DISTINCT T1.Age FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  T2.Secretary_Vote WHERE T2.Election_Cycle  =  \"Fall\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the distinct Advisor of students who have treasurer votes in the spring election cycle.",
+        "query": "SELECT DISTINCT T1.Advisor FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  T2.Treasurer_Vote WHERE T2.Election_Cycle  =  \"Spring\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Who served as an advisor for students who have treasurer votes in the spring election cycle?",
+        "query": "SELECT DISTINCT T1.Advisor FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  T2.Treasurer_Vote WHERE T2.Election_Cycle  =  \"Spring\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the distinct majors of students who have treasurer votes.",
+        "query": "SELECT DISTINCT T1.Major FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  T2.Treasurer_Vote"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the distinct majors that students with treasurer votes are studying?",
+        "query": "SELECT DISTINCT T1.Major FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  T2.Treasurer_Vote"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the first and last names of all the female (sex is F) students who have president votes.",
+        "query": "SELECT DISTINCT T1.Fname ,  T1.LName FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  T2.President_VOTE WHERE T1.sex  =  \"F\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the first and last names of all the female students who have president votes?",
+        "query": "SELECT DISTINCT T1.Fname ,  T1.LName FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  T2.President_VOTE WHERE T1.sex  =  \"F\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the first and last name of all the students of age 18 who have vice president votes.",
+        "query": "SELECT DISTINCT T1.Fname ,  T1.LName FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  T2.VICE_President_VOTE WHERE T1.age  =  18"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the first names and last names of the students who are 18 years old and have vice president votes.",
+        "query": "SELECT DISTINCT T1.Fname ,  T1.LName FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  T2.VICE_President_VOTE WHERE T1.age  =  18"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "How many male (sex is M) students have class senator votes in the fall election cycle?",
+        "query": "SELECT count(*) FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  Class_Senator_Vote WHERE T1.Sex  =  \"M\" AND T2.Election_Cycle  =  \"Fall\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Count the number of male students who had class senator votes in the fall election cycle.",
+        "query": "SELECT count(*) FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  Class_Senator_Vote WHERE T1.Sex  =  \"M\" AND T2.Election_Cycle  =  \"Fall\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the number of students whose city code is NYC and who have class senator votes in the spring election cycle.",
+        "query": "SELECT count(*) FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  Class_Senator_Vote WHERE T1.city_code  =  \"NYC\" AND T2.Election_Cycle  =  \"Spring\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Which students live in the city with code \"NYC\" and have class senator votes in the spring election cycle? Count the numbers.",
+        "query": "SELECT count(*) FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  Class_Senator_Vote WHERE T1.city_code  =  \"NYC\" AND T2.Election_Cycle  =  \"Spring\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the average age of students who live in the city with code \"NYC\" and have secretary votes in the spring election cycle.",
+        "query": "SELECT avg(T1.Age) FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  SECRETARY_Vote WHERE T1.city_code  =  \"NYC\" AND T2.Election_Cycle  =  \"Spring\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What is the average age of students who have city code \"NYC\" and have secretary votes for the spring election cycle?",
+        "query": "SELECT avg(T1.Age) FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  SECRETARY_Vote WHERE T1.city_code  =  \"NYC\" AND T2.Election_Cycle  =  \"Spring\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the average age of female (sex is F) students who have secretary votes in the spring election cycle.",
+        "query": "SELECT avg(T1.Age) FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  SECRETARY_Vote WHERE T1.Sex  =  \"F\" AND T2.Election_Cycle  =  \"Spring\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What is the average age of the female students with secretary votes in the spring election cycle?",
+        "query": "SELECT avg(T1.Age) FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  SECRETARY_Vote WHERE T1.Sex  =  \"F\" AND T2.Election_Cycle  =  \"Spring\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the distinct first names of all the students who have vice president votes and whose city code is not PIT.",
+        "query": "SELECT DISTINCT T1.Fname FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  T2.VICE_PRESIDENT_Vote EXCEPT SELECT DISTINCT Fname FROM STUDENT WHERE city_code  =  \"PIT\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the distinct first names of the students who have vice president votes and reside in a city whose city code is not PIT?",
+        "query": "SELECT DISTINCT T1.Fname FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  T2.VICE_PRESIDENT_Vote EXCEPT SELECT DISTINCT Fname FROM STUDENT WHERE city_code  =  \"PIT\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the distinct last names of all the students who have president votes and whose advisor is not 2192.",
+        "query": "SELECT DISTINCT T1.LName FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  PRESIDENT_Vote EXCEPT SELECT DISTINCT LName FROM STUDENT WHERE Advisor  =  \"2192\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the distinct last names of the students who have president votes but do not have 2192 as the advisor?",
+        "query": "SELECT DISTINCT T1.LName FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  PRESIDENT_Vote EXCEPT SELECT DISTINCT LName FROM STUDENT WHERE Advisor  =  \"2192\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the distinct last names of all the students who have president votes and whose advisor is 8741.",
+        "query": "SELECT DISTINCT T1.LName FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  PRESIDENT_Vote INTERSECT SELECT DISTINCT LName FROM STUDENT WHERE Advisor  =  \"8741\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the distinct last names of the students who have president votes and have 8741 as the advisor?",
+        "query": "SELECT DISTINCT T1.LName FROM STUDENT AS T1 JOIN VOTING_RECORD AS T2 ON T1.StuID  =  PRESIDENT_Vote INTERSECT SELECT DISTINCT LName FROM STUDENT WHERE Advisor  =  \"8741\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "For each advisor, report the total number of students advised by him or her.",
+        "query": "SELECT Advisor ,  count(*) FROM STUDENT GROUP BY Advisor"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "How many students does each advisor have?",
+        "query": "SELECT Advisor ,  count(*) FROM STUDENT GROUP BY Advisor"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Report all advisors that advise more than 2 students.",
+        "query": "SELECT Advisor FROM STUDENT GROUP BY Advisor HAVING COUNT(*)  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Which advisors have more than two students?",
+        "query": "SELECT Advisor FROM STUDENT GROUP BY Advisor HAVING COUNT(*)  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Report all majors that have less than 3 students.",
+        "query": "SELECT Major FROM STUDENT GROUP BY Major HAVING COUNT(*)  <  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What are the majors only less than three students are studying?",
+        "query": "SELECT Major FROM STUDENT GROUP BY Major HAVING COUNT(*)  <  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "For each election cycle, report the number of voting records.",
+        "query": "SELECT Election_Cycle ,  count(*) FROM VOTING_RECORD GROUP BY Election_Cycle"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Count the number of voting records for each election cycle.",
+        "query": "SELECT Election_Cycle ,  count(*) FROM VOTING_RECORD GROUP BY Election_Cycle"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Which major has the most students?",
+        "query": "SELECT Major FROM STUDENT GROUP BY major ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the major that is studied by the largest number of students.",
+        "query": "SELECT Major FROM STUDENT GROUP BY major ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What is the most common major among female (sex is F) students?",
+        "query": "SELECT Major FROM STUDENT WHERE Sex  =  \"F\" GROUP BY major ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Find the major that is studied by the most female students.",
+        "query": "SELECT Major FROM STUDENT WHERE Sex  =  \"F\" GROUP BY major ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "What is the city_code of the city that the most students live in?",
+        "query": "SELECT city_code FROM STUDENT GROUP BY city_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Return the code of the city that has the most students.",
+        "query": "SELECT city_code FROM STUDENT GROUP BY city_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Report the distinct advisors who have more than 2 students.",
+        "query": "SELECT Advisor FROM STUDENT GROUP BY Advisor HAVING count(*)  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "voter_2",
+        "question": "Which advisors are advising more than 2 students?",
+        "query": "SELECT Advisor FROM STUDENT GROUP BY Advisor HAVING count(*)  >  2"
+    }
+]

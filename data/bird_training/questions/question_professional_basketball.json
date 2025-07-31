@@ -1,0 +1,944 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Among the winning game from the team, what is the percentage of the winning was home game.",
+        "query": "SELECT CAST(homeWon AS REAL) * 100 / won  FROM teams"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which team(s) has greater than 75% lost among all the games played.",
+        "query": "SELECT name FROM teams WHERE CAST(lost AS REAL) * 100 / games > 75"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "List the team name and the total wins of the team in year 2005 which has greater winning from the previous year.",
+        "query": "SELECT T1.name, T1.won FROM teams AS T1 INNER JOIN ( SELECT * FROM teams WHERE year = 2004 ) AS T2 on T1.tmID = T2.tmID WHERE T1.year = 2005 and T1.won > T2.won"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "For team who has more home won than home lost more than 80%, list the team name and the offense points.",
+        "query": "SELECT name, o_pts FROM teams WHERE CAST((homeWon - homeLost) AS REAL) * 100 / games > 80"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the percentage of the teams who had post season (playoff) were ranked number 1?",
+        "query": "SELECT CAST(SUM(CASE WHEN rank = 1 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(name) FROM teams"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Who is the coach for 'BOS' team in year 1950. List the coach ID together with the number of game won and lost.",
+        "query": "SELECT coachID, won, lost FROM coaches WHERE year = 1950 AND tmID = 'BOS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Who is the longest serving coach from year 1970 to 1980. List the coach ID and the team(s) he served.",
+        "query": "SELECT coachID, tmID FROM coaches WHERE year BETWEEN 1970 AND 1980 ORDER BY stint DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "In year 2000, who are the coaches with more than 50 games won. List the coachID, team name and number of game won at home game.",
+        "query": "SELECT T1.coachID, T2.name, T2.won FROM coaches AS T1 INNER JOIN teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.year = 2000 AND T2.won > 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "List all the coaches with more game lost than won from year 2000-2010. List the coach ID, team name and year.",
+        "query": "SELECT DISTINCT T1.coachID, T2.tmID, T1.year FROM coaches AS T1 INNER JOIN teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.year BETWEEN 2000 AND 2010 AND T2.lost > T2.won"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which are the teams coached by 'adelmri01' from year 1990-1995. List the team name, year and offense point.",
+        "query": "SELECT T2.name, T1.year, T2.o_pts FROM coaches AS T1 INNER JOIN teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.year BETWEEN 1990 AND 1995 AND T1.coachID = 'adelmri01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which team(s) had 90% games won. List the coach ID for the team and year played.",
+        "query": "SELECT DISTINCT T2.name, T1.year, T1.coachID FROM coaches AS T1 INNER JOIN teams AS T2 ON T1.tmID = T2.tmID WHERE CAST(T2.won AS REAL) * 100 / T2.games > 90"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the percentage of player who won \"All-Defensive First Team\" from 1980 - 2000 is from 'NY'.",
+        "query": "SELECT COUNT(DISTINCT T1.playerID) FROM players AS T1 INNER JOIN awards_players AS T2 ON T1.playerID = T2.playerID WHERE T1.birthState = 'NY' AND T2.award = 'All-Defensive First Team' AND T2.year BETWEEN 1980 AND 2000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What division did the team coached by the winner of the 1977 NBA Coach of the Year award play in in 1976?",
+        "query": "SELECT DISTINCT T3.divID FROM awards_coaches AS T1 INNER JOIN coaches AS T2 ON T1.coachID = T2.coachID INNER JOIN teams AS T3 ON T2.tmID = T3.tmID WHERE T1.year = 1977 AND T1.award = 'NBA Coach of the Year' AND T3.year = 1976"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which coach of the Chicago Bulls during the year 1981 won the NBA Coach of the Year award in the 1970s?",
+        "query": "SELECT DISTINCT T2.coachID FROM coaches AS T1 INNER JOIN awards_coaches AS T2 ON T1.coachID = T2.coachID INNER JOIN teams AS T3 ON T3.tmID = T1.tmID WHERE T2.award = 'NBA Coach of the Year' AND T2.year BETWEEN 1970 AND 1979 AND T1.year = 1981 AND T3.name = 'Chicago Bulls'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the nickname of the NBA player whose team competed in the Western Conference in the season 2006 and who had a total of two blocks?",
+        "query": "SELECT T2.nameNick FROM player_allstar AS T1 INNER JOIN players AS T2 ON T1.playerID = T2.playerID WHERE T1.blocks = 2 AND T1.conference = 'West' AND T1.season_id = 2006"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "In what year did the only team to beat the Houston in the final round of postseason series games earn its lowest ranking?",
+        "query": "SELECT T2.year FROM series_post AS T1 INNER JOIN teams AS T2 ON T1.tmIDWinner = T2.tmID WHERE T1.round = 'DSF' AND T1.tmIDLoser = 'HSM' ORDER BY T2.rank ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the birth date of the player with the most assists during the 1985 All-Star season?",
+        "query": "SELECT T1.birthDate FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T2.season_id = 1985 ORDER BY T2.assists DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which player, born in Winter Haven, played 12 minutes per season during the 1980s in the All-Stars?",
+        "query": "SELECT DISTINCT T1.firstName, T1.middleName, T1.lastName FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T1.birthCity = 'Winter Haven' AND T2.season_id BETWEEN 1980 AND 1989 AND T2.minutes = 12"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Of all the All-star players who played in the Eastern Conference for no more than 5 minutes, how many went to Illinois College?",
+        "query": "SELECT COUNT(DISTINCT T1.playerID) FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T2.conference = 'East' AND T2.minutes <= 5 AND T1.college = 'Illinois'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Between the years 1990 and 2007, of the total rebounds achieved by each player, how many managed to exceed 75% of defensive rebounds?",
+        "query": "SELECT COUNT(DISTINCT playerID) FROM player_allstar WHERE CAST(d_rebounds AS REAL) * 100 / rebounds > 75 AND season_id BETWEEN 1990 AND 2007"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "in which year costela01 obtained the best balance of games won as a coach?",
+        "query": "SELECT year FROM coaches WHERE coachID = 'costela01' ORDER BY CAST(won AS REAL) / (won + lost) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many total minutes has the Brooklyn-born player, known by the name of Superman, played during all of his NBA All-Star seasons?",
+        "query": "SELECT SUM(T2.minutes) FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T1.birthCity = 'Brooklyn' AND T1.nameNick LIKE '%Superman%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Of all the teams coached by the winner of the 1994 NBA Coach of the Year award, which team has lost the most times playing at home?",
+        "query": "SELECT T3.tmID FROM awards_coaches AS T1 INNER JOIN coaches AS T2 ON T1.coachID = T2.coachID INNER JOIN teams AS T3 ON T3.tmID = T2.tmID WHERE T1.year = 1994 AND T1.award = 'NBA Coach of the Year' GROUP BY T3.tmID ORDER BY SUM(T3.homeLost) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which winning team in the final round of the postseason series games against the LAL won more than 60 games in the NBA league during the year 1996?",
+        "query": "SELECT DISTINCT T2.tmID FROM series_post AS T1 INNER JOIN teams AS T2 ON T1.tmIDWinner = T2.tmID WHERE T2.won > 60 AND T1.year = 1996 AND T1.round = 'CSF' AND T1.tmIDLoser = 'LAL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "In which league did the player who weighs 40% less than the heaviest player and whose height is 80 inches play?",
+        "query": "SELECT T2.lgID FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID GROUP BY T2.lgID, T1.weight HAVING T1.weight = MAX(T1.weight) - MAX(T1.weight) * 0.4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Please list the name of the coach who has served more than 2 NBA teams.",
+        "query": "SELECT coachID FROM coaches GROUP BY coachID HAVING COUNT(DISTINCT tmID) > 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the name of the coach during whose period of coaching, a team has the most numbers of games won in the post-season games?",
+        "query": "SELECT coachID FROM coaches ORDER BY post_wins DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Among the coaches who have served more than 2 NBA teams, during which coach's period of coaching, a team has the least numbers of games lost in the post-season games?",
+        "query": "SELECT coachID FROM coaches WHERE lgID = 'NBA' AND post_wins != 0 AND post_losses != 0 AND coachID IN ( SELECT coachID FROM coaches WHERE lgID = 'NBA' GROUP BY coachID HAVING COUNT(tmID) > 2 ) ORDER BY post_losses ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Among the players from the ABA league, how many of them have the center position?",
+        "query": "SELECT COUNT(DISTINCT T1.playerID) FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID WHERE T2.lgID = 'ABA' AND (T1.pos = 'C' OR T1.pos = 'F-C')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Please list the first name of the players from the NBA league with the forward position.",
+        "query": "SELECT DISTINCT T1.firstName FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID WHERE (T1.pos = 'F' OR T1.pos = 'F-C') AND T2.lgID = 'NBA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Among the players who went to high school in Chicago, how many of them belongs to the west conference?",
+        "query": "SELECT COUNT(DISTINCT T1.playerID) FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T1.hsCity = 'Chicago' AND T2.conference = 'West'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "For the players who belongs to the east conference, please list the name of the college they went to.",
+        "query": "SELECT DISTINCT T1.college FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T2.conference = 'East'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Among the players from the NBL league, how many of them were born in Spencer?",
+        "query": "SELECT COUNT(DISTINCT T1.playerID) FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID WHERE T1.birthCity = 'Spencer' AND T2.lgID = 'NBL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Please list the birth date of the player who has won the most MVPs.",
+        "query": "SELECT T1.birthDate FROM players AS T1 INNER JOIN awards_players AS T2 ON T1.playerID = T2.playerID WHERE T2.award = 'Most Valuable Player' GROUP BY T1.playerID, T1.birthDate ORDER BY COUNT(award) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Among the players born in Whitestone, how many of them have won the MVP?",
+        "query": "SELECT COUNT(DISTINCT T1.playerID) FROM players AS T1 INNER JOIN awards_players AS T2 ON T1.playerID = T2.playerID WHERE T2.award = 'Most Valuable Player' AND T1.birthCity = 'Houston'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Among the players who have won the award of Rookie of the year, what is the height of the tallest player?",
+        "query": "SELECT T1.height FROM players AS T1 INNER JOIN awards_players AS T2 ON T1.playerID = T2.playerID WHERE T2.award = 'Rookie of the Year' ORDER BY T1.height DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the average weight of the players who have won the award of Rookie of the year?",
+        "query": "SELECT AVG(T1.weight) FROM players AS T1 INNER JOIN awards_players AS T2 ON T1.playerID = T2.playerID WHERE T2.award = 'Rookie of the Year'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Among the players that went to high school in New York and have won the MVP, what is their average height?",
+        "query": "SELECT AVG(T1.height) FROM players AS T1 INNER JOIN awards_players AS T2 ON T1.playerID = T2.playerID WHERE T2.award = 'Most Valuable Player' AND T1.birthCity = 'New York'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Please list the top ten teams with the highest scores in 2000.",
+        "query": "SELECT tmID FROM players_teams WHERE year = 2000 GROUP BY tmID ORDER BY SUM(PostPoints) DESC LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which teams have winning rate less than 50%?",
+        "query": "SELECT name FROM teams WHERE CAST(won AS REAL) * 100 / (won + lost) < 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Who are the coaches for team with winning rate of 80% and above?",
+        "query": "SELECT coachID FROM coaches GROUP BY tmID, coachID, won, lost HAVING CAST(won AS REAL) * 100 / (won + lost) > 80"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which coach has serviced in NBA for more than 10 years.",
+        "query": "SELECT coachID FROM coaches WHERE lgID = 'NBA' GROUP BY coachID HAVING MAX(year) - MIN(year) > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many teams have played more than 3800 points and have player with \"Most Valuable Player\" award?",
+        "query": "SELECT COUNT(DISTINCT T4.name) FROM ( SELECT T1.name, SUM(T2.points) FROM teams AS T1 INNER JOIN players_teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year INNER JOIN awards_players AS T3 ON T2.playerID = T3.playerID WHERE T3.award = 'Most Valuable Player' GROUP BY T1.name HAVING SUM(T2.points) >= 3800 ) AS T4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which player from \"AFS\" team has the tallest height?",
+        "query": "SELECT T1.firstName, T1.middleName, T1.lastName FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID WHERE T2.tmID = 'AFS' ORDER BY T1.height DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Please list down the last name of players from \"BLB\" team.",
+        "query": "SELECT T1.lastName FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID WHERE T2.tmID = 'BLB'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "From 1962 to 1975, how many coaches received the award?",
+        "query": "SELECT COUNT(DISTINCT coachID) FROM awards_coaches WHERE year BETWEEN 1962 AND 1975"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Please list the coach IDs who received the award twice from 1970 to 1990.",
+        "query": "SELECT coachID FROM awards_coaches WHERE year BETWEEN 1970 AND 1990 GROUP BY coachID, award HAVING COUNT(award) = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "From 1962 to 2011, how many coaches received both NBA and ABA awards?",
+        "query": "SELECT COUNT(DISTINCT coachID) FROM awards_coaches WHERE year BETWEEN 1962 AND 2011 AND award = 'ABA Coach of the Year' AND coachID IN ( SELECT coachID FROM awards_coaches WHERE year BETWEEN 1962 AND 2011 AND award = 'NBA Coach of the Year' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "In 1975, what was the average point of all-star players coming from the USA?",
+        "query": "SELECT AVG(T2.points) FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T2.season_id = 1975"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Please list the last names and first names of all-star players who are higher than 75 inch.",
+        "query": "SELECT DISTINCT T1.lastName, T1.firstName FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T1.height > 75"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the minimum weight of all-star players coming from UCLA college?",
+        "query": "SELECT MIN(T1.weight) FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T1.college = 'UCLA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the maximum weight of USA all-star players?",
+        "query": "SELECT MAX(T1.weight) FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T1.birthCountry = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "From 1960 to 1970, what is the total point of all-star players who are still alive?",
+        "query": "SELECT SUM(T2.points) FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T2.season_id BETWEEN 1960 AND 1970 AND T1.deathDate = '0000-00-00'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Among players who were born after 1950, who had offence rebounds rates more than 30%? Please list their last names and first names.",
+        "query": "SELECT DISTINCT T1.lastName, T1.firstName FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T1.birthDate > 1950 AND CAST(T2.o_rebounds AS REAL) * 100 / T2.rebounds > 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many players received Rookie of the Year award from 1969 to 2010?",
+        "query": "SELECT COUNT(playerID) FROM awards_players WHERE year BETWEEN 1969 AND 2010 AND award = 'Rookie of the Year'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Please list the team names which have at least 3 all-star players.",
+        "query": "SELECT T1.tmID FROM players_teams AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID GROUP BY T1.tmID HAVING COUNT(DISTINCT T1.playerID) >= 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "From 1950 to 1970, what is the maximum point of players whose teams were ranked 1?",
+        "query": "SELECT MAX(T2.points) FROM teams AS T1 INNER JOIN players_teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.year BETWEEN 1950 AND 1970 AND T1.rank = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Please list the last names and first names of all-star players whose team were ranked 1 for consecutive 3 years from 1937 to 1940.",
+        "query": "SELECT T5.lastName, T5.firstName FROM players_teams AS T4 INNER JOIN players AS T5 ON T4.playerID = T5.playerID WHERE T4.year BETWEEN 1937 AND 1940 AND T4.tmID IN ( SELECT DISTINCT T1.tmID FROM teams AS T1 INNER JOIN teams AS T2 INNER JOIN teams AS T3 ON T1.tmID = T2.tmID AND T2.tmID = T3.tmID AND T3.year - T2.year = 1 AND T2.year - T1.year = 1 WHERE T1.rank = 1 AND T1.year BETWEEN 1937 AND 1940 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Among the teams that were ranked 3 from 1937 to 1940, what is the team name whose players had the highest point?",
+        "query": "SELECT DISTINCT T1.name FROM teams AS T1 INNER JOIN players_teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.rank = 3 AND T1.year BETWEEN 1937 AND 1940 ORDER BY T2.points DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "In 1937, how many teams whose players got at least 500 points?",
+        "query": "SELECT COUNT(*) FROM ( SELECT T2.name, SUM(T1.points) FROM players_teams AS T1 INNER JOIN teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.year = 1937 GROUP BY T2.name HAVING SUM(points) >= 500 ) AS T3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "In 1990, how many players whose teams had the winning rate of more than 75%?",
+        "query": "SELECT COUNT(DISTINCT T1.playerID) FROM players_teams AS T1 INNER JOIN teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE CAST(T2.won AS REAL) * 100 / CAST(T2.games AS REAL) > 75 AND T1.year = 1990"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Please list the top three shortest black players.",
+        "query": "SELECT firstName, lastName FROM players WHERE race = 'B' AND height > 0 ORDER BY height ASC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many players with the first name Joe were drafted in 1970?",
+        "query": "SELECT COUNT(DISTINCT playerID) FROM draft WHERE firstName = 'Joe' AND draftYear = 1970"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many field goals did George Mikan make overall between 1951 and 1953?",
+        "query": "SELECT COUNT(fg_made) FROM player_allstar WHERE first_name = 'George' AND last_name = 'Mikan' AND season_id BETWEEN 1951 AND 1953"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What are the basketball players' BMI ranges?",
+        "query": "SELECT MIN(CAST(weight AS REAL) / (height * height)) , MAX(CAST(weight AS REAL) / (height * height)) FROM players"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the name of the team with the highest home lost rate?",
+        "query": "SELECT name FROM teams ORDER BY CAST(homeWon AS REAL) / (homeWon + homeLost) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How old was Alexis Ajinca when he was first drafted?",
+        "query": "SELECT draftYear - strftime('%Y', birthDate) FROM draft AS T1 INNER JOIN players AS T2 ON T1.playerID = T2.playerID WHERE T1.firstName = 'Alexis' AND T1.lastName = 'Ajinca' AND draftRound = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Who is the tallest player in Denver Nuggets since 1980?",
+        "query": "SELECT T1.firstName, T1.lastName FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID INNER JOIN teams AS T3 ON T3.tmID = T2.tmID WHERE T3.name = 'Denver Nuggets' AND T2.year > 1980 ORDER BY T1.height DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Among the players who have passed away, who had the most award?",
+        "query": "SELECT T1.playerID FROM players AS T1 INNER JOIN awards_players AS T2 ON T1.playerID = T2.playerID WHERE deathDate IS NOT NULL GROUP BY T1.playerID ORDER BY COUNT(award) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the full name of the team that has the most players from UCLA?",
+        "query": "SELECT T3.name FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID INNER JOIN teams AS T3 ON T3.tmID = T2.tmID WHERE T1.college = 'UCLA' GROUP BY T3.name ORDER BY COUNT(DISTINCT T1.playerID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the average BMI of an All-star player?",
+        "query": "SELECT AVG(CAST(T1.weight AS REAL) / (T1.height * T1.height)) FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the full name of the team with the fastest growth in winning rate in the 'ABA' league from 1972 to 1973?",
+        "query": "SELECT T1.name FROM teams AS T1 INNER JOIN ( SELECT * FROM teams WHERE lgID = 'ABA' AND year = 1972 ) AS T2 ON T1.tmID = T2.tmID WHERE T1.lgID = 'ABA' AND T1.year = 1973 ORDER BY (CAST(T1.won AS REAL) / (T1.won + T1.lost) - (CAST(T2.won AS REAL) / (T2.won + T2.lost))) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Please list the first names of the players with the most personal fouls in the 'NBL' league.",
+        "query": "SELECT T1.firstName FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID WHERE T2.lgID = 'NBL' GROUP BY T1.playerID, T1.firstName ORDER BY COUNT(PF) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the average height of an East conference All-star player?",
+        "query": "SELECT AVG(DISTINCT height) FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE conference = 'East'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Among the coaches who won the 'ABA Coach of the Year' award, which is the coach with the highest number of won games?",
+        "query": "SELECT T1.coachID FROM coaches AS T1 INNER JOIN awards_coaches AS T2 ON T1.coachID = T2.coachID WHERE T2.award = 'ABA Coach of the Year' GROUP BY T1.coachID, T1.won ORDER BY T1.won DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the full name of the team that the 'NBA Coach of the Year' 1992 winner coached?",
+        "query": "SELECT name FROM teams AS T1 INNER JOIN coaches AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year INNER JOIN awards_coaches AS T3 ON T2.coachID = T3.coachID AND T2.year = T3.year WHERE T3.year = 1992 AND award = 'NBA Coach of the Year'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the first and last name of the player with the highest field goal made rate in 1973?",
+        "query": "SELECT T1.firstName, T1.lastName FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID WHERE year = 1973 ORDER BY CAST(T2.fgMade AS REAL) / T2.fgAttempted DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the full name of the team that selected Mike Lynn?",
+        "query": "SELECT T1.name FROM teams AS T1 INNER JOIN draft AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.draftYear WHERE T2.firstName = 'Mike' AND T2.lastName = 'Lynn'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Among the Most improved Players awarded from 1985-1990, how many player whose country is USA?",
+        "query": "SELECT COUNT(DISTINCT T2.playerID) FROM awards_players AS T1 INNER JOIN players AS T2 ON T1.playerID = T2.playerID WHERE T1.award = 'Most Improved Player' AND T2.birthCountry = 'USA' AND T1.year BETWEEN 1985 AND 1990"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Please list out the first name and last name of player who attended California college and have been selected as all stars?",
+        "query": "SELECT DISTINCT T1.firstName, T1.lastName FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T1.college = 'California'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "From 1950 to 1970, how many coaches who received more than 1 award?",
+        "query": "SELECT COUNT(coachID) FROM awards_coaches WHERE year BETWEEN 1950 AND 1970 GROUP BY coachID HAVING COUNT(coachID) > 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many players received Most Valuable Player award from 1969 to 1975?",
+        "query": "SELECT COUNT(DISTINCT playerID) FROM awards_players WHERE year BETWEEN 1969 AND 1975 AND award = 'Most Valuable Player'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Please list the team names which have at least 5 players were born in the same state.",
+        "query": "SELECT DISTINCT name FROM teams WHERE tmID IN ( SELECT tmID FROM players_teams AS T1 INNER JOIN players AS T2 ON T1.playerID = T2.playerID WHERE T2.birthState IS NOT NULL GROUP BY T1.tmID, T2.birthState HAVING COUNT(*) > 5 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many teams in the NBA which has at least 3 all-star players?",
+        "query": "SELECT COUNT(*) FROM ( SELECT tmID FROM players_teams AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T1.lgID = 'NBA' GROUP BY T1.tmID HAVING COUNT(DISTINCT T1.playerID) > 3 ) AS T3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which state has the most players selected as all stars?",
+        "query": "SELECT T1.birthState FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID GROUP BY T1.birthState ORDER BY COUNT(DISTINCT T1.playerID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many players whose teams were ranked 6 in 1937?",
+        "query": "SELECT COUNT(DISTINCT T1.playerID) FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID INNER JOIN teams AS T3 ON T3.tmID = T2.tmID WHERE T3.year = 1937 AND T3.rank = 6"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "In 1950, how many players whose teams have the losing rate less than 20%?",
+        "query": "SELECT COUNT(DISTINCT T1.playerID) FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID INNER JOIN teams AS T3 ON T3.tmID = T2.tmID WHERE CAST(T3.lost AS REAL) * 100 / (T3.lost + T3.won) < 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "List the full name of players who are born outside USA.",
+        "query": "SELECT firstName, middleName, lastName FROM players WHERE birthCountry != 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "List out all the coach ID who have served more than 2 different teams.",
+        "query": "SELECT coachID FROM coaches GROUP BY coachID HAVING COUNT(DISTINCT tmID) > 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which coach has the most 'won' than 'lost' in year '1988'?",
+        "query": "SELECT coachID FROM coaches WHERE year = 1988 ORDER BY won - lost DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Name the team in which the coach won the title 'NBA Coach of the Year' in 2010.",
+        "query": "SELECT DISTINCT T1.tmID FROM coaches AS T1 INNER JOIN awards_coaches AS T2 ON T1.coachID = T2.coachID WHERE T2.year = 2010 AND T2.award = 'NBA Coach of the Year'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "List the first name, last name, height and weight of the players who has all free throw attempted successfully made.",
+        "query": "SELECT DISTINCT T1.firstName, T1.lastName, T1.height, T1.weight FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T2.ft_attempted > 0 AND ft_attempted = ft_made"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "List the first name, last name and team name of players who are drafted from 'Seattle' between year 1965 to 1970.",
+        "query": "SELECT DISTINCT T1.firstName, T1.lastName, T3.name FROM players AS T1 INNER JOIN draft AS T2 ON T1.playerID = T2.playerID INNER JOIN teams AS T3 ON T2.tmID = T3.tmID WHERE T2.draftFrom = 'Seattle' AND T2.draftYear BETWEEN 1965 AND 1970"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "List the full name and age of the player when he won the \"Finals MVP\" in 2003.",
+        "query": "SELECT T1.firstName, T1.middleName, T1.lastName , 2003 - strftime('%Y', T1.birthDate) FROM awards_players AS T2 JOIN players AS T1 ON T2.playerID = T1.playerID WHERE T2.award = 'Finals MVP' AND T2.year = 2003"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "List the champion (team name) and year from year 1950 to 1960.",
+        "query": "SELECT DISTINCT T1.name, T2.year FROM teams AS T1 JOIN series_post AS T2 ON T1.tmID = T2.tmIDWinner WHERE T2.round = 'F' AND T2.year BETWEEN 1950 AND 1960"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Name the teams along with the coaches that went to 'Quarter Final' round in 1946.",
+        "query": "SELECT DISTINCT T1.coachID, T3.name FROM coaches AS T1 JOIN series_post AS T2 ON T1.tmID = T2.tmIDWinner JOIN teams AS T3 ON T3.tmID = T1.tmID WHERE T2.round = 'QF' AND T2.year = 1946"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "List out all the players fullname who won the championship in 1970.",
+        "query": "SELECT DISTINCT T3.firstName, T3.middleName, T3.lastName FROM series_post AS T1 INNER JOIN players_teams AS T2 ON T1.tmIDWinner = T2.tmID INNER JOIN players AS T3 ON T3.playerID = T2.playerID WHERE T1.year = 1970 AND T1.round = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "From which college was the player who won the most award in 1970.",
+        "query": "SELECT college FROM players WHERE playerID = ( SELECT playerID FROM awards_players WHERE year = 1970 GROUP BY playerID ORDER BY COUNT(award) DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Name the youngest player who ever won \"Rookie of the Year\".",
+        "query": "SELECT T1.firstName, T1.middleName, T1.lastName FROM players AS T1 INNER JOIN awards_players AS T2 ON T1.playerID = T2.playerID WHERE T2.award = 'Rookie of the Year' ORDER BY T1.birthDate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "List the full name of players who are drafted from round 1 in 1973 but not born in USA.",
+        "query": "SELECT T1.firstName, T1.middleName, T1.lastName FROM players AS T1 INNER JOIN draft AS T2 ON T1.playerID = T2.playerID WHERE T2.draftRound = 1 AND T1.birthCountry != 'USA' AND T2.draftYear = 1973"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the percentage of offense rebounds from the total rebounds of the players in year 2000.",
+        "query": "SELECT CAST(SUM(T2.o_rebounds) AS REAL) * 100 / SUM(T2.rebounds) FROM players_teams AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T1.year = 2000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "List the year, team and coach that with winning rate of above 75%.",
+        "query": "SELECT DISTINCT T1.year, T2.name, T1.coachID FROM coaches AS T1 INNER JOIN teams AS T2 ON T1.tmID = T2.tmID WHERE CAST(T1.won AS REAL) / CAST((T1.won + T1.lost) AS REAL) > 0.75"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "List all the coatches of the Oklahoma City Thunder",
+        "query": "SELECT DISTINCT coachID FROM coaches AS T1 INNER JOIN teams AS T2 ON T1.tmID = T2.tmID WHERE name = 'Oklahoma City Thunder'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many players, in games played in 1990, achieved 50% or less of oRebounds than dRebounds.",
+        "query": "SELECT COUNT(playerID) FROM players_teams WHERE CAST(oRebounds AS REAL) * 100 / dRebounds <= 50 AND year = 1990"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many players did not get more than 10 steals between the years 2000 and 2005?",
+        "query": "SELECT COUNT(DISTINCT playerID) FROM player_allstar WHERE season_id BETWEEN 2000 AND 2005 AND steals <= 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which player selected by Portland in 2nd draftRound won Rookie of the Year in 1971?",
+        "query": "SELECT T1.playerID FROM draft AS T1 INNER JOIN awards_players AS T2 ON T1.playerID = T2.playerID WHERE T2.award = 'Rookie of the Year' AND T1.draftYear = 1971 AND T1.draftRound = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many All Star players who played in the 1973 season were black?",
+        "query": "SELECT COUNT(DISTINCT T1.playerID) FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T2.season_id = 1973 AND T1.race = 'B'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which winning team in the 1947 playoff quarterfinals managed to score 3,513 defensive points that same year?",
+        "query": "SELECT T2.tmID FROM series_post AS T1 INNER JOIN teams AS T2 ON T1.tmIDWinner = T2.tmID WHERE T1.year = 1947 AND T1.round = 'QF' AND T2.d_pts = 3513"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Percentage of games lost out of total games played by the Houston Mavericks",
+        "query": "SELECT CAST(SUM(lost) AS REAL) * 100 / SUM(games) FROM teams WHERE name = 'Houston Mavericks'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Please list the players who received the \"Most Valuable Player\" award in the NBA league after the year of 1990, along with their IDs.",
+        "query": "SELECT playerID FROM awards_players WHERE year > 1990 AND award = 'Most Valuable Player' AND lgID = 'NBA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many times between 1975 and 1980 did the player abdulka01 play for LAL?",
+        "query": "SELECT COUNT(DISTINCT T2.year) FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID WHERE T2.tmID = 'LAL' AND T2.year BETWEEN 1975 AND 1980 AND T1.playerID = 'abdulka01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the percentage of coaches in 1969 who were awarded \"NBA Coach of the Year\"?",
+        "query": "SELECT CAST(SUM(CASE WHEN award = 'NBA Coach of the Year' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM awards_coaches WHERE year = 1969"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What were the difference of the CHS team's winning rate between 1946 and 1947 in the post-season series games? Please provide your answer in percentages.",
+        "query": "SELECT CAST(SUM(CASE WHEN year = 1947 AND tmIDWinner = 'CHS' THEN 1 ELSE 0 END) AS REAL) * 100 / SUM(CASE WHEN year = 1947 THEN 1 ELSE 0 END) - CAST(SUM(CASE WHEN year = 1946 AND tmIDWinner = 'CHS' THEN 1 ELSE 0 END) AS REAL) * 100 / SUM(CASE WHEN year = 1946 THEN 1 ELSE 0 END) FROM series_post"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many awards were given out in 2010 to players who attended high school in Chicago?",
+        "query": "SELECT COUNT(T1.award) FROM awards_players AS T1 INNER JOIN players AS T2 ON T1.playerID = T2.playerID WHERE T1.year = 2010 AND T2.hsCity = 'Chicago'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the percentage of players who attended Auburn University and won an \"All-Defensive Second Team\" award?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.award = 'All-Defensive Second Team' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM players AS T1 INNER JOIN awards_players AS T2 ON T1.playerID = T2.playerID WHERE T1.college = 'Auburn'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Please list the top five players with the most steals in the year 1997. Please give their full name.",
+        "query": "SELECT DISTINCT T1.firstName, T1.middleName, T1.lastName FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T2.season_id = 1997 ORDER BY T2.steals DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the name of the university that was drafted from the player who won the NBA Finals MVP in 1990?",
+        "query": "SELECT T1.college FROM players AS T1 INNER JOIN awards_players AS T2 ON T1.playerID = T2.playerID WHERE T2.year = 1990 AND T2.award = 'Finals MVP'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Among the NBA All-star players in 1996 season , which have more than 70% free throw rate? Please give their player id.",
+        "query": "SELECT playerID FROM player_allstar WHERE season_id = 1996 AND CAST(ft_made AS REAL) * 100 / ft_attempted > 70"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "From 1980 to 1983, how many of the NBA All-Star players have more than 60% three point rate?",
+        "query": "SELECT DISTINCT T2.playerID FROM player_allstar AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID WHERE T2.year BETWEEN 1980 AND 1983 AND T1.three_made / T1.three_attempted > 0.6"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Among the NBA winning coaches, which are from STL team? Please list their coach id.",
+        "query": "SELECT DISTINCT T2.coachID FROM coaches AS T1 INNER JOIN awards_coaches AS T2 ON T1.coachID = T2.coachID WHERE T1.tmID = 'STL' AND T1.lgID = 'NBA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many times have coaches who were from CHI been awarded as NBA Coach of the Year?",
+        "query": "SELECT COUNT(DISTINCT T2.coachID) FROM coaches AS T1 INNER JOIN awards_coaches AS T2 ON T1.coachID = T2.coachID WHERE T1.tmID = 'CHI' AND T2.award = 'NBA Coach of the Year'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Of the players drafted in NBA between 1990 and 2000, who has the most points in all-star? List the player's first name and last name.",
+        "query": "SELECT T3.firstname, T3.lastname FROM player_allstar AS T1 INNER JOIN awards_players AS T2 ON T1.playerID = T2.playerID INNER JOIN draft AS T3 ON T1.playerID = T3.playerID WHERE T2.year BETWEEN 1990 AND 2000 ORDER BY T1.points DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which player from Wake Forest college did the most offensive rebounds than defensive rebounds in the all-star? Please mention the full name of the player including the middle name if have any.",
+        "query": "SELECT T1.firstName, T1.middleName, T1.lastName FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T1.college = 'Wake Forest' AND T2.o_rebounds > T2.d_rebounds"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Find the full name of the player born in Atlanta and have the highest number of blocks. Also, in which team did this player perform the most number of blocks?",
+        "query": "SELECT T1.firstName, T1.lastName, T2.tmID FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID WHERE T1.birthCity = 'Atlanta' ORDER BY T2.blocks DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "State the name of teams ranked first five or more times and lost a league two or more times between 1980 and 2000?",
+        "query": "SELECT T1.name FROM teams AS T1 INNER JOIN series_post AS T2 ON T1.tmID = T2.tmIDLoser AND T1.year = T2.year WHERE T1.rank < 5 AND T2.lgIDLoser > 2 AND T2.year BETWEEN 1980 AND 2000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Player from which team has the highest point per minute in NBA from 1991 to 2000?",
+        "query": "SELECT tmID FROM players_teams WHERE year BETWEEN 1991 AND 2000 ORDER BY CAST(points AS REAL) / minutes DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the difference in the average age of players when they are drafted in the ABA vs when they are drafted in the NBA between the years 1970 and 1970?",
+        "query": "SELECT CAST(SUM(IIF(T2.lgID = 'ABA', 1970 - strftime('%Y', T3.birthDate), 0)) AS REAL) / COUNT(IIF(T2.lgID = 'ABA', 1, 0)) - CAST(SUM(IIF(T2.lgID = 'NBA', 1970 - strftime('%Y', T3.birthDate), 0)) AS REAL) / COUNT(IIF(T2.lgID = 'NBA', 1, 0)) FROM draft AS T1 INNER JOIN players_teams AS T2 ON T1.tmID = T2.tmID INNER JOIN players AS T3 ON T2.playerID = T3.playerID WHERE T1.draftYear BETWEEN 1970 AND 1970"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which player had the most game presentatons in 2011 NBA season.",
+        "query": "SELECT playerID FROM players_teams WHERE year = 2011 ORDER BY GP DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many first round draft player in 1996 NBA draft became an All-Star?",
+        "query": "SELECT COUNT(T2.playerID) FROM draft AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID WHERE T1.draftYear = 1996 AND T1.draftRound = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which team did the MVP of 1997 NBA season play in?",
+        "query": "SELECT DISTINCT T3.tmID FROM players_teams AS T1 INNER JOIN awards_players AS T2 ON T1.playerID = T2.playerID INNER JOIN teams AS T3 ON T1.tmID = T3.tmID AND T1.year = T3.year WHERE T2.year = 1997 AND T2.award = 'Finals MVP' LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many games did team of the scoring champion win in 2001 NBA season?",
+        "query": "SELECT T2.W FROM teams AS T1 INNER JOIN series_post AS T2 ON T1.tmID = T2.tmIDLoser AND T1.year = T2.year WHERE T2.year = 2001 ORDER BY T1.o_fgm DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many turnovers per game did the assist champion had in the 2003 NBA season?",
+        "query": "SELECT AVG(T2.turnovers) FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID WHERE T2.year = 2003 GROUP BY T1.playerID, T2.assists ORDER BY T2.assists DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What is the number of NBA titles that Ray Allen has won throughout his NBA career?",
+        "query": "SELECT COUNT(T1.playerID) FROM player_allstar AS T1 INNER JOIN awards_players AS T2 ON T1.playerID = T2.playerID WHERE first_name = 'Ray' AND last_name = 'Allen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How much did the win rate increase for the team after getting the No.1 NBA draft pick in the 2003 season than previous season?",
+        "query": "SELECT (CAST(SUM(CASE WHEN T1.year = 2004 THEN T1.won ELSE 0 END) AS REAL) / SUM(CASE WHEN T1.year = 2004 THEN T1.won + T1.lost ELSE 0 END)) - (CAST(SUM(CASE WHEN T1.year = 2003 THEN T1.won ELSE 0 END) AS REAL) / SUM(CASE WHEN T1.year = 2003 THEN T1.won + T1.lost ELSE 0 END)) FROM teams AS T1 INNER JOIN draft AS T2 ON T1.tmID = T2.tmID WHERE T2.draftRound = 1 AND T2.draftYear = 2003"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Among the coaches who won the 'NBA coach of the year' award from 1971 - 1975, how many of them were in 'POR' team?",
+        "query": "SELECT COUNT(T1.id) FROM awards_coaches AS T1 INNER JOIN teams AS T2 ON T1.year = T2.year WHERE T1.year BETWEEN 1971 AND 1975 AND T1.award = 'NBA Coach of the Year' AND T2.tmID = 'POR'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "How many percent of points were scored by NBA players who belonged to 'LAL' team and had performed steals movement.",
+        "query": "SELECT CAST(SUM(IIF(T2.steals IS NOT NULL AND T1.tmID = 'LAL', 1, 0)) AS REAL) * 100 / COUNT(T1.tmID) FROM teams AS T1 INNER JOIN players_teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What's the name of the player in 1996 who had the most steals that didn't play in the playoffs?",
+        "query": "SELECT T1.playerID FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID WHERE T2.year = 1996 AND T2.PostGP = 0 ORDER BY T2.steals DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Give the player id of the man who had the most turnovers whose team missed the playoffs in year 1988.",
+        "query": "SELECT T2.playerID FROM players_teams AS T1 INNER JOIN players AS T2 ON T1.playerID = T2.playerID WHERE T1.PostGP = 0 AND T1.year = 1988 ORDER BY T1.turnovers DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which NBA team that didn't play in playoffs had the most winning rate in the 2000 NBA regular season?",
+        "query": "SELECT T2.tmID FROM players_teams AS T1 INNER JOIN teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.PostGP = 0 AND T1.year = 2000 ORDER BY CAST(T2.won AS REAL) / (T2.won + T2.lost) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which non-playoffs team had the most points in the regular season in the year 1998?",
+        "query": "SELECT T2.tmID FROM players_teams AS T1 INNER JOIN teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.year = 1998 AND T1.PostGP = 0 ORDER BY T1.points DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "What's the full name of the team that won the most games in 2001 but didn't make the playoffs?",
+        "query": "SELECT T2.tmID FROM players_teams AS T1 INNER JOIN teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.PostGP = 0 ORDER BY T2.won DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which team that didn't play in playoffs had the most total rebounds in the year 1997?",
+        "query": "SELECT T2.tmID FROM players_teams AS T1 INNER JOIN teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.PostGP = 0 AND T1.year = 1997 ORDER BY T1.rebounds DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "For the player who was drafted in the 1st round, 6th position in 1976, which team did he play in that year?",
+        "query": "SELECT T2.tmID FROM draft AS T1 INNER JOIN teams AS T2 ON T1.tmID = T2.tmID AND T1.draftYear = T2.year WHERE T1.draftRound = 1 AND T1.draftSelection = 6 AND T1.draftYear = 1976"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "In the year 1998, how many home wins did the team which had the 1st round, 12th pick have that year?",
+        "query": "SELECT T2.homeWon FROM draft AS T1 INNER JOIN teams AS T2 ON T1.tmID = T2.tmID AND T1.draftYear = T2.year WHERE T1.draftRound = 1 AND T1.draftSelection = 12 AND T1.draftYear = 1998"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "For the player who had the most rebounds throughout his allstar appearances, what was his weight and height?",
+        "query": "SELECT T1.weight, T1.height FROM players AS T1 INNER JOIN player_allstar AS T2 ON T1.playerID = T2.playerID ORDER BY T2.rebounds DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Where was the high school of the player who had the most rebounds in the NBA allstar history?",
+        "query": "SELECT T2.highSchool FROM player_allstar AS T1 INNER JOIN players AS T2 ON T1.playerID = T2.playerID ORDER BY T1.rebounds DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "In the year 1997 allstar game, which teams did the players had the most rebounds play in? List their team ids.",
+        "query": "SELECT T2.tmID FROM players_teams AS T1 INNER JOIN teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year INNER JOIN player_allstar AS T3 ON T3.playerID = T1.playerID WHERE T3.season_id = 1997 ORDER BY T1.rebounds DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "For the latest passing player who could play all the positions in the court, how many points did he have in his career?",
+        "query": "SELECT SUM(T2.points) FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID WHERE T1.pos = 'C-F-G' GROUP BY T2.playerID, T2.year ORDER BY T2.year DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which team did the youngest player who could be in F-G position play in the NBA?",
+        "query": "SELECT T1.tmID FROM teams AS T1 INNER JOIN players_teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year INNER JOIN players AS T3 ON T2.playerID = T3.playerID WHERE T3.pos = 'F-G' AND T2.lgID = 'NBA' ORDER BY T3.birthDate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "For the players who played the most PBLA games, who was graduated from Central Missouri State college?",
+        "query": "SELECT T1.firstName, T1.middleName, T1.lastName FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID WHERE T2.lgID = 'PBLA' AND T2.GP = 10 AND T1.college = 'Central Missouri State' GROUP BY T1.firstName, T1.middleName, T1.lastName ORDER BY COUNT(T2.id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "In 2000, which team did the player who played the least minutes without missing a single game play in? Give the full name of the team.",
+        "query": "SELECT T1.tmID FROM teams AS T1 INNER JOIN players_teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T2.GP = 82 AND T2.year = 2000 GROUP BY T1.tmID ORDER BY SUM(T2.PostMinutes) ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "For all the full attendence players in 1995, which player had most turnovers? Give the full name of the player.",
+        "query": "SELECT T1.firstName, T1.middleName, T1.lastName FROM players AS T1 INNER JOIN players_teams AS T2 ON T1.playerID = T2.playerID WHERE T2.GP = 82 AND T2.year = 1995 ORDER BY T2.turnovers DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "For the player in 2011 who started every game he played, which team had the player who had the most steals?",
+        "query": "SELECT T1.tmID FROM teams AS T1 INNER JOIN players_teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.year = 2011 AND T2.GP = T2.GS GROUP BY T1.tmID, T2.steals ORDER BY T2.steals DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which team had the most same starting players througout the season? Give the full name of the team.",
+        "query": "SELECT DISTINCT T1.tmID FROM teams AS T1 INNER JOIN players_teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T2.GP = T2.GS"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "For the 2001 rebounds leader in the league, when was his birthday?",
+        "query": "SELECT birthDate FROM players WHERE playerID = ( SELECT playerID FROM players_teams WHERE year = 2001 GROUP BY playerID ORDER BY SUM(rebounds + dRebounds) DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which team did the all league rebound champion play in 1997? Give the full name of the team.",
+        "query": "SELECT T1.name FROM teams AS T1 INNER JOIN players_teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T2.year = 1997 GROUP BY T1.name ORDER BY SUM(rebounds + dRebounds) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "professional_basketball",
+        "question": "Which team had more than one player who grabbed more than 600 rebounds in 2011? Give the full name of the team.",
+        "query": "SELECT T1.tmID FROM teams AS T1 INNER JOIN players_teams AS T2 ON T1.tmID = T2.tmID AND T1.year = T2.year WHERE T1.year = 2011 AND T2.rebounds > 600"
+    }
+]

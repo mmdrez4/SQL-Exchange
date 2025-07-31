@@ -1,0 +1,602 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many bands are there?",
+        "query": "SELECT count(*) FROM Band"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Find the number of bands.",
+        "query": "SELECT count(*) FROM Band"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are all the labels?",
+        "query": "SELECT DISTINCT label FROM Albums"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the different album labels listed?",
+        "query": "SELECT DISTINCT label FROM Albums"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Find all the albums in 2012.",
+        "query": "SELECT * FROM Albums WHERE YEAR  =  2012"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "return all columns of the albums created in the year of 2012.",
+        "query": "SELECT * FROM Albums WHERE YEAR  =  2012"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Find all the stage positions of the musicians with first name \"Solveig\"",
+        "query": "SELECT DISTINCT T1.stageposition FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id WHERE Firstname  =  \"Solveig\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the different stage positions for all musicians whose first name is \"Solveig\"?",
+        "query": "SELECT DISTINCT T1.stageposition FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id WHERE Firstname  =  \"Solveig\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many songs are there?",
+        "query": "SELECT count(*) FROM Songs"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Count the number of songs.",
+        "query": "SELECT count(*) FROM Songs"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Find all the songs performed by artist with last name \"Heilo\"",
+        "query": "SELECT T3.Title FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId WHERE T2.Lastname  =  \"Heilo\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the names of the songs by the artist whose last name is \"Heilo\"?",
+        "query": "SELECT T3.Title FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId WHERE T2.Lastname  =  \"Heilo\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Hom many musicians performed in the song \"Flash\"?",
+        "query": "SELECT count(*) FROM performance AS T1 JOIN band AS T2 ON T1.bandmate  =  T2.id JOIN songs AS T3 ON T3.songid  =  T1.songid WHERE T3.Title  =  \"Flash\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many musicians play in the song \"Flash\"?",
+        "query": "SELECT count(*) FROM performance AS T1 JOIN band AS T2 ON T1.bandmate  =  T2.id JOIN songs AS T3 ON T3.songid  =  T1.songid WHERE T3.Title  =  \"Flash\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Find all the songs produced by artists with first name \"Marianne\".",
+        "query": "SELECT T3.Title FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId WHERE T2.firstname  =  \"Marianne\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the names of all songs produced by the artist with the first name \"Marianne\"?",
+        "query": "SELECT T3.Title FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId WHERE T2.firstname  =  \"Marianne\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Who performed the song named \"Badlands\"? Show the first name and the last name.",
+        "query": "SELECT T2.firstname ,  T2.lastname FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId WHERE T3.Title  =  \"Badlands\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the first and last names of the artist who perfomed the song \"Badlands\"?",
+        "query": "SELECT T2.firstname ,  T2.lastname FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId WHERE T3.Title  =  \"Badlands\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Who is performing in the back stage position for the song \"Badlands\"? Show the first name and the last name.",
+        "query": "SELECT T2.firstname ,  T2.lastname FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId WHERE T3.Title  =  \"Badlands\" AND T1.StagePosition  =  \"back\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the first and last names of the performer who was in the back stage position for the song \"Badlands\"?",
+        "query": "SELECT T2.firstname ,  T2.lastname FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId WHERE T3.Title  =  \"Badlands\" AND T1.StagePosition  =  \"back\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many unique labels are there for albums?",
+        "query": "SELECT count(DISTINCT label) FROM albums"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the unique labels for the albums?",
+        "query": "SELECT count(DISTINCT label) FROM albums"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What is the label that has the most albums?",
+        "query": "SELECT label FROM albums GROUP BY label ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What is the label with the most albums?",
+        "query": "SELECT label FROM albums GROUP BY label ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What is the last name of the musician that have produced the most number of songs?",
+        "query": "SELECT T2.lastname FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId GROUP BY lastname ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What is the last name of the musician who was in the most songs?",
+        "query": "SELECT T2.lastname FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId GROUP BY lastname ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What is the last name of the musician that has been at the back position the most?",
+        "query": "SELECT T2.lastname FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id WHERE stageposition  =  \"back\" GROUP BY lastname ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What is the last name of the musicians who has played back position the most?",
+        "query": "SELECT T2.lastname FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id WHERE stageposition  =  \"back\" GROUP BY lastname ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Find all the songs whose name contains the word \"the\".",
+        "query": "SELECT title FROM songs WHERE title LIKE '% the %'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the names of the songs whose title has the word \"the\"?",
+        "query": "SELECT title FROM songs WHERE title LIKE '% the %'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are all the instruments used?",
+        "query": "SELECT DISTINCT instrument FROM Instruments"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the different instruments listed in the database?",
+        "query": "SELECT DISTINCT instrument FROM Instruments"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What instrument did the musician with last name \"Heilo\" use in the song \"Le Pop\"?",
+        "query": "SELECT T4.instrument FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId JOIN Instruments AS T4 ON T4.songid  =  T3.songid AND T4.bandmateid  =  T2.id WHERE T2.lastname  =  \"Heilo\" AND T3.title  =  \"Le Pop\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What instruments did the musician with the last name \"Heilo\" play in the song \"Le Pop\"?",
+        "query": "SELECT T4.instrument FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId JOIN Instruments AS T4 ON T4.songid  =  T3.songid AND T4.bandmateid  =  T2.id WHERE T2.lastname  =  \"Heilo\" AND T3.title  =  \"Le Pop\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What is the most used instrument?",
+        "query": "SELECT instrument FROM instruments GROUP BY instrument ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What instrument is used the most?",
+        "query": "SELECT instrument FROM instruments GROUP BY instrument ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many songs have used the instrument \"drums\"?",
+        "query": "SELECT count(*) FROM instruments WHERE instrument  =  \"drums\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many songs use drums as an instrument?",
+        "query": "SELECT count(*) FROM instruments WHERE instrument  =  \"drums\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What instruments does the the song \"Le Pop\" use?",
+        "query": "SELECT instrument FROM instruments AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE title  =  \"Le Pop\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the instruments are used in the song \"Le Pop\"?",
+        "query": "SELECT instrument FROM instruments AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE title  =  \"Le Pop\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many instruments does the song \"Le Pop\" use?",
+        "query": "SELECT count(DISTINCT instrument) FROM instruments AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE title  =  \"Le Pop\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many different instruments are used in the song \"Le Pop\"?",
+        "query": "SELECT count(DISTINCT instrument) FROM instruments AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE title  =  \"Le Pop\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many instrument does the musician with last name \"Heilo\" use?",
+        "query": "SELECT count(DISTINCT instrument) FROM instruments AS T1 JOIN Band AS T2 ON T1.bandmateid  =  T2.id WHERE T2.lastname  =  \"Heilo\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many different instruments does the musician with the last name \"Heilo\" use?",
+        "query": "SELECT count(DISTINCT instrument) FROM instruments AS T1 JOIN Band AS T2 ON T1.bandmateid  =  T2.id WHERE T2.lastname  =  \"Heilo\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Find all the instruments ever used by the musician with last name \"Heilo\"?",
+        "query": "SELECT instrument FROM instruments AS T1 JOIN Band AS T2 ON T1.bandmateid  =  T2.id WHERE T2.lastname  =  \"Heilo\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are all the instruments used by the musician with the last name \"Heilo\"?",
+        "query": "SELECT instrument FROM instruments AS T1 JOIN Band AS T2 ON T1.bandmateid  =  T2.id WHERE T2.lastname  =  \"Heilo\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Which song has the most vocals?",
+        "query": "SELECT title FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid GROUP BY T1.songid ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What is the song with the most vocals?",
+        "query": "SELECT title FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid GROUP BY T1.songid ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Which vocal type is the most frequently appearring type?",
+        "query": "SELECT TYPE FROM vocals GROUP BY TYPE ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What is the type of vocables that appears most frequently?",
+        "query": "SELECT TYPE FROM vocals GROUP BY TYPE ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Which vocal type has the band mate with last name \"Heilo\" played the most?",
+        "query": "SELECT TYPE FROM vocals AS T1 JOIN band AS T2 ON T1.bandmate  =  T2.id WHERE lastname  =  \"Heilo\" GROUP BY TYPE ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What is the type of vocals that the band member with the last name \"Heilo\" played the most?",
+        "query": "SELECT TYPE FROM vocals AS T1 JOIN band AS T2 ON T1.bandmate  =  T2.id WHERE lastname  =  \"Heilo\" GROUP BY TYPE ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the vocal types used in song \"Le Pop\"?",
+        "query": "SELECT TYPE FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE title  =  \"Le Pop\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the types of vocals used in the song \"Le Pop\"?",
+        "query": "SELECT TYPE FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE title  =  \"Le Pop\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Find the number of vocal types used in song \"Demon Kitty Rag\"?",
+        "query": "SELECT count(*) FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE title  =  \"Demon Kitty Rag\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the types of vocals used in the song \"Demon Kitty Rag\"?",
+        "query": "SELECT count(*) FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE title  =  \"Demon Kitty Rag\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many songs have a lead vocal?",
+        "query": "SELECT count(DISTINCT title) FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE TYPE  =  \"lead\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many songs have vocals of type lead?",
+        "query": "SELECT count(DISTINCT title) FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE TYPE  =  \"lead\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Which vocal type did the musician with first name \"Solveig\" played in the song with title \"A Bar in Amsterdam\"?",
+        "query": "SELECT TYPE FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid JOIN band AS T3 ON T1.bandmate  =  T3.id WHERE T3.firstname  =  \"Solveig\" AND T2.title  =  \"A Bar In Amsterdam\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the types of vocals that the musician with the first name \"Solveig\" played in the song \"A Bar in Amsterdam\"?",
+        "query": "SELECT TYPE FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid JOIN band AS T3 ON T1.bandmate  =  T3.id WHERE T3.firstname  =  \"Solveig\" AND T2.title  =  \"A Bar In Amsterdam\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Find all the songs that do not have a lead vocal.",
+        "query": "SELECT DISTINCT title FROM vocals AS t1 JOIN songs AS t2 ON t1.songid  =  t2.songid EXCEPT SELECT t2.title FROM vocals AS t1 JOIN songs AS t2 ON t1.songid  =  t2.songid WHERE TYPE  =  \"lead\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the names of the songs without a lead vocal?",
+        "query": "SELECT DISTINCT title FROM vocals AS t1 JOIN songs AS t2 ON t1.songid  =  t2.songid EXCEPT SELECT t2.title FROM vocals AS t1 JOIN songs AS t2 ON t1.songid  =  t2.songid WHERE TYPE  =  \"lead\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Find all the vocal types.",
+        "query": "SELECT DISTINCT TYPE FROM vocals"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the different types of vocals?",
+        "query": "SELECT DISTINCT TYPE FROM vocals"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the albums produced in year 2010?",
+        "query": "SELECT * FROM Albums WHERE YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What information is there on albums from 2010?",
+        "query": "SELECT * FROM Albums WHERE YEAR  =  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Who performed the song named \"Le Pop\"?",
+        "query": "SELECT T2.firstname ,  T2.lastname FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId WHERE T3.Title  =  \"Le Pop\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What is the first and last name of artist who performed \"Le Pop\"?",
+        "query": "SELECT T2.firstname ,  T2.lastname FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId WHERE T3.Title  =  \"Le Pop\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What is the last name of the musician that have produced the most songs?",
+        "query": "SELECT T2.lastname FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId GROUP BY lastname ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What is the last name of the artist who sang the most songs?",
+        "query": "SELECT T2.lastname FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId GROUP BY lastname ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What instrument did the musician with last name \"Heilo\" use in the song \"Badlands\"?",
+        "query": "SELECT T4.instrument FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId JOIN Instruments AS T4 ON T4.songid  =  T3.songid AND T4.bandmateid  =  T2.id WHERE T2.lastname  =  \"Heilo\" AND T3.title  =  \"Badlands\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What instruments did the musician with the last name \"Heilo\" play in \"Badlands\"?",
+        "query": "SELECT T4.instrument FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId JOIN Instruments AS T4 ON T4.songid  =  T3.songid AND T4.bandmateid  =  T2.id WHERE T2.lastname  =  \"Heilo\" AND T3.title  =  \"Badlands\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many instruments does the song \"Badlands\" use?",
+        "query": "SELECT count(DISTINCT instrument) FROM instruments AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE title  =  \"Badlands\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many different instruments are used in the song \"Badlands\"?",
+        "query": "SELECT count(DISTINCT instrument) FROM instruments AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE title  =  \"Badlands\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the vocal types used in song \"Badlands\"?",
+        "query": "SELECT TYPE FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE title  =  \"Badlands\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What types of vocals are used in the song \"Badlands\"?",
+        "query": "SELECT TYPE FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE title  =  \"Badlands\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Find the number of vocal types used in song \"Le Pop\"",
+        "query": "SELECT count(*) FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE title  =  \"Le Pop\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many vocal types are used in the song \"Le Pop\"?",
+        "query": "SELECT count(*) FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE title  =  \"Le Pop\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many songs have a shared vocal?",
+        "query": "SELECT count(DISTINCT title) FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE TYPE  =  \"shared\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many different songs have shared vocals?",
+        "query": "SELECT count(DISTINCT title) FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid WHERE TYPE  =  \"shared\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Find all the songs that do not have a back vocal.",
+        "query": "SELECT DISTINCT title FROM vocals AS t1 JOIN songs AS t2 ON t1.songid  =  t2.songid EXCEPT SELECT t2.title FROM vocals AS t1 JOIN songs AS t2 ON t1.songid  =  t2.songid WHERE TYPE  =  \"back\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the different names of all songs without back vocals?",
+        "query": "SELECT DISTINCT title FROM vocals AS t1 JOIN songs AS t2 ON t1.songid  =  t2.songid EXCEPT SELECT t2.title FROM vocals AS t1 JOIN songs AS t2 ON t1.songid  =  t2.songid WHERE TYPE  =  \"back\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Which vocal type has the band mate with first name \"Solveig\" played the most?",
+        "query": "SELECT TYPE FROM vocals AS T1 JOIN band AS T2 ON T1.bandmate  =  T2.id WHERE firstname  =  \"Solveig\" GROUP BY TYPE ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the types of vocals that the band member with the first name \"Solveig\" played the most?",
+        "query": "SELECT TYPE FROM vocals AS T1 JOIN band AS T2 ON T1.bandmate  =  T2.id WHERE firstname  =  \"Solveig\" GROUP BY TYPE ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Which vocal type did the musician with last name \"Heilo\" played in the song with title \"Der Kapitan\"?",
+        "query": "SELECT TYPE FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid JOIN band AS T3 ON T1.bandmate  =  T3.id WHERE T3.lastname  =  \"Heilo\" AND T2.title  =  \"Der Kapitan\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the types of vocals that the musician with the last name \"Heilo\" played in \"Der Kapitan\"?",
+        "query": "SELECT TYPE FROM vocals AS T1 JOIN songs AS T2 ON T1.songid  =  T2.songid JOIN band AS T3 ON T1.bandmate  =  T3.id WHERE T3.lastname  =  \"Heilo\" AND T2.title  =  \"Der Kapitan\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Find the first name of the band mate that has performed in most songs.",
+        "query": "SELECT t2.firstname FROM Performance AS t1 JOIN Band AS t2 ON t1.bandmate  =  t2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId GROUP BY firstname ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What is the first name of the band mate who perfomed in the most songs?",
+        "query": "SELECT t2.firstname FROM Performance AS t1 JOIN Band AS t2 ON t1.bandmate  =  t2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId GROUP BY firstname ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Which vocal type has the band mate with first name \"Marianne\" played the most?",
+        "query": "SELECT TYPE FROM vocals AS T1 JOIN band AS T2 ON T1.bandmate  =  T2.id WHERE firstname  =  \"Marianne\" GROUP BY TYPE ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What is the vocal type of the band mate whose first name is \"Marianne\" played the most?",
+        "query": "SELECT TYPE FROM vocals AS T1 JOIN band AS T2 ON T1.bandmate  =  T2.id WHERE firstname  =  \"Marianne\" GROUP BY TYPE ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Who is performing in the back stage position for the song \"Der Kapitan\"? Show the first name and last name.",
+        "query": "SELECT T2.firstname ,  T2.lastname FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId WHERE T3.Title  =  \"Der Kapitan\" AND T1.StagePosition  =  \"back\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What is the first and last name of the artist who performed back stage for the song \"Der Kapitan\"?",
+        "query": "SELECT T2.firstname ,  T2.lastname FROM Performance AS T1 JOIN Band AS T2 ON T1.bandmate  =  T2.id JOIN Songs AS T3 ON T3.SongId  =  T1.SongId WHERE T3.Title  =  \"Der Kapitan\" AND T1.StagePosition  =  \"back\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Find the name of songs that does not have a back vocal.",
+        "query": "SELECT DISTINCT title FROM vocals AS t1 JOIN songs AS t2 ON t1.songid  =  t2.songid EXCEPT SELECT t2.title FROM vocals AS t1 JOIN songs AS t2 ON t1.songid  =  t2.songid WHERE TYPE  =  \"back\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the names of the songs that do not have back vocals?",
+        "query": "SELECT DISTINCT title FROM vocals AS t1 JOIN songs AS t2 ON t1.songid  =  t2.songid EXCEPT SELECT t2.title FROM vocals AS t1 JOIN songs AS t2 ON t1.songid  =  t2.songid WHERE TYPE  =  \"back\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the songs in album \"A Kiss Before You Go: Live in Hamburg\"?",
+        "query": "SELECT T3.title FROM albums AS T1 JOIN tracklists AS T2 ON T1.aid  =  T2.albumid JOIN songs AS T3 ON T2.songid  =  T3.songid WHERE T1.title  =  \"A Kiss Before You Go: Live in Hamburg\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the song titles on the album \"A Kiss Before You Go: Live in Hamburg\"?",
+        "query": "SELECT T3.title FROM albums AS T1 JOIN tracklists AS T2 ON T1.aid  =  T2.albumid JOIN songs AS T3 ON T2.songid  =  T3.songid WHERE T1.title  =  \"A Kiss Before You Go: Live in Hamburg\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are all the songs in albums under label \"Universal Music Group\"?",
+        "query": "SELECT T3.title FROM albums AS T1 JOIN tracklists AS T2 ON T1.aid  =  T2.albumid JOIN songs AS T3 ON T2.songid  =  T3.songid WHERE t1.label  =  \"Universal Music Group\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "What are the names of all the songs whose album is under the label of \"Universal Music Group\"?",
+        "query": "SELECT T3.title FROM albums AS T1 JOIN tracklists AS T2 ON T1.aid  =  T2.albumid JOIN songs AS T3 ON T2.songid  =  T3.songid WHERE t1.label  =  \"Universal Music Group\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "Find the number of songs in all the studio albums.",
+        "query": "SELECT count(DISTINCT T3.title) FROM albums AS T1 JOIN tracklists AS T2 ON T1.aid  =  T2.albumid JOIN songs AS T3 ON T2.songid  =  T3.songid WHERE t1.type  =  \"Studio\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "music_2",
+        "question": "How many songs appear in studio albums?",
+        "query": "SELECT count(DISTINCT T3.title) FROM albums AS T1 JOIN tracklists AS T2 ON T1.aid  =  T2.albumid JOIN songs AS T3 ON T2.songid  =  T3.songid WHERE t1.type  =  \"Studio\""
+    }
+]

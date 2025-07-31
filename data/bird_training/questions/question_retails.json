@@ -1,0 +1,1472 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many kinds of items are returned in order no.5?",
+        "query": "SELECT COUNT(l_linenumber) FROM lineitem WHERE l_orderkey = 5 AND l_returnflag = 'R'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "When was the latest date the items of order no.1 were shipped?",
+        "query": "SELECT MAX(l_shipdate) FROM lineitem WHERE l_orderkey = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Which order has a higher priority, order no. 4 or order no. 36?",
+        "query": "SELECT l_orderkey FROM lineitem WHERE l_orderkey IN (4, 36) ORDER BY l_shipdate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the comment of the order with the highest total price?",
+        "query": "SELECT o_comment FROM orders WHERE o_totalprice = ( SELECT MAX(o_totalprice) FROM orders )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the phone number of Customer#000000001?",
+        "query": "SELECT c_phone FROM customer WHERE c_name = 'Customer#000000001'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many orders in total have the customers in the household segment made?",
+        "query": "SELECT COUNT(T1.o_orderkey) FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T2.c_mktsegment = 'HOUSEHOLD'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among all the orders made by a customer in the household segment, what is the highest total price?",
+        "query": "SELECT MAX(T1.o_totalprice) FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T2.c_mktsegment = 'HOUSEHOLD'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please list the order comments of all the orders made by customers in the household segment.",
+        "query": "SELECT T1.o_comment FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T2.c_mktsegment = 'HOUSEHOLD'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please give the name of the customer who has made the single order with the highest total price.",
+        "query": "SELECT T2.c_name FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey ORDER BY T1.o_totalprice DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please list the order keys of all the orders made by a customer whose account is in debt.",
+        "query": "SELECT T1.o_orderkey FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T2.c_acctbal < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the orders made by customers in the household segment, how many of them are urgent?",
+        "query": "SELECT COUNT(T1.o_orderpriority) FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T2.c_mktsegment = 'HOUSEHOLD' AND T1.o_orderpriority = '1-URGENT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many customers are in Brazil?",
+        "query": "SELECT COUNT(T1.c_custkey) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T2.n_name = 'BRAZIL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please list the phone numbers of all the customers in the household segment and are in Brazil.",
+        "query": "SELECT T1.c_phone FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T1.c_mktsegment = 'HOUSEHOLD' AND T2.n_name = 'BRAZIL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among all the customers in Germany, how many of them have an account balance of over 1000?",
+        "query": "SELECT COUNT(T1.c_custkey) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T2.n_name = 'GERMANY' AND T1.c_acctbal > 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many orders in total are made by customers in Germany?",
+        "query": "SELECT COUNT(T2.c_custkey) FROM nation AS T1 INNER JOIN customer AS T2 ON T1.n_nationkey = T2.c_nationkey INNER JOIN orders AS T3 ON T2.c_custkey = T3.o_custkey WHERE T1.n_name = 'GERMANY'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the total price of all the orders made by customers in Germany?",
+        "query": "SELECT SUM(T3.o_totalprice) FROM nation AS T1 INNER JOIN customer AS T2 ON T1.n_nationkey = T2.c_nationkey INNER JOIN orders AS T3 ON T2.c_custkey = T3.o_custkey WHERE T1.n_name = 'GERMANY'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the orders made by customers in Germany, which one of them has the highest priority in delivery? Please give its order key.",
+        "query": "SELECT T3.o_orderkey FROM nation AS T1 INNER JOIN customer AS T2 ON T1.n_nationkey = T2.c_nationkey INNER JOIN orders AS T3 ON T2.c_custkey = T3.o_custkey WHERE T1.n_name = 'GERMANY' ORDER BY T3.o_orderdate LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the average price of the orders made by a customer in Germany?",
+        "query": "SELECT AVG(T3.o_totalprice) FROM nation AS T1 INNER JOIN customer AS T2 ON T1.n_nationkey = T2.c_nationkey INNER JOIN orders AS T3 ON T2.c_custkey = T3.o_custkey WHERE T1.n_name = 'GERMANY'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among all the customers, what is the percentage of the customer's nation being Germany?",
+        "query": "SELECT CAST(SUM(IIF(T2.n_name = 'GERMANY', 1, 0)) AS REAL) * 100 / COUNT(T1.c_custkey) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many countries are there in the No.2 region?",
+        "query": "SELECT COUNT(n_nationkey) FROM nation WHERE n_regionkey = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Which country does supplier No.34 come from?",
+        "query": "SELECT T2.n_name FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey WHERE T1.s_suppkey = 34"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Which region does \"Supplier#000000129\" belong to?",
+        "query": "SELECT T3.r_name FROM nation AS T1 INNER JOIN supplier AS T2 ON T1.n_nationkey = T2.s_nationkey INNER JOIN region AS T3 ON T1.n_regionkey = T3.r_regionkey WHERE T2.s_name = 'Supplier#000000129'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the nationality of \"Customer#000000055\"?",
+        "query": "SELECT T2.n_name FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_name = 'Customer#000000055'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Give customer No.106936's region name.",
+        "query": "SELECT T3.r_name FROM nation AS T1 INNER JOIN customer AS T2 ON T1.n_nationkey = T2.c_nationkey INNER JOIN region AS T3 ON T1.n_regionkey = T3.r_regionkey WHERE T2.c_custkey = 106936"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Give the number of Moroccan customers whose account is in debt.",
+        "query": "SELECT COUNT(T1.c_name) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T2.n_name = 'MOROCCO' AND T1.c_acctbal < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "For the order with the total price of 231499.38, what was the discounted price for supplier No. 9397?",
+        "query": "SELECT T1.l_extendedprice * (1 - T1.l_discount) AS DISCOUNTERPRICE FROM lineitem AS T1 INNER JOIN orders AS T2 ON T2.o_orderkey = T1.l_orderkey WHERE T1.l_suppkey = 9397 AND T2.o_totalprice = 231499.38"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "For the order with the total price of 218195.43, which supplier handled the returned item? Give the supplier id.",
+        "query": "SELECT T2.l_suppkey FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey WHERE T1.o_totalprice = 218195.43 AND T2.l_returnflag = 'R'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Clerk#000000936 dealt with a \"Not Specified\" order on 1995/3/13, what was the charge for the part of the order shipped by truck?",
+        "query": "SELECT T2.l_extendedprice * (1 - T2.l_discount) * (1 + T2.l_tax) AS num FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey WHERE T1.o_clerk = 'Clerk#000000936' AND T2.l_shipmode = 'TRUCK' AND T1.o_orderstatus = '4-NOT SPECIFIED' AND T1.o_orderdate = '1995-03-13'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Customer No.129301 made an order on 1996/7/27, what was the delivery time for the first part of that order?",
+        "query": "SELECT JULIANDAY(T2.l_receiptdate) - JULIANDAY(T2.l_commitdate) FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey WHERE T1.o_custkey = '129301' AND T1.o_orderdate = '1996-07-27'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Give the name of the customer who made an order with Clerk#000000803 on 1997/12/10.",
+        "query": "SELECT T2.c_name FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T1.o_orderdate = '1997-12-10' AND T1.o_clerk = 'Clerk#000000803'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Calculates the profit processed by Supplier No. 7414 on order No. 817154.",
+        "query": "SELECT T1.l_extendedprice * (1 - T1.l_discount) - T2.ps_supplycost * T1.l_quantity FROM lineitem AS T1 INNER JOIN partsupp AS T2 ON T1.l_suppkey = T2.ps_suppkey WHERE T1.l_suppkey = 7414 AND T1.l_orderkey = 817154"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Which country has the most number of suppliers whose account is in debt?",
+        "query": "SELECT T.n_name FROM ( SELECT T2.n_name, SUM(T1.s_acctbal) AS num FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey WHERE T1.s_acctbal < 0 GROUP BY T2.n_name ) AS T ORDER BY T.num LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the percentage of the European countries among the given countries?",
+        "query": "SELECT CAST(SUM(IIF(T2.r_name = 'EUROPE', 1, 0)) AS REAL) * 100 / COUNT(T1.n_name) FROM nation AS T1 INNER JOIN region AS T2 ON T1.n_regionkey = T2.r_regionkey"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Give the percentage of Japanese suppliers whose account is in debt.",
+        "query": "SELECT CAST(SUM(IIF(T2.n_name = 'JAPAN', 1, 0)) AS REAL) * 100 / COUNT(T1.s_name) FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey WHERE T1.s_acctbal < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the name of the customer with the highest amount of debt?",
+        "query": "SELECT c_name FROM customer WHERE c_acctbal = ( SELECT MIN(c_acctbal) FROM customer )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many orders were shipped in 1998?",
+        "query": "SELECT COUNT(l_orderkey) FROM lineitem WHERE STRFTIME('%Y', l_shipdate) = '1998'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many customers are in debt?",
+        "query": "SELECT COUNT(c_custkey) FROM customer WHERE c_acctbal < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many items that were shipped via air were returned in 1994?",
+        "query": "SELECT COUNT(l_linenumber) FROM lineitem WHERE l_returnflag = 'R' AND l_shipmode = 'AIR' AND STRFTIME('%Y', l_shipdate) = '1994'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many customers are in the automobile market segment?",
+        "query": "SELECT COUNT(c_custkey) FROM customer WHERE c_mktsegment = 'AUTOMOBILE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What are the top 2 order keys of the item with the highest amount of extended price?",
+        "query": "SELECT l_orderkey FROM lineitem ORDER BY l_extendedprice DESC LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "When was the order with the highest amount of total price shipped?",
+        "query": "SELECT T2.l_shipdate FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey ORDER BY T1.o_totalprice DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "In which country do most of the customers come from?",
+        "query": "SELECT T.n_name FROM ( SELECT T2.n_name, COUNT(T1.c_custkey) AS num FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey GROUP BY T2.n_name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many urgent orders were shipped the next day?",
+        "query": "SELECT COUNT(T2.o_orderkey) FROM lineitem AS T1 INNER JOIN orders AS T2 ON T2.o_orderkey = T1.l_orderkey WHERE JULIANDAY(T1.l_shipdate) - JULIANDAY(T2.o_orderdate) = 1 AND T2.o_orderpriority = '1-URGENT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many in debt customers in the household market segment are from Russia?",
+        "query": "SELECT COUNT(T1.c_custkey) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T1.c_acctbal < 0 AND T1.c_mktsegment = 'HOUSEHOLD' AND T2.n_name = 'RUSSIA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many suppliers are from Japan?",
+        "query": "SELECT COUNT(T1.c_custkey) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T2.n_name = 'JAPAN'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many orders shipped via ship have a medium priority?",
+        "query": "SELECT COUNT(T1.o_orderkey) FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey WHERE T2.l_shipmode = 'SHIP' AND T1.o_orderpriority = '3-MEDIUM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the customers from the United States, which market segment has the highest number of customers?",
+        "query": "SELECT T.c_mktsegment FROM ( SELECT T1.c_mktsegment, COUNT(T1.c_custkey) AS num FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T2.n_name = 'UNITED STATES' GROUP BY T1.c_mktsegment ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What are the countries in the region of Asia?",
+        "query": "SELECT T1.n_name FROM nation AS T1 INNER JOIN region AS T2 ON T1.n_regionkey = T2.r_regionkey WHERE T2.r_name = 'ASIA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What are the names of the parts manufactured by manufacturer 3 that have a supply cost of 1,000?",
+        "query": "SELECT T2.p_name FROM partsupp AS T1 INNER JOIN part AS T2 ON T1.ps_partkey = T2.p_partkey WHERE T1.ps_supplycost = 1000 AND T2.p_mfgr = 'Manufacturer#3'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many countries are there in the region whose comment description is \"asymptotes sublate after the r.\"",
+        "query": "SELECT COUNT(T1.n_nationkey) FROM nation AS T1 INNER JOIN region AS T2 ON T1.n_regionkey = T2.r_regionkey WHERE T2.r_comment = 'asymptotes sublate after the r'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the products manufactured by manufacturer 5 that have a retail price of no more than 1,000, how many products were shipped via rail?",
+        "query": "SELECT COUNT(T1.ps_partkey) FROM partsupp AS T1 INNER JOIN lineitem AS T2 ON T1.ps_suppkey = T2.l_suppkey INNER JOIN part AS T3 ON T1.ps_partkey = T3.p_partkey WHERE T3.p_mfgr = 'Manufacturer#5' AND T3.p_retailprice < 1000 AND T2.l_shipmode = 'RAIL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How much is the profit for smoke turquoise purple blue salmon that was delivered in person on 5/7/1996?",
+        "query": "SELECT T1.l_extendedprice * (1 - T1.l_discount) - T2.ps_supplycost * T1.l_quantity AS num FROM lineitem AS T1 INNER JOIN partsupp AS T2 ON T1.l_suppkey = T2.ps_suppkey INNER JOIN part AS T3 ON T2.ps_partkey = T3.p_partkey WHERE T1.l_receiptdate = '1996-05-07' AND T1.l_shipinstruct = 'DELIVER IN PERSON' AND T3.p_name = 'smoke turquoise purple blue salmon'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the average price before discount of the top 10 orders with the highest total price?",
+        "query": "SELECT SUM(T2.l_extendedprice) / 10 FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey ORDER BY T1.o_totalprice DESC LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Identify the names of the top 3 customers with the highest number of orders of all time and calculate for the average total price per order of each customers.",
+        "query": "SELECT T.c_name, T.res FROM ( SELECT T2.c_name, SUM(T1.o_totalprice) / COUNT(T1.o_orderkey) AS res , COUNT(T1.o_orderkey) AS num FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey GROUP BY T1.o_custkey ) AS T ORDER BY T.num DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many items were shipped on 4th December, 1993?",
+        "query": "SELECT COUNT(l_linenumber) FROM lineitem WHERE l_shipdate = '1993-12-04'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What was the order date of items with the highest total price?",
+        "query": "SELECT o_orderdate FROM orders WHERE o_totalprice = ( SELECT MAX(o_totalprice) FROM orders )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Calculate the percentage of customers' accounts in debt.",
+        "query": "SELECT CAST(SUM(IIF(c_acctbal < 0, 1, 0)) AS REAL) * 100 / COUNT(c_custkey) FROM customer"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many part supplies were nearly out of stock?",
+        "query": "SELECT COUNT(ps_suppkey) FROM partsupp WHERE ps_availqty < 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Calculate the percentage of manufactured parts by Manufacturer#3.",
+        "query": "SELECT CAST(SUM(IIF(p_mfgr = 'Manufacturer#3', 1, 0)) AS REAL) * 100 / COUNT(p_partkey) FROM part"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List any five parts name in Medium Plated Brass.",
+        "query": "SELECT p_name FROM part WHERE p_type = 'MEDIUM PLATED BRASS' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the orders shipped in November, 1998 by air, how many orders were urgent?",
+        "query": "SELECT COUNT(T1.o_orderkey) FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey WHERE T2.l_shipmode = 'AIR' AND T1.o_orderpriority = '1-URGENT' AND SUBSTR(T2.l_shipdate, 1, 7) = '1998-11'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many customers are there in India?",
+        "query": "SELECT COUNT(T1.c_custkey) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T2.n_name = 'INDIA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the customers from Morocco, how many customers were in debt?",
+        "query": "SELECT COUNT(T1.c_custkey) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T1.c_acctbal < 0 AND T2.n_name = 'MOROCCO'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List down the nation keys and names in Africa.",
+        "query": "SELECT T1.n_name, T1.n_nationkey FROM nation AS T1 INNER JOIN region AS T2 ON T1.n_regionkey = T2.r_regionkey WHERE T2.r_name = 'AFRICA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Calculate the total price of orders by Customer#000000013.",
+        "query": "SELECT SUM(T1.o_totalprice) FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T2.c_name = 'Customer#000000013'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many items did Customer#000021159 order? Calculate those items total charges.",
+        "query": "SELECT COUNT(T2.o_orderkey), SUM(T3.l_extendedprice * (1 - T3.l_discount) * (1 + T3.l_tax)) FROM customer AS T1 INNER JOIN orders AS T2 ON T1.c_custkey = T2.o_custkey INNER JOIN lineitem AS T3 ON T2.o_orderkey = T3.l_orderkey WHERE T1.c_name = 'Customer#000021159' GROUP BY T3.l_linenumber"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Calculate the total profit made by chocolate floral blue coral cyan.",
+        "query": "SELECT SUM(T3.l_extendedprice * (1 - T3.l_discount) - T2.ps_supplycost * T3.l_quantity) FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey INNER JOIN lineitem AS T3 ON T2.ps_partkey = T3.l_partkey AND T2.ps_suppkey = T3.l_suppkey WHERE T1.p_name = 'chocolate floral blue coral cyan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Calculate the percentage of suppliers in Germany.",
+        "query": "SELECT CAST(SUM(IIF(T2.n_name = 'GERMANY', 1, 0)) AS REAL) * 100 / COUNT(T1.s_suppkey) FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey WHERE T1.s_acctbal < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List the suppliers' names which supplied smoke red pale saddle plum.",
+        "query": "SELECT T3.s_name FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey INNER JOIN supplier AS T3 ON T2.ps_suppkey = T3.s_suppkey WHERE T1.p_name = 'smoke red pale saddle plum'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the suppliers from Middle East region, how many suppliers were in debt?",
+        "query": "SELECT COUNT(T3.s_name) FROM region AS T1 INNER JOIN nation AS T2 ON T1.r_regionkey = T2.n_regionkey INNER JOIN supplier AS T3 ON T2.n_nationkey = T3.s_nationkey WHERE T3.s_acctbal < 0 AND T1.r_name = 'MIDDLE EAST'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the parts shipped by rail on 1st December, 1995, list part names with 10% discount.",
+        "query": "SELECT T2.p_name FROM partsupp AS T1 INNER JOIN part AS T2 ON T1.ps_partkey = T2.p_partkey INNER JOIN lineitem AS T3 ON T1.ps_partkey = T3.l_partkey WHERE T3.l_discount = 0.1 AND T3.l_shipdate = '1995-12-01' AND T3.l_shipmode = 'RAIL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the parts supplied by Supplier#000000018, provide parts names which had supply costs above 900.",
+        "query": "SELECT T2.p_name FROM partsupp AS T1 INNER JOIN part AS T2 ON T1.ps_partkey = T2.p_partkey INNER JOIN supplier AS T3 ON T1.ps_suppkey = T3.s_suppkey WHERE T1.ps_supplycost > 900 AND T3.s_name = 'Supplier#000000018'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many orders were shipped in 1994?",
+        "query": "SELECT COUNT(l_orderkey) FROM lineitem WHERE STRFTIME('%Y', l_shipdate) = '1994'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many of the line items have been shipped by rail with a quantity less than 30?",
+        "query": "SELECT COUNT(l_linenumber) FROM lineitem WHERE l_quantity < 30 AND l_shipmode = 'RAIL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the customers in the furniture market segment, how many of them have a nation key of 1?",
+        "query": "SELECT COUNT(c_custkey) FROM customer WHERE c_mktsegment = 'FURNITURE' AND c_nationkey = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Give the phone number of the customer with the highest account balance.",
+        "query": "SELECT c_phone FROM customer ORDER BY c_acctbal DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the order priority of the order with the highest total price?",
+        "query": "SELECT o_orderpriority FROM orders WHERE o_totalprice = ( SELECT MAX(o_totalprice) FROM orders )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the total number of orders made by customers in United States?",
+        "query": "SELECT COUNT(T1.o_orderkey) FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey INNER JOIN nation AS T3 ON T2.c_nationkey = T3.n_nationkey WHERE T3.n_name = 'UNITED STATES'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the customers from Brazil, how many customers are in automobile market segment?",
+        "query": "SELECT COUNT(T1.c_custkey) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T1.c_mktsegment = 'AUTOMOBILE' AND T2.n_name = 'BRAZIL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Provide the order comments for at least 5 orders made by customers in the furniture segment.",
+        "query": "SELECT T1.o_comment FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T2.c_mktsegment = 'Furniture' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List down the countries that are located in Asia.",
+        "query": "SELECT T1.n_name FROM nation AS T1 INNER JOIN region AS T2 ON T1.n_regionkey = T2.r_regionkey WHERE T2.r_name = 'ASIA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Name the countries that belong in the region with comment description \"furiously express accounts wake sly\".",
+        "query": "SELECT T1.n_name FROM nation AS T1 INNER JOIN region AS T2 ON T1.n_regionkey = T2.r_regionkey WHERE T2.r_comment = 'furiously express accounts wake sly'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the total number of suppliers from Germany?",
+        "query": "SELECT COUNT(T1.s_suppkey) FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey WHERE T2.n_name = 'GERMANY'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the customers in Asia, how many customers are in debt?",
+        "query": "SELECT COUNT(T1.n_name) FROM nation AS T1 INNER JOIN customer AS T2 ON T1.n_nationkey = T2.c_nationkey INNER JOIN region AS T3 ON T1.n_regionkey = T3.r_regionkey WHERE T2.c_acctbal < 0 AND T3.r_name = 'ASIA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Provide the phone number of the customer with the highest total price in an order.",
+        "query": "SELECT T2.c_phone FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey ORDER BY T1.o_totalprice DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the products that have a retail price greater than 1,000, how many products were shipped via ship?",
+        "query": "SELECT COUNT(T1.ps_suppkey) FROM partsupp AS T1 INNER JOIN lineitem AS T2 ON T1.ps_suppkey = T2.l_suppkey INNER JOIN part AS T3 ON T1.ps_partkey = T3.p_partkey WHERE T3.p_retailprice > 1000 AND T2.l_shipmode = 'SHIP'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the name and marketing segment of the customer with the total order price of 199180.63?",
+        "query": "SELECT T2.c_name, T2.c_mktsegment FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T1.o_totalprice = 199180.63"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Provide the nation and region of the customer with the address of wH55UnX7 VI?",
+        "query": "SELECT T1.n_name, T3.r_name FROM nation AS T1 INNER JOIN customer AS T2 ON T1.n_nationkey = T2.c_nationkey INNER JOIN region AS T3 ON T1.n_regionkey = T3.r_regionkey WHERE T2.c_address = 'wH55UnX7 VI'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among all the customers in Brazil, how many of them have an account balance of less than 1000?",
+        "query": "SELECT COUNT(T1.c_custkey) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T2.n_name = 'BRAZIL' AND T1.c_acctbal < 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List the country name of the customers in the building marketing segment with an account balance greater than 80% of the average account balance of all customers.",
+        "query": "SELECT T2.n_name FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey INNER JOIN ( SELECT AVG(c_acctbal) * 0.8 AS avg_acctbal FROM customer ) AS T3 WHERE T1.c_acctbal > T3.avg_acctbal"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the customers with an account balance lower than 4000, what is the percentage of the customers in the US?",
+        "query": "SELECT CAST(SUM(IIF(T2.n_name = 'United States', 1, 0)) AS REAL) * 100 / COUNT(T1.c_custkey) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T1.c_acctbal < 4000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Give the name and phone number of the customers who have more than 9000 account balance.",
+        "query": "SELECT c_name, c_phone FROM customer WHERE c_acctbal > 9000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the average number of items shipped each day in April of 1994?",
+        "query": "SELECT AVG(l_linenumber) FROM lineitem WHERE l_shipdate BETWEEN '1994-01-01' AND '1994-01-30'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List the order key of the orders with a total price between 200000 and 300000.",
+        "query": "SELECT o_orderkey FROM orders WHERE o_totalprice BETWEEN 200000 AND 300000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Find and list the part key of the parts which has an above-average retail price.",
+        "query": "SELECT p_partkey FROM part WHERE p_retailprice > ( SELECT AVG(p_retailprice) FROM part )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Calculate the percentage of part supply that costs more than 500.",
+        "query": "SELECT CAST(SUM(IIF(ps_supplycost > 500, 1, 0)) AS REAL) * 100 / COUNT(ps_suppkey) FROM partsupp"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Find the supply key of the top ten suppliers with the most account balance, and list the supply key along with the account balance in descending order of account balance.",
+        "query": "SELECT s_suppkey, s_acctbal FROM supplier ORDER BY s_acctbal DESC LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many customers who are not in debt ordered an urgent order?",
+        "query": "SELECT COUNT(T2.c_custkey) FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T2.c_acctbal > 0 AND T1.o_orderpriority = '1-URGENT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List the name and phone number of customers in India who have an above-average account balance.",
+        "query": "SELECT T1.c_name, T1.c_phone FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T1.c_acctbal > ( SELECT AVG(c_acctbal) FROM customer ) ORDER BY T1.c_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "In the parts supply by Supplier#000000654, list the top five parts with the most supply cost in descending order of supply cost.",
+        "query": "SELECT T2.ps_partkey FROM supplier AS T1 INNER JOIN partsupp AS T2 ON T1.s_suppkey = T2.ps_suppkey WHERE T1.s_name = 'Supplier#000000654' ORDER BY T2.ps_supplycost DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What percentage of customers from France is in the automobile segment?",
+        "query": "SELECT CAST(SUM(IIF(T1.c_mktsegment = 'AUTOMOBILE', 1, 0)) AS REAL) * 100 / COUNT(T1.c_name) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T2.n_name = 'FRANCE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Name the part which is most profitable.",
+        "query": "SELECT T.p_name FROM ( SELECT T3.p_name , T2.l_extendedprice * (1 - T2.l_discount) - T1.ps_supplycost * T2.l_quantity AS num FROM partsupp AS T1 INNER JOIN lineitem AS T2 ON T1.ps_suppkey = T2.l_suppkey INNER JOIN part AS T3 ON T1.ps_partkey = T3.p_partkey ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List the names of the countries with the below-average number of customers in ascending order of customer numbers.",
+        "query": "SELECT T2.n_name FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey GROUP BY T2.n_name HAVING COUNT(T1.c_name) > ( SELECT COUNT(customer.c_name) / COUNT(DISTINCT nation.n_name) FROM customer INNER JOIN nation ON customer.c_nationkey = nation.n_nationkey ) ORDER BY COUNT(T1.c_name)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What percentage of customers from the African region is in the household segment?",
+        "query": "SELECT CAST(SUM(IIF(T2.r_name = 'AFRICA', 1, 0)) AS REAL) * 100 / COUNT(T1.n_nationkey) FROM nation AS T1 INNER JOIN region AS T2 ON T1.n_regionkey = T2.r_regionkey INNER JOIN customer AS T3 ON T1.n_nationkey = T3.c_nationkey WHERE T3.c_mktsegment = 'HOUSEHOLD'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List the name of the top ten items with the most quantity available in the descending order of availability.",
+        "query": "SELECT T1.p_name FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey ORDER BY T2.ps_availqty DESC LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Calculate the difference in the average retail price of parts shipped via ship and air.",
+        "query": "SELECT (CAST(SUM(IIF(T3.l_shipmode = 'SHIP', T1.p_retailprice, 0)) AS REAL) / SUM(IIF(T3.l_shipmode = 'SHIP', 1, 0))) - (CAST(SUM(IIF(T3.l_shipmode = 'AIR', T1.p_retailprice, 0)) AS REAL) / SUM(IIF(T3.l_shipmode = 'AIR', 1, 0))) FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey INNER JOIN lineitem AS T3 ON T2.ps_suppkey = T3.l_suppkey"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the average discount for the parts made by Manufacturer#5?",
+        "query": "SELECT AVG(T3.l_discount) FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey INNER JOIN lineitem AS T3 ON T2.ps_suppkey = T3.l_suppkey WHERE T1.p_mfgr = 'Manufacturer#5'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "In the parts shipped by rail, how many are of medium priority?",
+        "query": "SELECT COUNT(T2.l_partkey) FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey WHERE T2.l_shipmode = 'RAIL' AND T1.o_orderpriority = '3-MEDIUM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the suppliers in the European region, what percentage have a below-average account balance?",
+        "query": "SELECT CAST(SUM(IIF(T3.s_acctbal < ( SELECT AVG(supplier.s_acctbal) FROM supplier ), 1, 0)) AS REAL) * 100 / COUNT(T1.n_nationkey) FROM nation AS T1 INNER JOIN region AS T2 ON T1.n_regionkey = T2.r_regionkey INNER JOIN supplier AS T3 ON T1.n_nationkey = T3.s_nationkey WHERE T2.r_name = 'EUROPE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Calculate the difference in the average number of low-priority orders shipped by truck in each month of 1995 and 1996.",
+        "query": "SELECT (CAST(SUM(IIF(STRFTIME('%Y', T2.l_shipdate) = 1995, 1, 0)) AS REAL) / 12) - (CAST(SUM(IIF(STRFTIME('%Y', T2.l_shipdate) = 1996, 1, 0)) AS REAL) / 12) FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey WHERE T1.o_orderpriority = '5-LOW' AND T2.l_shipmode = 'TRUCK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List by their id all customers who have a debit balance in their accounts.",
+        "query": "SELECT c_custkey FROM customer WHERE c_acctbal < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List by order number the 3 items with the lowest price after applying the discount.",
+        "query": "SELECT l_orderkey FROM lineitem ORDER BY l_extendedprice * (1 - l_discount) LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many orders of more than 10 items have been returned?",
+        "query": "SELECT COUNT(l_linenumber) FROM lineitem WHERE l_quantity > 10 AND l_returnflag = 'R'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the total price charged for orders shipped by air without shipping instructions?",
+        "query": "SELECT l_extendedprice * (1 - l_discount) * (1 + l_tax) AS totalprice FROM lineitem WHERE l_shipmode = 'AIR' AND l_shipinstruct = 'NONE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Of the orders with a lower delivery priority, how many have an urgent priority order?",
+        "query": "SELECT COUNT(o_orderkey) FROM orders WHERE o_orderpriority = '1-URGENT' GROUP BY o_orderdate ORDER BY o_orderdate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many suppliers from Egypt have a debit balance?",
+        "query": "SELECT COUNT(T1.s_suppkey) FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey WHERE T1.s_acctbal < 0 AND T2.n_name = 'EGYPT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many items shipped by REG AIR were ordered on March 22, 1995?",
+        "query": "SELECT COUNT(T1.o_orderkey) FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey WHERE T2.l_shipmode = 'REG AIR' AND T1.o_orderdate = '1995-03-22'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many European suppliers are there?",
+        "query": "SELECT COUNT(T1.n_nationkey) FROM nation AS T1 INNER JOIN region AS T2 ON T1.n_regionkey = T2.r_regionkey INNER JOIN supplier AS T3 ON T1.n_nationkey = T3.s_nationkey WHERE T2.r_name = 'EUROPE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "To which segment belongs the customer that made the most orders in April 1994?",
+        "query": "SELECT T.c_mktsegment FROM ( SELECT T2.c_mktsegment, COUNT(T1.o_orderkey) AS num FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T1.o_orderdate LIKE '1994-04-%' GROUP BY T1.o_custkey ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Lists all parts supplied by Supplier#000000034.",
+        "query": "SELECT T3.p_name FROM partsupp AS T1 INNER JOIN supplier AS T2 ON T1.ps_suppkey = T2.s_suppkey INNER JOIN part AS T3 ON T1.ps_partkey = T3.p_partkey WHERE T2.s_name = 'Supplier#000000034'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What are the cost prices of large burnished copper?",
+        "query": "SELECT T2.ps_supplycost FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey WHERE T1.p_type = 'LARGE BURNISHED COPPER'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many clients from Mozambique required orders with a low priority order?",
+        "query": "SELECT COUNT(T1.c_custkey) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey INNER JOIN orders AS T3 ON T1.c_custkey = T3.o_custkey WHERE T2.n_name = 'MOZAMBIQUE' AND T3.o_orderpriority = '5-LOW'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Indicate the name of the product that is close to being sold out and that has the lowest cost price.",
+        "query": "SELECT T1.p_name FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey WHERE T2.ps_availqty < 10 ORDER BY T2.ps_supplycost LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many different clerks have served the customer with the address uFTe2u518et8Q8UC?",
+        "query": "SELECT COUNT(T1.o_clerk) FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T2.c_address = 'uFTe2u518et8Q8UC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Indicate the name of the parts without discount.",
+        "query": "SELECT T3.p_name FROM partsupp AS T1 INNER JOIN lineitem AS T2 ON T1.ps_suppkey = T2.l_suppkey INNER JOIN part AS T3 ON T1.ps_partkey = T3.p_partkey WHERE T2.l_discount = 0.0000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many suppliers from Germany have left a comment with 'carefully regular packages'?",
+        "query": "SELECT COUNT(T1.s_suppkey) FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey WHERE T2.n_name = 'GERMANY' AND T1.s_comment LIKE '%carefully regular packages%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many products shipped on 19/11/1994 were ordered on 21/09/1994?",
+        "query": "SELECT COUNT(T2.l_partkey) FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey WHERE T1.o_orderdate = '1994-09-21' AND T2.l_shipdate = '1994-11-19'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Calculate the average profit of prom brushed steel products.",
+        "query": "SELECT SUM(T2.l_extendedprice * (1 - T2.l_discount) - T1.ps_supplycost * T2.l_quantity) / COUNT(T1.ps_partkey) FROM partsupp AS T1 INNER JOIN lineitem AS T2 ON T1.ps_suppkey = T2.l_suppkey INNER JOIN part AS T3 ON T1.ps_partkey = T3.p_partkey WHERE T3.p_type = 'PROMO BRUSHED STEEL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What percentage of customers engaged in the household segment are from Iran?",
+        "query": "SELECT CAST(SUM(IIF(T2.n_name = 'IRAN', 1, 0)) AS REAL) * 100 / COUNT(T2.n_name) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T1.c_mktsegment = 'HOUSEHOLD'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please state the segment, the name, the address, and the phone number of customer number 3.",
+        "query": "SELECT c_mktsegment, c_name, c_address, c_phone FROM customer WHERE c_custkey = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please list any three line item numbers that have 10% off.",
+        "query": "SELECT l_linenumber FROM lineitem WHERE l_discount = 0.1 LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many of the line items that have a quantity greater than 40 have been shipped by air?",
+        "query": "SELECT COUNT(l_linenumber) FROM lineitem WHERE l_quantity > 40 AND l_shipmode = 'AIR'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Which ship mode has more \"deliver in person\" instructions, rail or mail?",
+        "query": "SELECT IIF(SUM(IIF(l_shipmode = 'RAIL', 1, 0)) - SUM(IIF(l_shipmode = 'MAIL', 1, 0)), 'RAIL', 'MAIL') AS result FROM lineitem WHERE l_shipinstruct = 'DELIVER IN PERSON'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the total price and the order priority of order number 33?",
+        "query": "SELECT o_totalprice, o_orderpriority FROM orders WHERE o_orderkey = 33"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many orders in 1998 had a total price under 950?",
+        "query": "SELECT COUNT(o_orderkey) AS countorders FROM orders WHERE STRFTIME('%Y', o_orderdate) = '1998' AND o_totalprice < 950"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please list any three customers with debt.",
+        "query": "SELECT c_name FROM customer WHERE c_acctbal < 0 LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the discounted price of line item number 1?",
+        "query": "SELECT l_extendedprice * (1 - l_discount) FROM lineitem WHERE l_linenumber = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the difference between the number of returned items and not returned items with the full price of under 16947.7?",
+        "query": "SELECT SUM(IIF(l_returnflag = 'A', 1, 0)) - SUM(IIF(l_returnflag = 'N', 1, 0)) AS diff FROM lineitem WHERE l_extendedprice < 16947.7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the supply cost of large plated tin?",
+        "query": "SELECT T2.ps_supplycost FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey WHERE T1.p_type = 'large plated tin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please name any three parts that have an available quantity of more than 9998.",
+        "query": "SELECT T1.p_name FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey WHERE T2.ps_availqty > 9998 LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please list any two parts that come with the wrap bag container and have a supply cost of under 10.",
+        "query": "SELECT T1.p_name FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey WHERE T2.ps_supplycost < 10 AND T1.p_container = 'WRAP BAG' LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the nationality of supplier number 1?",
+        "query": "SELECT T2.n_name FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey WHERE T1.s_suppkey = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What are the countries that belong to Africa?",
+        "query": "SELECT T2.n_name FROM region AS T1 INNER JOIN nation AS T2 ON T1.r_regionkey = T2.n_regionkey WHERE T1.r_name = 'Africa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Which region has the lowest number of countries?",
+        "query": "SELECT T.r_name FROM ( SELECT T1.r_name, COUNT(T2.n_name) AS num FROM region AS T1 INNER JOIN nation AS T2 ON T1.r_regionkey = T2.n_regionkey GROUP BY T1.r_name ) AS T ORDER BY T.num LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many customers from the furniture segments come from Iraq?",
+        "query": "SELECT COUNT(T1.c_custkey) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T1.c_mktsegment = 'FURNITURE' AND T2.n_name = 'IRAQ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the name of the customer number 93697 with the total order price of 191918.92?",
+        "query": "SELECT T2.c_name FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T1.o_totalprice = 191918.92 AND T1.o_custkey = 93697"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Which nation and region does the Customer#000000008 come from?",
+        "query": "SELECT T1.n_name, T3.r_name FROM nation AS T1 INNER JOIN customer AS T2 ON T1.n_nationkey = T2.c_nationkey INNER JOIN region AS T3 ON T1.n_regionkey = T3.r_regionkey WHERE T2.c_name = 'Customer#000000008'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the delivery time and the clerk of order number 6?",
+        "query": "SELECT JULIANDAY(T2.l_receiptdate) - JULIANDAY(T2.l_commitdate), T1.o_clerk FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey WHERE T1.o_orderkey = 6"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many Japanese suppliers have their accounts in debt?",
+        "query": "SELECT COUNT(T1.s_suppkey) FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey WHERE T1.s_acctbal < 0 AND T2.n_name = 'JAPAN'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Which customer is the most in debt?",
+        "query": "SELECT c_name FROM customer WHERE c_acctbal = ( SELECT MIN(c_acctbal) FROM customer )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List all the dates of the urgent orders.",
+        "query": "SELECT o_orderdate FROM orders WHERE o_orderpriority = '1-URGENT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many of the items are instructed to be delivered in person?",
+        "query": "SELECT COUNT(l_linenumber) FROM lineitem WHERE l_shipinstruct = 'DELIVER IN PERSON'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the largest supplier's account balance?",
+        "query": "SELECT MAX(s_acctbal) FROM supplier"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many part supplies are close to being out of stock?",
+        "query": "SELECT COUNT(ps_suppkey) FROM partsupp WHERE ps_availqty < 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List all the nations in Europe.",
+        "query": "SELECT T2.n_name FROM region AS T1 INNER JOIN nation AS T2 ON T1.r_regionkey = T2.n_regionkey WHERE T1.r_name = 'EUROPE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the supply cost for the part \"violet olive rose ivory sandy\"?",
+        "query": "SELECT T2.ps_supplycost FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey WHERE T1.p_name = 'violet olive rose ivory sandy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List all the customers' phone numbers from Ethiopia.",
+        "query": "SELECT T1.c_phone FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T2.n_name = 'Ethiopia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the total price of all orders from the customer with the phone number \"627-220-3983\"?",
+        "query": "SELECT SUM(T1.o_totalprice) FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T2.c_phone = '627-220-3983'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What are the shipping methods for the orders on 12/31/1994?",
+        "query": "SELECT DISTINCT T2.l_shipmode FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey WHERE T1.o_orderdate = '1994-12-31'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the account balance of the supplier with the most parts?",
+        "query": "SELECT T.s_acctbal FROM ( SELECT T1.s_acctbal, COUNT(T2.ps_suppkey) AS num FROM supplier AS T1 INNER JOIN partsupp AS T2 ON T1.s_suppkey = T2.ps_suppkey GROUP BY T1.s_suppkey ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Which nation does the supplier with the account balance of \"4393.04\" belong to?",
+        "query": "SELECT T2.n_name FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey WHERE T1.s_acctbal = 4393.04"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the region with the most customers?",
+        "query": "SELECT T.r_name FROM ( SELECT T3.r_name, COUNT(T2.c_custkey) AS num FROM nation AS T1 INNER JOIN customer AS T2 ON T1.n_nationkey = T2.c_nationkey INNER JOIN region AS T3 ON T1.n_regionkey = T3.r_regionkey GROUP BY T3.r_name ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List the phone number of the customer who placed orders with a total price of more than $300,000.",
+        "query": "SELECT T2.c_phone FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T1.o_totalprice > 300000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What are the clerks of orders with line items shipped by mail?",
+        "query": "SELECT T1.o_clerk FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey WHERE T2.l_shipmode = 'MAIL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What are the top 5 nations of suppliers with the lowest account balance?",
+        "query": "SELECT T2.n_name FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey ORDER BY T1.s_acctbal LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List all the addresses for the suppliers of the biggest parts.",
+        "query": "SELECT T2.s_address FROM partsupp AS T1 INNER JOIN supplier AS T2 ON T1.ps_suppkey = T2.s_suppkey INNER JOIN part AS T3 ON T1.ps_partkey = T3.p_partkey ORDER BY T3.p_size DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Which part and supplier have the most profit?",
+        "query": "SELECT T3.p_name, T4.s_name FROM partsupp AS T1 INNER JOIN lineitem AS T2 ON T1.ps_suppkey = T2.l_suppkey INNER JOIN part AS T3 ON T1.ps_partkey = T3.p_partkey INNER JOIN supplier AS T4 ON T1.ps_suppkey = T4.s_suppkey ORDER BY T2.l_extendedprice * (1 - T2.l_discount) - T1.ps_supplycost * T2.l_quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What proportion of suppliers are from Asia?",
+        "query": "SELECT CAST(SUM(IIF(T1.r_name = 'ASIA', 1, 0)) AS REAL) * 100 / COUNT(T1.r_regionkey) FROM region AS T1 INNER JOIN nation AS T2 ON T1.r_regionkey = T2.n_regionkey INNER JOIN supplier AS T3 ON T2.n_nationkey = T3.s_nationkey"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please indicate the total price of order key 32.",
+        "query": "SELECT o_totalprice FROM orders WHERE o_orderkey = 32"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many order keys are not applied for the discount?",
+        "query": "SELECT COUNT(l_orderkey) FROM lineitem WHERE l_discount = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List line items shipped by truck with delivery time before 1997.",
+        "query": "SELECT l_linenumber FROM lineitem WHERE STRFTIME('%Y', l_shipdate) < 1997 AND l_shipmode = 'truck'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many line items were returned in 1998?",
+        "query": "SELECT l_linenumber FROM lineitem WHERE STRFTIME('%Y', l_shipdate) < 1997 AND l_shipmode = 'TRUCK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Which line item with the highest quantity is shipped by air?",
+        "query": "SELECT l_linenumber FROM lineitem WHERE l_shipmode = 'AIR' ORDER BY l_quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List the names of customers whose accounts are in debt.",
+        "query": "SELECT c_name FROM customer WHERE c_acctbal < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many customers belong to the household segment in Germany?",
+        "query": "SELECT COUNT(T1.c_name) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T1.c_mktsegment = 'HOUSEHOLD' AND T2.n_name = 'GERMANY'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List the phone numbers of customers whose order priority is urgent.",
+        "query": "SELECT T2.c_phone FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T1.o_orderpriority = '1-URGENT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Name of customer whose order is applied with the highest discount.",
+        "query": "SELECT T3.c_name FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey INNER JOIN customer AS T3 ON T1.o_custkey = T3.c_custkey ORDER BY T2.l_discount DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List the 5 orders with the highest total price, indicating the delivery date.",
+        "query": "SELECT T1.o_orderkey, T2.l_shipdate FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey ORDER BY T1.o_totalprice DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List the comments describing orders from customers in the furniture segment.",
+        "query": "SELECT T1.o_comment FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T2.c_mktsegment = 'FURNITURE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please indicate the names of the customers whose order with a total price over $300000.",
+        "query": "SELECT T2.c_name FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T1.o_totalprice > 300000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Name customers in India with account balances over $5000.",
+        "query": "SELECT T1.c_name FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T1.c_acctbal > 5000 AND T2.n_name = 'INDIA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "List the phone numbers of suppliers from Japan.",
+        "query": "SELECT T1.s_phone FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey WHERE T2.n_name = 'JAPAN'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the providers in Argentina, which supplier has an account that is in debt?",
+        "query": "SELECT T1.s_name FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey WHERE T1.s_acctbal < 0 AND T2.n_name = 'ARGENTINA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many countries belong to the Algeria region?",
+        "query": "SELECT COUNT(T1.r_name) FROM region AS T1 INNER JOIN nation AS T2 ON T1.r_regionkey = T2.n_regionkey WHERE T2.n_name = 'ALGERIA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please indicate the names of customers whose orders are eligible for 10% discount with order dates between 1/1/1994 and 1/1/1995.",
+        "query": "SELECT T3.c_name FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey INNER JOIN customer AS T3 ON T1.o_custkey = T3.c_custkey WHERE T2.l_discount = 0.1 AND STRFTIME('%Y', T1.o_orderdate) BETWEEN 1994 AND 1995"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Calculate the percentage of countries that belong to the American region.",
+        "query": "SELECT CAST(SUM(IIF(T1.r_name = 'America', 1, 0)) AS REAL) * 100 / COUNT(T2.n_name) FROM region AS T1 INNER JOIN nation AS T2 ON T1.r_regionkey = T2.n_regionkey"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Calculate percentage of household segment in Indonesia.",
+        "query": "SELECT CAST(SUM(IIF(T1.c_mktsegment = 'HOUSEHOLD', 1, 0)) AS REAL) * 100 / COUNT(T1.c_mktsegment) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey WHERE T2.n_name = 'INDONESIA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please list the names of all the products under the type \"promo brushed steel\".",
+        "query": "SELECT p_name FROM part WHERE p_type = 'PROMO BRUSHED STEEL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the comment of the product \"burlywood plum powder puff mint\"?",
+        "query": "SELECT p_comment FROM part WHERE p_name = 'burlywood plum powder puff mint'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many parts have a retail price of over 1900?",
+        "query": "SELECT COUNT(p_partkey) FROM part WHERE p_retailprice > 1900"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the products under the type \"promo brushed steel\", how many of them are manufactured by Manufacturer#5?",
+        "query": "SELECT COUNT(p_partkey) FROM part WHERE p_type = 'PROMO BRUSHED STEEL' AND p_mfgr = 'Manufacturer#5'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please list all the brands that contain a part under the type \"promo brushed steel\".",
+        "query": "SELECT p_brand FROM part WHERE p_type = 'PROMO BRUSHED STEEL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the name of the product with the highest retail price?",
+        "query": "SELECT p_name FROM part WHERE p_retailprice = ( SELECT MAX(p_retailprice) FROM part )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Which part has a bigger size, \"pink powder drab lawn cyan\" or \"cornflower sky burlywood green beige\"?",
+        "query": "SELECT T.p_name FROM ( SELECT p_name, p_size FROM part WHERE p_name IN ('pink powder drab lawn cyan', 'cornflower sky burlywood green beige') ) AS T ORDER BY p_size DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many parts have a jumbo case container?",
+        "query": "SELECT COUNT(p_partkey) FROM part WHERE p_container = 'JUMBO CASE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the size of the smallest part in a jumbo case container?",
+        "query": "SELECT MIN(p_size) FROM part WHERE p_container = 'JUMBO CASE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many suppliers have their accounts in debt?",
+        "query": "SELECT COUNT(s_suppkey) FROM supplier WHERE s_acctbal < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please list the names of the top 3 suppliers with the most amount of money in their accounts.",
+        "query": "SELECT s_name FROM supplier ORDER BY s_acctbal DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please list the phone numbers of all the suppliers in Germany.",
+        "query": "SELECT T1.s_phone FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey WHERE T2.n_name = 'Germany'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please list the names of all the suppliers for the part \"hot spring dodger dim light\".",
+        "query": "SELECT T2.s_name FROM partsupp AS T1 INNER JOIN supplier AS T2 ON T1.ps_suppkey = T2.s_suppkey INNER JOIN part AS T3 ON T1.ps_partkey = T3.p_partkey WHERE T3.p_name = 'hot spring dodger dim light'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the lowest supply cost for the part \"hot spring dodger dim light\"?",
+        "query": "SELECT MIN(T1.ps_supplycost) FROM partsupp AS T1 INNER JOIN part AS T2 ON T1.ps_partkey = T2.p_partkey WHERE T2.p_name = 'hot spring dodger dim light'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the name of the supplier that provides the part \"hot spring dodger dim light\" with the lowest supply cost?",
+        "query": "SELECT T2.s_name FROM partsupp AS T1 INNER JOIN supplier AS T2 ON T1.ps_suppkey = T2.s_suppkey INNER JOIN part AS T3 ON T1.ps_partkey = T3.p_partkey WHERE T3.p_name = 'hot spring dodger dim light' ORDER BY T1.ps_supplycost LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the total quantity available by all suppliers for the part \"hot spring dodger dim light\"?",
+        "query": "SELECT SUM(T1.ps_availqty) FROM partsupp AS T1 INNER JOIN part AS T2 ON T1.ps_partkey = T2.p_partkey WHERE T2.p_name = 'hot spring dodger dim light'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Which supplier can provide the most number of \"hot spring dodger dim light\"? Please give the supplier's phone number.",
+        "query": "SELECT T3.s_phone FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey INNER JOIN supplier AS T3 ON T2.ps_suppkey = T3.s_suppkey WHERE T1.p_name = 'hot spring dodger dim light' ORDER BY T2.ps_availqty DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please list the names of all the suppliers for the part with the highest retail price.",
+        "query": "SELECT T3.s_phone FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey INNER JOIN supplier AS T3 ON T2.ps_suppkey = T3.s_suppkey WHERE T1.p_name = 'hot spring dodger dim light' ORDER BY T1.p_size DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many suppliers for the part \"hot spring dodger dim light\" are in Vietnam?",
+        "query": "SELECT COUNT(T3.s_name) FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey INNER JOIN supplier AS T3 ON T2.ps_suppkey = T3.s_suppkey INNER JOIN nation AS T4 ON T3.s_nationkey = T4.n_nationkey WHERE T1.p_name = 'hot spring dodger dim light' AND T4.n_name = 'VIETNAM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the suppliers providing parts under the type \"promo brushed steel\", how many of them are in debt?",
+        "query": "SELECT COUNT(T3.s_name) FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey INNER JOIN supplier AS T3 ON T2.ps_suppkey = T3.s_suppkey WHERE T3.s_acctbal < 0 AND T1.p_type = 'PROMO BRUSHED STEEL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please list the names of all the suppliers for parts under Brand#55.",
+        "query": "SELECT T3.s_name FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey INNER JOIN supplier AS T3 ON T2.ps_suppkey = T3.s_suppkey WHERE T1.p_brand = 'Brand#55'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among all the parts under the type \"promo brushed steel\", how many of them have a total available quantity from all suppliers of under 5000?",
+        "query": "SELECT SUM(num) FROM ( SELECT COUNT(T3.s_name) AS num FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey INNER JOIN supplier AS T3 ON T2.ps_suppkey = T3.s_suppkey WHERE T1.p_type = 'PROMO BRUSHED STEEL' GROUP BY T2.ps_partkey HAVING SUM(T2.ps_availqty) < 5000 ) T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "The part \"hot spring dodger dim light\" is ordered in how many orders?",
+        "query": "SELECT COUNT(T1.p_partkey) FROM part AS T1 INNER JOIN lineitem AS T2 ON T1.p_partkey = T2.l_partkey WHERE T1.p_name = 'hot spring dodger dim light'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the total quantity of the part \"hot spring dodger dim light\" ordered in all orders?",
+        "query": "SELECT SUM(T1.p_partkey) FROM part AS T1 INNER JOIN lineitem AS T2 ON T1.p_partkey = T2.l_partkey WHERE T1.p_name = 'hot spring dodger dim light'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please list the order keys of all the orders that have more than 2 parts with a jumbo case container.",
+        "query": "SELECT T.l_orderkey FROM ( SELECT T2.l_orderkey, COUNT(T2.l_partkey) AS num FROM part AS T1 INNER JOIN lineitem AS T2 ON T1.p_partkey = T2.l_partkey WHERE T1.p_container = 'JUMBO CASE' GROUP BY T2.l_orderkey ) AS T WHERE T.num > 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among all the suppliers in debt, how many of them are in Europe?",
+        "query": "SELECT COUNT(T1.n_nationkey) FROM nation AS T1 INNER JOIN region AS T2 ON T1.n_regionkey = T2.r_regionkey INNER JOIN supplier AS T3 ON T1.n_nationkey = T3.s_nationkey WHERE T2.r_name = 'EUROPE' AND T3.s_acctbal < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among all the suppliers providing the part \"hot spring dodger dim light\", how many of them are in Europe?",
+        "query": "SELECT COUNT(T1.r_regionkey) FROM region AS T1 INNER JOIN nation AS T2 ON T1.r_regionkey = T2.n_regionkey INNER JOIN supplier AS T3 ON T2.n_nationkey = T3.s_nationkey WHERE T1.r_name = 'EUROPE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please list the phone numbers of all the suppliers for the parts ordered in order no.1.",
+        "query": "SELECT T2.s_phone FROM lineitem AS T1 INNER JOIN supplier AS T2 ON T1.l_suppkey = T2.s_suppkey WHERE T1.l_orderkey = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the suppliers for the parts ordered in order no.4, how many of them are in debt?",
+        "query": "SELECT COUNT(T1.l_linenumber) FROM lineitem AS T1 INNER JOIN supplier AS T2 ON T1.l_suppkey = T2.s_suppkey WHERE T1.l_orderkey = 4 AND T2.s_acctbal < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the parts that are returned, how many of them are provided by a supplier in debt?",
+        "query": "SELECT COUNT(T1.l_partkey) FROM lineitem AS T1 INNER JOIN supplier AS T2 ON T1.l_suppkey = T2.s_suppkey WHERE T1.l_returnflag = 'R' AND T2.s_acctbal < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "On which date was the part \"burnished seashell gainsboro navajo chocolate\" in order no.1 shipped?",
+        "query": "SELECT T1.l_shipdate FROM lineitem AS T1 INNER JOIN part AS T2 ON T1.l_partkey = T2.p_partkey WHERE T1.l_orderkey = 1 AND T2.p_name = 'burnished seashell gainsboro navajo chocolate'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the quantity of the part \"burnished seashell gainsboro navajo chocolate\" ordered in order no.1?",
+        "query": "SELECT T1.l_quantity FROM lineitem AS T1 INNER JOIN part AS T2 ON T1.l_partkey = T2.p_partkey WHERE T1.l_orderkey = 1 AND T2.p_name = 'burnished seashell gainsboro navajo chocolate'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Which part is ordered in a bigger amount in order no.1, \"burnished seashell gainsboro navajo chocolate\" or \"salmon white grey tan navy\"?",
+        "query": "SELECT T.p_name FROM ( SELECT T2.p_name, SUM(T1.l_quantity) AS num FROM lineitem AS T1 INNER JOIN part AS T2 ON T1.l_partkey = T2.p_partkey WHERE T2.p_name IN ('salmon white grey tan navy', 'burnished seashell gainsboro navajo chocolate') GROUP BY T1.l_partkey ) AS T ORDER BY T.num DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the biggest discount among all orders for the part \"burnished seashell gainsboro navajo chocolate\"?",
+        "query": "SELECT MAX(T1.l_discount) FROM lineitem AS T1 INNER JOIN part AS T2 ON T1.l_partkey = T2.p_partkey WHERE T2.p_name = 'burnished seashell gainsboro navajo chocolate'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Please list all the modes of shipping for the part \"burnished seashell gainsboro navajo chocolate\".",
+        "query": "SELECT DISTINCT T1.l_shipmode FROM lineitem AS T1 INNER JOIN part AS T2 ON T1.l_partkey = T2.p_partkey WHERE T2.p_name = 'burnished seashell gainsboro navajo chocolate'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the average supply cost for the part \"hot spring dodger dim light\"?",
+        "query": "SELECT AVG(T1.ps_supplycost) FROM partsupp AS T1 INNER JOIN supplier AS T2 ON T1.ps_suppkey = T2.s_suppkey INNER JOIN part AS T3 ON T1.ps_partkey = T3.p_partkey WHERE T3.p_name = 'hot spring dodger dim light'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How much higher in percentage is the highest supply cost of the part \"hot spring dodger dim light\" than the lowest supply cost?",
+        "query": "SELECT CAST((MAX(T1.ps_supplycost) - MIN(T1.ps_supplycost)) AS REAL) * 100 / MIN(T1.ps_supplycost) FROM partsupp AS T1 INNER JOIN supplier AS T2 ON T1.ps_suppkey = T2.s_suppkey INNER JOIN part AS T3 ON T1.ps_partkey = T3.p_partkey WHERE T3.p_name = 'hot spring dodger dim light'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the profit for part no.98768 in order no.1?",
+        "query": "SELECT T1.l_extendedprice * (1 - T1.l_discount) - T2.ps_supplycost * T1.l_quantity FROM lineitem AS T1 INNER JOIN partsupp AS T2 ON T1.l_suppkey = T2.ps_suppkey WHERE T1.l_orderkey = 1 AND T1.l_partkey = 98768"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the discounted price of the part \"burnished seashell gainsboro navajo chocolate\" in order no.1?",
+        "query": "SELECT T1.l_extendedprice * (1 - T1.l_discount) FROM lineitem AS T1 INNER JOIN part AS T2 ON T1.l_partkey = T2.p_partkey WHERE T2.p_name = 'burnished seashell gainsboro navajo chocolate' AND T1.l_orderkey = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Which market segment does the customer with the highest amount of debt belongs to?",
+        "query": "SELECT c_mktsegment FROM customer WHERE c_acctbal = ( SELECT MIN(c_acctbal) FROM customer )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "In 1997, how many orders were shipped via mail?",
+        "query": "SELECT COUNT(l_orderkey) FROM lineitem WHERE STRFTIME('%Y', l_shipdate) = '1997' AND l_shipmode = 'MAIL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many customers are in the furniture segment?",
+        "query": "SELECT COUNT(c_custkey) FROM customer WHERE c_mktsegment = 'FURNITURE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Among the items shipped in 1994 via truck, how many items were returned?",
+        "query": "SELECT COUNT(l_orderkey) FROM lineitem WHERE STRFTIME('%Y', l_shipdate) = '1994' AND l_returnflag = 'R' AND l_shipmode = 'TRUCK'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many customers in the machinery segment are in debt?",
+        "query": "SELECT COUNT(c_custkey) FROM customer WHERE c_acctbal < 0 AND c_mktsegment = 'MACHINERY'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many urgent orders did Clerk#000000001 handle in 1997?",
+        "query": "SELECT COUNT(o_orderkey) FROM orders WHERE STRFTIME('%Y', o_orderdate) = '1997' AND o_clerk = 'Clerk#000000001' AND o_orderpriority = '1-URGENT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the name of the customer whose order was delivered the longest?",
+        "query": "SELECT T3.c_name FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey INNER JOIN customer AS T3 ON T1.o_custkey = T3.c_custkey ORDER BY (JULIANDAY(T2.l_receiptdate) - JULIANDAY(T2.l_commitdate)) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How much is the total price of all the orders shipped to customers in Argentina?",
+        "query": "SELECT SUM(T3.o_totalprice) FROM customer AS T1 INNER JOIN nation AS T2 ON T1.c_nationkey = T2.n_nationkey INNER JOIN orders AS T3 ON T1.c_custkey = T3.o_custkey WHERE T2.n_name = 'ARGENTINA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How many customers in the building segments have orders with a total price of no less than 50,000?",
+        "query": "SELECT COUNT(T2.c_name) FROM orders AS T1 INNER JOIN customer AS T2 ON T1.o_custkey = T2.c_custkey WHERE T2.c_mktsegment = 'BUILDING' AND T1.o_totalprice > 50000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Which country has the least number of suppliers?",
+        "query": "SELECT T2.n_name FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey GROUP BY T1.s_nationkey ORDER BY COUNT(T1.s_name) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How much is the part supply cost for the medium metallic grey dodger linen?",
+        "query": "SELECT T2.ps_supplycost FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey WHERE T1.p_name = 'medium metallic grey dodger linen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What are the top 2 countries with the highest number of indebted suppliers?",
+        "query": "SELECT T.n_name FROM ( SELECT T2.n_name, SUM(T1.s_acctbal) AS num FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey WHERE T1.s_acctbal < 0 GROUP BY T1.s_nationkey ) AS T ORDER BY T.num LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What are the names of the parts that have a part supply cost of at least 1,000?",
+        "query": "SELECT T1.p_name FROM part AS T1 INNER JOIN partsupp AS T2 ON T1.p_partkey = T2.ps_partkey WHERE T2.ps_supplycost > 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the name of the country of the supplier with the highest debt?",
+        "query": "SELECT T2.n_name FROM supplier AS T1 INNER JOIN nation AS T2 ON T1.s_nationkey = T2.n_nationkey ORDER BY T1.s_suppkey DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "Who is the clerk in charge of handling the item with the highest amount of extended price?",
+        "query": "SELECT T1.o_clerk FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey ORDER BY T2.l_extendedprice DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What are the total quantities of the items ordered by customer 101660 on 10/5/1995?",
+        "query": "SELECT SUM(T2.l_quantity) FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey WHERE T1.o_orderdate = '1995-10-05' AND T1.o_custkey = 101660"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What is the total amount of tax charged for the order placed by customer 88931 on 7/13/994?",
+        "query": "SELECT SUM(T2.l_extendedprice * (1 - T2.l_discount) * (1 + T2.l_tax)) FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey WHERE T1.o_custkey = 88931 AND T1.o_orderdate = '1994-07-13'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "What are the names of the parts that were ordered by customer 110942?",
+        "query": "SELECT T3.p_name FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey INNER JOIN part AS T3 ON T2.l_partkey = T3.p_partkey WHERE T1.o_custkey = 110942"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retails",
+        "question": "How much is the discounted price of every item that customer 111511 ordered in order 53159? List the names of the parts of every item.",
+        "query": "SELECT T2.l_extendedprice * (1 - T2.l_discount), T3.p_name FROM orders AS T1 INNER JOIN lineitem AS T2 ON T1.o_orderkey = T2.l_orderkey INNER JOIN part AS T3 ON T2.l_partkey = T3.p_partkey WHERE T1.o_custkey = 111511 AND T1.o_orderkey = 53159"
+    }
+]

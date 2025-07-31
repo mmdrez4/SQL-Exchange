@@ -1,0 +1,116 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "How many games are held after season 2007?",
+        "query": "SELECT count(*) FROM game WHERE season  >  2007"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "List the dates of games by the home team name in descending order.",
+        "query": "SELECT Date FROM game ORDER BY home_team DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "List the season, home team, away team of all the games.",
+        "query": "SELECT season ,  home_team ,  away_team FROM game"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "What are the maximum, minimum and average home games each stadium held?",
+        "query": "SELECT max(home_games) ,  min(home_games) ,  avg(home_games) FROM stadium"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "What is the average attendance of stadiums with capacity percentage higher than 100%?",
+        "query": "SELECT average_attendance FROM stadium WHERE capacity_percentage  >  100"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "What are the player name, number of matches, and information source for players who do not suffer from injury of 'Knee problem'?",
+        "query": "SELECT player ,  number_of_matches ,  SOURCE FROM injury_accident WHERE injury != 'Knee problem'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "What is the season of the game which causes the player 'Walter Samuel' to get injured?",
+        "query": "SELECT T1.season FROM game AS T1 JOIN injury_accident AS T2 ON T1.id  =  T2.game_id WHERE T2.player  =  'Walter Samuel'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "What are the ids, scores, and dates of the games which caused at least two injury accidents?",
+        "query": "SELECT T1.id ,  T1.score ,  T1.date FROM game AS T1 JOIN injury_accident AS T2 ON T2.game_id  =  T1.id GROUP BY T1.id HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "What are the id and name of the stadium where the most injury accidents happened?",
+        "query": "SELECT T1.id ,  T1.name FROM stadium AS T1 JOIN game AS T2 ON T1.id  =  T2.stadium_id JOIN injury_accident AS T3 ON T2.id  =  T3.game_id GROUP BY T1.id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "Find the id and name of the stadium where the largest number of injury accidents occurred.",
+        "query": "SELECT T1.id ,  T1.name FROM stadium AS T1 JOIN game AS T2 ON T1.id  =  T2.stadium_id JOIN injury_accident AS T3 ON T2.id  =  T3.game_id GROUP BY T1.id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "In which season and which stadium did any player have an injury of 'Foot injury' or 'Knee problem'?",
+        "query": "SELECT T1.season ,  T2.name FROM game AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.id JOIN injury_accident AS T3 ON T1.id  =  T3.game_id WHERE T3.injury  =  'Foot injury' OR T3.injury  =  'Knee problem'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "How many different kinds of information sources are there for injury accidents?",
+        "query": "SELECT count(DISTINCT SOURCE) FROM injury_accident"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "How many games are free of injury accidents?",
+        "query": "SELECT count(*) FROM game WHERE id NOT IN ( SELECT game_id FROM injury_accident )"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "How many distinct kinds of injuries happened after season 2010?",
+        "query": "SELECT count(DISTINCT T1.injury) FROM injury_accident AS T1 JOIN game AS T2 ON T1.game_id  =  T2.id WHERE T2.season  >  2010"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "List the name of the stadium where both the player 'Walter Samuel' and the player 'Thiago Motta' got injured.",
+        "query": "SELECT T2.name FROM game AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.id JOIN injury_accident AS T3 ON T1.id  =  T3.game_id WHERE T3.player  =  'Walter Samuel' INTERSECT SELECT T2.name FROM game AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.id JOIN injury_accident AS T3 ON T1.id  =  T3.game_id WHERE T3.player  =  'Thiago Motta'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "Show the name, average attendance, total attendance for stadiums where no accidents happened.",
+        "query": "SELECT name ,  average_attendance ,  total_attendance FROM stadium EXCEPT SELECT T2.name ,  T2.average_attendance ,  T2.total_attendance FROM game AS T1 JOIN stadium AS T2 ON T1.stadium_id  =  T2.id JOIN injury_accident AS T3 ON T1.id  =  T3.game_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "Which stadium name contains the substring \"Bank\"?",
+        "query": "SELECT name FROM stadium WHERE name LIKE \"%Bank%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "How many games has each stadium held?",
+        "query": "SELECT T1.id ,  count(*) FROM stadium AS T1 JOIN game AS T2 ON T1.id  =  T2.stadium_id GROUP BY T1.id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "game_injury",
+        "question": "For each injury accident, find the date of the game and the name of the injured player in the game, and sort the results in descending order of game season.",
+        "query": "SELECT T1.date ,  T2.player FROM game AS T1 JOIN injury_accident AS T2 ON T1.id  =  T2.game_id ORDER BY T1.season DESC"
+    }
+]

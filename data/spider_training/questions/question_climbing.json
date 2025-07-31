@@ -1,0 +1,242 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "How many climbers are there?",
+        "query": "SELECT count(*) FROM climber"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Count the number of climbers.",
+        "query": "SELECT count(*) FROM climber"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "List the names of climbers in descending order of points.",
+        "query": "SELECT Name FROM climber ORDER BY Points DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "What are the names of the climbers, ordered by points descending?",
+        "query": "SELECT Name FROM climber ORDER BY Points DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "List the names of climbers whose country is not Switzerland.",
+        "query": "SELECT Name FROM climber WHERE Country != \"Switzerland\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "What are the names of climbers who are not from the country of Switzerland?",
+        "query": "SELECT Name FROM climber WHERE Country != \"Switzerland\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "What is the maximum point for climbers whose country is United Kingdom?",
+        "query": "SELECT max(Points) FROM climber WHERE Country  =  \"United Kingdom\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Return the maximum number of points for climbers from the United Kingdom.",
+        "query": "SELECT max(Points) FROM climber WHERE Country  =  \"United Kingdom\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "How many distinct countries are the climbers from?",
+        "query": "SELECT COUNT(DISTINCT Country) FROM climber"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Count the number of different countries that climbers are from.",
+        "query": "SELECT COUNT(DISTINCT Country) FROM climber"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "What are the names of mountains in ascending alphabetical order?",
+        "query": "SELECT Name FROM mountain ORDER BY Name ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Give the names of mountains in alphabetical order.",
+        "query": "SELECT Name FROM mountain ORDER BY Name ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "What are the countries of mountains with height bigger than 5000?",
+        "query": "SELECT Country FROM mountain WHERE Height  >  5000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Return the countries of the mountains that have a height larger than 5000.",
+        "query": "SELECT Country FROM mountain WHERE Height  >  5000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "What is the name of the highest mountain?",
+        "query": "SELECT Name FROM mountain ORDER BY Height DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Return the name of the mountain with the greatest height.",
+        "query": "SELECT Name FROM mountain ORDER BY Height DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "List the distinct ranges of the mountains with the top 3 prominence.",
+        "query": "SELECT DISTINCT Range FROM mountain ORDER BY Prominence DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "What are the different ranges of the 3 mountains with the highest prominence?",
+        "query": "SELECT DISTINCT Range FROM mountain ORDER BY Prominence DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Show names of climbers and the names of mountains they climb.",
+        "query": "SELECT T1.Name ,  T2.Name FROM climber AS T1 JOIN mountain AS T2 ON T1.Mountain_ID  =  T2.Mountain_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "What are the names of climbers and the corresponding names of mountains that they climb?",
+        "query": "SELECT T1.Name ,  T2.Name FROM climber AS T1 JOIN mountain AS T2 ON T1.Mountain_ID  =  T2.Mountain_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Show the names of climbers and the heights of mountains they climb.",
+        "query": "SELECT T1.Name ,  T2.Height FROM climber AS T1 JOIN mountain AS T2 ON T1.Mountain_ID  =  T2.Mountain_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "What are the names of climbers and the corresponding heights of the mountains that they climb?",
+        "query": "SELECT T1.Name ,  T2.Height FROM climber AS T1 JOIN mountain AS T2 ON T1.Mountain_ID  =  T2.Mountain_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Show the height of the mountain climbed by the climber with the maximum points.",
+        "query": "SELECT T2.Height FROM climber AS T1 JOIN mountain AS T2 ON T1.Mountain_ID  =  T2.Mountain_ID ORDER BY T1.Points DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "What is the height of the mountain climbined by the climbing who had the most points?",
+        "query": "SELECT T2.Height FROM climber AS T1 JOIN mountain AS T2 ON T1.Mountain_ID  =  T2.Mountain_ID ORDER BY T1.Points DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Show the distinct names of mountains climbed by climbers from country \"West Germany\".",
+        "query": "SELECT DISTINCT T2.Name FROM climber AS T1 JOIN mountain AS T2 ON T1.Mountain_ID  =  T2.Mountain_ID WHERE T1.Country  =  \"West Germany\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "What are the different names of mountains ascended by climbers from the country of West Germany?",
+        "query": "SELECT DISTINCT T2.Name FROM climber AS T1 JOIN mountain AS T2 ON T1.Mountain_ID  =  T2.Mountain_ID WHERE T1.Country  =  \"West Germany\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Show the times used by climbers to climb mountains in Country Uganda.",
+        "query": "SELECT T1.Time FROM climber AS T1 JOIN mountain AS T2 ON T1.Mountain_ID  =  T2.Mountain_ID WHERE T2.Country  =  \"Uganda\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "What are the times used by climbers who climbed mountains in the country of Uganda?",
+        "query": "SELECT T1.Time FROM climber AS T1 JOIN mountain AS T2 ON T1.Mountain_ID  =  T2.Mountain_ID WHERE T2.Country  =  \"Uganda\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Please show the countries and the number of climbers from each country.",
+        "query": "SELECT Country ,  COUNT(*) FROM climber GROUP BY Country"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "How many climbers are from each country?",
+        "query": "SELECT Country ,  COUNT(*) FROM climber GROUP BY Country"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "List the countries that have more than one mountain.",
+        "query": "SELECT Country FROM mountain GROUP BY Country HAVING COUNT(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Which countries have more than one mountain?",
+        "query": "SELECT Country FROM mountain GROUP BY Country HAVING COUNT(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "List the names of mountains that do not have any climber.",
+        "query": "SELECT Name FROM mountain WHERE Mountain_ID NOT IN (SELECT Mountain_ID FROM climber)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "What are the names of countains that no climber has climbed?",
+        "query": "SELECT Name FROM mountain WHERE Mountain_ID NOT IN (SELECT Mountain_ID FROM climber)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Show the countries that have mountains with height more than 5600 stories and mountains with height less than 5200.",
+        "query": "SELECT Country FROM mountain WHERE Height  >  5600 INTERSECT SELECT Country FROM mountain WHERE Height  <  5200"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "What are the countries that have both mountains that are higher than 5600 and lower than 5200?",
+        "query": "SELECT Country FROM mountain WHERE Height  >  5600 INTERSECT SELECT Country FROM mountain WHERE Height  <  5200"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Show the range that has the most number of mountains.",
+        "query": "SELECT Range FROM mountain GROUP BY Range ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Which range contains the most mountains?",
+        "query": "SELECT Range FROM mountain GROUP BY Range ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "Show the names of mountains with height more than 5000 or prominence more than 1000.",
+        "query": "SELECT Name FROM mountain WHERE Height  >  5000 OR Prominence  >  1000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "climbing",
+        "question": "What are the names of mountains that have a height of over 5000 or a prominence of over 1000?",
+        "query": "SELECT Name FROM mountain WHERE Height  >  5000 OR Prominence  >  1000"
+    }
+]

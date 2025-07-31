@@ -1,0 +1,902 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the total number of households in Arecibo county?",
+        "query": "SELECT SUM(T1.households) FROM zip_data AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code WHERE T2.county = 'ARECIBO'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Which residential area in Arecibo county has the highest average house value? Please give its zip_code.",
+        "query": "SELECT T1.zip_code FROM zip_data AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code WHERE T2.county = 'ARECIBO' ORDER BY T1.avg_house_value DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Please list the numbers of males in all the residential areas in Arecibo county.",
+        "query": "SELECT SUM(T1.male_population) FROM zip_data AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code WHERE T2.county = 'ARECIBO'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Among all the residential areas in Delaware, how many of them implement daylight saving?",
+        "query": "SELECT COUNT(T1.zip_code) FROM zip_data AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code WHERE T2.county = 'DELAWARE' AND T1.daylight_savings = 'Yes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Among all the residential areas in Arecibo county, what is the zip_code of the one with the highest white population?",
+        "query": "SELECT T1.zip_code FROM zip_data AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code WHERE T2.county = 'ARECIBO' ORDER BY T1.white_population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "In which county is the residential area with the highest average income per household located?",
+        "query": "SELECT T2.county FROM zip_data AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code WHERE T2.county = 'ARECIBO' GROUP BY T2.county ORDER BY T1.avg_income_per_household DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Please list the names of all the counties with at least one residential area that implements daylight saving.",
+        "query": "SELECT DISTINCT T2.county FROM zip_data AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code WHERE T1.daylight_savings = 'Yes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Please list the zip_codes of all the residential areas in Huntingdon county with over 30 employees.",
+        "query": "SELECT DISTINCT T1.zip_code FROM zip_data AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code WHERE T2.county = 'HUNTINGDON' AND T1.employees > 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Please list the Asian populations of all the residential areas with the bad alias \"URB San Joaquin\".",
+        "query": "SELECT SUM(T1.asian_population) FROM zip_data AS T1 INNER JOIN avoid AS T2 ON T1.zip_code = T2.zip_code WHERE T2.bad_alias = 'URB San Joaquin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Among the residential areas with the bad alias \"Internal Revenue Service\", how many of them are in the Eastern time zone?",
+        "query": "SELECT COUNT(T1.zip_code) FROM zip_data AS T1 INNER JOIN avoid AS T2 ON T1.zip_code = T2.zip_code WHERE T2.bad_alias = 'Internal Revenue Service' AND T1.time_zone = 'Eastern'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the bad alias of the residential area with the highest average house value?",
+        "query": "SELECT T2.bad_alias FROM zip_data AS T1 INNER JOIN avoid AS T2 ON T1.zip_code = T2.zip_code WHERE T1.avg_house_value = ( SELECT MAX(avg_house_value) FROM zip_data ) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Please list the bad alias of all the residential areas with a median female age of over 32.",
+        "query": "SELECT DISTINCT T2.bad_alias FROM zip_data AS T1 INNER JOIN avoid AS T2 ON T1.zip_code = T2.zip_code WHERE T1.female_median_age > 32"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the highest gender ratio of the residential areas in Arecibo county?",
+        "query": "SELECT CAST(T1.male_population AS REAL) / T1.female_population FROM zip_data AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code WHERE T2.county = 'ARECIBO' AND T1.female_population <> 0 ORDER BY 1 DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the average median female age of all the residential areas in the Arecibo county?",
+        "query": "SELECT SUM(T1.female_median_age) / COUNT(T1.zip_code) FROM zip_data AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code WHERE T2.county = 'ARECIBO'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the area code of the city with the female median age over 32 years old?",
+        "query": "SELECT T1.area_code FROM area_code AS T1 INNER JOIN ZIP_Data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.female_median_age > 32 GROUP BY T1.area_code"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the alias of the city called Hartford?",
+        "query": "SELECT DISTINCT T2.alias FROM zip_data AS T1 INNER JOIN alias AS T2 ON T1.zip_code = T2.zip_code WHERE T1.city = 'Hartford'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "How many counties are there in Alabama?",
+        "query": "SELECT COUNT(T2.county) FROM state AS T1 INNER JOIN country AS T2 ON T1.abbreviation = T2.state WHERE T1.name = 'Alabama'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "How many post offices are there in New York?",
+        "query": "SELECT COUNT(DISTINCT T2.zip_code) FROM state AS T1 INNER JOIN zip_data AS T2 ON T1.abbreviation = T2.state WHERE T1.abbreviation = 'NY' AND T2.type = 'Post Office'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What are the precise locations of the cities with an area code of 787?",
+        "query": "SELECT T2.latitude, T2.longitude FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.area_code = '787' GROUP BY T2.latitude, T2.longitude"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "In California, how many delivery receptacles are there in the community post office that has the highest number of delivery receptacles?",
+        "query": "SELECT COUNT(*) FROM state AS T1 INNER JOIN zip_data AS T2 ON T1.abbreviation = T2.state WHERE T1.abbreviation = 'CA' AND T2.type LIKE '%Community Post Office%' AND T1.name = 'California' AND T2.state = 'CA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "In which county can you find the city with the highest number of females?",
+        "query": "SELECT T4.county FROM zip_data AS T3 INNER JOIN country AS T4 ON T3.zip_code = T4.zip_code GROUP BY T4.county ORDER BY T3.female_population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What are the names of the states whose postal point is not affiliated with any organization?",
+        "query": "SELECT DISTINCT T2.name FROM zip_data AS T1 INNER JOIN state AS T2 ON T1.state = T2.abbreviation WHERE T1.division IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the difference in the most populated city of Allentown-Bethlehem-Easton, PA-NJ in 2020 against its population in 2010?",
+        "query": "SELECT T1.population_2020 - T1.population_2010 AS result_data FROM zip_data AS T1 INNER JOIN CBSA AS T2 ON T1.CBSA = T2.CBSA WHERE T2.CBSA_name = 'Allentown-Bethlehem-Easton, PA-NJ' ORDER BY T1.population_2020 DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "List all the zip codes in the county of New Castle in Delaware.",
+        "query": "SELECT DISTINCT T2.zip_code FROM state AS T1 INNER JOIN country AS T2 ON T1.abbreviation = T2.state WHERE T2.county = 'NEW CASTLE' AND T1.name = 'Delaware'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "How many representatives are there in the state with the highest monthly benefit payments for retired workers?",
+        "query": "SELECT COUNT(T3.cognress_rep_id) FROM zip_data AS T1 INNER JOIN state AS T2 ON T1.state = T2.abbreviation INNER JOIN congress AS T3 ON T2.abbreviation = T3.abbreviation ORDER BY T1.monthly_benefits_retired_workers DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "In the state where Lisa Murkowski is the representative, how many cities have zero employees?",
+        "query": "SELECT COUNT(T3.city) FROM congress AS T1 INNER JOIN state AS T2 ON T1.abbreviation = T2.abbreviation INNER JOIN zip_data AS T3 ON T2.abbreviation = T3.state WHERE T1.first_name = 'Murkowski' AND T1.last_name = 'Lisa' AND T3.employees = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What are the top 3 states with the highest Asian population? List the full names of all the representatives in the said states.",
+        "query": "SELECT t.state, T1.first_name, T1.last_name FROM zip_data AS T INNER JOIN congress AS T1 ON t.state = T1.abbreviation GROUP BY t.state ORDER BY SUM(t.asian_population) DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Which state is Outagamie County in? Give the full name of the state.",
+        "query": "SELECT DISTINCT T2.name FROM country AS T1 INNER JOIN state AS T2 ON T1.state = T2.abbreviation WHERE T1.county = 'OUTAGAMIE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What party does the area with the zip code 91701 belong to?",
+        "query": "SELECT T1.party FROM congress AS T1 INNER JOIN state AS T2 ON T1.abbreviation = T2.abbreviation INNER JOIN zip_data AS T3 ON T2.abbreviation = T3.state WHERE T3.zip_code = 91701 GROUP BY T1.party"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "How many males are there in New Haven County's residential areas?",
+        "query": "SELECT SUM(T1.male_population) FROM zip_data AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code WHERE T2.county = 'NEW HAVEN'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Show the alias for the county at coordinate (18.090875, -66.867756).",
+        "query": "SELECT T2.alias FROM zip_data AS T1 INNER JOIN alias AS T2 ON T1.zip_code = T2.zip_code WHERE T1.latitude = 18.090875 AND T1.longitude = -66.867756"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "For the city with the most elders, what's its area code?",
+        "query": "SELECT T2.area_code FROM zip_data AS T1 INNER JOIN area_code AS T2 ON T1.zip_code = T2.zip_code GROUP BY T2.area_code ORDER BY T1.over_65 DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "For the county represented by Thompson Bennie G, how many bad aliases does it have?",
+        "query": "SELECT COUNT(DISTINCT T2.bad_alias) FROM zip_congress AS T1 INNER JOIN avoid AS T2 ON T1.zip_code = T2.zip_code INNER JOIN congress AS T3 ON T1.district = T3.cognress_rep_id WHERE T3.first_name = 'Thompson' AND T3.last_name = 'Bennie G'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Give the location coordinates of the city with area code 636.",
+        "query": "SELECT T2.latitude, T2.longitude FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.area_code = 636"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Show the zip code of the county represented by Buchanan Vernon.",
+        "query": "SELECT T2.zip_code FROM congress AS T1 INNER JOIN zip_congress AS T2 ON T1.cognress_rep_id = T2.district WHERE T1.first_name = 'Buchanan' AND T1.last_name = 'Vernon'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Which state is area code 878 in? Give the name of the state.",
+        "query": "SELECT T2.state FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.area_code = 878"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "How many counties are there in Virginia State?",
+        "query": "SELECT COUNT(T2.county) FROM state AS T1 INNER JOIN country AS T2 ON T1.abbreviation = T2.state WHERE T1.name = 'Virginia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Give the name and the position of the cbsa officer from the area with the zip code 45503.",
+        "query": "SELECT T1.CBSA_name, T2.latitude, T2.longitude FROM CBSA AS T1 INNER JOIN zip_data AS T2 ON T1.CBSA = T2.CBSA WHERE T2.zip_code = 45503 GROUP BY T1.CBSA_name, T2.latitude, T2.longitude"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Tell the name of the county which is represented by Hartzler Vicky.",
+        "query": "SELECT T1.county FROM country AS T1 INNER JOIN zip_congress AS T2 ON T1.zip_code = T2.zip_code INNER JOIN congress AS T3 ON T2.district = T3.cognress_rep_id WHERE T3.first_name = 'Hartzler' AND T3.last_name = 'Vicky' GROUP BY T1.county"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Calculate the average male median age of all the residential areas in Windham county.",
+        "query": "SELECT SUM(T2.male_median_age) / COUNT(T2.median_age) FROM country AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.county = 'WINDHAM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "For the county where DeSantis Ron is from, what is the average female median age?",
+        "query": "SELECT SUM(T4.female_median_age) / COUNT(T1.county) FROM country AS T1 INNER JOIN zip_congress AS T2 ON T1.zip_code = T2.zip_code INNER JOIN congress AS T3 ON T2.district = T3.cognress_rep_id INNER JOIN zip_data AS T4 ON T1.zip_code = T4.zip_code WHERE T3.first_name = 'DeSantis' AND T3.last_name = 'Ron'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the area code of Bishopville, SC?",
+        "query": "SELECT T1.area_code FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.city = 'Bishopville' AND T2.state = 'SC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Name the bad alias of Geneva, AL.",
+        "query": "SELECT T1.bad_alias FROM avoid AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.city = 'Geneva' AND T2.state = 'AL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Which city and state has the bad alias of Lawrenceville?",
+        "query": "SELECT T2.city, T2.state FROM avoid AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.bad_alias = 'Lawrenceville' GROUP BY T2.city, T2.state"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Name both the alias and the bad alias of zip code 38015.",
+        "query": "SELECT T1.alias, T2.bad_alias FROM alias AS T1 INNER JOIN avoid AS T2 ON T1.zip_code = T2.zip_code WHERE T1.zip_code = 38015"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the zip code of the district represented by Steven A King?",
+        "query": "SELECT T2.zip_code FROM congress AS T1 INNER JOIN zip_congress AS T2 ON T1.cognress_rep_id = T2.district WHERE T1.first_name = 'King' AND T1.last_name = 'Steven A'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the CBSA name and type in York, ME?",
+        "query": "SELECT T1.CBSA_name, T1.CBSA_type FROM CBSA AS T1 INNER JOIN zip_data AS T2 ON T1.CBSA = T2.CBSA WHERE T2.city = 'York' AND T2.state = 'ME'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "List 10 cities with a median age over 40. Include their zip codes and area codes.",
+        "query": "SELECT T2.city, T2.zip_code, T1.area_code FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.median_age >= 40 LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Name the county that has the bad alias of Druid Hills.",
+        "query": "SELECT T2.county FROM avoid AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code WHERE T1.bad_alias = 'Druid Hills'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the area code of Phillips county in Montana?",
+        "query": "SELECT DISTINCT T1.area_code FROM area_code AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code INNER JOIN state AS T3 ON T2.state = T3.abbreviation WHERE T2.county = 'PHILLIPS' AND T3.name = 'Montana'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Which district has the largest land area in Wisconsin? Write the full name of the congress representative and include the postal codes.",
+        "query": "SELECT T2.zip_code, T1.first_name, T1.last_name FROM congress AS T1 INNER JOIN zip_congress AS T2 ON T1.cognress_rep_id = T2.district WHERE T1.state = 'Wisconsin' ORDER BY T1.land_area DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "How many states are in the central time zone? Write their full names.",
+        "query": "SELECT SUM(CASE WHEN T1.time_zone = 'Central' THEN 1 ELSE 0 END) AS count FROM zip_data AS T1 INNER JOIN state AS T2 ON T2.abbreviation = T1.state WHERE T1.time_zone = 'Central'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Name 10 cities with their states that are under the Lexington-Fayette, KY office of the Canada Border Services Agency.",
+        "query": "SELECT DISTINCT T2.city, T2.state FROM CBSA AS T1 INNER JOIN zip_data AS T2 ON T1.CBSA = T2.CBSA WHERE T1.CBSA_name = 'Lexington-Fayette, KY' LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the percentage ratio between Democrats and Republicans in Indiana? List the zip codes belonging to Democrats.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.party = 'Democrat' THEN 1 ELSE NULL END) AS REAL) / COUNT(CASE WHEN T2.party = 'Republican' THEN 1 ELSE NULL END)FROM zip_congress AS T1 INNER JOIN congress AS T2 ON T2.cognress_rep_id = T1.district"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Calculate the ratio between the number of representatives in Alabama and the number of representatives in Illinois.",
+        "query": "SELECT CAST(COUNT(CASE WHEN state = 'Alabama' THEN cognress_rep_id ELSE NULL END) AS REAL) / COUNT(CASE WHEN state = 'Illinois' THEN cognress_rep_id ELSE NULL END) FROM congress"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Calculate the average of 2020's population in each zip code.",
+        "query": "SELECT CAST(SUM(population_2020) AS REAL) / COUNT(zip_code) FROM zip_data"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "State the male population for all zip code which were under the Berlin, NH CBSA.",
+        "query": "SELECT T2.male_population FROM CBSA AS T1 INNER JOIN zip_data AS T2 ON T1.CBSA = T2.CBSA WHERE T1.CBSA_name = 'Berlin, NH' GROUP BY T2.male_population"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Which CBSAs have more than 10 zip codes?",
+        "query": "SELECT T1.CBSA_name FROM CBSA AS T1 INNER JOIN zip_data AS T2 ON T1.CBSA = T2.CBSA GROUP BY T1.CBSA HAVING COUNT(T2.zip_code) > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "List all the bad alias for zip codes in Puerto Rico.",
+        "query": "SELECT T1.bad_alias FROM avoid AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.state = 'PR'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the longitude and latitude for the district represented by Grayson Alan?",
+        "query": "SELECT T1.latitude, T1.longitude FROM zip_data AS T1 INNER JOIN zip_congress AS T2 ON T1.zip_code = T2.zip_code INNER JOIN congress AS T3 ON T2.district = T3.cognress_rep_id WHERE T3.first_name = 'Grayson' AND T3.last_name = 'Alan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the state for area code of 787?",
+        "query": "SELECT DISTINCT T2.state FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.area_code = 787"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "List all representatives of districts which have more than 30 000 population in 2020.",
+        "query": "SELECT T3.first_name, T3.last_name FROM zip_data AS T1 INNER JOIN zip_congress AS T2 ON T1.zip_code = T2.zip_code INNER JOIN congress AS T3 ON T2.district = T3.cognress_rep_id WHERE T1.population_2020 > 30000 GROUP BY T3.first_name, T3.last_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Which zip code in Massachusetts that have more than 1 area code?",
+        "query": "SELECT T1.zip_code FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.state = 'MA' GROUP BY T1.zip_code HAVING COUNT(T1.area_code) > 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "State the county for Arecibo City.",
+        "query": "SELECT DISTINCT T1.county FROM country AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.city = 'Arecibo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "How many zip codes are under Barre, VT?",
+        "query": "SELECT COUNT(T2.zip_code) FROM CBSA AS T1 INNER JOIN zip_data AS T2 ON T1.CBSA = T2.CBSA WHERE T1.CBSA_name = 'Barre, VT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Among the zip code under Saint Croix county, which zip code has the biggest land area?",
+        "query": "SELECT T1.zip_code FROM country AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.county = 'SAINT CROIX' ORDER BY T2.land_area DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Calculate the difference between the 2020 population and the 2010 population for the districts represented by Griffin Tim.",
+        "query": "SELECT T1.population_2020 - T1.population_2010 FROM zip_data AS T1 INNER JOIN zip_congress AS T2 ON T1.zip_code = T2.zip_code INNER JOIN congress AS T3 ON T2.district = T3.cognress_rep_id WHERE T3.first_name = 'Griffin' AND T3.last_name = 'Tim'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Based on the population in 2020, calculate the percentage for the population of Asian in the zip code where the CBSA was Atmore, AL.",
+        "query": "SELECT CAST(T2.asian_population AS REAL) * 100 / T2.population_2010 FROM CBSA AS T1 INNER JOIN zip_data AS T2 ON T1.CBSA = T2.CBSA WHERE T1.CBSA_name = 'Atmore, AL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Among the cities with an area code 939, which city has the highest Asian population?",
+        "query": "SELECT T2.city FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.area_code = 939 ORDER BY T2.asian_population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Give the name of the country and state of the city with elevation of 1039.",
+        "query": "SELECT DISTINCT T1.name, T2.state FROM state AS T1 INNER JOIN country AS T2 ON T1.abbreviation = T2.state INNER JOIN zip_data AS T3 ON T2.zip_code = T3.zip_code WHERE T3.elevation = 1039"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Provide the alias and elevation of the city with zip code 1028.",
+        "query": "SELECT T1.alias, T2.elevation FROM alias AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.zip_code = 1028"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the area code of the city with the largest land area?",
+        "query": "SELECT T1.area_code FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.land_area = ( SELECT MAX(land_area) FROM zip_data )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Give the area code of the city with the white population ranging between 1700 to 2000.",
+        "query": "SELECT T1.area_code FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.white_population BETWEEN 1700 AND 2000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the Asian population in the city with the alias Leeds?",
+        "query": "SELECT SUM(T2.asian_population) FROM alias AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.alias = 'Leeds'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "List down the area code and country of the city named Savoy.",
+        "query": "SELECT T1.area_code, T2.county FROM area_code AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code INNER JOIN zip_data AS T3 ON T1.zip_code = T3.zip_code WHERE T3.city = 'Savoy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What are the alias of the cities with 0 population in 2010?",
+        "query": "SELECT DISTINCT T1.alias FROM alias AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.population_2010 = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Among the cities with area code 608, how many cities implement daylight savings?",
+        "query": "SELECT COUNT(T2.city) FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.area_code = 608 AND T2.daylight_savings = 'Yes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Provide the average elevation of the cities with alias Amherst.",
+        "query": "SELECT AVG(T2.elevation) FROM alias AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.alias = 'Amherst'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the country and state of the city named Dalton?",
+        "query": "SELECT T2.county FROM state AS T1 INNER JOIN country AS T2 ON T1.abbreviation = T2.state INNER JOIN zip_data AS T3 ON T2.zip_code = T3.zip_code WHERE T3.city = 'Dalton' GROUP BY T2.county"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Give at least five alias of cities with a postal point of post office.",
+        "query": "SELECT T1.alias FROM alias AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.type = 'Post Office' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the difference in the number of cities with P.O. box only and cities with Post Office among the cities with area code 787?",
+        "query": "SELECT COUNT(CASE WHEN T2.type = 'P.O. Box Only' THEN 1 ELSE NULL END) - COUNT(CASE WHEN T2.type = 'Post Office' THEN 1 ELSE NULL END) AS DIFFERENCE FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.area_code = 787"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Among the cities belonging to the country named Arroyo, calculate the percentage of increase in the population in these cities from 2010 to 2020.",
+        "query": "SELECT CAST((SUM(T2.population_2020) - SUM(T2.population_2010)) AS REAL) * 100 / SUM(T2.population_2010) FROM country AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.city = 'Arroyo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Among the postal points in Texas, provide the zip codes and cities of postal points which have total beneficiaries of above 10000.",
+        "query": "SELECT T2.zip_code, T2.city FROM state AS T1 INNER JOIN zip_data AS T2 ON T1.abbreviation = T2.state WHERE T1.name = 'Texas' AND T2.total_beneficiaries > 10000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Among the postal points in the District of Columbia, how many of them have an area with above 20000 black population?",
+        "query": "SELECT COUNT(T1.zip_code) FROM country AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.county = 'DISTRICT OF COLUMBIA' AND T2.black_population > 20000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Provide the city where zip code 19019 is located and the alias of that city.",
+        "query": "SELECT T2.city, T1.alias FROM alias AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.zip_code = 19019"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "List the bad alias of the postal point located in Camuy.",
+        "query": "SELECT T1.bad_alias FROM avoid AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.city = 'Camuy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Provide the zip code, city, and congress representative's full names of the area which has highest population in 2020.",
+        "query": "SELECT T1.zip_code, T1.city, T3.first_name, T3.last_name FROM zip_data AS T1 INNER JOIN zip_congress AS T2 ON T1.zip_code = T2.zip_code INNER JOIN congress AS T3 ON T2.district = T3.cognress_rep_id GROUP BY T2.district ORDER BY T1.population_2020 DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Among the daylight savings areas in the Midwest region, how many postal points are there in Illinois?",
+        "query": "SELECT COUNT(T2.zip_code) FROM state AS T1 INNER JOIN zip_data AS T2 ON T1.abbreviation = T2.state WHERE T1.name = 'Illinois' AND T2.daylight_savings = 'Yes' AND T2.region = 'Midwest'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Provide the countries and the zip codes in the Virgin Islands.",
+        "query": "SELECT T2.county, T2.zip_code FROM state AS T1 INNER JOIN country AS T2 ON T1.abbreviation = T2.state WHERE T1.name = 'Virgin Islands'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Provide the zip codes and the alias of Greeneville.",
+        "query": "SELECT T2.zip_code, T1.alias FROM alias AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.city = 'Greeneville'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Compare the numbers of postal points under Smith Adrian and Heck Joe.",
+        "query": "SELECT CASE WHEN COUNT(CASE WHEN T1.first_name = 'Smith' AND T1.last_name = 'Adrian' THEN T2.zip_code ELSE NULL END) > COUNT(CASE WHEN T1.first_name = 'Heck' AND T1.last_name = 'Joe' THEN T2.zip_code ELSE NULL END) THEN 'Smith Adrian>Heck Joe' ELSE 'Smith Adrian<=Heck Joe' END AS COMPARE FROM congress AS T1 INNER JOIN zip_congress AS T2 ON T1.cognress_rep_id = T2.district"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Provide the zip codes and CBSA officers of the postal point in Oxford.",
+        "query": "SELECT T2.zip_code, T1.CBSA_name FROM CBSA AS T1 INNER JOIN zip_data AS T2 ON T1.CBSA = T2.CBSA WHERE T2.city = 'Oxford'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Provide the zip codes and their affiliated organization for the postal point under Kingsport-Bristol, TN-VA.",
+        "query": "SELECT T2.zip_code, T2.organization FROM CBSA AS T1 INNER JOIN zip_data AS T2 ON T1.CBSA = T2.CBSA WHERE T1.CBSA_name = 'Kingsport-Bristol, TN-VA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Provide the zip codes and the congress representatives' names of the postal points which are affiliated with Readers Digest.",
+        "query": "SELECT T1.zip_code, T3.first_name, T3.last_name FROM zip_data AS T1 INNER JOIN zip_congress AS T2 ON T1.zip_code = T2.zip_code INNER JOIN congress AS T3 ON T2.district = T3.cognress_rep_id WHERE T1.organization = 'Readers Digest'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Among the postal points in California, calculate the percentage of them in post office types.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.type = 'Post Office' THEN T2.zip_code ELSE NULL END) AS REAL) * 100 / COUNT(T2.zip_code) FROM state AS T1 INNER JOIN zip_data AS T2 ON T1.abbreviation = T2.state WHERE T1.name = 'California'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What are the zip code for the Senate house?",
+        "query": "SELECT T2.zip_code FROM congress AS T1 INNER JOIN zip_congress AS T2 ON T1.cognress_rep_id = T2.district WHERE T1.House = 'House of Repsentatives' GROUP BY T2.zip_code"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Which city has the most bad aliases?",
+        "query": "SELECT T2.city FROM avoid AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code GROUP BY T1.bad_alias ORDER BY COUNT(T1.zip_code) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "List all the counties in Georgia.",
+        "query": "SELECT T2.county FROM state AS T1 INNER JOIN country AS T2 ON T1.abbreviation = T2.state WHERE T1.name = 'Georgia' GROUP BY T2.county"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "List all the locations of postal points with the area code \"410\".",
+        "query": "SELECT T2.latitude, T2.longitude FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.area_code = 410"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the name of the CBSA of the city with the highest average house value?",
+        "query": "SELECT DISTINCT T1.CBSA_name FROM CBSA AS T1 INNER JOIN zip_data AS T2 ON T1.CBSA = T2.CBSA WHERE T2.avg_house_value = ( SELECT MAX(avg_house_value) FROM zip_data ) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What are the bad aliases of the postal points from East Setauket?",
+        "query": "SELECT T1.bad_alias FROM avoid AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.city = 'East Setauket'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What was the population of Wilcox County in 2010?",
+        "query": "SELECT SUM(T2.population_2010) FROM country AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.county = 'WILCOX'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the code of the area with the largest Asian population?",
+        "query": "SELECT T1.zip_code FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code GROUP BY T2.asian_population ORDER BY T2.asian_population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "List all the cities with micro CBSA.",
+        "query": "SELECT T2.city FROM CBSA AS T1 INNER JOIN zip_data AS T2 ON T1.CBSA = T2.CBSA WHERE T1.CBSA_type = 'Micro'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the name of the state with the most counties?",
+        "query": "SELECT T1.name FROM state AS T1 INNER JOIN country AS T2 ON T1.abbreviation = T2.state GROUP BY T2.state ORDER BY COUNT(T2.county) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the number of households in the \"FL-10\" district?",
+        "query": "SELECT SUM(CASE WHEN T2.district = 'FL-10' THEN 1 ELSE 0 END) FROM zip_data AS T1 INNER JOIN zip_congress AS T2 ON T1.zip_code = T2.zip_code"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the average household income in the city known as \"Danzig\"?",
+        "query": "SELECT T2.avg_income_per_household FROM avoid AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.bad_alias = 'Danzig'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What are the states with an above-average female population?",
+        "query": "SELECT DISTINCT T2.state FROM state AS T1 INNER JOIN zip_data AS T2 ON T1.abbreviation = T2.state WHERE T2.female_population > ( SELECT AVG(female_population) FROM zip_data )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What percentage of households are in \"Coroyell\" out of its state?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.county = 'CORYELL' THEN T2.households ELSE 0 END) AS REAL) * 100 / SUM(T2.households) FROM country AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the name and the position of the CBSA officer in the city of Cabo Rojo?",
+        "query": "SELECT T1.CBSA_name, T1.CBSA_type FROM CBSA AS T1 INNER JOIN zip_data AS T2 ON T1.CBSA = T2.CBSA WHERE T2.city = 'Cabo Rojo' GROUP BY T1.CBSA_name, T1.CBSA_type"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Indicate the country name of the city Las Marias.",
+        "query": "SELECT T1.county FROM country AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.city = 'Las Marias'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "How many cities does congressman Pierluisi Pedro represent?",
+        "query": "SELECT COUNT(DISTINCT T1.city) FROM zip_data AS T1 INNER JOIN zip_congress AS T2 ON T1.zip_code = T2.zip_code INNER JOIN congress AS T3 ON T2.district = T3.cognress_rep_id WHERE T3.first_name = 'Pierluisi' AND T3.last_name = 'Pedro'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Provide the names of bad aliases in the city of Aguadilla.",
+        "query": "SELECT T1.bad_alias FROM avoid AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.city = 'Aguadilla'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Indicate the name of the congressman represent in Guanica.",
+        "query": "SELECT T3.first_name, T3.last_name FROM zip_data AS T1 INNER JOIN zip_congress AS T2 ON T1.zip_code = T2.zip_code INNER JOIN congress AS T3 ON T2.district = T3.cognress_rep_id WHERE T1.city = 'Guanica'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Which state has the most bad aliases?",
+        "query": "SELECT T2.state FROM avoid AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code GROUP BY T2.state ORDER BY COUNT(T1.bad_alias) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the difference in the number of bad alias between Aguada city and Aguadilla city?",
+        "query": "SELECT COUNT(CASE WHEN T2.city = 'Aguada' THEN T1.bad_alias ELSE NULL END) - COUNT(CASE WHEN T2.city = 'Aguadilla' THEN T1.bad_alias ELSE NULL END) AS DIFFERENCE FROM avoid AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Which state has greater than 50 CBSA officers of metro type?",
+        "query": "SELECT T2.state FROM CBSA AS T1 INNER JOIN zip_data AS T2 ON T1.CBSA = T2.CBSA WHERE T1.CBSA_type = 'Metro' GROUP BY T2.state HAVING COUNT(T1.CBSA_type) > 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Provide the population of Arecibo in 2020.",
+        "query": "SELECT SUM(T2.population_2020) FROM country AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.county = 'ARECIBO'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Indicate the name of the country with a population greater than 10000 in 2010.",
+        "query": "SELECT DISTINCT T1.county FROM country AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.population_2010 > 10000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Name the country with the largest number of households in a residential area.",
+        "query": "SELECT T1.county FROM country AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code GROUP BY T1.county ORDER BY T2.households DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Calculate the percentage of households in residential areas of countries over 10000.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.households > 10000 THEN T1.zip_code ELSE NULL END) AS REAL) * 100 / COUNT(T1.zip_code) FROM country AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Among the types of postal points in Saint Croix, what percentage of postal points is the post office?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.type = 'Post Office' THEN T1.zip_code ELSE NULL END) AS REAL) * 100 / COUNT(T1.zip_code) FROM country AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.county = 'SAINT CROIX'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Among the area code 787, list the country of the cities with a postal point type of unique postal office.",
+        "query": "SELECT DISTINCT T2.county FROM area_code AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code INNER JOIN zip_data AS T3 ON T1.zip_code = T3.zip_code WHERE T1.area_code = '787' AND T3.type = 'Unique Post Office'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the elevation of the city with the alias East Longmeadow?",
+        "query": "SELECT T2.elevation FROM alias AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.alias = 'East Longmeadow'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "In cities that do not implement daylight savings, what is the total number of cities?",
+        "query": "SELECT COUNT(T1.area_code) FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.daylight_savings = 'No'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Give the country and area code of the city with zip code 1116.",
+        "query": "SELECT T2.county, T1.area_code FROM area_code AS T1 INNER JOIN country AS T2 ON T1.zip_code = T2.zip_code WHERE T1.zip_code = 1116"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Among the cities with alias St Thomas, provide the type of postal point for each city.",
+        "query": "SELECT DISTINCT T2.type FROM alias AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.alias = 'St Thomas'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "List down the names of the cities belonging to Noble, Oklahoma.",
+        "query": "SELECT T3.city FROM state AS T1 INNER JOIN country AS T2 ON T1.abbreviation = T2.state INNER JOIN zip_data AS T3 ON T2.zip_code = T3.zip_code WHERE T1.name = 'Oklahoma' AND T2.county = 'NOBLE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Among the listed cities, provide the area code of the city with the largest water area.",
+        "query": "SELECT T1.area_code FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.water_area = ( SELECT MAX(water_area) FROM zip_data )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Provide the alias of the city with the highest population in year 2020.",
+        "query": "SELECT T1.alias FROM alias AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.population_2020 = ( SELECT MAX(population_2020) FROM zip_data )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the elevation of the city belonging to Hampden, Massachusetts?",
+        "query": "SELECT T3.elevation FROM state AS T1 INNER JOIN country AS T2 ON T1.abbreviation = T2.state INNER JOIN zip_data AS T3 ON T2.zip_code = T3.zip_code WHERE T1.name = 'Massachusetts' AND T2.county = 'HAMPDEN' GROUP BY T3.elevation"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "List the area code of the city with the highest Hispanic population.",
+        "query": "SELECT T1.area_code FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.hispanic_population = ( SELECT MAX(hispanic_population) FROM zip_data )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Give the alias of the cities with an Asian population of 7.",
+        "query": "SELECT T1.alias FROM alias AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.asian_population = 7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "What is the average of the white population in the cities with area code 920?",
+        "query": "SELECT AVG(T2.white_population) FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.area_code = 920"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Among the cities with alias Ponce, what is the percentage of cities with a country level FIPS code of less than 20?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.county_fips < 20 THEN T2.zip_code ELSE NULL END) AS REAL) * 100 / COUNT(T2.zip_code) FROM alias AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.alias = 'Ponce'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "List down the country of the cities with a population greater than 97% of the average population of all countries in 2020.",
+        "query": "SELECT T1.county FROM country AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.population_2020 > 0.97 * ( SELECT AVG(population_2020) FROM zip_data )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Count the number of postal points in the district represented by Kirkpatrick Ann.",
+        "query": "SELECT COUNT(T2.zip_code) FROM congress AS T1 INNER JOIN zip_congress AS T2 ON T1.cognress_rep_id = T2.district WHERE T1.first_name = 'Kirkpatrick' AND T1.last_name = 'Ann'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Provide the zip codes and coordinates of the postal points under Allentown-Bethlehem-Easton, PA-NJ.",
+        "query": "SELECT T2.zip_code, T2.latitude, T2.longitude FROM CBSA AS T1 INNER JOIN zip_data AS T2 ON T1.CBSA = T2.CBSA WHERE T1.CBSA_name = 'Allentown-Bethlehem-Easton, PA-NJ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Provide the zip codes, cities, and locations of the postal points that have Shared Reshipper as a bad alias.",
+        "query": "SELECT T1.zip_code, T2.city, T2.latitude, T2.longitude FROM avoid AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T1.bad_alias = 'Shared Reshipper'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Who are the congress representatives of the postal points in Garfield?",
+        "query": "SELECT T3.first_name, T3.last_name FROM zip_data AS T1 INNER JOIN zip_congress AS T2 ON T1.zip_code = T2.zip_code INNER JOIN congress AS T3 ON T2.district = T3.cognress_rep_id WHERE T1.city = 'Garfield'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Count the number of postal points under New York-Newark-Jersey City, NY-NJ-PA.",
+        "query": "SELECT COUNT(T2.zip_code) FROM CBSA AS T1 INNER JOIN zip_data AS T2 ON T1.CBSA = T2.CBSA WHERE T1.CBSA_name = 'New York-Newark-Jersey City, NY-NJ-PA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "How many postal points are there under the congress representative in Puerto Rico?",
+        "query": "SELECT COUNT(T2.zip_code) FROM congress AS T1 INNER JOIN zip_congress AS T2 ON T1.cognress_rep_id = T2.district WHERE T1.state = 'Puerto Rico'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Describe the number of postal points and the countries in West Virginia.",
+        "query": "SELECT COUNT(DISTINCT T2.zip_code), COUNT(DISTINCT T2.county) FROM state AS T1 INNER JOIN country AS T2 ON T1.abbreviation = T2.state WHERE T1.name = 'West Virginia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Provide the zip codes and area codes of the postal points with the community post office type at the elevation above 6000.",
+        "query": "SELECT T1.zip_code, T1.area_code FROM area_code AS T1 INNER JOIN zip_data AS T2 ON T1.zip_code = T2.zip_code WHERE T2.type = 'Community Post Office ' AND T2.elevation > 6000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "How many postal points are there under the congress representative from the House of Representatives in Mississippi?",
+        "query": "SELECT COUNT(T2.zip_code) FROM congress AS T1 INNER JOIN zip_congress AS T2 ON T1.cognress_rep_id = T2.district WHERE T1.state = 'Mississippi'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Provide the congress representatives' IDs of the postal points in East Springfield.",
+        "query": "SELECT T2.district FROM zip_data AS T1 INNER JOIN zip_congress AS T2 ON T1.zip_code = T2.zip_code WHERE T1.city = 'East Springfield'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Who is the CBSA officer of the post point in the area with the highest number of employees?",
+        "query": "SELECT T1.CBSA_name FROM CBSA AS T1 INNER JOIN zip_data AS T2 ON T1.CBSA = T2.CBSA WHERE T2.employees = ( SELECT MAX(employees) FROM zip_data )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "How many postal points with unique post office types are there in Ohio?",
+        "query": "SELECT COUNT(T2.zip_code) FROM state AS T1 INNER JOIN zip_data AS T2 ON T1.abbreviation = T2.state WHERE T1.name = 'Ohio' AND T2.type = 'Unique Post Office'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Calculate the average number of beneficiaries per postal point in Guam.",
+        "query": "SELECT CAST(SUM(T2.total_beneficiaries) AS REAL) / COUNT(T2.zip_code) FROM state AS T1 INNER JOIN zip_data AS T2 ON T1.abbreviation = T2.state WHERE T1.name = 'Guam'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "address",
+        "question": "Calculate the percentage of congress representatives from the Democrat party. Among them, how many postal points are in the Hawaii state?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.party = 'Democrat' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*), SUM(CASE WHEN T1.state = 'Hawaii' THEN 1 ELSE 0 END) FROM congress AS T1 INNER JOIN zip_congress AS T2 ON T1.cognress_rep_id = T2.district"
+    }
+]

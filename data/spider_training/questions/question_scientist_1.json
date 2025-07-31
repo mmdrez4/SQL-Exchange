@@ -1,0 +1,290 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the total number of scientists.",
+        "query": "SELECT count(*) FROM scientists"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "How many scientists are there?",
+        "query": "SELECT count(*) FROM scientists"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the total hours of all projects.",
+        "query": "SELECT sum(hours) FROM projects"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What is the total number of hours for all projects?",
+        "query": "SELECT sum(hours) FROM projects"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "How many different scientists are assigned to any project?",
+        "query": "SELECT count(DISTINCT scientist) FROM assignedto"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Count the number of different scientists assigned to any project.",
+        "query": "SELECT count(DISTINCT scientist) FROM assignedto"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the number of distinct projects.",
+        "query": "SELECT count(DISTINCT name) FROM projects"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "How many different projects are there?",
+        "query": "SELECT count(DISTINCT name) FROM projects"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the average hours of all projects.",
+        "query": "SELECT avg(hours) FROM projects"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What is the average hours across all projects?",
+        "query": "SELECT avg(hours) FROM projects"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the name of project that continues for the longest time.",
+        "query": "SELECT name FROM projects ORDER BY hours DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What is the name of the project with the most hours?",
+        "query": "SELECT name FROM projects ORDER BY hours DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "List the name of all projects that are operated longer than the average working hours of all projects.",
+        "query": "SELECT name FROM projects WHERE hours  >  (SELECT avg(hours) FROM projects)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What are the names of projects that have taken longer than the average number of hours for all projects?",
+        "query": "SELECT name FROM projects WHERE hours  >  (SELECT avg(hours) FROM projects)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the name and hours of project that has the most number of scientists.",
+        "query": "SELECT T1.name ,  T1.hours FROM projects AS T1 JOIN assignedto AS T2 ON T1.code  =  T2.project GROUP BY T2.project ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What is the name and hours for the project which has the most scientists assigned to it?",
+        "query": "SELECT T1.name ,  T1.hours FROM projects AS T1 JOIN assignedto AS T2 ON T1.code  =  T2.project GROUP BY T2.project ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the name of the project for which a scientist whose name contains \u2018Smith\u2019 is assigned to.",
+        "query": "SELECT T2.name FROM assignedto AS T1 JOIN projects AS T2 ON T1.project  =  T2.code JOIN scientists AS T3 ON T1.scientist  =  T3.SSN WHERE T3.name LIKE '%Smith%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What is the name of the project that has a scientist assigned to it whose name contains 'Smith'?",
+        "query": "SELECT T2.name FROM assignedto AS T1 JOIN projects AS T2 ON T1.project  =  T2.code JOIN scientists AS T3 ON T1.scientist  =  T3.SSN WHERE T3.name LIKE '%Smith%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the total hours of the projects that scientists named Michael Rogers or Carol Smith are assigned to.",
+        "query": "SELECT sum(T2.hours) FROM assignedto AS T1 JOIN projects AS T2 ON T1.project  =  T2.code JOIN scientists AS T3 ON T1.scientist  =  T3.SSN WHERE T3.name  =  'Michael Rogers' OR T3.name  =  'Carol Smith'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What is the sum of hours for projects that scientists with the name Michael Rogers or Carol Smith are assigned to?",
+        "query": "SELECT sum(T2.hours) FROM assignedto AS T1 JOIN projects AS T2 ON T1.project  =  T2.code JOIN scientists AS T3 ON T1.scientist  =  T3.SSN WHERE T3.name  =  'Michael Rogers' OR T3.name  =  'Carol Smith'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the name of projects that require between 100 and 300 hours of work.",
+        "query": "SELECT name FROM projects WHERE hours BETWEEN 100 AND 300"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What are the names of projects that require between 100 and 300 hours?",
+        "query": "SELECT name FROM projects WHERE hours BETWEEN 100 AND 300"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the name of the scientist who worked on both a project named 'Matter of Time' and a project named 'A Puzzling Parallax'.",
+        "query": "SELECT T3.name FROM assignedto AS T1 JOIN projects AS T2 ON T1.project  =  T2.code JOIN scientists AS T3 ON T1.scientist  =  T3.SSN WHERE T2.name  =  'Matter of Time' INTERSECT SELECT T3.name FROM assignedto AS T1 JOIN projects AS T2 ON T1.project  =  T2.code JOIN scientists AS T3 ON T1.scientist  =  T3.SSN WHERE T2.name  =  'A Puzzling Parallax'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What are the names of any scientists who worked on projects named 'Matter of Time' and 'A Puzzling Pattern'?",
+        "query": "SELECT T3.name FROM assignedto AS T1 JOIN projects AS T2 ON T1.project  =  T2.code JOIN scientists AS T3 ON T1.scientist  =  T3.SSN WHERE T2.name  =  'Matter of Time' INTERSECT SELECT T3.name FROM assignedto AS T1 JOIN projects AS T2 ON T1.project  =  T2.code JOIN scientists AS T3 ON T1.scientist  =  T3.SSN WHERE T2.name  =  'A Puzzling Parallax'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "List the names of all scientists sorted in alphabetical order.",
+        "query": "SELECT name FROM scientists ORDER BY name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What are the names of all the scientists in alphabetical order?",
+        "query": "SELECT name FROM scientists ORDER BY name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the number of scientists involved for each project name.",
+        "query": "SELECT count(*) ,  T1.name FROM projects AS T1 JOIN assignedto AS T2 ON T1.code  =  T2.project GROUP BY T1.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What are the naems of all the projects, and how many scientists were assigned to each of them?",
+        "query": "SELECT count(*) ,  T1.name FROM projects AS T1 JOIN assignedto AS T2 ON T1.code  =  T2.project GROUP BY T1.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the number of scientists involved for the projects that require more than 300 hours.",
+        "query": "SELECT count(*) ,  T1.name FROM projects AS T1 JOIN assignedto AS T2 ON T1.code  =  T2.project WHERE T1.hours  >  300 GROUP BY T1.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What are the names of projects that require more than 300 hours, and how many scientists are assigned to each?",
+        "query": "SELECT count(*) ,  T1.name FROM projects AS T1 JOIN assignedto AS T2 ON T1.code  =  T2.project WHERE T1.hours  >  300 GROUP BY T1.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the number of projects which each scientist is working on and scientist's name.",
+        "query": "SELECT count(*) ,  T1.name FROM scientists AS T1 JOIN assignedto AS T2 ON T1.ssn  =  T2.scientist GROUP BY T1.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What are the names of the scientists, and how many projects are each of them working on?",
+        "query": "SELECT count(*) ,  T1.name FROM scientists AS T1 JOIN assignedto AS T2 ON T1.ssn  =  T2.scientist GROUP BY T1.name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the SSN and name of scientists who are assigned to the project with the longest hours.",
+        "query": "SELECT T3.ssn ,  T3.name FROM assignedto AS T1 JOIN projects AS T2 ON T1.project  =  T2.code JOIN scientists AS T3 ON T1.scientist  =  T3.SSN WHERE T2.hours  =  (SELECT max(hours) FROM projects)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What are the SSN and names of scientists working on the project with the most hours?",
+        "query": "SELECT T3.ssn ,  T3.name FROM assignedto AS T1 JOIN projects AS T2 ON T1.project  =  T2.code JOIN scientists AS T3 ON T1.scientist  =  T3.SSN WHERE T2.hours  =  (SELECT max(hours) FROM projects)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the name of scientists who are assigned to some project.",
+        "query": "SELECT T2.name FROM assignedto AS T1 JOIN scientists AS T2 ON T1.scientist  =  T2.ssn"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What are the names of scientists who are assigned to any project?",
+        "query": "SELECT T2.name FROM assignedto AS T1 JOIN scientists AS T2 ON T1.scientist  =  T2.ssn"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Select the project names which are not assigned yet.",
+        "query": "SELECT Name FROM Projects WHERE Code NOT IN (SELECT Project FROM AssignedTo)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What are the names of projects that have not been assigned?",
+        "query": "SELECT Name FROM Projects WHERE Code NOT IN (SELECT Project FROM AssignedTo)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the name of scientists who are not assigned to any project.",
+        "query": "SELECT Name FROM scientists WHERE ssn NOT IN (SELECT scientist FROM AssignedTo)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What are the names of scientists who have not been assigned a project?",
+        "query": "SELECT Name FROM scientists WHERE ssn NOT IN (SELECT scientist FROM AssignedTo)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the number of scientists who are not assigned to any project.",
+        "query": "SELECT count(*) FROM scientists WHERE ssn NOT IN (SELECT scientist FROM AssignedTo)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "How many scientists do not have any projects assigned to them?",
+        "query": "SELECT count(*) FROM scientists WHERE ssn NOT IN (SELECT scientist FROM AssignedTo)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find the names of scientists who are not working on the project with the highest hours.",
+        "query": "SELECT name FROM scientists EXCEPT SELECT T3.name FROM assignedto AS T1 JOIN projects AS T2 ON T1.project  =  T2.code JOIN scientists AS T3 ON T1.scientist  =  T3.SSN WHERE T2.hours  =  (SELECT max(hours) FROM projects)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What are the names of scientists who are not working on the project with the most hours?",
+        "query": "SELECT name FROM scientists EXCEPT SELECT T3.name FROM assignedto AS T1 JOIN projects AS T2 ON T1.project  =  T2.code JOIN scientists AS T3 ON T1.scientist  =  T3.SSN WHERE T2.hours  =  (SELECT max(hours) FROM projects)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "List all the scientists' names, their projects' names, and the hours worked by that scientist on each project, in alphabetical order of project name, and then scientist name.",
+        "query": "SELECT T1.Name ,  T3.Name ,  T3.Hours FROM Scientists AS T1 JOIN AssignedTo AS T2 ON T1.SSN = T2.Scientist JOIN Projects AS T3 ON T2.Project = T3.Code ORDER BY T3.Name ,  T1.Name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What are the names of each scientist, the names of the projects that they work on, and the hours for each of those projects, listed in alphabetical order by project name, then scientist name.",
+        "query": "SELECT T1.Name ,  T3.Name ,  T3.Hours FROM Scientists AS T1 JOIN AssignedTo AS T2 ON T1.SSN = T2.Scientist JOIN Projects AS T3 ON T2.Project = T3.Code ORDER BY T3.Name ,  T1.Name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "Find name of the project that needs the least amount of time to finish and the name of scientists who worked on it.",
+        "query": "SELECT T2.name ,  T3.name FROM assignedto AS T1 JOIN projects AS T2 ON T1.project  =  T2.code JOIN scientists AS T3 ON T1.scientist  =  T3.SSN WHERE T2.hours  =  (SELECT min(hours) FROM projects)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "scientist_1",
+        "question": "What is the name of the project that requires the fewest number of hours, and the names of the scientists assigned to it?",
+        "query": "SELECT T2.name ,  T3.name FROM assignedto AS T1 JOIN projects AS T2 ON T1.project  =  T2.code JOIN scientists AS T3 ON T1.scientist  =  T3.SSN WHERE T2.hours  =  (SELECT min(hours) FROM projects)"
+    }
+]

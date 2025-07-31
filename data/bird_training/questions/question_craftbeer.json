@@ -1,0 +1,38 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "craftbeer",
+        "question": "Which distinct state makes beer that has the least amount of bitterness?",
+        "query": "SELECT DISTINCT T2.state, T1.ibu FROM beers AS T1 INNER JOIN breweries AS T2 ON T1.brewery_id = T2.id WHERE T1.ibu IS NOT NULL AND T1.ibu = ( SELECT MIN(ibu) FROM beers )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "craftbeer",
+        "question": "Where in New York can you locate the brewery that makes the bitterest beer? List both the brewery's name and the name of the city.",
+        "query": "SELECT T2.name, T2.city FROM beers AS T1 INNER JOIN breweries AS T2 ON T1.brewery_id = T2.id WHERE T2.state = 'NY' ORDER BY T1.ibu DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "craftbeer",
+        "question": "What is the average alcohol content per 12-ounce beer bottle produced by Boston Beer Company?",
+        "query": "SELECT AVG(T1.abv) FROM beers AS T1 INNER JOIN breweries AS T2 ON T1.brewery_id = T2.id WHERE T2.name = 'Boston Beer Company' AND T1.ounces = 12"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "craftbeer",
+        "question": "Of all the beer styles produced by Stevens Point Brewery, how many percent do they allot for American Adjunct Lager?",
+        "query": "SELECT CAST(SUM(IIF(T1.style = 'American Adjunct Lager', 1, 0)) AS REAL) * 100 / COUNT(T1.brewery_id) FROM beers AS T1 INNER JOIN breweries AS T2 ON T1.brewery_id = T2.id WHERE T2.name = 'Stevens Point Brewery'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "craftbeer",
+        "question": "Which city and state produces the most and least bitter beer, and what is the difference in bitterness between the two? List also the names of the beer.",
+        "query": "SELECT T1.state, T1.city, T2.name, T2.ibu FROM breweries AS T1 INNER JOIN beers AS T2 ON T1.id = T2.brewery_id GROUP BY T1.state, T1.city, T2.name, T2.ibu HAVING MAX(ibu) AND MIN(ibu) LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "craftbeer",
+        "question": "When compared to the total number of breweries in the US producing American Blonde Ale, how many in the state of Wisconsin produces American Blonde Ale? Indicate your answer in percentage (%).",
+        "query": "SELECT CAST(SUM(IIF(T2.state = 'WI', 1, 0)) AS REAL) * 100 / COUNT(T1.id) FROM beers AS T1 INNER JOIN breweries AS T2 ON T1.brewery_id = T2.id WHERE T1.style = 'American Blonde Ale'"
+    }
+]

@@ -1,0 +1,182 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "How many technicians are there?",
+        "query": "SELECT count(*) FROM technician"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "What is the number of technicians?",
+        "query": "SELECT count(*) FROM technician"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "List the names of technicians in ascending order of age.",
+        "query": "SELECT Name FROM technician ORDER BY Age ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "What are the names of the technicians by ascending order of age?",
+        "query": "SELECT Name FROM technician ORDER BY Age ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "What are the team and starting year of technicians?",
+        "query": "SELECT Team ,  Starting_Year FROM technician"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "What is the team and starting year for each technician?",
+        "query": "SELECT Team ,  Starting_Year FROM technician"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "List the name of technicians whose team is not \"NYY\".",
+        "query": "SELECT Name FROM technician WHERE Team != \"NYY\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "What is the name of the technician whose team is not 'NYY'?",
+        "query": "SELECT Name FROM technician WHERE Team != \"NYY\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "Show the name of technicians aged either 36 or 37",
+        "query": "SELECT Name FROM technician WHERE Age  =  36 OR Age  =  37"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "What are the names of the technicians aged either 36 or 37?",
+        "query": "SELECT Name FROM technician WHERE Age  =  36 OR Age  =  37"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "What is the starting year of the oldest technicians?",
+        "query": "SELECT Starting_Year FROM technician ORDER BY Age DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "What is the starting year for the oldest technician?",
+        "query": "SELECT Starting_Year FROM technician ORDER BY Age DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "Show different teams of technicians and the number of technicians in each team.",
+        "query": "SELECT Team ,  COUNT(*) FROM technician GROUP BY Team"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "For each team, how many technicians are there?",
+        "query": "SELECT Team ,  COUNT(*) FROM technician GROUP BY Team"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "Please show the team that has the most number of technicians.",
+        "query": "SELECT Team FROM technician GROUP BY Team ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "What are the teams with the most technicians?",
+        "query": "SELECT Team FROM technician GROUP BY Team ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "Show the team that have at least two technicians.",
+        "query": "SELECT Team FROM technician GROUP BY Team HAVING COUNT(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "What is the team with at least 2 technicians?",
+        "query": "SELECT Team FROM technician GROUP BY Team HAVING COUNT(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "Show names of technicians and series of machines they are assigned to repair.",
+        "query": "SELECT T3.Name ,  T2.Machine_series FROM repair_assignment AS T1 JOIN machine AS T2 ON T1.machine_id  =  T2.machine_id JOIN technician AS T3 ON T1.technician_ID  =  T3.technician_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "What are the names of technicians and the machine series that they repair?",
+        "query": "SELECT T3.Name ,  T2.Machine_series FROM repair_assignment AS T1 JOIN machine AS T2 ON T1.machine_id  =  T2.machine_id JOIN technician AS T3 ON T1.technician_ID  =  T3.technician_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "Show names of technicians in ascending order of quality rank of the machine they are assigned.",
+        "query": "SELECT T3.Name FROM repair_assignment AS T1 JOIN machine AS T2 ON T1.machine_id  =  T2.machine_id JOIN technician AS T3 ON T1.technician_ID  =  T3.technician_ID ORDER BY T2.quality_rank"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "What are the names of the technicians by ascending order of quality rank for the machine they are assigned?",
+        "query": "SELECT T3.Name FROM repair_assignment AS T1 JOIN machine AS T2 ON T1.machine_id  =  T2.machine_id JOIN technician AS T3 ON T1.technician_ID  =  T3.technician_ID ORDER BY T2.quality_rank"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "Show names of technicians who are assigned to repair machines with value point more than 70.",
+        "query": "SELECT T3.Name FROM repair_assignment AS T1 JOIN machine AS T2 ON T1.machine_id  =  T2.machine_id JOIN technician AS T3 ON T1.technician_ID  =  T3.technician_ID WHERE T2.value_points  >  70"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "What are the names of the technicians that are assigned to repair machines with more point values than 70?",
+        "query": "SELECT T3.Name FROM repair_assignment AS T1 JOIN machine AS T2 ON T1.machine_id  =  T2.machine_id JOIN technician AS T3 ON T1.technician_ID  =  T3.technician_ID WHERE T2.value_points  >  70"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "Show names of technicians and the number of machines they are assigned to repair.",
+        "query": "SELECT T2.Name ,  COUNT(*) FROM repair_assignment AS T1 JOIN technician AS T2 ON T1.technician_ID  =  T2.technician_ID GROUP BY T2.Name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "What are the names of the technicians  and how many machines are they assigned to repair?",
+        "query": "SELECT T2.Name ,  COUNT(*) FROM repair_assignment AS T1 JOIN technician AS T2 ON T1.technician_ID  =  T2.technician_ID GROUP BY T2.Name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "List the names of technicians who have not been assigned to repair machines.",
+        "query": "SELECT Name FROM technician WHERE technician_id NOT IN (SELECT technician_id FROM repair_assignment)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "What are the names of the technicians that have not been assigned to repair machines?",
+        "query": "SELECT Name FROM technician WHERE technician_id NOT IN (SELECT technician_id FROM repair_assignment)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "Show the starting years shared by technicians from team \"CLE\" and \"CWS\".",
+        "query": "SELECT Starting_Year FROM technician WHERE Team  =  \"CLE\" INTERSECT SELECT Starting_Year FROM technician WHERE Team  =  \"CWS\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "machine_repair",
+        "question": "What are the starting years shared by the technicians from the team \"CLE\" or \"CWS\"?",
+        "query": "SELECT Starting_Year FROM technician WHERE Team  =  \"CLE\" INTERSECT SELECT Starting_Year FROM technician WHERE Team  =  \"CWS\""
+    }
+]

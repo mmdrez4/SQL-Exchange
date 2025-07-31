@@ -1,0 +1,542 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "How many calendar items do we have?",
+        "query": "SELECT count(*) FROM Ref_calendar"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Count the number of all the calendar items.",
+        "query": "SELECT count(*) FROM Ref_calendar"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show all calendar dates and day Numbers.",
+        "query": "SELECT calendar_date ,  day_Number FROM Ref_calendar"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are all the calendar dates and day Numbers?",
+        "query": "SELECT calendar_date ,  day_Number FROM Ref_calendar"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the number of document types.",
+        "query": "SELECT count(*) FROM Ref_document_types"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "How many document types are there?",
+        "query": "SELECT count(*) FROM Ref_document_types"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "List all document type codes and document type names.",
+        "query": "SELECT document_type_code ,  document_type_name FROM Ref_document_types"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are all the document type codes and document type names?",
+        "query": "SELECT document_type_code ,  document_type_name FROM Ref_document_types"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What is the name and description for document type code RV?",
+        "query": "SELECT document_type_name ,  document_type_description FROM Ref_document_types WHERE document_type_code  =  \"RV\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Give me the name and description of the document type code RV.",
+        "query": "SELECT document_type_name ,  document_type_description FROM Ref_document_types WHERE document_type_code  =  \"RV\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What is the document type code for document type \"Paper\"?",
+        "query": "SELECT document_type_code FROM Ref_document_types WHERE document_type_name  =  \"Paper\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Find the code of the document type \"Paper\".",
+        "query": "SELECT document_type_code FROM Ref_document_types WHERE document_type_name  =  \"Paper\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the number of documents with document type code CV or BK.",
+        "query": "SELECT count(*) FROM All_documents WHERE document_type_code  =  \"CV\" OR document_type_code  =  \"BK\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "How many documents have document type code CV or BK?",
+        "query": "SELECT count(*) FROM All_documents WHERE document_type_code  =  \"CV\" OR document_type_code  =  \"BK\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What is the date when the document \"Marry CV\" was stored?",
+        "query": "SELECT date_stored FROM All_documents WHERE Document_name  =  \"Marry CV\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "When was the document named \"Marry CV\" stored? Give me the date.",
+        "query": "SELECT date_stored FROM All_documents WHERE Document_name  =  \"Marry CV\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What is the day Number and date of all the documents?",
+        "query": "SELECT T2.day_Number ,  T1.Date_Stored FROM All_documents AS T1 JOIN Ref_calendar AS T2 ON T1.date_stored  =  T2.calendar_date"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Return the day Number and stored date for all the documents.",
+        "query": "SELECT T2.day_Number ,  T1.Date_Stored FROM All_documents AS T1 JOIN Ref_calendar AS T2 ON T1.date_stored  =  T2.calendar_date"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What is the document type name for the document with name \"How to read a book\"?",
+        "query": "SELECT T2.document_type_name FROM All_documents AS T1 JOIN Ref_document_types AS T2 ON T1.document_type_code  =  T2.document_type_code WHERE T1.document_name  =  \"How to read a book\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Find the document type name of the document named \"How to read a book\".",
+        "query": "SELECT T2.document_type_name FROM All_documents AS T1 JOIN Ref_document_types AS T2 ON T1.document_type_code  =  T2.document_type_code WHERE T1.document_name  =  \"How to read a book\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the number of locations.",
+        "query": "SELECT count(*) FROM Ref_locations"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "How many locations are listed in the database?",
+        "query": "SELECT count(*) FROM Ref_locations"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "List all location codes and location names.",
+        "query": "SELECT location_code ,  location_name FROM Ref_locations"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are all the location codes and location names?",
+        "query": "SELECT location_code ,  location_name FROM Ref_locations"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are the name and description for location code x?",
+        "query": "SELECT location_name ,  location_description FROM Ref_locations WHERE location_code  =  \"x\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Give me the name and description of the location with code x.",
+        "query": "SELECT location_name ,  location_description FROM Ref_locations WHERE location_code  =  \"x\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What is the location code for the country \"Canada\"?",
+        "query": "SELECT location_code FROM Ref_locations WHERE location_name  =  \"Canada\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the location code of the country \"Canada\".",
+        "query": "SELECT location_code FROM Ref_locations WHERE location_name  =  \"Canada\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "How many roles are there?",
+        "query": "SELECT count(*) FROM ROLES"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Count the total number of roles listed.",
+        "query": "SELECT count(*) FROM ROLES"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "List all role codes, role names, and role descriptions.",
+        "query": "SELECT role_code ,  role_name ,  role_description FROM ROLES"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are all the role codes, role names, and role descriptions?",
+        "query": "SELECT role_code ,  role_name ,  role_description FROM ROLES"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are the name and description for role code \"MG\"?",
+        "query": "SELECT role_name ,  role_description FROM ROLES WHERE role_code  =  \"MG\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Find the name and description of the role with code \"MG\".",
+        "query": "SELECT role_name ,  role_description FROM ROLES WHERE role_code  =  \"MG\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the description for role name \"Proof Reader\".",
+        "query": "SELECT role_description FROM ROLES WHERE role_name  =  \"Proof Reader\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What is the description of the role named \"Proof Reader\"?",
+        "query": "SELECT role_description FROM ROLES WHERE role_name  =  \"Proof Reader\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "How many employees do we have?",
+        "query": "SELECT count(*) FROM Employees"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Find the number of employees we have.",
+        "query": "SELECT count(*) FROM Employees"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the name, role code, and date of birth for the employee with name 'Armani'.",
+        "query": "SELECT employee_name ,  role_code ,  date_of_birth FROM Employees WHERE employee_Name  =  'Armani'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are the name, role code, and date of birth of the employee named 'Armani'?",
+        "query": "SELECT employee_name ,  role_code ,  date_of_birth FROM Employees WHERE employee_Name  =  'Armani'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What is the id for the employee called Ebba?",
+        "query": "SELECT employee_ID FROM Employees WHERE employee_name  =  \"Ebba\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the id of the employee named Ebba.",
+        "query": "SELECT employee_ID FROM Employees WHERE employee_name  =  \"Ebba\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the names of all the employees with role \"HR\".",
+        "query": "SELECT employee_name FROM Employees WHERE role_code  =  \"HR\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Which employees have the role with code \"HR\"? Find their names.",
+        "query": "SELECT employee_name FROM Employees WHERE role_code  =  \"HR\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show all role codes and the number of employees in each role.",
+        "query": "SELECT role_code ,  count(*) FROM Employees GROUP BY role_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What is the code of each role and the number of employees in each role?",
+        "query": "SELECT role_code ,  count(*) FROM Employees GROUP BY role_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What is the role code with the largest number of employees?",
+        "query": "SELECT role_code FROM Employees GROUP BY role_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Find the code of the role that have the most employees.",
+        "query": "SELECT role_code FROM Employees GROUP BY role_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show all role codes with at least 3 employees.",
+        "query": "SELECT role_code FROM Employees GROUP BY role_code HAVING count(*)  >=  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are the roles with three or more employees? Give me the role codes.",
+        "query": "SELECT role_code FROM Employees GROUP BY role_code HAVING count(*)  >=  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the role code with the least employees.",
+        "query": "SELECT role_code FROM Employees GROUP BY role_code ORDER BY count(*) ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What is the role with the smallest number of employees? Find the role codes.",
+        "query": "SELECT role_code FROM Employees GROUP BY role_code ORDER BY count(*) ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What is the role name and role description for employee called Ebba?",
+        "query": "SELECT T2.role_name ,  T2.role_description FROM Employees AS T1 JOIN ROLES AS T2 ON T1.role_code  =  T2.role_code WHERE T1.employee_name  =  \"Ebba\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the name and description of the role played by the employee named Ebba.",
+        "query": "SELECT T2.role_name ,  T2.role_description FROM Employees AS T1 JOIN ROLES AS T2 ON T1.role_code  =  T2.role_code WHERE T1.employee_name  =  \"Ebba\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the names of employees with role name Editor.",
+        "query": "SELECT T1.employee_name FROM Employees AS T1 JOIN ROLES AS T2 ON T1.role_code  =  T2.role_code WHERE T2.role_name  =  \"Editor\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Find the names of all the employees whose the role name is \"Editor\".",
+        "query": "SELECT T1.employee_name FROM Employees AS T1 JOIN ROLES AS T2 ON T1.role_code  =  T2.role_code WHERE T2.role_name  =  \"Editor\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the employee ids for all employees with role name \"Human Resource\" or \"Manager\".",
+        "query": "SELECT T1.employee_id FROM Employees AS T1 JOIN ROLES AS T2 ON T1.role_code  =  T2.role_code WHERE T2.role_name  =  \"Human Resource\" OR T2.role_name  =  \"Manager\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are the employee ids of the employees whose role name is \"Human Resource\" or \"Manager\"?",
+        "query": "SELECT T1.employee_id FROM Employees AS T1 JOIN ROLES AS T2 ON T1.role_code  =  T2.role_code WHERE T2.role_name  =  \"Human Resource\" OR T2.role_name  =  \"Manager\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are the different location codes for documents?",
+        "query": "SELECT DISTINCT location_code FROM Document_locations"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Give me all the distinct location codes for documents.",
+        "query": "SELECT DISTINCT location_code FROM Document_locations"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the location name for document \"Robin CV\".",
+        "query": "SELECT T3.location_name FROM All_documents AS T1 JOIN Document_locations AS T2 ON T1.document_id  =  T2.document_id JOIN Ref_locations AS T3 ON T2.location_code  =  T3.location_code WHERE T1.document_name  =  \"Robin CV\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What is the location name of the document \"Robin CV\"?",
+        "query": "SELECT T3.location_name FROM All_documents AS T1 JOIN Document_locations AS T2 ON T1.document_id  =  T2.document_id JOIN Ref_locations AS T3 ON T2.location_code  =  T3.location_code WHERE T1.document_name  =  \"Robin CV\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the location code, the starting date and ending data in that location for all the documents.",
+        "query": "SELECT location_code ,  date_in_location_from ,  date_in_locaton_to FROM Document_locations"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are each document's location code, and starting date and ending data in that location?",
+        "query": "SELECT location_code ,  date_in_location_from ,  date_in_locaton_to FROM Document_locations"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What is \"the date in location from\" and \"the date in location to\" for the document with name \"Robin CV\"?",
+        "query": "SELECT T1.date_in_location_from ,  T1.date_in_locaton_to FROM Document_locations AS T1 JOIN All_documents AS T2 ON T1.document_id  =  T2.document_id WHERE T2.document_name  =  \"Robin CV\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Find the starting date and ending data in location for the document named \"Robin CV\".",
+        "query": "SELECT T1.date_in_location_from ,  T1.date_in_locaton_to FROM Document_locations AS T1 JOIN All_documents AS T2 ON T1.document_id  =  T2.document_id WHERE T2.document_name  =  \"Robin CV\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the location codes and the number of documents in each location.",
+        "query": "SELECT location_code ,  count(*) FROM Document_locations GROUP BY location_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What is the code of each location and the number of documents in that location?",
+        "query": "SELECT location_code ,  count(*) FROM Document_locations GROUP BY location_code"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What is the location code with the most documents?",
+        "query": "SELECT location_code FROM Document_locations GROUP BY location_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Find the code of the location with the largest number of documents.",
+        "query": "SELECT location_code FROM Document_locations GROUP BY location_code ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the location codes with at least 3 documents.",
+        "query": "SELECT location_code FROM Document_locations GROUP BY location_code HAVING count(*)  >=  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are the codes of the locations with at least three documents?",
+        "query": "SELECT location_code FROM Document_locations GROUP BY location_code HAVING count(*)  >=  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the location name and code with the least documents.",
+        "query": "SELECT T2.location_name ,  T1.location_code FROM Document_locations AS T1 JOIN Ref_locations AS T2 ON T1.location_code  =  T2.location_code GROUP BY T1.location_code ORDER BY count(*) ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are the name and code of the location with the smallest number of documents?",
+        "query": "SELECT T2.location_name ,  T1.location_code FROM Document_locations AS T1 JOIN Ref_locations AS T2 ON T1.location_code  =  T2.location_code GROUP BY T1.location_code ORDER BY count(*) ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are the names of the employees who authorised the destruction and the employees who destroyed the corresponding documents?",
+        "query": "SELECT T2.employee_name ,  T3.employee_name FROM Documents_to_be_destroyed AS T1 JOIN Employees AS T2 ON T1.Destruction_Authorised_by_Employee_ID = T2.employee_id JOIN Employees AS T3 ON T1.Destroyed_by_Employee_ID = T3.employee_id;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "List the names of the employees who authorized the destruction of documents and the employees who destroyed the corresponding documents.",
+        "query": "SELECT T2.employee_name ,  T3.employee_name FROM Documents_to_be_destroyed AS T1 JOIN Employees AS T2 ON T1.Destruction_Authorised_by_Employee_ID = T2.employee_id JOIN Employees AS T3 ON T1.Destroyed_by_Employee_ID = T3.employee_id;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the id of each employee and the number of document destruction authorised by that employee.",
+        "query": "SELECT Destruction_Authorised_by_Employee_ID ,  count(*) FROM Documents_to_be_destroyed GROUP BY Destruction_Authorised_by_Employee_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are the id of each employee and the number of document destruction authorised by that employee?",
+        "query": "SELECT Destruction_Authorised_by_Employee_ID ,  count(*) FROM Documents_to_be_destroyed GROUP BY Destruction_Authorised_by_Employee_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the employee ids and the number of documents destroyed by each employee.",
+        "query": "SELECT Destroyed_by_Employee_ID ,  count(*) FROM Documents_to_be_destroyed GROUP BY Destroyed_by_Employee_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are the id of each employee and the number of document destroyed by that employee?",
+        "query": "SELECT Destroyed_by_Employee_ID ,  count(*) FROM Documents_to_be_destroyed GROUP BY Destroyed_by_Employee_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the ids of the employees who don't authorize destruction for any document.",
+        "query": "SELECT employee_id FROM Employees EXCEPT SELECT Destruction_Authorised_by_Employee_ID FROM Documents_to_be_destroyed"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Which employees do not authorize destruction for any document? Give me their employee ids.",
+        "query": "SELECT employee_id FROM Employees EXCEPT SELECT Destruction_Authorised_by_Employee_ID FROM Documents_to_be_destroyed"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the ids of all employees who have authorized destruction.",
+        "query": "SELECT DISTINCT Destruction_Authorised_by_Employee_ID FROM Documents_to_be_destroyed"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are the ids of all the employees who authorize document destruction?",
+        "query": "SELECT DISTINCT Destruction_Authorised_by_Employee_ID FROM Documents_to_be_destroyed"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the ids of all employees who have destroyed a document.",
+        "query": "SELECT DISTINCT Destroyed_by_Employee_ID FROM Documents_to_be_destroyed"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "What are the ids of all the employees who have destroyed documents?",
+        "query": "SELECT DISTINCT Destroyed_by_Employee_ID FROM Documents_to_be_destroyed"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the ids of all employees who don't destroy any document.",
+        "query": "SELECT employee_id FROM Employees EXCEPT SELECT Destroyed_by_Employee_ID FROM Documents_to_be_destroyed"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Which employees do not destroy any document? Find their employee ids.",
+        "query": "SELECT employee_id FROM Employees EXCEPT SELECT Destroyed_by_Employee_ID FROM Documents_to_be_destroyed"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Show the ids of all employees who have either destroyed a document or made an authorization to do this.",
+        "query": "SELECT Destroyed_by_Employee_ID FROM Documents_to_be_destroyed UNION SELECT Destruction_Authorised_by_Employee_ID FROM Documents_to_be_destroyed"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "cre_Doc_Tracking_DB",
+        "question": "Which employees have either destroyed a document or made an authorization to do so? Return their employee ids.",
+        "query": "SELECT Destroyed_by_Employee_ID FROM Documents_to_be_destroyed UNION SELECT Destruction_Authorised_by_Employee_ID FROM Documents_to_be_destroyed"
+    }
+]

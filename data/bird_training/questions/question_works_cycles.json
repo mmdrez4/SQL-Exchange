@@ -1,0 +1,2846 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the average standard cost of product number CA-1098?",
+        "query": "SELECT AVG(T2.StandardCost) FROM Product AS T1 INNER JOIN ProductCostHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ProductNumber = 'CA-1098'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "For all the products, list the product name and its corresponding start date for the current standard cost.",
+        "query": "SELECT T1.Name, T2.StartDate FROM Product AS T1 INNER JOIN ProductCostHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T2.EndDate IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List the products whereby the standard cost is $80 more than previous standard cost in history.",
+        "query": "SELECT T1.Name FROM Product AS T1 INNER JOIN ProductCostHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.StandardCost - T2.StandardCost > 80 GROUP BY T1.Name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Name all products and total quantity for each item for shopping cart ID 14951.",
+        "query": "SELECT T1.Name, T2.Quantity FROM Product AS T1 INNER JOIN ShoppingCartItem AS T2 ON T1.ProductID = T2.ProductID WHERE T2.ShoppingCartID = 14951"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List the product name with more than 5 quantity in the shopping cart.",
+        "query": "SELECT T1.Name FROM Product AS T1 INNER JOIN ShoppingCartItem AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Quantity > 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "For all the purchase order transactions, name all the products with low quality.",
+        "query": "SELECT DISTINCT T1.Name FROM Product AS T1 INNER JOIN TransactionHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Class = 'L' AND T2.TransactionType = 'P' ORDER BY T1.Name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Provide all the transactions whereby the quantiy is more than 10,000 pieces. State the product name and the selling price.",
+        "query": "SELECT DISTINCT T1.Name, T1.ListPrice FROM Product AS T1 INNER JOIN TransactionHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Quantity > 10000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which is a high quality product but with the lowest transacted quantity?",
+        "query": "SELECT T1.Name FROM Product AS T1 INNER JOIN TransactionHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Class = 'H' ORDER BY T2.Quantity ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many transactions are there for product under the Mountain line?",
+        "query": "SELECT COUNT(T2.TransactionID) FROM Product AS T1 INNER JOIN TransactionHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ProductLine = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How much would be the total sales profit for shopping cart ID 20621 ?",
+        "query": "SELECT SUM((T1.ListPrice - T1.StandardCost) * T2.Quantity) FROM Product AS T1 INNER JOIN ShoppingCartItem AS T2 ON T1.ProductID = T2.ProductID WHERE T2.ShoppingCartID = 20621"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all product names that are high in quality. Please also state its selling price.",
+        "query": "SELECT Name, ListPrice FROM Product WHERE Class = 'H'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which product line has the most products that are salable?",
+        "query": "SELECT ProductLine FROM Product WHERE FinishedGoodsFlag = 1 GROUP BY ProductLine ORDER BY COUNT(FinishedGoodsFlag) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Provide details of review from reviewer whose name begin with letter 'J'. State the product ID, rating and comments.",
+        "query": "SELECT ProductID, Rating, Comments FROM ProductReview WHERE ReviewerName LIKE 'J%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "State the product name, product line, rating and the selling price of product with the lowest rating.",
+        "query": "SELECT T1.Name, T1.ProductLine, T2.Rating, T1.ListPrice FROM Product AS T1 INNER JOIN ProductReview AS T2 ON T1.ProductID = T2.ProductID ORDER BY T2.Rating ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Calculate the profit of each products. List all products with more than $100 in profit.",
+        "query": "SELECT DISTINCT Name FROM Product WHERE ListPrice - StandardCost > 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List down the product name, reviewer name, rating and comments for product under the road line.",
+        "query": "SELECT T1.Name, T2.ReviewerName, T2.Rating, T2.Comments FROM Product AS T1 INNER JOIN ProductReview AS T2 USING (productID) WHERE T1.ProductLine = 'R'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many people reviewed for product named HL Mountain Pedal? What is the average rating?",
+        "query": "SELECT COUNT(T1.ProductID), AVG(T2.Rating) FROM Product AS T1 INNER JOIN ProductReview AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name = 'HL Mountain Pedal'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List the purchase order whereby all received quantity were rejected? Name those product.",
+        "query": "SELECT T1.Name FROM Product AS T1 INNER JOIN PurchaseOrderDetail AS T2 ON T1.ProductID = T2.ProductID WHERE T2.RejectedQty = T2.ReceivedQty AND T2.RejectedQty <> 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among all products without any rejected quantity, which product has the highest line total? State the product name and unit price.",
+        "query": "SELECT T1.Name, T2.UnitPrice FROM Product AS T1 INNER JOIN PurchaseOrderDetail AS T2 ON T1.ProductID = T2.ProductID WHERE T2.RejectedQty = 0 ORDER BY T2.LineTotal DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all product names and its product line for all purchase order with order quantity of 5000 or more.",
+        "query": "SELECT T1.Name, T1.ProductLine FROM Product AS T1 INNER JOIN PurchaseOrderDetail AS T2 ON T1.ProductID = T2.ProductID WHERE T2.OrderQty > 4999"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the total ordered quantity for products under the 'Touring' line?",
+        "query": "SELECT SUM(T2.OrderQty) FROM Product AS T1 INNER JOIN PurchaseOrderDetail AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ProductLine = 'T'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the low quality product, which product has the highest line total? List the product name and its line total?",
+        "query": "SELECT T1.Name, T2.LineTotal FROM Product AS T1 INNER JOIN PurchaseOrderDetail AS T2 ON T1.ProductID = T2.ProductID WHERE Class = 'L' ORDER BY OrderQty * UnitPrice DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which product has the highest profit on net? State the product name.",
+        "query": "SELECT T1.Name FROM Product AS T1 INNER JOIN ProductVendor AS T2 ON T1.ProductID = T2.ProductID ORDER BY T2.LastReceiptCost - T2.StandardPrice DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all products with minimum order quantity of 100 and order them by product name in descending order.",
+        "query": "SELECT DISTINCT T1.Name FROM Product AS T1 INNER JOIN ProductVendor AS T2 ON T1.ProductID = T2.ProductID WHERE T2.MinOrderQty = 100 ORDER BY T1.Name DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List the name and calculate its profit for product with the highest rating in review.",
+        "query": "SELECT T1.Name, T1.ListPrice - T1.StandardCost FROM Product AS T1 INNER JOIN ProductReview AS T2 ON T1.ProductID = T2.ProductID ORDER BY T2.Rating DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the total profit all transactions with product ID 827?",
+        "query": "SELECT SUM((T1.ListPrice - T1.StandardCost) * T2.Quantity) FROM Product AS T1 INNER JOIN TransactionHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ProductID = 827"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which currency pair's average exchange rate for the day is the highest?",
+        "query": "SELECT FromCurrencyCode, ToCurrencyCode FROM CurrencyRate ORDER BY AverageRate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many products with the highest unit price were ordered?",
+        "query": "SELECT OrderQty FROM PurchaseOrderDetail ORDER BY UnitPrice DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Between Northwest and Southeast of the United States, which territory one recorded the highest amount of sales last year?",
+        "query": "SELECT Name FROM SalesTerritory WHERE CountryRegionCode = 'US' AND (Name = 'Northwest' OR Name = 'Southeast') ORDER BY SalesLastYear DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the full name of the Document Control Manager who is in charge of all Level 1 approved documents?",
+        "query": "SELECT T1.FirstName, T1.MiddleName, T1.LastName FROM Person AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Document AS T3 ON T3.Owner = T2.BusinessEntityID WHERE T2.JobTitle = 'Document Control Manager' AND T3.DocumentLevel = 1 AND T3.Status = 2 GROUP BY T1.FirstName, T1.MiddleName, T1.LastName"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which customer has the highest subtotal amount of sales orders whose assigned to the salesperson with the highest bonus?",
+        "query": "SELECT T1.CustomerID FROM SalesOrderHeader AS T1 INNER JOIN SalesPerson AS T2 ON T1.SalesPersonID = T2.BusinessEntityID ORDER BY T1.SubTotal DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the total price of Sales Order ID 46625 with Volume Discount 11 to 14 and Product ID 716?",
+        "query": "SELECT T2.UnitPrice * T2.OrderQty FROM SpecialOffer AS T1 INNER JOIN SalesOrderDetail AS T2 ON T1.SpecialOfferID = T2.SpecialOfferID WHERE T1.Description = 'Volume Discount 11 to 14' AND T1.SpecialOfferID = 2 AND T2.ProductID = 716 AND T2.SalesOrderID = 46625"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Of the products that has a reorder inventory point of no more than 600, how many manufactured in-house products that takes 1 day to manufacture with BOM Level 4 are there?",
+        "query": "SELECT COUNT(T1.ProductID) FROM Product AS T1 INNER JOIN BillOfMaterials AS T2 ON T1.ProductID = T2.ProductAssemblyID WHERE T1.MakeFlag = 1 AND T1.DaysToManufacture = 1 AND T2.BOMLevel = 4 AND T1.ReorderPoint <= 600"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the highest amount of bonus earned by the sales person in Canada?",
+        "query": "SELECT T2.Bonus FROM SalesTerritory AS T1 INNER JOIN SalesPerson AS T2 ON T1.TerritoryID = T2.TerritoryID WHERE T1.CountryRegionCode = 'CA' ORDER BY T2.SalesQuota DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the names of the product that has the lowest rating?",
+        "query": "SELECT T2.Name FROM ProductReview AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Rating = ( SELECT Rating FROM ProductReview ORDER BY Rating ASC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many of the workers who started working in 2009 are from the Production Department?",
+        "query": "SELECT COUNT(T2.BusinessEntityID) FROM Department AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 ON T1.DepartmentID = T2.DepartmentID WHERE T2.StartDate >= '2009-01-01' AND T2.StartDate < '2010-01-01' AND T1.Name = 'Production'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Who is the company's highest-paid single female employee? Include her full name and job title.",
+        "query": "SELECT T3.FirstName, T3.MiddleName, T3.LastName, T1.JobTitle FROM Employee AS T1 INNER JOIN EmployeePayHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Person AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID WHERE T1.MaritalStatus = 'S' AND T1.Gender = 'F' ORDER BY T2.Rate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Who is the Vice President of Engineering and when did he join the company? Indicate his/her full name.",
+        "query": "SELECT T2.FirstName, T2.MiddleName, T2.LastName, T1.HireDate FROM Employee AS T1 INNER JOIN Person AS T2 USING (BusinessEntityID) WHERE T1.JobTitle = 'Vice President of Engineering'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many active employees whose payrate is equal or below 30 per hour.",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM Employee AS T1 INNER JOIN EmployeePayHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.CurrentFlag = 1 AND T2.Rate <= 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which department has a worker who just recently started working?",
+        "query": "SELECT T1.Name FROM Department AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 ON T1.DepartmentID = T2.DepartmentID ORDER BY T2.StartDate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which store sales person was reently hired? Indicate his/her full name and gender.",
+        "query": "SELECT T2.FirstName, T2.MiddleName, T2.LastName, T1.Gender FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.PersonType = 'SP'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How frequently do the employee with the least number of sick leave hours get paid?",
+        "query": "SELECT T2.PayFrequency FROM Employee AS T1 INNER JOIN EmployeePayHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID ORDER BY T1.SickLeaveHours ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which job title has the lowest pay?",
+        "query": "SELECT T1.JobTitle FROM Employee AS T1 INNER JOIN EmployeePayHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID ORDER BY T2.Rate ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the total number of employees that worked in the Finance department?",
+        "query": "SELECT COUNT(T2.BusinessEntityID) FROM Department AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 USING (DepartmentID) WHERE T1.Name = 'Finance'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the profit of the product with the highest list price and of the product with the lowest list price other than 0? Indicates the depth the component is from its parent.",
+        "query": "SELECT ( SELECT ListPrice - StandardCost FROM Product WHERE ListPrice != 0 ORDER BY ListPrice DESC LIMIT 1 ) , ( SELECT ListPrice - StandardCost FROM Product WHERE ListPrice != 0 ORDER BY ListPrice LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the companies to which Adventure Works Cycles purchases parts or other goods, what is the profit on net obtained from the vendor who has an above average credit rating? Kindly indicate each names of the vendor and the corresponding net profits.",
+        "query": "SELECT T2.Name, T1.LastReceiptCost - T1.StandardPrice FROM ProductVendor AS T1 INNER JOIN Vendor AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.CreditRating = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many accounts have an address that is too long?",
+        "query": "SELECT COUNT(*) FROM Address WHERE AddressLine2 <> ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the postal code of the street address of the account that is latest updated?",
+        "query": "SELECT PostalCode FROM Address ORDER BY ModifiedDate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the longest assembly item duration for bicycles?",
+        "query": "SELECT JULIANDAY(EndDate) - JULIANDAY(StartDate) FROM BillOfMaterials ORDER BY JULIANDAY(EndDate) - JULIANDAY(StartDate) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many assembly items for bicycles aren't finished?",
+        "query": "SELECT COUNT(BillOfMaterialsID) FROM BillOfMaterials WHERE EndDate IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the unit measure code of the component that is of the greatest need in quantity to create the assembly.",
+        "query": "SELECT UnitMeasureCode FROM BillOfMaterials ORDER BY PerAssemblyQty DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many product maintenance documents are private?",
+        "query": "SELECT COUNT(DocumentNode) FROM Document WHERE DocumentSummary IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the titles of the documents that are pending approval.",
+        "query": "SELECT Title FROM Document WHERE Status = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the job titles of the employees who has a document that has been approved.",
+        "query": "SELECT DISTINCT T2.BusinessEntityID, T2.JobTitle FROM Document AS T1 INNER JOIN Employee AS T2 ON T1.Owner = T2.BusinessEntityID WHERE T1.Status = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the pay frequency of the oldest employee?",
+        "query": "SELECT T1.PayFrequency FROM EmployeePayHistory AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID ORDER BY T2.BirthDate ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the employees whose pay frequencies are the highest, how many of them are married?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM EmployeePayHistory AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.MaritalStatus = 'M' AND T1.PayFrequency = ( SELECT PayFrequency FROM EmployeePayHistory ORDER BY PayFrequency DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "For the employee who has been hired the latest, what is his or her pay rate?",
+        "query": "SELECT T1.Rate FROM EmployeePayHistory AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID ORDER BY T2.HireDate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the employees who have a pay rate of above 40, how many of them are male?",
+        "query": "SELECT SUM(CASE WHEN T2.Gender = 'M' THEN 1 ELSE 0 END) FROM EmployeePayHistory AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.Rate > 40"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the highest pay rate of the employees who are exempt from collective bargaining?",
+        "query": "SELECT T1.Rate FROM EmployeePayHistory AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.SalariedFlag = 1 ORDER BY T1.Rate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "For the employees who have the highest pay frequency, please list their vacation hours.",
+        "query": "SELECT T2.VacationHours FROM EmployeePayHistory AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.BusinessEntityID = ( SELECT BusinessEntityID FROM EmployeePayHistory ORDER BY Rate DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the pay rate of the employee who has the longest vacation hours?",
+        "query": "SELECT T1.Rate FROM EmployeePayHistory AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID ORDER BY T2.VacationHours DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many employees with a pay rate of over 35 have more than 10 sick leave hours?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM EmployeePayHistory AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.SickLeaveHours > 10 AND T1.Rate > 35"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the active male employees, how many of them are paid with the highest frequency?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM EmployeePayHistory AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.CurrentFlag = 1 AND T2.Gender = 'M' AND T1.PayFrequency = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many male employees have the job position of sales person?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.Gender = 'M' AND T2.PersonType = 'SP'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the job position of the oldest employee?",
+        "query": "SELECT T2.PersonType FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID ORDER BY T1.BirthDate ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the name style of the employee with the lowest pay rate?",
+        "query": "SELECT T2.NameStyle FROM EmployeePayHistory AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.Rate IS NOT NULL ORDER BY T1.Rate ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the employees who are married, how many of them have a western name style?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.NameStyle = 0 AND T1.MaritalStatus = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the employees who have more than 10 hours of sick leave, how many of them wish to receive e-mail promotions?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.EmailPromotion = 1 AND T1.SickLeaveHours > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the employees who have more than 20 vacations hours and wish to receive e-mail promotions.",
+        "query": "SELECT T1.BusinessEntityID FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.EmailPromotion = 1 AND T1.VacationHours > 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please give the additional contact information of the oldest employee with the jod position of sales person.",
+        "query": "SELECT T2.AdditionalContactInfo FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE PersonType = 'SP' ORDER BY T1.BirthDate ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the first name of the male employee who has a western name style?",
+        "query": "SELECT T2.FirstName FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.NameStyle = 0 AND T1.Gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the active employees, how many of them have a courtesy title of \"Mr\"?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.CurrentFlag = 1 AND T2.Title = 'Mr.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please give the personal information of the married employee who has the highest pay rate.",
+        "query": "SELECT T2.Demographics FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN EmployeePayHistory AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID WHERE T1.MaritalStatus = 'M' ORDER BY T3.Rate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the surname suffix of the employee who works as a store contact and has the longest sick leave hours?",
+        "query": "SELECT T2.Suffix FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.PersonType = 'SP' ORDER BY T1.SickLeaveHours DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the married employees with the highest pay frequency, how many of them have an eastern name style?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN EmployeePayHistory AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID WHERE T1.MaritalStatus = 'M' AND T2.NameStyle = 1 AND T3.Rate = ( SELECT Rate FROM EmployeePayHistory ORDER BY Rate DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many active employees do not wish to receive e-mail promotions?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.CurrentFlag = 1 AND T2.EmailPromotion = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the credit card IDs of the employees who work as store contact.",
+        "query": "SELECT T2.CreditCardID FROM Person AS T1 INNER JOIN PersonCreditCard AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.PersonType = 'SC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many vacation hours do the male employees have on average?",
+        "query": "SELECT CAST(SUM(T1.VacationHours) AS REAL) / COUNT(T1.BusinessEntityID) FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.Gender = 'M' AND T2.PersonType = 'EM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the employees who are married and wish to receive e-mail promotions, how much higher is their highest pay rate from the average pay rate?",
+        "query": "SELECT MAX(T1.Rate) - SUM(T1.Rate) / COUNT(T1.BusinessEntityID) FROM EmployeePayHistory AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Employee AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID WHERE T2.EmailPromotion = 2 AND T3.MaritalStatus = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "If a married employee has a western name style, what is the probability of him or her working as a store contact?",
+        "query": "SELECT CAST(COUNT(IIF(T1.PersonType = 'SC', T1.PersonType, NULL)) AS REAL) / COUNT(T1.PersonType) FROM Person AS T1 INNER JOIN Employee AS T2 WHERE T1.PersonType = 'SC' AND T1.NameStyle = 0 AND T2.MaritalStatus = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the active employees with over 10 hours of sick leave, what is the percentage of the employees with over 20 vacation hours?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.VacationHours > 20 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.BusinessEntityID) FROM EmployeePayHistory AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.CurrentFlag = 1 AND T2.SickLeaveHours > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Average of the last receipt cost of the products whose average lead time is 60 days.",
+        "query": "SELECT SUM(LastReceiptCost) / COUNT(ProductID) FROM ProductVendor WHERE AverageLeadTime = 60"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Average cost of purchase orders made during the first six months of 2012.",
+        "query": "SELECT CAST(SUM(ActualCost) AS REAL) / COUNT(TransactionID) FROM TransactionHistoryArchive WHERE TransactionType = 'P' AND TransactionDate >= '2012-01-01' AND TransactionDate < '2012-07-01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What percentage of male employees hired throughout the years 2009 are married?",
+        "query": "SELECT CAST(SUM(CASE WHEN MaritalStatus = 'M' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(BusinessEntityID) FROM Employee WHERE SUBSTR(HireDate, 1, 4) = '2009' AND Gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What percentage of people named Mary who wants Receive Email promotions of AdventureWorks and selected partners are store contacts?",
+        "query": "SELECT CAST(SUM(CASE WHEN EmailPromotion = 2 THEN 1 ELSE 0 END) AS REAL) * 100 / SUM(CASE WHEN PersonType = 'SC' THEN 1 ELSE 0 END) FROM Person WHERE FirstName = 'Mary'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List, by ProductID, all products whose profit, relative to the standard price, is negative.",
+        "query": "SELECT DISTINCT ProductID FROM ProductVendor WHERE StandardPrice - LastReceiptCost < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the average total due price of products with approved status?",
+        "query": "SELECT SUM(TotalDue) / COUNT(TotalDue) FROM PurchaseOrderHeader WHERE Status = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the percentage, by number of sales order units, for orders with quantities not greater than 3 and a discount of 0.2?",
+        "query": "SELECT CAST(SUM(CASE WHEN OrderQty < 3 AND UnitPriceDiscount = 0.2 THEN 1 ELSE 0 END) AS REAL) / COUNT(SalesOrderID) FROM SalesOrderDetail"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Lists all companies by BusinessEntityID that increased their current year sales by more than 60% over last year's sales and have a bonus greater than 3,000.",
+        "query": "SELECT BusinessEntityID FROM SalesPerson WHERE SalesYTD > SalesLastYear + SalesLastyear * 0.6 AND Bonus > 3000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Add the number of businesses that indicate their home address as their address and those whose address corresponds to the shipping address.",
+        "query": "SELECT SUM(CASE WHEN T2.Name = 'Home' THEN 1 ELSE 0 END) , SUM(CASE WHEN T2.Name = 'Shipping' THEN 1 ELSE 0 END) FROM BusinessEntityAddress AS T1 INNER JOIN AddressType AS T2 ON T1.AddressTypeID = T2.AddressTypeID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Identifies the ID number of the customer whose sales order for 32 units had a unit price of 35.",
+        "query": "SELECT T2.CustomerID FROM SalesOrderDetail AS T1 INNER JOIN Customer AS T2 WHERE T1.UnitPrice = 35 AND T1.OrderQty = 32"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What company has a Colonial Voice card that expired in March 2005?",
+        "query": "SELECT T2.BusinessEntityID FROM CreditCard AS T1 INNER JOIN PersonCreditCard AS T2 ON T1.CreditCardID = T2.CreditCardID WHERE T1.CardType = 'ColonialVoice' AND T1.ExpMonth = 3 AND T1.ExpYear = 2005"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the credit rating of the company whose average lead time is 16 days for a standard price of 18.9900 and whose last receipt date is August 27, 2011?",
+        "query": "SELECT T2.CreditRating FROM ProductVendor AS T1 INNER JOIN Vendor AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.StandardPrice = 18.9900 AND T1.AverageLeadTime = 16 AND STRFTIME('%Y-%m-%d', T1.LastReceiptDate) = '2011-08-27'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Calculate the number of products if we add the products of the accessories and components categories.",
+        "query": "SELECT COUNT(ProductID) FROM Product WHERE Name LIKE '%accessories %' OR Name LIKE '%components%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the job title of the newest employee in department 12?",
+        "query": "SELECT T1.JobTitle FROM Employee AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.DepartmentID = 12 ORDER BY T2.StartDate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List the first and last name of all unmarried male Production Supervisors.",
+        "query": "SELECT T2.FirstName, T2.LastName FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.MaritalStatus = 'S' AND T1.Gender = 'M' AND T1.JobTitle LIKE 'Production Supervisor%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many products are there if we add all those located in the Subassembly category?",
+        "query": "SELECT COUNT(T1.LocationID) FROM Location AS T1 INNER JOIN ProductInventory AS T2 USING (LocationID) WHERE T1.Name = 'Subassembly'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Sum the total number of products rejected for having a trim length that is too long.",
+        "query": "SELECT SUM(T2.ScrappedQty) FROM ScrapReason AS T1 INNER JOIN WorkOrder AS T2 ON T1.ScrapReasonID = T2.ScrapReasonID WHERE T1.Name = 'Trim length too long'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Calculate the total quantity of purchased product that has been prepared by employee number 257 and is in pending shipment status.",
+        "query": "SELECT SUM(T2.OrderQty) FROM PurchaseOrderHeader AS T1 INNER JOIN PurchaseOrderDetail AS T2 ON T1.PurchaseOrderID = T2.PurchaseOrderID WHERE T1.Status = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "If we discount the products that do not have any type of offer, how many different products have been sold in an amount greater than 2 units per order?",
+        "query": "SELECT COUNT(DISTINCT T1.ProductID) FROM SalesOrderDetail AS T1 INNER JOIN SpecialOfferProduct AS T2 ON T1.SpecialOfferID = T2.SpecialOfferID INNER JOIN SpecialOffer AS T3 ON T2.SpecialOfferID = T3.SpecialOfferID WHERE T1.OrderQty > 2 AND T1.UnitPriceDiscount = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What type of transaction was made with the only yellow product, size 62 and with a minimum inventory stock of 500 units?",
+        "query": "SELECT DISTINCT T2.TransactionType FROM Product AS T1 INNER JOIN TransactionHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Size = 62 AND T1.Color = 'Yellow' AND T1.SafetyStockLevel = 500"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the name of the subcategory to which the gray product with the lowest safety stock level belongs?",
+        "query": "SELECT T1.Name FROM ProductSubcategory AS T1 INNER JOIN Product AS T2 USING (ProductSubcategoryID) WHERE T2.Color = 'Grey' GROUP BY T1.Name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the product cost end date with the highest weight in grams?",
+        "query": "SELECT T2.EndDate FROM Product AS T1 INNER JOIN ProductCostHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.WeightUnitMeasureCode = 'G' ORDER BY T1.Weight DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the percentage of the total products ordered were not rejected by Drill size?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.VacationHours > 20 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.BusinessEntityID) FROM EmployeePayHistory AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.CurrentFlag = 1 AND T2.SickLeaveHours > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Calculate the average of the total ordered quantity of products purchased whose shipping method was Cargo Transport 5.",
+        "query": "SELECT CAST(SUM(IIF(T1.ShipMethodID = 5, T3.OrderQty, 0)) AS REAL) / COUNT(T3.ProductID) FROM ShipMethod AS T1 INNER JOIN PurchaseOrderHeader AS T2 ON T1.ShipMethodID = T2.ShipMethodID INNER JOIN PurchaseOrderDetail AS T3 ON T2.PurchaseOrderID = T3.PurchaseOrderID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List the name of the rates that apply to the provinces that are in the territory that obtained the greatest increase in sales with respect to the previous year.",
+        "query": "SELECT T2.Name FROM SalesTerritory AS T1 INNER JOIN StateProvince AS T2 ON T1.CountryRegionCode = T2.CountryRegionCode INNER JOIN SalesTaxRate AS T3 ON T2.StateProvinceID = T3.StateProvinceID ORDER BY (T1.SalesYTD - T1.SalesLastYear) / T1.SalesLastYear DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many employees earn their salaries on a monthly basis at an hourly rate of more than 50?",
+        "query": "SELECT COUNT(BusinessEntityID) FROM EmployeePayHistory WHERE rate * PayFrequency > 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the employee of company number 1's full name?",
+        "query": "SELECT FirstName, MiddleName, LastName FROM Person WHERE BusinessEntityID = 1 AND PersonType = 'EM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the name of the supplier number 1492?",
+        "query": "SELECT NAME FROM Vendor WHERE BusinessEntityID = 1492"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many vendors only consented to move on with the 500 to 15000 piece order in terms of quality?",
+        "query": "SELECT COUNT(*) FROM ProductVendor WHERE MinOrderQty > 500 AND MaxOrderQty < 15000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the departments that are part of the Executive General and Administration group.",
+        "query": "SELECT Name FROM Department WHERE GroupName = 'Executive General and Administration'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the family names of any employees whose middle names begin with C.",
+        "query": "SELECT LastName FROM Person WHERE PersonType = 'EM' AND MiddleName LIKE 'C%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many vendors are having their products ordered with an average delivery time of 25 days?",
+        "query": "SELECT COUNT(DISTINCT BusinessEntityID) FROM ProductVendor WHERE AverageLeadTime = 25"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list any 3 product numbers with the lowest standard cost.",
+        "query": "SELECT ProductID FROM ProductCostHistory ORDER BY StandardCost ASC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many black-colored products are there that cannot be sold?",
+        "query": "SELECT COUNT(ProductID) FROM Product WHERE FinishedGoodsFlag = 0 AND Color = 'Black'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the top three employees with the most unused sick leave along with their position titles.",
+        "query": "SELECT JobTitle FROM Employee ORDER BY SickLeaveHours DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the full address of address number 11906?",
+        "query": "SELECT AddressLine1, AddressLine2 FROM Address WHERE AddressID = 11906"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is business number 1580's net profit?",
+        "query": "SELECT LastReceiptCost - StandardPrice FROM ProductVendor WHERE BusinessEntityID = 1580"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the sales revenue for item number 740?",
+        "query": "SELECT ListPrice - StandardCost FROM Product WHERE ProductID = 740"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many customers gave a product the best possible rating? Please list their names.",
+        "query": "SELECT ReviewerName FROM ProductReview WHERE Rating = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the company that Adventure Works deal with that have poor credit rating? Please provide their business number.",
+        "query": "SELECT BusinessEntityID FROM Vendor WHERE CreditRating = ( SELECT CreditRating FROM Vendor ORDER BY CreditRating DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the forename and birthdate of person number 18?",
+        "query": "SELECT T1.FirstName, T2.BirthDate FROM Person AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.BusinessEntityID = 18"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What job is person number 322 currently holding?",
+        "query": "SELECT T1.Name FROM ContactType AS T1 INNER JOIN BusinessEntityContact AS T2 ON T1.ContactTypeID = T2.ContactTypeID WHERE T2.BusinessEntityID = 332"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list 3 businesses along with their IDs that use cellphones.",
+        "query": "SELECT T2.BusinessEntityID FROM PhoneNumberType AS T1 INNER JOIN PersonPhone AS T2 ON T1.PhoneNumberTypeID = T2.PhoneNumberTypeID WHERE T1.Name = 'Cell' LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the currency of Brazil?",
+        "query": "SELECT T1.Name FROM Currency AS T1 INNER JOIN CountryRegionCurrency AS T2 ON T1.CurrencyCode = T2.CurrencyCode INNER JOIN CountryRegion AS T3 ON T2.CountryRegionCode = T3.CountryRegionCode WHERE T3.Name = 'Brazil'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many people work in the finance department?",
+        "query": "SELECT COUNT(T2.BusinessEntityID) FROM Department AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 ON T1.DepartmentID = T2.DepartmentID WHERE T1.Name = 'Finance'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How long does it take for the business to receive the item it has purchased? Who is the vendor for business number 1496?",
+        "query": "SELECT T1.AverageLeadTime, T2.Name FROM ProductVendor AS T1 INNER JOIN Vendor AS T2 USING (businessentityid) WHERE T2.BusinessEntityID = 1496 GROUP BY T1.AverageLeadTime, T2.Name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many accounts are in Bothell as opposed to Kenmore? What is the name of the State that comprises these two cities?",
+        "query": "SELECT SUM(IIF(T1.city = 'Bothell', 1, 0)) - SUM(IIF(T1.city = 'Kenmore', 1, 0)) , stateprovincecode FROM Address AS T1 INNER JOIN StateProvince AS T2 ON T1.stateprovinceid = T2.stateprovinceid GROUP BY stateprovincecode"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which chromoly steel product model has AdventureWorks saved in English?",
+        "query": "SELECT T1.ProductModelID FROM ProductModelProductDescriptionCulture AS T1 INNER JOIN Culture AS T2 USING (cultureid) INNER JOIN ProductDescription AS T3 USING (productdescriptionid) WHERE T3.Description LIKE 'Chromoly steel%' AND T2.Name = 'English'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the total number of companies with a commission percentage of 0.018 or above, along with each company's assigned geographical location.",
+        "query": "SELECT T1.BusinessEntityID, T2.'Group' FROM SalesPerson AS T1 INNER JOIN SalesTerritory AS T2 USING (territoryid) WHERE T1.CommissionPct >= 0.018"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the various phone number types in the following order, from most to least common among businesses.",
+        "query": "SELECT T2.Name FROM PersonPhone AS T1 INNER JOIN PhoneNumberType AS T2 ON T1.PhoneNumberTypeID = T2.PhoneNumberTypeID GROUP BY T2.Name ORDER BY COUNT(T2.Name) DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which role has the most common contact among businesses?",
+        "query": "SELECT T1.Name FROM ContactType AS T1 INNER JOIN BusinessEntityContact AS T2 ON T1.ContactTypeID = T2.ContactTypeID GROUP BY T1.Name ORDER BY COUNT(T1.Name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the salespeople's email addresses?",
+        "query": "SELECT T2.EmailAddress FROM Person AS T1 INNER JOIN EmailAddress AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.PersonType = 'SP'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which position does Suchitra hold?",
+        "query": "SELECT T2.JobTitle FROM Person AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.FirstName = 'Suchitra'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many employees work for AdvertureWorks that is single?",
+        "query": "SELECT COUNT(T1.BusinessentityID) FROM Person AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.PersonType = 'EM' AND T2.MaritalStatus = 'S'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How much do the works data saved in English and Arabic differ from one another?",
+        "query": "SELECT SUM(CASE WHEN T1.Name = 'English' THEN 1 ELSE 0 END) - SUM(CASE WHEN T1.Name = 'Arabic' THEN 1 ELSE 0 END) FROM Culture AS T1 INNER JOIN ProductModelProductDescriptionCulture AS T2 ON T1.CultureID = T2.CultureID WHERE T1.Name = 'English' OR T1.Name = 'Arabic'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the location of business number 1?",
+        "query": "SELECT T1.AddressLine1 FROM Address AS T1 INNER JOIN BusinessEntityAddress AS T2 USING (AddressID) WHERE T2.BusinessEntityID = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the businesses along with their numbers that have their accounts located in Duvall.",
+        "query": "SELECT T2.BusinessEntityID FROM Address AS T1 INNER JOIN BusinessEntityAddress AS T2 ON T1.AddressID = T2.AddressID WHERE T1.City = 'Duvall'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What percentage of the AdventureWorks data is in Thai?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.Name = 'Thai' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.CultureID) FROM Culture AS T1 INNER JOIN ProductModelProductDescriptionCulture AS T2 ON T1.CultureID = T2.CultureID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What percentage of AdventureWorks employees are men?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.Gender = 'M' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.BusinessentityID) FROM Person AS T1 INNER JOIN Employee AS T2 ON T1.BusinessentityID = T2.BusinessentityID WHERE T1.PersonType = 'EM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Where is the address 15873 located, in what city and state? Does that city belong to a province where the code exists?",
+        "query": "SELECT T2.City, T1.Name, T1.IsOnlyStateProvinceFlag FROM StateProvince AS T1 INNER JOIN Address AS T2 ON T1.StateProvinceID = T2.StateProvinceID WHERE T2.AddressID = 15873"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the full address of business number 24?",
+        "query": "SELECT T1.AddressLine1, T1.AddressLine2 FROM Address AS T1 INNER JOIN BusinessEntityAddress AS T2 ON T1.AddressID = T2.AddressID WHERE T2.BusinessEntityID = 24"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which year is credit card No.9648's Expiration Year?",
+        "query": "SELECT ExpYear FROM CreditCard WHERE CreditCardID = 9648"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What's Emma H Harris's Business Entity ID number?",
+        "query": "SELECT BusinessEntityID FROM Person WHERE FirstName = 'Emma' AND LastName = 'Harris'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the location id for Debur and Polish?",
+        "query": "SELECT LocationID FROM Location WHERE Name = 'Debur and Polish'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the Department ids under the Sales and Marketing Group?",
+        "query": "SELECT DepartmentID FROM Department WHERE GroupName = 'Sales and Marketing'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which sales person made the sale of 1635823.3967 last year? Give the Business Entity ID.",
+        "query": "SELECT BusinessEntityID FROM SalesPerson WHERE SalesLastYear = '1635823.3967'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the Shift start time for Shift ID No.2?",
+        "query": "SELECT StartTime FROM Shift WHERE ShiftID = '2'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is contact Type ID No.16 represent for?",
+        "query": "SELECT Name FROM ContactType WHERE ContactTypeID = '16'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the minimum shipping charge for \"OVERSEAS - DELUXE\"?",
+        "query": "SELECT ShipBase FROM ShipMethod WHERE Name = 'OVERSEAS - DELUXE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please tell the meaning of CultureID \"fr\".",
+        "query": "SELECT Name FROM Culture WHERE CultureID = 'fr'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Give the Mauritius Rupee's currency code.",
+        "query": "SELECT CurrencyCode FROM Currency WHERE Name = 'Mauritius Rupee'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Name cellphone number's Type ID?",
+        "query": "SELECT PhoneNumberTypeID FROM PhoneNumberType WHERE Name = 'Cell'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "For the older production technician who was hired in 2008/12/7, what's his/her birthday?",
+        "query": "SELECT BirthDate FROM Employee WHERE HireDate = '2008-12-07'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the product ID No.793's model name?",
+        "query": "SELECT T1.Name FROM Product AS T1 INNER JOIN ProductModel AS T2 ON T1.ProductModelID = T2.ProductModelID WHERE T1.ProductID = 793"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the unit measure codes for product ID No.762?",
+        "query": "SELECT T2.UnitMeasureCode FROM Product AS T1 INNER JOIN UnitMeasure AS T2 ON T1.SizeUnitMeasureCode = T2.UnitMeasureCode OR T1.WeightUnitMeasureCode = T2.UnitMeasureCode WHERE T1.ProductID = 762 GROUP BY T1.ProductID, T2.UnitMeasureCode"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Where is Business Entity ID No.4 located at? Give the address down to street.",
+        "query": "SELECT AddressLine1, AddressLine2 FROM Address WHERE AddressID IN ( SELECT AddressID FROM BusinessEntityAddress WHERE BusinessEntityID = 4 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "For the on going assembly item Component ID No. 494, what's the Unit measure for it?",
+        "query": "SELECT T2.Name FROM BillOfMaterials AS T1 INNER JOIN UnitMeasure AS T2 ON T1.UnitMeasureCode = T2.UnitMeasureCode WHERE T1.ComponentID = 494 AND T1.EndDate IS NULL GROUP BY T2.name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "For the document Control Assistant who was born on 1975/12/25, how many private documents did he/she have?",
+        "query": "SELECT COUNT(T2.BusinessEntityID) FROM Document AS T1 INNER JOIN Employee AS T2 ON T1.Owner = T2.BusinessEntityID WHERE T2.JobTitle = 'Document Control Assistant' AND T2.BirthDate = '1975-12-25' AND T1.DocumentSummary IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "To the products which could make the profit as 21.9037, what were their list price after October of 2012?",
+        "query": "SELECT T1.ListPrice FROM Product AS T1 INNER JOIN ProductListPriceHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ListPrice - T1.StandardCost > 21.9037 AND STRFTIME('%Y-%m-%d', T2.StartDate) >= '2012-10-01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the size of the photo of product id No.1?",
+        "query": "SELECT T1.ThumbNailPhoto FROM ProductPhoto AS T1 INNER JOIN ProductProductPhoto AS T2 ON T1.ProductPhotoID = T2.ProductPhotoID WHERE T2.ProductID = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many letters are there in Catherine Ward's e-mail account passwords?",
+        "query": "SELECT LENGTH(T2.PasswordHash) FROM Person AS T1 INNER JOIN Password AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.FirstName = 'Catherine' AND T1.LastName = 'Ward'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What rating did Jill give for HL Mountain Pedal?",
+        "query": "SELECT T1.Rating FROM ProductReview AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ReviewerName = 'Jill' AND T2.Name = 'HL Mountain Pedal'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What's the profit for the Freewheel?",
+        "query": "SELECT T1.LastReceiptCost - T1.StandardPrice FROM ProductVendor AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Name = 'Freewheel'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Did Rachel Valdez complete her sales task?",
+        "query": "SELECT T1.Bonus FROM SalesPerson AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.FirstName = 'Rachel' AND T2.LastName = 'Valdez'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many types of tax did the sales happen in Quebec have?",
+        "query": "SELECT COUNT(DISTINCT T1.Name) FROM SalesTaxRate AS T1 INNER JOIN StateProvince AS T2 ON T1.StateProvinceID = T2.StateProvinceID WHERE T2.Name = 'Quebec'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What's Kevin A Wright's email address?",
+        "query": "SELECT T2.EmailAddress FROM Person AS T1 INNER JOIN EmailAddress AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.FirstName = 'Kevin' AND T1.MiddleName = 'A' AND T1.LastName = 'Wright'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the number of State Province of France that doesn't have a State Province Code?",
+        "query": "SELECT T1.CountryRegionCode FROM StateProvince AS T1 INNER JOIN CountryRegion AS T2 ON T1.CountryRegionCode = T2.CountryRegionCode WHERE T2.Name = 'France' AND T1.IsOnlyStateProvinceFlag = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What kind of transaction type for the \"HL Road Frame - Black, 48\" order happened in 2012/12/13?",
+        "query": "SELECT T1.TransactionType FROM TransactionHistory AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Name = 'HL Road Frame - Black, 48' AND STRFTIME('%Y-%m-%d',T1.TransactionDate) = '2013-07-31'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which type of transaction was it for the \"LL Road Handlebars\" order happened in 2012/11/3?",
+        "query": "SELECT T1.TransactionType FROM TransactionHistoryArchive AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Name = 'LL Road Handlebars' AND STRFTIME('%Y-%m-%d',T1.TransactionDate) = '2012-11-03'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How is the Credit Rating for company whose rowguid is \"33671A4E-DF2B-4879-807B-E3F930DD5C0C\"?",
+        "query": "SELECT T1.CreditRating FROM Vendor AS T1 INNER JOIN BusinessEntity AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.rowguid = '33671A4E-DF2B-4879-807B-E3F930DD5C0C'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the PreferredVendorStatus for the company which has the rowguid of \"684F328D-C185-43B9-AF9A-37ACC680D2AF\"?",
+        "query": "SELECT T1.PreferredVendorStatus FROM Vendor AS T1 INNER JOIN BusinessEntity AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.rowguid = '684F328D-C185-43B9-AF9A-37ACC680D2AF'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "For person id No.2054, is his/her vendor still active?",
+        "query": "SELECT T1.ActiveFlag FROM Vendor AS T1 INNER JOIN BusinessEntityContact AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.PersonID = 2054"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Show me the phone number of Gerald Patel's.",
+        "query": "SELECT T2.PhoneNumber FROM Person AS T1 INNER JOIN PersonPhone AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.FirstName = 'Gerald' AND T1.LastName = 'Patel'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which is Business Entity ID No.13626's phone number type?",
+        "query": "SELECT T2.Name FROM PersonPhone AS T1 INNER JOIN PhoneNumberType AS T2 USING (PhoneNumberTypeID) WHERE T1.BusinessEntityID = 13626"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What's Lynn N Tsoflias's job title?",
+        "query": "SELECT T2.JobTitle FROM Person AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.FirstName = 'Lynn' AND T1.MiddleName = 'N' AND T1.LastName = 'Tsoflias'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the number of the sub categories for bikes?",
+        "query": "SELECT COUNT(*) FROM ProductCategory AS T1 INNER JOIN ProductSubcategory AS T2 ON T1.ProductCategoryID = T2.ProductCategoryID WHERE T1.Name = 'Bikes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "For the document Control Assistant who was hired on 2009/1/22, what is the percentage of private documents did he/she have?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.DocumentSummary IS NOT NULL THEN 1 ELSE 0 END) AS REAL) / COUNT(T1.DocumentSummary) FROM Document AS T1 INNER JOIN Employee AS T2 ON T1.Owner = T2.BusinessEntityID WHERE T2.JobTitle = 'Document Control Assistant' AND T2.HireDate = '2009-01-22'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How much is HL Grip Tape's profit ratio?",
+        "query": "SELECT (T1.LastReceiptCost - T1.StandardPrice) / T1.StandardPrice FROM ProductVendor AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Name = 'HL Grip Tape'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "For all phone numbers, what percentage of the total is cell phone?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.Name = 'Cell' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.Name) FROM PersonPhone AS T1 INNER JOIN PhoneNumberType AS T2 ON T1.PhoneNumberTypeID = T2.PhoneNumberTypeID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the product assembly ID that come with unit measure code EA and BOM level of 2, at the same time have per assembly quantity of more than 10?",
+        "query": "SELECT ProductAssemblyID FROM BillOfMaterials WHERE UnitMeasureCode = 'EA' AND BOMLevel = 2 AND PerAssemblyQty > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many location IDs have actual resource hours of 2?",
+        "query": "SELECT COUNT(LocationID) FROM WorkOrderRouting WHERE ActualResourceHrs = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the stocked quantity of products manufactured from location ID 40?",
+        "query": "SELECT COUNT(*) FROM WorkOrderRouting AS T1 INNER JOIN BillOfMaterials AS T2 ON T1.LocationID = T2.ProductAssemblyID INNER JOIN WorkOrder AS T3 ON T3.WorkOrderID = T1.WorkOrderID WHERE T1.LocationID = 40"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the total per assembly quantity for unit measure code EA, IN and OZ respectively? What are the name of these 3 code?",
+        "query": "SELECT SUM(T1.PerAssemblyQty), T2.Name FROM BillOfMaterials AS T1 INNER JOIN UnitMeasure AS T2 ON T1.UnitMeasureCode = T2.UnitMeasureCode WHERE T1.UnitMeasureCode IN ('EA', 'IN', 'OZ') GROUP BY T2.Name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which product ID do not have any work order ID?",
+        "query": "SELECT ProductID FROM Product WHERE ProductID NOT IN ( SELECT T1.ProductID FROM Product AS T1 INNER JOIN WorkOrder AS T2 ON T1.ProductID = T2.ProductID )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the name of product purchased with transaction type P?",
+        "query": "SELECT ProductID FROM Product WHERE ProductID IN ( SELECT ProductID FROM TransactionHistory WHERE TransactionType = 'P' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "State the full name of accountants in the company.",
+        "query": "SELECT T2.FirstName, T2.MiddleName, T2.LastName FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.JobTitle = 'Accountant'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the job position currently occupied by Ken J S\u00c3\u00a1nchez?",
+        "query": "SELECT T1.JobTitle FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.FirstName = 'Ken' AND T2.MiddleName = 'J' AND T2.LastName = 'S\u00e1nchez'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many male employees do not wish to receive e-mail promotion?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.EmailPromotion = 0 AND T1.Gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Who is the top sales person who achived highest percentage of projected sales quota in 2013?",
+        "query": "SELECT BusinessEntityID FROM SalesPerson WHERE BusinessEntityID IN ( SELECT BusinessEntityID FROM SalesPersonQuotaHistory WHERE STRFTIME('%Y', QuotaDate) = '2013' ) ORDER BY CAST(SalesLastYear AS REAL) / SalesQuota DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many of the non-sales employees are married?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.PersonType = 'EM' AND T1.MaritalStatus = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the Production Technicians who are single, how many of them are vendor contact?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.JobTitle LIKE 'Production Technician%' AND T1.MaritalStatus = 'S' AND T2.PersonType = 'VC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the total sick leave hours of employees who do not wish to receive any e-mail promotion?",
+        "query": "SELECT SUM(T1.SickLeaveHours) FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.EmailPromotion = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the sales people, who are hired prior to 2010?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.PersonType = 'SP' AND SUBSTR(T1.HireDate, 0, 4) < 2010"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which sales person achieved the highest sales YTD? What is the projected yearly sales quota in 2011 for this person?",
+        "query": "SELECT T1.BusinessEntityID, SUM(T1.SalesQuota) FROM SalesPerson AS T1 INNER JOIN SalesPersonQuotaHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE STRFTIME('%Y', T2.QuotaDate) = '2011' GROUP BY T1.BusinessEntityID ORDER BY SUM(T1.SalesYTD) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many people with the name Alex are single and occupying organization level of 1?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.FirstName = 'Alex' AND T1.MaritalStatus = 'S' AND T1.OrganizationLevel = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the average vacation hours taken by Sales person?",
+        "query": "SELECT CAST(SUM(T1.VacationHours) AS REAL) / COUNT(T1.BusinessEntityID) FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.PersonType = 'SP'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "State the last name and job title of owner for document \"Crank Arm and Tire Maintenance\".",
+        "query": "SELECT T1.LastName, T3.JobTitle FROM Person AS T1 INNER JOIN Document AS T2 ON T1.BusinessEntityID = T2.Owner INNER JOIN Employee AS T3 ON T1.BusinessEntityID = T3.BusinessEntityID WHERE T2.Title = 'Crank Arm and Tire Maintenance'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many employees do not have any suffix and what are their organization level?",
+        "query": "SELECT COUNT(T3.BusinessEntityID) FROM ( SELECT T1.BusinessEntityID FROM Employee AS T1 INNER JOIN Person AS T2 USING (BusinessEntityID) WHERE T2.Suffix IS NULL GROUP BY T1.BusinessEntityID ) AS T3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the sales people who achieved projected sales quota 2013, is there any person from territory ID 1? If yes, state the business entity ID.",
+        "query": "SELECT DISTINCT T1.BusinessEntityID FROM SalesPerson AS T1 INNER JOIN SalesPersonQuotaHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.TerritoryID = 1 AND STRFTIME('%Y', QuotaDate) = '2013'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Who are the employees that submitted resume to Human Resource Department and got hired? State the last name.",
+        "query": "SELECT T3.LastName FROM Employee AS T1 INNER JOIN JobCandidate AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Person AS T3 ON T1.BusinessEntityID = T3.BusinessEntityID WHERE T1.BusinessEntityID IN (212, 274)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List down the email address of female single employees.",
+        "query": "SELECT T3.EmailAddress FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN EmailAddress AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID WHERE T1.Gender = 'F' AND T1.MaritalStatus = 'S'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the color of products that were reviewed?",
+        "query": "SELECT T1.Color FROM Product AS T1 INNER JOIN ProductReview AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ProductID = 709 OR 937 OR 798"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the projected sales quota amount in 2013 and sales YTD amount for sales person with business entity ID 275?",
+        "query": "SELECT SUM(T1.SalesQuota) FROM SalesPerson AS T1 INNER JOIN SalesPersonQuotaHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.BusinessEntityID = 275 AND STRFTIME('%Y', QuotaDate) = '2013'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Provide the business entity ID who did not achieved projected yearly sales quota in 2013.",
+        "query": "SELECT DISTINCT T1.BusinessEntityID FROM SalesPerson AS T1 INNER JOIN SalesPersonQuotaHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE STRFTIME('%Y', T2.QuotaDate) = '2013' AND T1.SalesQuota < T1.SalesLastYear"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the employees who wish to receive e-mail promotion from AdventureWorks, how many percent of them are female?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.Gender = 'F' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.BusinessEntityID) FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.EmailPromotion = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many times is married non sales employees against single non-sales employees?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.MaritalStatus = 'M' THEN 1 ELSE 0 END) AS REAL) * 100 / SUM(CASE WHEN T1.MaritalStatus = 'S' THEN 1 ELSE 0 END) FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.PersonType = 'EM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How much is the total bonus received by sales person and what is the percentage of it against the projected yearly sales quota in 2013?",
+        "query": "SELECT SUM(T1.Bonus) , CAST(SUM(T1.Bonus) AS REAL) * 100 / SUM(T1.SalesQuota) FROM SalesPerson AS T1 INNER JOIN SalesPersonQuotaHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE STRFTIME('%Y', T2.QuotaDate) = '2013'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many types of credit cards are there and how many are vista?",
+        "query": "SELECT COUNT(CardNumber) FROM CreditCard WHERE CardType = 'vista'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the name of the product with the id \"475\"?",
+        "query": "SELECT Name FROM Product WHERE ProductID = 475"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the employees born before 1980 , how many of them are single?",
+        "query": "SELECT COUNT(BusinessEntityID) FROM Employee WHERE MaritalStatus = 's' AND BirthDate < '1980-1-1'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all the names of the stores assigned to the sales person with the id \"277\".",
+        "query": "SELECT Name FROM Store WHERE SalesPersonID = 277"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many products with the id \"989\" were sold in August 2013?",
+        "query": "SELECT SUM(Quantity) FROM TransactionHistory WHERE TransactionDate LIKE '2013-08%' AND TransactionType = 'S' AND ProductID = 989"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all of the credit cards that had expired by 2007.",
+        "query": "SELECT CardNumber FROM CreditCard WHERE ExpYear < 2007"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all the pay rates of all employees that were hired at 20 years of age.",
+        "query": "SELECT T2.Rate FROM Employee AS T1 INNER JOIN EmployeePayHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE STRFTIME('%Y', T1.HireDate) - STRFTIME('%Y', T1.BirthDate) = 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the name of the territory assigned to the sales person with business id \"277\"?",
+        "query": "SELECT T2.Name FROM SalesPerson AS T1 INNER JOIN SalesTerritory AS T2 ON T1.TerritoryID = T2.TerritoryID WHERE T1.BusinessEntityID = 277"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the full name of the Vice President of Production?",
+        "query": "SELECT T2.FirstName, T2.MiddleName, T2.LastName FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.JobTitle = 'Vice President of Production'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many employees in the Information Service department work the evening shift?",
+        "query": "SELECT COUNT(T2.BusinessEntityID) FROM Department AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 ON T1.DepartmentID = T2.DepartmentID INNER JOIN Shift AS T3 ON T2.ShiftId = T3.ShiftId WHERE T1.Name = 'Information Services' AND T3.Name = 'Evening'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all the purchase order ids of the vendor with a below average rating.",
+        "query": "SELECT T2.PurchaseOrderID FROM Vendor AS T1 INNER JOIN PurchaseOrderHeader AS T2 ON T1.BusinessEntityID = T2.VendorID WHERE T1.CreditRating = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Is the phone number \"114-555-0100\" a work number or a home number?",
+        "query": "SELECT T2.Name FROM PersonPhone AS T1 INNER JOIN PhoneNumberType AS T2 ON T1.PhoneNumberTypeID = T2.PhoneNumberTypeID WHERE T1.PhoneNumber = '114-555-0100'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the total shipment by \"cargo transport 5\" cost of all purchase orders created on 12/14/2011?",
+        "query": "SELECT SUM(t2.freight) FROM ShipMethod AS t1 INNER JOIN PurchaseOrderHeader AS t2 ON t1.shipmethodid = t2.shipmethodid WHERE t1.name = 'cargo transport 5' AND t2.orderdate = '2011-12-14'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many sales orders did the salesperson David R. Campbell create?",
+        "query": "SELECT COUNT(T2.TotalDue) FROM Person AS T1 INNER JOIN SalesOrderHeader AS T2 ON T1.ModifiedDate = T2.DueDate WHERE T1.FirstName = 'David' AND T1.MiddleName = 'R' AND T1.LastName = 'Campbell' AND T1.PersonType = 'SP'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the email address of the Facilities Manager?",
+        "query": "SELECT T3.EmailAddress FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN EmailAddress AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID WHERE T1.JobTitle = 'Facilities Manager'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many customers are there in Canada?",
+        "query": "SELECT COUNT(T2.CustomerID) FROM SalesTerritory AS T1 INNER JOIN Customer AS T2 ON T1.TerritoryID = T2.TerritoryID WHERE T1.Name = 'Canada'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the shipping address for the sales order \"43873\"?",
+        "query": "SELECT T1.ShipToAddressID FROM SalesOrderHeader AS T1 INNER JOIN Address AS T2 ON T1.BillToAddressID = T2.AddressID WHERE T1.SalesOrderID = 43873 GROUP BY T1.ShipToAddressID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List the first names of the people with more than 65 sick leave hours.",
+        "query": "SELECT T2.FirstName FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.SickLeaveHours > 65"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among all the production technicians, how many have a below average pay rate for a production technician?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM Employee AS T1 INNER JOIN EmployeePayHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.JobTitle LIKE 'Production Technician%' AND T2.Rate < ( SELECT AVG(T2.Rate) FROM Employee AS T1 INNER JOIN EmployeePayHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.JobTitle LIKE 'Production Technician%' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What proportion of sales orders are made from the United Kingdom?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.Name = 'United Kingdom' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.SalesOrderID) FROM SalesOrderHeader AS T1 INNER JOIN SalesTerritory AS T2 ON T1.TerritoryID = T2.TerritoryID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "When is the modified date of the phone number \"1500 555-0143\"?",
+        "query": "SELECT ModifiedDate FROM PersonPhone WHERE PhoneNumber = '1 (11) 500 555-0143'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the business ID of the person who has made the most sales total year to date?",
+        "query": "SELECT BusinessEntityID FROM SalesPerson ORDER BY SalesYTD DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all active vendors who offer a purchasing web service.",
+        "query": "SELECT Name FROM Vendor WHERE ActiveFlag = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which territory has the most customers as of 9/12/2014?",
+        "query": "SELECT TerritoryID FROM Customer WHERE ModifiedDate < '2014-12-09' GROUP BY TerritoryID ORDER BY COUNT(TerritoryID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the total cost for all the orders placed on 5/29/2013?",
+        "query": "SELECT SUM(TotalDue) FROM PurchaseOrderHeader WHERE OrderDate LIKE '2013-05-29%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the most common first name among the vendor contact?",
+        "query": "SELECT FirstName FROM Person WHERE PersonType = 'VC' GROUP BY FirstName ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List the full name of all the 'Production Technician - WC50'",
+        "query": "SELECT T2.FirstName, T2.MiddleName, T2.LastName FROM Employee AS T1 INNER JOIN Person AS T2 USING (BusinessEntityID) WHERE T1.JobTitle = 'Production Technician - WC50' GROUP BY T2.FirstName, T2.MiddleName, T2.LastName"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many Minipumps have been sold?",
+        "query": "SELECT COUNT(OrderQty) FROM SalesOrderDetail WHERE ProductID IN ( SELECT ProductID FROM Product WHERE Name = 'Minipump' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the person's business ID with a vista credit card number \"11113366963373\"?",
+        "query": "SELECT T2.BusinessEntityID FROM CreditCard AS T1 INNER JOIN PersonCreditCard AS T2 ON T1.CreditCardID = T2.CreditCardID WHERE T1.CardNumber = 11113366963373"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Where does the person with the BusinessEntityID \"5555\" live?",
+        "query": "SELECT T3.City, T3.AddressLine1 FROM BusinessEntityAddress AS T1 INNER JOIN AddressType AS T2 ON T1.AddressTypeID = T2.AddressTypeID INNER JOIN Address AS T3 ON T1.AddressID = T3.AddressID WHERE T1.BusinessEntityID = 5555 AND T2.Name = 'Home'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all the names of products with the special offer \"15\".",
+        "query": "SELECT T2.Name FROM SpecialOfferProduct AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T1.SpecialOfferID = 15"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the credit card number for Michelle E Cox?",
+        "query": "SELECT T3.CreditCardID FROM Person AS T1 INNER JOIN PersonCreditCard AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN CreditCard AS T3 ON T2.CreditCardID = T3.CreditCardID WHERE T1.FirstName = 'Michelle' AND T1.MiddleName = 'E' AND T1.LastName = 'Cox'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the reason for sales order \"51883\"?",
+        "query": "SELECT T2.Name FROM SalesOrderHeaderSalesReason AS T1 INNER JOIN SalesReason AS T2 ON T1.SalesReasonID = T2.SalesReasonID WHERE T1.SalesOrderID = 51883"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the credit card number for the sales order \"45793\"?",
+        "query": "SELECT T2.CardNumber FROM SalesOrderHeader AS T1 INNER JOIN CreditCard AS T2 ON T1.CreditCardID = T2.CreditCardID WHERE T1.SalesOrderID = 45793"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all the sales people in the Northwest US.",
+        "query": "SELECT T2.BusinessEntityID FROM SalesTerritory AS T1 INNER JOIN SalesPerson AS T2 ON T1.TerritoryID = T2.TerritoryID WHERE T1.Name = 'Northwest' AND T1.CountryRegionCode = 'US'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which Production Technician has the highest pay rate?",
+        "query": "SELECT T1.BusinessEntityID FROM Employee AS T1 INNER JOIN EmployeePayHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.JobTitle LIKE 'Production Technician%' ORDER BY T2.Rate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Who is the sales person in charge of the territory with the id \"9\"? Provide their full name.",
+        "query": "SELECT T2.FirstName, T2.MiddleName, T2.LastName FROM SalesPerson AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.TerritoryID = 9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the description of the discount for the product with the id \"762\"?",
+        "query": "SELECT T2.Description FROM SpecialOfferProduct AS T1 INNER JOIN SpecialOffer AS T2 ON T1.SpecialOfferID = T2.SpecialOfferID WHERE T1.ProductID = 762"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Compare the average pay rate of male and female employees.",
+        "query": "SELECT AVG(T2.Rate) FROM Employee AS T1 INNER JOIN EmployeePayHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID GROUP BY T1.Gender"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the percentage of employees who work the night shift?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.Name = 'Night' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.BusinessEntityID) FROM Shift AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 ON T1.ShiftId = T2.ShiftId"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many married male employees were born before the year 1960?",
+        "query": "SELECT COUNT(BusinessEntityID) FROM Employee WHERE MaritalStatus = 'M' AND STRFTIME('%Y', BirthDate) < '1960' AND Gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the top 5 types of products with the highest selling price? ?",
+        "query": "SELECT Name FROM Product ORDER BY ListPrice DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "When did the company hired its first Accountant?",
+        "query": "SELECT MIN(HireDate) FROM Employee WHERE JobTitle = 'Accountant'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "In 2007, which job position was hired the most?",
+        "query": "SELECT JobTitle FROM Employee WHERE STRFTIME('%Y', HireDate) = '2007' GROUP BY HireDate ORDER BY COUNT(JobTitle) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the profit on net of the vendor with the highest standard price? If there are two vendors of the same amount, calculate only for one vendor.",
+        "query": "SELECT LastReceiptCost - StandardPrice FROM ProductVendor ORDER BY StandardPrice DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many departments did Sheela Ward work in between 1/1/2011 to 12/31/2012",
+        "query": "SELECT COUNT(T3.Name) FROM Person AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Department AS T3 ON T2.DepartmentID = T3.DepartmentID WHERE T1.FirstName = 'Sheela' AND T1.LastName = 'Word' AND STRFTIME('%Y', T3.ModifiedDate) BETWEEN '2011' AND '2012'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the average age of the sales agents in the company by 12/31/2009?",
+        "query": "SELECT AVG(2009 - STRFTIME('%Y', T2.BirthDate)) FROM Person AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.PersonType = 'SP'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "To which group does the department with the least amount of workers belong to? Indicate the name of the department as well.",
+        "query": "SELECT T2.GroupName FROM EmployeeDepartmentHistory AS T1 INNER JOIN Department AS T2 ON T1.DepartmentID = T2.DepartmentID GROUP BY T2.GroupName ORDER BY COUNT(T1.BusinessEntityID) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the age of the oldest Marketing Specialist by 12/31/2015 and what is his/her hourly rate?",
+        "query": "SELECT 2015 - STRFTIME('%Y', T1.BirthDate), T2.Rate FROM Employee AS T1 INNER JOIN EmployeePayHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.JobTitle = 'Marketing Specialist' ORDER BY 2015 - STRFTIME('%Y', T1.BirthDate) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the total amount due of all the purchases made by the company to the vendor that has the lowest selling price amount of a single product? Indicate the name of the vendor to which the purchases was made.",
+        "query": "SELECT T1.UnitPrice, T3.Name FROM PurchaseOrderDetail AS T1 INNER JOIN PurchaseOrderHeader AS T2 ON T1.PurchaseOrderID = T2.PurchaseOrderID INNER JOIN Vendor AS T3 ON T2.VendorID = T3.BusinessEntityID ORDER BY T1.UnitPrice LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Who made the purchase order with the greatest total due before freight? Indicate her employee ID and calculate for his/her age when he/she was hired.",
+        "query": "SELECT T2.BusinessEntityID, STRFTIME('%Y', T2.HireDate) - STRFTIME('%Y', T2.BirthDate) FROM PurchaseOrderHeader AS T1 INNER JOIN Employee AS T2 ON T1.EmployeeID = T2.BusinessEntityID ORDER BY T1.TotalDue DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the position of the employee with the 10th highest salary? Indicate his/her salary amount and his/her full name.",
+        "query": "SELECT T2.JobTitle, T1.Rate, T3.FirstName, T3.MiddleName, T3.LastName FROM EmployeePayHistory AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Person AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID ORDER BY T1.Rate DESC LIMIT 9, 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the profit of a single product that received the highest rating from John Smith? List the product/s' names.",
+        "query": "SELECT T1.ListPrice - T1.StandardCost, T1.Name FROM Product AS T1 INNER JOIN ProductReview AS T2 ON T1.ProductID = T2.ProductID WHERE T2.ReviewerName = 'John Smith' ORDER BY T2.Rating DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the salary rate per hour that the company paid to the first 5 employees that they hired?",
+        "query": "SELECT T1.Rate FROM EmployeePayHistory AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Person AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID ORDER BY T2.HireDate ASC LIMIT 0, 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the vendors with maximum orders betweeen 500 to 750, which vendor has the 10th highest profit on net?",
+        "query": "SELECT T2.Name FROM ProductVendor AS T1 INNER JOIN Vendor AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.MaxOrderQty BETWEEN 500 AND 750 ORDER BY T1.LastReceiptCost - T1.StandardPrice DESC LIMIT 9, 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "As of 12/31/2011, how long has the employee assigned to all pending for approval papers been working in the company from the date he was hired?",
+        "query": "SELECT 2011 - STRFTIME('%Y', T2.HireDate) FROM Document AS T1 INNER JOIN Employee AS T2 ON T1.Owner = T2.BusinessEntityID WHERE T1.Status = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Jill ranked which medium-quality class product as the highest, and how long will it take the company to manufacture such a product?",
+        "query": "SELECT T1.DaysToManufacture FROM Product AS T1 INNER JOIN ProductReview AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Rating = 5 AND T1.Class = 'M' ORDER BY T2.Rating LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What was the first job position that the company needed, and who was hired? Indicate his/her full name.",
+        "query": "SELECT T1.JobTitle, T2.FirstName, T2.MiddleName, T2.LastName FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID ORDER BY T1.HireDate LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many work orders with quantities ranging from 100 to 250 have a reorder point of no more than 375?",
+        "query": "SELECT COUNT(T1.TransactionID) FROM TransactionHistory AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Quantity BETWEEN 100 AND 250 AND T2.ReorderPoint <= 375"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How much is the average salary of female employees in comparison to male employees?",
+        "query": "SELECT AVG(T2.Rate) FROM Employee AS T1 INNER JOIN EmployeePayHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.Gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the names of the vendors to which the company purchased its women's tights products?",
+        "query": "SELECT DISTINCT T4.Name FROM Product AS T1 INNER JOIN ProductVendor AS T2 ON T1.ProductID = T2.ProductID INNER JOIN ProductSubcategory AS T3 ON T1.ProductSubcategoryID = T3.ProductSubcategoryID INNER JOIN Vendor AS T4 ON T2.BusinessEntityID = T4.BusinessEntityID WHERE T1.MakeFlag = 0 AND T1.Style = 'W' AND T3.Name = 'Tights'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How frequently does the first-ever Scheduling Assistant get paid?",
+        "query": "SELECT T2.PayFrequency FROM Employee AS T1 INNER JOIN EmployeePayHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.JobTitle = 'Scheduling Assistant' ORDER BY T1.HireDate LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What product has the fewest online orders from one customer? List the product's class, line of business, and list price.",
+        "query": "SELECT T2.Class, T2.ProductLine, T2.ListPrice FROM ShoppingCartItem AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID GROUP BY T1.ProductID ORDER BY SUM(Quantity) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the full name of the sales person who has the the highest commission percent received per sale?",
+        "query": "SELECT T2.FirstName, T2.MiddleName, T2.LastName FROM SalesPerson AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID ORDER BY T1.CommissionPct DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the full name of the second oldest person in the company at the time he was hired?",
+        "query": "SELECT T2.FirstName, T2.MiddleName, T2.LastName FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID ORDER BY STRFTIME('%Y', T1.HireDate) - STRFTIME('%Y', T1.BirthDate) DESC LIMIT 1, 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the total profit gained by the company from the product that has the highest amount of quantity ordered from online customers? Indicate the name of the product.",
+        "query": "SELECT (T2.ListPrice - T2.StandardCost) * SUM(T1.Quantity), T2.Name FROM ShoppingCartItem AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID GROUP BY T1.ProductID, T2.Name, T2.ListPrice, T2.StandardCost, T1.Quantity ORDER BY SUM(T1.Quantity) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the highest amount of difference between the ordered quantity and actual quantity received in a single purchase order and to which vendor was the purchase order made?",
+        "query": "SELECT T2.OrderQty - T2.ReceivedQty, VendorID FROM PurchaseOrderHeader AS T1 INNER JOIN PurchaseOrderDetail AS T2 ON T1.PurchaseOrderID = T2.PurchaseOrderID ORDER BY T2.OrderQty - T2.ReceivedQty DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the average lead time of product ID 843? Calculate for its profit on net and indicate the full location to which the vendor is located.",
+        "query": "SELECT T1.AverageLeadTime, T1.LastReceiptCost - T1.StandardPrice, T4.AddressLine1, T4.AddressLine2 , T4.City, T4.PostalCode FROM ProductVendor AS T1 INNER JOIN Vendor AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN BusinessEntityAddress AS T3 ON T1.BusinessEntityID = T3.BusinessEntityID INNER JOIN Address AS T4 ON T3.AddressID = T4.AddressID WHERE T1.ProductID = 843"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many salespersons haven't met quota?",
+        "query": "SELECT COUNT(BusinessEntityID) FROM SalesPerson WHERE Bonus = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the sales with a tax applied to retail transaction, how many of them are charged by multiple types of taxes?",
+        "query": "SELECT COUNT(SalesTaxRateID) FROM SalesTaxRate WHERE Name LIKE '%+%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please give the highest product cost of a purchase order.",
+        "query": "SELECT ActualCost FROM TransactionHistory WHERE TransactionType = 'P' ORDER BY ActualCost DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the current status of the order with the highest shipping cost?",
+        "query": "SELECT Status FROM SalesOrderHeader ORDER BY Freight DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many products are out of stock?",
+        "query": "SELECT COUNT(ProductID) FROM ProductVendor WHERE OnOrderQty = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the highest profit on net for a product?",
+        "query": "SELECT LastReceiptCost - StandardPrice FROM ProductVendor ORDER BY LastReceiptCost - StandardPrice DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which reviewer gives the biggest number of the highest rating?",
+        "query": "SELECT ReviewerName FROM ProductReview WHERE Rating = ( SELECT Rating FROM ProductReview ORDER BY Rating DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which product gets the most reviews?",
+        "query": "SELECT T2.Name FROM ProductReview AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID GROUP BY T1.ProductID ORDER BY COUNT(T1.ProductReviewID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the products that are purchased, how many of them have never received the highest rating?",
+        "query": "SELECT COUNT(T1.ProductID) FROM ProductReview AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.MakeFlag = 0 AND T1.Rating != 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the biggest amount of reviews a salable product gets?",
+        "query": "SELECT T1.Comments FROM ProductReview AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.FinishedGoodsFlag = 1 GROUP BY T1.Comments ORDER BY COUNT(T1.ProductReviewID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the products that are both manufactured in house and salable, how many of them get over 10 reviews?",
+        "query": "SELECT T2.Name FROM ProductReview AS T1 INNER JOIN Product AS T2 USING (ProductID) WHERE T2.FinishedGoodsFlag = 1 AND T2.MakeFlag = 1 GROUP BY T2.Name ORDER BY COUNT(T1.COMMENTS) > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the names of the products that get over 10 reviews and a salable.",
+        "query": "SELECT T2.NAME FROM ProductReview AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.FinishedGoodsFlag = 1 GROUP BY T2.NAME ORDER BY COUNT(T1.comments) > 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the reviewers who have given the highest rating for a medium class, women's product.",
+        "query": "SELECT T1.ReviewerName FROM ProductReview AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Class = 'M' AND T2.Style = 'W' AND T1.Rating = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the class of the product with the most reviews?",
+        "query": "SELECT T2.Class FROM ProductReview AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID GROUP BY T2.Class ORDER BY COUNT(T1.ProductReviewID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the e-mails of the reviewers who have reviewed high class.",
+        "query": "SELECT T1.EmailAddress FROM ProductReview AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Class = 'H'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the names of the products that have over 3 price changes.",
+        "query": "SELECT T2.Name FROM ProductListPriceHistory AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID GROUP BY T2.Name ORDER BY COUNT(T1.ListPrice) > 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the product description of Headset Ball Bearings?",
+        "query": "SELECT T1.Description FROM ProductDescription AS T1 INNER JOIN Product AS T2 WHERE T2.Name = 'Headset Ball Bearings' AND T1.productDescriptionID = T2.ProductID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the highest vendor's selling price for Hex Nut 5?",
+        "query": "SELECT T1.StandardPrice FROM ProductVendor AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Name = 'Hex Nut 5' ORDER BY T1.StandardPrice DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list all the vendors' usual selling prices of the product Hex Nut 5.",
+        "query": "SELECT T1.StandardPrice FROM ProductVendor AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Name = 'Hex Nut 5' GROUP BY T1.StandardPrice ORDER BY COUNT(T1.StandardPrice) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the vendors that sell the product Hex Nut 5, how many of them have a good credit rating?",
+        "query": "SELECT COUNT(DISTINCT T3.Name) FROM ProductVendor AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Vendor AS T3 ON T1.BusinessEntityID = T3.BusinessEntityID WHERE T2.Name = 'Hex Nut 5' AND T3.CreditRating = 1 AND 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the website purchasing links of the vendors from whom the product Hex Nut 5 can be purchased.",
+        "query": "SELECT T3.PurchasingWebServiceURL FROM ProductVendor AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Vendor AS T3 ON T1.BusinessEntityID = T3.BusinessEntityID WHERE T2.Name = 'Hex Nut 5'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which vendor's selling price for Hex Nut 5 is the lowest, please give the vendor's name.",
+        "query": "SELECT T3.Name FROM ProductVendor AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Vendor AS T3 ON T1.BusinessEntityID = T3.BusinessEntityID WHERE T2.Name = 'Hex Nut 5' ORDER BY T1.StandardPrice LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many high-class products are sold by preferred vendors?",
+        "query": "SELECT COUNT(T2.Name) FROM ProductVendor AS T1 INNER JOIN Product AS T2 USING (ProductID) INNER JOIN Vendor AS T3 ON T1.BusinessEntityID = T3.BusinessEntityID WHERE T3.PreferredVendorStatus = 1 AND T2.Class = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please give all the list prices of the product LL Fork.",
+        "query": "SELECT T2.ListPrice FROM Product AS T1 INNER JOIN ProductListPriceHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name = 'LL Fork'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the products from the mountain product line, how many of them are sold by over 2 vendors?",
+        "query": "SELECT SUM(CASE WHEN T1.ProductLine = 'M' THEN 1 ELSE 0 END) FROM Product AS T1 INNER JOIN ProductVendor AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Vendor AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID GROUP BY T1.ProductID HAVING COUNT(T1.Name) > 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the products that get over at least 1 review, how many of them are from the mountain product line?",
+        "query": "SELECT SUM(CASE WHEN T2.ProductLine = 'M' THEN 1 ELSE 0 END) FROM ProductReview AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID GROUP BY T1.ProductID HAVING COUNT(T1.ProductReviewID) > 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the email adresses of the reviewers who have given the lowest rating to the product HL Mountain Pedal.",
+        "query": "SELECT T1.EmailAddress FROM ProductReview AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Name = 'HL Mountain Pedal' ORDER BY T1.Rating LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many products that take more than 2 days to make are out of stock?",
+        "query": "SELECT COUNT(T2.ProductID) FROM ProductVendor AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T1.OnOrderQty IS NULL OR T1.OnOrderQty = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the products that are out of stock and purchased in house.",
+        "query": "SELECT T2.Name FROM ProductVendor AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.MakeFlag = 0 AND (T1.OnOrderQty IS NULL OR T1.OnOrderQty = 0)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the salable products from the mountain product line, how many of them have the most reviews?",
+        "query": "SELECT SUM(CASE WHEN T2.ProductLine = 'M' THEN 1 ELSE 0 END) FROM ProductReview AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.FinishedGoodsFlag = 1 GROUP BY T1.ProductID ORDER BY COUNT(T1.ProductReviewID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the average selling price of different vendors of the product Hex Nut 5?",
+        "query": "SELECT SUM(T1.StandardPrice) / COUNT(T1.BusinessEntityID) FROM ProductVendor AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Name = 'Hex Nut 5'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the product that has the highest average rating from the mountain product line?",
+        "query": "SELECT T2.Name FROM ProductReview AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.ProductLine = 'M' GROUP BY T2.Name ORDER BY CAST(SUM(T1.Rating) AS REAL) / COUNT(T1.ProductID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the top 3 house-manufactured products with the highest average rating.",
+        "query": "SELECT T2.Name FROM ProductReview AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T2.MakeFlag = 1 GROUP BY T2.Name ORDER BY SUM(T1.Rating) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all the non-sales employees in ascending order of its business entitty ID.",
+        "query": "SELECT FirstName, LastName FROM Person WHERE PersonType = 'EM' ORDER BY BusinessEntityID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Name all person in the individual retail whose last name is 'Anderson'.",
+        "query": "SELECT FirstName, MiddleName, LastName FROM Person WHERE LastName = 'Anderson' AND PersonType = 'IN'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List the name of employees who had left the company? When were they hired?",
+        "query": "SELECT T1.FirstName, T1.LastName, T2.HireDate FROM Person AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN EmployeeDepartmentHistory AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID WHERE T3.EndDate IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Name all salaried employee who are hired in 2007 and later.",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Person AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE STRFTIME('%Y', T2.HireDate) >= '2007' AND T2.SalariedFlag = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List the name of married employees with less than 20 vacation hours.",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Person AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.MaritalStatus = 'M' AND T2.VacationHours < 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Name the oldest employee who is working on night shift. How old is the employee?",
+        "query": "SELECT T1.FirstName, T1.LastName , STRFTIME('%Y', CURRENT_TIMESTAMP) - STRFTIME('%Y', BirthDate) FROM Person AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN EmployeeDepartmentHistory AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID WHERE T3.ShiftId = 3 ORDER BY STRFTIME('%Y', CURRENT_TIMESTAMP) - STRFTIME('%Y', BirthDate) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all staff in the Shipping and Receiving department who are hired in 2009.",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Person AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN EmployeeDepartmentHistory AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID INNER JOIN Department AS T4 ON T3.DepartmentID = T4.DepartmentID WHERE STRFTIME('%Y', T2.HireDate) = '2009' AND T4.Name = 'Shipping and Receiving'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the job title of the oldest employee in the company? In which department is he in?",
+        "query": "SELECT T2.JobTitle, T4.Name FROM Person AS T1 INNER JOIN Employee AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN EmployeeDepartmentHistory AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID INNER JOIN Department AS T4 ON T3.DepartmentID = T4.DepartmentID ORDER BY T2.HireDate LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Based on the lastet payrate of each employee, calculate the average hourly payrate for each department.",
+        "query": "SELECT AVG(T1.Rate) FROM EmployeePayHistory AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Department AS T3 ON T2.DepartmentID = T3.DepartmentID WHERE T1.RateChangeDate = ( SELECT MAX(T1.RateChangeDate) FROM EmployeePayHistory AS T1 INNER JOIN Department AS T2 ON T1.BusinessEntityID = T2.DepartmentID )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Other than the Chief Executive Officer, who is the employee who has the highest payrate? State the rate.",
+        "query": "SELECT T2.FirstName, T2.LastName FROM EmployeePayHistory AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Employee AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID WHERE T3.JobTitle NOT LIKE 'Chief Executive Officer' ORDER BY T1.Rate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Name the vendor who has the shortest average lead time for Product ID 319.",
+        "query": "SELECT T1.Name FROM Vendor AS T1 INNER JOIN ProductVendor AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.ProductID = 319 ORDER BY T2.AverageLeadTime LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all product name from Australia Bike Retailer order by product ID.",
+        "query": "SELECT T3.Name FROM Vendor AS T1 INNER JOIN ProductVendor AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Product AS T3 ON T2.ProductID = T3.ProductID WHERE T1.Name = 'Australia Bike Retailer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which vendor gives the best profit on net for product ID 342?",
+        "query": "SELECT T1.Name FROM Vendor AS T1 INNER JOIN ProductVendor AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T2.ProductID = 342 ORDER BY T2.LastReceiptCost - T2.StandardPrice DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the current payrate of Rob Walters? Calculate the percentage increment from his previous payrate.",
+        "query": "SELECT T2.Rate , (MAX(T2.Rate) - MIN(T2.Rate)) * 100 / MAX(T2.Rate) FROM Person AS T1 INNER JOIN EmployeePayHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.FirstName = 'Rob' AND T1.LastName = 'Walters'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Calculate the average length of employment for employee working in the Research and Development deparment.",
+        "query": "SELECT AVG(STRFTIME('%Y', CURRENT_TIMESTAMP) - STRFTIME('%Y', T1.HireDate)) FROM Employee AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Department AS T3 ON T2.DepartmentID = T3.DepartmentID WHERE T3.Name = 'Research and Development'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the average age of employee in Adventure Works?",
+        "query": "SELECT AVG(STRFTIME('%Y', CURRENT_TIMESTAMP) - STRFTIME('%Y', BirthDate)) FROM Employee"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the employees in Adventure Works, calculate the percentage of them working as sales representatives.",
+        "query": "SELECT CAST(SUM(CASE WHEN JobTitle = 'Sales Representative' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(BusinessEntityID) FROM Employee"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please provide contact details of all Marketing Managers. State their name and phone number.",
+        "query": "SELECT T1.FirstName, T1.LastName, T2.PhoneNumber FROM Person AS T1 INNER JOIN PersonPhone AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Employee AS T3 ON T1.BusinessEntityID = T3.BusinessEntityID WHERE T3.JobTitle = 'Marketing Manager'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List the person who owns a distinguish credt card.",
+        "query": "SELECT T3.FirstName, T3.LastName FROM CreditCard AS T1 INNER JOIN PersonCreditCard AS T2 ON T1.CreditCardID = T2.CreditCardID INNER JOIN Person AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID WHERE T1.CardType = 'Distinguish'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Name the sales person for store Area Bike Accessories. Which territory is he / she in?",
+        "query": "SELECT T4.Name FROM Store AS T1 INNER JOIN SalesPerson AS T2 ON T1.SalesPersonID = T2.BusinessEntityID INNER JOIN Person AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID INNER JOIN SalesTerritory AS T4 ON T2.TerritoryID = T4.TerritoryID WHERE T1.Name = 'Area Bike Accessories'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Name all stores and its sales representative in France territory.",
+        "query": "SELECT T3.Name, T4.FirstName, T4.LastName FROM SalesTerritory AS T1 INNER JOIN Customer AS T2 ON T1.TerritoryID = T2.TerritoryID INNER JOIN Store AS T3 ON T2.StoreID = T3.BusinessEntityID INNER JOIN Person AS T4 ON T2.PersonID = T4.BusinessEntityID WHERE T1.Name = 'France'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Name all products that started selling in 2013. State its respective vendor's name.",
+        "query": "SELECT T1.Name, T3.Name FROM Product AS T1 INNER JOIN ProductVendor AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Vendor AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID WHERE STRFTIME('%Y', T1.SellStartDate) = '2013'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Names the Sales Representative with the highest year to date sales.",
+        "query": "SELECT T2.FirstName, T2.MiddleName, T2.LastName FROM SalesPerson AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID ORDER BY T1.SalesYTD DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all product only MOQ of 1,000 and with standard cost more than 17.",
+        "query": "SELECT T2.Name FROM ProductVendor AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Vendor AS T3 ON T1.BusinessEntityID = T3.BusinessEntityID WHERE T1.MaxOrderQty = 1000 AND T2.StandardCost > 17"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Who is the oldest married male? State his job title.",
+        "query": "SELECT T2.FirstName, T2.LastName, T1.JobTitle FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.Gender = 'M' AND T1.MaritalStatus = 'M' ORDER BY T1.BirthDate LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "State the vendor for product number WB-H098.",
+        "query": "SELECT T3.Name FROM Product AS T1 INNER JOIN ProductVendor AS T2 ON T1.ProductID = T2.ProductID INNER JOIN Vendor AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID WHERE T1.ProductNumber = 'WB-H098'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Find the vendor with the least average lead time for Product ID 348.",
+        "query": "SELECT T2.Name FROM ProductVendor AS T1 INNER JOIN Vendor AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.ProductID = 348 ORDER BY T1.AverageLeadTime ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "State the employee who are born in or after 1970 and with the least sick leave hour.",
+        "query": "SELECT T2.FirstName, T2.LastName FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE STRFTIME('%Y', T1.BirthDate) > '1970' ORDER BY T1.SickLeaveHours LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Calculate the average age of employee in each department and state which department has the youngest employees.",
+        "query": "SELECT STRFTIME('%Y', CURRENT_TIMESTAMP) - STRFTIME('%Y', T1.BirthDate) + 1 , T3.Name FROM Employee AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 USING (BusinessEntityID) INNER JOIN Department AS T3 USING (DepartmentID) ORDER BY T1.BirthDate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please provide the IDs of any three AdventureWorks product subcategories.",
+        "query": "SELECT DISTINCT ProductCategoryID FROM ProductSubcategory LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the differences between the 288th salesperson's predicted annual sales and his or her actual sales thus far?",
+        "query": "SELECT SalesYTD - SalesQuota FROM SalesPerson WHERE BusinessEntityID = 288"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list three businesses with the lowest total sales from last year.",
+        "query": "SELECT BusinessEntityID FROM SalesPerson ORDER BY SalesLastYear LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which three sales regions have generated the most revenue thus far?",
+        "query": "SELECT TerritoryID FROM SalesTerritory ORDER BY SalesYTD DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What categories of offers qualify for group discounts for resellers?",
+        "query": "SELECT Type FROM SpecialOffer WHERE Category = 'Reseller'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the highest possible discount rate for 'Excess Inventory'?",
+        "query": "SELECT DiscountPct FROM SpecialOffer WHERE Type = 'Excess Inventory' ORDER BY DiscountPct DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the difference between the actual manufacturing cost of product number 818 and the estimated manufacturing cost?",
+        "query": "SELECT PlannedCost - ActualCost FROM WorkOrderRouting WHERE ProductID = 818"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many materials still need to be assembled and have a depth of 2 between each component and their parent product?",
+        "query": "SELECT COUNT(*) FROM BillOfMaterials WHERE BOMLevel = 2 AND EndDate IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many of the approved documents are confidential?",
+        "query": "SELECT COUNT(DocumentNode) FROM Document WHERE Status = 2 AND DocumentSummary IS NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the sales tax records charged by multiple types of tax?",
+        "query": "SELECT SalesTaxRateID FROM SalesTaxRate WHERE Name LIKE '%+%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which work order transaction number has the highest product quantity?",
+        "query": "SELECT TransactionID FROM TransactionHistory WHERE TransactionType = 'W' ORDER BY Quantity DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list any 3 vendors that are not recommended by Adventure Works.",
+        "query": "SELECT Name FROM Vendor WHERE PreferredVendorStatus = 0 LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many vendors does Adventure Works still work with but are not preferable?",
+        "query": "SELECT COUNT(BusinessEntityID) FROM Vendor WHERE PreferredVendorStatus = 0 AND ActiveFlag = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many employees who began working in 2009 or later had night shifts?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM EmployeeDepartmentHistory AS T1 INNER JOIN Shift AS T2 ON T1.ShiftId = T2.ShiftId WHERE T2.ShiftId = 3 AND STRFTIME('%Y', T2.StartTime) >= '2009'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which department, altogether, has the most personnel who work the evening shift?",
+        "query": "SELECT T3.Name FROM EmployeeDepartmentHistory AS T1 INNER JOIN Shift AS T2 ON T1.ShiftId = T2.ShiftId INNER JOIN Department AS T3 ON T1.DepartmentID = T3.DepartmentID WHERE T2.Name = 'Night' GROUP BY T3.Name ORDER BY COUNT(T1.BusinessEntityID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many shipments by truck were made?",
+        "query": "SELECT COUNT(*) FROM ShipMethod AS T1 INNER JOIN SalesOrderHeader AS T2 USING (ShipMethodID) WHERE T1.Name = 'XRQ - TRUCK GROUND'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the sales reasons for order 43718?",
+        "query": "SELECT T2.Name FROM SalesOrderHeaderSalesReason AS T1 INNER JOIN SalesReason AS T2 ON T1.SalesReasonID = T2.SalesReasonID WHERE T1.SalesOrderID = 43718"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What bike subcategories are there?",
+        "query": "SELECT T1.Name FROM ProductSubcategory AS T1 INNER JOIN ProductCategory AS T2 ON T1.ProductCategoryID = T2.ProductCategoryID WHERE T2.name = 'Bikes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which sales areas are expected to have the highest yearly sales quota?",
+        "query": "SELECT T2.Name FROM SalesPerson AS T1 INNER JOIN SalesTerritory AS T2 ON T1.TerritoryID = T2.TerritoryID GROUP BY T1.TerritoryID ORDER BY SUM(T1.SalesQuota) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What goods were sold to customers in accordance with sales order number 43660?",
+        "query": "SELECT T1.Name FROM Product AS T1 INNER JOIN SalesOrderDetail AS T2 ON T1.ProductID = T2.ProductID WHERE T2.SalesOrderID = 43660"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the top 5 products with the most orders.",
+        "query": "SELECT T1.Name FROM Product AS T1 INNER JOIN SalesOrderDetail AS T2 ON T1.ProductID = T2.ProductID GROUP BY T1.Name ORDER BY SUM(T2.OrderQty) DESC LIMIT 0, 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Where are the shelves where the down tube product was stored?",
+        "query": "SELECT T2.Shelf FROM Product AS T1 INNER JOIN ProductInventory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name = 'Down Tube'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which address type does \"Fun Toys and Bikes\" fall under?",
+        "query": "SELECT T2.Name FROM BusinessEntityAddress AS T1 INNER JOIN AddressType AS T2 ON T1.AddressTypeID = T2.AddressTypeID INNER JOIN Store AS T3 ON T1.BusinessEntityID = T3.BusinessEntityID WHERE T3.Name = 'Fun Toys and Bikes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Who is the \"Next-Door Bike Store\" point of contact?",
+        "query": "SELECT T1.Name FROM ContactType AS T1 INNER JOIN BusinessEntityContact AS T2 ON T1.ContactTypeID = T2.ContactTypeID INNER JOIN Store AS T3 ON T2.BusinessEntityID = T3.BusinessEntityID WHERE T3.Name = 'Next-Door Bike Store'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the order reference number for the \"Mountain End Caps\" product?",
+        "query": "SELECT T2.ReferenceOrderID FROM Product AS T1 INNER JOIN TransactionHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name = 'Mountain End Caps'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the 12th business's first line address?",
+        "query": "SELECT T1.AddressLine1 FROM Address AS T1 INNER JOIN BusinessEntityAddress AS T2 ON T1.AddressID = T2.AddressID WHERE T2.BusinessEntityID = 12"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list any three businesses with their IDs that are located in Dallas City.",
+        "query": "SELECT T2.BusinessEntityID FROM Address AS T1 INNER JOIN BusinessEntityAddress AS T2 ON T1.AddressID = T2.AddressID WHERE T1.City = 'Dallas' LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the name of the state that Racine belongs to?",
+        "query": "SELECT T2.Name FROM Address AS T1 INNER JOIN StateProvince AS T2 ON T1.StateProvinceID = T2.StateProvinceID WHERE T1.City = 'Racine'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the difference in percentage between the product descriptions written in Arabic and Thai?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.Name = 'Arabic' THEN 1 ELSE 0 END) AS REAL) * 100 / SUM(CASE WHEN T1.Name = 'Thai' THEN 1 ELSE 0 END) FROM Culture AS T1 INNER JOIN ProductModelProductDescriptionCulture AS T2 ON T1.CultureID = T2.CultureID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What percentage of businesses in the Northwest US have forecasted annual sales of above 300,000?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.SalesQuota > 300000 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.BusinessEntityID) FROM SalesPerson AS T1 INNER JOIN SalesTerritory AS T2 ON T1.TerritoryID = T2.TerritoryID WHERE T2.CountryRegionCode = 'US' AND T2.Name = 'Northwest'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the Crankarm product's net profit?",
+        "query": "SELECT T2.LastReceiptCost - T2.StandardPrice FROM Product AS T1 INNER JOIN ProductVendor AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name LIKE '%Crankarm%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the name of the product with the almost highest review score?",
+        "query": "SELECT T1.Name FROM Product AS T1 INNER JOIN ProductReview AS T2 ON T1.ProductID = T2.ProductID WHERE T2.Rating = ( SELECT Rating FROM ProductReview ORDER BY Rating DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the company's second highest salary per hour for employees who are paid monthly?",
+        "query": "SELECT Rate FROM EmployeePayHistory WHERE PayFrequency = 1 ORDER BY Rate DESC LIMIT 1, 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many Vista cards expired before the year 2007?",
+        "query": "SELECT COUNT(CreditCardID) FROM CreditCard WHERE CardType = 'Vista' AND ExpYear < 2007"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What time does the company's night shift begin? Indicate the answer in regular form.",
+        "query": "SELECT StartTime FROM Shift WHERE Name = 'Night'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the weight in pounds of the style that is produced the most by the company? If there are multiple products sharing the same weight, indicate the name of each one of them and their corresponding weights.",
+        "query": "SELECT Weight FROM Product WHERE WeightUnitMeasureCode = 'LB' GROUP BY Weight ORDER BY COUNT(Style) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which territory has the greatest difference in sales from previous year to this year? Indicate the difference, as well as the name and country of the region.",
+        "query": "SELECT SalesLastYear - SalesYTD, Name, CountryRegionCode FROM SalesTerritory ORDER BY SalesLastYear - SalesYTD DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the names of the top 6 products that has the biggest size in centimeter and what are its reorder point?",
+        "query": "SELECT Name, ReorderPoint FROM Product WHERE SizeUnitMeasureCode = 'CM' ORDER BY Size DESC LIMIT 6"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How much is the amount to be paid by the company for the purchase order with the third highest freight amount?",
+        "query": "SELECT TotalDue FROM PurchaseOrderHeader ORDER BY Freight DESC LIMIT 2, 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What profit will the company gain if they sell 10 items of the product that has the lightest weight?",
+        "query": "SELECT 10 * (ListPrice - StandardCost) FROM Product WHERE Weight IS NOT NULL ORDER BY Weight LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How much is the tax amount of the purchase order with the biggest tax amount? Indicate the purchase order ID.",
+        "query": "SELECT TaxAmt, PurchaseOrderID FROM PurchaseOrderHeader ORDER BY TaxAmt DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many person have a projected yearly sales of no more than 50,000?",
+        "query": "SELECT COUNT(BusinessEntityID) FROM SalesPersonQuotaHistory WHERE SalesQuota < 500000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the employees who were born before 1969, what is the work shift of the 6th oldest employee?",
+        "query": "SELECT T3.StartTime, T3.EndTime FROM Employee AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Shift AS T3 ON T2.ShiftId = T3.ShiftId WHERE STRFTIME('%Y', T1.BirthDate) < '1969' ORDER BY T1.BirthDate LIMIT 5, 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which product allows the company to make the highest profit on a single item among those that are the fastest to manufacture? Indicate the rating of the product if there any.",
+        "query": "SELECT T1.Name, T2.Rating FROM Product AS T1 INNER JOIN ProductReview AS T2 ON T1.ProductID = T2.ProductID WHERE T1.DaysToManufacture = ( SELECT DaysToManufacture FROM Product ORDER BY DaysToManufacture LIMIT 1 ) ORDER BY T1.ListPrice - T1.StandardCost DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the full names of the sales person whose bonuses are less than 1,000?",
+        "query": "SELECT T2.FirstName, T2.MiddleName, T2.LastName FROM SalesPerson AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.Bonus < 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "When did the Senior Tool Designer, who was 33 years old at the time he was hired, stopped working in the Engineering department?",
+        "query": "SELECT T2.EndDate FROM Employee AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Department AS T3 ON T2.DepartmentID = T3.DepartmentID WHERE T1.JobTitle = 'Senior Tool Designer' AND STRFTIME('%Y', T1.HireDate) - STRFTIME('%Y', T1.BirthDate) = 33 AND T2.EndDate IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the vendors with an average credit rating, what is the overall total due amount of purchases made by the company to the vendor that isn't preferrerd if another vendor is available?",
+        "query": "SELECT SUM(T2.TotalDue) FROM Vendor AS T1 INNER JOIN PurchaseOrderHeader AS T2 ON T1.BusinessEntityID = T2.VendorID WHERE T1.CreditRating = 4 AND T1.PreferredVendorStatus = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which department has the most number of night shifts?",
+        "query": "SELECT T3.Name FROM Shift AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 ON T1.ShiftId = T2.ShiftId INNER JOIN Department AS T3 ON T2.DepartmentID = T3.DepartmentID GROUP BY T2.DepartmentID ORDER BY COUNT(T1.Name = 'Night') DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How much profit can the company gained from selling two high class black Road Bikes with a size of 58?",
+        "query": "SELECT 2 * (T1.ListPrice - T1.StandardCost) FROM Product AS T1 INNER JOIN ProductSubcategory AS T2 ON T1.ProductSubcategoryID = T2.ProductSubcategoryID WHERE T1.Class = 'H' AND T1.Color = 'Black' AND T1.Size = 58 AND T2.Name = 'Road Bikes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the full names of the 10 youngest married male production technicians?",
+        "query": "SELECT T2.FirstName, T2.MiddleName, T2.LastName FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.JobTitle LIKE 'Production Technician%' AND T1.Gender = 'M' AND T1.MaritalStatus = 'M' ORDER BY T1.BirthDate DESC LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the products with an average lead time of 60, which vendor has the highest profit on net? Indicate the credit rating of such vendor.",
+        "query": "SELECT T2.Name, T2.CreditRating FROM ProductVendor AS T1 INNER JOIN Vendor AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.AverageLeadTime = 60 ORDER BY T1.LastReceiptCost - T1.StandardPrice DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the profit on net of the products that have exactly 200 maximum order quantity? Indicate the name of the vendors to which these products were purchased from.",
+        "query": "SELECT T1.LastReceiptCost - T1.StandardPrice, T2.Name FROM ProductVendor AS T1 INNER JOIN Vendor AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.MaxOrderQty = 200"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the full name of the non-sales employee who made the most number of rejected purchase orders?",
+        "query": "SELECT T2.FirstName, T2.LastName FROM PurchaseOrderHeader AS T1 INNER JOIN Person AS T2 ON T1.EmployeeID = T2.BusinessEntityID WHERE T2.PersonType = 'EM' AND T1.Status = 3 GROUP BY T2.FirstName, T2.LastName ORDER BY COUNT(T1.PurchaseOrderID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the names of the vendor with the second lowest minimum order quantity?",
+        "query": "SELECT T2.Name FROM ProductVendor AS T1 INNER JOIN Vendor AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID ORDER BY T1.MaxOrderQty ASC LIMIT 1, 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How much are the minimum orders of the vendors that are no longer used by the company?",
+        "query": "SELECT T2.MinOrderQty FROM Vendor AS T1 INNER JOIN ProductVendor AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.ActiveFlag = 0 ORDER BY T2.MinOrderQty LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Of the employees whose vacation hours are no more than 10, what is the age of the oldest employee at the time he/she was hired? Indicate his/her full name.",
+        "query": "SELECT STRFTIME('%Y', T1.HireDate) - STRFTIME('%Y', T1.BirthDate), T2.FirstName, T2.MiddleName, T2.LastName FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.VacationHours <= 10 ORDER BY STRFTIME('%Y', T1.HireDate) - STRFTIME('%Y', T1.BirthDate) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the primary type of all single female employees hired between 1/1/2008 to 12/31/2008?",
+        "query": "SELECT T2.PersonType FROM Employee AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.Gender = 'F' AND T1.MaritalStatus = 'S' AND STRFTIME('%Y-%m-%d', T1.HireDate) BETWEEN '2008-1-1' AND '2008-12-31' GROUP BY T2.PersonType ORDER BY COUNT(T2.PersonType) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the company's profit on the product that was rated second-highest by David?",
+        "query": "SELECT T2.ListPrice - T2.StandardCost FROM ProductReview AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ReviewerName = 'David' ORDER BY T1.Rating DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which geographic area does the city with the second lowest tax rate belongs to? Indicate the name of the state or province as well.",
+        "query": "SELECT T3.'Group', T2.Name FROM SalesTaxRate AS T1 INNER JOIN StateProvince AS T2 ON T1.StateProvinceID = T2.StateProvinceID INNER JOIN SalesTerritory AS T3 ON T2.TerritoryID = T3.TerritoryID ORDER BY T1.TaxRate LIMIT 1, 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the average profit of all the low class universal road frames? Indicate how many variety of sizes are there and the available colors.",
+        "query": "SELECT AVG(T1.ListPrice - T1.StandardCost), COUNT(DISTINCT T1.Size) , COUNT(DISTINCT T1.Style) FROM Product AS T1 INNER JOIN ProductSubcategory AS T2 ON T1.ProductSubcategoryID = T2.ProductSubcategoryID WHERE T1.Class = 'L' AND T2.Name = 'Road Frames' GROUP BY T1.Class, T1.Color"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the discount percentage of \"LL Road Frame Sale\"?",
+        "query": "SELECT DiscountPct FROM SpecialOffer WHERE Description = 'LL Road Frame Sale'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many discount are of the type \"Excess Inventory\"?",
+        "query": "SELECT COUNT(SpecialOfferID) FROM SpecialOffer WHERE Type = 'Excess Inventory'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which seasonal discount had the highest discount percentage?",
+        "query": "SELECT Description FROM SpecialOffer WHERE Type = 'Seasonal Discount' ORDER BY DiscountPct DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the top 3 discounts with the highest discount percentage and fall under the reseller category.",
+        "query": "SELECT Description, DiscountPct FROM SpecialOffer WHERE Category = 'Reseller' ORDER BY DiscountPct DESC LIMIT 0, 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Where can I get the demographic information about the Valley Bicycle Specialists store?",
+        "query": "SELECT Demographics FROM Store WHERE Name = 'Valley Bicycle Specialists'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among all the products that are manufactured in-house, how many of them are salable?",
+        "query": "SELECT SUM(FinishedGoodsFlag) FROM Product WHERE MakeFlag = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the minimum inventory quantity of Chainring Bolts?",
+        "query": "SELECT SafetyStockLevel FROM Product WHERE Name = 'Chainring Bolts'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which product has the highest standard cost?",
+        "query": "SELECT Name FROM Product ORDER BY StandardCost DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What type of employee is David Bradley?",
+        "query": "SELECT PersonType FROM Person WHERE FirstName = 'David' AND LastName = 'Bradley'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the employees who are store contacts, how many of them have a title of \"Mr.\"?",
+        "query": "SELECT COUNT(BusinessEntityID) FROM Person WHERE PersonType = 'SC' AND Title = 'Mr.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Where can I find the Valley Bicycle Specialists store?",
+        "query": "SELECT T2.AddressLine1, T2.AddressLine2 FROM BusinessEntityAddress AS T1 INNER JOIN Address AS T2 ON T1.AddressID = T2.AddressID INNER JOIN Store AS T3 ON T1.BusinessEntityID = T3.BusinessEntityID WHERE T3.Name = 'Valley Bicycle Specialists'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "To which e-mail address should I write if I want to contact David Bradley?",
+        "query": "SELECT T2.EmailAddress FROM Person AS T1 INNER JOIN EmailAddress AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.FirstName = 'David' AND T1.LastName = 'Bradley'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the phone numbers of all the store contacts.",
+        "query": "SELECT T2.PhoneNumber FROM Person AS T1 INNER JOIN PersonPhone AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.PersonType = 'SC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the hashed password of David Bradley?",
+        "query": "SELECT T2.PasswordHash FROM Person AS T1 INNER JOIN Password AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.FirstName = 'David' AND T1.LastName = 'Bradley'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the e-mail addresses of all the employees who wish to receive e-mail promotions from Adventureworks and selected partners.",
+        "query": "SELECT T2.EmailAddress FROM Person AS T1 INNER JOIN EmailAddress AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.EmailPromotion = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please show the credit card number of David Bradley.",
+        "query": "SELECT T3.CardNumber FROM Person AS T1 INNER JOIN PersonCreditCard AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN CreditCard AS T3 ON T2.CreditCardID = T3.CreditCardID WHERE T1.FirstName = 'David' AND T1.LastName = 'Bradley'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "In which year will the David Bradley's credit card expire?",
+        "query": "SELECT T3.ExpYear FROM Person AS T1 INNER JOIN PersonCreditCard AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN CreditCard AS T3 ON T2.CreditCardID = T3.CreditCardID WHERE T1.FirstName = 'David' AND T1.LastName = 'Bradley'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the names of all the store contact employees whose credit cards expired in 2007.",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Person AS T1 INNER JOIN PersonCreditCard AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN CreditCard AS T3 ON T2.CreditCardID = T3.CreditCardID WHERE T3.ExpYear = 2007 AND T1.PersonType = 'SC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the store contact employees, how many of them have a Vista credit card?",
+        "query": "SELECT COUNT(T1.FirstName) FROM Person AS T1 INNER JOIN PersonCreditCard AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN CreditCard AS T3 ON T2.CreditCardID = T3.CreditCardID WHERE T3.CardType = 'Vista' AND T1.PersonType = 'SC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many departments have David Bradley been in?",
+        "query": "SELECT COUNT(T3.DepartmentID) FROM Person AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Department AS T3 ON T2.DepartmentID = T3.DepartmentID WHERE T1.FirstName = 'David' AND T1.LastName = 'Bradley'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the departments that David Bradley used to belong to.",
+        "query": "SELECT T2.DepartmentID FROM Person AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Department AS T3 ON T2.DepartmentID = T3.DepartmentID WHERE T1.FirstName = 'David' AND T1.LastName = 'Bradley'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many people were there in the Engineering Department in the year 2009?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM Person AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Department AS T3 ON T2.DepartmentID = T3.DepartmentID WHERE T3.Name = 'Engineering' AND STRFTIME('%Y', T2.EndDate) > '2009' AND STRFTIME('%Y', T2.StartDate) < '2009'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which employee has been in the Engineering Department the longest? Please give his or her firstname and lastname.",
+        "query": "SELECT T1.FirstName, T1.LastName FROM Person AS T1 INNER JOIN EmployeeDepartmentHistory AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Department AS T3 ON T2.DepartmentID = T3.DepartmentID WHERE T3.Name = 'Engineering' ORDER BY T2.EndDate - T2.StartDate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among the employees in the Manufacturing group in 2007, how many of them are store contacts?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM EmployeeDepartmentHistory AS T1 INNER JOIN Department AS T2 ON T1.DepartmentID = T2.DepartmentID INNER JOIN Person AS T3 ON T1.BusinessEntityID WHERE T3.PersonType = 'SC' AND T2.GroupName = 'Manufacturing' AND STRFTIME('%Y', T1.EndDate) >= '2007' AND STRFTIME('%Y', T1.StartDate) <= '2007'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the credit card numbers of all the employees who have left the Finance Department.",
+        "query": "SELECT T3.CardNumber FROM EmployeeDepartmentHistory AS T1 INNER JOIN Department AS T2 ON T1.DepartmentID = T2.DepartmentID INNER JOIN CreditCard AS T3 ON T1.ModifiedDate = T3.ModifiedDate INNER JOIN PersonCreditCard AS T4 ON T3.CreditCardID = T4.CreditCardID WHERE T2.Name = 'Finance' AND T1.EndDate IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many employees working in the Engineering Department in 2007 would have their credit cards expired in the same year?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM EmployeeDepartmentHistory AS T1 INNER JOIN Department AS T2 ON T1.DepartmentID = T2.DepartmentID INNER JOIN PersonCreditCard AS T3 ON T1.BusinessEntityID = T3.BusinessEntityID INNER JOIN CreditCard AS T4 ON T3.CreditCardID = T4.CreditCardID WHERE T4.ExpYear = 2007 AND T2.Name = 'Engineering'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the e-mail address of the employee who switched departments for the most times?",
+        "query": "SELECT T2.EmailAddress FROM EmployeeDepartmentHistory AS T1 INNER JOIN EmailAddress AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID GROUP BY T2.BusinessEntityID ORDER BY COUNT(T1.DepartmentID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Among all the employees who don't wish to receive promotion e-mails, how many of them belong to or once belonged to the Engineering Department?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM EmployeeDepartmentHistory AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID INNER JOIN Department AS T3 ON T1.DepartmentID = T3.DepartmentID WHERE T3.Name = 'Engineering' AND T2.EmailPromotion = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many employees came into the Quality Assurance Group in the year 2007?",
+        "query": "SELECT COUNT(T1.BusinessEntityID) FROM EmployeeDepartmentHistory AS T1 INNER JOIN Department AS T2 ON T1.DepartmentID = T2.DepartmentID WHERE T2.GroupName = 'Quality Assurance' AND STRFTIME('%Y', T1.StartDate) = '2007'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the product names of all the products on the LL Road Frame Sale.",
+        "query": "SELECT T3.Name FROM SpecialOffer AS T1 INNER JOIN SpecialOfferProduct AS T2 ON T1.SpecialOfferID = T2.SpecialOfferID INNER JOIN Product AS T3 ON T2.ProductID = T3.ProductID WHERE T1.Description = 'LL Road Frame Sale'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many products were on the LL Road Frame Sale?",
+        "query": "SELECT COUNT(DISTINCT ProductID) FROM SpecialOffer AS T1 INNER JOIN SpecialOfferProduct AS T2 ON T1.SpecialOfferID = T2.SpecialOfferID WHERE T1.Description = 'LL Road Frame Sale'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Has the product Chainring Bolts been on any of the sales?",
+        "query": "SELECT CASE WHEN COUNT(T1.Description) >= 1 THEN 'Yes' ELSE 'No' END FROM SpecialOffer AS T1 INNER JOIN SpecialOfferProduct AS T2 ON T1.SpecialOfferID = T2.SpecialOfferID INNER JOIN Product AS T3 ON T2.ProductID = T3.ProductID WHERE T3.Name = 'Chainring Bolts'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many products from the Clothing category were on the LL Road Frame Sale?",
+        "query": "SELECT COUNT(T2.ProductID) FROM SpecialOffer AS T1 INNER JOIN SpecialOfferProduct AS T2 ON T1.SpecialOfferID = T2.SpecialOfferID INNER JOIN Product AS T3 ON T2.ProductID = T3.ProductID INNER JOIN ProductSubcategory AS T4 ON T3.ProductSubcategoryID = T4.ProductSubcategoryID INNER JOIN ProductCategory AS T5 ON T4.ProductCategoryID = T5.ProductCategoryID WHERE T1.Description = 'LL Road Frame Sale' AND T4.Name = 'Clothing'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Please list the products that are under the Clothing category that are manufactured in-house and salable.",
+        "query": "SELECT CASE WHEN T1.MakeFlag = 1 THEN T1.Name END FROM Product AS T1 INNER JOIN ProductSubcategory AS T2 ON T1.ProductSubcategoryID = T2.ProductSubcategoryID INNER JOIN ProductCategory AS T3 ON T2.ProductCategoryID = T3.ProductCategoryID WHERE T2.ProductSubcategoryID = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "For all the employees that have left the Engineering Department, what is the average time of their stay?",
+        "query": "SELECT CAST(SUM(365 * (STRFTIME('%Y', T1.EndDate) - STRFTIME('%Y', T1.StartDate)) + 30 * (STRFTIME('%m', T1.EndDate) - STRFTIME('%m', T1.StartDate)) + STRFTIME('%d', T1.EndDate) - STRFTIME('%d', T1.StartDate)) AS REAL) / COUNT(T1.BusinessEntityID) FROM EmployeeDepartmentHistory AS T1 INNER JOIN Department AS T2 ON T1.DepartmentID = T2.DepartmentID WHERE T2.Name = 'Engineering' AND T1.EndDate IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the average pay rate of the employees who worked in the Engineering Departmentin 2007?",
+        "query": "SELECT AVG(T3.Rate) FROM EmployeeDepartmentHistory AS T1 INNER JOIN Department AS T2 ON T1.DepartmentID = T2.DepartmentID INNER JOIN EmployeePayHistory AS T3 ON T1.BusinessEntityID = T3.BusinessEntityID WHERE T2.Name = 'Engineering' AND STRFTIME('%Y', EndDate) > '2007' AND STRFTIME('%Y', T1.StartDate) < '2007'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How much more expensive in percentage is the product with the highest selling price from the product with the lowest selling price in the Clothing category?",
+        "query": "SELECT (MAX(T1.ListPrice) - MIN(T1.ListPrice)) * 100 / MIN(T1.ListPrice) FROM Product AS T1 INNER JOIN ProductSubcategory AS T2 ON T1.ProductSubcategoryID = T2.ProductSubcategoryID INNER JOIN ProductCategory AS T3 ON T2.ProductCategoryID = T3.ProductCategoryID WHERE T3.Name = 'Clothing'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the average profit of all the products from the Clothing category?",
+        "query": "SELECT SUM(T1.ListPrice - T1.StandardCost) / COUNT(T1.ProductID) FROM Product AS T1 INNER JOIN ProductSubcategory AS T2 ON T1.ProductSubcategoryID = T2.ProductSubcategoryID INNER JOIN ProductCategory AS T3 ON T2.ProductCategoryID = T3.ProductCategoryID WHERE T3.Name = 'Clothing'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which product cost the least in 2013?",
+        "query": "SELECT ProductID FROM ProductCostHistory WHERE StartDate LIKE '2013%' ORDER BY StandardCost LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all products with the color yellow.",
+        "query": "SELECT ProductID FROM Product WHERE Color = 'Yellow'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the bussiness id for Mr. Hung-Fu Ting?",
+        "query": "SELECT BusinessEntityID FROM Person WHERE Title = 'Mr.' AND FirstName = 'Hung-Fu' AND LastName = 'Ting'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the phone number of the person with id \"12597\"?",
+        "query": "SELECT PhoneNumber FROM PersonPhone WHERE BusinessEntityID = 12597"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the price for the product with the id \"912\"?",
+        "query": "SELECT ListPrice FROM ProductListPriceHistory WHERE ProductID = 912"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Is there a work order where the planned cost is different from the actual cost?",
+        "query": "SELECT CASE WHEN ActualCost = PlannedCost THEN 'No' ELSE 'Yes' END FROM WorkOrderRouting"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the thumbnail photo file for the product with the id \"979\"?",
+        "query": "SELECT T2.ThumbnailPhotoFileName FROM ProductProductPhoto AS T1 INNER JOIN ProductPhoto AS T2 ON T1.ProductPhotoID = T2.ProductPhotoID WHERE T1.ProductID = 979"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all the names of the products with the price of more than 1000$.",
+        "query": "SELECT DISTINCT T2.Name FROM ProductListPriceHistory AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ListPrice > 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the product with the most profit?",
+        "query": "SELECT T1.ProductID FROM ProductListPriceHistory AS T1 INNER JOIN ProductCostHistory AS T2 ON T1.ProductID = T2.ProductID ORDER BY T1.ListPrice - T2.StandardCost DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the name of the product stored in location 1 compartment L container 6?",
+        "query": "SELECT T2.Name FROM ProductInventory AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T1.LocationID = 1 AND T1.Shelf = 'L' AND T1.Bin = 6"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are locations of the work order \"35493\"?",
+        "query": "SELECT T2.Name FROM WorkOrderRouting AS T1 INNER JOIN Location AS T2 ON T1.LocationID = T2.LocationID WHERE T1.WorkOrderID = 35493"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What are the products with a large photo?",
+        "query": "SELECT T2.ProductID FROM ProductPhoto AS T1 INNER JOIN ProductProductPhoto AS T2 ON T1.ProductPhotoID = T2.ProductPhotoID WHERE T1.LargePhotoFileName LIKE '%large.gif'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all the socks products.",
+        "query": "SELECT T2.ProductID FROM ProductSubcategory AS T1 INNER JOIN Product AS T2 ON T1.ProductSubcategoryID = T2.ProductSubcategoryID WHERE T1.Name = 'Socks'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "With 100$, how many Cable Lock can you buy?",
+        "query": "SELECT 100 / T2.ListPrice FROM Product AS T1 INNER JOIN ProductListPriceHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name = 'Cable Lock'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the scrap reason for work order \"57788\"?",
+        "query": "SELECT T2.Name FROM WorkOrder AS T1 INNER JOIN ScrapReason AS T2 ON T1.ScrapReasonID = T2.ScrapReasonID WHERE T1.WorkOrderID = 57788"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the cost for the sports?",
+        "query": "SELECT T2.StandardCost FROM Product AS T1 INNER JOIN ProductCostHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name LIKE '%Sport%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many products with the id \"476\" are stored in Metal Storage?",
+        "query": "SELECT T2.Quantity FROM Location AS T1 INNER JOIN ProductInventory AS T2 ON T1.LocationID = T2.LocationID WHERE T2.ProductID = 476 AND T1.Name = 'Metal Storage'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all the products with lower than average cost.",
+        "query": "SELECT DISTINCT T2.ProductID FROM ProductCostHistory AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T1.StandardCost < ( SELECT SUM(StandardCost) / COUNT(ProductID) FROM Product )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the the percentage of profit for the product \"858\"?",
+        "query": "SELECT (T1.ListPrice - T2.StandardCost) * 100 / T2.StandardCost FROM ProductListPriceHistory AS T1 INNER JOIN ProductCostHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ProductID = 858"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many products with a thumpnail photo?",
+        "query": "SELECT COUNT(ProductID) FROM ProductProductPhoto WHERE ProductPhotoID != 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many days did it take to end the work order \"425\"?",
+        "query": "SELECT 365 * (STRFTIME('%Y', ActualEndDate) - STRFTIME('%Y', ActualStartDate)) + 30 * (STRFTIME('%m', ActualEndDate) - STRFTIME('%m', ActualStartDate)) + STRFTIME('%d', ActualEndDate) - STRFTIME('%d', ActualStartDate) FROM WorkOrderRouting WHERE WorkOrderID = 425"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Which product has the highest price in 2012?",
+        "query": "SELECT ProductID FROM ProductListPriceHistory WHERE StartDate LIKE '2012%' ORDER BY ListPrice DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the cost for the product \"847\"?",
+        "query": "SELECT StandardCost FROM ProductCostHistory WHERE ProductID = 847"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the organization level for Human Resources Manager?",
+        "query": "SELECT OrganizationLevel FROM Employee WHERE JobTitle = 'Human Resources Manager'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many of the work orders didn\u2019t meet the due date?",
+        "query": "SELECT COUNT(WorkOrderID) FROM WorkOrder WHERE EndDate > DueDate"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the cost and the product number of product with the id \"888\"?",
+        "query": "SELECT T2.StandardCost, T2.ProductNumber FROM ProductCostHistory AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ProductID = 888"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "How many products using \"roadster_black_small.gif\" as the thumbnail photo?",
+        "query": "SELECT COUNT(DISTINCT T2.ProductID) FROM ProductPhoto AS T1 INNER JOIN ProductProductPhoto AS T2 ON T1.ProductPhotoID = T2.ProductPhotoID WHERE T1.LargePhotoFileName = 'roadster_black_large.gif'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List the locations ids, compartments and containers for the Lock Ring",
+        "query": "SELECT T2.LocationID, T2.Shelf, T2.Bin FROM Product AS T1 INNER JOIN ProductInventory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name LIKE 'Lock Ring'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What category do Road Frames fall into?",
+        "query": "SELECT T2.Name FROM ProductSubcategory AS T1 INNER JOIN ProductCategory AS T2 ON T1.ProductCategoryID = T2.ProductCategoryID WHERE T1.Name = 'Road Frames'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all the scraped work orders for handling damage reason.",
+        "query": "SELECT T2.WorkOrderID FROM ScrapReason AS T1 INNER JOIN WorkOrder AS T2 ON T1.ScrapReasonID = T2.ScrapReasonID WHERE T1.Name = 'Handling damage'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the profit for the product \"792\"?",
+        "query": "SELECT T1.ListPrice - T2.StandardCost FROM ProductListPriceHistory AS T1 INNER JOIN ProductCostHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.ProductID = 792"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Who owns the email address \"regina7@adventure-works.com\"?",
+        "query": "SELECT T2.FirstName, T2.LastName FROM EmailAddress AS T1 INNER JOIN Person AS T2 ON T1.BusinessEntityID = T2.BusinessEntityID WHERE T1.EmailAddress = 'regina7@adventure-works.com'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "Where are the locations where the product \"810\" is stored?",
+        "query": "SELECT T2.Name FROM ProductInventory AS T1 INNER JOIN Location AS T2 ON T1.LocationID = T2.LocationID WHERE T1.ProductID = 810"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the name of the product the work order \"2540\" was making?",
+        "query": "SELECT T2.Name FROM WorkOrder AS T1 INNER JOIN Product AS T2 ON T1.ProductID = T2.ProductID WHERE T1.WorkOrderID = 2540"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the price for the AWC Logo Cap?",
+        "query": "SELECT T2.ListPrice FROM Product AS T1 INNER JOIN ProductListPriceHistory AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name = 'AWC Logo Cap'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "List all the work orders that is related to the Down Tube.",
+        "query": "SELECT T2.WorkOrderID FROM Product AS T1 INNER JOIN WorkOrder AS T2 ON T1.ProductID = T2.ProductID WHERE T1.Name = 'Down Tube'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What is the the average percentage of profit for the all the product?",
+        "query": "SELECT AVG((T1.ListPrice - T2.StandardCost) * 100 / T2.StandardCost) FROM ProductListPriceHistory AS T1 INNER JOIN ProductCostHistory AS T2 ON T1.ProductID = T2.ProductID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "works_cycles",
+        "question": "What proportion of work order is in Subassembly?",
+        "query": "SELECT 100.0 * SUM(CASE WHEN T1.Name = 'Subassembly' THEN 1 ELSE 0 END) / COUNT(T2.WorkOrderID) FROM Location AS T1 INNER JOIN WorkOrderRouting AS T2 ON T1.LocationID = T2.LocationID"
+    }
+]

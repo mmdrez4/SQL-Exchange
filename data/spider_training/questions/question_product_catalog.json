@@ -1,0 +1,254 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the names of all the catalog entries.",
+        "query": "SELECT distinct(catalog_entry_name) FROM catalog_contents"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "What are all the catalog entry names?",
+        "query": "SELECT distinct(catalog_entry_name) FROM catalog_contents"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the list of attribute data types possessed by more than 3 attribute definitions.",
+        "query": "SELECT attribute_data_type FROM Attribute_Definitions GROUP BY attribute_data_type HAVING count(*)  >  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "What are the attribute data types with more than 3 attribute definitions?",
+        "query": "SELECT attribute_data_type FROM Attribute_Definitions GROUP BY attribute_data_type HAVING count(*)  >  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "What is the attribute data type of the attribute with name \"Green\"?",
+        "query": "SELECT attribute_data_type FROM Attribute_Definitions WHERE attribute_name  =  \"Green\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the attribute data type for the attribute named \"Green\".",
+        "query": "SELECT attribute_data_type FROM Attribute_Definitions WHERE attribute_name  =  \"Green\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the name and level of catalog structure with level between 5 and 10.",
+        "query": "SELECT catalog_level_name ,  catalog_level_number FROM Catalog_Structure WHERE catalog_level_number BETWEEN 5 AND 10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "What are the name and level of catalog structure with level number between 5 and 10",
+        "query": "SELECT catalog_level_name ,  catalog_level_number FROM Catalog_Structure WHERE catalog_level_number BETWEEN 5 AND 10"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find all the catalog publishers whose name contains \"Murray\"",
+        "query": "SELECT distinct(catalog_publisher) FROM catalogs WHERE catalog_publisher LIKE \"%Murray%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Which catalog publishers have substring \"Murray\" in their names?",
+        "query": "SELECT distinct(catalog_publisher) FROM catalogs WHERE catalog_publisher LIKE \"%Murray%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Which catalog publisher has published the most catalogs?",
+        "query": "SELECT catalog_publisher FROM catalogs GROUP BY catalog_publisher ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the catalog publisher that has the most catalogs.",
+        "query": "SELECT catalog_publisher FROM catalogs GROUP BY catalog_publisher ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the names and publication dates of all catalogs that have catalog level number greater than 5.",
+        "query": "SELECT t1.catalog_name ,  t1.date_of_publication FROM catalogs AS t1 JOIN catalog_structure AS t2 ON t1.catalog_id  =  t2.catalog_id WHERE catalog_level_number  >  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "What are the name and publication date of the catalogs with catalog level number above 5?",
+        "query": "SELECT t1.catalog_name ,  t1.date_of_publication FROM catalogs AS t1 JOIN catalog_structure AS t2 ON t1.catalog_id  =  t2.catalog_id WHERE catalog_level_number  >  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "What are the entry names of catalog with the attribute possessed by most entries.",
+        "query": "SELECT t1.catalog_entry_name FROM Catalog_Contents AS t1 JOIN Catalog_Contents_Additional_Attributes AS t2 ON t1.catalog_entry_id  =  t2.catalog_entry_id WHERE t2.attribute_value  =  (SELECT attribute_value FROM Catalog_Contents_Additional_Attributes GROUP BY attribute_value ORDER BY count(*) DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the entry names of the catalog with the attribute that have the most entries.",
+        "query": "SELECT t1.catalog_entry_name FROM Catalog_Contents AS t1 JOIN Catalog_Contents_Additional_Attributes AS t2 ON t1.catalog_entry_id  =  t2.catalog_entry_id WHERE t2.attribute_value  =  (SELECT attribute_value FROM Catalog_Contents_Additional_Attributes GROUP BY attribute_value ORDER BY count(*) DESC LIMIT 1)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "What is the entry name of the most expensive catalog (in USD)?",
+        "query": "SELECT catalog_entry_name FROM catalog_contents ORDER BY price_in_dollars DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the entry name of the catalog with the highest price (in USD).",
+        "query": "SELECT catalog_entry_name FROM catalog_contents ORDER BY price_in_dollars DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "What is the level name of the cheapest catalog (in USD)?",
+        "query": "SELECT t2.catalog_level_name FROM catalog_contents AS t1 JOIN catalog_structure AS t2 ON t1.catalog_level_number  =  t2.catalog_level_number ORDER BY t1.price_in_dollars LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the level name of the catalog with the lowest price (in USD).",
+        "query": "SELECT t2.catalog_level_name FROM catalog_contents AS t1 JOIN catalog_structure AS t2 ON t1.catalog_level_number  =  t2.catalog_level_number ORDER BY t1.price_in_dollars LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "What are the average and minimum price (in Euro) of all products?",
+        "query": "SELECT avg(price_in_euros) ,  min(price_in_euros) FROM catalog_contents"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Give me the average and minimum price (in Euro) of the products.",
+        "query": "SELECT avg(price_in_euros) ,  min(price_in_euros) FROM catalog_contents"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "What is the product with the highest height? Give me the catalog entry name.",
+        "query": "SELECT catalog_entry_name FROM catalog_contents ORDER BY height DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Which catalog content has the highest height? Give me the catalog entry name.",
+        "query": "SELECT catalog_entry_name FROM catalog_contents ORDER BY height DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the name of the product that has the smallest capacity.",
+        "query": "SELECT catalog_entry_name FROM catalog_contents ORDER BY capacity ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Which catalog content has the smallest capacity? Return the catalog entry name.",
+        "query": "SELECT catalog_entry_name FROM catalog_contents ORDER BY capacity ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the names of all the products whose stock number starts with \"2\".",
+        "query": "SELECT catalog_entry_name FROM catalog_contents WHERE product_stock_number LIKE \"2%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Which catalog contents have a product stock number that starts from \"2\"? Show the catalog entry names.",
+        "query": "SELECT catalog_entry_name FROM catalog_contents WHERE product_stock_number LIKE \"2%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the names of catalog entries with level number 8.",
+        "query": "SELECT t1.catalog_entry_name FROM Catalog_Contents AS t1 JOIN Catalog_Contents_Additional_Attributes AS t2 ON t1.catalog_entry_id  =  t2.catalog_entry_id WHERE t2.catalog_level_number  =  \"8\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "What are the names of catalog entries with level number 8?",
+        "query": "SELECT t1.catalog_entry_name FROM Catalog_Contents AS t1 JOIN Catalog_Contents_Additional_Attributes AS t2 ON t1.catalog_entry_id  =  t2.catalog_entry_id WHERE t2.catalog_level_number  =  \"8\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the names of the products with length smaller than 3 or height greater than 5.",
+        "query": "SELECT catalog_entry_name FROM catalog_contents WHERE LENGTH  <  3 OR width  >  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Which catalog contents have length below 3 or above 5? Find the catalog entry names.",
+        "query": "SELECT catalog_entry_name FROM catalog_contents WHERE LENGTH  <  3 OR width  >  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the name and attribute ID of the attribute definitions with attribute value 0.",
+        "query": "SELECT t1.attribute_name ,  t1.attribute_id FROM Attribute_Definitions AS t1 JOIN Catalog_Contents_Additional_Attributes AS t2 ON t1.attribute_id  =  t2.attribute_id WHERE t2.attribute_value  =  0"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Which attribute definitions have attribute value 0? Give me the attribute name and attribute ID.",
+        "query": "SELECT t1.attribute_name ,  t1.attribute_id FROM Attribute_Definitions AS t1 JOIN Catalog_Contents_Additional_Attributes AS t2 ON t1.attribute_id  =  t2.attribute_id WHERE t2.attribute_value  =  0"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the name and capacity of products with price greater than 700 (in USD).",
+        "query": "SELECT catalog_entry_name ,  capacity FROM Catalog_Contents WHERE price_in_dollars  >  700"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Which catalog contents has price above 700 dollars? Show their catalog entry names and capacities.",
+        "query": "SELECT catalog_entry_name ,  capacity FROM Catalog_Contents WHERE price_in_dollars  >  700"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the dates on which more than one revisions were made.",
+        "query": "SELECT date_of_latest_revision FROM Catalogs GROUP BY date_of_latest_revision HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "On which days more than one revisions were made on catalogs.",
+        "query": "SELECT date_of_latest_revision FROM Catalogs GROUP BY date_of_latest_revision HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "How many products are there in the records?",
+        "query": "SELECT count(*) FROM catalog_contents"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Find the total number of catalog contents.",
+        "query": "SELECT count(*) FROM catalog_contents"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "Name all the products with next entry ID greater than 8.",
+        "query": "SELECT catalog_entry_name FROM catalog_contents WHERE next_entry_id  >  8"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "product_catalog",
+        "question": "What are the catalog entry names of the products with next entry ID above 8?",
+        "query": "SELECT catalog_entry_name FROM catalog_contents WHERE next_entry_id  >  8"
+    }
+]

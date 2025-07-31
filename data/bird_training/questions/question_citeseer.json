@@ -1,0 +1,116 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "Among all the citation, what is the percentage of paper ID under the Agents classification?",
+        "query": "SELECT CAST(COUNT(CASE WHEN class_label = 'Agents' THEN paper_id ELSE NULL END) AS REAL) * 100 / COUNT(paper_id) FROM paper"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "What is the most cited word? How many papers was that word cited in?",
+        "query": "SELECT word_cited_id, COUNT(paper_id) FROM content GROUP BY word_cited_id ORDER BY COUNT(word_cited_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "What is the total number of word cited under that class labelled 'AI'?",
+        "query": "SELECT COUNT(DISTINCT T2.word_cited_id) FROM paper AS T1 INNER JOIN content AS T2 ON T1.paper_id = T2.paper_id WHERE T1.class_label = 'AI'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "For all words cited in paper ID 315017, state the other paper ID and class label which also cited those words.",
+        "query": "SELECT T1.class_label, T2.word_cited_id FROM paper AS T1 INNER JOIN content AS T2 ON T1.paper_id = T2.paper_id WHERE T1.paper_id = 315017"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "Among all the DB class type citation, which word is the most frequently cited?",
+        "query": "SELECT T2.word_cited_id FROM paper AS T1 INNER JOIN content AS T2 ON T1.paper_id = T2.paper_id WHERE T1.class_label = 'DB' GROUP BY T2.word_cited_id ORDER BY COUNT(T2.word_cited_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "Calculate the percentage of words used in Agents class label.",
+        "query": "SELECT CAST(COUNT(DISTINCT CASE WHEN T1.class_label = 'Agents' THEN T2.word_cited_id ELSE NULL END) AS REAL) * 100 / COUNT(DISTINCT T2.word_cited_id) FROM paper AS T1 INNER JOIN content AS T2 ON T1.paper_id = T2.paper_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "Which paper ID cited the most word? In which class label does it belongs to?",
+        "query": "SELECT T1.paper_id, T1.class_label FROM paper AS T1 INNER JOIN content AS T2 ON T1.paper_id = T2.paper_id GROUP BY T1.paper_id, T1.class_label ORDER BY COUNT(T2.word_cited_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "List all the paper ID and its class type that cited the word 'word1002'.",
+        "query": "SELECT T1.paper_id, T1.class_label FROM paper AS T1 INNER JOIN content AS T2 ON T1.paper_id = T2.paper_id WHERE T2.word_cited_id = 'word1002'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "List all words cited in the AI class label.",
+        "query": "SELECT DISTINCT T2.word_cited_id FROM paper AS T1 INNER JOIN content AS T2 ON T1.paper_id = T2.paper_id WHERE T1.class_label = 'AI'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "What is the class label of paper ID 'chakrabarti01integrating'. How many words were cited by this paper ID?",
+        "query": "SELECT DISTINCT T1.class_label, COUNT(T2.word_cited_id) FROM paper AS T1 INNER JOIN content AS T2 ON T1.paper_id = T2.paper_id WHERE T1.paper_id = 'chakrabarti01integrating' GROUP BY T1.class_label"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "List all paper ID and its class type with more than 20 cited words.",
+        "query": "SELECT DISTINCT T1.paper_id, T1.class_label FROM paper AS T1 INNER JOIN content AS T2 ON T1.paper_id = T2.paper_id GROUP BY T2.paper_id, T1.class_label HAVING COUNT(T2.word_cited_id) > 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "List the words that are cited in both AI and IR class label.",
+        "query": "SELECT DISTINCT T2.word_cited_id FROM paper AS T1 INNER JOIN content AS T2 ON T1.paper_id = T2.paper_id WHERE T1.class_label = 'AI' OR T1.class_label = 'IR'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "Name the paper which is cited most times and the paper which is cited least times? Also, find the number of times each one is cited.",
+        "query": "SELECT cited_paper_id, COUNT(cited_paper_id), ( SELECT cited_paper_id FROM cites GROUP BY cited_paper_id ORDER BY COUNT(cited_paper_id) ASC LIMIT 1 ), ( SELECT COUNT(cited_paper_id) FROM cites GROUP BY cited_paper_id ORDER BY COUNT(cited_paper_id) ASC LIMIT 1 ) FROM cites GROUP BY cited_paper_id ORDER BY COUNT(cited_paper_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "On average, how many papers are under the ML class?",
+        "query": "SELECT CAST(COUNT(CASE WHEN class_label = 'ML' THEN paper_id ELSE NULL END) AS REAL) / COUNT(paper_id) FROM paper"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "Find the words cited in papers that are cited by sima01computational?",
+        "query": "SELECT DISTINCT T2.word_cited_id FROM cites AS T1 INNER JOIN content AS T2 ON T1.cited_paper_id = T2.paper_id WHERE T1.citing_paper_id = 'sima01computational'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "How many papers were cited by schmidt99advanced cited word3555?",
+        "query": "SELECT COUNT(T2.paper_id) FROM cites AS T1 INNER JOIN content AS T2 ON T1.cited_paper_id = T2.paper_id WHERE T1.citing_paper_id = 'schmidt99advanced' AND T2.word_cited_id = 'word3555'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "Under what classification do the papers that cited word1163 belong?",
+        "query": "SELECT DISTINCT T1.class_label FROM paper AS T1 INNER JOIN content AS T2 ON T1.paper_id = T2.paper_id WHERE T2.word_cited_id = 'word1163'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "Among the papers under DB classification, which paper has the highest number of words cited?",
+        "query": "SELECT T1.paper_id FROM paper AS T1 INNER JOIN content AS T2 ON T1.paper_id = T2.paper_id WHERE T1.class_label = 'DB' GROUP BY T1.paper_id ORDER BY COUNT(T2.word_cited_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "citeseer",
+        "question": "In the papers classified as ML, how many cited butz01algorithmic?",
+        "query": "SELECT COUNT(T1.paper_id) FROM paper AS T1 INNER JOIN cites AS T2 ON T1.paper_id = T2.citing_paper_id WHERE T1.class_label = 'ML' AND T2.cited_paper_id = 'butz01algorithmic'"
+    }
+]

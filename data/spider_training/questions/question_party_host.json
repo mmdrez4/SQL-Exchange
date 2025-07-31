@@ -1,0 +1,182 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "How many parties are there?",
+        "query": "SELECT count(*) FROM party"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Count the number of parties.",
+        "query": "SELECT count(*) FROM party"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "List the themes of parties in ascending order of number of hosts.",
+        "query": "SELECT Party_Theme FROM party ORDER BY Number_of_hosts ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "What are the themes of parties ordered by the number of hosts in ascending manner?",
+        "query": "SELECT Party_Theme FROM party ORDER BY Number_of_hosts ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "What are the themes and locations of parties?",
+        "query": "SELECT Party_Theme ,  LOCATION FROM party"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Give me the theme and location of each party.",
+        "query": "SELECT Party_Theme ,  LOCATION FROM party"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Show the first year and last year of parties with theme \"Spring\" or \"Teqnology\".",
+        "query": "SELECT First_year ,  Last_year FROM party WHERE Party_Theme  =  \"Spring\" OR Party_Theme  =  \"Teqnology\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "What are the first year and last year of the parties whose theme is \"Spring\" or \"Teqnology\"?",
+        "query": "SELECT First_year ,  Last_year FROM party WHERE Party_Theme  =  \"Spring\" OR Party_Theme  =  \"Teqnology\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "What is the average number of hosts for parties?",
+        "query": "SELECT avg(Number_of_hosts) FROM party"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Compute the average number of hosts for parties.",
+        "query": "SELECT avg(Number_of_hosts) FROM party"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "What is the location of the party with the most hosts?",
+        "query": "SELECT LOCATION FROM party ORDER BY Number_of_hosts DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Which party had the most hosts? Give me the party location.",
+        "query": "SELECT LOCATION FROM party ORDER BY Number_of_hosts DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Show different nationalities along with the number of hosts of each nationality.",
+        "query": "SELECT Nationality ,  COUNT(*) FROM HOST GROUP BY Nationality"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "How many hosts does each nationality have? List the nationality and the count.",
+        "query": "SELECT Nationality ,  COUNT(*) FROM HOST GROUP BY Nationality"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Show the most common nationality of hosts.",
+        "query": "SELECT Nationality FROM HOST GROUP BY Nationality ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Which nationality has the most hosts?",
+        "query": "SELECT Nationality FROM HOST GROUP BY Nationality ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Show the nations that have both hosts older than 45 and hosts younger than 35.",
+        "query": "SELECT Nationality FROM HOST WHERE Age  >  45 INTERSECT SELECT Nationality FROM HOST WHERE Age  <  35"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Which nations have both hosts of age above 45 and hosts of age below 35?",
+        "query": "SELECT Nationality FROM HOST WHERE Age  >  45 INTERSECT SELECT Nationality FROM HOST WHERE Age  <  35"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Show the themes of parties and the names of the party hosts.",
+        "query": "SELECT T3.Party_Theme ,  T2.Name FROM party_host AS T1 JOIN HOST AS T2 ON T1.Host_ID  =  T2.Host_ID JOIN party AS T3 ON T1.Party_ID  =  T3.Party_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "For each party, return its theme and the name of its host.",
+        "query": "SELECT T3.Party_Theme ,  T2.Name FROM party_host AS T1 JOIN HOST AS T2 ON T1.Host_ID  =  T2.Host_ID JOIN party AS T3 ON T1.Party_ID  =  T3.Party_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Show the locations of parties and the names of the party hosts in ascending order of the age of the host.",
+        "query": "SELECT T3.Location ,  T2.Name FROM party_host AS T1 JOIN HOST AS T2 ON T1.Host_ID  =  T2.Host_ID JOIN party AS T3 ON T1.Party_ID  =  T3.Party_ID ORDER BY T2.Age"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "For each party, find its location and the name of its host. Sort the result in ascending order of the age of the host.",
+        "query": "SELECT T3.Location ,  T2.Name FROM party_host AS T1 JOIN HOST AS T2 ON T1.Host_ID  =  T2.Host_ID JOIN party AS T3 ON T1.Party_ID  =  T3.Party_ID ORDER BY T2.Age"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Show the locations of parties with hosts older than 50.",
+        "query": "SELECT T3.Location FROM party_host AS T1 JOIN HOST AS T2 ON T1.Host_ID  =  T2.Host_ID JOIN party AS T3 ON T1.Party_ID  =  T3.Party_ID WHERE T2.Age  >  50"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Which parties have hosts of age above 50? Give me the party locations.",
+        "query": "SELECT T3.Location FROM party_host AS T1 JOIN HOST AS T2 ON T1.Host_ID  =  T2.Host_ID JOIN party AS T3 ON T1.Party_ID  =  T3.Party_ID WHERE T2.Age  >  50"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Show the host names for parties with number of hosts greater than 20.",
+        "query": "SELECT T2.Name FROM party_host AS T1 JOIN HOST AS T2 ON T1.Host_ID  =  T2.Host_ID JOIN party AS T3 ON T1.Party_ID  =  T3.Party_ID WHERE T3.Number_of_hosts  >  20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Which parties have more than 20 hosts? Give me the host names for these parties.",
+        "query": "SELECT T2.Name FROM party_host AS T1 JOIN HOST AS T2 ON T1.Host_ID  =  T2.Host_ID JOIN party AS T3 ON T1.Party_ID  =  T3.Party_ID WHERE T3.Number_of_hosts  >  20"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "Show the name and the nationality of the oldest host.",
+        "query": "SELECT Name ,  Nationality FROM HOST ORDER BY Age DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "What are the name and the nationality of the host of the highest age?",
+        "query": "SELECT Name ,  Nationality FROM HOST ORDER BY Age DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "List the names of hosts who did not serve as a host of any party in our record.",
+        "query": "SELECT Name FROM HOST WHERE Host_ID NOT IN (SELECT Host_ID FROM party_host)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "party_host",
+        "question": "What are the names of hosts who did not host any party in our record?",
+        "query": "SELECT Name FROM HOST WHERE Host_ID NOT IN (SELECT Host_ID FROM party_host)"
+    }
+]

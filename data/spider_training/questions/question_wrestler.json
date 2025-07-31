@@ -1,0 +1,242 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "How many wrestlers are there?",
+        "query": "SELECT count(*) FROM wrestler"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Count the number of wrestlers.",
+        "query": "SELECT count(*) FROM wrestler"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "List the names of wrestlers in descending order of days held.",
+        "query": "SELECT Name FROM wrestler ORDER BY Days_held DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "What are the names of the wrestlers, ordered descending by days held?",
+        "query": "SELECT Name FROM wrestler ORDER BY Days_held DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "What is the name of the wrestler with the fewest days held?",
+        "query": "SELECT Name FROM wrestler ORDER BY Days_held ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Return the name of the wrestler who had the lowest number of days held.",
+        "query": "SELECT Name FROM wrestler ORDER BY Days_held ASC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "What are the distinct reigns of wrestlers whose location is not \"Tokyo,Japan\" ?",
+        "query": "SELECT DISTINCT Reign FROM wrestler WHERE LOCATION != \"Tokyo , Japan\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Give the different reigns of wrestlers who are not located in Tokyo, Japan.",
+        "query": "SELECT DISTINCT Reign FROM wrestler WHERE LOCATION != \"Tokyo , Japan\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "What are the names and location of the wrestlers?",
+        "query": "SELECT Name ,  LOCATION FROM wrestler"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Give the names and locations of all wrestlers.",
+        "query": "SELECT Name ,  LOCATION FROM wrestler"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "What are the elimination moves of wrestlers whose team is \"Team Orton\"?",
+        "query": "SELECT Elimination_Move FROM Elimination WHERE Team  =  \"Team Orton\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Return the elimination movies of wrestlers on Team Orton.",
+        "query": "SELECT Elimination_Move FROM Elimination WHERE Team  =  \"Team Orton\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "What are the names of wrestlers and the elimination moves?",
+        "query": "SELECT T2.Name ,  T1.Elimination_Move FROM elimination AS T1 JOIN wrestler AS T2 ON T1.Wrestler_ID  =  T2.Wrestler_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Give the names of wrestlers and their elimination moves.",
+        "query": "SELECT T2.Name ,  T1.Elimination_Move FROM elimination AS T1 JOIN wrestler AS T2 ON T1.Wrestler_ID  =  T2.Wrestler_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "List the names of wrestlers and the teams in elimination in descending order of days held.",
+        "query": "SELECT T2.Name ,  T1.Team FROM elimination AS T1 JOIN wrestler AS T2 ON T1.Wrestler_ID  =  T2.Wrestler_ID ORDER BY T2.Days_held DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "What are the names of wrestlers and their teams in elimination, ordered descending by days held?",
+        "query": "SELECT T2.Name ,  T1.Team FROM elimination AS T1 JOIN wrestler AS T2 ON T1.Wrestler_ID  =  T2.Wrestler_ID ORDER BY T2.Days_held DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "List the time of elimination of the wrestlers with largest days held.",
+        "query": "SELECT T1.Time FROM elimination AS T1 JOIN wrestler AS T2 ON T1.Wrestler_ID  =  T2.Wrestler_ID ORDER BY T2.Days_held DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "What is the time of elimination for the wrestler with the most days held?",
+        "query": "SELECT T1.Time FROM elimination AS T1 JOIN wrestler AS T2 ON T1.Wrestler_ID  =  T2.Wrestler_ID ORDER BY T2.Days_held DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Show times of elimination of wrestlers with days held more than 50.",
+        "query": "SELECT T1.Time FROM elimination AS T1 JOIN wrestler AS T2 ON T1.Wrestler_ID  =  T2.Wrestler_ID WHERE T2.Days_held  >  50"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "What are the times of elimination for wrestlers with over 50 days held?",
+        "query": "SELECT T1.Time FROM elimination AS T1 JOIN wrestler AS T2 ON T1.Wrestler_ID  =  T2.Wrestler_ID WHERE T2.Days_held  >  50"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Show different teams in eliminations and the number of eliminations from each team.",
+        "query": "SELECT Team ,  COUNT(*) FROM elimination GROUP BY Team"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "How many eliminations did each team have?",
+        "query": "SELECT Team ,  COUNT(*) FROM elimination GROUP BY Team"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Show teams that have suffered more than three eliminations.",
+        "query": "SELECT Team FROM elimination GROUP BY Team HAVING COUNT(*)  >  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Which teams had more than 3 eliminations?",
+        "query": "SELECT Team FROM elimination GROUP BY Team HAVING COUNT(*)  >  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Show the reign and days held of wrestlers.",
+        "query": "SELECT Reign ,  Days_held FROM wrestler"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "What are the reigns and days held of all wrestlers?",
+        "query": "SELECT Reign ,  Days_held FROM wrestler"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "What are the names of wrestlers days held less than 100?",
+        "query": "SELECT Name FROM wrestler WHERE Days_held  <  100"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Return the names of wrestlers with fewer than 100 days held.",
+        "query": "SELECT Name FROM wrestler WHERE Days_held  <  100"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Please show the most common reigns of wrestlers.",
+        "query": "SELECT Reign FROM wrestler GROUP BY Reign ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Which reign is the most common among wrestlers?",
+        "query": "SELECT Reign FROM wrestler GROUP BY Reign ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "List the locations that are shared by more than two wrestlers.",
+        "query": "SELECT LOCATION FROM wrestler GROUP BY LOCATION HAVING COUNT(*)  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Which locations are shared by more than two wrestlers?",
+        "query": "SELECT LOCATION FROM wrestler GROUP BY LOCATION HAVING COUNT(*)  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "List the names of wrestlers that have not been eliminated.",
+        "query": "SELECT Name FROM wrestler WHERE Wrestler_ID NOT IN (SELECT Wrestler_ID FROM elimination)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "What are the names of wrestlers who have never been eliminated?",
+        "query": "SELECT Name FROM wrestler WHERE Wrestler_ID NOT IN (SELECT Wrestler_ID FROM elimination)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Show the teams that have both wrestlers eliminated by \"Orton\" and wrestlers eliminated by \"Benjamin\".",
+        "query": "SELECT Team FROM Elimination WHERE Eliminated_By  =  \"Orton\" INTERSECT SELECT Team FROM Elimination WHERE Eliminated_By  =  \"Benjamin\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "What are the teams that have both wrestlers eliminated by Orton and wrestlers eliminated by Benjamin?",
+        "query": "SELECT Team FROM Elimination WHERE Eliminated_By  =  \"Orton\" INTERSECT SELECT Team FROM Elimination WHERE Eliminated_By  =  \"Benjamin\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "What is the number of distinct teams that suffer elimination?",
+        "query": "SELECT COUNT (DISTINCT team) FROM elimination"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "How many different teams have had eliminated wrestlers?",
+        "query": "SELECT COUNT (DISTINCT team) FROM elimination"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "Show the times of elimination by \"Punk\" or \"Orton\".",
+        "query": "SELECT TIME FROM elimination WHERE Eliminated_By  =  \"Punk\" OR Eliminated_By  =  \"Orton\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "wrestler",
+        "question": "What are the times of elimination for any instances in which the elimination was done by Punk or Orton?",
+        "query": "SELECT TIME FROM elimination WHERE Eliminated_By  =  \"Punk\" OR Eliminated_By  =  \"Orton\""
+    }
+]

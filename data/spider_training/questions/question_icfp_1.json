@@ -1,0 +1,398 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "How many authors are there?",
+        "query": "SELECT count(*) FROM authors"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Count the number of authors.",
+        "query": "SELECT count(*) FROM authors"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "How many institutions are there?",
+        "query": "SELECT count(*) FROM inst"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Count the number of institutions.",
+        "query": "SELECT count(*) FROM inst"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "How many papers are published in total?",
+        "query": "SELECT count(*) FROM papers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Count the number of total papers.",
+        "query": "SELECT count(*) FROM papers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "What are the titles of papers published by \"Jeremy Gibbons\"?",
+        "query": "SELECT t3.title FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE  t1.fname  =  \"Jeremy\" AND t1.lname  =  \"Gibbons\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the titles of all the papers written by \"Jeremy Gibbons\"",
+        "query": "SELECT t3.title FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE  t1.fname  =  \"Jeremy\" AND t1.lname  =  \"Gibbons\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find all the papers published by \"Aaron Turon\".",
+        "query": "SELECT t3.title FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE  t1.fname  =  \"Aaron\" AND t1.lname  =  \"Turon\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the titles of all the papers written by \"Aaron Turon\".",
+        "query": "SELECT t3.title FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE  t1.fname  =  \"Aaron\" AND t1.lname  =  \"Turon\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "How many papers have \"Atsushi Ohori\" published?",
+        "query": "SELECT count(*) FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE  t1.fname  =  \"Atsushi\" AND t1.lname  =  \"Ohori\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "How many papers are \"Atsushi Ohori\" the author of?",
+        "query": "SELECT count(*) FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE  t1.fname  =  \"Atsushi\" AND t1.lname  =  \"Ohori\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "What is the name of the institution that \"Matthias Blume\" belongs to?",
+        "query": "SELECT DISTINCT t3.name FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN inst AS t3 ON t2.instid  =  t3.instid WHERE t1.fname  =  \"Matthias\" AND t1.lname  =  \"Blume\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which institution is the author \"Matthias Blume\" belong to? Give me the name of the institution.",
+        "query": "SELECT DISTINCT t3.name FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN inst AS t3 ON t2.instid  =  t3.instid WHERE t1.fname  =  \"Matthias\" AND t1.lname  =  \"Blume\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which institution does \"Katsuhiro Ueno\" belong to?",
+        "query": "SELECT DISTINCT t3.name FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN inst AS t3 ON t2.instid  =  t3.instid WHERE t1.fname  =  \"Katsuhiro\" AND t1.lname  =  \"Ueno\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "What is the name of the institution the author \"Katsuhiro Ueno\" belongs to?",
+        "query": "SELECT DISTINCT t3.name FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN inst AS t3 ON t2.instid  =  t3.instid WHERE t1.fname  =  \"Katsuhiro\" AND t1.lname  =  \"Ueno\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Who belong to the institution \"University of Oxford\"? Show the first names and last names.",
+        "query": "SELECT DISTINCT t1.fname ,  t1.lname FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN inst AS t3 ON t2.instid  =  t3.instid WHERE t3.name  =  \"University of Oxford\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the first names and last names of the authors whose institution affiliation is \"University of Oxford\".",
+        "query": "SELECT DISTINCT t1.fname ,  t1.lname FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN inst AS t3 ON t2.instid  =  t3.instid WHERE t3.name  =  \"University of Oxford\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which authors belong to the institution \"Google\"? Show the first names and last names.",
+        "query": "SELECT DISTINCT t1.fname ,  t1.lname FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN inst AS t3 ON t2.instid  =  t3.instid WHERE t3.name  =  \"Google\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the first names and last names of the authors whose institution affiliation is \"Google\".",
+        "query": "SELECT DISTINCT t1.fname ,  t1.lname FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN inst AS t3 ON t2.instid  =  t3.instid WHERE t3.name  =  \"Google\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "What are the last names of the author of the paper titled \"Binders Unbound\"?",
+        "query": "SELECT t1.lname FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE t3.title  =  \"Binders Unbound\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Who is the author of the paper titled \"Binders Unbound\"? Give me the last name.",
+        "query": "SELECT t1.lname FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE t3.title  =  \"Binders Unbound\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the first and last name of the author(s) who wrote the paper \"Nameless, Painless\".",
+        "query": "SELECT t1.fname ,  t1.lname FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE t3.title  =  \"Nameless ,  Painless\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "What are the first and last name of the author who published the paper titled \"Nameless, Painless\"?",
+        "query": "SELECT t1.fname ,  t1.lname FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE t3.title  =  \"Nameless ,  Painless\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "What are the papers published under the institution \"Indiana University\"?",
+        "query": "SELECT DISTINCT t1.title FROM papers AS t1 JOIN authorship AS t2 ON t1.paperid  =  t2.paperid JOIN inst AS t3 ON t2.instid  =  t3.instid WHERE t3.name  =  \"Indiana University\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "List the titles of the papers whose authors are from the institution \"Indiana University\".",
+        "query": "SELECT DISTINCT t1.title FROM papers AS t1 JOIN authorship AS t2 ON t1.paperid  =  t2.paperid JOIN inst AS t3 ON t2.instid  =  t3.instid WHERE t3.name  =  \"Indiana University\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find all the papers published by the institution \"Google\".",
+        "query": "SELECT DISTINCT t1.title FROM papers AS t1 JOIN authorship AS t2 ON t1.paperid  =  t2.paperid JOIN inst AS t3 ON t2.instid  =  t3.instid WHERE t3.name  =  \"Google\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which papers were written by authors from the institution \"Google\"?",
+        "query": "SELECT DISTINCT t1.title FROM papers AS t1 JOIN authorship AS t2 ON t1.paperid  =  t2.paperid JOIN inst AS t3 ON t2.instid  =  t3.instid WHERE t3.name  =  \"Google\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "How many papers are published by the institution \"Tokohu University\"?",
+        "query": "SELECT count(DISTINCT t1.title) FROM papers AS t1 JOIN authorship AS t2 ON t1.paperid  =  t2.paperid JOIN inst AS t3 ON t2.instid  =  t3.instid WHERE t3.name  =  \"Tokohu University\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the number of papers published by authors from the institution \"Tokohu University\".",
+        "query": "SELECT count(DISTINCT t1.title) FROM papers AS t1 JOIN authorship AS t2 ON t1.paperid  =  t2.paperid JOIN inst AS t3 ON t2.instid  =  t3.instid WHERE t3.name  =  \"Tokohu University\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the number of papers published by the institution \"University of Pennsylvania\".",
+        "query": "SELECT count(DISTINCT t1.title) FROM papers AS t1 JOIN authorship AS t2 ON t1.paperid  =  t2.paperid JOIN inst AS t3 ON t2.instid  =  t3.instid WHERE t3.name  =  \"University of Pennsylvania\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "How many papers are written by authors from the institution \"University of Pennsylvania\"?",
+        "query": "SELECT count(DISTINCT t1.title) FROM papers AS t1 JOIN authorship AS t2 ON t1.paperid  =  t2.paperid JOIN inst AS t3 ON t2.instid  =  t3.instid WHERE t3.name  =  \"University of Pennsylvania\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the papers which have \"Olin Shivers\" as an author.",
+        "query": "SELECT t3.title FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE t1.fname  =  \"Olin\" AND t1.lname  =  \"Shivers\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which papers did the author \"Olin Shivers\" write? Give me the paper titles.",
+        "query": "SELECT t3.title FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE t1.fname  =  \"Olin\" AND t1.lname  =  \"Shivers\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which papers have \"Stephanie Weirich\" as an author?",
+        "query": "SELECT t3.title FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE t1.fname  =  \"Stephanie\" AND t1.lname  =  \"Weirich\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the titles of the papers the author \"Stephanie Weirich\" wrote.",
+        "query": "SELECT t3.title FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE t1.fname  =  \"Stephanie\" AND t1.lname  =  \"Weirich\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which paper is published in an institution in \"USA\" and have \"Turon\" as its second author?",
+        "query": "SELECT t3.title FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid JOIN inst AS t4 ON t2.instid  =  t4.instid WHERE t4.country  =  \"USA\" AND t2.authorder  =  2 AND t1.lname  =  \"Turon\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find papers whose second author has last name \"Turon\" and is affiliated with an institution in the country \"USA\".",
+        "query": "SELECT t3.title FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid JOIN inst AS t4 ON t2.instid  =  t4.instid WHERE t4.country  =  \"USA\" AND t2.authorder  =  2 AND t1.lname  =  \"Turon\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the titles of papers whose first author is affiliated with an institution in the country \"Japan\" and has last name \"Ohori\"?",
+        "query": "SELECT t3.title FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid JOIN inst AS t4 ON t2.instid  =  t4.instid WHERE t4.country  =  \"Japan\" AND t2.authorder  =  1 AND t1.lname  =  \"Ohori\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which papers' first author is affiliated with an institution in the country \"Japan\" and has last name \"Ohori\"? Give me the titles of the papers.",
+        "query": "SELECT t3.title FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid JOIN inst AS t4 ON t2.instid  =  t4.instid WHERE t4.country  =  \"Japan\" AND t2.authorder  =  1 AND t1.lname  =  \"Ohori\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "What is the last name of the author that has published the most papers?",
+        "query": "SELECT t1.lname FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid GROUP BY t1.fname ,  t1.lname ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which author has written the most papers? Find his or her last name.",
+        "query": "SELECT t1.lname FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid GROUP BY t1.fname ,  t1.lname ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Retrieve the country that has published the most papers.",
+        "query": "SELECT t1.country FROM inst AS t1 JOIN authorship AS t2 ON t1.instid  =  t2.instid JOIN papers AS t3 ON t2.paperid  =  t3.paperid GROUP BY t1.country ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the country that the most papers are affiliated with.",
+        "query": "SELECT t1.country FROM inst AS t1 JOIN authorship AS t2 ON t1.instid  =  t2.instid JOIN papers AS t3 ON t2.paperid  =  t3.paperid GROUP BY t1.country ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the name of the organization that has published the largest number of papers.",
+        "query": "SELECT t1.name FROM inst AS t1 JOIN authorship AS t2 ON t1.instid  =  t2.instid JOIN papers AS t3 ON t2.paperid  =  t3.paperid GROUP BY t1.name ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which institution has the most papers? Find the name of the institution.",
+        "query": "SELECT t1.name FROM inst AS t1 JOIN authorship AS t2 ON t1.instid  =  t2.instid JOIN papers AS t3 ON t2.paperid  =  t3.paperid GROUP BY t1.name ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the titles of the papers that contain the word \"ML\".",
+        "query": "SELECT title FROM papers WHERE title LIKE \"%ML%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which papers have the substring \"ML\" in their titles? Return the titles of the papers.",
+        "query": "SELECT title FROM papers WHERE title LIKE \"%ML%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which paper's title contains the word \"Database\"?",
+        "query": "SELECT title FROM papers WHERE title LIKE \"%Database%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which papers have the substring \"Database\" in their titles? Show the titles of the papers.",
+        "query": "SELECT title FROM papers WHERE title LIKE \"%Database%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the first names of all the authors who have written a paper with title containing the word \"Functional\".",
+        "query": "SELECT t1.fname FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE t3.title LIKE \"%Functional%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Who has written a paper that has the word \"Functional\" in its title? Return the first names of the authors.",
+        "query": "SELECT t1.fname FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE t3.title LIKE \"%Functional%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the last names of all the authors that have written a paper with title containing the word \"Monadic\".",
+        "query": "SELECT t1.lname FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE t3.title LIKE \"%Monadic%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which authors have written a paper with title containing the word \"Monadic\"? Return their last names.",
+        "query": "SELECT t1.lname FROM authors AS t1 JOIN authorship AS t2 ON t1.authid  =  t2.authid JOIN papers AS t3 ON t2.paperid  =  t3.paperid WHERE t3.title LIKE \"%Monadic%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Retrieve the title of the paper that has the largest number of authors.",
+        "query": "SELECT t2.title FROM authorship AS t1 JOIN papers AS t2 ON t1.paperid  =  t2.paperid WHERE t1.authorder  =  (SELECT max(authorder) FROM authorship)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which paper has the most authors? Give me the paper title.",
+        "query": "SELECT t2.title FROM authorship AS t1 JOIN papers AS t2 ON t1.paperid  =  t2.paperid WHERE t1.authorder  =  (SELECT max(authorder) FROM authorship)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "What is the first name of the author with last name \"Ueno\"?",
+        "query": "SELECT fname FROM authors WHERE lname  =  \"Ueno\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which authors have last name \"Ueno\"? List their first names.",
+        "query": "SELECT fname FROM authors WHERE lname  =  \"Ueno\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the last name of the author with first name \"Amal\".",
+        "query": "SELECT lname FROM authors WHERE fname  =  \"Amal\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Which authors have first name \"Amal\"? List their last names.",
+        "query": "SELECT lname FROM authors WHERE fname  =  \"Amal\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Find the first names of all the authors ordered in alphabetical order.",
+        "query": "SELECT fname FROM authors ORDER BY fname"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Sort the first names of all the authors in alphabetical order.",
+        "query": "SELECT fname FROM authors ORDER BY fname"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Retrieve all the last names of authors in alphabetical order.",
+        "query": "SELECT lname FROM authors ORDER BY lname"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Give me a list of all the last names of authors sorted in alphabetical order",
+        "query": "SELECT lname FROM authors ORDER BY lname"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Retrieve all the first and last names of authors in the alphabetical order of last names.",
+        "query": "SELECT fname ,  lname FROM authors ORDER BY lname"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "icfp_1",
+        "question": "Sort the list of all the first and last names of authors in alphabetical order of the last names.",
+        "query": "SELECT fname ,  lname FROM authors ORDER BY lname"
+    }
+]

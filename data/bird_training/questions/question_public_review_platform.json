@@ -1,0 +1,2288 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many Yelp businesses are there in 'AZ' with less than \"3\" stars?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE state LIKE 'AZ' AND stars < 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the quantity of the closed or not running Yelp Businesses in 'AZ'?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE state LIKE 'AZ' AND active LIKE 'False'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many long reviews does user No. 36139 give for the Yelp businesses?",
+        "query": "SELECT COUNT(review_length) FROM Reviews WHERE user_id = 36139 AND review_length LIKE 'long'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many users have \"uber\" number of fans?",
+        "query": "SELECT COUNT(user_id) FROM Users WHERE user_fans LIKE 'Uber'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many Yelp businesses are opened 24 hours?",
+        "query": "SELECT COUNT(T2.business_id) FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T1.attribute_name LIKE 'Open 24 Hours' AND T2.attribute_value LIKE 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What kind of \"wi-fi\" does Yelp business No.\"10172\" have?",
+        "query": "SELECT T2.attribute_value FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T2.business_id = 10172 AND T1.attribute_name LIKE 'wi-fi'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many \"bars\" are there in the Yelp business?",
+        "query": "SELECT COUNT(T1.category_id) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id WHERE T1.category_name LIKE 'Bars'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many more \"buffets\" than \"gyms\" in Yelp business?",
+        "query": "SELECT SUM(CASE WHEN T1.category_name LIKE 'Buffets' THEN 1 ELSE 0 END) - SUM(CASE WHEN T1.category_name LIKE 'Gyms' THEN 1 ELSE 0 END) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What business category is the Yelp business which got the most 5 star reviews in?",
+        "query": "SELECT T1.category_name FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id INNER JOIN Reviews AS T4 ON T3.business_id = T4.business_id WHERE T4.review_stars = 5 GROUP BY T1.category_name ORDER BY COUNT(T1.category_name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "In which year did the user who gave the most number of \"5\" star reviews join the Yelp?",
+        "query": "SELECT T2.user_yelping_since_year FROM Reviews AS T1 INNER JOIN Users AS T2 ON T1.user_id = T2.user_id WHERE T1.review_stars = 5 GROUP BY T2.user_yelping_since_year ORDER BY COUNT(T1.review_stars) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "For the user who gave the most number of long reviews, what is his/her averge ratings of all review?",
+        "query": "SELECT CAST(SUM(T1.review_stars) AS REAL) / COUNT(T1.review_stars) FROM Reviews AS T1 INNER JOIN Users AS T2 ON T1.user_id = T2.user_id WHERE T1.review_length LIKE 'Long' GROUP BY T1.user_id ORDER BY COUNT(T1.review_length) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "For the Yelp business which had the most number of \"long\" reviews, which category does it belong to?",
+        "query": "SELECT T4.category_name FROM Reviews AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id INNER JOIN Business_Categories AS T3 ON T2.business_id = T3.business_id INNER JOIN Categories AS T4 ON T3.category_id = T4.category_id WHERE T1.review_length LIKE 'Long' GROUP BY T2.business_id ORDER BY COUNT(T1.review_length) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "For the Yelp business which had the most number of \"short\" tips, which category does it belong to?",
+        "query": "SELECT DISTINCT T1.category_name FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id INNER JOIN Tips AS T4 ON T3.business_id = T4.business_id WHERE T4.tip_length LIKE 'short'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "In which year did the user who has given the most number of \"short\" tips join the Yelp?",
+        "query": "SELECT T2.user_yelping_since_year FROM Tips AS T1 INNER JOIN Users AS T2 ON T1.user_id = T2.user_id WHERE T1.tip_length LIKE 'short' GROUP BY T2.user_yelping_since_year ORDER BY COUNT(T1.tip_length) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "User No. 70271 only has given one tip to the Yelp business, which category was that business belonged to?",
+        "query": "SELECT T4.category_name FROM Tips AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id INNER JOIN Business_Categories AS T3 ON T2.business_id = T3.business_id INNER JOIN Categories AS T4 ON T3.category_id = T4.category_id WHERE T1.user_id = 70271"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "There was only one tip that user No. 69722 gave to the Yelp business, what was the ratings of that business?",
+        "query": "SELECT T2.stars FROM Tips AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id WHERE T1.user_id = 69722"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Give the percentage of \"Automotive\" businesses among all the Yelp businesses.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.category_name LIKE 'Automotive' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.business_id) AS \"percentage\" FROM Business_Categories AS T1 INNER JOIN Categories AS T2 ON T1.category_id = T2.category_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What percentage more for the \"Women's Clothing\" Yelp businesses to \"Men's Clothing\"?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.category_name LIKE 'Women''s Clothing' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.business_id) - CAST(SUM(CASE WHEN T2.category_name LIKE 'Men''s Clothing' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.business_id) AS \"more percentage\" FROM Business_Categories AS T1 INNER JOIN Categories AS T2 ON T1.category_id = T2.category_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Give the number of users who joined Yelp since \"2004\".",
+        "query": "SELECT COUNT(user_id) FROM Users WHERE user_yelping_since_year = 2004"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many users who have joined Yelp since \"2005\" but have no fans?",
+        "query": "SELECT COUNT(user_id) FROM Users WHERE user_yelping_since_year = 2005 AND user_fans LIKE 'None'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "State the number of actively running Yelp businesses in \"Tolleson\".",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE city LIKE 'Tolleson' AND active LIKE 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the number of reviews from user No. \"21679\"?",
+        "query": "SELECT COUNT(review_length) FROM Reviews WHERE user_id = 21679"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many \"5\" star reviews does the Yelp business No. \"10682\" get?",
+        "query": "SELECT COUNT(review_length) FROM Reviews WHERE business_id = 10682 AND review_stars = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which closed/not running Yelp business in \"Sun City\" has got the most reviews? Give the business id.",
+        "query": "SELECT T1.business_id FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T1.city LIKE 'Sun City' AND T1.active LIKE 'FALSE' GROUP BY T1.business_id ORDER BY COUNT(T2.review_length) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "For the only Yelp business in \"Yuma\" city, how many \"medium\" reviews did it get?",
+        "query": "SELECT COUNT(T2.review_length) FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T1.city LIKE 'Yuma' AND T2.review_length LIKE 'Medium'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Does Yelp business No.\"4960\" have TV?",
+        "query": "SELECT DISTINCT CASE WHEN T1.attribute_name LIKE 'Has TV' THEN 'yes' ELSE 'no' END FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T2.business_id = 4960"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Give the number of \"dogs allowed\" Yelp businesses.",
+        "query": "SELECT COUNT(T2.business_id) FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T1.attribute_name LIKE 'Dogs Allowed' AND T2.attribute_value LIKE 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many hours does the Yelp business No. \"5734\" open on Saturday?",
+        "query": "SELECT T1.closing_time - T1.opening_time AS \"hour\" FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id WHERE T2.day_of_week LIKE 'Saturday' AND T1.business_id = 5734"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Tell the number of \"hair removal\" Yelp businesses.",
+        "query": "SELECT COUNT(T1.category_id) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id WHERE T1.category_name LIKE 'Hair Removal'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many more \"Chinese\" than \"Filipino\" Yelp businesses?",
+        "query": "SELECT SUM(CASE WHEN T1.category_name LIKE 'Chinese' THEN 1 ELSE 0 END) - SUM(CASE WHEN T1.category_name LIKE 'Filipino' THEN 1 ELSE 0 END) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "User No.\"63469\" has got \"1\" like for a tip to the Yelp business, which city is that business located in?",
+        "query": "SELECT T1.city FROM Business AS T1 INNER JOIN Tips AS T2 ON T1.business_id = T2.business_id WHERE T2.likes = 1 AND T2.user_id = 63469"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many types of music does Yelp business No.\"1141\" have?",
+        "query": "SELECT COUNT(T1.attribute_name) FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T2.attribute_value LIKE 'TRUE' AND T2.business_id = 1141"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many \"cute\" type of compliments does user No. 57400 get?",
+        "query": "SELECT COUNT(T1.compliment_type) FROM Compliments AS T1 INNER JOIN Users_Compliments AS T2 ON T1.compliment_id = T2.compliment_id WHERE T1.compliment_type LIKE 'cute' AND T2.user_id = 57400"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Who has got the most number of \"funny\" type of compliments? Give the user ID.",
+        "query": "SELECT user_id FROM Users_Compliments WHERE compliment_id IN ( SELECT compliment_id FROM Compliments WHERE compliment_type LIKE 'funny' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Give the number of \"drive-thru\" businesses in \"Scottsdale\" with business ID number less than \"1000\".",
+        "query": "SELECT T2.business_id FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T3.business_id < 1000 AND T3.city LIKE 'Scottsdale' AND T1.attribute_name LIKE 'Drive-Thru' AND T2.attribute_value LIKE 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the average rating for the all Yelp businesses that open 24 hours?",
+        "query": "SELECT CAST(SUM(T3.stars) AS REAL) / COUNT(T2.business_id) AS \"avg\" FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T1.attribute_name LIKE 'Open 24 Hours' AND T2.attribute_value LIKE 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "For all the Yelp businesses that allow customers bring their own beer, what percentage of them are in \"Phoenix\"?",
+        "query": "SELECT CAST(SUM(CASE WHEN T3.city LIKE 'Phoenix' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.business_id) AS \"percentage\" FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T1.attribute_name LIKE 'BYOB' AND T2.attribute_value LIKE 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List the names of business in AZ with a rating of 5.",
+        "query": "SELECT business_id FROM Business WHERE state LIKE 'AZ' AND stars = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many active businesses of city are underrated?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE review_count LIKE 'Low' AND active LIKE 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many user ids from 1 to 20 have no fan users and have low ratings?",
+        "query": "SELECT COUNT(user_id) FROM Users WHERE user_id BETWEEN 1 AND 20 AND user_fans LIKE 'None' AND user_review_count LIKE 'Low'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Indicate the opening hours of businesses are with category in fashion.",
+        "query": "SELECT T4.opening_time FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id INNER JOIN Business_Hours AS T4 ON T3.business_id = T4.business_id WHERE T1.category_name LIKE 'Fashion'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses operating in the shopping business have opening times before 8AM?",
+        "query": "SELECT COUNT(T3.business_id) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id INNER JOIN Business_Hours AS T4 ON T3.business_id = T4.business_id WHERE T4.opening_time < '8AM' AND T1.category_name LIKE 'Shopping'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Provide name of businesses whose category is pets and are still opened after 9PM.",
+        "query": "SELECT T3.business_id FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id INNER JOIN Business_Hours AS T4 ON T3.business_id = T4.business_id WHERE T4.closing_time > '9PM' AND T1.category_name LIKE 'Pets'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses with the category are open from Monday to Thursday?",
+        "query": "SELECT COUNT(T2.business_id) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id INNER JOIN Business_Hours AS T4 ON T3.business_id = T4.business_id INNER JOIN Days AS T5 ON T4.day_id = T5.day_id WHERE T5.day_of_week LIKE 'Monday' OR T5.day_of_week LIKE 'Tuesday' OR T5.day_of_week LIKE 'Wednesday' OR T5.day_of_week LIKE 'Thursday'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please indicate the review count of the \"active life\" businesses in Phoenix.",
+        "query": "SELECT COUNT(*) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T1.category_name = 'Active Life' AND T3.city = 'Phoenix'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please list the businesses name with a rating less than 5 whose category name is men's clothing.",
+        "query": "SELECT T2.business_id FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T1.category_name LIKE 'Men''s Clothing' AND T3.stars < 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which businesses are no longer in business but have a low number of votes useful?",
+        "query": "SELECT DISTINCT T1.business_id FROM Reviews AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id INNER JOIN Business_Categories AS T3 ON T2.business_id = T3.business_id INNER JOIN Categories AS T4 ON T3.category_id = T4.category_id WHERE T2.active LIKE 'FALSE' AND T1.review_votes_useful LIKE 'Low'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please list the businesses names whose length of user review is long with business id from 1 to 20.",
+        "query": "SELECT T4.category_name FROM Reviews AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id INNER JOIN Business_Categories AS T3 ON T2.business_id = T3.business_id INNER JOIN Categories AS T4 ON T3.category_id = T4.category_id WHERE T1.review_length LIKE 'Long' AND T3.category_id BETWEEN 1 AND 20 GROUP BY T4.category_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please provide the attribute values \u200b\u200bof the bussinesses with fashion in Scottsdale.",
+        "query": "SELECT T2.attribute_value FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.business_id INNER JOIN Business_Categories AS T3 ON T1.business_id = T3.business_id INNER JOIN Categories AS T4 ON T3.category_id = T4.category_id WHERE T4.category_name LIKE 'Fashion' AND T1.city LIKE 'Scottsdale'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many compliments received from medium users that Phoenix city achieved?",
+        "query": "SELECT COUNT(T1.number_of_compliments) FROM Users_Compliments AS T1 INNER JOIN Reviews AS T2 ON T1.user_id = T2.user_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T3.city LIKE 'Phoenix' AND T1.number_of_compliments LIKE 'Medium'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Provide the businesses name in Tempe city whose opening hours are earlier than 8AM.",
+        "query": "SELECT T1.category_name FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id INNER JOIN Business_Hours AS T4 ON T3.business_id = T4.business_id WHERE T3.city LIKE 'Tempe' AND T4.opening_time < '8AM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses in Glendale city that are still running is opened from 8AM to 6PM?",
+        "query": "SELECT COUNT(T1.category_name) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id INNER JOIN Business_Hours AS T4 ON T3.business_id = T4.business_id WHERE T3.city LIKE 'Glendale' AND T4.opening_time LIKE '8AM' AND T4.closing_time LIKE '6PM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses are there in Phoenix city? Find the percentage of businesses in Phoenix city in the total city.",
+        "query": "SELECT SUM(CASE WHEN T3.city LIKE 'Phoenix' THEN 1 ELSE 0 END) AS \"num\" , CAST(SUM(CASE WHEN T3.city LIKE 'Phoenix' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T3.city) FROM Business_Categories AS T1 INNER JOIN Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T1.business_id = T3.business_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many cities have businesses with active life category? Find the percentage of the city where the review count that is low in total review count.",
+        "query": "SELECT SUM(CASE WHEN T2.category_name LIKE 'Active Life' THEN 1 ELSE 0 END) AS \"num\" , CAST(SUM(CASE WHEN T3.city LIKE 'Phoenix' THEN 1 ELSE 0 END) AS REAL) * 100 / ( SELECT COUNT(T3.review_count) FROM Business_Categories AS T1 INNER JOIN Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T1.business_id = T3.business_id WHERE T3.review_count LIKE 'Low' ) FROM Business_Categories AS T1 INNER JOIN Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T1.business_id = T3.business_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many active businesses are there in Phoenix?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE city LIKE 'Phoenix' AND active LIKE 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses in Scottsdale are rated as \"wonderful experience\"?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE city LIKE 'Scottsdale' AND stars > 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the average rating of inactive businesses?",
+        "query": "SELECT CAST(SUM(stars) AS REAL) / COUNT(business_id) AS \"average\" FROM Business WHERE active LIKE 'FALSE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses in AZ state have the beer_and_wine attribute?",
+        "query": "SELECT COUNT(T1.business_id) FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.business_id WHERE T2.attribute_value LIKE 'beer_and_wine' AND T1.state LIKE 'AZ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which city has the most businesses whose attribute is full_bar?",
+        "query": "SELECT T1.city FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.business_id WHERE T2.attribute_value LIKE 'full_bar' GROUP BY T1.city"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses in the fashion industry are rated 5 stars?",
+        "query": "SELECT COUNT(T1.business_id) FROM Business AS T1 INNER JOIN Business_Categories ON T1.business_id = Business_Categories.business_id INNER JOIN Categories AS T3 ON Business_Categories.category_id = T3.category_id WHERE T1.stars = 5 AND T3.category_name LIKE 'Fashion'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which city has the highest number of businesses in the food industry whose number of reviews is high?",
+        "query": "SELECT T1.city FROM Business AS T1 INNER JOIN Business_Categories ON T1.business_id = Business_Categories.business_id INNER JOIN Categories AS T3 ON Business_Categories.category_id = T3.category_id WHERE T1.review_count LIKE 'High' AND T3.category_name LIKE 'Food' GROUP BY T1.city"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please list all business IDs in Mesa city that review stars of over 3.",
+        "query": "SELECT T1.business_id FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T1.city LIKE 'Mesa' AND T2.review_stars > 3 GROUP BY T1.business_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which city has the least number of businesses whose amount of funny votes is low?",
+        "query": "SELECT T1.city FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T2.review_votes_funny LIKE 'low' GROUP BY T1.city"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What percentage of businesses are in the Real Estate sector and have the rating of 5 out of all businesses in Chandler?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.stars = 5 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.business_id) AS \"percentage\" FROM Business AS T1 INNER JOIN Business_Categories ON T1.business_id = Business_Categories.business_id INNER JOIN Categories AS T3 ON Business_Categories.category_id = T3.category_id WHERE T1.city LIKE 'Chandler' AND T3.category_name LIKE 'Real Estate'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many users who started yelping since 2012 have sent a high number of funny votes?",
+        "query": "SELECT COUNT(user_id) FROM Users WHERE user_yelping_since_year = 2012 AND user_votes_funny LIKE 'High'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the number of useful votes that the user 52592 received when reviewed for business number 2?",
+        "query": "SELECT review_votes_useful FROM Reviews WHERE user_id = 52592 AND business_id = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What are the attribute numbers that are related to payment?",
+        "query": "SELECT attribute_id FROM Attributes WHERE attribute_name LIKE '%payment%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How long was the review for business number 2 that user number 612 wrote?",
+        "query": "SELECT review_length FROM Reviews WHERE user_id = 612 AND review_stars = 5 AND business_id = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses are actively running in Gilbert City?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE city LIKE 'Gilbert' AND active LIKE 'True'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses in the AZ state got low quality of reviews?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE state LIKE 'AZ' AND review_count LIKE 'Low'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please state any three business numbers in AZ state that have received the \"Great experience\" review stars.",
+        "query": "SELECT DISTINCT T2.business_id FROM Reviews AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id WHERE T2.state LIKE 'AZ' AND T1.review_stars = 5 LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please name one attribute that business number 2 does not have.",
+        "query": "SELECT T1.attribute_name FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T2.attribute_value LIKE 'none' LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many \"cool\" compliments did user number 33 receive?",
+        "query": "SELECT COUNT(T2.compliment_type) FROM Users_Compliments AS T1 INNER JOIN Compliments AS T2 ON T1.compliment_id = T2.compliment_id WHERE T1.user_id = 33 AND T2.compliment_type LIKE 'cool'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What are the opening hours of business number 53 on Friday?",
+        "query": "SELECT T1.closing_time - T1.opening_time AS \"opening hours\" FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id WHERE T2.day_of_week LIKE 'Friday' AND T1.business_id = 53"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What are the attributes that business number 56 have?",
+        "query": "SELECT T1.attribute_name FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T2.attribute_value LIKE 'TRUE' AND T2.business_id = 56"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What are the categories that business number 15 belongs to?",
+        "query": "SELECT T2.category_name FROM Business_Categories AS T1 INNER JOIN Categories AS T2 ON T1.category_id = T2.category_id WHERE T1.business_id = 15"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses are there in Scottsdale city under the category of \"Beauty & Spas\"?",
+        "query": "SELECT COUNT(T2.business_id) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T3.city LIKE 'Scottsdale' AND T1.category_name LIKE 'Beauty & Spas'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please list any two user numbers that have an \"Uber\" number of cute compliments.",
+        "query": "SELECT T1.user_id FROM Users_Compliments AS T1 INNER JOIN Compliments AS T2 ON T1.compliment_id = T2.compliment_id WHERE T1.number_of_compliments LIKE 'Uber' AND T2.compliment_type LIKE 'cute' LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses operating in the \"Accessories\" category have received a \"wonderful experience\" review from users?",
+        "query": "SELECT COUNT(T2.business_id) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T3.stars > 3 AND T1.category_name LIKE 'Accessories'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How long does business number 12 in Scottsdale stay open on day number 3?",
+        "query": "SELECT T2.closing_time - T2.opening_time AS \"hour\" FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id WHERE T1.business_id = 12 AND T1.city LIKE 'Scottsdale' AND T2.day_id = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses in AZ state do not open on Thursday?",
+        "query": "SELECT COUNT(T1.business_id) FROM Business AS T1 INNER JOIN Checkins AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T2.label_time_4 LIKE 'None' AND T1.state LIKE 'AZ' AND T3.day_of_week LIKE 'Thursday'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses of Yelp are in Scottsdale?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE city LIKE 'Scottsdale'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the Yelp_Businesses in Arizona, how many of them are still running?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE state LIKE 'AZ' AND active LIKE 'True'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many Yelp_Businesses in Scottsdale have received positive comments in the Elitestar rating?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE city LIKE 'Scottsdale' AND stars > 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which city has more Yelp_Business that's more appealing to users, Scottsdale or Anthem?",
+        "query": "SELECT city FROM Business ORDER BY review_count DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many Yelp_Businesses in Arizona have a Elitestar rating of over 4?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE state LIKE 'AZ' AND stars > 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many Yelp_Businesses are there in Arizona in total?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE state LIKE 'AZ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please list the cities of the Yelp_Businesses that have gotten a 5 in the Elitestar rating.",
+        "query": "SELECT city FROM Business WHERE stars = 5 GROUP BY city"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many reviews have the user whose ID is 3 posted?",
+        "query": "SELECT COUNT(review_length) FROM Reviews WHERE user_id = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many reviews made by user whose ID is 3 are long?",
+        "query": "SELECT COUNT(review_length) FROM Reviews WHERE user_id = 3 AND review_length LIKE 'Long'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the long reviews made by user ID 3, how many of them have received a medium number of useful votes?",
+        "query": "SELECT COUNT(review_length) FROM Reviews WHERE user_id = 3 AND review_length LIKE 'Long' AND review_votes_useful LIKE 'Medium'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many users have joined Yelp since the year 2012?",
+        "query": "SELECT COUNT(user_id) FROM Users WHERE user_yelping_since_year = 2012"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please list the IDs of the users who have a high number of followers.",
+        "query": "SELECT user_id FROM Users WHERE user_fans LIKE 'High' GROUP BY user_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many Yelp_Businesses do not provide alcohol?",
+        "query": "SELECT COUNT(T1.attribute_id) FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T1.attribute_name LIKE 'Alcohol' AND T2.attribute_value LIKE 'none'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the Yelp_Businesses in Arizona, how many of them do not provide alcohol?",
+        "query": "SELECT COUNT(T2.business_id) FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T1.attribute_name LIKE 'Alcohol' AND T2.attribute_value LIKE 'none' AND T3.state LIKE 'AZ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please list the business IDs of all the Yelp_Businesses that are good for kids.",
+        "query": "SELECT T2.business_id FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T1.attribute_name LIKE 'Good for Kids' AND T2.attribute_value LIKE 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many Yelp_Business falls under the category of \"Shopping\"?",
+        "query": "SELECT COUNT(T1.category_id) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id WHERE T1.category_name LIKE 'Shopping'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Under which categories is Yelp_Business no. 1?",
+        "query": "SELECT T1.category_name FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id WHERE T2.business_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the Yelp_Businesses which are still running, how many of them fall under the category of \"Food\"?",
+        "query": "SELECT COUNT(T3.business_id) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id INNER JOIN Tips AS T4 ON T3.business_id = T4.business_id WHERE T1.category_name LIKE 'Food' AND T3.active LIKE 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many Yelp_Business in Anthem are under the category of \"Food\"?",
+        "query": "SELECT COUNT(T3.business_id) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T1.category_name LIKE 'Food' AND T3.city LIKE 'Anthem'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please list the business ID of the Yelp_Business with the highest Elitestar rating under the category \"Food\".",
+        "query": "SELECT T2.business_id FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T1.category_name LIKE 'Food' ORDER BY T3.stars DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many Yelp_Business under the category of \"Food\" are good for kids?",
+        "query": "SELECT COUNT(T3.stars) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id INNER JOIN Business_Attributes AS T4 ON T3.business_id = T4.business_id INNER JOIN Attributes AS T5 ON T4.attribute_id = T5.attribute_id WHERE T1.category_name LIKE 'Food' AND T5.attribute_name LIKE 'Good for Kids' AND T4.attribute_value LIKE 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many Yelp_Business in Arizona has user no. 3 reviewed?",
+        "query": "SELECT COUNT(T2.business_id) FROM Reviews AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id WHERE T2.state LIKE 'AZ' AND T1.user_id = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please list all the categories of the Yelp_Business in Arizona.",
+        "query": "SELECT T1.category_name FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T3.state LIKE 'AZ' GROUP BY T1.category_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How long does Yelp_Business no.1 open on Tuesdays?",
+        "query": "SELECT T1.closing_time - T1.opening_time AS \"opening hours\" FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id WHERE T2.day_of_week LIKE 'Tuesday' AND T1.business_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "When does Yelp_Business no.1 open on Tuesdays?",
+        "query": "SELECT T1.opening_time FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id WHERE T2.day_of_week LIKE 'Tuesday' AND T1.business_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many Yelp_Business close after 8PM on Mondays?",
+        "query": "SELECT COUNT(T1.business_id) FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id WHERE T2.day_of_week LIKE 'Monday' AND T1.closing_time > '8PM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please list the opening time on Mondays of all the Yelp_Businesses in Anthem that are still running.",
+        "query": "SELECT T1.opening_time FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id INNER JOIN Business AS T3 ON T1.business_id = T3.business_id WHERE T2.day_of_week LIKE 'Monday' AND T3.city LIKE 'Anthem' AND T3.active LIKE 'True' GROUP BY T1.opening_time"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the Yelp_Business in Arizona, how many of them closes at 12PM on Sundays?",
+        "query": "SELECT COUNT(T1.business_id) FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id INNER JOIN Business AS T3 ON T1.business_id = T3.business_id WHERE T2.day_of_week LIKE 'Sunday' AND T1.closing_time LIKE '12PM' AND T3.state LIKE 'AZ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please list the categories of the Yelp_Business that closes at 12PM on Sundays.",
+        "query": "SELECT T4.category_name FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id INNER JOIN Business_Categories AS T3 ON T1.business_id = T3.business_id INNER JOIN Categories AS T4 ON T4.category_id = T4.category_id WHERE T1.closing_time = '12PM' AND T2.day_of_week = 'Sunday' GROUP BY T4.category_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many \"Good for Kids\" Yelp_Businesses are open everyday of the week?",
+        "query": "SELECT COUNT(T1.business_id) FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id INNER JOIN Business_Attributes AS T3 ON T1.business_id = T3.business_id INNER JOIN Attributes AS T4 ON T4.attribute_id = T4.attribute_id WHERE T2.day_id IN (1, 2, 3, 4, 5, 6, 7) AND T4.attribute_name = 'Good for Kids' AND T3.attribute_value = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many users became an elite user the same year they joined Yelp?",
+        "query": "SELECT COUNT(T1.user_id) FROM Users AS T1 INNER JOIN Elite AS T2 ON T1.user_id = T2.user_id WHERE T1.user_yelping_since_year = T2.year_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the longest business time on Mondays for a Yelp_Business under the category \"Shopping\"?",
+        "query": "SELECT T1.closing_time + 12 - T1.opening_time AS \"hour\" FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id INNER JOIN Business AS T3 ON T1.business_id = T3.business_id INNER JOIN Business_Categories AS T4 ON T3.business_id = T4.business_id INNER JOIN Categories AS T5 ON T4.category_id = T5.category_id WHERE T2.day_of_week LIKE 'Monday' AND T5.category_name LIKE 'Shopping' ORDER BY T1.closing_time + 12 - T1.opening_time DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please list the business IDs of the Yelp_Business that have a business time of longer than 12 hours on Sundays.",
+        "query": "SELECT T1.business_id FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id INNER JOIN Business AS T3 ON T1.business_id = T3.business_id WHERE T1.closing_time + 12 - T1.opening_time > 12 AND T2.day_of_week LIKE 'Sunday' GROUP BY T1.business_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many elite users have reviewed Yelp_Business no.1?",
+        "query": "SELECT COUNT(T1.user_id) FROM Users AS T1 INNER JOIN Elite AS T2 ON T1.user_id = T2.user_id INNER JOIN Reviews AS T3 ON T1.user_id = T3.user_id WHERE T3.business_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the users who have posted more than 10 reviews, how many users are elite users?",
+        "query": "SELECT COUNT(T4.user_id) FROM ( SELECT T1.user_id FROM Users AS T1 INNER JOIN Elite AS T2 ON T1.user_id = T2.user_id INNER JOIN Reviews AS T3 ON T1.user_id = T3.user_id WHERE T3.user_id IS NOT NULL GROUP BY T3.user_id HAVING COUNT(T3.user_id) > 10 ) T4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which Yelp_Business in Arizona gets the most number of reviews?",
+        "query": "SELECT T1.user_id FROM Reviews AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id WHERE T2.state LIKE 'AZ' GROUP BY T1.user_id ORDER BY COUNT(T1.user_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many stars on average does a Yelp_Business in Anthem get from a user review?",
+        "query": "SELECT AVG(T2.review_stars) FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T1.city LIKE 'Anthem'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many stars on average does user no.3 give to Yelp_Business in Arizona?",
+        "query": "SELECT AVG(T2.review_stars) FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T1.state LIKE 'AZ' AND T2.user_id = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the average business time for Yelp_Business no.1 on weekends?",
+        "query": "SELECT T1.closing_time + 12 - T1.opening_time AS \"avg opening hours\" FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id WHERE T1.business_id = 1 AND (T2.day_of_week = 'Sunday' OR T2.day_of_week = 'Sunday')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the average Elitestar rating for a Yelp_Business that closes at 12PM on Sundays?",
+        "query": "SELECT CAST(SUM(T3.stars) AS REAL) / COUNT(T1.business_id) AS \"average stars\" FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id INNER JOIN Business AS T3 ON T1.business_id = T3.business_id WHERE T2.day_of_week LIKE 'Sunday' AND T1.closing_time LIKE '12PM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many of the busineses are in Casa Grande?",
+        "query": "SELECT COUNT(city) FROM Business WHERE city LIKE 'Casa Grande'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the total number of active businesses in AZ with a low review count?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE state LIKE 'AZ' AND active LIKE 'True' AND review_count LIKE 'low'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List down the business ID with a star range from 2 to 3, located at Mesa.",
+        "query": "SELECT business_id FROM Business WHERE city LIKE 'Mesa' AND stars BETWEEN 2 AND 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "In users yelping since 2011 to 2013, how many of them have high count of fans?",
+        "query": "SELECT COUNT(user_id) FROM Users WHERE user_yelping_since_year BETWEEN 2011 AND 2013 AND user_fans LIKE 'High'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the review length of user 35026 to business with business ID 2?",
+        "query": "SELECT review_length FROM Reviews WHERE user_id = 35026 AND business_id = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the businesses in Chandler, list the attribute of the business with a low review count.",
+        "query": "SELECT DISTINCT T3.attribute_id, T3.attribute_name FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.attribute_id INNER JOIN Attributes AS T3 ON T2.attribute_id = T3.attribute_id WHERE T1.review_count = 'Low' AND T1.city = 'Chandler'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "In businesses with a category of mexican, how many of them has a star rating below 4?",
+        "query": "SELECT COUNT(T1.business_id) FROM Business AS T1 INNER JOIN Business_Categories ON T1.business_id = Business_Categories.business_id INNER JOIN Categories AS T3 ON Business_Categories.category_id = T3.category_id WHERE T1.stars < 4 AND T3.category_name LIKE 'Mexican'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List the active business ID and its stars of the businesses fall under the category of Fashion.",
+        "query": "SELECT T1.business_id, T1.stars FROM Business AS T1 INNER JOIN Business_Categories ON T1.business_id = Business_Categories.business_id INNER JOIN Categories AS T3 ON Business_Categories.category_id = T3.category_id WHERE T1.active LIKE 'TRUE' AND T3.category_name LIKE 'Fashion'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the category of businesses with highest star rating?",
+        "query": "SELECT T3.category_name FROM Business AS T1 INNER JOIN Business_Categories AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T2.category_id = T3.category_id ORDER BY T1.stars DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the category of the business with medium review length and highest review stars within business ID from 6 t0 9?",
+        "query": "SELECT T4.category_name FROM Reviews AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id INNER JOIN Business_Categories AS T3 ON T2.business_id = T3.business_id INNER JOIN Categories AS T4 ON T3.category_id = T4.category_id WHERE T1.review_length LIKE 'Medium' AND T2.business_id BETWEEN 6 AND 9 ORDER BY T1.review_stars DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Count the active businesses that has an attribute of caters with low review count.",
+        "query": "SELECT COUNT(T1.business_id) FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.business_id INNER JOIN Attributes AS T3 ON T2.attribute_id = T3.attribute_id WHERE T3.attribute_name LIKE 'Caters' AND T1.review_count LIKE 'Low' AND T1.active LIKE 'TRUE'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the closing and opening time of businesses located at Tempe with highest star rating?",
+        "query": "SELECT T2.closing_time, T2.opening_time FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id WHERE T1.city LIKE 'Tempe' ORDER BY T1.stars DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the active businesses located at Chandler, AZ, list the category and atrributes of business with a medium review count.",
+        "query": "SELECT T3.category_name, T5.attribute_name FROM Business AS T1 INNER JOIN Business_Categories ON T1.business_id = Business_Categories.business_id INNER JOIN Categories AS T3 ON Business_Categories.category_id = T3.category_id INNER JOIN Business_Attributes AS T4 ON T1.business_id = T4.business_id INNER JOIN Attributes AS T5 ON T4.attribute_id = T5.attribute_id WHERE T1.active LIKE 'TRUE' AND T1.state LIKE 'AZ' AND T1.city LIKE 'Chandler' AND T1.review_count LIKE 'Medium'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List the categories of active businesses in Surprise, AZ.",
+        "query": "SELECT T3.category_name FROM Business AS T1 INNER JOIN Business_Categories ON T1.business_id = Business_Categories.business_id INNER JOIN Categories AS T3 ON Business_Categories.category_id = T3.category_id WHERE T1.active LIKE 'TRUE' AND T1.state LIKE 'AZ' AND T1.city LIKE 'Surprise' GROUP BY T3.category_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Find the location of businesses that have business hours from 8 am to 9 pm every Friday.",
+        "query": "SELECT T1.city FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T2.closing_time LIKE '9PM' AND T2.opening_time LIKE '8AM' AND T3.day_of_week LIKE 'Friday' GROUP BY T1.city"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the attribute value of an active business with a high review count and 3 stars which is located at Mesa, AZ?",
+        "query": "SELECT T2.attribute_value FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.business_id INNER JOIN Attributes AS T3 ON T2.attribute_id = T3.attribute_id WHERE T1.state LIKE 'AZ' AND T1.review_count LIKE 'High' AND T1.active LIKE 'TRUE' AND T1.city LIKE 'Mesa' AND T1.stars = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the opening time of the active businesses in Chandler that has a medium review count.",
+        "query": "SELECT DISTINCT T2.opening_time FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T1.city LIKE 'Chandler' AND T1.active LIKE 'TRUE' AND T1.review_count LIKE 'Medium'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the businesses with a category of Accessories, what is the percentage of the business with less than 4 stars?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.stars < 4 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.stars) AS \"percentage\" FROM Business AS T1 INNER JOIN Business_Categories ON T1.business_id = Business_Categories.business_id INNER JOIN Categories AS T3 ON Business_Categories.category_id = T3.category_id WHERE T3.category_name LIKE 'Accessories'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List the closing time and day of week of active businesses in Tempe with stars greater than the 70% of average age of star rating.",
+        "query": "SELECT T2.closing_time, T3.day_of_week FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T1.city LIKE 'Tempe' AND T1.active LIKE 'TRUE' AND T1.stars > 0.7 * ( SELECT AVG(T1.stars) FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T1.city LIKE 'Tempe' AND T1.active LIKE 'TRUE' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many active businesses are located at Phoenix, Arizona?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE city LIKE 'Phoenix' AND active LIKE 'True'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses are with high review count?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE review_count LIKE 'High'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses ID sell beer and wine?",
+        "query": "SELECT COUNT(business_id) FROM Business_Attributes WHERE attribute_id = 1 AND attribute_value = 'beer_and_wine'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many attributes ID owned by business ID 2?",
+        "query": "SELECT COUNT(attribute_id) FROM Business_Attributes WHERE business_id = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many users received high compliment type in photo?",
+        "query": "SELECT COUNT(T1.user_id) FROM Users_Compliments AS T1 INNER JOIN Compliments AS T2 ON T1.compliment_id = T2.compliment_id WHERE T1.number_of_compliments LIKE 'High' AND T2.compliment_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses in Phoenix, Arizona is attributed to waiter service?",
+        "query": "SELECT COUNT(T1.business_id) FROM Business AS T1 INNER JOIN Business_attributes AS T2 ON T1.business_id = T2.business_id INNER JOIN Attributes AS T3 ON T2.attribute_id = T3.attribute_id WHERE T1.city LIKE 'Phoenix' AND T3.attribute_name LIKE 'waiter_service' AND T2.attribute_id = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Find out which business is opened for 24/7 and list out what is the business attribute.",
+        "query": "SELECT T5.attribute_name FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id INNER JOIN Business AS T3 ON T1.business_id = T3.business_id INNER JOIN Business_Attributes AS T4 ON T3.business_id = T4.business_id INNER JOIN Attributes AS T5 ON T4.attribute_id = T5.attribute_id WHERE T2.day_id LIKE '1' AND '2' AND '3' AND '4' AND '5' AND '6' AND '7' AND T1.opening_time = T1.closing_time GROUP BY T5.attribute_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which business in fashion category has the most review?",
+        "query": "SELECT T3.business_id FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id INNER JOIN Reviews AS T4 ON T3.business_id = T4.business_id WHERE T1.category_name LIKE 'Fashion' AND T1.category_id = 7 GROUP BY T3.business_id ORDER BY COUNT(T4.user_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List out which business category that are most likely to have average good review in Arizona?",
+        "query": "SELECT DISTINCT T4.category_name FROM Reviews AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id INNER JOIN Business_Categories AS T3 ON T2.business_id = T3.business_id INNER JOIN Categories AS T4 ON T3.category_id = T4.category_id WHERE T2.state LIKE 'AZ' AND T1.review_stars >= 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the ratio of having the best to worse elite user in 2013?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.user_average_stars = 1 THEN 1 ELSE 0 END) AS REAL) / COUNT(T2.user_id) , SUM(CASE WHEN T1.user_average_stars = 5 THEN 1 ELSE 0 END) * 1.0 / COUNT(T2.user_id) FROM Users AS T1 INNER JOIN Elite AS T2 ON T1.user_id = T2.user_id WHERE T2.year_id = 2013"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Calculate the increment percentage of elite user for each year since year 2005.",
+        "query": "SELECT CAST(COUNT(CASE WHEN year_id < 2014 THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(CASE WHEN year_id = 2005 THEN 1.0 ELSE NULL END) AS increment FROM Elite"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many business have been reviewed by user ID 3 and how long have this user been with Yelp?",
+        "query": "SELECT COUNT(T1.business_id) , strftime('%Y', 'now') - T2.user_yelping_since_year FROM Reviews AS T1 INNER JOIN Users AS T2 ON T1.user_id = T2.user_id WHERE T1.user_id = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the yearly average review done by user ID 3?",
+        "query": "SELECT COUNT(review_stars) / (strftime('%Y', 'now') - T1.user_yelping_since_year) FROM Users AS T1 INNER JOIN Reviews AS T2 ON T1.user_id = T2.user_id WHERE T1.user_id = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the average number of review received by each business given that the user is an elite?",
+        "query": "SELECT CAST(COUNT(T1.user_id) AS REAL) / COUNT(DISTINCT T1.business_id) FROM Reviews AS T1 INNER JOIN Elite AS T2 ON T1.user_id = T2.user_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List out the user who is an elite user for consecutively 5 years or more and what is the user average star? How many likes does this user gets?",
+        "query": "SELECT T2.user_average_stars, COUNT(T3.likes) FROM Elite AS T1 INNER JOIN Users AS T2 ON T1.user_id = T2.user_id INNER JOIN Tips AS T3 ON T3.user_id = T2.user_id GROUP BY T1.user_id HAVING COUNT(T1.user_id) > 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Find out which hotel and travel business having the most review? Calculate the standard deviation of the review star for this business.",
+        "query": "SELECT T2.category_id FROM Business_Categories AS T1 INNER JOIN Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Reviews AS T3 ON T3.business_id = T1.business_id WHERE T2.category_name = 'Hotels & Travel' GROUP BY T2.category_id ORDER BY COUNT(T2.category_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the correlation between the review starts and business stars?",
+        "query": "SELECT CAST(SUM(T2.review_stars) AS REAL) / COUNT(T1.business_id) FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many of the businesses are active?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE active LIKE 'True'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List down the business ID with a low review count in Phoenix.",
+        "query": "SELECT business_id FROM Business WHERE city LIKE 'Phoenix' AND review_count LIKE 'Low'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the total number of active business in AZ with a high review count?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE state LIKE 'AZ' AND review_count LIKE 'High' AND active LIKE 'True'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List down the business ID with a star range from 3 to 4, located at Tempe.",
+        "query": "SELECT business_id FROM Business WHERE city LIKE 'Tempe' AND stars BETWEEN 3 AND 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "In users yelping since 2010 to 2012, how many of them has an low fans?",
+        "query": "SELECT COUNT(user_id) FROM Users WHERE user_yelping_since_year BETWEEN 2010 AND 2012 AND user_fans LIKE 'Low'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the review length of user 60776 to business with business ID 1?",
+        "query": "SELECT review_length FROM Reviews WHERE user_id = 60776 AND business_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the businesses in Scottsdale, list the attribute of the business with a high review count.",
+        "query": "SELECT T3.attribute_name FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.business_id INNER JOIN Attributes AS T3 ON T2.attribute_id = T3.attribute_id WHERE T1.review_count LIKE 'High' AND T1.city LIKE 'Scottsdale' GROUP BY T3.attribute_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "In businesses with a category of automotive, how many of them has an star rating below 3?",
+        "query": "SELECT COUNT(T1.business_id) FROM Business AS T1 INNER JOIN Business_Categories ON T1.business_id = Business_Categories.business_id INNER JOIN Categories AS T3 ON Business_Categories.category_id = T3.category_id WHERE T3.category_name LIKE 'Automotive' AND T1.stars < 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List the active business ID and its stars of the businesses fall under the category of Pets.",
+        "query": "SELECT T1.business_id, T1.stars FROM Business AS T1 INNER JOIN Business_Categories ON T1.business_id = Business_Categories.business_id INNER JOIN Categories AS T3 ON Business_Categories.category_id = T3.category_id WHERE T1.active LIKE 'TRUE' AND T3.category_name LIKE 'Pets'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the attribute of the business with highest star rating?",
+        "query": "SELECT T3.attribute_name FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.business_id INNER JOIN Attributes AS T3 ON T2.attribute_id = T3.attribute_id ORDER BY T1.stars DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the category of the business with short review length and highest review stars within business ID from 5 t0 10?",
+        "query": "SELECT T4.category_name FROM Reviews AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id INNER JOIN Business_Categories AS T3 ON T2.business_id = T3.business_id INNER JOIN Categories AS T4 ON T3.category_id = T4.category_id WHERE T1.review_length LIKE 'Short' AND T2.business_id BETWEEN 5 AND 10 ORDER BY T1.review_stars DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Count the active businesses that has an attribute of Wi-Fi with medium review count.",
+        "query": "SELECT COUNT(T1.business_id) FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.business_id INNER JOIN Attributes AS T3 ON T2.attribute_id = T3.attribute_id WHERE T3.attribute_name LIKE 'Wi-Fi' AND T1.active LIKE 'TRUE' AND T1.review_count LIKE 'Medium'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the closing and opening time of businesses located at Gilbert with highest star rating?",
+        "query": "SELECT T2.closing_time, T2.opening_time FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id WHERE T1.city LIKE 'Gilbert' ORDER BY T1.stars DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the active businesses located at Mesa, AZ, list the category and attributes of business with a low review count.",
+        "query": "SELECT T3.category_name FROM Business AS T1 INNER JOIN Business_Categories AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T2.category_id = T3.category_id WHERE T1.review_count = 'Low' AND T1.city = 'Mesa' AND T1.active = 'true' AND T1.state = 'AZ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List the categories of inactive businesses in AZ.",
+        "query": "SELECT T3.category_name FROM Business AS T1 INNER JOIN Business_Categories ON T1.business_id = Business_Categories.business_id INNER JOIN Categories AS T3 ON Business_Categories.category_id = T3.category_id WHERE T1.active LIKE 'FALSE' AND T1.state LIKE 'AZ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Find the location of businesses that has business hours from 9 am to 9 pm every Saturday.",
+        "query": "SELECT T1.city FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T2.closing_time LIKE '9PM' AND T2.opening_time LIKE '9AM' AND T3.day_of_week LIKE 'Saturday' GROUP BY T1.city"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the attribute value of an inactive business with a medium review count and 3.5 stars which is located at Phoenix, AZ?",
+        "query": "SELECT T2.attribute_value FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.business_id INNER JOIN Attributes AS T3 ON T2.attribute_id = T3.attribute_id WHERE T1.state LIKE 'AZ' AND T1.review_count LIKE 'Medium' AND T1.active LIKE 'FALSE' AND T1.city LIKE 'Phoenix' AND T1.stars = 3.5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the opening time of the active businesses in Surprise that has a low review count.",
+        "query": "SELECT T2.opening_time FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T1.city LIKE 'Surprise' AND T1.active LIKE 'TRUE' AND T1.review_count LIKE 'Low' GROUP BY T2.opening_time"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the businesses with a category of Local Services, what is the percentage of the business with less than 3 stars?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.stars < 3 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.stars) AS \"percentage\" FROM Business AS T1 INNER JOIN Business_Categories ON T1.business_id = Business_Categories.business_id INNER JOIN Categories AS T3 ON Business_Categories.category_id = T3.category_id WHERE T3.category_name LIKE 'Local Services'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List the closing time and day of week of active businesses in Scottsdale with stars greater than the 60% of average age of star rating.",
+        "query": "SELECT T2.closing_time, T3.day_of_week FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T1.city LIKE 'Scottsdale' AND T1.active LIKE 'TRUE' AND T1.stars > 0.6 * ( SELECT AVG(T1.stars) FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T1.city LIKE 'Scottsdale' AND T1.active LIKE 'TRUE' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many users have no followers in 2014?",
+        "query": "SELECT COUNT(user_id) FROM Users WHERE user_yelping_since_year = 2004 AND user_fans LIKE 'None'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List at least 5 users that has received less than 5 low compliments from\nother users.",
+        "query": "SELECT user_id FROM Users_Compliments WHERE number_of_compliments LIKE 'Low' GROUP BY user_id ORDER BY COUNT(number_of_compliments) > 5 LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List at least 10 users ID that has 4 as an average ratings of all reviews sent.",
+        "query": "SELECT COUNT(user_id) FROM Users WHERE user_average_stars = 4 LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What city does the business have a business hour from 10 am to 12 pm on Sunday?",
+        "query": "SELECT T1.city FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T2.opening_time LIKE '10AM' AND T2.closing_time LIKE '12PM' AND T3.day_of_week LIKE 'Sunday'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses are opened for 24 hours?",
+        "query": "SELECT COUNT(T2.business_id) FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T2.attribute_value LIKE 'TRUE' AND T1.attribute_name LIKE 'Open 24 Hours'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List at least 5 active business ID that are good for groups and dancing.",
+        "query": "SELECT T2.business_id FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T2.attribute_value LIKE 'TRUE' AND T1.attribute_name LIKE 'Good for Dancing' AND T1.attribute_name LIKE 'Good for Groups' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the active businesses in Ahwatukee, which of them are still open in Sunday?",
+        "query": "SELECT T1.business_id FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T1.city LIKE 'Ahwatukee' AND T1.active LIKE 'TRUE' AND T3.day_of_week LIKE 'Sunday'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List the categories of all active businesses that were not in Arizona.",
+        "query": "SELECT T3.category_name FROM Business AS T1 INNER JOIN Business_Categories ON T1.business_id = Business_Categories.business_id INNER JOIN Categories AS T3 ON Business_Categories.category_id = T3.category_id WHERE T1.active LIKE 'TRUE' AND T1.state NOT LIKE 'AZ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List the category of the business with high review count but received 2 stars.",
+        "query": "SELECT T3.category_name FROM Business AS T1 INNER JOIN Business_Categories ON T1.business_id = Business_Categories.business_id INNER JOIN Categories AS T3 ON Business_Categories.category_id = T3.category_id WHERE T1.stars = 2 AND T1.review_count LIKE 'High'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses have a romantic ambiance?",
+        "query": "SELECT COUNT(T2.business_id) FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T2.attribute_value = 'true' AND T1.attribute_name = 'ambience_romantic'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List the city of the business where they open from 1 pm to 6 pm on Saturday.",
+        "query": "SELECT T1.city FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T2.closing_time LIKE '6PM' AND T2.opening_time LIKE '1PM' AND T3.day_of_week LIKE 'Saturday'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the total number of fans or followers who received most likes of their comments in the business?",
+        "query": "SELECT COUNT(T1.user_fans) FROM Users AS T1 INNER JOIN Tips AS T2 ON T1.user_id = T2.user_id ORDER BY COUNT(T2.likes) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What city does the business came from where they received a high volume of check-ins from 12 am to 1 am on Saturday.",
+        "query": "SELECT T1.city FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T2.closing_time = '1AM' AND T2.opening_time = '12AM' AND T3.day_of_week = 'Saturday'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses have shopping centers and received high review count?",
+        "query": "SELECT COUNT(T2.business_id) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T1.category_name = 'Shopping Centers' AND T3.review_count = 'High'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses accept insurance?",
+        "query": "SELECT COUNT(T1.business_id) FROM Business_Attributes AS T1 INNER JOIN Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T2.attribute_name = 'Accepts Insurance' AND T1.attribute_value = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Calculate the average review star from users in businesses located in South Carolina and California state.",
+        "query": "SELECT 1.0 * (( SELECT SUM(T1.stars) FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T1.state = 'SC' ) + ( SELECT SUM(T1.stars) FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T1.state = 'CA' )) / ( SELECT SUM(T1.stars) FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id ) AS reslut"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Compare and get the difference of the number of businesses that are open in Monday and Tuesday from 10 am to 9 pm.",
+        "query": "SELECT SUM(CASE WHEN T3.day_of_week = 'Monday' THEN 1 ELSE 0 END) - SUM(CASE WHEN T3.day_of_week = 'Tuesday' THEN 1 ELSE 0 END) AS DIFF FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T2.opening_time = '10AM' AND T2.closing_time = '9PM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "State the ID number for the attribute named \"Accepts Insurance\"?",
+        "query": "SELECT attribute_id FROM Attributes WHERE attribute_name = 'Accepts Insurance'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many actively running Yelp businesses are there located in \"Phoenix\" city?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE active = 'true' AND city = 'Phoenix'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Give the number of \"4\" stars Yelp businesses in \"Mesa\" city.",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE stars = 4 AND city = 'Mesa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Provide the number of Yelp businesses in \"Gilbert\" which got a\" high\" review count.",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE review_count = 'High' AND city = 'Gilbert'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which actively running Yelp business in \"Gilbert\" has got the most reviews? Give the business id.",
+        "query": "SELECT DISTINCT T1.business_id FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T1.active = 'true' AND T1.city = 'Gilbert' AND T1.review_count = 'Uber'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "For the Yelp business in \"Tempe\" city which got \"3.5\" stars and review count as \"Uber\", how many \"long\" reviews did it get?",
+        "query": "SELECT COUNT(T2.review_length) FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T1.city = 'Tempe' AND T1.stars = '3.5' AND T1.review_count = 'Uber' AND T2.review_length = 'Long'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How is the \"noise level\" for the only Yelp business in \u201cMesa\u201d which got a \"Uber\" review count?",
+        "query": "SELECT T3.attribute_name FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.business_id INNER JOIN Attributes AS T3 ON T2.attribute_id = T3.attribute_id WHERE T1.city = 'Mesa' AND T1.review_count = 'Uber' AND T3.attribute_name = 'Noise Level'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Is the Yelp business No. 14033 good for supper?",
+        "query": "SELECT T1.attribute_value FROM Business_Attributes AS T1 INNER JOIN Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T2.attribute_name = 'good_for_dinner' AND T1.business_id = 14033"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How long is the Yelp business No. 15098 opened on Monday?",
+        "query": "SELECT SUBSTR(T1.closing_time, 1, 2) + 12 - SUBSTR(T1.opening_time, 1, 2) AS YYSJ FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id WHERE T2.day_of_week = 'Monday' AND T1.business_id = 15098"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "For the Yelp businesses which received a \"5\" star review with \"uber\" number of votes for funny, which one is located in \"Phoenix\"? Give the business ID.",
+        "query": "SELECT T1.business_id FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T1.city = 'Phoenix' AND T2.review_stars = 5 AND T2.review_votes_funny = 'Uber'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which city is the business that got a \"medium\" length tip with \"3\" likes located in?",
+        "query": "SELECT T1.city FROM Business AS T1 INNER JOIN Tips AS T2 ON T1.business_id = T2.business_id WHERE T2.tip_length = 'Medium' AND T2.likes = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "For the user who joined Yelp in \"2010\", with an average of \"4.5\" stars review and has got uber number of fans, how many \"funny\" compliments has he/she received from other users?",
+        "query": "SELECT COUNT(T2.user_id) FROM Users AS T1 INNER JOIN Users_Compliments AS T2 ON T1.user_id = T2.user_id INNER JOIN Compliments AS T3 ON T2.compliment_id = T3.compliment_id WHERE T1.user_yelping_since_year = 2010 AND T1.user_average_stars = 4.5 AND T1.user_fans = 'Uber' AND T3.compliment_type = 'funny'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many \"cool\" type compliments does user No. 41717 get?",
+        "query": "SELECT COUNT(T2.number_of_compliments) FROM Compliments AS T1 INNER JOIN Users_Compliments AS T2 ON T1.compliment_id = T2.compliment_id WHERE T1.compliment_type = 'cool' AND T2.user_id = 41717"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Does Yelp business No.\"11825\" have a \"parking lot\"?",
+        "query": "SELECT T1.attribute_value FROM Business_Attributes AS T1 INNER JOIN Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T1.business_id = 11825 AND T2.attribute_name = 'parking_lot'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Is the payment in mastercard possible for the Yelp business No.\"12476\"?",
+        "query": "SELECT T1.attribute_value FROM Business_Attributes AS T1 INNER JOIN Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T1.business_id = 12476 AND T2.attribute_name = 'payment_types_mastercard'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the percentage for the Yelp businesses in \"Pets\" category of all businesses?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.category_name = 'Pets' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.category_name) FROM Business_Categories AS T1 INNER JOIN Categories AS T2 ON T1.category_id = T2.category_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many times is the number of \"Women's Clothing\" Yelp businesses to \"Men's Clothing\"?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.category_name = 'Women''s Clothing' THEN 1 ELSE 0 END) AS REAL) / SUM(CASE WHEN T2.category_name = 'Men''s Clothing' THEN 1 ELSE 0 END) AS TIMES FROM Business_Categories AS T1 INNER JOIN Categories AS T2 ON T1.category_id = T2.category_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Write down the ID, active status and city of the business which are in CA state.",
+        "query": "SELECT business_id, active, city FROM Business WHERE state = 'CA' AND active = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Calculate the percentage of running business among all business.",
+        "query": "SELECT CAST(SUM(CASE WHEN active = 'true' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(business_id) FROM Business"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among all attribute names, list down the ID and attribute name which start with \"music\".",
+        "query": "SELECT attribute_id, attribute_name FROM Attributes WHERE attribute_name LIKE 'music%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Between 2006 and 2007, which year ID had the greater number in elite user?",
+        "query": "SELECT year_id FROM Elite WHERE year_id IN (2006, 2007) GROUP BY year_id ORDER BY COUNT(user_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Based on all user compliments, find the percentage of low number of compliments on all compliments ID.",
+        "query": "SELECT CAST(SUM(CASE WHEN number_of_compliments = 'Low' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(user_id) FROM Users_compliments"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List down the business ID and user ID who got uber for cool votes.",
+        "query": "SELECT business_id, user_id FROM Reviews WHERE review_votes_cool = 'Uber'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Write the user ID, business ID and tips length of who started using Yelp since 2004 and had high followers.",
+        "query": "SELECT T1.user_id, T2.business_id, T2.tip_length FROM Users AS T1 INNER JOIN Tips AS T2 ON T1.user_id = T2.user_id WHERE T1.user_yelping_since_year = 2004 AND T1.user_fans = 'High'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the review votes of funny and cool hit uber with long review length, describe the business ID, active status, user ID and user year of joining Yelp.",
+        "query": "SELECT T1.business_id, T1.active, T3.user_id, T3.user_yelping_since_year FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id INNER JOIN Users AS T3 ON T2.user_id = T3.user_id WHERE T2.review_votes_cool = 'Uber' AND T2.review_votes_funny = 'Uber' AND T2.review_length = 'Long'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Under the attribute name of \"music_playlist\", describe the attribute ID, business ID, city and inactive status.",
+        "query": "SELECT T1.attribute_id, T2.business_id, T3.city FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T1.attribute_name = 'music_playlist' AND T3.active = 'false'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Calculate the percentage of business with attribute name of \"Accepts Credit Cards\".",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.attribute_name = 'Accepts Credit Cards' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.attribute_name) FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the stopped businesses in San Tan Valley city, list down the user ID and review length of who had great experience.",
+        "query": "SELECT T2.user_id, T2.review_length FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T1.city = 'San Tan Valley' AND T1.active = 'false' AND T2.review_stars = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Mention the user average star, elite year and the compliment type of user ID 6027 whereby number of compliments reach uber.",
+        "query": "SELECT T2.user_average_stars, T1.year_id, T4.compliment_type, T3.number_of_compliments FROM Elite AS T1 INNER JOIN Users AS T2 ON T1.user_id = T2.user_id INNER JOIN Users_Compliments AS T3 ON T2.user_id = T3.user_id INNER JOIN Compliments AS T4 ON T3.compliment_id = T4.compliment_id INNER JOIN Years AS T5 ON T1.year_id = T5.year_id WHERE T3.number_of_compliments = 'Uber' AND T3.user_id = 6027"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Under the category name of \"Coffee & Tea\", mention any 5 business ID , their state and city.",
+        "query": "SELECT T2.business_id, T3.state, T3.city FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T1.category_name = 'Coffee & Tea' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Describe category name which had above 10% in comparing with all business and categories.",
+        "query": "SELECT T1.category_name FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id GROUP BY T2.category_id HAVING COUNT(T2.business_id) > ( SELECT COUNT(T3.business_id) FROM Business_Categories AS T3 ) * 0.1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "For the business with great experience existed in Sun Lakes city, provide the user ID who gave review on it and user followers.",
+        "query": "SELECT T3.user_id, T3.user_fans FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id INNER JOIN Users AS T3 ON T2.user_id = T3.user_id WHERE T1.city = 'Sun Lakes' AND T1.stars = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Compare the number of business between the category of \"Men's Clothing\" and \"Women's Clothing\".",
+        "query": "SELECT SUM(CASE WHEN T1.category_name = 'Men''s Clothing' THEN 1 ELSE 0 END) - SUM(CASE WHEN T1.category_name = 'Women''s Clothing' THEN 1 ELSE 0 END) AS diff FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among highest quality user of under ID 100, mention compliment type which got highest compliment number and user's followers.",
+        "query": "SELECT T1.compliment_type, T3.user_fans FROM Compliments AS T1 INNER JOIN Users_Compliments AS T2 ON T1.compliment_id = T2.compliment_id INNER JOIN Users AS T3 ON T2.user_id = T3.user_id WHERE T2.number_of_compliments = 'Uber' AND T2.user_id < 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List all the businesses that closed at 8PM.",
+        "query": "SELECT DISTINCT business_id FROM Business_Hours WHERE closing_time = '8PM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many 2 stars rated business located in Phoenix, Arizona?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE city = 'Phoenix' AND state = 'AZ' AND stars = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses in Tempe are rated as 'Wonderful experience?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE city = 'Phoenix' AND stars > 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List all the users with average star less than 3 stars in 2012",
+        "query": "SELECT user_id FROM Users WHERE user_yelping_since_year = 2012 AND user_average_stars < 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Find the percentage of 5 stars rated business.",
+        "query": "SELECT CAST(SUM(CASE WHEN stars = 5 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(stars) FROM Business"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Calculate difference between business that have the highest number of reviews and business that have the lowest number of reviews.",
+        "query": "SELECT ( SELECT COUNT(business_id) FROM Reviews GROUP BY business_id ORDER BY COUNT(business_id) DESC LIMIT 1 ) - ( SELECT COUNT(business_id) FROM Reviews GROUP BY business_id ORDER BY COUNT(business_id) ASC LIMIT 1 ) AS DIFF"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List all the tires businesses that are opened everyday.",
+        "query": "SELECT DISTINCT T2.business_id FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id INNER JOIN Business_Hours AS T4 ON T3.business_id = T4.business_id WHERE T1.category_name = 'Tires' GROUP BY T2.business_id HAVING COUNT(day_id) = 7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which users become an elite in 2012?",
+        "query": "SELECT DISTINCT T1.user_id FROM Elite AS T1 INNER JOIN Years AS T2 ON T1.year_id = T2.year_id WHERE T2.actual_year = 2012"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List the business ID of shopping business that have 4 stars ratings.",
+        "query": "SELECT T1.business_id FROM Business AS T1 INNER JOIN Business_Categories AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T2.category_id = T3.category_id WHERE T3.category_name = 'Shopping' AND T1.stars = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many business have low check-in on Sunday at 10AM?",
+        "query": "SELECT COUNT(T2.business_id) FROM Days AS T1 INNER JOIN Checkins AS T2 ON T1.day_id = T2.day_id WHERE T1.day_of_week = 'Sunday' AND T2.label_time_10 = 'Low'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses in Glendale are reviewed by user with the ID of 20241?",
+        "query": "SELECT COUNT(T1.business_id) FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T1.city = 'Glendale' AND T2.user_id = 20241"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "State the locations of all Pet Services business.",
+        "query": "SELECT T1.city FROM Business AS T1 INNER JOIN Business_Categories AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T2.category_id = T3.category_id WHERE T3.category_name = 'Pet Services'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many photos type compliment given from users with high cool votes?",
+        "query": "SELECT COUNT(T1.user_id) FROM Users AS T1 INNER JOIN Users_Compliments AS T2 ON T1.user_id = T2.user_id INNER JOIN Compliments AS T3 ON T2.compliment_id = T3.compliment_id INNER JOIN Reviews AS T4 ON T1.user_id = T4.user_id WHERE T3.compliment_type = 'photos' AND T4.review_votes_cool = 'High'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many closed businesses that have more than 10 attributes?",
+        "query": "SELECT COUNT(*) FROM Business WHERE business_id IN ( SELECT T1.business_id FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.business_id WHERE T1.active = 'false' GROUP BY T1.business_id HAVING COUNT(DISTINCT T2.attribute_id) > 10 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List the business located in Mesa that have alcohol attribute.",
+        "query": "SELECT T1.business_id FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.business_id INNER JOIN Attributes AS T3 ON T2.attribute_id = T3.attribute_id WHERE T1.city = 'Mesa' AND T3.attribute_name = 'Alcohol'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Based on business in Phoenix, calculate the percentage of business with low funny votes.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.review_votes_funny = 'Low' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.business_id) FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T1.city = 'Phoenix'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the ratio between business in shopping category and business in pets category?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.category_name = 'Shopping' THEN 1 ELSE 0 END) AS REAL) / SUM(CASE WHEN T2.category_name = 'Pets' THEN 1 ELSE 0 END) AS radio FROM Business_Categories AS T1 INNER JOIN Categories AS T2 ON T1.category_id = T2.category_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses are registered in the database under 'Banks & Credit Unions' category?",
+        "query": "SELECT COUNT(T2.business_id) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id WHERE T1.category_name = 'Banks & Credit Unions'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many active businesses from Casa Grande are registered in the database?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE active = 'true' AND city = 'Casa Grande'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What time does the business with ID no.12 open on Monday?",
+        "query": "SELECT T1.opening_time FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id WHERE T1.business_id = 12 AND T2.day_of_week = 'Monday'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses that are registered in the database can be attributed to 'Good for Kids'?",
+        "query": "SELECT COUNT(T2.business_id) FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T1.attribute_name = 'Good for Kids' AND T2.attribute_value = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Identify the most popular and appealing active business in Gilbert based on users' reviews.",
+        "query": "SELECT business_id FROM Business WHERE city = 'Gilbert' AND active = 'true' AND review_count = 'High' ORDER BY stars DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Find the 5-star business in Ahwatukee, AZ and identify it's business category.",
+        "query": "SELECT T1.business_id, T3.category_name FROM Business AS T1 INNER JOIN Business_Categories AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T2.category_id = T3.category_id WHERE T1.city = 'Ahwatukee' AND T1.stars = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among all closed businesses in Avondale, AZ what percent have obtained a 'wonderful experience' rating of the business.",
+        "query": "SELECT CAST(SUM(CASE WHEN stars > 3 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(stars) FROM Business WHERE city = 'Avondale' AND active = 'false'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Identify the user who has been yelping since 2004. Is he or she an Yelp Elite member?",
+        "query": "SELECT DISTINCT T2.user_id FROM Users AS T1 INNER JOIN Elite AS T2 ON T1.user_id = T2.user_id WHERE T1.user_yelping_since_year = 2004"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Identify the percent of long reviews among all 5-star reviews given to businesses by the Yelp users.",
+        "query": "SELECT CAST(SUM(CASE WHEN review_length = 'Long' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(review_length) FROM Reviews WHERE review_stars = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among all the users with the average ratings of at least 4 and above of all reviews, calculate the percent that have no fans or followers.",
+        "query": "SELECT CAST(SUM(CASE WHEN user_fans = 'None' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(user_id) FROM Users WHERE user_average_stars >= 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many short tips were left for the business with ID no.2?",
+        "query": "SELECT COUNT(business_id) FROM Tips WHERE business_id = 2 AND tip_length = 'Short'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Find the Yelp user with the average 5-star rating of all reviews who has been yelping the longest.",
+        "query": "SELECT user_id FROM Users WHERE user_average_stars = 5 ORDER BY user_yelping_since_year ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Identify the operating hours of businesses in Black Canyon City with review count greater than average.",
+        "query": "SELECT T2.opening_time, T2.closing_time FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T1.city = 'Black Canyon City' GROUP BY t2.business_id HAVING T1.review_count > AVG(T1.review_count)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among all the users who received the high number of compliments, what percent received the 'cute' type of compliment.",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.compliment_type = 'cute' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.user_id) FROM Compliments AS T1 INNER JOIN Users_Compliments AS T2 ON T1.compliment_id = T2.compliment_id WHERE T2.number_of_compliments = 'High'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Mention the number of businesses that have no any attribute.",
+        "query": "SELECT COUNT(business_id) FROM Business_Attributes WHERE attribute_value IN ('none', 'no', 'false')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What are the opening and closing time of business id 1 for day id 2?",
+        "query": "SELECT opening_time, closing_time FROM Business_Hours WHERE business_id = 1 AND day_id = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List out city name of businesses which have medium length of review.",
+        "query": "SELECT DISTINCT T1.city FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T2.review_length = 'Medium'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the closing time of business id 4 on Sunday?",
+        "query": "SELECT T2.closing_time FROM Days AS T1 INNER JOIN Business_Hours AS T2 ON T1.day_id = T2.day_id WHERE T1.day_of_week = 'Sunday' AND T2.business_id = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the businesses which have short length of review, which one located in Phoenix?",
+        "query": "SELECT DISTINCT T1.business_id FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T1.city = 'Phoenix' AND T2.review_length = 'Short'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the users whose fan is medium, how many users received high compliments from other users.",
+        "query": "SELECT COUNT(T1.user_id) FROM Users AS T1 INNER JOIN Users_Compliments AS T2 ON T1.user_id = T2.user_id WHERE T2.number_of_compliments = 'High' AND T1.user_fans = 'Medium'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the users who received low compliments from other users, which users joined Yelp in 2012?",
+        "query": "SELECT DISTINCT T2.user_id FROM Users AS T1 INNER JOIN Users_Compliments AS T2 ON T1.user_id = T2.user_id WHERE T1.user_yelping_since_year = 2012 AND T2.number_of_compliments = 'Low'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the businesses without attribute, how many businesses located in Gilbert?",
+        "query": "SELECT COUNT(T2.business_id) FROM Business_Attributes AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id WHERE T2.city = 'Gilbert' AND T1.attribute_value IN ('None', 'no', 'false')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the businesses with average rating, how many business has attribute of full_bar.",
+        "query": "SELECT COUNT(T1.business_id) FROM Business_Attributes AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id WHERE T1.attribute_value = 'full_bar'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List out the state of businesses which have opening time at 1AM.",
+        "query": "SELECT DISTINCT T1.state FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id WHERE T2.opening_time = '1AM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List out the category name of business id 5.",
+        "query": "SELECT T1.category_name FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id WHERE T2.business_id = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List out the user id that has compliment type of photos.",
+        "query": "SELECT T2.user_id FROM Compliments AS T1 INNER JOIN Users_Compliments AS T2 ON T1.compliment_id = T2.compliment_id WHERE T1.compliment_type = 'photos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Calculate the percentage of medium tip length in the list. List out the time when users of medium tip length join Yelp.",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.tip_length = 'Medium' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.tip_length), T2.user_yelping_since_year FROM Tips AS T1 INNER JOIN Users AS T2 ON T1.user_id = T2.user_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Calculate the percentage of businesses who located in Mesa. What is attribute value of these businesses.",
+        "query": "SELECT CAST(COUNT(T1.city) AS REAL) * 100 / ( SELECT COUNT(business_id) FROM Business ), T2.attribute_value FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.business_id WHERE T1.city = 'Mesa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "State the state of businesses which have closing time at 12AM.",
+        "query": "SELECT DISTINCT T1.state FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id WHERE T2.closing_time = '12AM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the businesses which have attribute of beer_and_wine, how many business located in Peoria?",
+        "query": "SELECT COUNT(T1.business_id) FROM Business_Attributes AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id WHERE T2.city = 'Peoria' AND T1.attribute_value = 'beer_and_wine'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the users who received high compliments from other users, which users joined Yelp earliest?",
+        "query": "SELECT T2.user_id FROM Users AS T1 INNER JOIN Users_Compliments AS T2 ON T1.user_id = T2.user_id WHERE T2.number_of_compliments = 'High' AND T1.user_yelping_since_year = ( SELECT MIN(user_yelping_since_year) FROM Users )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which business ID has the most reviews?",
+        "query": "SELECT business_id FROM Reviews GROUP BY business_id ORDER BY COUNT(user_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which year has the most elite users?",
+        "query": "SELECT year_id FROM Elite GROUP BY year_id ORDER BY COUNT(user_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many 5 star businesses have uber review votes for funny?",
+        "query": "SELECT COUNT(business_id) FROM Reviews WHERE review_stars = 5 AND review_votes_funny = 'Uber'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many users have uber review votes for funny from the fans?",
+        "query": "SELECT COUNT(DISTINCT user_id) FROM Reviews WHERE review_votes_funny = 'Uber'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which business ID have the shortest business operating hours?",
+        "query": "SELECT business_id FROM Business_Hours ORDER BY closing_time - opening_time LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Find out which business ID are opened all the time.",
+        "query": "SELECT DISTINCT business_id FROM Business_Hours WHERE day_id >= 1 AND day_id < 8 AND opening_time = closing_time"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Does the length of the tip influence the number of likes for hotel and travel business category?",
+        "query": "SELECT T3.tip_length, SUM(T3.likes) AS likes FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Tips AS T3 ON T2.business_id = T3.business_id WHERE T1.category_name = 'Hotels & Travel' GROUP BY T3.tip_length"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many users manage to get uber votes for all of the review category? Find out what are the user average star.",
+        "query": "SELECT COUNT(T2.user_id) AS USER_IDS, T2.user_average_stars FROM Reviews AS T1 INNER JOIN Users AS T2 ON T1.user_id = T2.user_id WHERE T1.review_votes_funny = 'Uber' AND T1.review_votes_useful = 'Uber' AND T1.review_votes_cool = 'Uber'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the ratio of good to bad business star for a businesses that are opened all the time?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.stars BETWEEN 3.5 AND 5 THEN 1 ELSE 0 END) AS REAL) / SUM(CASE WHEN T1.stars BETWEEN 1 AND 2.5 THEN 1 ELSE 0 END) AS ratio FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List out 10 business ID that are being reviewed the most by users and list out what are top 3 business categories.",
+        "query": "SELECT T2.business_id, T3.category_name FROM Reviews AS T1 INNER JOIN Business_categories AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T2.category_id = T3.category_id GROUP BY T2.business_id ORDER BY COUNT(T1.user_id) DESC LIMIT 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses in Arizona having an average review less than 3 stars?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE business_id IN ( SELECT DISTINCT T1.business_id FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T1.state = 'AZ' GROUP BY T1.business_id HAVING SUM(T2.review_stars) / COUNT(T2.user_id) < 3 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the percentage of user not becoming an elite user?",
+        "query": "SELECT CAST((( SELECT COUNT(user_id) FROM Users ) - ( SELECT COUNT(DISTINCT user_id) FROM Elite )) AS REAL) * 100 / ( SELECT COUNT(user_id) FROM Users )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What are the most common compliments types received by user with uber number of fans?",
+        "query": "SELECT DISTINCT T3.compliment_type FROM Users AS T1 INNER JOIN Users_Compliments AS T2 ON T1.user_id = T2.user_id INNER JOIN Compliments AS T3 ON T2.compliment_id = T3.compliment_id WHERE T1.user_fans = 'Uber'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the average year needed by a user with uber fans to become an elite user?",
+        "query": "SELECT CAST(SUM(T2.year_id - T1.user_yelping_since_year) AS REAL) / COUNT(T1.user_id) FROM Users AS T1 INNER JOIN Elite AS T2 ON T1.user_id = T2.user_id WHERE T1.user_fans = 'Uber'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the average year for a user to be upgraded to elite user?",
+        "query": "SELECT CAST(SUM(T2.year_id - T1.user_yelping_since_year) AS REAL) / COUNT(T1.user_id) FROM Users AS T1 INNER JOIN Elite AS T2 ON T1.user_id = T2.user_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many business are opened for more than 8 hour in Mesa and what is the percentage of the active businesses?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.active = 'true' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.business_id) AS ACT FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id WHERE T1.city = 'Mesa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many active businesses are opened during late afternoon in the Phoenix city? List out the top 3 categories name for these businesses.",
+        "query": "SELECT DISTINCT T4.category_name FROM Business_Hours AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id INNER JOIN Business_Categories AS T3 ON T2.business_id = T3.business_id INNER JOIN Categories AS T4 ON T3.category_id = T4.category_id WHERE T2.active = 'true' AND T2.city = 'Phoenix' AND T1.opening_time >= '5PM' LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which user has done the most review on a business attributed to delivery?",
+        "query": "SELECT T3.user_id FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id INNER JOIN Reviews AS T3 ON T2.business_id = T3.business_id WHERE T1.attribute_name = 'Delivery' GROUP BY T3.user_id ORDER BY COUNT(T2.business_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the average number of reviews written for active businesses that operate not more than 30 hours a week?",
+        "query": "SELECT AVG(T3.user_id) FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Reviews AS T3 ON T1.business_id = T3.business_id WHERE T1.active = 'true' GROUP BY T2.closing_time - T2.opening_time HAVING SUM(T2.closing_time - T2.opening_time) < 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many business ids have opening hours from 8AM to 6PM?",
+        "query": "SELECT DISTINCT business_id FROM Business_Hours WHERE opening_time = '8AM' AND closing_time = '6PM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Provide business ids with opening hours 10AM on Saturday.",
+        "query": "SELECT DISTINCT business_id FROM Business_Hours WHERE day_id = 6 AND opening_time = '10AM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Indicate the business id and days which are opened from 8AM to 6PM.",
+        "query": "SELECT DISTINCT day_id FROM Business_Hours WHERE opening_time = '8AM' AND closing_time = '6PM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses id are rated more than 4?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE stars > 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What are the categories of businesses that have opening time on Sunday?",
+        "query": "SELECT DISTINCT T1.category_name FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business_Hours AS T3 ON T2.business_id = T3.business_id INNER JOIN Days AS T4 ON T3.day_id = T4.day_id WHERE T4.day_of_week = 'Sunday' AND T3.opening_time <> ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please indicate the opening day of businesses whose category is pets.",
+        "query": "SELECT DISTINCT T4.day_of_week FROM Business_Categories AS T1 INNER JOIN Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business_Hours AS T3 ON T1.business_id = T3.business_id INNER JOIN Days AS T4 ON T3.day_id = T4.day_id WHERE T2.category_name = 'Pets'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please indicate the closing hours and business days of the businesses with the category named Doctors.",
+        "query": "SELECT DISTINCT T3.opening_time, T3.day_id FROM Business_Categories AS T1 INNER JOIN Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business_Hours AS T3 ON T1.business_id = T3.business_id INNER JOIN Days AS T4 ON T3.day_id = T4.day_id WHERE T2.category_name = 'Doctors'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the working days from Monday to Saturday, which businesses with the category names work the most days?",
+        "query": "SELECT T2.category_name FROM Business_Categories AS T1 INNER JOIN Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business_Hours AS T3 ON T1.business_id = T3.business_id INNER JOIN Days AS T4 ON T3.day_id = T4.day_id GROUP BY T2.category_name ORDER BY COUNT(T3.day_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please indicate the business id have the closing time with the category of Arts & Entertainment on Sunday.",
+        "query": "SELECT T1.business_id, T3.closing_time FROM Business_Categories AS T1 INNER JOIN Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business_Hours AS T3 ON T1.business_id = T3.business_id INNER JOIN Days AS T4 ON T3.day_id = T4.day_id WHERE T2.category_name = 'Arts & Entertainment' AND T4.day_of_week = 'Sunday'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "In businesses with a category of \"DJs\", how many businesses are rated less than 5?",
+        "query": "SELECT COUNT(T1.business_id) FROM Business AS T1 INNER JOIN Business_Categories AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T2.category_id = T3.category_id WHERE T3.category_name = 'DJs' AND T1.stars < 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List active business ids with opening times of 7AM and closing times of 8PM.",
+        "query": "SELECT DISTINCT T4.business_id FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business_Hours AS T3 ON T2.business_id = T3.business_id INNER JOIN Business AS T4 ON T3.business_id = T4.business_id WHERE T4.active = 'true' AND T3.opening_time = '7AM' AND T3.closing_time = '8PM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses with the category named Stadiums & Arenas are rated highest?",
+        "query": "SELECT COUNT(T1.business_id) FROM Business_Categories AS T1 INNER JOIN Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T1.business_id = T3.business_id WHERE T2.category_name = 'Stadiums & Arenas' AND T3.stars = ( SELECT MAX(stars) FROM Business )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many category id have low review count and rating more than 2?",
+        "query": "SELECT COUNT(DISTINCT T1.category_id) FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T3.review_count = 'Low' AND T3.stars > 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which businesses with the category name Accessories have opening hours before 7AM?",
+        "query": "SELECT T1.business_id FROM Business_Hours AS T1 INNER JOIN Business_Categories AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T2.category_id = T3.category_id WHERE T3.category_name = 'Accessories' AND SUBSTR(T1.opening_time, -4, 2) * 1 < 7 AND T1.opening_time LIKE '%AM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the active businesses in Arizona, how many businesses work after 12PM?",
+        "query": "SELECT COUNT(DISTINCT T2.business_id) FROM Business_Hours AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id INNER JOIN Business_Categories AS T3 ON T2.business_id = T3.business_id INNER JOIN Categories AS T4 ON T3.category_id = T4.category_id WHERE T2.active = 'true' AND T2.state = 'AZ' AND T1.opening_time > '12PM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Please provide the name of businesses with user id \"16328\".",
+        "query": "SELECT T1.category_name FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Tips AS T3 ON T2.business_id = T3.business_id WHERE T3.user_id = 16328"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses have the category named food? List those businesses and find the percentage of businesses with less than 2 stars.",
+        "query": "SELECT T3.business_id, CAST((( SELECT COUNT(business_id) FROM Business WHERE stars < 2 ) - ( SELECT COUNT(business_id) FROM Business WHERE stars > 2 )) AS REAL) * 100 / ( SELECT COUNT(stars) FROM Business ) FROM Business_Categories AS T1 INNER JOIN Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T1.business_id = T3.business_id WHERE T2.category_name = 'Food'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Calculate the percentage of businesses with the category name food that are open from 7AM to 8PM in the businesses with the same time.",
+        "query": "SELECT CAST(SUM(CASE WHEN T3.category_name = 'Food' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T3.category_name) FROM Business_Categories AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T1.category_id = T3.category_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Write down the number of running business with each review count in Cave Creek city.",
+        "query": "SELECT SUM(CASE WHEN review_count = 'High' THEN 1 ELSE 0 END) AS high , SUM(CASE WHEN review_count = 'Medium' THEN 1 ELSE 0 END) AS Medium , SUM(CASE WHEN review_count = 'Low' THEN 1 ELSE 0 END) AS low FROM Business WHERE city = 'Cave Creek' AND active = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Calculate the yearly average user who started using Yelp from the year of 2005 to 2014.",
+        "query": "SELECT AVG(user_id) FROM Users WHERE user_yelping_since_year >= 2005 AND user_yelping_since_year <= 2015"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the active and inactive ratio of the business with the review count of low.",
+        "query": "SELECT CAST(SUM(CASE WHEN active = 'true' THEN 1 ELSE 0 END) AS REAL) / SUM(CASE WHEN active = 'false' THEN 1 ELSE 0 END) AS radio FROM Business WHERE review_count = 'Low'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List any five of user ID who became elite user in 2006.",
+        "query": "SELECT user_id FROM Elite WHERE year_id = 2006 LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Write down the any five of ID and name of category that starts with alphabet \"P\".",
+        "query": "SELECT category_id, category_name FROM Categories WHERE category_name LIKE 'P%' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Provide the list of user ID along with review star of which has the review length of medium with business ID of 35.",
+        "query": "SELECT user_id, review_stars FROM Reviews WHERE business_id = 15 AND review_length = 'Medium'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List down the business ID and attribute value of the attribute name of \"payment_types_visa\".",
+        "query": "SELECT T2.business_id, T2.attribute_value FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T1.attribute_name = 'payment_types_visa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Describe ID and active status of the business under category of \"Diagnostic Imaging\".",
+        "query": "SELECT T2.business_id, T3.active FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T1.category_name = 'Diagnostic Imaging'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Mention the user ID and their year of joining Yelp who had great experience on business ID 143.",
+        "query": "SELECT T2.user_id, T2.user_yelping_since_year FROM Reviews AS T1 INNER JOIN Users AS T2 ON T1.user_id = T2.user_id WHERE T1.business_id = 143 AND T1.review_stars = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the user ID with number in compliment of uber on profile, list any 5 user ID and the year when they join Yelp.",
+        "query": "SELECT T3.user_id, T3.user_yelping_since_year FROM Compliments AS T1 INNER JOIN Users_Compliments AS T2 ON T1.compliment_id = T2.compliment_id INNER JOIN Users AS T3 ON T2.user_id = T3.user_id WHERE T1.compliment_type = 'profile' AND T2.number_of_compliments = 'Uber' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List the user ID, business ID with review length of the business which received the most likes in tips.",
+        "query": "SELECT T1.user_id, T1.business_id, T2.review_length FROM Tips AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id ORDER BY T1.likes DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the elite users of 10 consecutive year from 2005 to 2014, list down the user ID and their number of compliment on photos.",
+        "query": "SELECT T2.user_id, T2.number_of_compliments FROM Compliments AS T1 INNER JOIN Users_Compliments AS T2 ON T1.compliment_id = T2.compliment_id INNER JOIN Elite AS T3 ON T2.user_id = T3.user_id WHERE T3.year_id BETWEEN 2005 AND 2014 AND T1.compliment_type = 'photos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Calculate the percentage of business which opened on Sunday from 9AM to 9PM based on the number of business opened on Sunday.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.opening_time = '9AM' AND T2.closing_time = '9PM' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.day_id) FROM Days AS T1 INNER JOIN Business_Hours AS T2 ON T1.day_id = T2.day_id WHERE T1.day_of_week = 'Sunday'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Write down the ID and opening day of a week for the business which are running in Black Canyon City.",
+        "query": "SELECT T2.business_id, T3.day_of_week FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T1.city = 'Black Canyon City' AND T1.active = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Within the user who joined Yelp in 2004, explore the user ID with average star of 5 and it's review length on the business.",
+        "query": "SELECT T2.user_id, T2.review_length FROM Users AS T1 INNER JOIN Reviews AS T2 ON T1.user_id = T2.user_id WHERE T1.user_yelping_since_year = 2004 AND T1.user_average_stars = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Which business ID received the review of 4 star and above by 65% of user? Describe their active status and city.",
+        "query": "SELECT DISTINCT T2.business_id, T2.city FROM Reviews AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id WHERE T1.review_stars >= 4 AND ( SELECT CAST(( SELECT COUNT(DISTINCT T1.user_id) FROM Reviews AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id WHERE T1.review_stars >= 4 ) AS REAL) * 100 / ( SELECT COUNT(user_id) FROM Users ) > 65 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Calculate the difference between running business in Glendale City and Mesa City.",
+        "query": "SELECT SUM(CASE WHEN city = 'Glendale' THEN 1 ELSE 0 END) - SUM(CASE WHEN city = 'Mesa' THEN 1 ELSE 0 END) AS diff FROM Business WHERE active = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many likes did short comment left by users who joined in 2010 get?",
+        "query": "SELECT SUM(T2.likes) FROM Users AS T1 INNER JOIN Tips AS T2 ON T1.user_id = T2.user_id WHERE T1.user_yelping_since_year = 2010"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "For users with average ratings of 3, what kind of tip length they mostly left?",
+        "query": "SELECT T2.tip_length FROM Users AS T1 INNER JOIN Tips AS T2 ON T1.user_id = T2.user_id WHERE T1.user_average_stars = 3 GROUP BY T2.tip_length ORDER BY COUNT(T2.tip_length) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Sum up the likes get by short reviews on businesses located in City Goodyear.",
+        "query": "SELECT SUM(T2.likes) AS likes FROM Business AS T1 INNER JOIN Tips AS T2 ON T1.business_id = T2.business_id WHERE T1.city = 'Goodyear'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "For businesses with long length reviews, which state are they located?",
+        "query": "SELECT DISTINCT T1.state FROM Business AS T1 INNER JOIN Tips AS T2 ON T1.business_id = T2.business_id WHERE T2.tip_length = 'Long'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How much time do businesses in El Mirage City, AZ State operate in average daily?",
+        "query": "SELECT SUM(T2.closing_time - T2.opening_time) FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id WHERE T1.city = 'El Mirage' AND T1.state = 'AZ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List down the closing day of businesses located at SC State.",
+        "query": "SELECT T3.day_id - T2.day_id FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T1.state = 'SC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List down the category of businesses whose stars ratings are 5.",
+        "query": "SELECT DISTINCT T3.category_name FROM Business AS T1 INNER JOIN Business_Categories AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T2.category_id = T3.category_id WHERE T1.stars = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What are the states of businesses with attribute of beer and wine located?",
+        "query": "SELECT DISTINCT T2.state FROM Business_Attributes AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id WHERE T1.attribute_value = 'beer_and_wine'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many user's compliment in photo has medium in number?",
+        "query": "SELECT COUNT(T2.user_id) FROM Compliments AS T1 INNER JOIN Users_Compliments AS T2 ON T1.compliment_id = T2.compliment_id WHERE T1.compliment_type = 'photos' AND T2.number_of_compliments = 'Medium'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among businesses with \"Wi-Fi\" attribute, which businesses id are located at SC State?",
+        "query": "SELECT T3.business_id FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T1.attribute_name = 'Wi-Fi' AND T2.attribute_value = 'true' AND T3.state = 'SC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Sum up the number of business with \"ambience_romantic\" attribute.",
+        "query": "SELECT COUNT(T2.business_id) FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T1.attribute_name = 'ambience_romantic' AND T2.attribute_value = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the percentage of businesses with \"Good for Kids\" attribute over the other attributes?",
+        "query": "SELECT CAST(SUM(CASE WHEN attribute_name = 'Good for Kids' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.business_id) FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T2.attribute_value = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses are not closed in the city of Mesa?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE city = 'Mesa' AND active = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "In how many businesses have customers had a bad or terrible experience?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE stars IN (1, 2)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List by ID the businesses with the reviews with the lowest veracity of Paradise Valley.",
+        "query": "SELECT business_id FROM Business WHERE stars > 3 AND city = 'Paradise Valley' AND review_count = 'Low'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses have more than 1 attribute?",
+        "query": "SELECT COUNT(business_id) FROM Business_Attributes WHERE attribute_value > 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses are opened the same number of hours every day of the week?",
+        "query": "SELECT COUNT(business_id) FROM Business_Hours WHERE opening_time = '8AM' AND closing_time = '6PM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many reviews of businesses that are still open received an uber rating on the funny vote?",
+        "query": "SELECT COUNT(T1.business_id) FROM Business AS T1 INNER JOIN Reviews AS T2 ON T1.business_id = T2.business_id WHERE T2.review_votes_funny = 'Uber' AND T1.active = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many of the users who use a high number of compliments do not have any fans?",
+        "query": "SELECT COUNT(T2.user_id) FROM Users_Compliments AS T1 INNER JOIN Users AS T2 ON T1.user_id = T2.user_id WHERE T1.number_of_compliments = 'High' AND T2.user_fans = 'None'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the most common type of compliments that a user has received from other users?",
+        "query": "SELECT T2.compliment_type FROM Users_Compliments AS T1 INNER JOIN Compliments AS T2 ON T1.compliment_id = T2.compliment_id GROUP BY T2.compliment_type ORDER BY COUNT(T2.compliment_type) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many stars does each of the 3 top users with the most likes in their reviews have?",
+        "query": "SELECT T2.user_average_stars FROM Tips AS T1 INNER JOIN Users AS T2 ON T1.user_id = T2.user_id GROUP BY T2.user_id ORDER BY SUM(T1.likes) DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "In which categories does the only business located in the city of Arcadia appear?",
+        "query": "SELECT T1.category_name FROM Categories AS T1 INNER JOIN Business_Categories AS T2 ON T1.category_id = T2.category_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T3.city = 'Arcadia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List by their id all businesses that are open on Sunday.",
+        "query": "SELECT T1.business_id FROM Business_Hours AS T1 INNER JOIN Days AS T2 ON T1.day_id = T2.day_id WHERE T1.day_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses with music_karaoke attribute are closed?",
+        "query": "SELECT COUNT(T2.business_id) FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id INNER JOIN Business AS T3 ON T2.business_id = T3.business_id WHERE T1.attribute_name = 'music_karaoke' AND T3.active = 'false' AND T2.attribute_value IN ('none', 'no', 'false')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many open businesses in the City of Phoenix have users left a long review?",
+        "query": "SELECT COUNT(DISTINCT T2.business_id) FROM Reviews AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id WHERE T1.review_length = 'Long' AND T2.active = 'true' AND T2.city = 'Phoenix'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many users who have received a low cool vote have also received at least 1 low cool vote for some of their reviews?",
+        "query": "SELECT COUNT(DISTINCT T1.user_id) FROM Users AS T1 INNER JOIN Reviews AS T2 ON T1.user_id = T2.user_id WHERE T1.user_votes_cool = 'Low' AND T2.review_votes_cool = 'Low'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many users with a long tip and 2 likes for their tip have a high number of fans?",
+        "query": "SELECT COUNT(DISTINCT T1.user_id) FROM Users AS T1 INNER JOIN Tips AS T2 ON T1.user_id = T2.user_id WHERE T2.tip_length = 'Long' AND T2.likes = 2 AND T1.user_fans = 'High'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "In how many businesses with the ambience_trendy attribute?",
+        "query": "SELECT COUNT(T2.business_id) FROM Attributes AS T1 INNER JOIN Business_Attributes AS T2 ON T1.attribute_id = T2.attribute_id WHERE T1.attribute_name = 'ambience_trendy' AND T2.attribute_value IN ('none', 'no', 'false')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many businesses in the city of Scottsdale open on Sunday at 12PM?",
+        "query": "SELECT COUNT(DISTINCT T2.business_id) FROM Business AS T1 INNER JOIN Business_hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T1.city = 'Scottsdale' AND T3.day_of_week = 'Sunday' AND T2.opening_time = '12PM'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the average number of stars for businesses in the Obstetricians & Gynecologists category?",
+        "query": "SELECT CAST(SUM(T1.stars) AS REAL) / COUNT(T1.business_id) FROM Business AS T1 INNER JOIN Business_Categories AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T2.category_id = T3.category_id WHERE T3.category_name = 'Obstetricians & Gynecologists'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Calculate the percentage of users with a high number of fans who were elite in 2011.",
+        "query": "SELECT CAST(SUM(CASE WHEN T3.user_fans = 'High' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T3.user_fans) FROM Years AS T1 INNER JOIN Elite AS T2 ON T1.year_id = T2.year_id INNER JOIN Users AS T3 ON T2.user_id = T3.user_id WHERE T1.actual_year = 2011"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "How many of the businesses are in Surprise?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE city = 'Surprise'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List down the business ID with a high review count in Tempe.",
+        "query": "SELECT business_id FROM Business WHERE review_count = 'High' AND city = 'Tempe'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the total number of active businesses in AZ with a medium review count?",
+        "query": "SELECT COUNT(business_id) FROM Business WHERE review_count = 'Medium' AND state = 'AZ' AND active = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List down the business ID with a star range from 3 to 5, located at Chandler.",
+        "query": "SELECT business_id FROM Business WHERE stars >= 3 AND stars < 6 AND city = 'Chandler'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "In users yelping since 2009 to 2011, how many of them have low count of fans?",
+        "query": "SELECT COUNT(user_id) FROM Users WHERE user_yelping_since_year >= 2009 AND user_yelping_since_year < 2012 AND user_fans = 'Low'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the review length of user 11021 to business with business ID 3?",
+        "query": "SELECT review_length FROM Reviews WHERE user_id = 11021 AND business_id = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the businesses in Tempe, list the attribute of the business with a medium review count.",
+        "query": "SELECT DISTINCT T3.attribute_name FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.business_id INNER JOIN Attributes AS T3 ON T2.attribute_id = T3.attribute_id WHERE T1.city = 'Tempe' AND T1.review_count = 'Medium'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "In businesses with a category of food, how many of them have a star rating below 3?",
+        "query": "SELECT COUNT(DISTINCT T1.business_id) FROM Business AS T1 INNER JOIN Business_Categories AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T2.category_id = T3.category_id WHERE T3.category_name = 'Food' AND T1.stars < 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List the active business ID and its stars of the businesses fall under the category of Food.",
+        "query": "SELECT DISTINCT T1.business_id, T1.stars FROM Business AS T1 INNER JOIN Business_Categories AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T2.category_id = T3.category_id WHERE T3.category_name = 'Food' AND T1.active = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the category and attributes of businesses with highest star rating?",
+        "query": "SELECT DISTINCT T3.category_name, T5.attribute_name FROM Business AS T1 INNER JOIN Business_Categories AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T2.category_id = T3.category_id INNER JOIN Business_Attributes AS T4 ON T2.business_id = T4.business_id INNER JOIN Attributes AS T5 ON T4.attribute_id = T5.attribute_id WHERE T1.stars = ( SELECT MAX(stars) FROM Business )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the category of the business with short review length and highest review stars within business ID from 7 to 14?",
+        "query": "SELECT DISTINCT T3.category_name FROM Reviews AS T1 INNER JOIN Business_Categories AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T2.category_id = T3.category_id WHERE T2.business_id >= 7 AND T2.business_id < 15 AND T1.review_length = 'Short' AND T1.review_stars = ( SELECT MAX(review_stars) FROM Reviews )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Count the active businesses that has an attribute of BYOB with high review count.",
+        "query": "SELECT COUNT(DISTINCT T1.business_id) FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.business_id INNER JOIN Attributes AS T3 ON T2.attribute_id = T3.attribute_id WHERE T3.attribute_name = 'BYOB' AND T1.review_count = 'High' AND T1.active = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the closing and opening time of businesses located at Glendale with highest star rating?",
+        "query": "SELECT T2.opening_time, T2.closing_time FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id WHERE T1.city = 'Glendale' ORDER BY T1.stars DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the active businesses located at Goodyear, AZ, list the category and atrributes of business with a high review count.",
+        "query": "SELECT T3.category_name, T5.attribute_name FROM Business AS T1 INNER JOIN Business_Categories AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T2.category_id = T3.category_id INNER JOIN Business_Attributes AS T4 ON T1.business_id = T4.business_id INNER JOIN Attributes AS T5 ON T4.attribute_id = T5.attribute_id WHERE T1.review_count = 'High' AND T1.city = 'Goodyear' AND T1.state = 'AZ' AND T1.active = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List the categories of active businesses in Glendale, AZ.",
+        "query": "SELECT DISTINCT T3.category_name FROM Business_Categories AS T1 INNER JOIN Business AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T1.category_id = T3.category_id WHERE T2.active = 'true' AND T2.state = 'AZ' AND T2.city = 'Glendale'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Find the location of businesses that has business hours from 7 am to 7 pm every Wednesday.",
+        "query": "SELECT DISTINCT T1.city FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T2.opening_time = '7AM' AND T2.closing_time = '7PM' AND T3.day_of_week = 'Wednesday'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the attribute value of an active business with a low review count and 3 stars which is located at Goodyear, AZ?",
+        "query": "SELECT DISTINCT T2.attribute_value FROM Business AS T1 INNER JOIN Business_Attributes AS T2 ON T1.business_id = T2.business_id INNER JOIN Attributes AS T3 ON T2.attribute_id = T3.attribute_id WHERE T1.state = 'AZ' AND T1.city = 'Goodyear' AND T1.active = 'true' AND T1.stars = 3 AND T1.review_count = 'Low'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "What is the opening time of the active businesses in Glendale that have a medium review count.",
+        "query": "SELECT DISTINCT T2.opening_time FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T1.city = 'Glendale' AND T1.review_count = 'Medium' AND T1.active = 'true'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "Among the businesses with a category of Food, what is the percentage of the business with greater than 3 stars?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.stars > 3 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.stars) FROM Business AS T1 INNER JOIN Business_Categories AS T2 ON T1.business_id = T2.business_id INNER JOIN Categories AS T3 ON T2.category_id = T3.category_id WHERE T3.category_name = 'Food'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "public_review_platform",
+        "question": "List the closing time and day of week of active businesses in Goodyear with stars greater than the 80% of average age of star rating.",
+        "query": "SELECT DISTINCT T2.closing_time, T3.day_of_week FROM Business AS T1 INNER JOIN Business_Hours AS T2 ON T1.business_id = T2.business_id INNER JOIN Days AS T3 ON T2.day_id = T3.day_id WHERE T1.active = 'true' AND T1.city = 'Goodyear' AND T1.stars > ( SELECT AVG(stars) * 0.8 FROM Business WHERE active = 'true' AND city = 'Goodyear' )"
+    }
+]

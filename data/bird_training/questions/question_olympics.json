@@ -1,0 +1,1016 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Please list the names of all the Olympic games that John Aalberg has taken part in.",
+        "query": "SELECT T1.games_name FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T3.full_name = 'John Aalberg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What was the name of the Olympic game that John Aalberg took part in when he was 31?",
+        "query": "SELECT T1.games_name FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T3.full_name = 'John Aalberg' AND T2.age = 31"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "When John Aalberg took part in the 1994 Winter Olympic Game, how old was he?",
+        "query": "SELECT T2.age FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T3.full_name = 'John Aalberg' AND T1.games_name = '1994 Winter'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many Olympic competitors are from Finland?",
+        "query": "SELECT COUNT(T1.person_id) FROM person_region AS T1 INNER JOIN noc_region AS T2 ON T1.region_id = T2.id WHERE T2.region_name = 'Finland'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Please list the names of all the Olympic competitors from Finland.",
+        "query": "SELECT T3.full_name FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.region_name = 'Finland'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "The Olympic competitor John Aalberg is from which region?",
+        "query": "SELECT T1.region_name FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T3.full_name = 'John Aalberg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the NOC code of the region where the tallest male Olympic competitor is from?",
+        "query": "SELECT T1.noc FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T3.gender = 'M' ORDER BY T3.height DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Among all the Olympic competitors from Finland, how many of them are female?",
+        "query": "SELECT COUNT(T3.id) FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.region_name = 'Finland' AND T3.gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "In which city was the 1992 Summer Olympic Games held?",
+        "query": "SELECT T2.city_name FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T3.games_name = '1992 Summer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Please list the names of the Olympic games that were held in London.",
+        "query": "SELECT T3.games_name FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T2.city_name = 'London'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "In which year did London hold its earliest Olympic game?",
+        "query": "SELECT T3.games_year FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T2.city_name = 'London' ORDER BY T3.games_year LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "For how many times has London held the Olympic games?",
+        "query": "SELECT COUNT(T1.games_id) FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id WHERE T2.city_name = 'London'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the average height of the male Olympic competitors from Finland?",
+        "query": "SELECT AVG(T3.height) FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.region_name = 'Finland' AND T3.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Among the competitors of the 1994 Winter Olympic Game, what is the percentage of those from Finland?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T5.region_name = 'Finland' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T3.id) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id INNER JOIN person_region AS T4 ON T3.id = T4.person_id INNER JOIN noc_region AS T5 ON T4.region_id = T5.id WHERE T1.games_name = '1994 Winter'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Which sport does the event \"Shooting Women's Trap\" belong to?",
+        "query": "SELECT T1.sport_name FROM sport AS T1 INNER JOIN event AS T2 ON T1.id = T2.sport_id WHERE T2.event_name LIKE 'Shooting Women%s Trap'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Which city was the host of 1936 Winter Olympic Games?",
+        "query": "SELECT T2.city_name FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T3.games_name = '1936 Winter'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many Olympic Games has London hosted?",
+        "query": "SELECT COUNT(T3.id) FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T2.city_name = 'London'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Tell the number of swimming related events.",
+        "query": "SELECT COUNT(T2.event_name) FROM sport AS T1 INNER JOIN event AS T2 ON T1.id = T2.sport_id WHERE T1.sport_name = 'Swimming'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "For Peter Kohnke, show the name of his/her region.",
+        "query": "SELECT T1.region_name FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T3.full_name = 'Peter Kohnke'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Which game has Jessica Carolina Aguilera Aguilera participated in? Give the id of the game.",
+        "query": "SELECT T2.games_id FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id WHERE T1.full_name = 'Jessica Carolina Aguilera Aguilera'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Show the name of the sport with the most events.",
+        "query": "SELECT T1.sport_name FROM sport AS T1 INNER JOIN event AS T2 ON T1.id = T2.sport_id GROUP BY T1.sport_name ORDER BY COUNT(T2.event_name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Give the name of the tallest athlete from Sweden.",
+        "query": "SELECT T3.full_name FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.region_name = 'Sweden' ORDER BY T3.height DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many athletes in the database are from Guatemala?",
+        "query": "SELECT COUNT(T1.person_id) FROM person_region AS T1 INNER JOIN noc_region AS T2 ON T1.region_id = T2.id WHERE T2.region_name = 'Guatemala'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Who has participated in the most Olympic Games in the database?",
+        "query": "SELECT T1.full_name FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id GROUP BY T2.person_id ORDER BY COUNT(T2.person_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Show the name of the competitor id 90991.",
+        "query": "SELECT T1.full_name FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id WHERE T2.id = 90991"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many competitor ids does Martina Kohlov have?",
+        "query": "SELECT COUNT(T2.id) FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id WHERE T1.full_name = 'Martina Kohlov'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Calculate the bmi of the competitor id 147420.",
+        "query": "SELECT CAST(T1.weight AS REAL) / (T1.height * T1.height) FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id WHERE T2.id = 147420"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the percentage of male athletes from Estonia?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T3.gender = 'M' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T2.person_id) FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.region_name = 'Estonia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Who is the youngest person who participated in the Olympics?",
+        "query": "SELECT T1.full_name FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id ORDER BY T2.age LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many 24 years old competitors competed in Men's Basketball?",
+        "query": "SELECT COUNT(T2.person_id) FROM competitor_event AS T1 INNER JOIN games_competitor AS T2 ON T1.competitor_id = T2.id INNER JOIN event AS T3 ON T1.event_id = T3.id WHERE T3.event_name LIKE 'Basketball Men%s Basketball' AND T2.age = 24"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What are the names of the events under Art Competitions?",
+        "query": "SELECT T2.event_name FROM sport AS T1 INNER JOIN event AS T2 ON T1.id = T2.sport_id WHERE T1.sport_name = 'Art Competitions'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many gold medals does Henk Jan Zwolle have?",
+        "query": "SELECT COUNT(T1.id) FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id INNER JOIN competitor_event AS T3 ON T2.id = T3.competitor_id INNER JOIN medal AS T4 ON T3.medal_id = T4.id WHERE T1.full_name = 'Henk Jan Zwolle' AND T4.medal_name = 'Gold'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the name of the event where competitors received the most gold medals?",
+        "query": "SELECT T2.event_name FROM competitor_event AS T1 INNER JOIN event AS T2 ON T1.event_id = T2.id INNER JOIN medal AS T3 ON T1.medal_id = T3.id WHERE T3.medal_name = 'Gold' GROUP BY T2.id ORDER BY COUNT(T1.event_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many athletes are from Australia?",
+        "query": "SELECT COUNT(T2.person_id) FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id WHERE T1.region_name = 'Australia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Which cities hosted at least 3 Olympic games?",
+        "query": "SELECT T2.city_name FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id GROUP BY T2.id HAVING COUNT(T1.games_id) >= 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many Summer games were held in Stockholm?",
+        "query": "SELECT COUNT(T3.id) FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T2.city_name = 'Stockholm' AND T3.season = 'Summer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Which region do most of the athletes are from?",
+        "query": "SELECT T2.region_name FROM person_region AS T1 INNER JOIN noc_region AS T2 ON T1.region_id = T2.id GROUP BY T2.region_name ORDER BY COUNT(T1.person_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Where was the first Olympic game held?",
+        "query": "SELECT T2.city_name FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id ORDER BY T3.games_year LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the name of the game in which the oldest Olympian has ever participated?",
+        "query": "SELECT T1.games_name FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id ORDER BY T2.age LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many athletes competed in the 1992 Summer Olympics?",
+        "query": "SELECT COUNT(T2.person_id) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T1.games_name = '1928 Summer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many Olympic events did Michael Phelps II join in total? Find the percentage of the events where he won a gold medal.",
+        "query": "SELECT COUNT(T3.event_id) , CAST(COUNT(CASE WHEN T4.id = '1' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T4.id) FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id INNER JOIN competitor_event AS T3 ON T2.id = T3.competitor_id INNER JOIN medal AS T4 ON T3.medal_id = T4.id WHERE T1.full_name = 'Michael Fred Phelps, II'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "In the Winter and Summer Olympics of 1988, which game has the most number of competitors? Find the difference of the number of competitors between the two games.",
+        "query": "SELECT P1 , ( SELECT MAX(P2) - MIN(P2) FROM ( SELECT COUNT(T2.person_id) AS P2 FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T1.games_name IN ('1988 Winter', '1988 Summer') GROUP BY T1.season ) ORDER BY P2 DESC LIMIT 1 ) FROM ( SELECT T1.season AS P1, COUNT(T2.person_id) AS P2 FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T1.games_name IN ('1988 Winter', '1988 Summer') GROUP BY T1.season ) ORDER BY P2 DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What age of the competitors is the most numerous?",
+        "query": "SELECT age FROM games_competitor GROUP BY age ORDER BY COUNT(person_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "In which cities beginning with the letter M have the Olympic Games been held?",
+        "query": "SELECT city_name FROM city WHERE city_name LIKE 'M%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "In which cities were the 1976 winter and summer games held?",
+        "query": "SELECT T2.city_name FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T3.games_name IN ('1976 Summer', '1976 Winter')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What was the medal that Coleen Dufresne got?",
+        "query": "SELECT T4.medal_name FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id INNER JOIN competitor_event AS T3 ON T2.id = T3.competitor_id INNER JOIN medal AS T4 ON T3.medal_id = T4.id WHERE T1.full_name = 'Coleen Dufresne (-Stewner)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the name of the competitor who has won the most medals?",
+        "query": "SELECT T1.full_name FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id INNER JOIN competitor_event AS T3 ON T2.id = T3.competitor_id INNER JOIN medal AS T4 ON T3.medal_id = T4.id WHERE T4.id != 4 GROUP BY T1.full_name ORDER BY COUNT(T4.id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Where is competitor Estelle Nze Minko from?",
+        "query": "SELECT T1.region_name FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T3.full_name = 'Estelle Nze Minko'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the name of all the sports Chin Eei Hui has competed in?",
+        "query": "SELECT DISTINCT T1.sport_name FROM sport AS T1 INNER JOIN event AS T2 ON T1.id = T2.sport_id INNER JOIN competitor_event AS T3 ON T2.id = T3.event_id INNER JOIN games_competitor AS T4 ON T3.competitor_id = T4.id INNER JOIN person AS T5 ON T4.person_id = T5.id WHERE T5.full_name = 'Chin Eei Hui'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the name of the oldest person who participated in the Olympic Games?",
+        "query": "SELECT T1.full_name FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id ORDER BY T2.age DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "In which Olympic Games have the largest number of women participation?",
+        "query": "SELECT T1.games_name FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T3.gender = 'F' GROUP BY T1.games_name ORDER BY COUNT(T2.person_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many males from Belgium have participated in an Olympic Games?",
+        "query": "SELECT COUNT(T2.person_id) FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.region_name = 'Belgium' AND T3.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many persons participated in the Sapporo Olympics?",
+        "query": "SELECT COUNT(T1.person_id) FROM games_competitor AS T1 INNER JOIN games_city AS T2 ON T1.games_id = T2.games_id INNER JOIN city AS T3 ON T2.city_id = T3.id WHERE T3.city_name = 'Sapporo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "In which Olympic Games has Morten Aleksander Djupvik participated?",
+        "query": "SELECT T1.games_name FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T3.full_name = 'Morten Aleksander Djupvik'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many persons in total have participated in 12 meter Mixed Sailing competitions?",
+        "query": "SELECT COUNT(T1.competitor_id) FROM competitor_event AS T1 INNER JOIN event AS T2 ON T1.event_id = T2.id INNER JOIN sport AS T3 ON T2.sport_id = T3.id WHERE T2.event_name = 'Sailing Mixed 12 metres'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many different events are there of Modern Pentathlon?",
+        "query": "SELECT COUNT(DISTINCT T2.event_name) FROM sport AS T1 INNER JOIN event AS T2 ON T1.id = T2.sport_id WHERE T1.sport_name = 'Modern Pentathlon'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Calculate the percentage of women who have participated in Equestrianism Mixed Three-Day Event, Individual.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.gender = 'F' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T1.id) FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id INNER JOIN competitor_event AS T3 ON T2.id = T3.competitor_id INNER JOIN event AS T4 ON T3.event_id = T4.id WHERE T4.event_name = 'Equestrianism Mixed Three-Day Event, Individual'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Calculate the average age of the persons who participated in the 1992 Summer Games.",
+        "query": "SELECT AVG(T2.age) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.games_name = '1992 Summer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "List out years that only have summer games.",
+        "query": "SELECT games_year FROM games WHERE season != 'Winter' GROUP BY games_year HAVING COUNT(season) = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many Olympics games were held during the 90s?",
+        "query": "SELECT COUNT(games_year) FROM games WHERE games_year BETWEEN '1990' AND '1999'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many athletes participated in the 2014 Winter Olympics?",
+        "query": "SELECT COUNT(T2.person_id) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T1.games_name = '2014 Winter'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many athletes from region 151 have won a medal?",
+        "query": "SELECT COUNT(T3.person_id) FROM competitor_event AS T1 INNER JOIN games_competitor AS T2 ON T1.competitor_id = T2.id INNER JOIN person_region AS T3 ON T2.person_id = T3.person_id WHERE T3.region_id = 151 AND T1.medal_id != 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many athlete from China participate in the 2016 Summer Olympics?",
+        "query": "SELECT COUNT(T3.id) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id INNER JOIN person_region AS T4 ON T3.id = T4.person_id INNER JOIN noc_region AS T5 ON T4.region_id = T5.id WHERE T1.games_name = '2016 Summer' AND T5.region_name = 'China'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many gold medals were given to the winners in the Ice Hockey Men's Ice Hockey event?",
+        "query": "SELECT COUNT(T2.competitor_id) FROM event AS T1 INNER JOIN competitor_event AS T2 ON T1.id = T2.event_id WHERE T1.event_name LIKE 'Ice Hockey Men%s Ice Hockey' AND T2.medal_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Which region has the highest medal number?",
+        "query": "SELECT T5.region_name FROM medal AS T1 INNER JOIN competitor_event AS T2 ON T1.id = T2.medal_id INNER JOIN games_competitor AS T3 ON T2.competitor_id = T3.id INNER JOIN person_region AS T4 ON T3.person_id = T4.person_id INNER JOIN noc_region AS T5 ON T4.region_id = T5.id WHERE T1.id != 4 GROUP BY T5.region_name ORDER BY COUNT(T2.competitor_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "List out all the gold medalist winners in cycling sport.",
+        "query": "SELECT DISTINCT T5.full_name FROM event AS T1 INNER JOIN competitor_event AS T2 ON T1.id = T2.event_id INNER JOIN games_competitor AS T3 ON T2.competitor_id = T3.id INNER JOIN sport AS T4 ON T1.sport_id = T4.id INNER JOIN person AS T5 ON T3.person_id = T5.id WHERE T4.sport_name = 'Cycling' AND T2.medal_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "List out all the medals won by Lee Chong Wei.",
+        "query": "SELECT DISTINCT T1.medal_name FROM medal AS T1 INNER JOIN competitor_event AS T2 ON T1.id = T2.medal_id INNER JOIN games_competitor AS T3 ON T2.competitor_id = T3.id INNER JOIN person AS T4 ON T3.person_id = T4.id WHERE T4.full_name = 'Lee Chong Wei' AND T2.medal_id <> 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the percentage of female athletes below 20s who participated in the 2002 Winter Olympic?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T3.gender = 'F' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T2.person_id) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.games_name = '2002 Winter' AND T2.age < 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the ratio male to female athletes in the 2012 Summer Olympic?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T3.gender = 'M' THEN 1 ELSE NULL END) AS REAL) / COUNT(CASE WHEN T3.gender = 'F' THEN 1 ELSE NULL END) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.games_name = '2012 Summer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Which summer Olympic have the highest and lowest number of participants?",
+        "query": "SELECT ( SELECT T1.games_name FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T1.season = 'Summer' GROUP BY T1.games_year ORDER BY COUNT(T2.person_id) DESC LIMIT 1 ) AS HIGHEST , ( SELECT T1.games_name FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T1.season = 'Summer' GROUP BY T1.games_year ORDER BY COUNT(T2.person_id) LIMIT 1 ) AS LOWEST"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many athletes from Malaysia have won a medal?",
+        "query": "SELECT COUNT(T3.person_id) FROM medal AS T1 INNER JOIN competitor_event AS T2 ON T1.id = T2.medal_id INNER JOIN games_competitor AS T3 ON T2.competitor_id = T3.id INNER JOIN person_region AS T4 ON T3.person_id = T4.person_id INNER JOIN noc_region AS T5 ON T4.region_id = T5.id WHERE T5.region_name = 'Malaysia' AND T1.id != 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many athletes playing in Canoeing fall into overweight BMI category in the 2008 Summer games?",
+        "query": "SELECT COUNT(T5.id) FROM sport AS T1 INNER JOIN event AS T2 ON T1.id = T2.sport_id INNER JOIN competitor_event AS T3 ON T2.id = T3.event_id INNER JOIN games_competitor AS T4 ON T3.competitor_id = T4.id INNER JOIN person AS T5 ON T4.person_id = T5.id INNER JOIN games AS T6 ON T4.games_id = T6.id WHERE T1.sport_name = 'Canoeing' AND T6.games_name = '2008 Summer' AND T5.weight * 10000.0 / (T5.height * T5.height) BETWEEN 25.0 AND 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the average height of male athletes playing basketball sport?",
+        "query": "SELECT AVG(T5.height) FROM sport AS T1 INNER JOIN event AS T2 ON T1.id = T2.sport_id INNER JOIN competitor_event AS T3 ON T2.id = T3.event_id INNER JOIN games_competitor AS T4 ON T3.competitor_id = T4.id INNER JOIN person AS T5 ON T4.person_id = T5.id WHERE T1.sport_name = 'Basketball' AND T5.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many female athletes are from the Philippines?",
+        "query": "SELECT COUNT(T2.person_id) FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.region_name = 'Philippines' AND T3.gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Which region is Yao Ming from?",
+        "query": "SELECT T1.region_name FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T3.full_name = 'Yao Ming'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "At what age did Michael Fred Phelps, II join the Olympics?",
+        "query": "SELECT T2.age FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id WHERE T1.full_name = 'Michael Fred Phelps, II' ORDER BY T2.age LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many athletes are there in the region where Clara Hughes is from?",
+        "query": "SELECT COUNT(person_id) FROM person_region WHERE region_id = ( SELECT T1.region_id FROM person_region AS T1 INNER JOIN person AS T2 ON T1.person_id = T2.id WHERE T2.full_name = 'Clara Hughes' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many Men's 200 Metres Freestyle events did Ian James Thorpe compete in?",
+        "query": "SELECT COUNT(T1.id) FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id INNER JOIN competitor_event AS T3 ON T2.id = T3.competitor_id INNER JOIN event AS T4 ON T3.event_id = T4.id WHERE T1.full_name = 'Ian James Thorpe' AND T4.event_name LIKE 'Swimming Men%s 200 metres Freestyle'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many times was Larysa Semenivna Latynina (Diriy-) declared as champion in Gymnastics Women's Individual All-Around?",
+        "query": "SELECT COUNT(T1.id) FROM event AS T1 INNER JOIN competitor_event AS T2 ON T1.id = T2.event_id INNER JOIN games_competitor AS T3 ON T2.competitor_id = T3.id INNER JOIN person AS T4 ON T3.person_id = T4.id WHERE T4.full_name = 'Larysa Semenivna Latynina (Diriy-)' AND T1.event_name LIKE 'Gymnastics Women%s Individual All-Around' AND T2.medal_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What are the names of the cities where Carl Lewis Borack competed?",
+        "query": "SELECT T4.city_name FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id INNER JOIN games_city AS T3 ON T2.games_id = T3.games_id INNER JOIN city AS T4 ON T3.city_id = T4.id WHERE T1.full_name = 'Carl Lewis Borack'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many Olympic games were held in London?",
+        "query": "SELECT COUNT(T1.games_id) FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id WHERE T2.city_name = 'London'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Which city was the 1992 Summer Olympic held?",
+        "query": "SELECT T2.city_name FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T3.games_name = '1992 Summer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many athletes over the age of 59 competed in the 2016 Summer Olympics?",
+        "query": "SELECT COUNT(T2.person_id) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T1.games_name = '2016 Summer' AND T2.age > 59"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Among the Olympic games held in Los Angeles, what is the name of the Olympic game that has the most number of competitors?",
+        "query": "SELECT T1.games_name FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN games_city AS T3 ON T2.games_id = T3.games_id INNER JOIN city AS T4 ON T3.city_id = T4.id WHERE T4.city_name = 'Los Angeles' GROUP BY T1.id ORDER BY COUNT(T2.person_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many 10-year old athletes participated in the Gymnastics Men's Parallel Bars, Teams event?",
+        "query": "SELECT COUNT(T2.person_id) FROM competitor_event AS T1 INNER JOIN games_competitor AS T2 ON T1.competitor_id = T2.id INNER JOIN event AS T3 ON T1.event_id = T3.id WHERE T3.event_name LIKE 'Gymnastics Men%s Parallel Bars, Teams' AND T2.age = 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the average age of the athletes from the United States of America who competed in the 2016 Summer Olympics?",
+        "query": "SELECT AVG(T2.age) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person_region AS T3 ON T2.person_id = T3.person_id INNER JOIN noc_region AS T4 ON T3.region_id = T4.id WHERE T1.games_name = '2016 Summer' AND T4.region_name = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Which region does the NOC code \"COL\" stand for?",
+        "query": "SELECT region_name FROM noc_region WHERE noc = 'COL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "State the name of sport id 19.",
+        "query": "SELECT sport_name FROM sport WHERE id = 19"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Give the id of the event \"Shooting Mixed Skeet\".",
+        "query": "SELECT id FROM event WHERE event_name = 'Shooting Mixed Skeet'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Provide hockey's sport id.",
+        "query": "SELECT id FROM sport WHERE sport_name = 'Hockey'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Tell the weight of Dagfinn Sverre Aarskog.",
+        "query": "SELECT weight FROM person WHERE full_name = 'Dagfinn Sverre Aarskog'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the id of Rio de Janeiro?",
+        "query": "SELECT id FROM city WHERE city_name = 'Rio de Janeiro'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many people have won the gold medal of the event \"Rowing Women's Coxed Eights\"?",
+        "query": "SELECT COUNT(T1.competitor_id) FROM competitor_event AS T1 INNER JOIN event AS T2 ON T1.event_id = T2.id INNER JOIN medal AS T3 ON T1.medal_id = T3.id WHERE T2.event_name LIKE 'Rowing Women%s Coxed Eights' AND T3.medal_name = 'Gold'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many kinds of events belong to the sport of cycling?",
+        "query": "SELECT COUNT(T2.event_name) FROM sport AS T1 INNER JOIN event AS T2 ON T1.id = T2.sport_id WHERE T1.sport_name = 'Cycling'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is Vijay Singh Chauhan's region name?",
+        "query": "SELECT T1.region_name FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T3.full_name = 'Vijay Singh Chauhan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "When did Roma host the Olympic Games?",
+        "query": "SELECT T3.games_year FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T2.city_name = 'Roma'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many 20 years old athletes were there in the 1984 Summer Olympic Games?",
+        "query": "SELECT COUNT(T2.person_id) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T1.games_name = '1984 Summer' AND T2.age = 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many games has Prithipal Singh participated in?",
+        "query": "SELECT COUNT(T2.games_id) FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id WHERE T1.full_name = 'Prithipal Singh'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "State the number of athletes in the 1984 Summer Olympic Games who were more than 50 years old.",
+        "query": "SELECT COUNT(T2.person_id) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T1.games_name = '1984 Summer' AND T2.age > 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many kinds of events does athletics have?",
+        "query": "SELECT COUNT(T2.event_name) FROM sport AS T1 INNER JOIN event AS T2 ON T1.id = T2.sport_id WHERE T1.sport_name = 'Athletics'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Who is the heaviest athlete from Russia?",
+        "query": "SELECT T3.full_name FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.region_name = 'Russia' ORDER BY T3.weight DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Give the height of the tallest athlete from Portugal.",
+        "query": "SELECT T3.height FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.region_name = 'Portugal' ORDER BY T3.height DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Tell the host city of the 1968 Winter Olympic Games.",
+        "query": "SELECT T2.city_name FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T3.games_name = '1968 Winter'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Which region has the most athletes?",
+        "query": "SELECT T2.region_name FROM person_region AS T1 INNER JOIN noc_region AS T2 ON T1.region_id = T2.id GROUP BY T2.region_name ORDER BY COUNT(T1.person_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the percentage of athletes from Vanuatu who are taller than 175?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T3.height > 175 THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T2.person_id) FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.region_name = 'Vanuatu'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Calculate the average weight of male athletes from Tonga.",
+        "query": "SELECT AVG(T3.weight) FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.region_name = 'Tonga' AND T3.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Where was the 1920 Summer held?",
+        "query": "SELECT T2.city_name FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T3.games_name = '1920 Summer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "From 1900 to 1992, how many games did London host?",
+        "query": "SELECT COUNT(T3.id) FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T2.city_name = 'London' AND T3.games_year BETWEEN 1900 AND 1992"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many Summer games are there that were held in Paris?",
+        "query": "SELECT COUNT(T3.id) FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T2.city_name = 'Paris' AND T3.season = 'Summer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Please list all game names that were held in Los Angeles.",
+        "query": "SELECT T3.games_name FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T2.city_name = 'Los Angeles'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Which city hosted the most games?",
+        "query": "SELECT T2.city_name FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id GROUP BY T2.city_name ORDER BY COUNT(T2.city_name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the game name that was held in Beijing in 2008?",
+        "query": "SELECT T3.games_name FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T2.city_name = 'Beijing' AND T3.games_year = 2008"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the percentage of champions at the age of over 30?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.age > 30 THEN 1 END) AS REAL) * 100 / COUNT(T2.person_id) FROM competitor_event AS T1 INNER JOIN games_competitor AS T2 ON T1.competitor_id = T2.id WHERE T1.medal_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "At which age did A Lamusi participate in 2012 Summer?",
+        "query": "SELECT T2.age FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.games_name = '2012 Summer' AND T3.full_name = 'A Lamusi'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many competitors were there who participated in 2000 Summer with age 31?",
+        "query": "SELECT COUNT(T2.person_id) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T1.games_name = '2000 Summer' AND T2.age = 31"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many male competitors were there who participated in 1948 Summer?",
+        "query": "SELECT COUNT(T2.person_id) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.games_name = '1948 Summer' AND T3.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Please list all competitors' names who participated in 1936 Summer.",
+        "query": "SELECT T3.full_name FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.games_name = '1936 Summer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Who is the youngest competitor that participated in 2014 Winter?",
+        "query": "SELECT T3.full_name FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.games_name = '2014 Winter' ORDER BY T2.age LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the average age of competitors who participated in 1988 Winter?",
+        "query": "SELECT AVG(T2.age) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.games_name = '1988 Winter'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the percentage of female competitors whose heights are over 170 that participated in the game in 1988?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T3.gender = 'F' AND T3.height > 170 THEN 1 END) AS REAL) * 100 / COUNT(T2.person_id) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.games_year = 1988"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the sport name of \"Cross Country Skiing Men's 10/15 kilometres Pursuit\" event?",
+        "query": "SELECT T1.sport_name FROM sport AS T1 INNER JOIN event AS T2 ON T1.id = T2.sport_id WHERE T2.event_name LIKE 'Cross Country Skiing Men%s 10/15 kilometres Pursuit'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the percentage of people whose age greater than 24 and participate in winter season?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.age > 24 AND T1.season = 'Winter' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T2.games_id) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the region id of Christine Jacoba Aaftink?",
+        "query": "SELECT T1.region_id FROM person_region AS T1 INNER JOIN person AS T2 ON T1.person_id = T2.id WHERE T2.full_name = 'Christine Jacoba Aaftink'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Mention the height of people who belong to region id 7.",
+        "query": "SELECT T2.height FROM person_region AS T1 INNER JOIN person AS T2 ON T1.person_id = T2.id WHERE T1.region_id = 7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "State the name of the city that held game id 3.",
+        "query": "SELECT T2.city_name FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id WHERE T1.games_id = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What are the id of the games held in London?",
+        "query": "SELECT T1.games_id FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id WHERE T2.city_name = 'London'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many people who are below 30 and participated in the summer season?",
+        "query": "SELECT COUNT(T2.person_id) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T1.season = 'Summer' AND T2.age < 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "List out the name of the game that the people participated in games id 13.",
+        "query": "SELECT DISTINCT T1.games_name FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T2.games_id = 13"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the average age of the people who participated in the winter season?",
+        "query": "SELECT AVG(T2.age) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T1.season = 'Winter'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the percentage of the people who are under 35 and participated in the summer season?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.age < 35 THEN 1 END) AS REAL) * 100 / COUNT(T2.games_id) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T1.season = 'Summer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "State the event name of Basketball.",
+        "query": "SELECT T2.event_name FROM sport AS T1 INNER JOIN event AS T2 ON T1.id = T2.sport_id WHERE T1.sport_name = 'Basketball'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the name of medal that competitor id 9 obtained?",
+        "query": "SELECT DISTINCT T1.medal_name FROM medal AS T1 INNER JOIN competitor_event AS T2 ON T1.id = T2.medal_id WHERE T2.competitor_id = 9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "List out the id of event that achieve the gold medal.",
+        "query": "SELECT T2.event_id FROM medal AS T1 INNER JOIN competitor_event AS T2 ON T1.id = T2.medal_id WHERE T1.medal_name = 'Gold'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Who is the heaviest athlete?",
+        "query": "SELECT full_name FROM person ORDER BY weight DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Which city were the Olympic games held in 1992?",
+        "query": "SELECT T2.city_name FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T3.games_year = 1992"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Which region is the majority of the athletes from?",
+        "query": "SELECT T2.region_name FROM person_region AS T1 INNER JOIN noc_region AS T2 ON T1.region_id = T2.id GROUP BY T2.region_name ORDER BY COUNT(T1.person_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the name of the oldest competitor?",
+        "query": "SELECT T1.full_name FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id ORDER BY T2.age DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Which sport did John Aalberg participate in?",
+        "query": "SELECT DISTINCT T1.sport_name FROM sport AS T1 INNER JOIN event AS T2 ON T1.id = T2.sport_id INNER JOIN competitor_event AS T3 ON T2.id = T3.event_id INNER JOIN games_competitor AS T4 ON T3.competitor_id = T4.id INNER JOIN person AS T5 ON T4.person_id = T5.id WHERE T5.full_name = 'John Aalberg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many Belgian men have competed in an Olympic Games?",
+        "query": "SELECT COUNT(T2.person_id) FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.region_name = 'Belgium' AND T3.gender = 'M'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many athletes took part in the Olympic games held in Barcelona?",
+        "query": "SELECT COUNT(T1.person_id) FROM games_competitor AS T1 INNER JOIN games_city AS T2 ON T1.games_id = T2.games_id INNER JOIN city AS T3 ON T2.city_id = T3.id WHERE T3.city_name = 'Barcelona'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many different football events are there?",
+        "query": "SELECT COUNT(T2.event_name) FROM sport AS T1 INNER JOIN event AS T2 ON T1.id = T2.sport_id WHERE T1.sport_name = 'Football'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What were the cities in which John Aalberg competed?",
+        "query": "SELECT T4.city_name FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id INNER JOIN games_city AS T3 ON T2.games_id = T3.games_id INNER JOIN city AS T4 ON T3.city_id = T4.id WHERE T1.full_name = 'John Aalberg'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "In Barcelona, how many Olympic games were held?",
+        "query": "SELECT COUNT(T1.games_id) FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id WHERE T2.city_name = 'Barcelona'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many competitors over the age of 30 participated in the 1992 Winter Olympics?",
+        "query": "SELECT COUNT(T2.person_id) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T1.games_name = '1992 Winter' AND T2.age > 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the name of the Olympic game with the most competitors held in Barcelona?",
+        "query": "SELECT T1.games_name FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN games_city AS T3 ON T2.games_id = T3.games_id INNER JOIN city AS T4 ON T3.city_id = T4.id WHERE T4.city_name = 'Barcelona' GROUP BY T1.id ORDER BY COUNT(T2.person_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "List the name of competitors from Argentina.",
+        "query": "SELECT T3.full_name FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.region_name = 'Argentina'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the average age of Argentina's athletes who participated in the Summer Olympics in 2012?",
+        "query": "SELECT AVG(T2.age) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person_region AS T3 ON T2.person_id = T3.person_id INNER JOIN noc_region AS T4 ON T3.region_id = T4.id WHERE T1.games_name = '2012 Summer' AND T4.region_name = 'Argentina'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Calculate the percentage of bronze medals won by men's basketball players.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T4.medal_name = 'Bronze' THEN 1 ELSE NULL END) AS REAL) * 100 / COUNT(T2.person_id) FROM competitor_event AS T1 INNER JOIN games_competitor AS T2 ON T1.competitor_id = T2.id INNER JOIN event AS T3 ON T1.event_id = T3.id INNER JOIN medal AS T4 ON T1.medal_id = T4.id WHERE T3.event_name LIKE 'Basketball Men%s Basketball'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "List the name of the games that Georgios Abaris participated.",
+        "query": "SELECT T1.games_name FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T3.full_name = 'Georgios Abaris'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Provide the name of competitors from Greece.",
+        "query": "SELECT T3.full_name FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.region_name = 'Greece'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Calculate the average age of the competitors who participated in the 1924 Winter.",
+        "query": "SELECT AVG(T2.age) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T1.games_name = '1924 Winter'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the NOC code of the region of the competitors weighted 77 kg?",
+        "query": "SELECT T1.noc FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T3.weight = 77"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "List the names of the games held in Paris.",
+        "query": "SELECT T3.games_name FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T2.city_name = 'Paris'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Provide the competitors' names who joined the 2000 Summer.",
+        "query": "SELECT T3.full_name FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.games_name = '2000 Summer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "In which city was the game held where the oldest competitor participated?",
+        "query": "SELECT T4.city_name FROM games_competitor AS T1 INNER JOIN games AS T2 ON T1.games_id = T2.id INNER JOIN games_city AS T3 ON T1.games_id = T3.games_id INNER JOIN city AS T4 ON T3.city_id = T4.id ORDER BY T1.age DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the name of the youngest competitor?",
+        "query": "SELECT T1.full_name FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id ORDER BY T2.age LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "List down the games ID of games held in Tokyo.",
+        "query": "SELECT T1.games_id FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id WHERE T2.city_name = 'Tokyo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Give the NOC code and region name of the heaviest competitor.",
+        "query": "SELECT T1.noc, T1.region_name FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id ORDER BY T3.weight DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "In what year and season did Sohail Abbas compete?",
+        "query": "SELECT T1.games_year, T1.season FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T3.full_name = 'Sohail Abbas'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the average weight of the competitors who won a silver medal?",
+        "query": "SELECT AVG(T1.weight) FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id INNER JOIN competitor_event AS T3 ON T2.id = T3.competitor_id INNER JOIN medal AS T4 ON T3.medal_id = T4.id WHERE T4.medal_name = 'Silver'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "In which city the 2004 Summer was held?",
+        "query": "SELECT T2.city_name FROM games_city AS T1 INNER JOIN city AS T2 ON T1.city_id = T2.id INNER JOIN games AS T3 ON T1.games_id = T3.id WHERE T3.games_name = '2004 Summer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "What is the season of the game where a competitor who weighted 73 kg and 180 cm tall, participated?",
+        "query": "SELECT DISTINCT T1.season FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T3.height = 180 AND T3.weight = 73"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Provide the names of competitors who received a gold medal.",
+        "query": "SELECT DISTINCT T1.full_name FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id INNER JOIN competitor_event AS T3 ON T2.id = T3.competitor_id INNER JOIN medal AS T4 ON T3.medal_id = T4.id WHERE T4.medal_name = 'Gold'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Compute the average height of competitors whose age ranges from 22 to 28.",
+        "query": "SELECT AVG(T1.height) FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id WHERE T2.age BETWEEN 22 AND 28"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "How many female competitors were from Iran?",
+        "query": "SELECT COUNT(T2.person_id) FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T1.region_name = 'Iran' AND T3.gender = 'F'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Provide the age of the tallest competitor.",
+        "query": "SELECT T2.age FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id ORDER BY T1.height DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Among the competitors with age ranges 24 and below, calculate the difference between the number of competitors who weighed greater than 70 kg and competitors who weighted less than 70 kg.",
+        "query": "SELECT COUNT(CASE WHEN T1.weight > 70 THEN 1 ELSE NULL END) - COUNT(CASE WHEN T1.weight < 70 THEN 1 ELSE NULL END) FROM person AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.person_id WHERE T2.age < 24"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "In the 2014 Winter game, what is the percentage of competitors who age 28 years old?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.age = 28 THEN 1 END) AS REAL) * 100 / COUNT(T2.person_id) FROM games AS T1 INNER JOIN games_competitor AS T2 ON T1.id = T2.games_id WHERE T1.games_name = '2014 Winter'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "olympics",
+        "question": "Among the males, list the region name of people with height greater than 87% of the average height of all people listed.",
+        "query": "SELECT DISTINCT T1.region_name FROM noc_region AS T1 INNER JOIN person_region AS T2 ON T1.id = T2.region_id INNER JOIN person AS T3 ON T2.person_id = T3.id WHERE T3.gender = 'M' AND T3.height * 100 > ( SELECT AVG(height) FROM person WHERE gender = 'M' ) * 87"
+    }
+]

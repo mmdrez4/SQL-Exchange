@@ -1,0 +1,1760 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "In which country does Polish found least in?",
+        "query": "SELECT T2.Name FROM ethnicGroup AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code WHERE T1.Name = 'Polish' GROUP BY T2.Name, T1.Percentage ORDER BY T1.Percentage ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which countries have more than 90% of African? List the name of the country in full.",
+        "query": "SELECT T2.Name FROM ethnicGroup AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code WHERE T1.Name = 'African' AND T1.Percentage > 90"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "State the different ethnic group and percentage of the language in Singapore.",
+        "query": "SELECT T1.Name, T1.Percentage FROM ethnicGroup AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code WHERE T2.Name = 'Singapore' GROUP BY T1.Name, T1.Percentage"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Calculate the percentage of country which gained independence as republic after 1970.",
+        "query": "SELECT CAST(SUM(CASE WHEN Government = 'republic' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(Country) FROM politics WHERE STRFTIME('%Y', Independence) > '1970'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Find the GPD for Bosnia and Herzegovina and the type of government it belongs to.",
+        "query": "SELECT T1.GDP, T2.Government FROM economy AS T1 INNER JOIN politics AS T2 ON T1.Country = T2.Country INNER JOIN country AS T3 ON T3.Code = T2.Country WHERE T3.Name = 'Bosnia and Herzegovina'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "State the country and its population with population growth greater than 2% but infant mortality rate less than 5%.",
+        "query": "SELECT T1.Name, T1.Population FROM country AS T1 INNER JOIN population AS T2 ON T1.Code = T2.Country WHERE T2.Population_Growth > 2 AND T2.Infant_Mortality < 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which is the majority of the ethnic group in country with great than 10,000,000 population",
+        "query": "SELECT T2.Name FROM country AS T1 INNER JOIN ethnicGroup AS T2 ON T1.Code = T2.Country WHERE T1.Population > 10000000 GROUP BY T2.Name, T2.Percentage ORDER BY T2.Percentage DESC LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Provide the country with its full name which has the most ethnic group? List them all ethnic group together with its percentage.",
+        "query": "SELECT T1.Name, T2.Name, T2.Percentage FROM country AS T1 INNER JOIN ethnicGroup AS T2 ON T1.Code = T2.Country WHERE T1.Name = ( SELECT T1.Name FROM country AS T1 INNER JOIN ethnicGroup AS T2 ON T1.Code = T2.Country GROUP BY T1.Name ORDER BY COUNT(T2.Name) DESC LIMIT 1 ) GROUP BY T1.Name, T2.Name, T2.Percentage"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the full name of the country with 100% Africans?",
+        "query": "SELECT T1.Name FROM ethnicGroup AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code WHERE T1.Percentage = 100 AND T1.Name = 'African'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "List the infant mortality of country with the least Amerindian.",
+        "query": "SELECT T1.Infant_Mortality FROM population AS T1 INNER JOIN ethnicGroup AS T2 ON T1.Country = T2.Country WHERE T2.Name = 'Amerindian' ORDER BY T2.Percentage ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "For country with area greater than 600000, what is agriculture percentage of GDP the country contributes?",
+        "query": "SELECT T2.Agriculture FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country WHERE T1.Area > 600000 AND T2.Agriculture IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Provide the country with republic government which has the highest population growth?",
+        "query": "SELECT T2.Country FROM population AS T1 INNER JOIN politics AS T2 ON T1.Country = T2.Country WHERE T2.Government = 'republic' ORDER BY T1.Population_Growth DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "When did 'Bulgaria' gain independence?",
+        "query": "SELECT T2.Independence FROM country AS T1 INNER JOIN politics AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Bulgaria'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Calculate the population of Arab in each country?",
+        "query": "SELECT T2.Percentage * T1.Population FROM country AS T1 INNER JOIN ethnicGroup AS T2 ON T1.Code = T2.Country WHERE T2.Name = 'Arab'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the population of African in 'Turks and Caicos Islands'?",
+        "query": "SELECT T2.Percentage * T1.Population FROM country AS T1 INNER JOIN ethnicGroup AS T2 ON T1.Code = T2.Country WHERE T2.Name = 'African' AND T1.Name = 'Turks and Caicos Islands'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the number of growth population for country with the lowest infant mortality?",
+        "query": "SELECT T2.Population_Growth * T1.Population FROM country AS T1 INNER JOIN population AS T2 ON T1.Code = T2.Country WHERE T2.Infant_Mortality IS NOT NULL ORDER BY T2.Infant_Mortality ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among countries with more than 400,000 GDP, state its capital and population.",
+        "query": "SELECT T1.Capital, T1.Population FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country WHERE T2.GDP > 400000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Calculate the service of GDP for Brazil.",
+        "query": "SELECT T2.Service * T2.GDP FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Brazil'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country has the highest infant mortality? Also state its population growth.",
+        "query": "SELECT T1.Name, T2.Population_Growth FROM country AS T1 INNER JOIN population AS T2 ON T1.Code = T2.Country ORDER BY T2.Infant_Mortality DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "List all countries with negative growth in population. State the country, population and growth.",
+        "query": "SELECT T1.Name, T1.Population, T2.Population_Growth FROM country AS T1 INNER JOIN population AS T2 ON T1.Code = T2.Country WHERE T2.Population_Growth < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "For countries with area between 500000 to 1000000, state the country and infant mortality rate.",
+        "query": "SELECT T1.Name, T2.Infant_Mortality FROM country AS T1 INNER JOIN population AS T2 ON T1.Code = T2.Country WHERE T1.Area BETWEEN 500000 AND 1000000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among the countries with more than 3% population growth rate, state the country name in full along with its GDP.",
+        "query": "SELECT T1.Name, T3.GDP FROM country AS T1 INNER JOIN population AS T2 ON T1.Code = T2.Country INNER JOIN economy AS T3 ON T3.Country = T2.Country WHERE T2.Population_Growth > 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the infant mortality rate for Ethiopia?",
+        "query": "SELECT T2.Infant_Mortality FROM country AS T1 INNER JOIN population AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Ethiopia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How much does the gross domestic products goes to the industry sector for Singapore?",
+        "query": "SELECT T2.GDP * T2.Industry FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Singapore'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How much is her GDP in agriculture for the country with the least area?",
+        "query": "SELECT T2.GDP * T2.Agriculture FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country ORDER BY T1.Area ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country has the biggest percentage of the albanian ethnic group?",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN ethnicGroup AS T2 ON T1.Code = T2.Country WHERE T2.Name = 'Albanian' ORDER BY T2.Percentage DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among the countries with the African ethnic group, how many of them has a population of over 10000000?",
+        "query": "SELECT COUNT(T1.Name) FROM country AS T1 INNER JOIN ethnicGroup AS T2 ON T1.Code = T2.Country WHERE T2.Name = 'African' AND T1.Area > 10000000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Please list the name of the countries with over 5 ethnic groups.",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN ethnicGroup AS T2 ON T1.Code = T2.Country GROUP BY T1.Name HAVING COUNT(T1.Name) > 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country has the highest GDP?",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country ORDER BY T2.GDP DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among the countries with a population of over 10000000, how many of them have a GDP of over 500000?",
+        "query": "SELECT COUNT(T1.Name) FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country WHERE T2.GDP > 500000 AND T1.Population > 10000000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Please list the capital cities of the countries with an inflation rate under 2.",
+        "query": "SELECT T1.Capital FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country WHERE T2.Inflation < 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country has the lowest inflation rate?",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country WHERE T2.Inflation IS NOT NULL ORDER BY T2.Inflation ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among the countries whose agriculture percentage of the GDP is under 50%, how many of them have an area of over 8000000?",
+        "query": "SELECT COUNT(T1.Name) FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country WHERE T2.Agriculture < 50 AND T1.Area > 8000000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many cities have a salt lake located in it?",
+        "query": "SELECT COUNT(T1.City) FROM located AS T1 INNER JOIN lake AS T2 ON T1.Lake = T2.Name WHERE T2.Type = 'salt'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Please list the depth of the lakes that are located in the Province of Albania.",
+        "query": "SELECT T2.Depth FROM located AS T1 INNER JOIN lake AS T2 ON T1.Lake = T2.Name WHERE T1.Province = 'Albania'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "The lake with the highest altitude is located in which city?",
+        "query": "SELECT T2.City FROM lake AS T1 LEFT JOIN located AS T2 ON T2.Lake = T1.Name ORDER BY T1.Altitude DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many lakes in the Canary Islands cover an area of over 1000000?",
+        "query": "SELECT COUNT(T2.Name) FROM located AS T1 INNER JOIN lake AS T2 ON T1.Lake = T2.Name WHERE T1.Province = 'Canary Islands' AND T2.Area > 1000000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country has the most languages spoken?",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN language AS T2 ON T1.Code = T2.Country GROUP BY T1.Name ORDER BY COUNT(T2.Name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the capital city of the country that has the percentage of Armenian speakers over 90%?",
+        "query": "SELECT T1.Capital FROM country AS T1 INNER JOIN language AS T2 ON T1.Code = T2.Country WHERE T2.Name = 'Armenian' AND T2.Percentage > 90"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among the countries with a population of under 1000000, how many of them have over 2 languages?",
+        "query": "SELECT T2.Country FROM country AS T1 INNER JOIN language AS T2 ON T1.Code = T2.Country WHERE T1.Population < 1000000 GROUP BY T2.Country HAVING COUNT(T1.Name) > 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many organizations are founded in countries with a population of under 1000000?",
+        "query": "SELECT COUNT(T2.Name) FROM country AS T1 INNER JOIN organization AS T2 ON T1.Code = T2.Country WHERE T1.Population < 1000000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many organizations are established after 1999/1/1 in a country whose GDP is under 500000?",
+        "query": "SELECT T1.Country, COUNT(T1.Country) FROM economy AS T1 INNER JOIN organization AS T2 ON T1.Country = T2.Country WHERE T1.GDP < 500000 AND STRFTIME('%Y', T2.Established) < '1999' GROUP BY T1.Country"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among the countries with over 3 organizations, how many of them have an inflation rate of over 5%?",
+        "query": "SELECT COUNT(T2.Country) FROM economy AS T1 INNER JOIN organization AS T2 ON T1.Country = T2.Country WHERE T2.Country IN ( SELECT Country FROM organization GROUP BY Country HAVING COUNT(Country) > 3 ) AND T1.Inflation > 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many organizations are established in the country with the most ethnic groups?",
+        "query": "SELECT COUNT(T2.Province) FROM country AS T1 INNER JOIN organization AS T2 ON T1.Code = T2.Country INNER JOIN ethnicGroup AS T3 ON T3.Country = T2.Country GROUP BY T1.Name ORDER BY COUNT(T3.Name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Please list the organization names established in the countries where Dutch is spoken.",
+        "query": "SELECT T2.Name FROM language AS T1 INNER JOIN organization AS T2 ON T1.Country = T2.Country WHERE T1.Name = 'Dutch'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many organizations are established in countries where people speak Bosnian?",
+        "query": "SELECT COUNT(T2.Name) FROM language AS T1 INNER JOIN organization AS T2 ON T1.Country = T2.Country WHERE T1.Name = 'Bosnian'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the highest infant mortality rate per thousand of the countries whose inflation is under 3?",
+        "query": "SELECT MAX(T2.Infant_Mortality) FROM economy AS T1 INNER JOIN population AS T2 ON T1.Country = T2.Country WHERE T1.Inflation < 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among the countries whose GDP is over 1000000, how many of them have a population groth rate of over 3%?",
+        "query": "SELECT COUNT(T1.Country) FROM economy AS T1 INNER JOIN population AS T2 ON T1.Country = T2.Country WHERE T1.GDP > 1000000 AND T2.Population_Growth > 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country has the highest GDP per capita?",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country ORDER BY T2.GDP / T1.Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the highest lake area coverage of a country?",
+        "query": "SELECT T2.Area * 100  / T3.Area FROM located AS T1 INNER JOIN lake AS T2 ON T1.Lake = T2.Name INNER JOIN country AS T3 ON T3.Code = T1.Country ORDER BY T2.Longitude DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the average population growth rate of countries where more than 3 languages are used?",
+        "query": "SELECT SUM(T3.Population_Growth) / COUNT(T3.Country) FROM country AS T1 INNER JOIN language AS T2 ON T1.Code = T2.Country INNER JOIN population AS T3 ON T3.Country = T2.Country WHERE T2.Country IN ( SELECT Country FROM language GROUP BY Country HAVING COUNT(Country) > 3 ) GROUP BY T3.Country"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Please list the names of the countries with an inflation rate that's 30% above the average.",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country GROUP BY T1.Name, T2.Inflation HAVING T2.Inflation > AVG(T2.Inflation) * 1.3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Where country does Baghdad belongs to?",
+        "query": "SELECT Name FROM country WHERE Province = 'Baghdad'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which religion has the largest population in Martinique?",
+        "query": "SELECT T2.Name FROM country AS T1 INNER JOIN religion AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Martinique' ORDER BY T1.population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country is 41% Christian? Give the full name of the country.",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN religion AS T2 ON T1.Code = T2.Country WHERE T2.Name = 'Christian' AND T2.Percentage = 41"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which two countries does the Detroit River flow through? Give the full name of the country.",
+        "query": "SELECT T3.Name FROM located AS T1 INNER JOIN river AS T2 ON T1.River = T2.Name INNER JOIN country AS T3 ON T3.Code = T1.Country WHERE T2.Name = 'Detroit River'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which two countries have the longest border in the world? Give the full name of the country.",
+        "query": "SELECT T2.Country1, T2.Country2 FROM country AS T1 INNER JOIN borders AS T2 ON T1.Code = T2.Country1 ORDER BY T2.Length DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country has the most neighbors? Give the full name of the country.",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN borders AS T2 ON T1.Code = T2.Country1 GROUP BY T1.Name ORDER BY COUNT(T1.Name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country is Mountain Cerro Chirripo located in? Give the full name of the country.",
+        "query": "SELECT DISTINCT T1.Name FROM country AS T1 INNER JOIN geo_mountain AS T2 ON T1.Code = T2.Country WHERE T2.Mountain = 'Cerro Chirripo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many mountains are there in Indonesia?",
+        "query": "SELECT COUNT(DISTINCT T2.Mountain) FROM country AS T1 INNER JOIN geo_mountain AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Indonesia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the quantity of the mountains does Japan have?",
+        "query": "SELECT COUNT(DISTINCT T2.Mountain) FROM country AS T1 INNER JOIN geo_mountain AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Japan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the latitude of the island on which Mount Andrinjitra is located?",
+        "query": "SELECT T1.Latitude FROM island AS T1 INNER JOIN mountainOnIsland AS T2 ON T1.Name = T2.Island WHERE T2.Mountain = 'Andringitra'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which two countries share the second highest mountain? Give the country code.",
+        "query": "SELECT T1.Code FROM country AS T1 INNER JOIN geo_mountain AS T2 ON T1.Code = T2.Country WHERE T2.Mountain = ( SELECT Name FROM mountain ORDER BY Height DESC LIMIT 1, 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the area of Egypt as a percentage of Asia?",
+        "query": "SELECT T2.Percentage FROM country AS T1 INNER JOIN encompasses AS T2 ON T1.Code = T2.Country INNER JOIN continent AS T3 ON T3.Name = T2.Continent WHERE T3.Name = 'Asia' AND T1.Name = 'Egypt'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the area of Egypt as a percentage of Asia?",
+        "query": "SELECT T1.Area * 100 / T3.Area FROM country AS T1 INNER JOIN encompasses AS T2 ON T1.Code = T2.Country INNER JOIN continent AS T3 ON T3.Name = T2.Continent WHERE T3.Name = 'Asia' AND T1.Name = 'Egypt'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which city in Japan has the most people in the country?",
+        "query": "SELECT T2.Name FROM country AS T1 INNER JOIN city AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Japan' ORDER BY T2.Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "For the country in which Olsztyn is located, where is the capital?",
+        "query": "SELECT T1.Capital FROM country AS T1 INNER JOIN city AS T2 ON T1.Code = T2.Country WHERE T2.Name = 'Olsztyn'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "In which province is the highest volcano mountain located in?",
+        "query": "SELECT T1.Province FROM country AS T1 INNER JOIN geo_mountain AS T2 ON T1.Code = T2.Country INNER JOIN mountain AS T3 ON T3.Name = T2.Mountain WHERE T3.Type = 'volcano' ORDER BY T3.Height DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "When did Uganda declare independence?",
+        "query": "SELECT T2.Independence FROM country AS T1 INNER JOIN politics AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Uganda'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What kind of government does Iran have?",
+        "query": "SELECT T2.Government FROM country AS T1 INNER JOIN politics AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Iran'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Where does Bermuda belong to? Give the full name of the country.",
+        "query": "SELECT T3.Name FROM locatedOn AS T1 INNER JOIN island AS T2 ON T1.Island = T2.Name INNER JOIN country AS T3 ON T3.Code = T1.Country WHERE T3.Name = 'Bermuda'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Where is the capital of country which has the largest percentage of Malay people?",
+        "query": "SELECT T1.Capital FROM country AS T1 INNER JOIN ethnicGroup AS T2 ON T1.Code = T2.Country WHERE T2.Name = 'Malay' ORDER BY T2.Percentage DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "For the third largest country, which ethinic group has the most population?",
+        "query": "SELECT T2.Name FROM country AS T1 INNER JOIN ethnicGroup AS T2 ON T1.Code = T2.Country WHERE T1.Name = ( SELECT Name FROM country ORDER BY Area DESC LIMIT 2, 1 ) GROUP BY T2.Name ORDER BY T2.Percentage * T1.Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country has the city of 114339 in population? Give the full name of the country.",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN city AS T2 ON T1.Code = T2.Country WHERE T2.Population = 114339"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many rivers finally flows to the sea of 459m in depth?",
+        "query": "SELECT COUNT(*) FROM river WHERE Sea IN ( SELECT Name FROM sea WHERE Depth = 459 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the area of the country which became independent in 1921/3/13?",
+        "query": "SELECT T1.Area FROM country AS T1 INNER JOIN politics AS T2 ON T1.Code = T2.Country WHERE T2.Independence = '1921-03-13'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the population density of the Petropavl's home country?",
+        "query": "SELECT CAST(T1.Population AS REAL) / T1.Area FROM country AS T1 INNER JOIN city AS T2 ON T1.Code = T2.Country WHERE T2.Name = 'Petropavl'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many more people speak English than speak Scottish in United Kingdom?",
+        "query": "SELECT T3.Population * (T2.Percentage - T1.Percentage) FROM ethnicGroup AS T1 INNER JOIN ethnicGroup AS T2 ON T1.Country = T2.Country INNER JOIN country AS T3 ON T1.Country = T3.Code WHERE T1.Name = 'Scottish' AND T2.Name = 'English' AND T3.Name = 'United Kingdom'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the most populated city of the 12th highest density country?",
+        "query": "SELECT T2.Name FROM country AS T1 INNER JOIN city AS T2 ON T1.Code = T2.Country WHERE T1.Name = ( SELECT Name FROM country ORDER BY CAST(Population AS REAL) / Area LIMIT 11, 1 ) ORDER BY T2.Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many times longer is the longest border in the United States than the shortest?",
+        "query": "SELECT MAX(T2.Length) / MIN(T2.Length) FROM country AS T1 INNER JOIN borders AS T2 ON T1.Code = T2.Country2 WHERE T1.Name = 'United States'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Please list the capital cities of the countries that have more than 4 mountains.",
+        "query": "SELECT T1.Capital FROM country AS T1 INNER JOIN geo_mountain AS T2 ON T1.Code = T2.Country GROUP BY T1.Name, T1.Capital HAVING COUNT(T1.Name) > 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many mountains are there in the country with the greatest population?",
+        "query": "SELECT COUNT(T2.Mountain) FROM country AS T1 INNER JOIN geo_mountain AS T2 ON T1.Code = T2.Country GROUP BY T1.Name ORDER BY T1.Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among the countries whose agriculture takes up more than 40% of its GDP, how many of them have less than 2 mountains?",
+        "query": "SELECT COUNT(T3.Country) FROM ( SELECT T1.Country FROM economy AS T1 INNER JOIN geo_mountain AS T2 ON T1.Country = T2.Country WHERE T1.Industry < 40 GROUP BY T1.Country HAVING COUNT(T1.Country) < 2 ) AS T3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Please list the mountains in the country with the lowest inflation rate.",
+        "query": "SELECT Mountain FROM geo_mountain WHERE Country = ( SELECT Country FROM economy ORDER BY Inflation ASC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among the independent countries whose type of government is republic, what is the biggest number of deserts they have?",
+        "query": "SELECT COUNT(T3.Desert) FROM country AS T1 INNER JOIN politics AS T2 ON T1.Code = T2.Country INNER JOIN geo_desert AS T3 ON T3.Country = T2.Country WHERE T2.Government = 'republic'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Please list the deserts in the countries whose population is over 100000 and covers an area of under 500000.",
+        "query": "SELECT T2.Desert FROM country AS T1 INNER JOIN geo_desert AS T2 ON T1.Code = T2.Country WHERE T1.Area > 100000 AND T1.Population < 500000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many deserts are there in a country where over 90% of people speaks Armenian?",
+        "query": "SELECT COUNT(T2.Desert) FROM country AS T1 INNER JOIN geo_desert AS T2 ON T1.Code = T2.Country INNER JOIN language AS T3 ON T1.Code = T2.Country WHERE T3.Name = 'Armenian' AND T3.Percentage > 90"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which mountain is the highest in an independent country?",
+        "query": "SELECT T4.Name FROM country AS T1 INNER JOIN politics AS T2 ON T1.Code = T2.Country INNER JOIN geo_mountain AS T3 ON T3.Country = T2.Country INNER JOIN mountain AS T4 ON T4.Name = T3.Mountain WHERE T2.Independence IS NOT NULL ORDER BY T4.Height DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many volcanic mountains are there in countries whose population is no more than 5000000?",
+        "query": "SELECT COUNT(DISTINCT T3.Name) FROM country AS T1 INNER JOIN geo_mountain AS T2 ON T1.Code = T2.Country INNER JOIN mountain AS T3 ON T3.Name = T2.Mountain WHERE T3.Type = 'volcanic' AND T1.Population <= 5000000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among the countries with a GDP of over 1000000, how many of them have mountains higher than 1000?",
+        "query": "SELECT COUNT(DISTINCT T1.Name) FROM country AS T1 INNER JOIN geo_mountain AS T2 ON T1.Code = T2.Country INNER JOIN economy AS T3 ON T3.Country = T1.Code INNER JOIN mountain AS T4 ON T4.Name = T2.Mountain WHERE T3.GDP > 1000000 AND T4.Height > 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the greatest length of the border between 2 independent countries?",
+        "query": "SELECT MAX(T3.Length) FROM country AS T1 INNER JOIN politics AS T2 ON T1.Code = T2.Country INNER JOIN borders AS T3 ON T3.Country1 = T2.Country WHERE T2.Independence IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among the countries whose government type is republic, how many of them shares a border that's longer than 200?",
+        "query": "SELECT COUNT(DISTINCT T1.Name) FROM country AS T1 INNER JOIN politics AS T2 ON T1.Code = T2.Country INNER JOIN borders AS T3 ON T3.Country1 = T2.Country WHERE T2.Government = 'republic' AND T3.Length > 200"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Please list the countries that share the shortest border.",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN borders AS T2 ON T1.Code = T2.Country1 ORDER BY T2.Length ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the GDP of the European Continent?",
+        "query": "SELECT SUM(T4.GDP) FROM country AS T1 INNER JOIN encompasses AS T2 ON T1.Code = T2.Country INNER JOIN continent AS T3 ON T3.Name = T2.Continent INNER JOIN economy AS T4 ON T4.Country = T1.Code WHERE T3.Name = 'Europe'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many mountains are there on the African Continent?",
+        "query": "SELECT COUNT(T3.Name) FROM country AS T1 INNER JOIN encompasses AS T2 ON T1.Code = T2.Country INNER JOIN continent AS T3 ON T3.Name = T2.Continent INNER JOIN province AS T4 ON T4.Country = T1.Code INNER JOIN geo_mountain AS T5 ON T5.Province = T4.Name WHERE T3.Name = 'European'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Of the deserts on the America Continent, which one covers the greatest area?",
+        "query": "SELECT T5.Name FROM country AS T1 INNER JOIN encompasses AS T2 ON T1.Code = T2.Country INNER JOIN continent AS T3 ON T3.Name = T2.Continent INNER JOIN geo_desert AS T4 ON T4.Country = T1.Code INNER JOIN desert AS T5 ON T5.Name = T4.Desert WHERE T3.Name = 'America' ORDER BY T5.Area DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Please list the countries on the European Continent that have a population growth of more than 3%.",
+        "query": "SELECT T2.Country FROM country AS T1 INNER JOIN encompasses AS T2 ON T1.Code = T2.Country INNER JOIN continent AS T3 ON T3.Name = T2.Continent INNER JOIN population AS T4 ON T4.Country = T1.Code WHERE T3.Name = 'Europe' AND T4.Population_Growth > 0.03"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many countries on the European Continent has an infant mortality rate per thousand of over 100?",
+        "query": "SELECT COUNT(T1.Name) FROM country AS T1 INNER JOIN encompasses AS T2 ON T1.Code = T2.Country INNER JOIN continent AS T3 ON T3.Name = T2.Continent INNER JOIN population AS T4 ON T4.Country = T1.Code WHERE T3.Name = 'Europe' AND T4.Infant_Mortality < 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among the countries that use Bosnian as their language, how many of them don't have a positive population growth rate?",
+        "query": "SELECT COUNT(DISTINCT T1.Name) FROM country AS T1 INNER JOIN language AS T2 ON T1.Code = T2.Country INNER JOIN population AS T3 ON T3.Country = T2.Country WHERE T2.Name = 'Bosnian' AND T3.Population_Growth < 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the average percentage of agriculture of GDP in countries on the African Continent?",
+        "query": "SELECT AVG(T4.Agriculture) FROM continent AS T1 INNER JOIN encompasses AS T2 ON T1.Name = T2.Continent INNER JOIN country AS T3 ON T3.Code = T2.Country INNER JOIN economy AS T4 ON T4.Country = T3.Code WHERE T1.Name = 'Africa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among the independent countries, how many of them has a GDP per capita of over 5000?",
+        "query": "SELECT COUNT(DISTINCT T1.Name) FROM country AS T1 INNER JOIN politics AS T2 ON T1.Code = T2.Country INNER JOIN economy AS T3 ON T3.Country = T2.Country WHERE T2.Independence IS NOT NULL AND T3.GDP > 5000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the average inflation rate of the biggest continent?",
+        "query": "SELECT AVG(T4.Inflation) FROM continent AS T1 INNER JOIN encompasses AS T2 ON T1.Name = T2.Continent INNER JOIN country AS T3 ON T3.Code = T2.Country INNER JOIN economy AS T4 ON T4.Country = T3.Code WHERE T1.Name = ( SELECT Name FROM continent ORDER BY Area DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which island is city Balikpapan located on? How big is the island?",
+        "query": "SELECT T3.Name, T3.Area FROM city AS T1 INNER JOIN locatedOn AS T2 ON T1.Name = T2.City INNER JOIN island AS T3 ON T3.Name = T2.Island WHERE T1.Name = 'Balikpapan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "List all the cities in Sumatra and state the population of each city.",
+        "query": "SELECT T1.Name, T1.Population FROM city AS T1 INNER JOIN locatedOn AS T2 ON T1.Name = T2.City INNER JOIN island AS T3 ON T3.Name = T2.Island WHERE T3.Name = 'Sumatra'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "On which island does South Yorkshire situated? State it's longtitude and latitude.",
+        "query": "SELECT DISTINCT T3.Longitude, T3.Latitude FROM city AS T1 INNER JOIN locatedOn AS T2 ON T1.Name = T2.City INNER JOIN island AS T3 ON T3.Name = T2.Island WHERE T1.Province = 'South Yorkshire'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "List all islands that are greater than the island on which Warwickshire is located.",
+        "query": "SELECT DISTINCT Name FROM island WHERE Area > ( SELECT DISTINCT T3.Area FROM city AS T1 INNER JOIN locatedOn AS T2 ON T1.Name = T2.City INNER JOIN island AS T3 ON T3.Name = T2.Island WHERE T1.Province = 'Warwickshire' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "For island area less than 200, list the island name and city it belongs to.",
+        "query": "SELECT DISTINCT T3.Name, T1.Name FROM city AS T1 INNER JOIN locatedOn AS T2 ON T1.Name = T2.City INNER JOIN island AS T3 ON T3.Name = T2.Island WHERE T3.Area < 200"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "In which province is city Glenrothes located? What is the capital of the province?",
+        "query": "SELECT T2.Province, T1.Capital FROM province AS T1 INNER JOIN city AS T2 ON T1.Name = T2.Province AND T1.Country = T2.Country WHERE T2.Name = 'Glenrothes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "List the all the cities and its city population for provinces with population more than 1000000.",
+        "query": "SELECT T1.Name, T1.Population FROM city AS T1 INNER JOIN province AS T2 ON T2.Name = T1.Province WHERE T2.Population > 1000000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "List all the coral islands along with its city and province.",
+        "query": "SELECT City, Province FROM locatedOn WHERE Island IN ( SELECT Name FROM island WHERE Type = 'coral' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the average population for all cities location at Baltic Sea?",
+        "query": "SELECT AVG(T1.Population) FROM city AS T1 INNER JOIN located AS T2 ON T1.Name = T2.City INNER JOIN sea AS T3 ON T3.Name = T2.Sea WHERE T3.Name = 'Baltic Sea'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Calculate the percentage of population in Edmonton city to the population of its province.",
+        "query": "SELECT CAST(T1.Population AS REAL) * 100 / T2.Population FROM city AS T1 INNER JOIN province AS T2 ON T1.Province = T2.Name WHERE T1.Name = 'Edmonton'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which are the rivers that flows to Black Sea?",
+        "query": "SELECT Name FROM river WHERE Sea = 'Black Sea'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "State the name of the lake in Albania province and in which city does it located at.",
+        "query": "SELECT Lake, City FROM located WHERE Province = 'Albania' AND Lake IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Name the tallest mountain on Himalaya and what is its height.",
+        "query": "SELECT Name, Height FROM mountain WHERE Mountains = 'Himalaya' ORDER BY Height DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "List all the mountains that are volcanic along with its longitude and latitude.",
+        "query": "SELECT Name, Latitude, Longitude FROM mountain WHERE Type = 'volcano'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Name all the volcano mountains between the height of 2000 to 4000.",
+        "query": "SELECT Name FROM mountain WHERE Type = 'volcano' AND Height BETWEEN 2000 AND 4000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Please state the longest river that flows to the Mediterranean Sea.",
+        "query": "SELECT Name FROM river WHERE Sea = 'Mediterranean Sea' ORDER BY Length DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many percent of the mountains on Andes which are non-volcanic?",
+        "query": "SELECT CAST(SUM(CASE WHEN type != 'volcano' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) FROM mountain WHERE Mountains = 'Andes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "List all the cities and provinces located at the rivers that flows to Atlantic Ocean.",
+        "query": "SELECT T1.Name, T1.Province FROM city AS T1 INNER JOIN located AS T2 ON T1.Name = T2.City INNER JOIN river AS T3 ON T3.Name = T2.River WHERE T3.Sea = 'Atlantic Ocean'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the name and length of rivers located at 'Orleans' city?",
+        "query": "SELECT T3.Name, T3.Length FROM city AS T1 INNER JOIN located AS T2 ON T1.Name = T2.City INNER JOIN river AS T3 ON T3.Name = T2.River WHERE T1.Name = 'Orleans'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the height of the mountain on which river 'Lech' is located? Please also provide its longitude and latitude.",
+        "query": "SELECT T1.Height, T1.Latitude, T1.Longitude FROM mountain AS T1 INNER JOIN geo_mountain AS T2 ON T1.Name = T2.Mountain INNER JOIN province AS T3 ON T3.Name = T2.Province INNER JOIN located AS T4 ON T4.Province = T3.Name WHERE T4.River = 'Lech'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Name the river of which Lorraine is on. Please name the mountains where to source flow from?",
+        "query": "SELECT T1.SourceLongitude, T1.SourceLatitude, T1.SourceAltitude FROM river AS T1 INNER JOIN geo_river AS T2 ON T2.River = T1.Name WHERE T2.Province = 'Lorraine'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which mountain does the river source Blue Nile located? State the height of the mountain.",
+        "query": "SELECT T1.Name, T1.Height FROM mountain AS T1 INNER JOIN geo_mountain AS T2 ON T1.Name = T2.Mountain INNER JOIN province AS T3 ON T3.Name = T2.Province INNER JOIN geo_source AS T4 ON T4.Province = T3.Name WHERE T4.River = 'Blue Nile'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Name the river at Little Rock city. State the length of the river.",
+        "query": "SELECT T3.Length FROM city AS T1 INNER JOIN located AS T2 ON T1.Name = T2.City INNER JOIN river AS T3 ON T3.Name = T2.River WHERE T1.Name = 'Little Rock'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "List all rivers and province it is located that is greater than 1000 in length.",
+        "query": "SELECT T1.Province, T2.Name FROM geo_river AS T1 INNER JOIN river AS T2 ON T1.River = T2.Name WHERE T2.Length > 1000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "In which province and country does Moldoveanu located? State its height.",
+        "query": "SELECT T2.Province, T2.Country, T1.Height FROM mountain AS T1 INNER JOIN geo_mountain AS T2 ON T1.Name = T2.Mountain WHERE T1.Name = 'Moldoveanu'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Provide all rivers name and length in USA.",
+        "query": "SELECT DISTINCT T3.Name, T3.Length FROM city AS T1 INNER JOIN located AS T2 ON T1.Name = T2.City INNER JOIN river AS T3 ON T3.Name = T2.River WHERE T2.Country = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the average height of all mountains in Nepal?",
+        "query": "SELECT AVG(T1.Height) FROM mountain AS T1 INNER JOIN geo_mountain AS T2 ON T1.Name = T2.Mountain WHERE T2.Province = 'Nepal'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "For all cities where Seine is located at, which city has the greatest population? Calculate the difference from the city with least population.",
+        "query": "SELECT MAX(T1.Population) - MIN(T1.population) FROM city AS T1 INNER JOIN located AS T2 ON T1.Name = T2.City INNER JOIN river AS T3 ON T3.Name = T2.River WHERE T3.Name = 'Seine'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which are the 2 rivers located at Belgrade city? Which river is longer and how by much?",
+        "query": "SELECT T1.Name, T1.Length FROM river AS T1 INNER JOIN located AS T2 ON T1.Name = T2.River INNER JOIN city AS T3 ON T3.Name = T2.City WHERE T3.Name = 'Belgrade'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which nations have a 100% Spanish-speaking population?",
+        "query": "SELECT Country FROM language WHERE Name = 'Spanish' AND Percentage = 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which countries are dependent on the British Crown?",
+        "query": "SELECT Country FROM politics WHERE Government = 'British crown dependency'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What are the names of the rivers in Canada?",
+        "query": "SELECT DISTINCT T1.River FROM located AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code WHERE T2.Name = 'Canada' AND T1.River IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the name of the country whose citizens have the lowest purchasing power?",
+        "query": "SELECT T2.Name FROM economy AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code ORDER BY T1.Inflation DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What province does the 4th most populous city in the United Kingdom belong to, and how many people live there?",
+        "query": "SELECT T1.Province, T1.Population FROM city AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code WHERE T2.Name = 'United Kingdom' ORDER BY T1.Population DESC LIMIT 3, 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many Jewish residents are there in Moldova?",
+        "query": "SELECT T2.Percentage * T1.Population FROM country AS T1 INNER JOIN ethnicGroup AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Moldova' AND T2.Name = 'Jewish'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the average area of Asian countries?",
+        "query": "SELECT AVG(Area) FROM country AS T1 INNER JOIN encompasses AS T2 ON T1.Code = T2.Country WHERE T2.Continent = 'Asia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country is home to the world's tiniest desert, and what are its longitude and latitude?",
+        "query": "SELECT T2.Country, T1.Latitude, T1.Longitude FROM desert AS T1 INNER JOIN geo_desert AS T2 ON T1.Name = T2.Desert WHERE T1.Name = ( SELECT Name FROM desert ORDER BY Area ASC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many people in Montenegro speaks Serbian?",
+        "query": "SELECT T1.Percentage * T2.Population FROM language AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code WHERE T1.Name = 'Serbian' AND T2.Name = 'Montenegro'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many mountains are there in the country with the most land area?",
+        "query": "SELECT COUNT(Mountain) FROM geo_mountain WHERE Country = ( SELECT Code FROM country ORDER BY Area DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which sea is the shallowest and which country surrounds it?",
+        "query": "SELECT DISTINCT T2.Name FROM located AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code WHERE Sea = ( SELECT Name FROM sea ORDER BY Depth ASC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which nation's GDP is the lowest among those that are communist states?",
+        "query": "SELECT T2.Country FROM politics AS T1 INNER JOIN economy AS T2 ON T1.Country = T2.Country WHERE T1.Government = 'Communist state' ORDER BY T2.GDP ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What kind of political system is in place in the country with the highest inflation rate?",
+        "query": "SELECT T1.Government FROM politics AS T1 INNER JOIN economy AS T2 ON T1.Country = T2.Country ORDER BY T2.Inflation DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which nation has the greatest infant mortality rate among those that attained independence in 1960?",
+        "query": "SELECT T1.Country FROM politics AS T1 INNER JOIN population AS T2 ON T1.Country = T2.Country WHERE STRFTIME('%Y', T1.Independence) = '1960' ORDER BY T2.Infant_Mortality DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the smallest border's length, and what form of government do the two nations bordering it have?",
+        "query": "SELECT T1.Government, T3.Government FROM politics AS T1 INNER JOIN borders AS T2 ON T1.Country = T2.Country1 INNER JOIN politics AS T3 ON T3.Country = T2.Country2 ORDER BY T2.Length ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which Arabic-speaking country has the smallest population?",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN language AS T2 ON T1.Code = T2.Country WHERE T2.Name = 'Arabic' AND T2.Percentage = 100 ORDER BY T1.Population ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What provinces encompass the world's biggest desert in terms of overall area?",
+        "query": "SELECT Province FROM geo_desert WHERE Desert = ( SELECT Name FROM desert ORDER BY Area DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many lakes are there in the 4th most populous African country with a republican form of government?",
+        "query": "SELECT COUNT(*) FROM geo_lake WHERE Country = ( SELECT T4.Code FROM ( SELECT T2.Code, T2.Population FROM encompasses AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code INNER JOIN politics AS T3 ON T1.Country = T3.Country WHERE T1.Continent = 'Africa' AND T1.Percentage = 100 AND T3.Government = 'republic' ORDER BY Population DESC LIMIT 4 ) AS T4 ORDER BY population ASC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which religion is most prevalent in Asia?",
+        "query": "SELECT T4.Name FROM continent AS T1 INNER JOIN encompasses AS T2 ON T1.Name = T2.Continent INNER JOIN country AS T3 ON T3.Code = T2.Country INNER JOIN religion AS T4 ON T4.Country = T3.Code WHERE T1.Name = 'Asia' GROUP BY T4.Name ORDER BY SUM(T4.Percentage) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the difference in population between the two nations where the tallest peak is located?",
+        "query": "SELECT * FROM mountain AS T1 INNER JOIN geo_mountain AS T2 ON T1.Name = T2.Mountain INNER JOIN province AS T3 ON T3.Country = T2.Country INNER JOIN country AS T4 ON T4.Code = T3.Country WHERE T1.Name = ( SELECT Name FROM mountain ORDER BY Height DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What are the names of the sea that can be found on the island with the biggest area?",
+        "query": "SELECT T2.Name FROM islandIn AS T1 INNER JOIN sea AS T2 ON T2.Name = T1.Sea WHERE T1.Island = ( SELECT Name FROM island ORDER BY Area DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What are the names of the three nations where the longest river that empties into the Atlantic Ocean stretches to?",
+        "query": "SELECT DISTINCT T1.Country FROM city AS T1 INNER JOIN located AS T2 ON T1.Name = T2.City INNER JOIN river AS T3 ON T3.Name = T2.River WHERE T3.Name = ( SELECT Name FROM river WHERE Sea = 'Atlantic Ocean' ORDER BY Length DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many people reside in the nation's capital city, which is situated in the nation that attained independence on 8/15/1947?",
+        "query": "SELECT T3.Population FROM politics AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code INNER JOIN city AS T3 ON T3.Name = T2.Capital WHERE T1.Independence = '1947-08-15'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the total number of Afro-Asian people in the most populous Asian country governed by a monarchy?",
+        "query": "SELECT T5.Percentage * T6.Population FROM ethnicGroup AS T5 INNER JOIN country AS T6 ON T5.Country = T6.Code WHERE Country = ( SELECT T3.Code FROM continent AS T1 INNER JOIN encompasses AS T2 ON T1.Name = T2.Continent INNER JOIN country AS T3 ON T3.Code = T2.Country INNER JOIN politics AS T4 ON T4.Country = T3.Code WHERE T4.Government = 'monarchy' AND T1.Name = 'Asia' ORDER BY T3.Population DESC LIMIT 1 ) AND T5.Name = 'Afro-Asian'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What are the names of the cities along the Euphrat River's course? Indicate the capital city of the nation where the Euphrat River flows.",
+        "query": "SELECT T2.City, T1.Capital FROM country AS T1 INNER JOIN located AS T2 ON T1.Code = T2.Country INNER JOIN river AS T3 ON T3.Name = T2.River WHERE T3.Name = 'Euphrat'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the proportion of English-speaking citizens in the countries that rely on the United States compared to the total number of citizens in those countries?",
+        "query": "SELECT T2.Percentage * T1.Population FROM country AS T1 INNER JOIN language AS T2 ON T1.Code = T2.Country INNER JOIN politics AS T3 ON T3.Country = T2.Country WHERE T3.Dependent = 'USA' AND T2.Name = 'English'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which federal republic country in Europe has the most provinces, and what proportion of GDP is devoted to services?\nCalculate the population density as well.",
+        "query": "SELECT T1.Country, T2.Service , SUM(T1.Population) / SUM(T1.Area) FROM province AS T1 INNER JOIN economy AS T2 ON T1.Country = T2.Country WHERE T1.Country IN ( SELECT Country FROM encompasses WHERE Continent = 'Europe' ) GROUP BY T1.Country, T2.Service ORDER BY COUNT(T1.Name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the capital of the 3rd most populated country in Asia and what is the capital city's ratio in percentage (%) against the overall population of the country?",
+        "query": "SELECT T4.Capital, CAST(T3.Population AS REAL) * 100 / T4.Population FROM city AS T3 INNER JOIN ( SELECT T1.Capital , T1.Population FROM country AS T1 INNER JOIN encompasses AS T2 ON T1.Code = T2.Country WHERE T2.Continent = 'Asia' ORDER BY T1.Population DESC LIMIT 2, 1 ) AS T4 ON T3.Name = T4.Capital"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What's the name of the second biggest desert?",
+        "query": "SELECT Name FROM desert ORDER BY Area DESC LIMIT 1, 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the main spoken language in MNE?",
+        "query": "SELECT Name FROM language WHERE Country = 'MNE' ORDER BY Percentage DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What's the percentage of people in Cayman Islands speak English?",
+        "query": "SELECT T1.Percentage FROM language AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code WHERE T2.Name = 'Cayman Islands' AND T1.Name = 'English'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country was the source of Pjandsh River? Give the full name of the country.",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN located AS T2 ON T1.Code = T2.Country WHERE T2.River = 'Pjandsh'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "For the countries have the population north of a billion, which one has the lowest GDP? Give the full name of the country.",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country WHERE T1.Population > 1000000000 ORDER BY T2.GDP ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the capital of the country that has the Licancabur Mountain?",
+        "query": "SELECT T4.Capital FROM mountain AS T1 INNER JOIN geo_mountain AS T2 ON T1.Name = T2.Mountain INNER JOIN province AS T3 ON T3.Name = T2.Province INNER JOIN country AS T4 ON T4.Province = T3.Name WHERE T1.Name = 'Licancabur'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How much sea is around the island where Kerinci Mountain is located?",
+        "query": "SELECT COUNT(T4.Sea) FROM mountain AS T1 INNER JOIN mountainOnIsland AS T2 ON T1.Name = T2.Mountain INNER JOIN island AS T3 ON T3.Name = T2.Island INNER JOIN islandIn AS T4 ON T4.Island = T3.Name WHERE T1.Name = 'Kerinci'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which three countries does the Amazonas flow through? Give the full name of the countries.",
+        "query": "SELECT DISTINCT T4.Name FROM city AS T1 INNER JOIN located AS T2 ON T1.Name = T2.City INNER JOIN river AS T3 ON T3.Name = T2.River INNER JOIN country AS T4 ON T4.Code = T2.Country WHERE T3.Name = 'Amazonas'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country became independent on 1492-01-01? Give the full name of the country.",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN politics AS T2 ON T1.Code = T2.Country WHERE T2.Independence = '1492-01-01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many cities in France have a population of more than 100,000?",
+        "query": "SELECT COUNT(T2.Name) FROM country AS T1 INNER JOIN city AS T2 ON T2.Country = T1.Code WHERE T1.Name = 'France' AND T2.Population > 100000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among all the rivers finally flows to the sea of 540m in depth, which one has the longest length?",
+        "query": "SELECT T2.Name FROM sea AS T1 INNER JOIN river AS T2 ON T2.Sea = T1.Name WHERE T1.Depth = 540 ORDER BY T2.Length DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "In which Country is the second highest volcanic mountain located in? Give the code of the country.",
+        "query": "SELECT T3.Country FROM mountain AS T1 INNER JOIN geo_mountain AS T2 ON T1.Name = T2.Mountain INNER JOIN province AS T3 ON T3.Name = T2.Province ORDER BY T1.Height DESC LIMIT 1, 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the longitude of the island on which Mount Olympos is located?",
+        "query": "SELECT T3.Longitude FROM mountain AS T1 INNER JOIN mountainOnIsland AS T2 ON T1.Name = T2.Mountain INNER JOIN island AS T3 ON T3.Name = T2.Island WHERE T1.Name = 'Olympos'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "For all the countries that is smaller than 100 square kilometres, which one has the most GDP?",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country WHERE T1.Area < 100 ORDER BY T2.GDP DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the total number of cities that Japan have?",
+        "query": "SELECT COUNT(T3.Name) FROM country AS T1 INNER JOIN province AS T2 ON T1.Code = T2.Country INNER JOIN city AS T3 ON T3.Province = T2.Name WHERE T1.Name = 'Japan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which city has most population other than its capital in Bangladesh?",
+        "query": "SELECT T3.Name FROM country AS T1 INNER JOIN province AS T2 ON T1.Code = T2.Country INNER JOIN city AS T3 ON T3.Province = T2.Name WHERE T1.Name = 'Bangladesh' AND T3.Name <> T1.Capital ORDER BY T3.Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which non capital city has the most people of all?",
+        "query": "SELECT T3.Name FROM country AS T1 INNER JOIN province AS T2 ON T1.Code = T2.Country INNER JOIN city AS T3 ON T3.Province = T2.Name WHERE T3.Name <> T1.Capital ORDER BY T3.Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "In which country is the city of Grozny? Give the full name of the country.",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN province AS T2 ON T1.Code = T2.Country INNER JOIN city AS T3 ON T3.Province = T2.Name WHERE T3.Name = 'Grozny'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which religion has the majority of the people in Japan?",
+        "query": "SELECT T2.Name FROM country AS T1 INNER JOIN religion AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Japan' ORDER BY T2.Percentage DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which two countries have the border in length of 803 km? Give the full names of the countries.",
+        "query": "SELECT T1.Name, T3.Name FROM country AS T1 INNER JOIN borders AS T2 ON T1.Code = T2.Country1 INNER JOIN country AS T3 ON T3.Code = T2.Country2 WHERE T2.Length = 803"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many percent of the total area of Russia is in Europe?",
+        "query": "SELECT T2.Percentage FROM continent AS T1 INNER JOIN encompasses AS T2 ON T1.Name = T2.Continent INNER JOIN country AS T3 ON T3.Code = T2.Country WHERE T3.Name = 'Russia' AND T1.Name = 'Europe'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Give the full names of the countries that are located in more than one continent.",
+        "query": "SELECT T3.Name FROM continent AS T1 INNER JOIN encompasses AS T2 ON T1.Name = T2.Continent INNER JOIN country AS T3 ON T3.Code = T2.Country GROUP BY T3.Name HAVING COUNT(T3.Name) > 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many people are there in Fareham's mother country?",
+        "query": "SELECT T1.Population FROM country AS T1 INNER JOIN province AS T2 ON T1.Code = T2.Country INNER JOIN city AS T3 ON T3.Province = T2.Name WHERE T3.Name = 'Fareham'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What's the number of infant mortality in Switzerland in a year?",
+        "query": "SELECT T2.Infant_Mortality * T1.Population * T2.Population_Growth FROM country AS T1 INNER JOIN population AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Switzerland'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many mountains are there in the United States?",
+        "query": "SELECT COUNT(T1.Name) FROM mountain AS T1 INNER JOIN geo_mountain AS T2 ON T1.Name = T2.Mountain INNER JOIN province AS T3 ON T3.Name = T2.Province INNER JOIN country AS T4 ON T4.Province = T3.Name WHERE T4.Name = 'United States'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "When did Equatorial Guinea become independent?",
+        "query": "SELECT T2.Independence FROM country AS T1 INNER JOIN politics AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Equatorial Guinea'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the GDP per capita in Switzerland?",
+        "query": "SELECT T2.GDP / T1.Population FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Switzerland'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the GDP for Service of the country with Fuenlabrada as its city.",
+        "query": "SELECT T4.Service * T4.GDP FROM country AS T1 INNER JOIN province AS T2 ON T1.Code = T2.Country INNER JOIN city AS T3 ON T3.Province = T2.Name INNER JOIN economy AS T4 ON T4.Country = T2.Country WHERE T3.Name = 'Fuenlabrada'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many times longer is the longest river in Tajikistan than the shortest river?",
+        "query": "SELECT MAX(T2.Length) / MIN(T2.Length) FROM located AS T1 INNER JOIN river AS T2 ON T1.River = T2.Name WHERE T1.Country = 'TJ'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the population density of Hanoi's home country?",
+        "query": "SELECT T1.Population / T1.Area FROM country AS T1 INNER JOIN province AS T2 ON T1.Code = T2.Country INNER JOIN city AS T3 ON T3.Province = T2.Name WHERE T3.Name = 'Hanoi'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "In countries where there is more than one ethnic group, name the ethnic group with the greatest presence in each country and the country to which it corresponds.",
+        "query": "SELECT Country, Name FROM ethnicGroup AS T1 WHERE Percentage < 100 AND Percentage = ( SELECT MAX(Percentage) FROM ethnicGroup AS T2 WHERE T1.Country = T2.Country )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many deserts are not located in a single country? Name them.",
+        "query": "SELECT Desert FROM geo_desert GROUP BY Desert HAVING COUNT(DISTINCT Country) > 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many rivers belong to more than one country? Name the provinces where we can find them.",
+        "query": "SELECT River, GROUP_CONCAT(Province) FROM geo_river GROUP BY River HAVING COUNT(DISTINCT Country) > 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What percentage of the border does Angola share with each of the countries with which it borders?",
+        "query": "SELECT SUM(CASE WHEN T2.Name = 'Angola' THEN T1.Length ELSE 0 END) * 100 / SUM(T1.Length) FROM borders AS T1 LEFT JOIN country AS T2 ON T1.Country1 = T2.Code"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What percent of the non volcanic islands in the Lesser Antilles group of islands have an area of no more than 300 square kilometers?",
+        "query": "SELECT SUM(CASE WHEN Area <= 300 THEN 1 ELSE 0 END) * 100 / COUNT(*) FROM island WHERE Islands = 'Lesser Antilles' AND (Type != 'volcanic' OR Type IS NULL)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Of all the countries in which English is spoken, what percentage has English as their only language?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.Percentage = 100 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.Name) FROM country AS T1 INNER JOIN language AS T2 ON T1.Code = T2.Country WHERE T2.Name = 'English'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Name of the capitals of the countries that have less than 99.95% less population than the country that has the most population.",
+        "query": "SELECT Capital FROM country WHERE Population <= ( SELECT MAX(Population) - MAX(Population) * 0.9995 FROM country )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Average length of the rivers flowing into the Donau River.",
+        "query": "SELECT * FROM river WHERE Name = 'Donau'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Based on the data shown at Target, what percentage of countries are non-Christian?",
+        "query": "SELECT 100 - (CAST(SUM(CASE WHEN Target = 'Christian' THEN 1 ELSE 0 END) AS REAL)) * 100 / COUNT(Country) FROM target"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country with a city with a population between 50,000 and 300,000 inhabitants and which is a member of an organization established between 03/01/1991 and 04/30/1991 is also a member of the EBRD?",
+        "query": "SELECT T2.Country FROM country AS T1 INNER JOIN isMember AS T2 ON T1.Code = T2.Country INNER JOIN organization AS T3 ON T3.Country = T2.Country INNER JOIN city AS T4 ON T4.Country = T3.Country WHERE T3.Abbreviation = 'EBRD' AND T4.Population BETWEEN 50000 AND 300000 AND T3.Established BETWEEN '1991-01-31' AND '1991-04-30'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which river with its mouth in the Donau River and a length greater than 500 km is located in Slovenia?",
+        "query": "SELECT T2.River FROM country AS T1 INNER JOIN geo_river AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Slovenia' AND T2.River IN ( SELECT NAME FROM river WHERE Length > 500 AND River = 'Donau' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "In which city is the sea whose depth is 4232 meters less than that of the Bay of Bengal?",
+        "query": "SELECT T2.City FROM sea AS T1 INNER JOIN located AS T2 ON T1.Name = T2.Sea INNER JOIN city AS T3 ON T3.Name = T2.City WHERE ( SELECT Depth FROM sea WHERE Name LIKE '%Bengal%' ) - T1.Depth = 4235"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "In which city is the lake located at coordinates longitude -85.35 and latitude 11.6?",
+        "query": "SELECT T2.City FROM lake AS T1 INNER JOIN located AS T2 ON T1.Name = T2.Lake INNER JOIN province AS T3 ON T3.Name = T2.Province INNER JOIN city AS T4 ON T4.Province = T3.Name WHERE T1.Longitude = -85.35 AND T1.Latitude = 11.6"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "On which continent is the country with the most erosion of real income?",
+        "query": "SELECT T1.Name FROM continent AS T1 INNER JOIN encompasses AS T2 ON T1.Name = T2.Continent INNER JOIN country AS T3 ON T3.Code = T2.Country INNER JOIN economy AS T4 ON T4.Country = T3.Code ORDER BY T4.Inflation DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which two Asian countries share a border that is 1,782 kilometers long?",
+        "query": "SELECT T4.Country1, T4.Country2 FROM continent AS T1 INNER JOIN encompasses AS T2 ON T1.Name = T2.Continent INNER JOIN country AS T3 ON T3.Code = T2.Country INNER JOIN borders AS T4 ON T4.Country1 = T3.Code WHERE T1.Name = 'Asia' AND T4.Length = 1782"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Of all the lakes in Bolivia, which is the deepest?",
+        "query": "SELECT T1.Name FROM lake AS T1 INNER JOIN geo_lake AS T2 ON T1.Name = T2.Lake INNER JOIN province AS T3 ON T3.Name = T2.Province INNER JOIN country AS T4 ON T4.Code = T3.Country WHERE T4.Name = 'Bolivia' ORDER BY T1.Depth DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "In which lake flows the river that is, in turn, the mouth of the Manicouagan River?",
+        "query": "SELECT NAME FROM lake WHERE river = ( SELECT river FROM river WHERE NAME = 'Manicouagan' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "In which group of islands is Rinjani Mountain located?",
+        "query": "SELECT T1.Islands FROM island AS T1 INNER JOIN mountainOnIsland AS T2 ON T1.Name = T2.Island INNER JOIN mountain AS T3 ON T3.Name = T2.Mountain WHERE T3.Name = 'Rinjani'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "List all the seas with which the deepest sea merges.",
+        "query": "SELECT T2.Sea2 FROM sea AS T1 INNER JOIN mergesWith AS T2 ON T1.Name = T2.Sea1 WHERE T1.Name = ( SELECT Name FROM sea ORDER BY Depth DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Of all the countries that share territory with more than one continent, in which of them does the average population not exceed 10 inhabitants per square kilometer?",
+        "query": "SELECT NAME FROM country WHERE CODE IN ( SELECT country FROM encompasses GROUP BY country HAVING COUNT(continent) > 1 ) AND population / Area <= 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Of all the countries of the Hindu religion, which has the lowest ratio of people per square meter of surface?",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN religion AS T2 ON T1.Code = T2.Country WHERE T2.Name = 'Hindu' ORDER BY T1.Population / T1.Area ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "On what date did the country have a gross domestic product 400% higher than Saint Kitts and Nevis become independent?",
+        "query": "SELECT Independence FROM politics WHERE country = ( SELECT country FROM economy WHERE GDP = 1100 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the average population ratio of the countries in which organizations were established in 1947?",
+        "query": "SELECT T1.Population / T1.Area FROM country AS T1 INNER JOIN organization AS T2 ON T1.Code = T2.Country WHERE STRFTIME('%Y', T2.Established) = '1947'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the name of Anguilla's capital, and where is it located?",
+        "query": "SELECT Capital, Province FROM country WHERE Name = 'Anguilla'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which nation has the smallest population, and where is its capital located?",
+        "query": "SELECT Name, Capital FROM country ORDER BY Population ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How much more space does Asia have than Europe?",
+        "query": "SELECT MAX(Area) - MIN(Area) FROM continent WHERE Name = 'Asia' OR Name = 'Europe'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the geographic location of Aarhus city? Please provide the answer with the coordinates of the location.",
+        "query": "SELECT Longitude, Latitude FROM city WHERE Name = 'Aarhus'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the population gap between the United Kingdom and Italy?",
+        "query": "SELECT MAX(Population) - MIN(Population) FROM country WHERE Name = 'United Kingdom' OR Name = 'Italy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "In which city is the European Bank for Reconstruction and Development's headquarters? Please include the city and province where the headquarters are located in your answer.",
+        "query": "SELECT City, Province FROM organization WHERE Name = 'European Bank for Reconstruction and Development'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which lake is the largest in terms of both surface area and depth?",
+        "query": "SELECT Name FROM lake ORDER BY Area * Depth DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which two nations are separated from one another by the longest border? Please include the entire names of the nations in your answer.",
+        "query": "SELECT Country1, Country2 FROM borders ORDER BY Length DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which nation has the highest GDP? Please give the nation's full name.",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country ORDER BY T2.GDP DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which nation has the lowest proportion of people who speak an African language? Please state the nation's full name.",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN ethnicGroup AS T2 ON T1.Code = T2.Country WHERE T2.Name = 'African' ORDER BY T2.Percentage ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country has three different religions-Anglicanism, Christianity, and Roman Catholicism and uses 100% English?",
+        "query": "SELECT T2.Country FROM country AS T1 INNER JOIN religion AS T2 ON T1.Code = T2.Country INNER JOIN language AS T3 ON T3.Country = T2.Country WHERE (T2.Name = 'Anglican' OR T2.Name = 'Christian' OR T2.Name = 'Roman Catholic') AND T3.Name = 'English' AND T3.Percentage = 100 GROUP BY T1.Name HAVING COUNT(T1.Name) = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Please list the top 3 countries with the highest inflation rate.",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country ORDER BY T2.Inflation DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Please provide a list of every nation where English is spoken and utilized entirely.",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN language AS T2 ON T1.Code = T2.Country WHERE T2.Name = 'English' AND T2.Percentage = 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many businesses were founded after 1960 in a nation that wasn't independent?",
+        "query": "SELECT COUNT(T3.Name) FROM country AS T1 INNER JOIN politics AS T2 ON T1.Code = T2.Country INNER JOIN organization AS T3 ON T3.Country = T2.Country WHERE T2.Independence = NULL AND STRFTIME('%Y', T3.Established) > '1960'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What province did the river Klaeaelv travel through and how long is the river?",
+        "query": "SELECT T1.Province FROM city AS T1 INNER JOIN located AS T2 ON T1.Name = T2.City INNER JOIN river AS T3 ON T3.Name = T2.River WHERE T3.Name = 'Klaraelv'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How many Italian regions are bordered by the Mediterranean Sea? How deep is the Mediterranean Sea?",
+        "query": "SELECT COUNT(DISTINCT T2.province), T3.Depth FROM country AS T1 INNER JOIN located AS T2 ON T1.Code = T2.Country INNER JOIN sea AS T3 ON T3.Name = T2.Sea WHERE T1.Code = 'I' AND T3.Name = 'Mediterranean Sea' GROUP BY T3.Depth"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What nations are considered British Overseas Territories?",
+        "query": "SELECT name FROM country WHERE CODE IN ( SELECT country FROM politics WHERE government = 'British Overseas Territories' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which of the top 3 economies by GDP has the lowest proportion of the economy devoted to agriculture?",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country ORDER BY T2.GDP DESC, T2.Agriculture ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "How big is Africa, and how many nations make up the continent?",
+        "query": "SELECT T1.Area, COUNT(T3.Name) FROM continent AS T1 INNER JOIN encompasses AS T2 ON T1.Name = T2.Continent INNER JOIN country AS T3 ON T3.Code = T2.Country WHERE T1.Name = 'Asia' GROUP BY T1.Name, T1.Area"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which United States province is home to the greatest number of corporations' corporate headquarters?",
+        "query": "SELECT T1.Province FROM country AS T1 INNER JOIN organization AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'United States' GROUP BY T1.Province ORDER BY COUNT(T1.Name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What are the most recent three independent nations?",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN politics AS T2 ON T1.Code = T2.Country ORDER BY T2.Independence DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Please name any three sovereign nations that have been governed by the republic since 1991.",
+        "query": "SELECT country FROM politics WHERE government = 'republic' AND STRFTIME('%Y', independence) >= '1991' AND country IN ( SELECT country FROM country ) ORDER BY independence LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which company falls under the category of an associated member? Please provide the organization's full name.",
+        "query": "SELECT NAME FROM organization WHERE country IN ( SELECT country FROM politics WHERE dependent != '' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which nations have a boundary with the Kalahari Desert?",
+        "query": "SELECT T3.Name FROM desert AS T1 INNER JOIN geo_desert AS T2 ON T1.Name = T2.Desert INNER JOIN country AS T3 ON T3.Code = T2.Country WHERE T1.Name = 'Kalahari'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which desert in Kazakhstan is the largest?",
+        "query": "SELECT T1.Name FROM desert AS T1 INNER JOIN geo_desert AS T2 ON T1.Name = T2.Desert INNER JOIN country AS T3 ON T3.Code = T2.Country WHERE T3.Name = 'Kazakstan' ORDER BY T1.Area DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What sea does the Baltic Sea converge with, and how deep is the Baltic Sea?",
+        "query": "SELECT T2.Sea2, T1.Depth FROM sea AS T1 INNER JOIN mergesWith AS T2 ON T1.Name = T2.Sea1 WHERE T1.Name = 'Baltic Sea'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which constitutional monarchy nations saw the greatest growth in the number of organizations after 1907?",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN organization AS T2 ON T1.Code = T2.Country INNER JOIN politics AS T3 ON T3.Country = T2.Country WHERE STRFTIME('%Y', T2.Established) > '1907' AND T3.Government = 'constitutional monarchy' GROUP BY T1.Name ORDER BY COUNT(DISTINCT T2.Name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What kind of mountain is Ampato? Which province and nation does this mountain belong to?",
+        "query": "SELECT T1.Type, T3.Name, T4.Name FROM mountain AS T1 INNER JOIN geo_mountain AS T2 ON T1.Name = T2.Mountain INNER JOIN province AS T3 ON T3.Name = T2.Province INNER JOIN country AS T4 ON T3.Country = T4.Code WHERE T1.Name = 'Ampato'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Please provide a list of every volcano mountain in the province of Ecuador.",
+        "query": "SELECT T1.Name FROM mountain AS T1 INNER JOIN geo_mountain AS T2 ON T1.Name = T2.Mountain INNER JOIN province AS T3 ON T3.Name = T2.Province WHERE T3.Name = 'Ecuador' AND T1.Type = 'volcano'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What percentage of nations have achieved independence since 1993 and practice parliamentary democracy? Please include any three parliament-based democracies that attained independence after 1993.",
+        "query": "SELECT SUM(IIF(government = 'parliamentary democracy', 1, 0)) , CAST(SUM(IIF(government = 'parliamentary democracy', 1, 0)) AS REAL) * 100 / COUNT(*) FROM politics AS t1 WHERE STRFTIME('%Y', independence) >= '1993'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What proportion of rivers have a length of more than 3,000 miles? Please provide the name of a Russian river that is more than 3,000 miles long.",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.Length > 3000 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.Name) FROM river AS T1 INNER JOIN located AS T2 ON T1.Name = T2.River INNER JOIN country AS T3 ON T3.Code = T2.Country"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the full name of ABEDA and when was it established?",
+        "query": "SELECT Name, Established FROM organization WHERE Abbreviation = 'ABEDA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Name all the organisations that were established from 1970 to 1980.",
+        "query": "SELECT Name FROM organization WHERE STRFTIME('%Y', Established) BETWEEN '1970' AND '1980'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Provide a list of all organisations with headquarters in London?",
+        "query": "SELECT Name FROM organization WHERE City = 'London'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "For each organisations with headquarters in the USA, provide the its full name and the city where the headquarter is located at.",
+        "query": "SELECT Name, City FROM organization WHERE Country = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Name the first organisation established in the Paris city. State its abbreviation, full name and date of establishment.",
+        "query": "SELECT Abbreviation, Name, Established FROM organization WHERE City = 'Paris' ORDER BY Established ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "List all the organisations that where its name contains 'United Nation'. State its full name and its headquarter city.",
+        "query": "SELECT Name, City FROM organization WHERE Name LIKE '%United Nation%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which 2 countries' border span across the longest length? Provide the country's full name.",
+        "query": "SELECT T1.Name, T3.Name FROM country AS T1 INNER JOIN borders AS T2 ON T1.Code = T2.Country1 INNER JOIN country AS T3 ON T3.Code = T2.Country2 ORDER BY T2.Length DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Name all countries in which have border with Bulgaria.",
+        "query": "SELECT T3.Name FROM country AS T1 INNER JOIN borders AS T2 ON T1.Code = T2.Country1 INNER JOIN country AS T3 ON T3.Code = T2.Country2 WHERE T1.Name = 'Bulgaria'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "State all countries with border greater than 4,000. List the full country name.",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN borders AS T2 ON T1.Code = T2.Country1 WHERE T2.Length > 4000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among the country member of 'IOC' organization, which country has the most population?",
+        "query": "SELECT T2.Name FROM isMember AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code WHERE T1.Organization = 'IOC' ORDER BY T2.Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "List all members and member type of the Islamic Development Bank.",
+        "query": "SELECT T2.Country, T2.Type FROM organization AS T1 INNER JOIN isMember AS T2 ON T1.Abbreviation = T2.Organization INNER JOIN country AS T3 ON T2.Country = T3.Code WHERE T1.Name = 'Islamic Development Bank'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "State the area and population of the country where Asia Pacific Economic Cooperation headquarter is located.",
+        "query": "SELECT T2.Name, T2.Population FROM organization AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code WHERE T1.Name = 'Asia Pacific Economic Cooperation'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the organization(s) that has 'National Society' as member type.",
+        "query": "SELECT T1.Name FROM organization AS T1 INNER JOIN isMember AS T2 ON T2.Country = T1.Country INNER JOIN country AS T3 ON T2.Country = T3.Code WHERE T2.Type = 'National Society'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country has the least organization membership?",
+        "query": "SELECT country FROM organization WHERE country IN ( SELECT Code FROM country ) GROUP BY country ORDER BY COUNT(NAME) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "List all countries with 'Category III' membership in 'IFAD' organization. Please also provide the capital of the country.",
+        "query": "SELECT Name, Capital FROM country WHERE Code IN ( SELECT Country FROM isMember WHERE type = 'Category III' AND Organization = 'IFAD' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Name the organizations with the most members.",
+        "query": "SELECT T1.Name FROM organization AS T1 INNER JOIN isMember AS T2 ON T2.Country = T1.Country INNER JOIN country AS T3 ON T2.Country = T3.Code GROUP BY T1.Name ORDER BY COUNT(T3.Name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the capital of Australia? Is the capital a headquarter to any organization? Name the organization(s).",
+        "query": "SELECT T2.Capital, T1.Name FROM organization AS T1 INNER JOIN country AS T2 ON T1.City = T2.Capital WHERE T2.Name = 'Australia'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Among the organizations where headquarters are in the 'USA', what is the percentage of the them are in 'Washington'?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.City = 'Washington' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.City) FROM country AS T1 INNER JOIN organization AS T2 ON T1.Code = T2.Country WHERE T2.Country = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the border length between 'USA' and 'MEX'",
+        "query": "SELECT Length FROM borders WHERE Country1 = 'MEX' AND Country2 = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the newest established organization where Singapore is a member of?",
+        "query": "SELECT T3.Name FROM country AS T1 INNER JOIN isMember AS T2 ON T1.Code = T2.Country INNER JOIN organization AS T3 ON T3.Country = T2.Country WHERE T1.Name = 'Singapore' ORDER BY T3.Established DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Provide the population of the city of the 'World Tourism Organization' headquarter.",
+        "query": "SELECT T2.Population FROM organization AS T1 INNER JOIN city AS T2 ON T1.City = T2.Name WHERE T1.Name = 'World Tourism Organization'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the height of mountain Dhaulagiri located and in which province is it located?",
+        "query": "SELECT T1.Height, T2.Province FROM mountain AS T1 INNER JOIN geo_mountain AS T2 ON T1.Name = T2.Mountain WHERE T1.Name = 'Dhaulagiri'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "List all the name and height of all mountains in Alaska",
+        "query": "SELECT T1.Name, T1.Height FROM mountain AS T1 INNER JOIN geo_mountain AS T2 ON T1.Name = T2.Mountain WHERE T2.Province = 'Alaska'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the population of the country with the highest infant mortality rate?",
+        "query": "SELECT T1.Population FROM country AS T1 INNER JOIN population AS T2 ON T1.Code = T2.Country ORDER BY T2.Infant_Mortality DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "State the inflation rate of Greece.",
+        "query": "SELECT T2.Inflation FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country WHERE T1.Name = 'Greece'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Find the government type for the country with the highest percentage GDP in Agriculture.",
+        "query": "SELECT T3.Government FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country INNER JOIN politics AS T3 ON T3.Country = T2.Country ORDER BY T2.Agriculture DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "List the full name its capital of all the countries with parliamentary democracy government.",
+        "query": "SELECT T1.Capital FROM country AS T1 INNER JOIN politics AS T2 ON T1.Code = T2.Country WHERE T2.Government = 'parliamentary democracy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Provide a full list of countries and its population with more than 70% of Chinese.",
+        "query": "SELECT T1.Name, T1.Population * T2.Percentage FROM country AS T1 INNER JOIN ethnicGroup AS T2 ON T1.Code = T2.Country WHERE T2.Name = 'Chinese' AND T2.Percentage > 70"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "In which city has the greatest population, what is its percentage to its country population?",
+        "query": "SELECT T3.Name, CAST(T3.Population AS REAL) * 100 / T1.Population FROM country AS T1 INNER JOIN province AS T2 ON T1.Code = T2.Country INNER JOIN city AS T3 ON T3.Country = T2.Country ORDER BY T3.Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "When did the United States of America attained it's Independence?",
+        "query": "SELECT T1.Independence FROM politics AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code WHERE T2.Name = 'United States'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the peak height of the highest volcanic type of mountain? Give it's name.",
+        "query": "SELECT Height, Name FROM mountain WHERE Type = 'volcanic' ORDER BY Height DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the name of the most recently founded organization in Saudi Arabia?",
+        "query": "SELECT T1.Name FROM organization AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code WHERE T2.Name = 'Saudi Arabia' ORDER BY T1.Established DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country has the 5th highest infant mortality rate?",
+        "query": "SELECT T2.Name FROM population AS T1 INNER JOIN country AS T2 ON T1.Country = T2.Code ORDER BY T1.Infant_Mortality DESC LIMIT 4, 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which country has the widest range of religious practices?",
+        "query": "SELECT T1.Name FROM country AS T1 INNER JOIN religion AS T2 ON T1.Code = T2.Country GROUP BY T1.Name ORDER BY COUNT(DISTINCT T2.Name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What river has the 17th-longest length overall? Specify it's length.",
+        "query": "SELECT Name, Length FROM river ORDER BY Length DESC LIMIT 16, 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "When did the country whose capital is Nouakchott attained it's independence?",
+        "query": "SELECT T2.Independence FROM country AS T1 INNER JOIN politics AS T2 ON T1.Code = T2.Country WHERE T1.Capital = 'Nouakchott'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the name of the country with the smallest population, and what is its gross domestic product?",
+        "query": "SELECT T1.Name, T2.GDP FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country ORDER BY T1.Population ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which Zaire region is home to the country's deepest lake's Name it and list its depth.",
+        "query": "SELECT T3.Name, T1.Name, T1.Depth FROM lake AS T1 INNER JOIN located AS T2 ON T1.Name = T2.Lake INNER JOIN province AS T3 ON T3.Name = T2.Province INNER JOIN country AS T4 ON T4.Code = T3.Country WHERE T4.Name = 'Zaire'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the maximal elevation of the summit of the shortest mountain that can be found in the island of Madagaskar? Indicate what type of mountain it is.",
+        "query": "SELECT T3.Height, T3.Type FROM island AS T1 INNER JOIN mountainOnIsland AS T2 ON T1.Name = T2.Island INNER JOIN mountain AS T3 ON T3.Name = T2.Mountain WHERE T1.Name = 'Madagaskar' ORDER BY T3.Height DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which nation, with a population ranging from 60,000,000 to 99,000,000, has the greatest gross domestic product?",
+        "query": "SELECT T1.Name, T2.GDP FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country WHERE T1.Population BETWEEN 60000000 AND 90000000 ORDER BY T2.GDP DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Which Asian country gave its agricultural sector the largest share of its gross domestic product?",
+        "query": "SELECT T2.Country FROM continent AS T1 INNER JOIN encompasses AS T2 ON T1.Name = T2.Continent INNER JOIN country AS T3 ON T2.Country = T3.Code INNER JOIN economy AS T4 ON T4.Country = T3.Code WHERE T1.Name = 'Asia' ORDER BY T4.Agriculture DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What form of governance does the least prosperous nation in the world have?",
+        "query": "SELECT T3.Government FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country INNER JOIN politics AS T3 ON T3.Country = T2.Country WHERE T2.GDP IS NOT NULL ORDER BY T2.GDP ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What year saw the greatest number of organizations created on the European continent?",
+        "query": "SELECT STRFTIME('%Y', T4.Established) FROM continent AS T1 INNER JOIN encompasses AS T2 ON T1.Name = T2.Continent INNER JOIN country AS T3 ON T2.Country = T3.Code INNER JOIN organization AS T4 ON T4.Country = T3.Code WHERE T1.Name = 'Europe' GROUP BY STRFTIME('%Y', T4.Established) ORDER BY COUNT(T4.Name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What other country does the most populated nation in the world share a border with and how long is the border between the two nations?",
+        "query": "SELECT T2.Country2, T2.Length FROM country AS T1 INNER JOIN borders AS T2 ON T1.Code = T2.Country1 INNER JOIN country AS T3 ON T3.Code = T2.Country2 WHERE T1.Name = ( SELECT Name FROM country ORDER BY Population DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the population density of the nation whose capital city is in the Distrito Federal province, and what portion of its gross domestic product is devoted to its industries?",
+        "query": "SELECT T1.Population / T1.Area, T2.Industry FROM country AS T1 INNER JOIN economy AS T2 ON T1.Code = T2.Country WHERE T1.Province = 'Distrito Federal'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Lists all governments with a parliamentary democracy that achieved their independence between 01/01/1950 and 12/31/1999.",
+        "query": "SELECT * FROM politics WHERE STRFTIME('%Y', Independence) BETWEEN '1950' AND '1999' AND Government = 'parliamentary democracy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What percentage of countries became independent during the year 1960?",
+        "query": "SELECT CAST(SUM(CASE WHEN STRFTIME('%Y', Independence) = '1960' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(Country) FROM politics"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "List all deserts that are not between latitudes 30 and 40.",
+        "query": "SELECT Name FROM desert WHERE Latitude < 30 OR Latitude > 40"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "Indicate the coordinates of all the deserts whose area is in more than one country.",
+        "query": "SELECT T1.Latitude, T1.Longitude FROM desert AS T1 INNER JOIN geo_desert AS T2 ON T1.Name = T2.Desert GROUP BY T1.Name, T1.Latitude, T1.Longitude HAVING COUNT(T1.Name) > 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mondial_geo",
+        "question": "What is the provincial capital of the province with a population of less than 80,000 that has the highest average population per area?",
+        "query": "SELECT CapProv FROM province WHERE Population < 80000 ORDER BY Population / Area DESC LIMIT 1"
+    }
+]

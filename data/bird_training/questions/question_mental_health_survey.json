@@ -1,0 +1,302 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many users answered \"No\" to question 19?",
+        "query": "SELECT COUNT(QuestionID) FROM Answer WHERE QuestionID = 19 AND AnswerText LIKE 'No'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "From 2016 to 2019, how many users each year were asked the question 13?",
+        "query": "SELECT SurveyID, COUNT(UserID) FROM Answer WHERE QuestionID = 13 AND SurveyID BETWEEN 2016 AND 2019 GROUP BY SurveyID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many users, between the age 27 to 35, were surveyed in 2018?",
+        "query": "SELECT T1.UserID FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T1.SurveyID = 2018 AND T2.questionid = 1 AND T1.AnswerText BETWEEN '27' AND '35'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "In 2019, how many users in the United States have a family history of mental illness?",
+        "query": "SELECT COUNT(T1.UserID) FROM Answer AS T1 INNER JOIN ( SELECT T2.questionid FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T1.SurveyID = 2019 AND T2.questionid = 6 AND T1.AnswerText LIKE 'Yes' ) AS T2 ON T1.QuestionID = T2.questionid WHERE T1.SurveyID = 2019 AND T2.questionid = 3 AND T1.AnswerText LIKE 'United States'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "Betweeen 2016 to 2019, which year recorded the highest number of people with mental illness?",
+        "query": "SELECT T1.SurveyID FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T1.SurveyID BETWEEN 2016 AND 2019 AND T2.questionid = 34 AND T1.AnswerText LIKE 'Yes' GROUP BY T1.SurveyID ORDER BY COUNT(T1.UserID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many female users were surveyed in the mental health survey for 2017 in the state of Nebraska?",
+        "query": "SELECT COUNT(*) FROM ( SELECT T2.UserID FROM Question AS T1 INNER JOIN Answer AS T2 ON T1.questionid = T2.QuestionID INNER JOIN Survey AS T3 ON T2.SurveyID = T3.SurveyID WHERE T3.Description = 'mental health survey for 2017' AND T1.questionid = 2 AND T2.AnswerText = 'Female' UNION SELECT T2.UserID FROM Question AS T1 INNER JOIN Answer AS T2 ON T1.questionid = T2.QuestionID INNER JOIN Survey AS T3 ON T2.SurveyID = T3.SurveyID WHERE T1.questionid = 4 AND T2.AnswerText = 'Nebraska' AND T3.Description = 'mental health survey for 2017' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many users believed that their productivity is ever affected by a mental health issue overall?",
+        "query": "SELECT COUNT(T1.UserID) FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T2.questionid = 54 AND T1.AnswerText LIKE 'Yes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "What are the ages of the oldest and youngest user that were surveyed? Indicate their user id.",
+        "query": "SELECT MAX(T1.AnswerText), MIN(T1.AnswerText) , ( SELECT T1.UserID FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T2.questionid = 1 ORDER BY T1.AnswerText LIMIT 1 ) AS \"youngest id\" FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T2.questionid = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "Which country have the least number of users being surveyed? Indicate the name of the country. If there are multiple countries having the same number of users, indicate all of their names.",
+        "query": "SELECT T1.AnswerText FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T2.questionid = 3 GROUP BY T1.AnswerText ORDER BY COUNT(T1.UserID) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "What is the average age of the survey respondents in the United States?",
+        "query": "SELECT CAST(SUM(T1.AnswerText) AS REAL) / COUNT(T1.UserID) FROM Answer AS T1 INNER JOIN ( SELECT T1.UserID FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T2.questionid = 3 AND T1.AnswerText = 'United States' ) AS T2 ON T1.UserID = T2.UserID INNER JOIN Question AS T3 ON T1.QuestionID = T3.questionid WHERE T3.questionid = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "What is the percentage of the the users who would bring up a mental health issue with a potential employer in an interview?",
+        "query": "SELECT CAST(SUM(CASE  WHEN T1.AnswerText LIKE 'Yes' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.UserID) FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T2.questionid = 12"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many questions in 2014's survey had more than 200 answers?",
+        "query": "SELECT COUNT(QuestionID) FROM Answer WHERE SurveyID LIKE 2014 GROUP BY QuestionID ORDER BY COUNT(QuestionID) > 200 LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "What is the oldest age of the users in 2014's survey?",
+        "query": "SELECT T2.AnswerText FROM Question AS T1 INNER JOIN Answer AS T2 ON T1.questionid = T2.QuestionID WHERE T1.questiontext = 'What is your age?' AND T2.SurveyID = 2014 ORDER BY T2.AnswerText DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many users answered \"No\" to the question \"Would you bring up a mental health issue with a potential employer in an interview?\" in 2014's survey?",
+        "query": "SELECT COUNT(T2.UserID) FROM Question AS T1 INNER JOIN Answer AS T2 ON T1.questionid = T2.QuestionID WHERE T1.questiontext = 'Would you bring up a mental health issue with a potential employer in an interview?' AND T2.SurveyID = 2014 AND T2.AnswerText LIKE 'NO'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "Please list the IDs of the users who answered \"Yes\" to the question \"Do you think that discussing a physical health issue with your employer would have negative consequences?\" in 2014's survey.",
+        "query": "SELECT T2.UserID FROM Question AS T1 INNER JOIN Answer AS T2 ON T1.questionid = T2.QuestionID WHERE T1.questiontext = 'Do you think that discussing a physical health issue with your employer would have negative consequences?' AND T2.AnswerText LIKE 'Yes' AND T2.SurveyID = 2014"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many users participated in the mental health survey for 2014?",
+        "query": "SELECT COUNT(DISTINCT T1.UserID) FROM Answer AS T1 INNER JOIN Survey AS T2 ON T1.SurveyID = T2.SurveyID WHERE T2.Description = 'mental health survey for 2014'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "Please list all the answers to the question \"Any additional notes or comments\" that are not null in 2014's survey.",
+        "query": "SELECT T2.AnswerText FROM Question AS T1 INNER JOIN Answer AS T2 ON T1.questionid = T2.QuestionID WHERE T1.questiontext = 'Any additional notes or comments' AND T2.SurveyID = 2014 AND T2.AnswerText <> -1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "Please list all the common questions in 2014's survey and 2016's survey.",
+        "query": "SELECT T1.questiontext FROM Question AS T1 INNER JOIN Answer AS T2 ON T1.questionid = T2.QuestionID WHERE T2.SurveyID IN (2014, 2016) GROUP BY T1.questiontext"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many users lived in Canada according to 2018's survey?",
+        "query": "SELECT COUNT(T2.UserID) FROM Question AS T1 INNER JOIN Answer AS T2 ON T1.questionid = T2.QuestionID WHERE T2.SurveyID = 2018 AND T1.questiontext = 'What country do you live in?' AND T2.AnswerText = 'Canada'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "Please list all the questions in the mental health survey for 2014.",
+        "query": "SELECT T2.questiontext FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid INNER JOIN Survey AS T3 ON T1.SurveyID = T3.SurveyID WHERE T3.Description LIKE 'mental health survey for 2014' GROUP BY T2.questiontext"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "According to 2016's survey, what is the number of users with a mental health disorder in the past?",
+        "query": "SELECT COUNT(T2.UserID) FROM Question AS T1 INNER JOIN Answer AS T2 ON T1.questionid = T2.QuestionID WHERE T2.SurveyID = 2016 AND T1.questiontext LIKE 'Have you had a mental health disorder in the past?' AND T2.AnswerText = 'Yes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many users answered \"Yes\" to the question \"Have you had a mental health disorder in the past?\" in 3 consecutive years starting from 2016?",
+        "query": "SELECT COUNT(T2.UserID) FROM Question AS T1 INNER JOIN Answer AS T2 ON T1.questionid = T2.QuestionID WHERE T2.SurveyID IN (2016, 2017, 2018) AND T1.questiontext LIKE 'Have you had a mental health disorder in the past?' AND T2.AnswerText = 'Yes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "What is the average result of the question \"What is your age?\" in 2014's survey?",
+        "query": "SELECT CAST(SUM(T2.AnswerText) AS REAL) / COUNT(T2.UserID) AS \"avg\" FROM Question AS T1 INNER JOIN Answer AS T2 ON T1.questionid = T2.QuestionID WHERE T2.SurveyID = 2014 AND T1.questiontext LIKE 'What is your age?'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "What is the rate of increase of users with a current mental disorder from 2019's survey to 2016's survey?",
+        "query": "SELECT CAST(( SELECT COUNT(T2.UserID) FROM Question AS T1 INNER JOIN Answer AS T2 ON T1.questionid = T2.QuestionID WHERE T2.SurveyID = 2019 AND T1.questiontext LIKE 'Do you currently have a mental health disorder?' AND T2.AnswerText = 'Yes' ) - ( SELECT COUNT(T2.UserID) FROM Question AS T1 INNER JOIN Answer AS T2 ON T1.questionid = T2.QuestionID WHERE T2.SurveyID = 2016 AND T1.questiontext LIKE 'Do you currently have a mental health disorder?' AND T2.AnswerText = 'Yes' ) AS REAL) * 100 / ( SELECT COUNT(T2.UserID) FROM Question AS T1 INNER JOIN Answer AS T2 ON T1.questionid = T2.QuestionID WHERE T2.SurveyID = 2016 AND T1.questiontext LIKE 'Do you currently have a mental health disorder?' AND T2.AnswerText = 'Yes' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "Tell the question ID for \"Would you bring up a physical health issue with a potential employer in an interview?\".",
+        "query": "SELECT questionid FROM Question WHERE questiontext LIKE 'Would you bring up a physical health issue with a potential employer in an interview?'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many users answered the question No.20?",
+        "query": "SELECT MAX(UserID) - MIN(UserID) + 1 FROM Answer WHERE QuestionID = 20"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many questions did user No.5 answer?",
+        "query": "SELECT COUNT(QuestionID) FROM Answer WHERE UserID = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many users participated in the Survey No.2016?",
+        "query": "SELECT COUNT(DISTINCT UserID) FROM Answer WHERE SurveyID LIKE 2016"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "State the number of questions that were asked in the \"mental health survey for 2018\".",
+        "query": "SELECT COUNT(T1.QuestionID) FROM Answer AS T1 INNER JOIN Survey AS T2 ON T1.SurveyID = T2.SurveyID WHERE T2.Description = 'mental health survey for 2018'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "Tell the number of surveys that contained the question \u201cWhat country do you work in?\u201d.",
+        "query": "SELECT COUNT(DISTINCT T1.QuestionID) FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid INNER JOIN Survey AS T3 ON T1.SurveyID = T3.SurveyID WHERE T2.questiontext = 'What country do you work in?'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "What answer did user No. 2681 give to the question \"Do you currently have a mental health disorder?\"?",
+        "query": "SELECT T1.AnswerText FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T2.questiontext = 'Do you currently have a mental health disorder?' AND T1.UserID = 2681"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "Provide the number of users who took part in the \"mental health survey for 2016\".",
+        "query": "SELECT COUNT(DISTINCT T1.UserID) FROM Answer AS T1 INNER JOIN Survey AS T2 ON T1.SurveyID = T2.SurveyID WHERE T2.Description = 'mental health survey for 2016'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "What was the most common answer for the question \"What country do you work in?\"?",
+        "query": "SELECT T1.AnswerText FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T2.questiontext = 'What country do you work in?' GROUP BY T1.AnswerText ORDER BY COUNT(T1.AnswerText) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many different answers did the question \"Describe the conversation you had with your previous employer about your mental health, including their reactions and actions taken to address your mental health issue/questions.\" get?",
+        "query": "SELECT COUNT(DISTINCT T1.AnswerText) FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T2.questiontext LIKE 'Describe the conversation you had with your previous employer about your mental health, including their reactions and actions taken to address your mental health issue/questions.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "For the question \u201cWhat US state or territory do you work in?\u201d, how many people gave \"Kansas\" as the answer?",
+        "query": "SELECT COUNT(T1.UserID) FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T2.questiontext LIKE 'What US state or territory do you work in?' AND T1.AnswerText = 'Kansas'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many people wrote comments for the question \"Any additional notes or comments.\"?",
+        "query": "SELECT COUNT(T1.UserID) FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T2.questiontext LIKE 'Any additional notes or comments' AND T1.AnswerText IS NOT NULL"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "For all the users who have been asked \"Have you ever been diagnosed with a mental health disorder?\", how many of them said \"Yes\"?",
+        "query": "SELECT COUNT(T1.UserID) FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T2.questiontext LIKE 'Have you ever been diagnosed with a mental health disorder?' AND T1.AnswerText = 'Yes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "Give the number of users who took the \"mental health survey for 2018\".",
+        "query": "SELECT COUNT(DISTINCT T1.UserID) FROM Answer AS T1 INNER JOIN Survey AS T2 ON T1.SurveyID = T2.SurveyID WHERE T2.Description = 'mental health survey for 2018'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many users answered the question \"Overall, how much importance does your employer place on physical health?\"?",
+        "query": "SELECT COUNT(T1.UserID) FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T2.questiontext LIKE 'Overall, how much importance does your employer place on physical health?'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "For which question did the user No.2183 gave the answer \"Mood Disorder (Depression, Bipolar Disorder, etc)\"?",
+        "query": "SELECT T1.AnswerText FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T2.questionid = 2183 AND T1.AnswerText = 'Mood Disorder (Depression, Bipolar Disorder, etc)'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "What was the percentage for the answer of \"Yes\" was given to the question \"Has your employer ever formally discussed mental health (for example, as part of a wellness campaign or other official communication)?\"?",
+        "query": "SELECT CAST(SUM(CASE  WHEN T1.AnswerText LIKE 'Yes' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.UserID) FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T2.questiontext LIKE 'Has your employer ever formally discussed mental health (for example, as part of a wellness campaign or other official communication)?'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many times more for the number of users who took the \"mental health survey for 2017\" than \"mental health survey for 2018\"?",
+        "query": "SELECT CAST(COUNT(T1.UserID) AS REAL) / ( SELECT COUNT(T1.UserID) FROM Answer AS T1 INNER JOIN Survey AS T2 ON T1.SurveyID = T2.SurveyID WHERE T2.Description = 'mental health survey for 2018' ) FROM Answer AS T1 INNER JOIN Survey AS T2 ON T1.SurveyID = T2.SurveyID WHERE T2.Description = 'mental health survey for 2017'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "Among respondents who participated in the survey in 2016, what percentage had a mental health disorder in the past?",
+        "query": "SELECT CAST(SUM(CASE  WHEN T1.AnswerText LIKE 'Yes' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.SurveyID) FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T1.QuestionID = 32 AND T1.SurveyID = 2016"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many respondents younger than 25 years old did participate in the survey in 2016?",
+        "query": "SELECT COUNT(DISTINCT T1.UserID) FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T1.QuestionID = 1 AND T1.SurveyID = 2016 AND T1.AnswerText <= 25"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "What is the average number of respondents per survey between 2014 and 2019?",
+        "query": "SELECT CAST(COUNT(SurveyID) AS REAL) / 5 FROM Answer WHERE SurveyID BETWEEN 2014 AND 2019"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many respondents who participated in the survey in 2019 have ever sought treatment for a mental health disorder from a mental health professional?",
+        "query": "SELECT COUNT(T1.UserID) FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T1.QuestionID = 7 AND T1.SurveyID = 2019 AND T1.AnswerText = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many respondents who participated in the survey in 2014 work remotely at least 50% of the time?",
+        "query": "SELECT COUNT(T1.AnswerText) FROM Answer AS T1 INNER JOIN Question AS T2 ON T1.QuestionID = T2.questionid WHERE T1.QuestionID = 93 AND T1.SurveyID = 2014 AND T1.AnswerText = 'Yes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many questions were asked in the questionary for the mental health survey?",
+        "query": "SELECT COUNT(questiontext) FROM Question"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "How many respondents of the mental health survey were diagnosed with 'Substance Use Disorder'?",
+        "query": "SELECT COUNT(AnswerText) FROM Answer WHERE AnswerText LIKE 'Substance Use Disorder'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "mental_health_survey",
+        "question": "List the top three popular responses to the question of the survey in 2017 with the question ID no.85.",
+        "query": "SELECT AnswerText FROM Answer WHERE QuestionID = 85 AND SurveyID = 2017 GROUP BY AnswerText ORDER BY COUNT(AnswerText) DESC LIMIT 3"
+    }
+]

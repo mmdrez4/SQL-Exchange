@@ -1,0 +1,104 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "How many camera lenses have a focal length longer than 15 mm?",
+        "query": "SELECT count(*) FROM camera_lens WHERE focal_length_mm  >  15"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "Find the brand and name for each camera lens, and sort in descending order of maximum aperture.",
+        "query": "SELECT brand ,  name FROM camera_lens ORDER BY max_aperture DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "List the id, color scheme, and name for all the photos.",
+        "query": "SELECT id ,  color ,  name FROM photos"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "What are the maximum and average height of the mountains?",
+        "query": "SELECT max(height) ,  avg(height) FROM mountain"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "What are the average prominence of the mountains in country 'Morocco'?",
+        "query": "SELECT avg(prominence) FROM mountain WHERE country  =  'Morocco'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "What are the name, height and prominence of mountains which do not belong to the range 'Aberdare Range'?",
+        "query": "SELECT name ,  height ,  prominence FROM mountain WHERE range != 'Aberdare Range'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "What are the id and name of the photos for mountains?",
+        "query": "SELECT T1.id ,  T1.name FROM mountain AS T1 JOIN photos AS T2 ON T1.id  =  T2.mountain_id WHERE T1.height  >  4000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "What are the id and name of the mountains that have at least 2 photos?",
+        "query": "SELECT T1.id ,  T1.name FROM mountain AS T1 JOIN photos AS T2 ON T1.id  =  T2.mountain_id GROUP BY T1.id HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "What are the names of the cameras that have taken picture of the most mountains?",
+        "query": "SELECT T2.name FROM photos AS T1 JOIN camera_lens AS T2 ON T1.camera_lens_id  =  T2.id GROUP BY T2.id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "What are the names of photos taken with the lens brand 'Sigma' or 'Olympus'?",
+        "query": "SELECT T1.name FROM camera_lens AS T1 JOIN photos AS T2 ON T2.camera_lens_id  =  T1.id WHERE T1.brand  =  'Sigma' OR T1.brand  =  'Olympus'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "How many different kinds of lens brands are there?",
+        "query": "SELECT count(DISTINCT brand) FROM camera_lens"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "How many camera lenses are not used in taking any photos?",
+        "query": "SELECT count(*) FROM camera_lens WHERE id NOT IN ( SELECT camera_lens_id FROM photos )"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "How many distinct kinds of camera lenses are used to take photos of mountains in the country 'Ethiopia'?",
+        "query": "SELECT count(DISTINCT T2.camera_lens_id) FROM mountain AS T1 JOIN photos AS T2 ON T1.id  =  T2.mountain_id WHERE T1.country  =  'Ethiopia'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "List the brands of lenses that took both a picture of mountains with range 'Toubkal Atlas' and a picture of mountains with range 'Lasta Massif'",
+        "query": "SELECT T3.brand FROM mountain AS T1 JOIN photos AS T2 ON T1.id  =  T2.mountain_id JOIN camera_lens AS T3 ON T2.camera_lens_id  =  T3.id WHERE T1.range  =  'Toubkal Atlas' INTERSECT SELECT T3.brand FROM mountain AS T1 JOIN photos AS T2 ON T1.id  =  T2.mountain_id JOIN camera_lens AS T3 ON T2.camera_lens_id  =  T3.id WHERE T1.range  =  'Lasta Massif'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "Show the name and prominence of the mountains whose picture is not taken by a lens of brand 'Sigma'.",
+        "query": "SELECT name ,  prominence FROM mountain EXCEPT SELECT T1.name ,  T1.prominence FROM mountain AS T1 JOIN photos AS T2 ON T1.id  =  T2.mountain_id JOIN camera_lens AS T3 ON T2.camera_lens_id  =  T3.id WHERE T3.brand  =  'Sigma'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "List the camera lens names containing substring \"Digital\".",
+        "query": "SELECT name FROM camera_lens WHERE name LIKE \"%Digital%\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "mountain_photos",
+        "question": "What is the name of each camera lens and the number of photos taken by it? Order the result by the count of photos.",
+        "query": "SELECT T1.name ,  count(*) FROM camera_lens AS T1 JOIN photos AS T2 ON T1.id  =  T2.camera_lens_id GROUP BY T1.id ORDER BY count(*)"
+    }
+]

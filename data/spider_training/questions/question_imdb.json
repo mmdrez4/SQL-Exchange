@@ -1,0 +1,656 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What year is the movie \" The Imitation Game \" from ?",
+        "query": "SELECT release_year FROM movie WHERE title  =  \"The Imitation Game\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What year was the movie \" The Imitation Game \" produced",
+        "query": "SELECT release_year FROM movie WHERE title  =  \"The Imitation Game\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What year was \" Benedict Cumberbatch \" born ?",
+        "query": "SELECT birth_year FROM actor WHERE name  =  \"Benedict Cumberbatch\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "In what year was \" Benedict Cumberbatch \" born",
+        "query": "SELECT birth_year FROM actor WHERE name  =  \"Benedict Cumberbatch\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What is the nationality of the actress \" Christoph Waltz \" ?",
+        "query": "SELECT nationality FROM actor WHERE name  =  \"Christoph Waltz\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What is the nationality of the actor \" Christoph Waltz \" ?",
+        "query": "SELECT nationality FROM actor WHERE name  =  \"Christoph Waltz\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all movies produced in 2015",
+        "query": "SELECT title FROM movie WHERE release_year  =  2015;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all actors born in \" Tehran \"",
+        "query": "SELECT name FROM actor WHERE birth_city  =  \"Tehran\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all actors born in Tehran",
+        "query": "SELECT name FROM actor WHERE birth_city  =  \"Tehran\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Which actors were born in Tehran",
+        "query": "SELECT name FROM actor WHERE birth_city  =  \"Tehran\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all actors who are from Afghanistan",
+        "query": "SELECT name FROM actor WHERE nationality  =  \"Afghanistan\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all actors from Afghanistan",
+        "query": "SELECT name FROM actor WHERE nationality  =  \"Afghanistan\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Give me the name of all the actors from Afghanistan",
+        "query": "SELECT name FROM actor WHERE nationality  =  \"Afghanistan\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all actors who were born in 1984",
+        "query": "SELECT name FROM actor WHERE birth_year  =  1984;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "When was \" Kevin Spacey \" born ?",
+        "query": "SELECT birth_year FROM actor WHERE name  =  \"actor_name0\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "In what year was \" Kevin Spacey \" born ?",
+        "query": "SELECT birth_year FROM actor WHERE name  =  \"actor_name0\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Where is the birth place of \" Kevin Spacey \"",
+        "query": "SELECT birth_city FROM director WHERE name  =  \"director_name0\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "In what city was \" Kevin Spacey \" born ?",
+        "query": "SELECT birth_city FROM director WHERE name  =  \"director_name0\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What is the nationality of \" Kevin Spacey \" ?",
+        "query": "SELECT nationality FROM director WHERE name  =  \"director_name0\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "How much was the budget of \" Finding Nemo \"",
+        "query": "SELECT budget FROM movie WHERE title  =  \"Finding Nemo\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all movies directed by \" Steven Spielberg \" after 2006",
+        "query": "SELECT t3.title FROM director AS t2 JOIN directed_by AS t1 ON t2.did  =  t1.did JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t2.name  =  \"Steven Spielberg\" AND t3.release_year  >  2006;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Who is the director of the movie \" James Bond \" ?",
+        "query": "SELECT t2.name FROM director AS t2 JOIN directed_by AS t1 ON t2.did  =  t1.did JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t3.title  =  \"James Bond\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Who directed the movie \" James Bond \" ?",
+        "query": "SELECT t2.name FROM director AS t2 JOIN directed_by AS t1 ON t2.did  =  t1.did JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t3.title  =  \"James Bond\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "List \" James Bond \" directors",
+        "query": "SELECT t2.name FROM director AS t2 JOIN directed_by AS t1 ON t2.did  =  t1.did JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t3.title  =  \"James Bond\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find the actor who played \" Alan Turing \" in the movie \" The Imitation Game \"",
+        "query": "SELECT t1.name FROM CAST AS t2 JOIN actor AS t1 ON t2.aid  =  t1.aid JOIN movie AS t3 ON t3.mid  =  t2.msid WHERE t2.role  =  \"Alan Turing\" AND t3.title  =  \"The Imitation Game\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Who acted \" Alan Turing \" in the movie \" The Imitation Game \" ?",
+        "query": "SELECT t1.name FROM CAST AS t2 JOIN actor AS t1 ON t2.aid  =  t1.aid JOIN movie AS t3 ON t3.mid  =  t2.msid WHERE t2.role  =  \"Alan Turing\" AND t3.title  =  \"The Imitation Game\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Who was the actor that played \" Alan Turing \" in the movie \" The Imitation Game \" ?",
+        "query": "SELECT t1.name FROM CAST AS t2 JOIN actor AS t1 ON t2.aid  =  t1.aid JOIN movie AS t3 ON t3.mid  =  t2.msid WHERE t2.role  =  \"Alan Turing\" AND t3.title  =  \"The Imitation Game\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Who acts as \" Alan Turing \" in the movie \" The Imitation Game \" ?",
+        "query": "SELECT t1.name FROM CAST AS t2 JOIN actor AS t1 ON t2.aid  =  t1.aid JOIN movie AS t3 ON t3.mid  =  t2.msid WHERE t2.role  =  \"Alan Turing\" AND t3.title  =  \"The Imitation Game\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Who is the actor playing \" Alan Turing \" in \" The Imitation Game \" ?",
+        "query": "SELECT t1.name FROM CAST AS t2 JOIN actor AS t1 ON t2.aid  =  t1.aid JOIN movie AS t3 ON t3.mid  =  t2.msid WHERE t2.role  =  \"Alan Turing\" AND t3.title  =  \"The Imitation Game\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What is the genre of the movie \" Jurassic Park \" ?",
+        "query": "SELECT t2.genre FROM genre AS t2 JOIN classification AS t1 ON t2.gid  =  t1.gid JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t3.title  =  \"Jurassic Park\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Who was the director of the movie Joy from 2015 ?",
+        "query": "SELECT t2.name FROM director AS t2 JOIN directed_by AS t1 ON t2.did  =  t1.did JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t3.release_year  =  2015 AND t3.title  =  \"Joy\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all movies written by \" Matt Damon \"",
+        "query": "SELECT t1.title FROM written_by AS t3 JOIN movie AS t1 ON t3.msid  =  t1.mid JOIN writer AS t2 ON t3.wid  =  t2.wid WHERE t2.name  =  \"Matt Damon\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all movies written and produced by \" Woody Allen \"",
+        "query": "SELECT t2.title FROM movie AS t2 JOIN made_by AS t3 ON t2.mid  =  t3.msid JOIN producer AS t1 ON t1.pid  =  t3.pid JOIN written_by AS t5 ON t5.msid  =  t2.mid JOIN writer AS t4 ON t5.wid  =  t4.wid WHERE t1.name  =  \"Woody Allen\" AND t4.name  =  \"Woody Allen\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all movies featuring \" Robin Wright \"",
+        "query": "SELECT t2.title FROM CAST AS t3 JOIN actor AS t1 ON t3.aid  =  t1.aid JOIN movie AS t2 ON t2.mid  =  t3.msid WHERE t1.name  =  \"Robin Wright\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What are all the movies featuring \" Robin Wright \" ?",
+        "query": "SELECT t2.title FROM CAST AS t3 JOIN actor AS t1 ON t3.aid  =  t1.aid JOIN movie AS t2 ON t2.mid  =  t3.msid WHERE t1.name  =  \"Robin Wright\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all movies in which \" Robin Wright \" appears",
+        "query": "SELECT t2.title FROM CAST AS t3 JOIN actor AS t1 ON t3.aid  =  t1.aid JOIN movie AS t2 ON t2.mid  =  t3.msid WHERE t1.name  =  \"Robin Wright\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What was the budget of the movie Juno from 2007 ?",
+        "query": "SELECT budget FROM movie WHERE release_year  =  2007 AND title  =  \"Juno\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all Sci-Fi produced in year 2010",
+        "query": "SELECT t3.title FROM genre AS t2 JOIN classification AS t1 ON t2.gid  =  t1.gid JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t2.genre  =  \"Sci-Fi\" AND t3.release_year  =  2010;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "List all the Sci-Fi movies which released in 2010",
+        "query": "SELECT t3.title FROM genre AS t2 JOIN classification AS t1 ON t2.gid  =  t1.gid JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t2.genre  =  \"Sci-Fi\" AND t3.release_year  =  2010;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all actors born in \" Austin \" after 1980",
+        "query": "SELECT name FROM actor WHERE birth_city  =  \"Austin\" AND birth_year  >  1980;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Who are the actors born in \" Austin \" after 1980 ?",
+        "query": "SELECT name FROM actor WHERE birth_city  =  \"Austin\" AND birth_year  >  1980;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all actors from Austin born after 1980",
+        "query": "SELECT name FROM actor WHERE birth_city  =  \"Austin\" AND birth_year  >  1980;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all movies by directors born in \" Los Angeles \"",
+        "query": "SELECT t3.title FROM director AS t2 JOIN directed_by AS t1 ON t2.did  =  t1.did JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t2.birth_city  =  \"Los Angeles\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all actors who were born in \" New York City \" in 1984",
+        "query": "SELECT name FROM actor WHERE birth_city  =  \"New York City\" AND birth_year  =  1984;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all movies about nuclear weapons",
+        "query": "SELECT t3.title FROM tags AS t2 JOIN keyword AS t1 ON t2.kid  =  t1.id JOIN movie AS t3 ON t2.msid  =  t3.mid WHERE t1.keyword  =  \"nuclear weapons\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What are the movies related to nuclear weapons",
+        "query": "SELECT t3.title FROM tags AS t2 JOIN keyword AS t1 ON t2.kid  =  t1.id JOIN movie AS t3 ON t2.msid  =  t3.mid WHERE t1.keyword  =  \"nuclear weapons\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Which movies did \" Alfred Hitchcock \" direct ?",
+        "query": "SELECT t3.title FROM director AS t2 JOIN directed_by AS t1 ON t2.did  =  t1.did JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t2.name  =  \"Alfred Hitchcock\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all movies directed by \" Asghar Farhadi \" and featuring \" Taraneh Alidoosti \"",
+        "query": "SELECT t4.title FROM CAST AS t5 JOIN actor AS t1 ON t5.aid  =  t1.aid JOIN movie AS t4 ON t4.mid  =  t5.msid JOIN directed_by AS t2 ON t4.mid  =  t2.msid JOIN director AS t3 ON t3.did  =  t2.did WHERE t1.name  =  \"Taraneh Alidoosti\" AND t3.name  =  \"Asghar Farhadi\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What are all the movies directed by \" Asghar Farhadi \" featuring \" Taraneh Alidoosti \" ?",
+        "query": "SELECT t4.title FROM CAST AS t5 JOIN actor AS t1 ON t5.aid  =  t1.aid JOIN movie AS t4 ON t4.mid  =  t5.msid JOIN directed_by AS t2 ON t4.mid  =  t2.msid JOIN director AS t3 ON t3.did  =  t2.did WHERE t1.name  =  \"Taraneh Alidoosti\" AND t3.name  =  \"Asghar Farhadi\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "How many movies are there that are directed by \" Asghar Farhadi \" and featuring \" Taraneh Alidoosti \" ?",
+        "query": "SELECT t4.title FROM CAST AS t5 JOIN actor AS t1 ON t5.aid  =  t1.aid JOIN movie AS t4 ON t4.mid  =  t5.msid JOIN directed_by AS t2 ON t4.mid  =  t2.msid JOIN director AS t3 ON t3.did  =  t2.did WHERE t1.name  =  \"Taraneh Alidoosti\" AND t3.name  =  \"Asghar Farhadi\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "List all the movies directed by \" Asghar Farhadi \" in which \" Taraneh Alidoosti \" played",
+        "query": "SELECT t4.title FROM CAST AS t5 JOIN actor AS t1 ON t5.aid  =  t1.aid JOIN movie AS t4 ON t4.mid  =  t5.msid JOIN directed_by AS t2 ON t4.mid  =  t2.msid JOIN director AS t3 ON t3.did  =  t2.did WHERE t1.name  =  \"Taraneh Alidoosti\" AND t3.name  =  \"Asghar Farhadi\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What are all the tv series created by \" Shonda Rhimes \" ?",
+        "query": "SELECT t2.title FROM producer AS t1 JOIN made_by AS t3 ON t1.pid  =  t3.pid JOIN tv_series AS t2 ON t2.sid  =  t3.msid WHERE t1.name  =  \"Shonda Rhimes\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Who acts \" Olivia Pope \" in the series Scandal ?",
+        "query": "SELECT t1.name FROM CAST AS t3 JOIN actor AS t1 ON t3.aid  =  t1.aid JOIN tv_series AS t2 ON t2.sid  =  t3.msid WHERE t3.role  =  \"Olivia Pope\" AND t2.title  =  \"Scandal\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Who is the writer of the movie \" The Truman Show \"",
+        "query": "SELECT t2.name FROM written_by AS t3 JOIN movie AS t1 ON t3.msid  =  t1.mid JOIN writer AS t2 ON t3.wid  =  t2.wid WHERE t1.title  =  \"The Truman Show\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Who is the writer of \" The Truman Show \"",
+        "query": "SELECT t2.name FROM written_by AS t3 JOIN movie AS t1 ON t3.msid  =  t1.mid JOIN writer AS t2 ON t3.wid  =  t2.wid WHERE t1.title  =  \"The Truman Show\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What are the series featuring \" Scott Foley \" ?",
+        "query": "SELECT t2.title FROM CAST AS t3 JOIN actor AS t1 ON t3.aid  =  t1.aid JOIN tv_series AS t2 ON t2.sid  =  t3.msid WHERE t1.name  =  \"Scott Foley\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What are the series in which \" Scott Foley \" is an actor ?",
+        "query": "SELECT t2.title FROM CAST AS t3 JOIN actor AS t1 ON t3.aid  =  t1.aid JOIN tv_series AS t2 ON t2.sid  =  t3.msid WHERE t1.name  =  \"Scott Foley\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find the directors of all movies featuring \" Kate Winslet \"",
+        "query": "SELECT t3.name FROM CAST AS t4 JOIN actor AS t1 ON t4.aid  =  t1.aid JOIN movie AS t5 ON t5.mid  =  t4.msid JOIN directed_by AS t2 ON t5.mid  =  t2.msid JOIN director AS t3 ON t3.did  =  t2.did WHERE t1.name  =  \"Kate Winslet\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find the producers of all movies in which \" Kate Winslet \" is an actor",
+        "query": "SELECT t1.name FROM CAST AS t3 JOIN actor AS t2 ON t3.aid  =  t2.aid JOIN movie AS t5 ON t5.mid  =  t3.msid JOIN made_by AS t4 ON t5.mid  =  t4.msid JOIN producer AS t1 ON t1.pid  =  t4.pid WHERE t2.name  =  \"Kate Winslet\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Who is the director of the tv series \" House of Cards \" from 2013 ?",
+        "query": "SELECT t2.name FROM director AS t2 JOIN directed_by AS t1 ON t2.did  =  t1.did JOIN tv_series AS t3 ON t3.sid  =  t1.msid WHERE t3.release_year  =  2013 AND t3.title  =  \"House of Cards\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all the female actors from Austin",
+        "query": "SELECT name FROM actor WHERE birth_city  =  \"Austin\" AND gender  =  \"female\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all actors from Italy born after 1980",
+        "query": "SELECT name FROM actor WHERE birth_year  >  1980 AND nationality  =  \"Italy\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all the female actors born in \" New York City \" after 1980",
+        "query": "SELECT name FROM actor WHERE birth_city  =  \"New York City\" AND birth_year  >  1980 AND gender  =  \"female\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all the female actors in the movie \" Saving Private Ryan \"",
+        "query": "SELECT t1.name FROM CAST AS t2 JOIN actor AS t1 ON t2.aid  =  t1.aid JOIN movie AS t3 ON t3.mid  =  t2.msid WHERE t1.gender  =  \"female\" AND t3.title  =  \"Saving Private Ryan\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all the directors who are from Afghanistan",
+        "query": "SELECT name FROM director WHERE nationality  =  \"Afghanistan\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find the actors who played in the movie \" Camp X-Ray \"",
+        "query": "SELECT t1.name FROM CAST AS t2 JOIN actor AS t1 ON t2.aid  =  t1.aid JOIN movie AS t3 ON t3.mid  =  t2.msid WHERE t3.title  =  \"Camp X-Ray\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all actors from Canada who acted in \" James Bond \" movies",
+        "query": "SELECT t1.name FROM CAST AS t2 JOIN actor AS t1 ON t2.aid  =  t1.aid JOIN movie AS t3 ON t3.mid  =  t2.msid WHERE t1.nationality  =  \"Canada\" AND t3.title  =  \"James Bond\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "find all films in which \" Rowan Atkinson \" acted as \" Mr. Bean \"",
+        "query": "SELECT t2.title FROM CAST AS t3 JOIN actor AS t1 ON t3.aid  =  t1.aid JOIN movie AS t2 ON t2.mid  =  t3.msid WHERE t1.name  =  \"Rowan Atkinson\" AND t3.role  =  \"Mr. Bean\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "where is the director of \" The Past \" from",
+        "query": "SELECT t2.birth_city FROM director AS t2 JOIN directed_by AS t1 ON t2.did  =  t1.did JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t3.title  =  \"The Past\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "who acted the role of \" Mr. Bean \"",
+        "query": "SELECT t1.name FROM CAST AS t2 JOIN actor AS t1 ON t2.aid  =  t1.aid WHERE t2.role  =  \"Mr. Bean\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "what are the genres of movies directed by \" Asghar Farhadi \"",
+        "query": "SELECT t3.genre FROM director AS t5 JOIN directed_by AS t2 ON t5.did  =  t2.did JOIN movie AS t4 ON t4.mid  =  t2.msid JOIN classification AS t1 ON t4.mid  =  t1.msid JOIN genre AS t3 ON t3.gid  =  t1.gid WHERE t5.name  =  \"Asghar Farhadi\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Which movie had the character \" Daffy Duck \"",
+        "query": "SELECT t1.title FROM movie AS t1 JOIN CAST AS t2 ON t1.mid  =  t2.msid WHERE t2.role  =  \"Daffy Duck\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What are the major roles in the movie \" Daddy Long Legs \"",
+        "query": "SELECT t2.role FROM CAST AS t2 JOIN actor AS t1 ON t2.aid  =  t1.aid JOIN movie AS t3 ON t3.mid  =  t2.msid WHERE t3.title  =  \"Daddy Long Legs\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "List all the directors of movies about nuclear weapons",
+        "query": "SELECT t3.name FROM director AS t3 JOIN directed_by AS t2 ON t3.did  =  t2.did JOIN movie AS t4 ON t4.mid  =  t2.msid JOIN tags AS t5 ON t5.msid  =  t4.mid JOIN keyword AS t1 ON t5.kid  =  t1.id WHERE t1.keyword  =  \"nuclear weapons\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What is the number of movies in which \" Jennifer Aniston \" acted after 2010 ?",
+        "query": "SELECT COUNT ( DISTINCT t2.title  ) FROM CAST AS t3 JOIN actor AS t1 ON t3.aid  =  t1.aid JOIN movie AS t2 ON t2.mid  =  t3.msid WHERE t1.name  =  \"Jennifer Aniston\" AND t2.release_year  >  2010;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What is the number of actors in the movie \" Saving Private Ryan \" ?",
+        "query": "SELECT COUNT ( DISTINCT t1.name  ) FROM CAST AS t2 JOIN actor AS t1 ON t2.aid  =  t1.aid JOIN movie AS t3 ON t3.mid  =  t2.msid WHERE t3.title  =  \"Saving Private Ryan\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "How many actors are in the movie \" Saving Private Ryan \" ?",
+        "query": "SELECT COUNT ( DISTINCT t1.name  ) FROM CAST AS t2 JOIN actor AS t1 ON t2.aid  =  t1.aid JOIN movie AS t3 ON t3.mid  =  t2.msid WHERE t3.title  =  \"Saving Private Ryan\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "How many movies did \" Steven Spielberg \" direct ?",
+        "query": "SELECT COUNT ( DISTINCT t3.title  ) FROM director AS t2 JOIN directed_by AS t1 ON t2.did  =  t1.did JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t2.name  =  \"Steven Spielberg\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "How many movies were produced in the year 2013 ?",
+        "query": "SELECT COUNT ( DISTINCT title  ) FROM movie WHERE release_year  =  2013;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What is the number of movies produced in 2013 ?",
+        "query": "SELECT COUNT ( DISTINCT title  ) FROM movie WHERE release_year  =  2013;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What is the number of movies directed by \" Woody Allen \" per year ?",
+        "query": "SELECT COUNT ( DISTINCT t3.title  )  ,  t3.release_year FROM director AS t2 JOIN directed_by AS t1 ON t2.did  =  t1.did JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t2.name  =  \"Woody Allen\" GROUP BY t3.release_year;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "How many movies did \" Shahab Hosseini \" act in ?",
+        "query": "SELECT COUNT ( DISTINCT t2.title  ) FROM CAST AS t3 JOIN actor AS t1 ON t3.aid  =  t1.aid JOIN movie AS t2 ON t2.mid  =  t3.msid WHERE t1.name  =  \"Shahab Hosseini\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What is the number of movies in which \" Shahab Hosseini \" acted ?",
+        "query": "SELECT COUNT ( DISTINCT t2.title  ) FROM CAST AS t3 JOIN actor AS t1 ON t3.aid  =  t1.aid JOIN movie AS t2 ON t2.mid  =  t3.msid WHERE t1.name  =  \"Shahab Hosseini\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What is the number of movies featuring \" Shahab Hosseini \" ?",
+        "query": "SELECT COUNT ( DISTINCT t2.title  ) FROM CAST AS t3 JOIN actor AS t1 ON t3.aid  =  t1.aid JOIN movie AS t2 ON t2.mid  =  t3.msid WHERE t1.name  =  \"Shahab Hosseini\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "How many movies did \" Shahab Hosseini \" act in",
+        "query": "SELECT COUNT ( DISTINCT t2.title  ) FROM CAST AS t3 JOIN actor AS t1 ON t3.aid  =  t1.aid JOIN movie AS t2 ON t2.mid  =  t3.msid WHERE t1.name  =  \"Shahab Hosseini\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "How many actors were born in \" Los Angeles \" after 2000 ?",
+        "query": "SELECT COUNT ( DISTINCT name  ) FROM actor WHERE birth_city  =  \"Los Angeles\" AND birth_year  >  2000;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "How many movies did \" Humphrey Bogart \" act in before 1942 ?",
+        "query": "SELECT COUNT ( DISTINCT t2.title  ) FROM CAST AS t3 JOIN actor AS t1 ON t3.aid  =  t1.aid JOIN movie AS t2 ON t2.mid  =  t3.msid WHERE t1.name  =  \"Humphrey Bogart\" AND t2.release_year  <  1942;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What is the number of movies that \" Brad Pitt \" acts in per year ?",
+        "query": "SELECT COUNT ( DISTINCT t2.title  )  ,  t2.release_year FROM CAST AS t3 JOIN actor AS t1 ON t3.aid  =  t1.aid JOIN movie AS t2 ON t2.mid  =  t3.msid WHERE t1.name  =  \"Brad Pitt\" GROUP BY t2.release_year;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "How many movies about Iraq war were produced in 2015 ?",
+        "query": "SELECT COUNT ( DISTINCT t3.title  ) FROM tags AS t2 JOIN keyword AS t1 ON t2.kid  =  t1.id JOIN movie AS t3 ON t2.msid  =  t3.mid WHERE t1.keyword  =  \"Iraq war\" AND t3.release_year  =  2015;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "How many movies about Persians were released after 1990 ?",
+        "query": "SELECT COUNT ( DISTINCT t3.title  ) FROM tags AS t2 JOIN keyword AS t1 ON t2.kid  =  t1.id JOIN movie AS t3 ON t2.msid  =  t3.mid WHERE t1.keyword  =  \"Persians\" AND t3.release_year  >  1990;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "How many movies did \" Quentin Tarantino \" direct after 2010 ?",
+        "query": "SELECT COUNT ( DISTINCT t3.title  ) FROM director AS t2 JOIN directed_by AS t1 ON t2.did  =  t1.did JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t2.name  =  \"Quentin Tarantino\" AND t3.release_year  >  2010;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "How many movies did \" Quentin Tarantino \" direct before 2010 ?",
+        "query": "SELECT COUNT ( DISTINCT t3.title  ) FROM director AS t2 JOIN directed_by AS t1 ON t2.did  =  t1.did JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t2.name  =  \"Quentin Tarantino\" AND t3.release_year  <  2010;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "How many movies did \" Quentin Tarantino \" direct before 2002 and after 2010 ?",
+        "query": "SELECT COUNT ( DISTINCT t4.title  ) FROM director AS t3 JOIN directed_by AS t2 ON t3.did  =  t2.did JOIN movie AS t4 ON t4.mid  =  t2.msid JOIN made_by AS t5 ON t4.mid  =  t5.msid JOIN producer AS t1 ON t1.pid  =  t5.pid WHERE t3.name  =  \"Quentin Tarantino\" AND t4.release_year  <  2010 AND t4.release_year  >  2002;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "How many female actors were born in \" New York City \" after 1980 ?",
+        "query": "SELECT COUNT ( DISTINCT name  ) FROM actor WHERE birth_city  =  \"New York City\" AND birth_year  >  1980 AND gender  =  \"female\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "find the number of actors from Iran who played in \" Jim Jarmusch \" movies",
+        "query": "SELECT COUNT ( DISTINCT t1.name  ) FROM CAST AS t4 JOIN actor AS t1 ON t4.aid  =  t1.aid JOIN movie AS t5 ON t5.mid  =  t4.msid JOIN directed_by AS t2 ON t5.mid  =  t2.msid JOIN director AS t3 ON t3.did  =  t2.did WHERE t1.nationality  =  \"Iran\" AND t3.name  =  \"Jim Jarmusch\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "How many actors from China have acted in \" Rush Hour 3 \"",
+        "query": "SELECT COUNT ( DISTINCT t1.name  ) FROM CAST AS t2 JOIN actor AS t1 ON t2.aid  =  t1.aid JOIN movie AS t3 ON t3.mid  =  t2.msid WHERE t1.nationality  =  \"China\" AND t3.title  =  \"Rush Hour 3\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all movies that star both \" Woody Strode \" and \" Jason Robards \"",
+        "query": "SELECT t4.title FROM CAST AS t5 JOIN actor AS t1 ON t5.aid  =  t1.aid JOIN movie AS t4 ON t4.mid  =  t5.msid JOIN CAST AS t3 ON t4.mid  =  t3.msid JOIN actor AS t2 ON t3.aid  =  t2.aid WHERE t1.name  =  \"Woody Strode\" AND t2.name  =  \"Jason Robards\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all movies featuring \" Woody Strode \" and \" Jason Robards \"",
+        "query": "SELECT t4.title FROM CAST AS t5 JOIN actor AS t1 ON t5.aid  =  t1.aid JOIN movie AS t4 ON t4.mid  =  t5.msid JOIN CAST AS t3 ON t4.mid  =  t3.msid JOIN actor AS t2 ON t3.aid  =  t2.aid WHERE t1.name  =  \"Woody Strode\" AND t2.name  =  \"Jason Robards\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all movies featuring both \" Woody Strode \" and \" Jason Robards \"",
+        "query": "SELECT t4.title FROM CAST AS t5 JOIN actor AS t1 ON t5.aid  =  t1.aid JOIN movie AS t4 ON t4.mid  =  t5.msid JOIN CAST AS t3 ON t4.mid  =  t3.msid JOIN actor AS t2 ON t3.aid  =  t2.aid WHERE t1.name  =  \"Woody Strode\" AND t2.name  =  \"Jason Robards\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all movies featuring \" Jason Robards \" and \" Woody Strode \"",
+        "query": "SELECT t4.title FROM CAST AS t5 JOIN actor AS t1 ON t5.aid  =  t1.aid JOIN movie AS t4 ON t4.mid  =  t5.msid JOIN CAST AS t3 ON t4.mid  =  t3.msid JOIN actor AS t2 ON t3.aid  =  t2.aid WHERE t1.name  =  \"Woody Strode\" AND t2.name  =  \"Jason Robards\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find all actors who acted in the same movie as \" Tom Hanks \"",
+        "query": "SELECT t1.name FROM CAST AS t4 JOIN actor AS t1 ON t4.aid  =  t1.aid JOIN movie AS t5 ON t5.mid  =  t4.msid JOIN CAST AS t3 ON t5.mid  =  t3.msid JOIN actor AS t2 ON t3.aid  =  t2.aid WHERE t2.name  =  \"Tom Hanks\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What movies have the same director as the movie \" Revolutionary Road \" ?",
+        "query": "SELECT t3.title FROM director AS t5 JOIN directed_by AS t2 ON t5.did  =  t2.did JOIN directed_by AS t1 ON t5.did  =  t1.did JOIN movie AS t4 ON t4.mid  =  t2.msid JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t4.title  =  \"Revolutionary Road\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find the movie which is classified in the most number of genres",
+        "query": "SELECT t3.title FROM genre AS t2 JOIN classification AS t1 ON t2.gid  =  t1.gid JOIN movie AS t3 ON t3.mid  =  t1.msid GROUP BY t3.title ORDER BY COUNT ( DISTINCT t2.genre  ) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "which movie has the most number of actors from China ?",
+        "query": "SELECT t2.title FROM CAST AS t3 JOIN actor AS t1 ON t3.aid  =  t1.aid JOIN movie AS t2 ON t2.mid  =  t3.msid WHERE t1.nationality  =  \"China\" GROUP BY t2.title ORDER BY COUNT ( DISTINCT t1.name  ) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find the actors who played in the latest movie by \" Quentin Tarantino \"",
+        "query": "SELECT t1.name FROM CAST AS t4 JOIN actor AS t1 ON t4.aid  =  t1.aid JOIN movie AS t5 ON t5.mid  =  t4.msid JOIN directed_by AS t2 ON t5.mid  =  t2.msid JOIN director AS t3 ON t3.did  =  t2.did WHERE t3.name  =  \"Quentin Tarantino\" ORDER BY t5.release_year DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find the name and budget of the latest movie by \" Quentin Tarantino \"",
+        "query": "SELECT t3.budget  ,  t3.title FROM director AS t2 JOIN directed_by AS t1 ON t2.did  =  t1.did JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t2.name  =  \"Quentin Tarantino\" ORDER BY t3.release_year DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "What is the latest movie by \" Jim Jarmusch \"",
+        "query": "SELECT t3.title FROM director AS t2 JOIN directed_by AS t1 ON t2.did  =  t1.did JOIN movie AS t3 ON t3.mid  =  t1.msid WHERE t2.name  =  \"Jim Jarmusch\" ORDER BY t3.release_year DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Which producer has worked with the most number of directors ?",
+        "query": "SELECT t1.name FROM director AS t3 JOIN directed_by AS t2 ON t3.did  =  t2.did JOIN movie AS t4 ON t4.mid  =  t2.msid JOIN made_by AS t5 ON t4.mid  =  t5.msid JOIN producer AS t1 ON t1.pid  =  t5.pid GROUP BY t1.name ORDER BY COUNT ( DISTINCT t3.name  ) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "imdb",
+        "question": "Find the latest movie which \" Gabriele Ferzetti \" acted in",
+        "query": "SELECT t1.name FROM CAST AS t2 JOIN actor AS t1 ON t2.aid  =  t1.aid JOIN movie AS t3 ON t3.mid  =  t2.msid WHERE t1.name  =  \"Gabriele Ferzetti\" ORDER BY t3.release_year DESC LIMIT 1;"
+    }
+]

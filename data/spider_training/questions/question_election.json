@@ -1,0 +1,410 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "How many counties are there in total?",
+        "query": "SELECT count(*) FROM county"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Count the total number of counties.",
+        "query": "SELECT count(*) FROM county"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the county name and population of all counties.",
+        "query": "SELECT County_name ,  Population FROM county"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "What are the name and population of each county?",
+        "query": "SELECT County_name ,  Population FROM county"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the average population of all counties.",
+        "query": "SELECT avg(Population) FROM county"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "On average how large is the population of the counties?",
+        "query": "SELECT avg(Population) FROM county"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Return the maximum and minimum population among all counties.",
+        "query": "SELECT max(Population) ,  min(Population) FROM county"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "What are the maximum and minimum population of the counties?",
+        "query": "SELECT max(Population) ,  min(Population) FROM county"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show all the distinct districts for elections.",
+        "query": "SELECT DISTINCT District FROM election"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "What are the distinct districts for elections?",
+        "query": "SELECT DISTINCT District FROM election"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the zip code of the county with name \"Howard\".",
+        "query": "SELECT Zip_code FROM county WHERE County_name  =  \"Howard\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "What is the zip code the county named \"Howard\" is located in?",
+        "query": "SELECT Zip_code FROM county WHERE County_name  =  \"Howard\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the delegate from district 1 in election.",
+        "query": "SELECT Delegate FROM election WHERE District  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Who is the delegate of district 1 in the elections?",
+        "query": "SELECT Delegate FROM election WHERE District  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the delegate and committee information of elections.",
+        "query": "SELECT Delegate ,  Committee FROM election"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "What are the delegate and committee information for each election record?",
+        "query": "SELECT Delegate ,  Committee FROM election"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "How many distinct governors are there?",
+        "query": "SELECT count(DISTINCT Governor) FROM party"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Count the number of distinct governors.",
+        "query": "SELECT count(DISTINCT Governor) FROM party"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the lieutenant governor and comptroller from the democratic party.",
+        "query": "SELECT Lieutenant_Governor ,  Comptroller FROM party WHERE Party  =  \"Democratic\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Who are the lieutenant governor and comptroller from the democratic party?",
+        "query": "SELECT Lieutenant_Governor ,  Comptroller FROM party WHERE Party  =  \"Democratic\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "In which distinct years was the governor \"Eliot Spitzer\"?",
+        "query": "SELECT DISTINCT YEAR FROM party WHERE Governor  =  \"Eliot Spitzer\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Find the distinct years when the governor was named \"Eliot Spitzer\".",
+        "query": "SELECT DISTINCT YEAR FROM party WHERE Governor  =  \"Eliot Spitzer\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show all the information about election.",
+        "query": "SELECT * FROM election"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Return all the information for each election record.",
+        "query": "SELECT * FROM election"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the delegates and the names of county they belong to.",
+        "query": "SELECT T2.Delegate ,  T1.County_name FROM county AS T1 JOIN election AS T2 ON T1.County_id  =  T2.District"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "What are the delegate and name of the county they belong to, for each county?",
+        "query": "SELECT T2.Delegate ,  T1.County_name FROM county AS T1 JOIN election AS T2 ON T1.County_id  =  T2.District"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Which delegates are from counties with population smaller than 100000?",
+        "query": "SELECT T2.Delegate FROM county AS T1 JOIN election AS T2 ON T1.County_id  =  T2.District WHERE T1.Population  <  100000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Find the delegates who are from counties with population below 100000.",
+        "query": "SELECT T2.Delegate FROM county AS T1 JOIN election AS T2 ON T1.County_id  =  T2.District WHERE T1.Population  <  100000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "How many distinct delegates are from counties with population larger than 50000?",
+        "query": "SELECT count(DISTINCT T2.Delegate) FROM county AS T1 JOIN election AS T2 ON T1.County_id  =  T2.District WHERE T1.Population  >  50000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Count the number of distinct delegates who are from counties with population above 50000.",
+        "query": "SELECT count(DISTINCT T2.Delegate) FROM county AS T1 JOIN election AS T2 ON T1.County_id  =  T2.District WHERE T1.Population  >  50000"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "What are the names of the county that the delegates on \"Appropriations\" committee belong to?",
+        "query": "SELECT T1.County_name FROM county AS T1 JOIN election AS T2 ON T1.County_id  =  T2.District WHERE T2.Committee  =  \"Appropriations\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Which county do the delegates on \"Appropriations\" committee belong to? Give me the county names.",
+        "query": "SELECT T1.County_name FROM county AS T1 JOIN election AS T2 ON T1.County_id  =  T2.District WHERE T2.Committee  =  \"Appropriations\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the delegates and the names of the party they belong to.",
+        "query": "SELECT T1.Delegate ,  T2.Party FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "For each delegate, find the names of the party they are part of.",
+        "query": "SELECT T1.Delegate ,  T2.Party FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Who were the governors of the parties associated with delegates from district 1?",
+        "query": "SELECT T2.Governor FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID WHERE T1.District  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Find the parties associated with the delegates from district 1. Who served as governors of the parties?",
+        "query": "SELECT T2.Governor FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID WHERE T1.District  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Who were the comptrollers of the parties associated with the delegates from district 1 or district 2?",
+        "query": "SELECT T2.Comptroller FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID WHERE T1.District  =  1 OR T1.District  =  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Find the parties associated with the delegates from district 1 or 2. Who served as comptrollers of the parties?",
+        "query": "SELECT T2.Comptroller FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID WHERE T1.District  =  1 OR T1.District  =  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Return all the committees that have delegates from Democratic party.",
+        "query": "SELECT T1.Committee FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID WHERE T2.Party  =  \"Democratic\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Which committees have delegates from the Democratic party?",
+        "query": "SELECT T1.Committee FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID WHERE T2.Party  =  \"Democratic\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the name of each county along with the corresponding number of delegates from that county.",
+        "query": "SELECT T1.County_name ,  COUNT(*) FROM county AS T1 JOIN election AS T2 ON T1.County_id  =  T2.District GROUP BY T1.County_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "For each county, find the name of the county and the number of delegates from that county.",
+        "query": "SELECT T1.County_name ,  COUNT(*) FROM county AS T1 JOIN election AS T2 ON T1.County_id  =  T2.District GROUP BY T1.County_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the name of each party and the corresponding number of delegates from that party.",
+        "query": "SELECT T2.Party ,  COUNT(*) FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID GROUP BY T1.Party"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "For each party, return the name of the party and the number of delegates from that party.",
+        "query": "SELECT T2.Party ,  COUNT(*) FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID GROUP BY T1.Party"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Return the names of all counties sorted by population in ascending order.",
+        "query": "SELECT County_name FROM county ORDER BY Population ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Sort the names of all counties in ascending order of population.",
+        "query": "SELECT County_name FROM county ORDER BY Population ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Return the names of all counties sorted by county name in descending alphabetical order.",
+        "query": "SELECT County_name FROM county ORDER BY County_name DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Sort the names of all counties in descending alphabetical order.",
+        "query": "SELECT County_name FROM county ORDER BY County_name DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the name of the county with the biggest population.",
+        "query": "SELECT County_name FROM county ORDER BY Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Which county has the largest population? Give me the name of the county.",
+        "query": "SELECT County_name FROM county ORDER BY Population DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the 3 counties with the smallest population.",
+        "query": "SELECT County_name FROM county ORDER BY Population ASC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "What are the 3 counties that have the smallest population? Give me the county names.",
+        "query": "SELECT County_name FROM county ORDER BY Population ASC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the names of counties that have at least two delegates.",
+        "query": "SELECT T1.County_name FROM county AS T1 JOIN election AS T2 ON T1.County_id  =  T2.District GROUP BY T1.County_id HAVING COUNT(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Which counties have two or more delegates? Give me the county names.",
+        "query": "SELECT T1.County_name FROM county AS T1 JOIN election AS T2 ON T1.County_id  =  T2.District GROUP BY T1.County_id HAVING COUNT(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the name of the party that has at least two records.",
+        "query": "SELECT Party FROM party GROUP BY Party HAVING COUNT(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Which party has two or more records?",
+        "query": "SELECT Party FROM party GROUP BY Party HAVING COUNT(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the name of the party that has the most delegates.",
+        "query": "SELECT T2.Party FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID GROUP BY T1.Party ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Which party has the largest number of delegates?",
+        "query": "SELECT T2.Party FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID GROUP BY T1.Party ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the people that have been governor the most times.",
+        "query": "SELECT Governor FROM party GROUP BY Governor ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Which people severed as governor most frequently?",
+        "query": "SELECT Governor FROM party GROUP BY Governor ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Show the people that have been comptroller the most times and the corresponding number of times.",
+        "query": "SELECT Comptroller ,  COUNT(*) FROM party GROUP BY Comptroller ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Which people severed as comptroller most frequently? Give me the name of the person and the frequency count.",
+        "query": "SELECT Comptroller ,  COUNT(*) FROM party GROUP BY Comptroller ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "What are the names of parties that do not have delegates in election?",
+        "query": "SELECT Party FROM party WHERE Party_ID NOT IN (SELECT Party FROM election)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Which parties did not have any delegates in elections?",
+        "query": "SELECT Party FROM party WHERE Party_ID NOT IN (SELECT Party FROM election)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "What are the names of parties that have both delegates on \"Appropriations\" committee and",
+        "query": "SELECT T2.Party FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID WHERE T1.Committee  =  \"Appropriations\" INTERSECT SELECT T2.Party FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID WHERE T1.Committee  =  \"Economic Matters\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Which parties have delegates in both the \"Appropriations\" committee and the \"Economic Matters\" committee?",
+        "query": "SELECT T2.Party FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID WHERE T1.Committee  =  \"Appropriations\" INTERSECT SELECT T2.Party FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID WHERE T1.Committee  =  \"Economic Matters\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Which committees have delegates from both democratic party and liberal party?",
+        "query": "SELECT T1.Committee FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID WHERE T2.Party  =  \"Democratic\" INTERSECT SELECT T1.Committee FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID WHERE T2.Party  =  \"Liberal\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "election",
+        "question": "Find the committees that have delegates both from from the democratic party and the liberal party.",
+        "query": "SELECT T1.Committee FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID WHERE T2.Party  =  \"Democratic\" INTERSECT SELECT T1.Committee FROM election AS T1 JOIN party AS T2 ON T1.Party  =  T2.Party_ID WHERE T2.Party  =  \"Liberal\""
+    }
+]

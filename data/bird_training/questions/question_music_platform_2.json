@@ -1,0 +1,416 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "How many podcasts are there in the category which has the most podcasts?",
+        "query": "SELECT COUNT(podcast_id) FROM categories WHERE category = ( SELECT category FROM categories GROUP BY category ORDER BY COUNT(podcast_id) DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the percentage of the podcast that are categorized in four or more categories?",
+        "query": "SELECT COUNT(T1.podcast_id) FROM ( SELECT podcast_id FROM categories GROUP BY podcast_id HAVING COUNT(category) >= 4 ) AS T1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Provide the itunes id and url for podcast titled 'Brown Suga Diaries'.",
+        "query": "SELECT itunes_id, itunes_url FROM podcasts WHERE title = 'Brown Suga Diaries'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "List all podcast with its itunes url for all title containing the word 'Dream'.",
+        "query": "SELECT itunes_url FROM podcasts WHERE title LIKE '%Dream%' GROUP BY itunes_url"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Name all the categories for podcast titled 'I Heart My Life Show'.",
+        "query": "SELECT T1.category FROM categories AS T1 INNER JOIN podcasts AS T2 ON T2.podcast_id = T1.podcast_id WHERE T2.title = 'I Heart My Life Show'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "List all the podcast title and its itunes url under the 'society-culture' category.",
+        "query": "SELECT T2.title, T2.itunes_url FROM categories AS T1 INNER JOIN podcasts AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.category = 'society-culture'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "How many people rated 5 for the podcast which title contains the word 'spoiler' under the 'art' category '?",
+        "query": "SELECT COUNT(T3.podcast_id) FROM categories AS T1 INNER JOIN podcasts AS T2 ON T2.podcast_id = T1.podcast_id INNER JOIN reviews AS T3 ON T3.podcast_id = T2.podcast_id WHERE T2.title LIKE '%spoilers%' AND T1.category = 'arts' AND T3.rating = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "List the authors who created review for podcast titled 'Pop Rocket' in 2016 with rating less than 5.",
+        "query": "SELECT T2.author_id FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.title = 'Pop Rocket' AND T2.created_at LIKE '2016-%' AND T2.rating < 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Name all the podcast title and its category with average rating of more than 3.0.",
+        "query": "SELECT T2.title, T1.category FROM categories AS T1 INNER JOIN podcasts AS T2 ON T2.podcast_id = T1.podcast_id INNER JOIN reviews AS T3 ON T3.podcast_id = T2.podcast_id GROUP BY T3.podcast_id HAVING AVG(T3.rating) > 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "List all content reviewed for podcast with the best rating under the 'fiction' category. State the podcast title.",
+        "query": "SELECT DISTINCT T2.title FROM categories AS T1 INNER JOIN podcasts AS T2 ON T2.podcast_id = T1.podcast_id INNER JOIN reviews AS T3 ON T3.podcast_id = T2.podcast_id WHERE T3.rating = 5 AND T1.category = 'fiction'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "State the podcast title, content review and rating for all reviews with titled 'Love it!'",
+        "query": "SELECT DISTINCT T1.title, T2.content, T2.rating FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T2.title = 'Love it!'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Find the author, rating and review creation date of review for podcast title 'In The Thick'.",
+        "query": "SELECT T2.author_id, T2.rating, T2.created_at FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.title = 'In The Thick' GROUP BY T2.author_id, T2.rating, T2.created_at"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Which podcast was reviewed the latest? State the date of creation, podcast tile and rating.",
+        "query": "SELECT T1.podcast_id, T2.created_at, T2.title, T2.rating FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id ORDER BY T2.created_at DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Name the podcast title, rating and review content created by '76A4C24B6038145'.",
+        "query": "SELECT T2.title, T2.rating, T2.content FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T2.author_id = '76A4C24B6038145'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "For all reviews with the worst rating, state the podcast title as well as the review title and content.",
+        "query": "SELECT DISTINCT T1.title, T2.title, T2.content FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T2.rating = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "List all reviews created in May 2019. State the title of podcast and review rating.",
+        "query": "SELECT DISTINCT T1.title, T2.rating FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T2.created_at LIKE '2019-05-%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the average rating for the podcast that is most reviewed?",
+        "query": "SELECT AVG(T2.rating) FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id GROUP BY T1.podcast_id ORDER BY COUNT(T2.content) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Which category does the podcast titled 'SciFi Tech Talk' belong to?",
+        "query": "SELECT T1.category FROM categories AS T1 INNER JOIN podcasts AS T2 ON T2.podcast_id = T1.podcast_id WHERE T2.title = 'SciFi Tech Talk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the name of the podcast in which a commentor left a comment with the title 'Long time listener, calling it quits?' Include the URL of the podcast as well.",
+        "query": "SELECT podcast_id, itunes_url FROM podcasts WHERE podcast_id = ( SELECT podcast_id FROM reviews WHERE title = 'Long time listener, calling it quits' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "List all the names of podcasts under the 'true crime' category.",
+        "query": "SELECT T2.title FROM categories AS T1 INNER JOIN podcasts AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.category = 'true-crime'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Write all the review content belonging to StormCast: The Official Warhammer Age of Sigmar Podcast.",
+        "query": "SELECT content FROM reviews WHERE podcast_id = ( SELECT podcast_id FROM podcasts WHERE title = 'StormCast: The Official Warhammer Age of Sigmar Podcast' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Write all the review titles and the contents belonging to the podcast 'More Stupider: A 90-Day Fiance Podcast' with a review rating of 1.",
+        "query": "SELECT title, content FROM reviews WHERE podcast_id = ( SELECT podcast_id FROM podcasts WHERE title = 'More Stupider: A 90-Day Fiance Podcast' ) AND rating = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "How many reviews does 'LifeAfter/The Message' have which were rated below 3?",
+        "query": "SELECT COUNT(T2.rating) FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.title = 'LifeAfter/The Message' AND T2.rating <= 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "The 'More Stupider: A 90-Day Fiance Podcast' belongs to which category and what is the average rating of the podcast?",
+        "query": "SELECT AVG(T3.rating) FROM categories AS T1 INNER JOIN podcasts AS T2 ON T2.podcast_id = T1.podcast_id INNER JOIN reviews AS T3 ON T3.podcast_id = T2.podcast_id WHERE T2.title = 'More Stupider: A 90-Day Fiance Podcast'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Of the arts-books and arts-design categories, which one has more podcasts and what is the numerical difference between them?",
+        "query": "SELECT ( SELECT category FROM categories WHERE category = 'arts-books' OR category = 'arts-design' GROUP BY category ORDER BY COUNT(podcast_id) DESC LIMIT 1 ) \"has more podcasts\" , ( SELECT SUM(CASE WHEN category = 'arts-books' THEN 1 ELSE 0 END) - SUM(CASE WHEN category = 'arts-design' THEN 1 ELSE 0 END) FROM categories ) \"differenct BETWEEN arts-books and arts-design\""
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "How many total reviews runned at in June 2022 were added to the podcasts?",
+        "query": "SELECT SUM(reviews_added) FROM runs WHERE run_at LIKE '2022-06-%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "How many podcast reviews with a rating of 3 were created during the first quarter of 2015?",
+        "query": "SELECT COUNT(podcast_id) FROM reviews WHERE rating = 3 AND created_at BETWEEN '2015-01-01T00:00:00-07:00' AND '2015-03-31T23:59:59-07:00'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Calculate the percentage of podcasts in the fiction-science-fiction category.",
+        "query": "SELECT CAST(SUM(CASE WHEN category = 'fiction-science-fiction' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(podcast_id) OR '%' \"percentage\" FROM categories"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the average rating of all the podcasts with reviews created in 2019?",
+        "query": "SELECT AVG(rating) FROM reviews WHERE created_at BETWEEN '2019-01-01T00:00:00-07:00' AND '2019-12-31T23:59:59-07:00'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the percentage of reviews added each year of the total reviews added?",
+        "query": "SELECT CAST((SUM(CASE WHEN run_at LIKE '2022-%' THEN reviews_added ELSE 0 END) - SUM(CASE WHEN run_at LIKE '2021-%' THEN reviews_added ELSE 0 END)) AS REAL) * 100 / SUM(reviews_added) OR '%' \"percentage\" FROM runs"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Indicates the title of all podcasts in the fiction category.",
+        "query": "SELECT T2.title FROM categories AS T1 INNER JOIN podcasts AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.category = 'fiction'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the rating and category of the podcast entitled Sitcomadon?",
+        "query": "SELECT DISTINCT T3.rating, T1.category FROM categories AS T1 INNER JOIN podcasts AS T2 ON T2.podcast_id = T1.podcast_id INNER JOIN reviews AS T3 ON T3.podcast_id = T2.podcast_id WHERE T2.title = 'Sitcomadon'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Indicate the id of the reviewer whose itunes id is 1516665400.",
+        "query": "SELECT T2.author_id FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.itunes_id = 1516665400"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What are the titles of the podcasts whose reviews were created between 2018-08-22T11:53:16-07:00 and 2018-11-20T11:14:20-07:00?",
+        "query": "SELECT DISTINCT T1.title FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T2.created_at BETWEEN '2018-08-22T11:53:16-07:00' AND '2018-11-20T11:14:20-07:00'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "To which categories do the podcasts of the reviewer whose id is EFB34EAC8E9397C belong?",
+        "query": "SELECT DISTINCT T1.category FROM categories AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T2.author_id = 'EFB34EAC8E9397C'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Indicate the slug and the itunes url of the podcast whose review content was written Can't stop listening.",
+        "query": "SELECT slug, itunes_url FROM podcasts WHERE podcast_id IN ( SELECT podcast_id FROM reviews WHERE content = 'Can''t stop listening' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What dates were the Don't Lie To Your Life Coach podcast reviews created?",
+        "query": "SELECT created_at FROM reviews WHERE podcast_id = ( SELECT podcast_id FROM podcasts WHERE title = 'Don''t Lie To Your Life Coach' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "In how many categories were podcast reviews created in the last six months of 2016? List them.",
+        "query": "SELECT COUNT(DISTINCT T1.category) FROM categories AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T2.created_at BETWEEN '2016-07-01T00:00:00-07:00' AND '2016-12-31T23:59:59-07:00'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Calculate the average rating of the true crime category.",
+        "query": "SELECT AVG(T2.rating) FROM categories AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.category = 'true-crime'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "List the titles of the art category.",
+        "query": "SELECT DISTINCT T2.title FROM categories AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.category = 'arts'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the average rating of all the podcasts in category art?",
+        "query": "SELECT AVG(T2.rating) FROM categories AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.category = 'arts'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Provide the names of podcasts in the art category in 2018.",
+        "query": "SELECT DISTINCT T2.title FROM categories AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.category = 'arts' AND T2.created_at LIKE '2018-%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Write the names of the podcasts in the music category that have a rating greater than 3.",
+        "query": "SELECT DISTINCT T2.title FROM categories AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.category = 'music' AND T2.rating > 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Which titles have the content \"love\" but the category is art produced between 2018 and 2019.",
+        "query": "SELECT DISTINCT T2.title FROM categories AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE (T2.created_at LIKE '2018-%' AND T1.category = 'arts' AND T2.content LIKE '%love%') OR (T2.created_at LIKE '2019-%' AND T1.category = 'arts' AND T2.content LIKE '%love%')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the category and itune url of the title \"Scaling Global\"?",
+        "query": "SELECT T1.category, T2.itunes_url FROM categories AS T1 INNER JOIN podcasts AS T2 ON T2.podcast_id = T1.podcast_id WHERE T2.title = 'Scaling Global'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the average rating of podcasts in comedy category?",
+        "query": "SELECT AVG(T2.rating) FROM categories AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.category = 'comedy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the least common category?",
+        "query": "SELECT category FROM categories GROUP BY category ORDER BY COUNT(podcast_id) ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the longest review?",
+        "query": "SELECT title FROM reviews ORDER BY LENGTH(content) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the review with the title \"Hosts bring the show down\" for?",
+        "query": "SELECT title FROM podcasts WHERE podcast_id = ( SELECT podcast_id FROM reviews WHERE title = 'Hosts bring the show down' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Which \"music\" podcast has the longest title?",
+        "query": "SELECT T2.title FROM categories AS T1 INNER JOIN podcasts AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.category = 'music' ORDER BY LENGTH(T2.title) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "List all the cagetories for all the podcasts with \"jessica\" in the title.",
+        "query": "SELECT category FROM categories WHERE podcast_id IN ( SELECT podcast_id FROM podcasts WHERE title LIKE '%jessica%' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the category for the \"Moist Boys\" podcast?",
+        "query": "SELECT category FROM categories WHERE podcast_id IN ( SELECT podcast_id FROM podcasts WHERE title = 'Moist Boys' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "List all of the two-star reviews and their categories.",
+        "query": "SELECT T1.category FROM categories AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T2.rating = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "List all the podcasts reviewed by a reviewer who has a review titled \"Inspired & On Fire!\".",
+        "query": "SELECT T1.title FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T2.title = 'Inspired & On Fire!'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What are the titles and categories of all the podcasts with a review that has \"Absolutely fantastic\" in it?",
+        "query": "SELECT T2.title, T1.category FROM categories AS T1 INNER JOIN podcasts AS T2 ON T2.podcast_id = T1.podcast_id INNER JOIN reviews AS T3 ON T3.podcast_id = T2.podcast_id WHERE T3.content LIKE '%Absolutely fantastic%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Which category has the most reviews?",
+        "query": "SELECT T1.category FROM categories AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id GROUP BY T1.category ORDER BY COUNT(T2.podcast_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "List the urls for all the \"fiction-science-fiction\" podcasts.",
+        "query": "SELECT itunes_url FROM podcasts WHERE podcast_id IN ( SELECT podcast_id FROM categories WHERE category = 'fiction-science-fiction' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the content of the earliest review for the \"Stuff You Should Know\" podcast?",
+        "query": "SELECT T2.content FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.title = 'Stuff You Should Know' ORDER BY T2.created_at ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "How many reviews does \"Planet Money\" have?",
+        "query": "SELECT COUNT(T2.podcast_id) FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.title = 'Planet Money'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the average rating for the \"crime-junkie\" podcast?",
+        "query": "SELECT AVG(T2.rating) FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.title = 'Crime Junkie'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What percentage of podcasts are \"technology\" podcasts? List all of them.",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.category = 'technology' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.title) OR '%' \"percentage\" FROM categories AS T1 INNER JOIN podcasts AS T2 ON T2.podcast_id = T1.podcast_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the content of the review under the title \"really interesting!\" and is created on 2018-04-24 at 12:05:16?",
+        "query": "SELECT content FROM reviews WHERE title = 'really interesting!' AND created_at = '2018-04-24T12:05:16-07:00'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Which category is the podcast \"Scaling Global\" under?",
+        "query": "SELECT category FROM categories WHERE podcast_id IN ( SELECT podcast_id FROM podcasts WHERE title = 'Scaling Global' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Please list the titles of all the podcasts under the category \"arts-performing-arts\".",
+        "query": "SELECT DISTINCT T2.title FROM categories AS T1 INNER JOIN podcasts AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.category = 'arts-performing-arts'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "How many reviews are created for the podcast \"Scaling Global\" under?",
+        "query": "SELECT COUNT(T2.content) FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.title = 'Scaling Global'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Among the reviews for the podcast \"Please Excuse My Dead Aunt Sally\", how many of them are made in the year 2019?",
+        "query": "SELECT COUNT(T2.created_at) FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.title = 'Please Excuse My Dead Aunt Sally' AND T2.created_at LIKE '2019-%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "Please list the titles of the podcasts for which the author whose ID is F7E5A318989779D has written a review.",
+        "query": "SELECT T2.title FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T2.author_id = 'F7E5A318989779D'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "How many ratings of 5 have been given to the podcast \"Please Excuse My Dead Aunt Sally\"?",
+        "query": "SELECT COUNT(T2.rating) FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.title = 'Please Excuse My Dead Aunt Sally' AND T2.rating = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "music_platform_2",
+        "question": "What is the average rating of the podcast \"Please Excuse My Dead Aunt Sally\"?",
+        "query": "SELECT AVG(T2.rating) FROM podcasts AS T1 INNER JOIN reviews AS T2 ON T2.podcast_id = T1.podcast_id WHERE T1.title = 'Please Excuse My Dead Aunt Sally'"
+    }
+]

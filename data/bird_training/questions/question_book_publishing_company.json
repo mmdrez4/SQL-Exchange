@@ -1,0 +1,440 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Which date has the most ordered quantity? What is the total order quantity on that day?",
+        "query": "SELECT ord_date, SUM(qty) FROM sales GROUP BY ord_date ORDER BY SUM(qty) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "What is the title with the most ordered quantity in year 1992?",
+        "query": "SELECT T2.title FROM sales AS T1 INNER JOIN titles AS T2 ON T1.title_id = T2.title_id WHERE STRFTIME('%Y', T1.ord_date) = '1992' ORDER BY T1.qty DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "List the title, price and publication date for all sales with 'ON invoice' payment terms.",
+        "query": "SELECT T2.title, T2.price, T2.pubdate FROM sales AS T1 INNER JOIN titles AS T2 ON T1.title_id = T2.title_id WHERE T1.payterms = 'ON invoice'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "What is the title that have at least 10% royalty without minimum range amount.",
+        "query": "SELECT T1.title FROM titles AS T1 INNER JOIN roysched AS T2 ON T1.title_id = T2.title_id WHERE T2.lorange = 0 AND T2.royalty >= 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "State the title and royalty percentage for title ID BU2075 between 10000 to 50000 range.",
+        "query": "SELECT T1.title, T2.royalty FROM titles AS T1 INNER JOIN roysched AS T2 ON T1.title_id = T2.title_id WHERE T2.lorange > 10000 AND T2.hirange < 50000 AND T1.title_ID = 'BU2075'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Among the titles with royalty percentage, which title has the greatest royalty percentage. State it's minimum range to enjoy this royalty percentage.",
+        "query": "SELECT T1.title, T2.lorange FROM titles AS T1 INNER JOIN roysched AS T2 ON T1.title_id = T2.title_id ORDER BY T2.royalty DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Provide a list of titles together with its publisher name for all publishers located in the USA.",
+        "query": "SELECT T1.title, T2.pub_name FROM titles AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id WHERE T2.country = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "State the royalty percentage for the most year to date sale title within the 20000 range.",
+        "query": "SELECT MAX(T1.ytd_sales) FROM titles AS T1 INNER JOIN roysched AS T2 ON T1.title_id = T2.title_id WHERE T2.lorange > 20000 AND T2.hirange < 20000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "List all titles published in year 1991. Also provide notes details of the title and the publisher's name.",
+        "query": "SELECT T1.title, T1.notes, T2.pub_name FROM titles AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id WHERE STRFTIME('%Y', T1.pubdate) = '1991'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "List all titles with sales of quantity more than 20 and store located in the CA state.",
+        "query": "SELECT T1.title, T2.qty FROM titles AS T1 INNER JOIN sales AS T2 ON T1.title_id = T2.title_id INNER JOIN stores AS T3 ON T2.stor_id = T3.stor_id WHERE T2.qty > 20 AND T3.state = 'CA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Name the store with the highest quantity in sales? What is the least quantity title from the store's sale?",
+        "query": "SELECT T3.stor_id, T2.title FROM sales AS T1 INNER JOIN titles AS T2 ON T1.title_id = T2.title_id INNER JOIN stores AS T3 ON T3.stor_id = T1.stor_id WHERE T3.stor_id = ( SELECT stor_id FROM sales GROUP BY stor_id ORDER BY SUM(qty) DESC LIMIT 1 ) GROUP BY T3.stor_id, T2.title ORDER BY SUM(T1.qty) ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Name the title and publisher for title ID BU 2075. Provide all the royalty percentage for all ranges.",
+        "query": "SELECT T1.title, T3.pub_name, T2.lorange, T2.hirange, T2.royalty FROM titles AS T1 INNER JOIN roysched AS T2 ON T1.title_id = T2.title_id INNER JOIN publishers AS T3 ON T1.pub_id = T3.pub_id WHERE T1.title_id = 'BU2075'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Name the store with ID 7066 and calculate the percentage of the the quantity ordered that were on 'Net 30' payment terms.",
+        "query": "SELECT T2.stor_name , CAST(SUM(CASE WHEN payterms = 'Net 30' THEN qty ELSE 0 END) AS REAL) * 100 / SUM(qty) FROM sales AS T1 INNER JOIN stores AS T2 ON T1.stor_id = T2.stor_id WHERE T1.stor_id = '7066' GROUP BY T2.stor_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "State the publisher name for publisher ID 877? Calculate its average year to date sales.",
+        "query": "SELECT T2.pub_name, AVG(T1.ytd_sales) FROM titles AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id WHERE T1.pub_id = '0877' GROUP BY T2.pub_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Name all employees who were hired before year 1990.",
+        "query": "SELECT fname, lname FROM employee WHERE STRFTIME('%Y', hire_date) < '1990'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Which employee has the lowest job level. State the first name, last name and when he /she was hired.",
+        "query": "SELECT fname, lname, hire_date FROM employee ORDER BY job_lvl LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "In which year has the most hired employees?",
+        "query": "SELECT STRFTIME('%Y', hire_date) FROM employee GROUP BY STRFTIME('%Y', hire_date) ORDER BY COUNT(emp_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "List all employees who are at the maximum level in their job designation.",
+        "query": "SELECT T1.fname, T1.lname FROM employee AS T1 INNER JOIN jobs AS T2 ON T1.job_id = T2.job_id WHERE T1.job_lvl = T2.max_lvl"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Name the Chief Executive Officer and when he/she was hired.",
+        "query": "SELECT T1.fname, T1.lname, T1.hire_date FROM employee AS T1 INNER JOIN jobs AS T2 ON T1.job_id = T2.job_id WHERE T2.job_desc = 'Chief Financial Officier'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Who are the employees working for publisher not located in USA? State the employee's name and publisher name.",
+        "query": "SELECT T1.fname, T1.lname, T2.pub_name FROM employee AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id WHERE T2.country != 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "List all employees working for publisher 'GGG&G'. State their name and job description.",
+        "query": "SELECT T1.fname, T1.lname, T3.job_desc FROM employee AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id INNER JOIN jobs AS T3 ON T1.job_id = T3.job_id WHERE T2.pub_name = 'GGG&G'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "For each publisher, state the type of titles they published order by the publisher name.",
+        "query": "SELECT DISTINCT T2.pub_name, T1.type FROM titles AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id ORDER BY T2.pub_name"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Name the publisher which has the most titles published in 1991.",
+        "query": "SELECT T2.pub_name FROM titles AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id WHERE STRFTIME('%Y', T1.pubdate) = '1991' GROUP BY T1.pub_id, T2.pub_name ORDER BY COUNT(T1.title_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Name the title with the highest price published by 'Binnet & Hardley'.",
+        "query": "SELECT T1.title FROM titles AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id WHERE T2.pub_name = 'Binnet & Hardley' ORDER BY T1.price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Among all employees, who have job level greater than 200. State the employee name and job description.",
+        "query": "SELECT T1.fname, T1.lname, T2.job_desc FROM employee AS T1 INNER JOIN jobs AS T2 ON T1.job_id = T2.job_id WHERE T1.job_lvl > 200"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Name all the authors for all business titles.",
+        "query": "SELECT T3.au_fname, T3.au_lname FROM titles AS T1 INNER JOIN titleauthor AS T2 ON T1.title_id = T2.title_id INNER JOIN authors AS T3 ON T2.au_id = T3.au_id WHERE T1.type = 'business'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "List all the titles and year to date sales by author who are not on contract.",
+        "query": "SELECT T1.title_id, T1.ytd_sales FROM titles AS T1 INNER JOIN titleauthor AS T2 ON T1.title_id = T2.title_id INNER JOIN authors AS T3 ON T2.au_id = T3.au_id WHERE T3.contract = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "For all authors from CA who are not on contract, which title of his/hers has the most year to date sales.",
+        "query": "SELECT T1.title FROM titles AS T1 INNER JOIN titleauthor AS T2 ON T1.title_id = T2.title_id INNER JOIN authors AS T3 ON T2.au_id = T3.au_id WHERE T3.contract = 0 AND T3.state = 'CA' ORDER BY T1.ytd_sales DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Name all the authors for 'Sushi, Anyone?'.",
+        "query": "SELECT T3.au_fname, T3.au_lname FROM titles AS T1 INNER JOIN titleauthor AS T2 ON T1.title_id = T2.title_id INNER JOIN authors AS T3 ON T2.au_id = T3.au_id WHERE T1.title = 'Sushi, Anyone?'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Calculate the percentage of the employees who are Editor or Designer?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.job_desc IN ('Editor', 'Designer') THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.job_id) FROM employee AS T1 INNER JOIN jobs AS T2 ON T1.job_id = T2.job_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "List all titles which have year to date sales higher than the average order by pubisher name.",
+        "query": "SELECT T1.title FROM titles AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id WHERE T1.ytd_sales > ( SELECT AVG(ytd_sales) FROM titles )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "How many publishers are in the USA?",
+        "query": "SELECT COUNT(pub_id) FROM publishers WHERE country = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "What is the publisher's information of New Moon Books?",
+        "query": "SELECT T1.pr_info FROM pub_info AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id WHERE T2.pub_name = 'New Moon Books'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Please list the first names of the employees who work as Managing Editor.",
+        "query": "SELECT T1.fname FROM employee AS T1 INNER JOIN jobs AS T2 ON T1.job_id = T2.job_id WHERE T2.job_desc = 'Managing Editor'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "What is the highest level of job to get to for the employee who got hired the earliest?",
+        "query": "SELECT T2.max_lvl FROM employee AS T1 INNER JOIN jobs AS T2 ON T1.job_id = T2.job_id ORDER BY T1.hire_date LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "In which city is the store with the highest total sales quantity located?",
+        "query": "SELECT T2.city FROM sales AS T1 INNER JOIN stores AS T2 ON T1.stor_id = T2.stor_id GROUP BY T2.city ORDER BY SUM(T1.qty) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "What is the price of the book that sells the best?",
+        "query": "SELECT T2.price FROM sales AS T1 INNER JOIN titles AS T2 ON T1.title_id = T2.title_id ORDER BY T1.qty DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Please list the stores that ordered the book \"Life Without Fear\".",
+        "query": "SELECT T2.stor_name FROM sales AS T1 INNER JOIN stores AS T2 ON T1.stor_id = T2.stor_id INNER JOIN titles AS T3 ON T1.title_id = T3.title_id WHERE T3.title = 'Life Without Fear'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Among the stores that have ordered the book \"Life Without Fear\", how many of them are located in Massachusetts?",
+        "query": "SELECT COUNT(T1.stor_id) FROM sales AS T1 INNER JOIN stores AS T2 ON T1.stor_id = T2.stor_id INNER JOIN titles AS T3 ON T1.title_id = T3.title_id WHERE T2.state = 'Massachusetts'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "In which country is the publisher of the book \"Life Without Fear\" located?",
+        "query": "SELECT T2.country FROM titles AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id WHERE T1.title = 'Life Without Fear'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "What is the publisher that has published the most expensive book?",
+        "query": "SELECT T2.pub_name FROM titles AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id ORDER BY T1.price DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Among the publishers in the USA, how many of them have published books that are over $15?",
+        "query": "SELECT COUNT(DISTINCT T1.pub_id) FROM titles AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id WHERE T2.country = 'USA' AND T1.price > 15"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Please give more detailed information about the first three books that sell the best.",
+        "query": "SELECT T1.notes FROM titles AS T1 INNER JOIN sales AS T2 ON T1.title_id = T2.title_id ORDER BY T2.qty DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "How many books on business have the bookstores in Massachusetts ordered?",
+        "query": "SELECT SUM(T1.qty) FROM sales AS T1 INNER JOIN stores AS T2 ON T1.stor_id = T2.stor_id INNER JOIN titles AS T3 ON T1.title_id = T3.title_id WHERE T2.state = 'Massachusetts' AND T3.type = 'business'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "What is the average quantity of each order for the book \"Life Without Fear\"?",
+        "query": "SELECT CAST(SUM(T2.qty) AS REAL) / COUNT(T1.title_id) FROM titles AS T1 INNER JOIN sales AS T2 ON T1.title_id = T2.title_id WHERE T1.title = 'Life Without Fear'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "What is the average level employees working as Managing Editor are at? How many levels are there between the average level and the highest level?",
+        "query": "SELECT AVG(T2.job_lvl), T1.max_lvl - AVG(T2.job_lvl) FROM jobs AS T1 INNER JOIN employee AS T2 ON T1.job_id = T2.job_id WHERE T1.job_desc = 'Managing Editor' GROUP BY T2.job_id, T1.max_lvl"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Which one is the cheapest business book?",
+        "query": "SELECT title FROM titles WHERE type = 'business' ORDER BY price LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Which type of book had the most pre-paid amount?",
+        "query": "SELECT type FROM titles ORDER BY advance DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "What's the royalty for the bestseller book?",
+        "query": "SELECT royalty FROM titles ORDER BY ytd_sales DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Which job level is O'Rourke at?",
+        "query": "SELECT job_lvl FROM employee WHERE lname = 'O''Rourke'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Show me the employ id of the highest employee who doesn't have a middle name.",
+        "query": "SELECT emp_id FROM employee WHERE minit = '' ORDER BY job_lvl DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Is the author of \"Sushi, Anyone?\" on the contract?",
+        "query": "SELECT T1.contract FROM authors AS T1 INNER JOIN titleauthor AS T2 ON T1.au_id = T2.au_id INNER JOIN titles AS T3 ON T2.title_id = T3.title_id WHERE T3.title = 'Sushi, Anyone?'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Which publisher had the highest job level? Give his/her full name.",
+        "query": "SELECT T1.fname, T1.minit, T1.lname FROM employee AS T1 INNER JOIN jobs AS T2 ON T1.job_id = T2.job_id ORDER BY T1.job_lvl DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "What's Pedro S Afonso's job title?",
+        "query": "SELECT T2.job_desc FROM employee AS T1 INNER JOIN jobs AS T2 ON T1.job_id = T2.job_id WHERE T1.fname = 'Pedro' AND T1.minit = 'S' AND T1.lname = 'Afonso'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "How many levels are there left for Diego W Roel to reach if he/she could go to the max level for his/her position?",
+        "query": "SELECT T2.max_lvl - T1.job_lvl FROM employee AS T1 INNER JOIN jobs AS T2 ON T1.job_id = T2.job_id WHERE T1.fname = 'Diego' AND T1.minit = 'W' AND T1.lname = 'Roel'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "What's on the notes for the order happened on 1994/9/14?",
+        "query": "SELECT T1.notes FROM titles AS T1 INNER JOIN sales AS T2 ON T1.title_id = T2.title_id WHERE STRFTIME('%Y-%m-%d', T2.ord_date) = '1994-09-14'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "List the type of the book for the order which was sold on 1993/5/29.",
+        "query": "SELECT DISTINCT T1.type FROM titles AS T1 INNER JOIN sales AS T2 ON T1.title_id = T2.title_id WHERE STRFTIME('%Y-%m-%d', T2.ord_date) = '1993-05-29'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Tell me about the information of the French publisher.",
+        "query": "SELECT T1.pr_info FROM pub_info AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id WHERE T2.country = 'France'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "What's the publisher of the book \"Silicon Valley Gastronomic Treats\"? Give the publisher's name.",
+        "query": "SELECT T2.pub_name FROM titles AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id WHERE T1.title = 'Silicon Valley Gastronomic Treats'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Which city did Victoria P Ashworth work in?",
+        "query": "SELECT T2.city FROM employee AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id WHERE T1.fname = 'Victoria' AND T1.minit = 'P' AND T1.lname = 'Ashworth'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "How many sales did the store in Remulade make?",
+        "query": "SELECT COUNT(T1.ord_num) FROM sales AS T1 INNER JOIN stores AS T2 ON T1.stor_id = T2.stor_id WHERE T2.city = 'Remulade'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "For the quantities, what percent more did the store in Fremont sell than the store in Portland in 1993?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.city = 'Fremont' THEN qty END) - SUM(CASE WHEN T2.city = 'Portland' THEN qty END) AS REAL) * 100 / SUM(CASE WHEN T2.city = 'Fremont' THEN qty END) FROM sales AS T1 INNER JOIN stores AS T2 ON T1.stor_id = T2.stor_id WHERE STRFTIME('%Y', T1.ord_date) = '1993'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Among all the employees, how many percent more for the publishers than designers?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.job_desc = 'publisher' THEN 1 ELSE 0 END) - SUM(CASE WHEN T2.job_desc = 'designer' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.job_id) FROM employee AS T1 INNER JOIN jobs AS T2 ON T1.job_id = T2.job_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Find and list the full name of employees who were hired between 1990 and 1995. Also, arrange them in the descending order of job level.",
+        "query": "SELECT fname, minit, lname FROM employee WHERE STRFTIME('%Y', hire_date) BETWEEN '1990' AND '1995' ORDER BY job_lvl DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Which titles has above average royalty rate? Give those title's name, type and price?",
+        "query": "SELECT DISTINCT T1.title, T1.type, T1.price FROM titles AS T1 INNER JOIN roysched AS T2 ON T1.title_id = T2.title_id WHERE T2.royalty > ( SELECT CAST(SUM(royalty) AS REAL) / COUNT(title_id) FROM roysched )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "In 1994 which title had less order quanty than the average order quantity? Find the title name, type and price.",
+        "query": "SELECT DISTINCT T1.title, T1.type, T1.price FROM titles AS T1 INNER JOIN sales AS T2 ON T1.title_id = T2.title_id WHERE T2.ord_date LIKE '1994%' AND T2.Qty < ( SELECT CAST(SUM(T4.qty) AS REAL) / COUNT(T3.title_id) FROM titles AS T3 INNER JOIN sales AS T4 ON T3.title_id = T4.title_id )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "List the title name, type, and price of the titles published by New Moon Books. Arrange the list in ascending order of price.",
+        "query": "SELECT T1.title, T1.type, T1.price FROM titles AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id WHERE T2.pub_name = 'New Moon Books' ORDER BY T1.price"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "In the books published by US publishers, which book has the highest royalty? List these books in the descending order of royalty.",
+        "query": "SELECT T1.title FROM titles AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id INNER JOIN roysched AS T3 ON T1.title_id = T3.title_id WHERE T2.country = 'USA' ORDER BY T1.royalty DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Find the difference between the average royalty of titles published by US and non US publishers?",
+        "query": "SELECT (CAST(SUM(CASE WHEN T2.country = 'USA' THEN T1.royalty ELSE 0 END) AS REAL) / SUM(CASE WHEN T2.country = 'USA' THEN 1 ELSE 0 END)) - (CAST(SUM(CASE WHEN T2.country != 'USA' THEN T1.royalty ELSE 0 END) AS REAL) / SUM(CASE WHEN T2.country != 'USA' THEN 1 ELSE 0 END)) FROM titles AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id INNER JOIN roysched AS T3 ON T1.title_id = T3.title_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Calculate the average level difference between the Marketing editors hired by the US and non-US publishers?",
+        "query": "SELECT (CAST(SUM(CASE WHEN T1.country = 'USA' THEN job_lvl ELSE 0 END) AS REAL) / SUM(CASE WHEN T1.country = 'USA' THEN 1 ELSE 0 END)) - (CAST(SUM(CASE WHEN T1.country != 'USA' THEN job_lvl ELSE 0 END) AS REAL) / SUM(CASE WHEN T1.country != 'USA' THEN 1 ELSE 0 END)) FROM publishers AS T1 INNER JOIN employee AS T2 ON T1.pub_id = T2.pub_id INNER JOIN jobs AS T3 ON T2.job_id = T3.job_id WHERE T3.job_desc = 'Managing Editor'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Which title is about helpful hints on how to use your electronic resources, which publisher published it and what is the price of this book?",
+        "query": "SELECT T1.title, T2.pub_name, T1.price FROM titles AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id WHERE T1.notes = 'Helpful hints on how to use your electronic resources to the best advantage.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Of the titles, which title is about the Carefully researched study of the effects of strong emotions on the body, which state-based publisher published this book, and what is the year-to-date sale?",
+        "query": "SELECT T1.title, T2.pub_name, T1.ytd_sales FROM titles AS T1 INNER JOIN publishers AS T2 ON T1.pub_id = T2.pub_id WHERE T1.notes = 'Carefully researched study of the effects of strong emotions on the body. Metabolic charts included.'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "book_publishing_company",
+        "question": "Name the top five titles that sold more than average and list them in descending order of the number of sales in California stores?",
+        "query": "SELECT T1.title FROM titles AS T1 INNER JOIN sales AS T2 ON T1.title_id = T2.title_id INNER JOIN publishers AS T3 ON T1.pub_id = T3.pub_id WHERE T2.qty > ( SELECT CAST(SUM(qty) AS REAL) / COUNT(title_id) FROM sales ) AND T3.state = 'CA' ORDER BY T2.qty DESC LIMIT 5"
+    }
+]

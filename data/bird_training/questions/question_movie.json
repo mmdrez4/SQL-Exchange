@@ -1,0 +1,278 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Please list the names of the characters in the movie Look Who's Talking.",
+        "query": "SELECT T2.`Character Name` FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID WHERE T1.Title = 'Look Who''s Talking'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Which character has the longest screen time in the movie Batman?",
+        "query": "SELECT T2.`Character Name` FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID WHERE T1.Title = 'Batman' ORDER BY T2.screentime DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Which actor played the role of Joker in the movie Batman?",
+        "query": "SELECT T3.Name FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T1.Title = 'Batman' AND T2.`Character Name` = 'Joker'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Please list the names of the actors who played a role in the movie Batman.",
+        "query": "SELECT T3.Name FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T1.Title = 'Batman'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Which movie is the character Dr. Archibald 'Moonlight' Graham from?",
+        "query": "SELECT T1.Title FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID WHERE T2.`Character Name` = 'Dr. Archibald ''Moonlight'' Graham'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Please list the names of the movies starring Tom Cruise.",
+        "query": "SELECT T1.Title FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T3.Name = 'Tom Cruise'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "How many movies starring Morgan Freeman are suggested by parental guidance?",
+        "query": "SELECT COUNT(*) FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T3.Name = 'Morgan Freeman' AND T1.`MPAA Rating` = 'PG'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Among the movies starring Tom Cruise, which one of them has the best quality?",
+        "query": "SELECT T1.Title FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T3.Name = 'Tom Cruise' ORDER BY T1.Rating DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "What is the name of the character played by Tom Cruise in the movie Born on the Fourth of July?",
+        "query": "SELECT T2.`Character Name` FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T3.Name = 'Tom Cruise' AND T1.Title = 'Born on the Fourth of July'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Please list the names of all the characters played by Tom Cruise.",
+        "query": "SELECT T1.`Character Name` FROM characters AS T1 INNER JOIN actor AS T2 ON T1.ActorID = T2.ActorID WHERE T2.Name = 'Tom Cruise'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Among the actors who starred in the movie Batman, which one of them is the tallest?",
+        "query": "SELECT T3.Name FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T1.Title = 'Batman' ORDER BY T3.`Height (Inches)` DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "How many movies star a male African American actor?",
+        "query": "SELECT COUNT(*) FROM characters AS T1 INNER JOIN actor AS T2 ON T1.ActorID = T2.ActorID WHERE T2.Gender = 'Male' AND T2.Ethnicity = 'African American'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "What is the average rating of all the movies starring Tom Cruise?",
+        "query": "SELECT AVG(T1.Rating) FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T3.Name = 'Tom Cruise'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "How much longer in percentage is the screen time of the most important character in Batman than the least important one?",
+        "query": "SELECT (MAX(CAST(SUBSTR(T2.screentime, 3, 2) AS REAL)) - MIN(CAST(SUBSTR(T2.screentime, 3, 2) AS REAL))) * 100 / MIN(CAST(SUBSTR(T2.screentime, 3, 2) AS REAL)) FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID WHERE T1.Title = 'Batman'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Which movie had the biggest budget? Give the name of the movie.",
+        "query": "SELECT Title FROM movie ORDER BY Budget DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "What is the MPAA rating for the movie with the character named \"Peter Quill\" in it?",
+        "query": "SELECT T1.`MPAA Rating` FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID WHERE T2.`Character Name` = 'Peter Quill'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Give the name of the No.1 character in the credit list from the highest rating thriller movie.",
+        "query": "SELECT T2.`Character Name` FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID WHERE T2.creditOrder = '1' AND T1.Genre = 'Thriller' ORDER BY T1.Rating DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Who was the actor that played in the movie \"Batman\" with the longest screentime?",
+        "query": "SELECT T2.Name FROM characters AS T1 INNER JOIN actor AS T2 ON T1.ActorID = T2.ActorID INNER JOIN movie AS T3 ON T3.MovieID = T1.MovieID WHERE T3.Title = 'Batman' ORDER BY T1.screentime DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "How many movies has the highest networth actor acted in?",
+        "query": "SELECT COUNT(*) FROM characters AS T1 INNER JOIN actor AS T2 ON T1.ActorID = T2.ActorID WHERE CAST(REPLACE(REPLACE(T2.NetWorth, ',', ''), '$', '') AS REAL) = ( SELECT MAX(CAST(REPLACE(REPLACE(NetWorth, ',', ''), '$', '') AS REAL)) FROM actor)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Who played the character named \"Chanice Kobolowski\"?",
+        "query": "SELECT T2.Name FROM characters AS T1 INNER JOIN actor AS T2 ON T1.ActorID = T2.ActorID WHERE T1.`Character Name` = 'Chanice Kobolowski'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "When is the birthday of the actor who played \"Sully\"?",
+        "query": "SELECT T2.`Date of Birth` FROM characters AS T1 INNER JOIN actor AS T2 ON T1.ActorID = T2.ActorID WHERE T1.`Character Name` = 'Sully'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Show the birth city of the actor who played \"Gabriel Martin\".",
+        "query": "SELECT T2.`Birth City` FROM characters AS T1 INNER JOIN actor AS T2 ON T1.ActorID = T2.ActorID WHERE T1.`Character Name` = 'Gabriel Martin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Give the biography of the actor who played \"Michael Moscovitz\".",
+        "query": "SELECT T2.Biography FROM characters AS T1 INNER JOIN actor AS T2 ON T1.ActorID = T2.ActorID WHERE T1.`Character Name` = 'Michael Moscovitz'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "How tall is the actor who played \"Lurch\"?",
+        "query": "SELECT T2.`Height (Inches)` FROM characters AS T1 INNER JOIN actor AS T2 ON T1.ActorID = T2.ActorID WHERE T1.`Character Name` = 'Lurch'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Show the No.3 character name in the credit list of the movie \"G.I. Joe: The Rise of Cobra\".",
+        "query": "SELECT T2.`Character Name` FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID WHERE T1.Title = 'G.I. Joe: The Rise of Cobra' AND T2.creditOrder = '3'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Who played the No.2 character in the credit list of the movie \"American Hustle\"?",
+        "query": "SELECT T3.Name FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T1.Title = 'American Hustle' AND T2.creditOrder = '2'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Who played the No.1 character in the credit list of the movie which was released on \"2015/10/26\"?",
+        "query": "SELECT T3.Name FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T1.`Release Date` = '2015-10-26' AND T2.creditOrder = '1'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "What is the percentage of the USA actors that showed up in the credit list of movie \"Mrs. Doubtfire\"?",
+        "query": "SELECT CAST(SUM(CASE WHEN T3.`Birth Country` = 'USA' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T3.`Birth Country`) FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T1.Title = 'Mrs. Doubtfire'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "What is the percentage of the actors that showed up in the credit list of movie \"Dawn of the Planet of the Apes\" that were born after \"1970/1/1\"?",
+        "query": "SELECT CAST(SUM(CASE WHEN T3.`Date of Birth` > '1970-01-01' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T3.`Date of Birth`) FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T1.Title = 'Dawn of the Planet of the Apes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "List down the movie ID of movie with a budget of 15000000 and a rating between 7 to 8.",
+        "query": "SELECT MovieID FROM movie WHERE Rating BETWEEN 7 AND 8 AND Budget = 15000000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "In rated PG movies, how many of them released in June 1990?",
+        "query": "SELECT COUNT(*) FROM movie WHERE `MPAA Rating` = 'PG' AND `Release Date` LIKE '1990-06%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "What is the name of male and white actor with actor ID 439?",
+        "query": "SELECT Name FROM actor WHERE ActorID = 439 AND Gender = 'Male' AND Ethnicity = 'White'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Among the actors born in New York City, list the genre of their movie with a rating greater than 5.",
+        "query": "SELECT T1.Genre FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T3.`Birth City` = 'New York City' AND T1.Rating > 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "In romantic movies, how many of them starred by John Travolta?",
+        "query": "SELECT COUNT(*) FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T1.Genre = 'Romance' AND T3.Name = 'John Travolta'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "List the height and net worth of actors starred in Three Men and a Little Lady.",
+        "query": "SELECT T3.`Height (Inches)`, T3.NetWorth FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T1.Title = 'Three Men and a Little Lady'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "What is the genre of PG rated movie starred by the actor with highest net worth?",
+        "query": "SELECT T1.Genre FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T1.`MPAA Rating` = 'PG' ORDER BY CAST(REPLACE(REPLACE(T3.NetWorth, ',', ''), '$', '') AS REAL) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "What is the net worth of the actor starred in Misery who has a height ranging from 60 to 70 inches tall?",
+        "query": "SELECT T3.NetWorth FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T1.Title = 'Misery' AND T3.`Height (Inches)` BETWEEN 60 AND 70 AND T3.Gender = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Count the male actors born in USA that starred in Ghost.",
+        "query": "SELECT COUNT(*) FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T1.Title = 'Ghost' AND T3.Gender = 'Male' AND T3.`Birth Country` = 'USA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "What is the MPAA rating and title of the movie starred by Leonardo DiCaprio with highest budget?",
+        "query": "SELECT T1.`MPAA Rating`, T1.Title FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T3.Name = 'Leonardo DiCaprio' ORDER BY T1.Budget DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Among the actors starred in Die Hard 2, list their net worth and birth date of actors with a height between 60 to 65.",
+        "query": "SELECT T3.NetWorth, T3.`Date of Birth` FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T1.Title = 'Die Hard 2' AND T3.`Height (Inches)` BETWEEN 60 AND 65"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "List the runtime of movies starred by an African-American actor born on December 28, 1954.",
+        "query": "SELECT T1.Runtime FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T3.Ethnicity = 'African American' AND T3.`Date of Birth` = '1954-12-28'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Find the actor's name that played as Don Altobello in a drama movie that has a gross of 136766062.",
+        "query": "SELECT T3.Name FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T1.Gross = 136766062 AND T2.`Character Name` = 'Don Altobello' AND T1.Genre = 'Drama'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "What is the gross of a comedy movie with a rating lower than 7 and starred by an actor with a net worth greater than $375,000,000.00?",
+        "query": "SELECT SUM(T1.Gross) FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE CAST(REPLACE(REPLACE(T3.NetWorth, ',', ''), '$', '') AS REAL) > 375000000 AND T1.Rating < 7 AND T1.Genre = 'Comedy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "What is the runtime of the movie starred by Jackie Chan with a rating greater than 7?",
+        "query": "SELECT T1.Runtime FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T3.Name = 'Jackie Chan' AND T1.Rating > 7"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "Among the movies with drama genre, what is the percentage of the actors with net worth greater than $400,000,000.00?",
+        "query": "SELECT SUM(CASE WHEN CAST(REPLACE(REPLACE(T3.NetWorth, ',', ''), '$', '') AS REAL) > 400000000 THEN 1 ELSE 0 END) - SUM(CASE WHEN CAST(REPLACE(REPLACE(T3.NetWorth, ',', ''), '$', '') AS REAL) < 400000000 THEN 1 ELSE 0 END) FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T1.Genre = 'Drama'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "movie",
+        "question": "List the character's name of actress born in Sherman Oaks and starred in the movie Bruce Almighty with height greater than the 50% of average height of all actors listed.",
+        "query": "SELECT T3.Name FROM movie AS T1 INNER JOIN characters AS T2 ON T1.MovieID = T2.MovieID INNER JOIN actor AS T3 ON T3.ActorID = T2.ActorID WHERE T3.Gender = 'Female' AND T1.Title = 'Godzilla' AND T3.`Birth City` = 'Sherman Oaks' AND T3.`Height (Inches)` * 100 > ( SELECT AVG(`Height (Inches)`) FROM actor ) * 50"
+    }
+]

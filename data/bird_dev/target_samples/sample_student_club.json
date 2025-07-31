@@ -1,0 +1,210 @@
+{
+    "event": [
+        [
+            "rec5XDvJLyxDsGZWc",
+            "Laugh Out Loud",
+            "2019-10-24T13:00:00",
+            "Social",
+            "Semester social event. Optional attendance.",
+            "900 E. Washington St.",
+            "Closed"
+        ],
+        [
+            "rec180D2MI4EpckHy",
+            "Officers meeting - March",
+            "2020-03-10T09:30:00",
+            "Meeting",
+            null,
+            null,
+            "Planning"
+        ],
+        [
+            "recY3Yesu24bRK7tr",
+            "January Meeting",
+            "2020-01-14T12:00:00",
+            "Meeting",
+            null,
+            "MU 215",
+            "Open"
+        ]
+    ],
+    "major": [
+        [
+            "rec8UcO67UAV7r4dm",
+            "Psychology",
+            "Psychology Department",
+            "College of Education & Human Services"
+        ],
+        [
+            "recFmin5MqRH5YC7m",
+            "Global Communication",
+            "Languages, Philosophy and Communication Studies Department",
+            "College of Humanities and Social Sciences"
+        ],
+        [
+            "recAiT3yTABWypvHu",
+            "Communicative Disorders and Deaf Education",
+            "Communicative Disorders and Deaf Education Department",
+            "College of Education & Human Services"
+        ]
+    ],
+    "zip_code": [
+        [
+            19083,
+            "Standard",
+            "Havertown",
+            "Delaware County",
+            "Pennsylvania",
+            "PA"
+        ],
+        [
+            96092,
+            "PO Box",
+            "Vina",
+            "Tehama County",
+            "California",
+            "CA"
+        ],
+        [
+            6380,
+            "Standard",
+            "Taftville",
+            "New London County",
+            "Connecticut",
+            "CT"
+        ]
+    ],
+    "attendance": [
+        [
+            "recIuIXdbLe5j5vCA",
+            "rec3pH4DxMcWHMRB7"
+        ],
+        [
+            "recmbOVHSyzXQZpQr",
+            "recL4aEZBZoPk9NYx"
+        ],
+        [
+            "recggMW2eyCYceNcy",
+            "reccW7q1KkhSKZsea"
+        ]
+    ],
+    "budget": [
+        [
+            "reckyFmOuPIIya9hY",
+            "Advertisement",
+            0.0,
+            75.0,
+            75,
+            "Open",
+            "recAlAwtBZ0Fqbr5K"
+        ],
+        [
+            "recr60T1tLsfdICV8",
+            "Food",
+            154.34,
+            0.659999999999997,
+            155,
+            "Closed",
+            "recEVTik3MlqbvLFi"
+        ],
+        [
+            "recmdREMTVnyW11OD",
+            "Parking",
+            0.0,
+            10.0,
+            10,
+            "Planning",
+            "rec2mJrCofveboaz6"
+        ]
+    ],
+    "expense": [
+        [
+            "recTUt9QxJ0Sp3H3m",
+            "Water, chips, cookies",
+            "2019-10-08",
+            69.33,
+            "true",
+            "recD078PnS3x2doBe",
+            "rec1bG6HSft7XIvTP"
+        ],
+        [
+            "rec1nIjoZKTYayqZ6",
+            "Water, Cookies",
+            "2019-10-08",
+            20.2,
+            "true",
+            "recro8T1MPMwRadVH",
+            "recy8KY5bUdzF81vv"
+        ],
+        [
+            "recgd6PuR9E84egT5",
+            "Water, Veggie tray, supplies",
+            "2019-09-03",
+            28.15,
+            "true",
+            "recro8T1MPMwRadVH",
+            "recca5tkvdQgoLKZz"
+        ]
+    ],
+    "income": [
+        [
+            "recuH1QWNo5JMi2uc",
+            "2019-09-28",
+            50,
+            "Dues",
+            null,
+            "recL4aEZBZoPk9NYx"
+        ],
+        [
+            "recSOleKmRLKSGUxk",
+            "2019-09-08",
+            50,
+            "Dues",
+            null,
+            "recf4UKTfipCzgcSA"
+        ],
+        [
+            "rech1nxcukSGGnyJC",
+            "2019-10-10",
+            50,
+            "Dues",
+            null,
+            "recuSfhAZIlKba4s2"
+        ]
+    ],
+    "member": [
+        [
+            "recUdRhbhcEO1Hk5r",
+            "Amy",
+            "Firth",
+            "amy.firth@lpu.edu",
+            "Member",
+            "Small",
+            "768-555-2323",
+            21042,
+            "recIzqYuV3wMONTgB"
+        ],
+        [
+            "recsTO4OZIF9rbubk",
+            "Madelyn",
+            "Nicholson",
+            "madelyn.nicholson@lpu.edu",
+            "Member",
+            "Medium",
+            "466-555-3483",
+            27511,
+            "recKJHO1P6ZC5m567"
+        ],
+        [
+            "recL4aEZBZoPk9NYx",
+            "Trent",
+            "Smith",
+            "trent.smith@lpu.edu",
+            "Member",
+            "X-Large",
+            "397-555-3444",
+            60559,
+            "recAiT3yTABWypvHu"
+        ]
+    ]
+}

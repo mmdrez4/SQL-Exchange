@@ -1,0 +1,92 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "decoration_competition",
+        "question": "How many members are there?",
+        "query": "SELECT count(*) FROM member"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "decoration_competition",
+        "question": "List the names of members in ascending alphabetical order.",
+        "query": "SELECT Name FROM member ORDER BY Name ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "decoration_competition",
+        "question": "What are the names and countries of members?",
+        "query": "SELECT Name ,  Country FROM member"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "decoration_competition",
+        "question": "Show the names of members whose country is \"United States\" or \"Canada\".",
+        "query": "SELECT Name FROM member WHERE Country  =  \"United States\" OR Country  =  \"Canada\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "decoration_competition",
+        "question": "Show the different countries and the number of members from each.",
+        "query": "SELECT Country ,  COUNT(*) FROM member GROUP BY Country"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "decoration_competition",
+        "question": "Show the most common country across members.",
+        "query": "SELECT Country FROM member GROUP BY Country ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "decoration_competition",
+        "question": "Which countries have more than two members?",
+        "query": "SELECT Country FROM member GROUP BY Country HAVING COUNT(*)  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "decoration_competition",
+        "question": "Show the leader names and locations of colleges.",
+        "query": "SELECT Leader_Name ,  College_Location FROM college"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "decoration_competition",
+        "question": "Show the names of members and names of colleges they go to.",
+        "query": "SELECT T2.Name ,  T1.Name FROM college AS T1 JOIN member AS T2 ON T1.College_ID  =  T2.College_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "decoration_competition",
+        "question": "Show the names of members and the locations of colleges they go to in ascending alphabetical order of member names.",
+        "query": "SELECT T2.Name ,  T1.College_Location FROM college AS T1 JOIN member AS T2 ON T1.College_ID  =  T2.College_ID ORDER BY T2.Name ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "decoration_competition",
+        "question": "Show the distinct leader names of colleges associated with members from country \"Canada\".",
+        "query": "SELECT DISTINCT T1.Leader_Name FROM college AS T1 JOIN member AS T2 ON T1.College_ID  =  T2.College_ID WHERE T2.Country  =  \"Canada\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "decoration_competition",
+        "question": "Show the names of members and the decoration themes they have.",
+        "query": "SELECT T1.Name ,  T2.Decoration_Theme FROM member AS T1 JOIN round AS T2 ON T1.Member_ID  =  T2.Member_ID"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "decoration_competition",
+        "question": "Show the names of members that have a rank in round higher than 3.",
+        "query": "SELECT T1.Name FROM member AS T1 JOIN round AS T2 ON T1.Member_ID  =  T2.Member_ID WHERE T2.Rank_in_Round  >  3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "decoration_competition",
+        "question": "Show the names of members in ascending order of their rank in rounds.",
+        "query": "SELECT T1.Name FROM member AS T1 JOIN round AS T2 ON T1.Member_ID  =  T2.Member_ID ORDER BY Rank_in_Round ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "decoration_competition",
+        "question": "List the names of members who did not participate in any round.",
+        "query": "SELECT Name FROM member WHERE Member_ID NOT IN (SELECT Member_ID FROM round)"
+    }
+]

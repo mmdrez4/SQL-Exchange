@@ -1,0 +1,410 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the number of students in total.",
+        "query": "SELECT count(*) FROM list"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "How many students are there?",
+        "query": "SELECT count(*) FROM list"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the last names of students studying in room 111.",
+        "query": "SELECT lastname FROM list WHERE classroom  =  111"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "What are the last names of students in room 111?",
+        "query": "SELECT lastname FROM list WHERE classroom  =  111"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the first names of students studying in room 108.",
+        "query": "SELECT firstname FROM list WHERE classroom  =  108"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "What are the first names of students in room 108?",
+        "query": "SELECT firstname FROM list WHERE classroom  =  108"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "What are the first names of students studying in room 107?",
+        "query": "SELECT DISTINCT firstname FROM list WHERE classroom  =  107"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "List the first names of all the students in room 107.",
+        "query": "SELECT DISTINCT firstname FROM list WHERE classroom  =  107"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "For each classroom report the grade that is taught in it. Report just the classroom number and the grade number.",
+        "query": "SELECT DISTINCT classroom ,  grade FROM list"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "What are the grade number and classroom number of each class in the list?",
+        "query": "SELECT DISTINCT classroom ,  grade FROM list"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Which grade is studying in classroom 103?",
+        "query": "SELECT DISTINCT grade FROM list WHERE classroom  =  103"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the grade taught in classroom 103.",
+        "query": "SELECT DISTINCT grade FROM list WHERE classroom  =  103"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the grade studying in room 105.",
+        "query": "SELECT DISTINCT grade FROM list WHERE classroom  =  105"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Which grade is studying in room 105?",
+        "query": "SELECT DISTINCT grade FROM list WHERE classroom  =  105"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Which classrooms are used by grade 4?",
+        "query": "SELECT DISTINCT classroom FROM list WHERE grade  =  4"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the classrooms in which grade 4 is studying.",
+        "query": "SELECT DISTINCT classroom FROM list WHERE grade  =  4"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Which classrooms are used by grade 5?",
+        "query": "SELECT DISTINCT classroom FROM list WHERE grade  =  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Show me the classrooms grade 5 is using.",
+        "query": "SELECT DISTINCT classroom FROM list WHERE grade  =  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the last names of the teachers that teach fifth grade.",
+        "query": "SELECT DISTINCT T2.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE grade  =  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "what are the last names of the teachers who teach grade 5?",
+        "query": "SELECT DISTINCT T2.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE grade  =  5"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the first names of the teachers that teach first grade.",
+        "query": "SELECT DISTINCT T2.firstname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE grade  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "What are the first names of the teachers who teach grade 1?",
+        "query": "SELECT DISTINCT T2.firstname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE grade  =  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the first names of all the teachers that teach in classroom 110.",
+        "query": "SELECT firstname FROM teachers WHERE classroom  =  110"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Which teachers teach in classroom 110? Give me their first names.",
+        "query": "SELECT firstname FROM teachers WHERE classroom  =  110"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the last names of teachers teaching in classroom 109.",
+        "query": "SELECT lastname FROM teachers WHERE classroom  =  109"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Which teachers teach in classroom 109? Give me their last names.",
+        "query": "SELECT lastname FROM teachers WHERE classroom  =  109"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Report the first name and last name of all the teachers.",
+        "query": "SELECT DISTINCT firstname ,  lastname FROM teachers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "What are the first name and last name of all the teachers?",
+        "query": "SELECT DISTINCT firstname ,  lastname FROM teachers"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Report the first name and last name of all the students.",
+        "query": "SELECT DISTINCT firstname ,  lastname FROM list"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Show each student's first name and last name.",
+        "query": "SELECT DISTINCT firstname ,  lastname FROM list"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find all students taught by OTHA MOYER. Output the first and last names of the students.",
+        "query": "SELECT T1.firstname ,  T1.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T2.firstname  =  \"OTHA\" AND T2.lastname  =  \"MOYER\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Which students study under the teacher named OTHA MOYER? Give me the first and last names of the students.",
+        "query": "SELECT T1.firstname ,  T1.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T2.firstname  =  \"OTHA\" AND T2.lastname  =  \"MOYER\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find all students taught by MARROTTE KIRK. Output first and last names of students.",
+        "query": "SELECT T1.firstname ,  T1.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T2.firstname  =  \"MARROTTE\" AND T2.lastname  =  \"KIRK\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Which are the first and last names of the students taught by MARROTTE KIRK?",
+        "query": "SELECT T1.firstname ,  T1.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T2.firstname  =  \"MARROTTE\" AND T2.lastname  =  \"KIRK\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the first and last name of all the teachers that teach EVELINA BROMLEY.",
+        "query": "SELECT T2.firstname ,  T2.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T1.firstname  =  \"EVELINA\" AND T1.lastname  =  \"BROMLEY\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Which teachers teach the student named EVELINA BROMLEY? Give me the first and last name  of the teachers.",
+        "query": "SELECT T2.firstname ,  T2.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T1.firstname  =  \"EVELINA\" AND T1.lastname  =  \"BROMLEY\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the last names of all the teachers that teach GELL TAMI.",
+        "query": "SELECT T2.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T1.firstname  =  \"GELL\" AND T1.lastname  =  \"TAMI\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "What are the last names of the teachers who teach the student called GELL TAMI?",
+        "query": "SELECT T2.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T1.firstname  =  \"GELL\" AND T1.lastname  =  \"TAMI\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "How many students does LORIA ONDERSMA teaches?",
+        "query": "SELECT count(*) FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T2.firstname  =  \"LORIA\" AND T2.lastname  =  \"ONDERSMA\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Count the number of students the teacher LORIA ONDERSMA teaches.",
+        "query": "SELECT count(*) FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T2.firstname  =  \"LORIA\" AND T2.lastname  =  \"ONDERSMA\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "How many students does KAWA GORDON teaches?",
+        "query": "SELECT count(*) FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T2.firstname  =  \"KAWA\" AND T2.lastname  =  \"GORDON\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the number of students taught by the teacher KAWA GORDON.",
+        "query": "SELECT count(*) FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T2.firstname  =  \"KAWA\" AND T2.lastname  =  \"GORDON\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the number of students taught by TARRING LEIA.",
+        "query": "SELECT count(*) FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T2.firstname  =  \"TARRING\" AND T2.lastname  =  \"LEIA\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "How many students are taught by teacher TARRING LEIA?",
+        "query": "SELECT count(*) FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T2.firstname  =  \"TARRING\" AND T2.lastname  =  \"LEIA\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "How many teachers does the student named CHRISSY NABOZNY have?",
+        "query": "SELECT count(*) FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T1.firstname  =  \"CHRISSY\" AND T1.lastname  =  \"NABOZNY\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the number of teachers who teach the student called CHRISSY NABOZNY.",
+        "query": "SELECT count(*) FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T1.firstname  =  \"CHRISSY\" AND T1.lastname  =  \"NABOZNY\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "How many teachers does the student named MADLOCK RAY have?",
+        "query": "SELECT count(*) FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T1.firstname  =  \"MADLOCK\" AND T1.lastname  =  \"RAY\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the number of teachers who teach the student called MADLOCK RAY.",
+        "query": "SELECT count(*) FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T1.firstname  =  \"MADLOCK\" AND T1.lastname  =  \"RAY\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find all first-grade students who are NOT taught by OTHA MOYER. Report their first and last names.",
+        "query": "SELECT DISTINCT T1.firstname ,  T1.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T1.grade  =  1 EXCEPT SELECT T1.firstname ,  T1.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T2.firstname  =  \"OTHA\" AND T2.lastname  =  \"MOYER\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "What are the first and last names of the first-grade students who are NOT taught by teacher OTHA MOYER?",
+        "query": "SELECT DISTINCT T1.firstname ,  T1.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T1.grade  =  1 EXCEPT SELECT T1.firstname ,  T1.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T2.firstname  =  \"OTHA\" AND T2.lastname  =  \"MOYER\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the last names of the students in third grade that are not taught by COVIN JEROME.",
+        "query": "SELECT DISTINCT T1.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T1.grade  =  3 AND T2.firstname != \"COVIN\" AND T2.lastname != \"JEROME\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Which students in third grade are not taught by teacher COVIN JEROME? Give me the last names of the students.",
+        "query": "SELECT DISTINCT T1.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom WHERE T1.grade  =  3 AND T2.firstname != \"COVIN\" AND T2.lastname != \"JEROME\""
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "For each grade, report the grade, the number of classrooms in which it is taught and the total number of students in the grade.",
+        "query": "SELECT grade ,  count(DISTINCT classroom) ,  count(*) FROM list GROUP BY grade"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "For each grade, return the grade number, the number of classrooms used for the grade, and the total number of students enrolled in the grade.",
+        "query": "SELECT grade ,  count(DISTINCT classroom) ,  count(*) FROM list GROUP BY grade"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "For each classroom, report the classroom number and the number of grades using it.",
+        "query": "SELECT classroom ,  count(DISTINCT grade) FROM list GROUP BY classroom"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "For each classroom, show the classroom number and count the number of distinct grades that use the room.",
+        "query": "SELECT classroom ,  count(DISTINCT grade) FROM list GROUP BY classroom"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Which classroom has the most students?",
+        "query": "SELECT classroom FROM list GROUP BY classroom ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the classroom that the most students use.",
+        "query": "SELECT classroom FROM list GROUP BY classroom ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Report the number of students in each classroom.",
+        "query": "SELECT classroom ,  count(*) FROM list GROUP BY classroom"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "For each classroom, show the classroom number and find how many students are using it.",
+        "query": "SELECT classroom ,  count(*) FROM list GROUP BY classroom"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "For each grade 0 classroom, report the total number of students.",
+        "query": "SELECT classroom ,  count(*) FROM list WHERE grade  =  \"0\" GROUP BY classroom"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "For each grade 0 classroom, return the classroom number and the count of students.",
+        "query": "SELECT classroom ,  count(*) FROM list WHERE grade  =  \"0\" GROUP BY classroom"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Report the total number of students for each fourth-grade classroom.",
+        "query": "SELECT classroom ,  count(*) FROM list WHERE grade  =  \"4\" GROUP BY classroom"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "For each fourth-grade classroom, show the classroom number and the total number of students using it.",
+        "query": "SELECT classroom ,  count(*) FROM list WHERE grade  =  \"4\" GROUP BY classroom"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the name of the teacher who teaches the largest number of students.",
+        "query": "SELECT T2.firstname ,  T2.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom GROUP BY T2.firstname ,  T2.lastname ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Which teacher teaches the most students? Give me the first name and last name of the teacher.",
+        "query": "SELECT T2.firstname ,  T2.lastname FROM list AS T1 JOIN teachers AS T2 ON T1.classroom  =  T2.classroom GROUP BY T2.firstname ,  T2.lastname ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "Find the number of students in one classroom.",
+        "query": "SELECT count(*) ,  classroom FROM list GROUP BY classroom"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "student_1",
+        "question": "How many students does one classroom have?",
+        "query": "SELECT count(*) ,  classroom FROM list GROUP BY classroom"
+    }
+]

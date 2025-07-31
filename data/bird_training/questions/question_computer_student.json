@@ -1,0 +1,434 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "What is the average number of students for each advisor?",
+        "query": "SELECT CAST(COUNT(p_id) AS REAL) / COUNT(DISTINCT p_id_dummy) AS avgnum FROM advisedBy GROUP BY p_id_dummy"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "How many professors are teaching course ID 18?",
+        "query": "SELECT COUNT(DISTINCT p_id) FROM taughtBy WHERE course_id = 18"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "List all the course IDs for professional or master/graduate courses.",
+        "query": "SELECT course_id FROM course WHERE courseLevel = 'Level_500'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "How many courses are there for basic or medium undergraduate courses?",
+        "query": "SELECT COUNT(course_id) FROM course WHERE courseLevel = 'Level_300'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "List the ID of all professors who are not faculty member along with the courses taught by him/her.",
+        "query": "SELECT T2.p_id, T2.course_id FROM person AS T1 INNER JOIN taughtBy AS T2 ON T1.p_id = T2.p_id WHERE T1.professor = 1 AND T1.hasPosition <> 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Provide the ID of professors who are teaching high-level or harder undergraduate course.",
+        "query": "SELECT T2.p_id FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id WHERE T1.courseLevel = 'Level_400'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "What are the courses taught by the advisors who gave advice to student with ID 376?",
+        "query": "SELECT T3.course_id FROM advisedBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id INNER JOIN taughtBy AS T3 ON T2.p_id = T3.p_id WHERE T1.p_id = 141"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Name the advisors for students in Year 3 of the program.",
+        "query": "SELECT T1.p_id FROM advisedBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id WHERE T2.yearsInProgram = 'Year_3'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Which level of courses is taught by professor ID 297?",
+        "query": "SELECT T1.courseLevel FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id WHERE T2.p_id = 297"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "What level is course 165? List the professors who teach the course.",
+        "query": "SELECT T1.courseLevel, T2.p_id FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id WHERE T2.course_id = 165"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "List the ID and years in program for students taught by advisor with ID 5.",
+        "query": "SELECT T1.p_id, T2.yearsInProgram FROM advisedBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id WHERE T1.p_id_dummy = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "State the courses and level of courses by professors who are faculty employees.",
+        "query": "SELECT T3.course_id, T3.courseLevel FROM taughtBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id INNER JOIN course AS T3 ON T3.course_id = T1.course_id WHERE T2.hasPosition = 'Faculty_eme'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Find the ID of advisor of student ID 80 and state the level of courses taught by him/her.",
+        "query": "SELECT T1.p_id_dummy, T2.courseLevel FROM advisedBy AS T1 INNER JOIN course AS T2 ON T1.p_id = T2.course_id INNER JOIN taughtBy AS T3 ON T2.course_id = T3.course_id WHERE T1.p_id = 80"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Provide the ID of professors who teach in both harder undergraduate course and master/graduate courses.",
+        "query": "SELECT DISTINCT T2.p_id FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id WHERE T1.courseLevel = 'Level_400' OR T1.courseLevel = 'Level_500'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Who are the professors who gave advice to students in the 12th years of program?",
+        "query": "SELECT T1.p_id_dummy FROM advisedBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id WHERE T2.yearsInProgram = 'Year_12'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Which are the courses with the most number of professors? State the course ID and the level of the course.",
+        "query": "SELECT T1.course_id, T1.courseLevel FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id GROUP BY T1.course_id, T1.courseLevel ORDER BY COUNT(T1.course_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "How many basic and medium undergraduate courses are there?",
+        "query": "SELECT COUNT(*) FROM course WHERE courseLevel = 'Level_300'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "How many people teaches course no.11?",
+        "query": "SELECT COUNT(*) FROM taughtBy WHERE course_id = 11"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Which course has more teachers, course no.16 or course no.18?",
+        "query": "SELECT course_id FROM taughtBy WHERE course_id = 11 OR course_id = 18 GROUP BY course_id ORDER BY COUNT(course_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "How many teachers are faculty employees?",
+        "query": "SELECT COUNT(*) FROM person WHERE hasPosition = 'Faculty_eme'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Please list the IDs of the teachers who have advised more than 4 others to teach.",
+        "query": "SELECT p_id_dummy FROM advisedBy GROUP BY p_id_dummy HAVING COUNT(p_id_dummy) > 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "How many basic or medium undergraduate courses are taught by a professor?",
+        "query": "SELECT COUNT(*) FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id INNER JOIN person AS T3 ON T3.p_id = T2.p_id WHERE T1.courseLevel = 'Level_300' AND T3.professor = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Please list the IDs of all the faculty employees who teaches a basic or medium undergraduate course.",
+        "query": "SELECT T2.p_id FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id INNER JOIN person AS T3 ON T3.p_id = T2.p_id WHERE T1.courseLevel = 'Level_300' AND T3.hasPosition = 'Faculty_eme'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Is the teacher who teaches course no.9 a faculty member?",
+        "query": "SELECT T2.hasPosition FROM taughtBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id WHERE T1.course_id = 9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Please list the levels of the all courses taught by teacher no.79.",
+        "query": "SELECT T1.courseLevel FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id WHERE T2.p_id = 79"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Please list the IDs of the advisors of the students who are in the 5th year of their program.",
+        "query": "SELECT T1.p_id_dummy FROM advisedBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id WHERE T2.yearsInProgram = 'Year_5'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "How many students are advised to teach by a professor teaching basic or medium undergraduate courses?",
+        "query": "SELECT COUNT(DISTINCT T4.p_id) FROM person AS T1 INNER JOIN taughtBy AS T2 ON T1.p_id = T2.p_id INNER JOIN course AS T3 ON T3.course_id = T2.course_id INNER JOIN advisedBy AS T4 ON T4.p_id = T1.p_id WHERE T1.professor = 1 AND T3.courseLevel = 'Level_300'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Among the courses that are basic or medium undergraduate courses, how many of them are taught by a faculty member?",
+        "query": "SELECT COUNT(*) FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id INNER JOIN person AS T3 ON T2.p_id = T3.p_id WHERE T3.professor = 1 AND T1.courseLevel = 'Level_300'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "For the professor who advised student no.6, please list the IDs of the courses he or she teaches.",
+        "query": "SELECT T2.course_id FROM taughtBy AS T1 INNER JOIN course AS T2 ON T1.course_id = T2.course_id INNER JOIN advisedBy AS T3 ON T3.p_id = T1.p_id WHERE T1.p_id = 9"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "What is the level of the course with the most number of teachers?",
+        "query": "SELECT T1.courseLevel FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id GROUP BY T2.course_id ORDER BY COUNT(T2.p_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Please list the IDs of the professors that teaches more than 3 courses.",
+        "query": "SELECT T1.p_id FROM taughtBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id WHERE T2.professor = 1 GROUP BY T1.p_id HAVING COUNT(DISTINCT T1.course_id) > 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Please list the IDs of the top 3 professors that teaches the most courses.",
+        "query": "SELECT T1.p_id FROM taughtBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id WHERE T2.professor = 1 GROUP BY T1.p_id ORDER BY COUNT(*) DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "In total, all the students in the 3rd year of their program are advised by how many professors?",
+        "query": "SELECT COUNT(DISTINCT T1.p_id_dummy) FROM advisedBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id WHERE T2.yearsInProgram = 'Year_3'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "What is the average number of courses taught by a professor?",
+        "query": "SELECT CAST(COUNT(T1.course_id) AS REAL) / COUNT(DISTINCT T2.p_id) AS num FROM taughtBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id WHERE T2.professor = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "What is the ratio of professors and students?",
+        "query": "SELECT CAST(SUM(CASE  WHEN professor = 1 THEN 1 ELSE 0 END) AS REAL) * 100 / SUM(CASE  WHEN student = 1 THEN 1 ELSE 0 END) AS per FROM person"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Calculate the percentage of high-level undergraduate course.",
+        "query": "SELECT CAST(SUM(CASE  WHEN courseLevel = 'Level_400' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(*) AS per FROM course"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "List down all the person IDs who taught course ID of 18.",
+        "query": "SELECT p_id FROM taughtBy WHERE course_id = 18"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Provide the position status and IDs of professor who advised student ID \"303\".",
+        "query": "SELECT T2.hasPosition, T1.p_id_dummy FROM advisedBy AS T1 INNER JOIN person AS T2 ON T1.p_id_dummy = T2.p_id WHERE T1.p_id = 303"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "List the person IDs and course levels of the affiliated professors in faculty.",
+        "query": "SELECT T1.p_id, T3.courseLevel FROM person AS T1 INNER JOIN taughtBy AS T2 ON T1.p_id = T2.p_id INNER JOIN course AS T3 ON T3.course_id = T2.course_id WHERE T1.hasPosition = 'Faculty_aff'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Describe the year in program and in phase status for the student with most number in advisor.",
+        "query": "SELECT T2.yearsInProgram, T2.inPhase FROM advisedBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id GROUP BY T1.p_id ORDER BY COUNT(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "List down the advised student IDs and IDs of employing professor in faculty.",
+        "query": "SELECT T1.p_id, T2.p_id FROM advisedBy AS T1 INNER JOIN person AS T2 ON T1.p_id_dummy = T2.p_id WHERE hasPosition = 'Faculty_eme'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "List the course IDs and levels of person IDs from 40 to 50.",
+        "query": "SELECT T1.course_id, T1.courseLevel FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id WHERE T2.p_id BETWEEN 40 AND 50"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Describe the course level and list of person IDs who taught course ID of 147.",
+        "query": "SELECT T1.courseLevel, T1.course_id FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id WHERE T2.p_id = 141"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Mention the person ID of faculty professor who taught course ID 104 and the course level.",
+        "query": "SELECT T1.p_id, T3.courseLevel FROM person AS T1 INNER JOIN taughtBy AS T2 ON T1.p_id = T2.p_id INNER JOIN course AS T3 ON T3.course_id = T2.course_id WHERE T3.course_id = 104 AND T1.hasPosition <> 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Find the professor ID and position in faculty who taught high-level undergraduate course of less than 10 in ID.",
+        "query": "SELECT T1.p_id, T1.hasPosition FROM person AS T1 INNER JOIN taughtBy AS T2 ON T1.p_id = T2.p_id INNER JOIN course AS T3 ON T3.course_id = T2.course_id WHERE T3.courseLevel = 'Level_400' AND T2.course_id < 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "List the professor ID who taught the course ID from 121 to 130 of basic undergraduate courses.",
+        "query": "SELECT T2.p_id FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id WHERE T1.courseLevel = 'Level_300' AND T1.course_id > 121 AND T1.course_id < 130"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "List the advisor IDs for students with eighth year of program and position status in faculty of those professors.",
+        "query": "SELECT T1.p_id_dummy, T2.hasPosition FROM advisedBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id WHERE T2.yearsInProgram = 'Year_8'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "List any five of course IDs with professor IDs who taught master courses.",
+        "query": "SELECT T1.course_id, T2.p_id FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id WHERE T1.courseLevel = 'Level_500' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "How many students are under advisor 415?",
+        "query": "SELECT COUNT(*) FROM advisedBy WHERE p_id_dummy = 415"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "How many professional or master/graduate courses are there?",
+        "query": "SELECT COUNT(*) FROM course WHERE courseLevel = 'Level_500'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "How many non-faculty members are not undergoing the phase of qualifications?",
+        "query": "SELECT COUNT(*) FROM person WHERE hasPosition = 0 AND inPhase = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Which professor taught the least amount of courses?",
+        "query": "SELECT p_id FROM taughtBy GROUP BY p_id ORDER BY COUNT(course_id) ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Among the students being advised by Advisor 5, how many students are in the 5th year?",
+        "query": "SELECT COUNT(*) FROM advisedBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id WHERE T1.p_id_dummy = 5 AND T2.student = 1 AND T2.yearsInProgram = 'Year_5'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Which professor teaches the highest number of professional or master/graduate courses?",
+        "query": "SELECT T2.p_id FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id WHERE T1.courseLevel = 'Level_500' GROUP BY T2.p_id ORDER BY COUNT(T2.course_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Among the faculty affiliated professor, how many professors teaches professional or master/undergraduate courses?",
+        "query": "SELECT COUNT(*) FROM person AS T1 INNER JOIN taughtBy AS T2 ON T1.p_id = T2.p_id INNER JOIN course AS T3 ON T3.course_id = T2.course_id WHERE T1.hasPosition = 'Faculty_aff' AND T1.professor = 1 AND T3.courseLevel = 'Level_500'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Who are the top 5 professors who teaches the highest number of professional or master/undergraduate courses?",
+        "query": "SELECT T2.p_id FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id WHERE T1.courseLevel = 'Level_500' GROUP BY T2.p_id ORDER BY COUNT(T2.p_id) DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "How many advisors are in charge of advising all the students in 1st year?",
+        "query": "SELECT COUNT(T1.p_id_dummy) FROM advisedBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id WHERE T2.yearsInProgram = 'Year_1' AND T2.student = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "How many professors teaches no more than two high-level or harder undergraduate courses?",
+        "query": "SELECT COUNT(*) FROM ( SELECT COUNT(T2.p_id) FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id WHERE T1.courseLevel = 'Level_400' GROUP BY T2.p_id HAVING COUNT(DISTINCT T1.course_id) <= 2 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Between the faculty employee professors, how many teaches high-level or harder undergraduate courses? Indicate each of the professors unique identifying number.",
+        "query": "SELECT COUNT(*) FROM person AS T1 INNER JOIN taughtBy AS T2 ON T1.p_id = T2.p_id INNER JOIN course AS T3 ON T3.course_id = T2.course_id WHERE T1.hasPosition = 'Faculty_eme' AND T1.professor = 1 AND T3.courseLevel = 'Level_400'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "What is the position in the faculty of the professor who teaches the highest number of courses?",
+        "query": "SELECT T1.hasPosition FROM person AS T1 INNER JOIN taughtBy AS T2 ON T1.p_id = T2.p_id WHERE T1.professor = 1 GROUP BY T1.p_id ORDER BY COUNT(T2.course_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "What year in the program do the students with more than 2 advisors are in?",
+        "query": "SELECT T2.yearsInProgram FROM advisedBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id WHERE T2.student = 1 GROUP BY T2.p_id HAVING COUNT(T2.p_id) > 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "How many professors teaches basic or medium undergraduate courses?",
+        "query": "SELECT COUNT(*) FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id WHERE T1.courseLevel = 'Level_300'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Among the students being advised by advisors, which students' year in the program do the advisors advise the majority of?",
+        "query": "SELECT T2.yearsInProgram FROM advisedBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id WHERE T2.student = 1 GROUP BY T2.yearsInProgram ORDER BY COUNT(T1.p_id_dummy) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "How many students that are undergoing the pre-phase of qualification have advisors?",
+        "query": "SELECT COUNT(T1.p_id_dummy) FROM advisedBy AS T1 INNER JOIN person AS T2 ON T1.p_id = T2.p_id WHERE T2.inPhase = 'Pre_Quals' AND T2.student = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "What is the average number of professional or master/undergraduate courses being taught by each professor?",
+        "query": "SELECT CAST(COUNT(T1.course_id) AS REAL) / COUNT(DISTINCT T2.p_id) FROM course AS T1 INNER JOIN taughtBy AS T2 ON T1.course_id = T2.course_id WHERE T1.courseLevel = 'Level_500'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "How many courses were taught by more than 4 people?",
+        "query": "SELECT COUNT(*) FROM ( SELECT COUNT(course_id) FROM taughtBy GROUP BY course_id HAVING COUNT(course_id) > 4 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "What is the total of professional courses available at the university? List out all the course id.",
+        "query": "SELECT COUNT(course_id) FROM course WHERE courseLevel = 'Level_500'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "What is the sum of year 1 and year 2 students?",
+        "query": "SELECT COUNT(*) FROM person WHERE yearsInProgram = 'Year_1' OR yearsInProgram = 'Year_2'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "How many courses were taught by a professor who is currently the member of faculty?",
+        "query": "SELECT COUNT(*) FROM person AS T1 INNER JOIN taughtBy AS T2 ON T1.p_id = T2.p_id WHERE T1.professor = 1 AND T1.hasPosition <> 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Which professor taught the most courses and what is the position of this person in the university?",
+        "query": "SELECT T1.p_id, T1.hasPosition FROM person AS T1 INNER JOIN taughtBy AS T2 ON T1.p_id = T2.p_id GROUP BY T1.p_id ORDER BY COUNT(T2.course_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Which courses were taught by a professor who is not a faculty member?",
+        "query": "SELECT DISTINCT T2.course_id FROM person AS T1 INNER JOIN taughtBy AS T2 ON T1.p_id = T2.p_id WHERE T1.professor = 1 AND T1.hasPosition = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "computer_student",
+        "question": "Which member of the faculty are teaching the most courses and what is his/her general course level?",
+        "query": "SELECT T1.p_id, T3.courseLevel FROM person AS T1 INNER JOIN taughtBy AS T2 ON T1.p_id = T2.p_id INNER JOIN course AS T3 ON T3.course_id = T2.course_id GROUP BY T1.p_id ORDER BY COUNT(T2.course_id) DESC LIMIT 1"
+    }
+]

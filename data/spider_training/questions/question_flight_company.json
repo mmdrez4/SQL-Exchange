@@ -1,0 +1,116 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "How many flights have a velocity larger than 200?",
+        "query": "SELECT count(*) FROM flight WHERE velocity  >  200"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "List the vehicle flight number, date and pilot of all the flights, ordered by altitude.",
+        "query": "SELECT vehicle_flight_number ,  date ,  pilot FROM flight ORDER BY altitude ASC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "List the id, country, city and name of the airports ordered alphabetically by the name.",
+        "query": "SELECT id ,  country ,  city ,  name FROM airport ORDER BY name"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "What is maximum group equity shareholding of the companies?",
+        "query": "SELECT max(group_equity_shareholding) FROM operate_company"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "What is the velocity of the pilot named 'Thompson'?",
+        "query": "SELECT avg(velocity) FROM flight WHERE pilot  =  'Thompson'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "What are the names and types of the companies that have ever operated a flight?",
+        "query": "SELECT T1.name ,  T1.type FROM operate_company AS T1 JOIN flight AS t2 ON T1.id  =  T2.company_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "What are the names of the airports which are not in the country 'Iceland'?",
+        "query": "SELECT name FROM airport WHERE country != 'Iceland'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "What are the distinct types of the companies that have operated any flights with velocity less than 200?",
+        "query": "SELECT DISTINCT T1.type FROM operate_company AS T1 JOIN flight AS t2 ON T1.id  =  T2.company_id WHERE T2.velocity  <  200"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "What are the ids and names of the companies that operated more than one flight?",
+        "query": "SELECT T1.id ,  T1.name FROM operate_company AS T1 JOIN flight AS t2 ON T1.id  =  T2.company_id GROUP BY T1.id HAVING count(*)  >  1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "What is the id, name and IATA code of the airport that had most number of flights?",
+        "query": "SELECT T1.id ,  T1.name ,  T1.IATA FROM airport AS T1 JOIN flight AS T2 ON T1.id  =  T2.airport_id GROUP BY T2.id ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "What are the different pilot names who had piloted a flight in the country 'United States' or in the airport named 'Billund Airport'?",
+        "query": "SELECT DISTINCT T2.pilot FROM airport AS T1 JOIN flight AS T2 ON T1.id  =  T2.airport_id WHERE T1.country  =  'United States' OR T1.name  =  'Billund Airport'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "What is the most common company type, and how many are there?",
+        "query": "SELECT TYPE ,  count(*) FROM operate_company GROUP BY TYPE ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "How many airports haven't the pilot 'Thompson' driven an aircraft?",
+        "query": "SELECT count(*) FROM airport WHERE id NOT IN ( SELECT airport_id FROM flight WHERE pilot  =  'Thompson' );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "List the name of the pilots who have flied for both a company that mainly provide 'Cargo' services and a company that runs 'Catering services' activities.",
+        "query": "SELECT T2.pilot FROM operate_company AS T1 JOIN flight AS t2 ON T1.id  =  T2.company_id WHERE T1.principal_activities  =  'Cargo' INTERSECT SELECT T2.pilot FROM operate_company AS T1 JOIN flight AS t2 ON T1.id  =  T2.company_id WHERE T1.principal_activities  =  'Catering services'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "Which of the airport names contains the word 'international'?",
+        "query": "SELECT name FROM airport WHERE name LIKE '%international%'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "How many companies operates airlines in each airport?",
+        "query": "SELECT T3.id ,  count(*) FROM operate_company AS T1 JOIN flight AS t2 ON T1.id  =  T2.company_id JOIN airport AS T3 ON T2.airport_id  =  T3.id GROUP BY T3.id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "how many airports are there in each country?",
+        "query": "SELECT count(*) ,  country FROM airport GROUP BY country"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "which countries have more than 2 airports?",
+        "query": "SELECT country FROM airport GROUP BY country HAVING count(*)  >  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "flight_company",
+        "question": "which pilot is in charge of the most number of flights?",
+        "query": "SELECT pilot FROM flight GROUP BY pilot ORDER BY count(*) DESC LIMIT 1"
+    }
+]

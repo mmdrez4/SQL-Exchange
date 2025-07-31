@@ -1,0 +1,278 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "How many gas companies are there?",
+        "query": "SELECT count(*) FROM company"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What is the total number of companies?",
+        "query": "SELECT count(*) FROM company"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "List the company name and rank for all companies in the decreasing order of their sales.",
+        "query": "SELECT company ,  rank FROM company ORDER BY Sales_billion DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What is the name and rank of every company ordered by descending number of sales?",
+        "query": "SELECT company ,  rank FROM company ORDER BY Sales_billion DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "Show the company name and the main industry for all companies whose headquarters are not from USA.",
+        "query": "SELECT company ,  main_industry FROM company WHERE headquarters != 'USA'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What are the companies and main industries of all companies that are not headquartered in the United States?",
+        "query": "SELECT company ,  main_industry FROM company WHERE headquarters != 'USA'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "Show all company names and headquarters in the descending order of market value.",
+        "query": "SELECT company ,  headquarters FROM company ORDER BY market_value DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What are the names and headquarters of all companies ordered by descending market value?",
+        "query": "SELECT company ,  headquarters FROM company ORDER BY market_value DESC"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "Show minimum, maximum, and average market value for all companies.",
+        "query": "SELECT min(market_value) ,  max(market_value) ,  avg(market_value) FROM company"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What is the minimum, maximum, and average market value for every company?",
+        "query": "SELECT min(market_value) ,  max(market_value) ,  avg(market_value) FROM company"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "Show all main industry for all companies.",
+        "query": "SELECT DISTINCT main_industry FROM company"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What are the different main industries for all companies?",
+        "query": "SELECT DISTINCT main_industry FROM company"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "List all headquarters and the number of companies in each headquarter.",
+        "query": "SELECT headquarters ,  count(*) FROM company GROUP BY headquarters"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "For each headquarter, what are the headquarter and how many companies are centered there?",
+        "query": "SELECT headquarters ,  count(*) FROM company GROUP BY headquarters"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "Show all main industry and total market value in each industry.",
+        "query": "SELECT main_industry ,  sum(market_value) FROM company GROUP BY main_industry"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What are the main indstries and total market value for each industry?",
+        "query": "SELECT main_industry ,  sum(market_value) FROM company GROUP BY main_industry"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "List the main industry with highest total market value and its number of companies.",
+        "query": "SELECT main_industry ,  count(*) FROM company GROUP BY main_industry ORDER BY sum(market_value) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "For each main industry, what is the total number of companies for the industry with the highest total market value?",
+        "query": "SELECT main_industry ,  count(*) FROM company GROUP BY main_industry ORDER BY sum(market_value) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "Show headquarters with at least two companies in the banking industry.",
+        "query": "SELECT headquarters FROM company WHERE main_industry  =  'Banking' GROUP BY headquarters HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What are the headquarters with at least two companies in the banking industry?",
+        "query": "SELECT headquarters FROM company WHERE main_industry  =  'Banking' GROUP BY headquarters HAVING count(*)  >=  2"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "Show gas station id, location, and manager_name for all gas stations ordered by open year.",
+        "query": "SELECT station_id ,  LOCATION ,  manager_name FROM gas_station ORDER BY open_year"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What are the gas station ids, locations, and manager names for the gas stations ordered by opening year?",
+        "query": "SELECT station_id ,  LOCATION ,  manager_name FROM gas_station ORDER BY open_year"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "How many gas station are opened between 2000 and 2005?",
+        "query": "SELECT count(*) FROM gas_station WHERE open_year BETWEEN 2000 AND 2005"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What is the total number of gas stations that opened between 2000 and 2005?",
+        "query": "SELECT count(*) FROM gas_station WHERE open_year BETWEEN 2000 AND 2005"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "Show all locations and the number of gas stations in each location ordered by the count.",
+        "query": "SELECT LOCATION ,  count(*) FROM gas_station GROUP BY LOCATION ORDER BY count(*)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "For each location, how many gas stations are there in order?",
+        "query": "SELECT LOCATION ,  count(*) FROM gas_station GROUP BY LOCATION ORDER BY count(*)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "Show all headquarters with both a company in banking industry and a company in Oil and gas.",
+        "query": "SELECT headquarters FROM company WHERE main_industry  =  'Banking' INTERSECT SELECT headquarters FROM company WHERE main_industry  =  'Oil and gas'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What are the headquarters that have both a company in the banking and 'oil and gas' industries?",
+        "query": "SELECT headquarters FROM company WHERE main_industry  =  'Banking' INTERSECT SELECT headquarters FROM company WHERE main_industry  =  'Oil and gas'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "Show all headquarters without a company in banking industry.",
+        "query": "SELECT headquarters FROM company EXCEPT SELECT headquarters FROM company WHERE main_industry  =  'Banking'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What are the headquarters without companies that are in the banking industry?",
+        "query": "SELECT headquarters FROM company EXCEPT SELECT headquarters FROM company WHERE main_industry  =  'Banking'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "Show the company name with the number of gas station.",
+        "query": "SELECT T2.company ,  count(*) FROM station_company AS T1 JOIN company AS T2 ON T1.company_id  =  T2.company_id GROUP BY T1.company_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "For each company id, what are the companies and how many gas stations does each one operate?",
+        "query": "SELECT T2.company ,  count(*) FROM station_company AS T1 JOIN company AS T2 ON T1.company_id  =  T2.company_id GROUP BY T1.company_id"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "Show company name and main industry without a gas station.",
+        "query": "SELECT company ,  main_industry FROM company WHERE company_id NOT IN (SELECT company_id FROM station_company)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What are the main industries of the companies without gas stations and what are the companies?",
+        "query": "SELECT company ,  main_industry FROM company WHERE company_id NOT IN (SELECT company_id FROM station_company)"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "Show the manager name for gas stations belonging to the ExxonMobil company.",
+        "query": "SELECT T3.manager_name FROM station_company AS T1 JOIN company AS T2 ON T1.company_id  =  T2.company_id JOIN gas_station AS T3 ON T1.station_id  =  T3.station_id WHERE T2.company  =  'ExxonMobil'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What are the names of the managers for gas stations that are operated by the ExxonMobil company?",
+        "query": "SELECT T3.manager_name FROM station_company AS T1 JOIN company AS T2 ON T1.company_id  =  T2.company_id JOIN gas_station AS T3 ON T1.station_id  =  T3.station_id WHERE T2.company  =  'ExxonMobil'"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "Show all locations where a gas station for company with market value greater than 100 is located.",
+        "query": "SELECT T3.location FROM station_company AS T1 JOIN company AS T2 ON T1.company_id  =  T2.company_id JOIN gas_station AS T3 ON T1.station_id  =  T3.station_id WHERE T2.market_value  >  100"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What are the locations that have gas stations owned by a company with a market value greater than 100?",
+        "query": "SELECT T3.location FROM station_company AS T1 JOIN company AS T2 ON T1.company_id  =  T2.company_id JOIN gas_station AS T3 ON T1.station_id  =  T3.station_id WHERE T2.market_value  >  100"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "Show the manager name with most number of gas stations opened after 2000.",
+        "query": "SELECT manager_name FROM gas_station WHERE open_year  >  2000 GROUP BY manager_name ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What is the name of the manager with the most gas stations that opened after 2000?",
+        "query": "SELECT manager_name FROM gas_station WHERE open_year  >  2000 GROUP BY manager_name ORDER BY count(*) DESC LIMIT 1"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "order all gas station locations by the opening year.",
+        "query": "SELECT LOCATION FROM gas_station ORDER BY open_year"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What are the locations of all the gas stations ordered by opening year?",
+        "query": "SELECT LOCATION FROM gas_station ORDER BY open_year"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "find the rank, company names, market values of the companies in the banking industry order by their sales and profits in billion.",
+        "query": "SELECT rank ,  company ,  market_value FROM company WHERE main_industry  =  'Banking' ORDER BY sales_billion ,  profits_billion"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What is the rank, company, and market value of every comapny in the banking industry ordered by sales and profits?",
+        "query": "SELECT rank ,  company ,  market_value FROM company WHERE main_industry  =  'Banking' ORDER BY sales_billion ,  profits_billion"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "find the location and Representative name of the gas stations owned by the companies with top 3 Asset amounts.",
+        "query": "SELECT T3.location ,  T3.Representative_Name FROM station_company AS T1 JOIN company AS T2 ON T1.company_id  =  T2.company_id JOIN gas_station AS T3 ON T1.station_id  =  T3.station_id ORDER BY T2.Assets_billion DESC LIMIT 3"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "gas_company",
+        "question": "What are the locations and representatives' names of the gas stations owned by the companies with the 3 largest amounts of assets?",
+        "query": "SELECT T3.location ,  T3.Representative_Name FROM station_company AS T1 JOIN company AS T2 ON T1.company_id  =  T2.company_id JOIN gas_station AS T3 ON T1.station_id  =  T3.station_id ORDER BY T2.Assets_billion DESC LIMIT 3"
+    }
+]

@@ -1,0 +1,1208 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many more games were sold on game platform ID 50 than on game platform ID 51 in region ID 1?",
+        "query": "SELECT (SUM(CASE WHEN T.game_platform_id = 50 THEN T.num_sales ELSE 0 END) - SUM(CASE WHEN T.game_platform_id = 51 THEN T.num_sales ELSE 0 END)) * 100000 AS nums FROM region_sales AS T WHERE T.region_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Please list all the games that have the same game genre as 3D Lemmings.",
+        "query": "SELECT T1.game_name FROM game AS T1 WHERE T1.genre_id = ( SELECT T.genre_id FROM game AS T WHERE T.game_name = '3D Lemmings' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many action games are there in total?",
+        "query": "SELECT COUNT(T1.id) FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T2.genre_name = 'Action'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the genre of 3D Lemmings?",
+        "query": "SELECT T2.genre_name FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T1.game_name = '3D Lemmings'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Who is the publisher of 3D Lemmings?",
+        "query": "SELECT T3.publisher_name FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN publisher AS T3 ON T2.publisher_id = T3.id WHERE T1.game_name = '3D Lemmings'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Please list the names of all the games published by 10TACLE Studios.",
+        "query": "SELECT T1.game_name FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN publisher AS T3 ON T2.publisher_id = T3.id WHERE T3.publisher_name = '10TACLE Studios'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Among the games published by 10TACLE Studios, how many of them are puzzles?",
+        "query": "SELECT COUNT(T1.id) FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN publisher AS T3 ON T2.publisher_id = T3.id INNER JOIN genre AS T4 ON T1.genre_id = T4.id WHERE T4.genre_name = 'Puzzle' AND T3.publisher_name = '10TACLE Studios'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Please list the names of all the games published by 10TACLE Studios and are puzzles.",
+        "query": "SELECT T1.game_name FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN publisher AS T3 ON T2.publisher_id = T3.id INNER JOIN genre AS T4 ON T1.genre_id = T4.id WHERE T3.publisher_name = '10TACLE Studios' AND T4.genre_name = 'Puzzle'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which publisher has published the most games?",
+        "query": "SELECT T.publisher_name FROM ( SELECT T2.publisher_name, COUNT(DISTINCT T2.id) FROM game_publisher AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id GROUP BY T1.publisher_id ORDER BY COUNT(T2.id) DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "On which platform was Panzer Tactics released in 2007?",
+        "query": "SELECT T5.platform_name FROM game_publisher AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id INNER JOIN game AS T3 ON T1.game_id = T3.id INNER JOIN game_platform AS T4 ON T1.id = T4.game_publisher_id INNER JOIN platform AS T5 ON T4.platform_id = T5.id WHERE T3.game_name = 'Panzer Tactics' AND T4.release_year = 2007"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "In which year was Panzer Tactics released on DS?",
+        "query": "SELECT T4.release_year FROM game_publisher AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id INNER JOIN game AS T3 ON T1.game_id = T3.id INNER JOIN game_platform AS T4 ON T1.id = T4.game_publisher_id INNER JOIN platform AS T5 ON T4.platform_id = T5.id WHERE T3.game_name = 'Panzer Tactics' AND T5.platform_name = 'DS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Please list the names of the publishers of all the puzzle games.",
+        "query": "SELECT DISTINCT T3.publisher_name FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN publisher AS T3 ON T2.publisher_id = T3.id INNER JOIN genre AS T4 ON T1.genre_id = T4.id WHERE T4.genre_name = 'Puzzle'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the name of the publisher that has published the most puzzle games?",
+        "query": "SELECT T.publisher_name FROM ( SELECT T3.publisher_name, COUNT(DISTINCT T1.id) FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN publisher AS T3 ON T2.publisher_id = T3.id INNER JOIN genre AS T4 ON T1.genre_id = T4.id WHERE T4.genre_name = 'Puzzle' GROUP BY T3.publisher_name ORDER BY COUNT(DISTINCT T1.id) DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many publishers have published more than 3 puzzle games?",
+        "query": "SELECT COUNT(T.publisher_name) FROM ( SELECT T3.publisher_name, COUNT(DISTINCT T1.id) FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN publisher AS T3 ON T2.publisher_id = T3.id INNER JOIN genre AS T4 ON T1.genre_id = T4.id WHERE T4.genre_name = 'Puzzle' GROUP BY T3.publisher_name HAVING COUNT(DISTINCT T1.id) > 3 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Among the games published by Nintendo, what is the percentage of those in the genre of sports?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T4.genre_name = 'Sports' THEN T1.id ELSE NULL END) AS REAL) * 100/ COUNT(T1.id) FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN publisher AS T3 ON T2.publisher_id = T3.id INNER JOIN genre AS T4 ON T1.genre_id = T4.id WHERE T3.publisher_name = 'Nintendo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games were sold on the DS platform on average in the 4 different regions?",
+        "query": "SELECT SUM(T1.num_sales) * 100000 / 4 FROM region_sales AS T1 INNER JOIN game_platform AS T2 ON T1.game_platform_id = T2.id INNER JOIN platform AS T3 ON T2.platform_id = T3.id WHERE T3.platform_name = 'DS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Tell the number of games whose publisher id is 352.",
+        "query": "SELECT DISTINCT T.game_id FROM game_publisher AS T WHERE T.publisher_id = 352"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List the genre id of the game Pro Evolution Soccer 2012.",
+        "query": "SELECT T.genre_id FROM game AS T WHERE T.game_name = 'Pro Evolution Soccer 2012'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "State the region id of Japan.",
+        "query": "SELECT T.id FROM region AS T WHERE T.region_name = 'Japan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Show the id of the game platform with the most sales in region 2.",
+        "query": "SELECT T1.game_platform_id FROM ( SELECT T.game_platform_id, SUM(T.num_sales) FROM region_sales AS T WHERE T.region_id = 2 GROUP BY T.game_platform_id ORDER BY SUM(T.num_sales) DESC LIMIT 1 ) T1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which genre has the most games? Show its id.",
+        "query": "SELECT genre_id FROM ( SELECT T.genre_id, COUNT(T.id) FROM game AS T GROUP BY T.genre_id ORDER BY COUNT(T.id) DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the id of the game \"Resident Evil Archives: Resident Evil\"?",
+        "query": "SELECT T.genre_id FROM game AS T WHERE T.game_name = 'Resident Evil Archives: Resident Evil'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Show the number of games which were released on X360 in 2010.",
+        "query": "SELECT COUNT(DISTINCT T3.game_id) FROM platform AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.platform_id INNER JOIN game_publisher AS T3 ON T2.game_publisher_id = T3.id WHERE T1.platform_name = 'X360' AND T2.release_year = 2010"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "State the publisher name of the game \"ModNation Racers\".",
+        "query": "SELECT T1.publisher_name FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id INNER JOIN game AS T3 ON T2.game_id = T3.id WHERE T3.game_name = 'ModNation Racers'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Show the id of game platform which makes the most sales in Japan.",
+        "query": "SELECT T.game_platform_id FROM ( SELECT T2.game_platform_id, MAX(T2.num_sales) FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id WHERE T1.region_name = 'Japan' ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many platforms are available for the game Pro Evolution Soccer 2016?",
+        "query": "SELECT COUNT(T2.id) FROM game_platform AS T1 INNER JOIN platform AS T2 ON T1.platform_id = T2.id INNER JOIN game_publisher AS T3 ON T1.game_publisher_id = T3.id INNER JOIN game AS T4 ON T3.game_id = T4.id WHERE T4.game_name = 'Pro Evolution Soccer 2016'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games in the database belong to the genre of sports?",
+        "query": "SELECT COUNT(T1.id) FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T2.genre_name = 'Sports'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Name of the publisher of the game id 10031.",
+        "query": "SELECT T2.publisher_name FROM game_publisher AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id WHERE T1.game_id = 10031"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "State the name of the publisher with the most games.",
+        "query": "SELECT T.publisher_name FROM ( SELECT T2.publisher_name, COUNT(DISTINCT T1.game_id) FROM game_publisher AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id GROUP BY T2.publisher_name ORDER BY COUNT(DISTINCT T1.game_id) DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many more sports games than simulation games?",
+        "query": "SELECT COUNT(CASE WHEN T1.genre_name = 'Sports' THEN T2.id ELSE NULL END) - COUNT(CASE WHEN T1.genre_name = 'Simulation' THEN T2.id ELSE NULL END) FROM genre AS T1 INNER JOIN game AS T2 ON T1.id = T2.genre_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Tell the genre of the game \"Resident Evil: Revelations\".",
+        "query": "SELECT T2.genre_name FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T1.game_name = 'Resident Evil: Revelations'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many sales does game platform id 3871 make in Europe?",
+        "query": "SELECT T2.num_sales * 100000 FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id WHERE T1.region_name = 'Europe' AND T2.game_platform_id = 3871"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Give the number of games which were published by Ascaron Entertainment GmbH.",
+        "query": "SELECT COUNT(T2.game_id) FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id WHERE T1.publisher_name = 'Ascaron Entertainment GmbH'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Show the name of the earliest platform in the database.",
+        "query": "SELECT T2.platform_name FROM game_platform AS T1 INNER JOIN platform AS T2 ON T1.platform_id = T2.id ORDER BY T1.release_year ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "For all the games which were published by Namco Bandai Games, what percentage of them were adventure games?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T4.genre_name = 'Adventure' THEN T1.id ELSE NULL END) AS REAL) * 100 / COUNT(T1.id) FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN publisher AS T3 ON T2.publisher_id = T3.id INNER JOIN genre AS T4 ON T1.genre_id = T4.id WHERE T3.publisher_name = 'Namco Bandai Games'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many times more is the number of games which were published by Atari than Athena?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.publisher_name = 'Atari' THEN T2.game_id ELSE NULL END) AS REAL) / COUNT(CASE WHEN T1.publisher_name = 'Athena' THEN T2.game_id ELSE NULL END) FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games did Electronic Arts publish?",
+        "query": "SELECT COUNT(DISTINCT T2.game_id) FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id WHERE T1.publisher_name = 'Electronic Arts'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the genre of the Advent Rising game?",
+        "query": "SELECT T2.genre_name FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T1.game_name = 'Advent Rising'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many role-playing games did Microsoft Game Studios publish?",
+        "query": "SELECT COUNT(T3.id) FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id INNER JOIN game AS T3 ON T2.game_id = T3.id INNER JOIN genre AS T4 ON T3.genre_id = T4.id WHERE T4.genre_name = 'Role-Playing' AND T1.publisher_name = 'Microsoft Game Studios'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which publisher published the most games?",
+        "query": "SELECT T.publisher_name FROM ( SELECT T2.publisher_name, COUNT(DISTINCT T1.game_id) FROM game_publisher AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id GROUP BY T2.publisher_name ORDER BY COUNT(DISTINCT T1.game_id) DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "In 2004, what are the names of the platforms where Codemasters publish its games?",
+        "query": "SELECT T4.platform_name FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id INNER JOIN game_platform AS T3 ON T2.id = T3.game_publisher_id INNER JOIN platform AS T4 ON T3.platform_id = T4.id WHERE T3.release_year = 2004 AND T1.publisher_name = 'Codemasters'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games were released on PS4 in 2014?",
+        "query": "SELECT COUNT(DISTINCT T3.game_id) FROM platform AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.platform_id INNER JOIN game_publisher AS T3 ON T2.game_publisher_id = T3.id WHERE T1.platform_name = 'PS4' AND T2.release_year = 2014"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What are the names of the publishers who published the oldest games?",
+        "query": "SELECT DISTINCT T3.publisher_name FROM game_platform AS T1 INNER JOIN game_publisher AS T2 ON T1.game_publisher_id = T2.id INNER JOIN publisher AS T3 ON T2.publisher_id = T3.id ORDER BY T1.release_year LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many publishers in Japan released a game on X360 in 2011?",
+        "query": "SELECT COUNT(T3.game_publisher_id) FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id INNER JOIN game_platform AS T3 ON T2.game_platform_id = T3.id INNER JOIN platform AS T4 ON T3.platform_id = T4.id WHERE T4.platform_name = 'X360' AND T3.release_year = 2011 AND T1.region_name = 'Japan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which game platform is the most popular in Europe?",
+        "query": "SELECT T.platform_name FROM ( SELECT T4.platform_name, SUM(T2.num_sales) FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id INNER JOIN game_platform AS T3 ON T2.game_platform_id = T3.id INNER JOIN platform AS T4 ON T3.platform_id = T4.id WHERE T1.region_name = 'Europe' ORDER BY T2.num_sales DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which year has the most number of PC games releases?",
+        "query": "SELECT T.release_year FROM ( SELECT T2.release_year, COUNT(DISTINCT T3.game_id) FROM platform AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.platform_id INNER JOIN game_publisher AS T3 ON T2.game_publisher_id = T3.id WHERE T1.platform_name = 'PC' GROUP BY T2.release_year ORDER BY COUNT(DISTINCT T3.game_id) DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List the names of all the publishers who published one game only.",
+        "query": "SELECT T.publisher_name FROM ( SELECT T2.publisher_name, COUNT(DISTINCT T1.game_id) FROM game_publisher AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id GROUP BY T2.publisher_name HAVING COUNT(DISTINCT T1.game_id) = 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What are the names of the games that were published by 505 Games?",
+        "query": "SELECT T3.game_name FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id INNER JOIN game AS T3 ON T2.game_id = T3.id WHERE T1.publisher_name = '505 Games'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the genre ID of the game named 25 to Life?",
+        "query": "SELECT T.genre_id FROM game AS T WHERE T.game_name = '25 to Life'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List down the game ID of games with genre ID 2.",
+        "query": "SELECT T.id FROM game AS T WHERE T.genre_id = 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Provide the release year of record ID 1 to 10.",
+        "query": "SELECT T.release_year FROM game_platform AS T WHERE T.id BETWEEN 1 AND 10"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Give the game publisher ID of records with platform ID 15.",
+        "query": "SELECT T.game_publisher_id FROM game_platform AS T WHERE T.platform_id = 15"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List down the record ID of records released between 2000 to 2003.",
+        "query": "SELECT T.id FROM game_platform AS T WHERE T.release_year BETWEEN 2000 AND 2003"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the number of sales in region ID 2 with game platform ID 9615?",
+        "query": "SELECT T.num_sales * 100000 FROM region_sales AS T WHERE T.region_id = 2 AND T.game_platform_id = 9615"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List down the names of platform where the games released in 2016 can be played on.",
+        "query": "SELECT DISTINCT T1.platform_name FROM platform AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.platform_id WHERE T2.release_year = 2016"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "When was the game titled 3DS Classic Collection released?",
+        "query": "SELECT T1.release_year FROM game_platform AS T1 INNER JOIN game_publisher AS T2 ON T1.game_publisher_id = T2.id INNER JOIN game AS T3 ON T2.game_id = T3.id WHERE T3.game_name = '3DS Classic Collection'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the average number of sales in Japan?",
+        "query": "SELECT AVG(T2.num_sales) * 100000 AS avg_japan FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id WHERE T1.region_name = 'Japan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Give the genre of the games released from 2000 to 2002.",
+        "query": "SELECT DISTINCT T4.genre_name FROM game_platform AS T1 INNER JOIN game_publisher AS T2 ON T1.game_publisher_id = T2.id INNER JOIN game AS T3 ON T2.game_id = T3.id INNER JOIN genre AS T4 ON T3.genre_id = T4.id WHERE T1.release_year BETWEEN 2000 AND 2002"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List down the name of games published by 3DO.",
+        "query": "SELECT T1.game_name FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN publisher AS T3 ON T2.publisher_id = T3.id WHERE T3.publisher_name = '3DO'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many role-playing games are there?",
+        "query": "SELECT COUNT(T1.id) FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T2.genre_name = 'Role-Playing'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List the region name where games reached 300000 sales and above.",
+        "query": "SELECT DISTINCT T1.region_name FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id WHERE T2.num_sales * 100000 > 300000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which company published the game with the most sales in North America?",
+        "query": "SELECT T.publisher_name FROM ( SELECT T5.publisher_name, SUM(T2.num_sales) * 100000 FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id INNER JOIN game_platform AS T3 ON T2.game_platform_id = T3.id INNER JOIN game_publisher AS T4 ON T3.game_publisher_id = T4.id INNER JOIN publisher AS T5 ON T4.publisher_id = T5.id WHERE T1.region_name = 'North America' GROUP BY T5.publisher_name ORDER BY SUM(T2.num_sales) * 100000 DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the release year of the game that gained 350000 sales in North America?",
+        "query": "SELECT T3.release_year FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id INNER JOIN game_platform AS T3 ON T2.game_platform_id = T3.id WHERE T2.num_sales * 100000 = 350000 AND T1.region_name = 'North America'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "In which platform does the game titled 15 Days available?",
+        "query": "SELECT T1.platform_name FROM platform AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.platform_id INNER JOIN game_publisher AS T3 ON T2.game_publisher_id = T3.id INNER JOIN game AS T4 ON T3.game_id = T4.id WHERE T4.game_name = 'Counter Force'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Give the name of the publisher of the game ID 75.",
+        "query": "SELECT T2.publisher_name FROM game_publisher AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id WHERE T1.game_id = 75"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the title of the game that gained the most sales in Japan?",
+        "query": "SELECT T.game_name FROM ( SELECT T5.game_name FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id INNER JOIN game_platform AS T3 ON T2.game_platform_id = T3.id INNER JOIN game_publisher AS T4 ON T3.game_publisher_id = T4.id INNER JOIN game AS T5 ON T4.game_id = T5.id WHERE T1.region_name = 'Japan' ORDER BY T2.num_sales DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Provide the game publisher's name of the game with sales greater than 90% of the average sales in Japan.",
+        "query": "SELECT DISTINCT T5.publisher_name FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id INNER JOIN game_platform AS T3 ON T2.game_platform_id = T3.id INNER JOIN game_publisher AS T4 ON T3.game_publisher_id = T4.id INNER JOIN publisher AS T5 ON T4.publisher_id = T5.id WHERE T2.num_sales * 10000000 > ( SELECT AVG(T2.num_sales) * 100000 * 90 FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id WHERE T1.region_name = 'Japan' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Among the games released in 2004, what is the percentage of games on PSP?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.platform_name = 'PSP' THEN T3.game_id ELSE NULL END) AS REAL) * 100 / COUNT(T3.game_id) FROM platform AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.platform_id INNER JOIN game_publisher AS T3 ON T2.game_publisher_id = T3.id WHERE T2.release_year = 2004"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games were released in 1981?",
+        "query": "SELECT COUNT(T.id) FROM game_platform AS T WHERE T.release_year = 1981"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the genre ID of the '2Xtreme' game?",
+        "query": "SELECT T.genre_id FROM game AS T WHERE T.game_name = '2Xtreme'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Sum the total game sales in every region for platform ID 9658.",
+        "query": "SELECT SUM(T.num_sales) * 100000 FROM region_sales AS T WHERE T.game_platform_id = 9658"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Provide the ID of 1C Company.",
+        "query": "SELECT T.id FROM publisher AS T WHERE T.publisher_name = '1C Company'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Provide the genre name of the genre ID 3.",
+        "query": "SELECT T.genre_name FROM genre AS T WHERE T.id = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List the game IDs that were released in 2017.",
+        "query": "SELECT T.id FROM game_platform AS T WHERE T.release_year = 2017"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "When was the \"Adventure Island\" game released?",
+        "query": "SELECT T3.release_year FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN game_platform AS T3 ON T2.id = T3.game_publisher_id WHERE T1.game_name = 'Adventure Island'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games are puzzle genre?",
+        "query": "SELECT COUNT(T1.id) FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T2.genre_name = 'Puzzle'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Provide the games that can be played on the SCD platform.",
+        "query": "SELECT T4.game_name FROM game_platform AS T1 INNER JOIN platform AS T2 ON T1.platform_id = T2.id INNER JOIN game_publisher AS T3 ON T1.game_publisher_id = T3.id INNER JOIN game AS T4 ON T3.game_id = T4.id WHERE T2.platform_name = 'SCD'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games were published by Acclaim Entertainment?",
+        "query": "SELECT COUNT(DISTINCT T1.game_id) FROM game_publisher AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id WHERE T2.publisher_name = 'Acclaim Entertainment'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Name the publisher of the Chronicles of the Sword game.",
+        "query": "SELECT T3.publisher_name FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN publisher AS T3 ON T2.publisher_id = T3.id WHERE T1.game_name = 'Chronicles of the Sword'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Provide the number of games sold in North America on the PS4 platform.",
+        "query": "SELECT SUM(T1.num_sales * 100000) FROM region_sales AS T1 INNER JOIN region AS T2 ON T1.region_id = T2.id INNER JOIN game_platform AS T3 ON T1.game_platform_id = T3.id INNER JOIN platform AS T4 ON T3.platform_id = T4.id WHERE T2.region_name = 'North America' AND T4.platform_name = 'PS4'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Provide the ID of the most popular platform in Europe.",
+        "query": "SELECT T.game_platform_id FROM ( SELECT T1.game_platform_id, SUM(T1.num_sales) FROM region_sales AS T1 INNER JOIN region AS T2 ON T1.region_id = T2.id WHERE T2.region_name = 'Europe' GROUP BY T1.game_platform_id ORDER BY SUM(T1.num_sales) DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Name the game released in 2011.",
+        "query": "SELECT T3.game_name FROM game_platform AS T1 INNER JOIN game_publisher AS T2 ON T1.game_publisher_id = T2.id INNER JOIN game AS T3 ON T2.game_id = T3.id WHERE T1.release_year = 2011"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games can be played on the Wii platform?",
+        "query": "SELECT COUNT(T1.id) FROM game_platform AS T1 INNER JOIN platform AS T2 ON T1.platform_id = T2.id WHERE T2.platform_name = 'Wii'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Provide any five games and release year under the sports genre.",
+        "query": "SELECT T3.game_name, T1.release_year FROM game_platform AS T1 INNER JOIN game_publisher AS T2 ON T1.game_publisher_id = T2.id INNER JOIN game AS T3 ON T2.game_id = T3.id INNER JOIN genre AS T4 ON T3.genre_id = T4.id WHERE T4.genre_name = 'Sports' LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Mention the genre of the 2Xtreme.",
+        "query": "SELECT T2.id FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T1.game_name = '2Xtreme'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Provide the platform where the Panzer Tactics can be played.",
+        "query": "SELECT T4.platform_name FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN game_platform AS T3 ON T2.id = T3.game_publisher_id INNER JOIN platform AS T4 ON T3.platform_id = T4.id WHERE T1.game_name = 'Panzer Tactics'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Calculate how many percent of sales in North America is higher than the average sale per region for platform ID 9577.",
+        "query": "SELECT (SUM(CASE WHEN T2.region_name = 'North America' THEN T1.num_sales ELSE 0 END) - AVG(T1.num_sales)) * 100.0 / AVG(T1.num_sales) FROM region_sales AS T1 INNER JOIN region AS T2 ON T1.region_id = T2.id WHERE T1.game_platform_id = 9577"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which game has the longest name?",
+        "query": "SELECT T.game_name FROM game AS T ORDER BY LENGTH(T.game_name) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games were released in 2001?",
+        "query": "SELECT COUNT(T.id) FROM game_platform AS T WHERE T.release_year = 2001"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the total number of sales across all regions?",
+        "query": "SELECT SUM(T.num_sales) * 100000 FROM region_sales t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the average number of games published by a publisher?",
+        "query": "SELECT CAST(COUNT(T.game_id) AS REAL) / COUNT(DISTINCT T.publisher_id) FROM game_publisher AS T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the first year a game is released?",
+        "query": "SELECT MIN(T.release_year) FROM game_platform t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the least common game genre?",
+        "query": "SELECT T.game_name FROM ( SELECT T2.game_name, COUNT(T2.id) FROM genre AS T1 INNER JOIN game AS T2 ON T1.id = T2.genre_id GROUP BY T2.game_name ORDER BY COUNT(T2.id) ASC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which is the publisher for the game \"Prism: Light the Way\"?",
+        "query": "SELECT T1.publisher_name FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id INNER JOIN game AS T3 ON T2.game_id = T3.id WHERE T3.game_name = 'Prism: Light the Way'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List the platforms that release the most games each year.",
+        "query": "SELECT T1.platform_name FROM platform AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.platform_id INNER JOIN game_publisher AS T3 ON T2.game_publisher_id = T3.id GROUP BY T2.release_year, T1.platform_name ORDER BY COUNT(DISTINCT T3.game_id) DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games do not have any sales in Europe?",
+        "query": "SELECT COUNT(*) FROM region_sales AS T1 INNER JOIN region AS T2 ON T1.region_id = T2.id WHERE T2.region_name = 'Europe' AND T1.num_sales = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What are the games that were released in 2006?",
+        "query": "SELECT T3.game_name FROM game_platform AS T1 INNER JOIN game_publisher AS T2 ON T1.game_publisher_id = T2.id INNER JOIN game AS T3 ON T2.game_id = T3.id WHERE T1.release_year = 2006"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the genre of the game \"Mario vs. Donkey Kong\"?",
+        "query": "SELECT T1.genre_name FROM genre AS T1 INNER JOIN game AS T2 ON T1.id = T2.genre_id WHERE T2.game_name = 'Mario vs. Donkey Kong'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which publisher published the most games?",
+        "query": "SELECT T.publisher_name FROM ( SELECT T1.publisher_name, COUNT(DISTINCT T2.game_id) FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id GROUP BY T1.publisher_name ORDER BY COUNT(DISTINCT T2.game_id) DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List all the platform games.",
+        "query": "SELECT T2.game_name FROM genre AS T1 INNER JOIN game AS T2 ON T1.id = T2.genre_id WHERE T1.genre_name = 'Platform'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What are the years that \"WiiU\" got a new game?",
+        "query": "SELECT T2.release_year FROM platform AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.platform_id WHERE T1.platform_name = 'WiiU' ORDER BY T2.release_year DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which game has the most sales in Japan?",
+        "query": "SELECT T5.game_name FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id INNER JOIN game_platform AS T3 ON T2.game_platform_id = T3.id INNER JOIN game_publisher AS T4 ON T3.game_publisher_id = T4.id INNER JOIN game AS T5 ON T4.game_id = T5.id WHERE T1.region_name = 'Japan' ORDER BY T2.num_sales DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List the games from the publisher \"Activision\".",
+        "query": "SELECT T3.game_name FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id INNER JOIN game AS T3 ON T2.game_id = T3.id WHERE T1.publisher_name = 'Activision'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many different publishers have published a game that starts with \"Marvel\"?",
+        "query": "SELECT COUNT(DISTINCT T1.publisher_id) FROM game_publisher AS T1 INNER JOIN game AS T2 ON T1.game_id = T2.id WHERE T2.game_name LIKE 'Marvel%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What percentage of games are sports?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.genre_name = 'Sports' THEN T2.id ELSE NULL END) AS REAL) * 100 / COUNT(T2.id) FROM genre AS T1 INNER JOIN game AS T2 ON T1.id = T2.genre_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the ratio of game sales between North America and Japan?",
+        "query": "SELECT SUM(CASE WHEN T2.region_name = 'North America' THEN T1.num_sales ELSE 0 END) / SUM(CASE WHEN T2.region_name = 'Japan' THEN T1.num_sales ELSE 0 END) FROM region_sales AS T1 INNER JOIN region AS T2 ON T1.region_id = T2.id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which year has the most number of video game releases?",
+        "query": "SELECT T1.release_year FROM ( SELECT T.release_year, COUNT(id) FROM game_platform AS T GROUP BY T.release_year ORDER BY COUNT(T.id) DESC LIMIT 1 ) T1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many video game publishers have Interactive in their names?",
+        "query": "SELECT COUNT(T.id) FROM publisher AS T WHERE T.publisher_name LIKE '%Interactive%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What are the top 2 platforms with the most sales in North America?",
+        "query": "SELECT T4.platform_name FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id INNER JOIN game_platform AS T3 ON T2.game_platform_id = T3.id INNER JOIN platform AS T4 ON T3.platform_id = T4.id WHERE T1.region_name = 'North America' ORDER BY T2.num_sales DESC LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games did BMG Interactive Entertainment release in 2012?",
+        "query": "SELECT COUNT(DISTINCT T2.game_id) FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id INNER JOIN game_platform AS T3 ON T2.id = T3.game_publisher_id WHERE T3.release_year = 2012"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the name of the publisher that released the most video games in 2007?",
+        "query": "SELECT T3.publisher_name FROM game_platform AS T1 INNER JOIN game_publisher AS T2 ON T1.game_publisher_id = T2.id INNER JOIN publisher AS T3 ON T2.publisher_id = T3.id WHERE T1.release_year = 2007 GROUP BY T3.publisher_name ORDER BY COUNT(DISTINCT T2.game_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many publishers published the Minecraft game?",
+        "query": "SELECT COUNT(T2.publisher_id) FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id WHERE T1.game_name = 'Minecraft'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which publisher has published the most number of Action games?",
+        "query": "SELECT T.publisher_name FROM ( SELECT T4.publisher_name, COUNT(DISTINCT T2.id) FROM genre AS T1 INNER JOIN game AS T2 ON T1.id = T2.genre_id INNER JOIN game_publisher AS T3 ON T2.id = T3.game_id INNER JOIN publisher AS T4 ON T3.publisher_id = T4.id WHERE T1.genre_name = 'Action' GROUP BY T4.publisher_name ORDER BY COUNT(DISTINCT T2.id) DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many Sports games did Nintendo publish?",
+        "query": "SELECT COUNT(T3.id) FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id INNER JOIN game AS T3 ON T2.game_id = T3.id INNER JOIN genre AS T4 ON T3.genre_id = T4.id WHERE T4.genre_name = 'Sports' AND T1.publisher_name = 'Nintendo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the genre of the game '2 Games in 1: Sonic Advance & ChuChu Rocket!'?",
+        "query": "SELECT T2.genre_name FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T1.game_name = '2 Games in 1: Sonic Advance & ChuChu Rocket!'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many times did other regions make positive sales in DS platform?",
+        "query": "SELECT COUNT(DISTINCT T2.id) FROM platform AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.platform_id INNER JOIN region_sales AS T3 ON T1.id = T3.game_platform_id INNER JOIN region AS T4 ON T3.region_id = T4.id WHERE T1.platform_name = 'DS' AND T4.region_name = 'Other' AND T3.num_sales > 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What are the names of the games published by American Softworks?",
+        "query": "SELECT T3.game_name FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id INNER JOIN game AS T3 ON T2.game_id = T3.id WHERE T1.publisher_name = 'American Softworks'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many strategy games are there?",
+        "query": "SELECT COUNT(CASE WHEN T1.genre_name = 'Strategy' THEN T2.id ELSE NULL END) FROM genre AS T1 INNER JOIN game AS T2 ON T1.id = T2.genre_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which publisher published Overwatch?",
+        "query": "SELECT T3.publisher_name FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN publisher AS T3 ON T2.publisher_id = T3.id WHERE T1.game_name = 'Overwatch'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the name of the genre with the most number of video games?",
+        "query": "SELECT T2.genre_name FROM game AS T1 INNER JOIN genre AS T2 ON T2.id = T1.genre_id GROUP BY T2.genre_name ORDER BY COUNT(T1.genre_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the number of games sold in Europe for game platform ID 26?",
+        "query": "SELECT T2.num_sales * 100000 AS nums_eur FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id WHERE T2.game_platform_id = 26 AND T1.region_name = 'Europe'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games were released in the year 2001?",
+        "query": "SELECT COUNT(id) FROM game_platform AS T WHERE T.release_year = 2001"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games include the word 'Box' in their name?",
+        "query": "SELECT COUNT(*) FROM ( SELECT T.game_name FROM game AS T WHERE T.game_name LIKE '%Box%' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What are the three largest numbers of games sold?",
+        "query": "SELECT T.game_platform_id, SUM(T.num_sales) * 100000 FROM region_sales AS T GROUP BY game_platform_id ORDER BY SUM(T.num_sales) * 100000 DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What year were the first game released?",
+        "query": "SELECT T.release_year FROM game_platform AS T ORDER BY T.release_year ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What publishers have the word 'Entertainment' in their name?",
+        "query": "SELECT T.publisher_name FROM publisher AS T WHERE T.publisher_name LIKE '%Entertainment%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Indicate the name of all adventure games.",
+        "query": "SELECT T2.game_name FROM genre AS T1 INNER JOIN game AS T2 ON T1.id = T2.genre_id WHERE T1.genre_name = 'Adventure'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List the name of all games published by 'Pioneer LDC'.",
+        "query": "SELECT T3.game_name FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id INNER JOIN game AS T3 ON T2.game_id = T3.id WHERE T1.publisher_name = 'Pioneer LDC'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Indicate the name of all the games published for the 'SCD' platform.",
+        "query": "SELECT T1.game_name FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN game_platform AS T3 ON T2.id = T3.game_publisher_id INNER JOIN platform AS T4 ON T3.platform_id = T4.id WHERE T4.platform_name = 'SCD'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List the name of all games published in Japan.",
+        "query": "SELECT T1.game_name FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN game_platform AS T3 ON T2.id = T3.game_publisher_id INNER JOIN region_sales AS T4 ON T3.id = T4.game_platform_id INNER JOIN region AS T5 ON T4.region_id = T5.id WHERE T5.region_name = 'Japan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What genres are the games published by 'Agatsuma Entertainment'?",
+        "query": "SELECT T4.genre_name FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id INNER JOIN game AS T3 ON T2.game_id = T3.id INNER JOIN genre AS T4 ON T3.genre_id = T4.id WHERE T1.publisher_name = 'Agatsuma Entertainment'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games are not of the genres 'Role-Playing', 'Shooter' and 'Simulation'?",
+        "query": "SELECT COUNT(T2.id) FROM genre AS T1 INNER JOIN game AS T2 ON T1.id = T2.genre_id WHERE T1.genre_name NOT IN ('Role-Playing', 'Shooter', 'Simulation')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Indicate, by region, which platform has sold the most games.",
+        "query": "SELECT T.region_name FROM ( SELECT T1.platform_name, T4.region_name, SUM(T3.num_sales) FROM platform AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.platform_id INNER JOIN region_sales AS T3 ON T1.id = T3.game_platform_id INNER JOIN region AS T4 ON T3.region_id = T4.id GROUP BY T1.platform_name, T4.region_name ORDER BY SUM(T3.num_sales) DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which publisher has published the most games in the 'Puzzle' genre?",
+        "query": "SELECT T.publisher_name FROM ( SELECT T1.publisher_name, COUNT(T3.id) FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id INNER JOIN game AS T3 ON T2.game_id = T3.id INNER JOIN genre AS T4 ON T3.genre_id = T4.id WHERE T4.genre_name = 'Puzzle' GROUP BY T1.publisher_name ORDER BY COUNT(T3.id) DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which game has sold the fewest units?",
+        "query": "SELECT T.game_name FROM ( SELECT T1.game_name FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN game_platform AS T3 ON T2.id = T3.game_publisher_id INNER JOIN region_sales AS T4 ON T3.id = T4.game_platform_id ORDER BY T4.num_sales LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which publisher has published the game 'Pachi-Slot Kanzen Kouryaku 3: Universal Koushiki Gaido Volume 3'?",
+        "query": "SELECT T1.publisher_name FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id INNER JOIN game AS T3 ON T2.game_id = T3.id WHERE T3.game_name = 'Pachi-Slot Kanzen Kouryaku 3: Universal Koushiki Gaido Volume 3'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "In which regions has the game 'Pengo' been sold?",
+        "query": "SELECT T5.region_name FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN game_platform AS T3 ON T2.id = T3.game_publisher_id INNER JOIN region_sales AS T4 ON T3.id = T4.game_platform_id INNER JOIN region AS T5 ON T4.region_id = T5.id WHERE T1.game_name = 'Pengo'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List by name all the games released in the year 2010.",
+        "query": "SELECT T1.game_name FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN game_platform AS T3 ON T2.id = T3.game_publisher_id WHERE T3.release_year = '2010'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Calculate the average game sales for the PS2 platform.",
+        "query": "SELECT SUM(T3.num_sales * 100000) / COUNT(T1.id) FROM platform AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.platform_id INNER JOIN region_sales AS T3 ON T2.id = T3.game_platform_id WHERE T1.platform_name = 'PS2'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Calculate the percentage of games published by 'Brash Entertainment'?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.publisher_name = 'Brash Entertainment' THEN T2.game_id ELSE NULL END) AS REAL) * 100 / COUNT(T2.game_id) FROM publisher AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.publisher_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the total number of games sold in region ID 1?",
+        "query": "SELECT SUM(T.num_sales * 100000) FROM region_sales AS T WHERE T.region_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many FIFA games are there across all platforms?",
+        "query": "SELECT COUNT(*) FROM ( SELECT T.game_name FROM game AS T WHERE T.game_name LIKE '%FIFA%' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which platform is the most popular in Europe?",
+        "query": "SELECT T.platform_name FROM ( SELECT T4.platform_name FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id INNER JOIN game_platform AS T3 ON T2.game_platform_id = T3.id INNER JOIN platform AS T4 ON T3.platform_id = T4.id WHERE T1.region_name = 'Europe' ORDER BY T2.num_sales DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Who is the publisher of the game 2002 FIFA World Cup?",
+        "query": "SELECT T2.publisher_name FROM game_publisher AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id INNER JOIN game AS T3 ON T1.game_id = T3.id WHERE T3.game_name = '2002 FIFA World Cup'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What platform is the game 3Xtreme available on?",
+        "query": "SELECT T2.platform_name FROM game_platform AS T1 INNER JOIN platform AS T2 ON T1.platform_id = T2.id INNER JOIN game_publisher AS T3 ON T1.game_publisher_id = T3.id INNER JOIN game AS T4 ON T3.game_id = T4.id WHERE T4.game_name = '3Xtreme'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What genre is the game 2010 FIFA World Cup South Africa?",
+        "query": "SELECT T2.genre_name FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T1.game_name = '2010 FIFA World Cup South Africa'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Which region has the highest number of games sold on all platforms?",
+        "query": "SELECT T.region_name FROM ( SELECT T2.region_name, SUM(T1.num_sales) FROM region_sales AS T1 INNER JOIN region AS T2 ON T1.region_id = T2.id INNER JOIN game_platform AS T3 ON T1.game_platform_id = T3.id INNER JOIN platform AS T4 ON T3.platform_id = T4.id GROUP BY T4.platform_name ORDER BY SUM(T1.num_sales) DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games were sold on PS3 platform in Japan?",
+        "query": "SELECT SUM(T1.num_sales * 100000) FROM region_sales AS T1 INNER JOIN region AS T2 ON T1.region_id = T2.id INNER JOIN game_platform AS T3 ON T1.game_platform_id = T3.id INNER JOIN platform AS T4 ON T3.platform_id = T4.id WHERE T2.region_name = 'Japan' AND T4.platform_name = 'PS3'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What are the names of games that were released in 2007?",
+        "query": "SELECT T3.game_name FROM game_platform AS T1 INNER JOIN game_publisher AS T2 ON T1.game_publisher_id = T2.id INNER JOIN game AS T3 ON T2.game_id = T3.id WHERE T1.release_year = 2007"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games were published by Activision?",
+        "query": "SELECT COUNT(DISTINCT T3.id) FROM game_publisher AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id INNER JOIN game AS T3 ON T1.game_id = T3.id WHERE T2.publisher_name = 'Activision'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Indicate the release year of the game with more than 200000 sales in Japan.",
+        "query": "SELECT DISTINCT T3.release_year FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id INNER JOIN game_platform AS T3 ON T2.game_platform_id = T3.id WHERE T2.num_sales * 100000 > 200000 AND T1.region_name = 'Japan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "In 2010, how many PS3 games were released?",
+        "query": "SELECT COUNT(T3.game_id) FROM platform AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.platform_id INNER JOIN game_publisher AS T3 ON T2.game_publisher_id = T3.id WHERE T1.platform_name = 'PS3' AND T2.release_year = 2010"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Indicate the publisher who has published the most games of all time.",
+        "query": "SELECT T.publisher_name FROM ( SELECT T2.publisher_name, COUNT(DISTINCT T1.game_id) FROM game_publisher AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id GROUP BY T2.publisher_name ORDER BY COUNT(DISTINCT T1.game_id) DESC LIMIT 1 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many shooter games are there?",
+        "query": "SELECT COUNT(T1.id) FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T2.genre_name = 'Shooter'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the percentage of games that were released on PS4 in 2014 among all platforms?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.platform_name = 'PS4' THEN T3.game_id ELSE NULL END) AS REAL) * 100 / COUNT(T3.game_id) FROM game_platform AS T1 INNER JOIN platform AS T2 ON T1.platform_id = T2.id INNER JOIN game_publisher AS T3 ON T1.game_publisher_id = T3.id WHERE T1.release_year = 2014"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How much are the sales of the games in region ID 4?",
+        "query": "SELECT SUM(T.num_sales) * 100000 FROM region_sales AS T WHERE T.region_id = 4"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List down the game platform IDs of games with a region ID of 1.",
+        "query": "SELECT T.game_platform_id FROM region_sales AS T WHERE T.region_id = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Calculate the difference between sales of games from region ID 2 and region ID 3.",
+        "query": "SELECT SUM(CASE WHEN T.region_id = 2 THEN T.num_sales ELSE 0 END) - SUM(CASE WHEN T.region_id = 3 THEN T.num_sales ELSE 0 END) FROM region_sales t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List down the platform IDs of the games released in 2007.",
+        "query": "SELECT DISTINCT T.platform_id FROM game_platform AS T WHERE T.release_year = 2007"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "State the game publisher IDs of the games with a platform ID of 16.",
+        "query": "SELECT T.game_publisher_id FROM game_platform AS T WHERE T.platform_id = 16"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Calculate the number of game publisher IDs for games released in 1984.",
+        "query": "SELECT COUNT(T.game_publisher_id) FROM game_platform AS T WHERE T.release_year = 1984"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List down the platform IDs of the games with a region ID of 3.",
+        "query": "SELECT T2.id FROM region_sales AS T1 INNER JOIN game_platform AS T2 ON T1.game_platform_id = T2.id WHERE T1.region_id = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What are the sales made by the games in Japan region?",
+        "query": "SELECT SUM(CASE WHEN T2.region_name = 'Japan' THEN T1.num_sales ELSE 0 END) AS nums FROM region_sales AS T1 INNER JOIN region AS T2 ON T1.region_id = T2.id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many game publisher IDs have published games on the X360 platform?",
+        "query": "SELECT COUNT(T1.game_publisher_id) FROM game_platform AS T1 INNER JOIN platform AS T2 ON T1.platform_id = T2.id WHERE T2.platform_name = 'X360'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "State the name of the platforms for games released in 2000.",
+        "query": "SELECT DISTINCT T2.platform_name FROM game_platform AS T1 INNER JOIN platform AS T2 ON T1.platform_id = T2.id WHERE T1.release_year = 2000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Find out the difference between the number of publishers who released the games on the PS3 and X360.",
+        "query": "SELECT COUNT(CASE WHEN T2.platform_name = 'PS3' THEN T1.game_publisher_id ELSE NULL END) - COUNT(CASE WHEN T2.platform_name = 'X360' THEN T1.game_publisher_id ELSE NULL END) FROM game_platform AS T1 INNER JOIN platform AS T2 ON T1.platform_id = T2.id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What are the game IDs of the games published by Bethesda Softworks?",
+        "query": "SELECT T1.game_id FROM game_publisher AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id WHERE T2.publisher_name = 'Bethesda Softworks'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Calculate the total number of IDs for the game published by Capcom and Sony Computer Entertainment.",
+        "query": "SELECT COUNT(DISTINCT T1.game_id) FROM game_publisher AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id WHERE T2.publisher_name IN ('Capcom', 'Sony Computer Entertainment')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the genre of the game \"Grand Theft Auto V\"?",
+        "query": "SELECT T2.genre_name FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T1.game_name = 'Grand Theft Auto V'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List down the names of the games in the racing genre.",
+        "query": "SELECT T1.game_name FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T2.genre_name = 'Racing'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Calculate the number of games in the fighting genre.",
+        "query": "SELECT COUNT(T1.id) FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T2.genre_name = 'Fighting'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What are the genres of games published by the publisher with an ID of 464?",
+        "query": "SELECT DISTINCT T2.genre_name FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id INNER JOIN game_publisher AS T3 ON T1.id = T3.game_id WHERE T3.publisher_id = 464"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Find out the platform of the game \"Final Fantasy XIII-2\".",
+        "query": "SELECT T4.platform_name FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN game_platform AS T3 ON T2.id = T3.game_publisher_id INNER JOIN platform AS T4 ON T3.platform_id = T4.id WHERE T1.game_name = 'Final Fantasy XIII-2'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Calculate the total sales made by the games released in 2000.",
+        "query": "SELECT SUM(T1.num_sales) FROM region_sales AS T1 INNER JOIN game_platform AS T2 ON T1.game_platform_id = T2.id WHERE T2.release_year = 2000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Calculate the difference in sales between the games released in 1990 and 2000.",
+        "query": "SELECT SUM(CASE WHEN T2.release_year = 2000 THEN T1.num_sales ELSE 0 END) - SUM(CASE WHEN T2.release_year = 1990 THEN T1.num_sales ELSE 0 END) FROM region_sales AS T1 INNER JOIN game_platform AS T2 ON T1.game_platform_id = T2.id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What are the platform IDs of records released in 2006?",
+        "query": "SELECT DISTINCT T.platform_id FROM game_platform AS T WHERE T.release_year = 2006"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Compute the average number of sales in region ID 3.",
+        "query": "SELECT AVG(T.num_sales * 100000) FROM region_sales AS T WHERE T.region_id = 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "In which year did the record ID 19 with game publisher ID 6657 released?",
+        "query": "SELECT T.release_year FROM game_platform AS T WHERE T.game_publisher_id = 6657 AND T.id = 19"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Calculate the total sales in all regions with game platform ID 66.",
+        "query": "SELECT SUM(T.num_sales) * 100000 FROM region_sales AS T WHERE T.game_platform_id = 66"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Give the game name of the game ID 44.",
+        "query": "SELECT T.game_name FROM game AS T WHERE T.id = 44"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List the games available on Wii.",
+        "query": "SELECT T4.game_name FROM platform AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.platform_id INNER JOIN game_publisher AS T3 ON T2.game_publisher_id = T3.id INNER JOIN game AS T4 ON T3.game_id = T4.id WHERE T1.platform_name = 'Wii'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Provide the name of games released in 2015.",
+        "query": "SELECT T3.game_name FROM game_platform AS T1 INNER JOIN game_publisher AS T2 ON T1.game_publisher_id = T2.id INNER JOIN game AS T3 ON T2.game_id = T3.id WHERE T1.release_year = 2015"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the total number of adventure games released in 2005?",
+        "query": "SELECT COUNT(DISTINCT T3.id) FROM game_platform AS T1 INNER JOIN game_publisher AS T2 ON T1.game_publisher_id = T2.id INNER JOIN game AS T3 ON T2.game_id = T3.id INNER JOIN genre AS T4 ON T3.genre_id = T4.id WHERE T4.genre_name = 'Adventure' AND T1.release_year = 2005"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the name of the company that produced the game titled Adventure Time: Explore the Dungeon Because I Don't Know!?",
+        "query": "SELECT T3.publisher_name FROM game AS T1 INNER JOIN game_publisher AS T2 ON T1.id = T2.game_id INNER JOIN publisher AS T3 ON T2.publisher_id = T3.id WHERE T1.game_name = 'Adventure Time: Explore the Dungeon Because I Don''t Know!'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List down the game platform ID and region name where the games achieved 20000 sales and below.",
+        "query": "SELECT T2.game_platform_id, T1.region_name FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id WHERE T2.num_sales * 100000 <= 20000"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Provide the name of game produced by 505 Games in 2006.",
+        "query": "SELECT T3.game_name FROM game_platform AS T1 INNER JOIN game_publisher AS T2 ON T1.game_publisher_id = T2.id INNER JOIN game AS T3 ON T2.game_id = T3.id INNER JOIN publisher AS T4 ON T2.publisher_id = T4.id WHERE T4.publisher_name = '505 Games' AND T1.release_year = 2006"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the genre of the game ID 119?",
+        "query": "SELECT T2.genre_name FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T1.id = 119"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List the game IDs of the games produced by Abylight.",
+        "query": "SELECT T1.game_id FROM game_publisher AS T1 INNER JOIN publisher AS T2 ON T1.publisher_id = T2.id WHERE T2.publisher_name = 'Abylight'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "In which region where a game had the lowest number of sales?",
+        "query": "SELECT DISTINCT T1.region_name FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id ORDER BY T2.num_sales LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List down the name of strategy games.",
+        "query": "SELECT T1.game_name FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T2.genre_name = 'Strategy'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "In what platform does the game ID 178 available?",
+        "query": "SELECT T3.platform_name FROM game_publisher AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.game_publisher_id INNER JOIN platform AS T3 ON T2.platform_id = T3.id WHERE T1.game_id = 178"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Give the genre of the following game titled 'Airlock' , 'Airline Tycoon' , and 'Airblade', respectively.",
+        "query": "SELECT T2.genre_name FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T1.game_name IN ('Airlock', 'Airline Tycoon', 'Airblade')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Calculate the total number of sales in North America.",
+        "query": "SELECT SUM(T2.num_sales) * 100000 AS nums FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id WHERE T1.region_name = 'North America'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List down at least five publishers of the games with number of sales less than 10000.",
+        "query": "SELECT T.publisher_name FROM ( SELECT DISTINCT T5.publisher_name FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id INNER JOIN game_platform AS T3 ON T2.game_platform_id = T3.id INNER JOIN game_publisher AS T4 ON T3.game_publisher_id = T4.id INNER JOIN publisher AS T5 ON T4.publisher_id = T5.id WHERE T1.region_name = 'North America' AND T2.num_sales * 100000 < 10000 LIMIT 5 ) t"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "List the platform ID of the game titled Airborne Troops: Countdown to D-Day.",
+        "query": "SELECT T1.platform_id FROM game_platform AS T1 INNER JOIN game_publisher AS T2 ON T1.game_publisher_id = T2.id INNER JOIN game AS T3 ON T2.game_id = T3.id WHERE T3.game_name = 'Airborne Troops: Countdown to D-Day'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "How many games available on PSP were released in 2004?",
+        "query": "SELECT COUNT(T3.game_id) FROM platform AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.platform_id INNER JOIN game_publisher AS T3 ON T2.game_publisher_id = T3.id WHERE T1.platform_name = 'PSP' AND T2.release_year = 2004"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the genre of the game titled '999: Nine Hours, Nine Persons, Nine Doors' ?",
+        "query": "SELECT T2.genre_name FROM game AS T1 INNER JOIN genre AS T2 ON T1.genre_id = T2.id WHERE T1.game_name = '999: Nine Hours, Nine Persons, Nine Doors'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "When was the game ID 156 released?",
+        "query": "SELECT T1.release_year FROM game_platform AS T1 INNER JOIN game_publisher AS T2 ON T1.game_publisher_id = T2.id WHERE T2.game_id = 156"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "What is the diffrence between the number of games produced by Culture Brain that can be played on SNES and DS?",
+        "query": "SELECT COUNT(CASE WHEN T1.platform_name = 'SNES' THEN T3.game_id ELSE NULL END) - COUNT(CASE WHEN T1.platform_name = 'DS' THEN T3.game_id ELSE NULL END) FROM platform AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.platform_id INNER JOIN game_publisher AS T3 ON T2.game_publisher_id = T3.id INNER JOIN publisher AS T4 ON T3.publisher_id = T4.id WHERE T4.publisher_name = 'Culture Brain'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "In games that can be played on Wii, what is the percentage of games released in 2007?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T2.release_year = 2007 THEN T3.game_id ELSE NULL END) AS REAL) * 100 / COUNT(T3.game_id) FROM platform AS T1 INNER JOIN game_platform AS T2 ON T1.id = T2.platform_id INNER JOIN game_publisher AS T3 ON T2.game_publisher_id = T3.id WHERE T1.platform_name = 'Wii'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "video_games",
+        "question": "Among games sold in Europe, list the platform ID of games with sales lesser than 30% of the average number of sales.",
+        "query": "SELECT DISTINCT T3.platform_id FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id INNER JOIN game_platform AS T3 ON T2.game_platform_id = T3.id WHERE T1.region_name = 'Europe' AND T2.num_sales * 100 * 100000 < ( SELECT AVG(T2.num_sales * 100000) * 30 FROM region AS T1 INNER JOIN region_sales AS T2 ON T1.id = T2.region_id WHERE T1.region_name = 'Europe' )"
+    }
+]

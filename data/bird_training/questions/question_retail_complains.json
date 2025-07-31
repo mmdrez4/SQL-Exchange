@@ -1,0 +1,1010 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "On which day was the most verbose complaint received?",
+        "query": "SELECT `Date received` FROM callcenterlogs WHERE ser_time = ( SELECT MAX(ser_time) FROM callcenterlogs )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "When did the earliest complaint start on 2017/3/22?",
+        "query": "SELECT MIN(ser_time) FROM callcenterlogs WHERE `Date received` = '2017-03-22'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Which complaint is more urgent, complaint ID CR2400594 or ID CR2405641?",
+        "query": "SELECT CASE WHEN SUM(CASE WHEN `Complaint ID` = 'CR2400594' THEN priority END) > SUM(CASE WHEN `Complaint ID` = 'CR2405641' THEN priority END) THEN 'CR2400594' ELSE 'CR2405641' END FROM callcenterlogs"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Please list the full names of all the male clients born after the year 1990.",
+        "query": "SELECT first, middle, last FROM client WHERE year > 1990"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many complaints have the client Diesel Galloway filed?",
+        "query": "SELECT COUNT(T1.client_id) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.first = 'Diesel' AND T1.last = 'Galloway'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the detailed product of the complaint filed by Diesel Galloway on 2014/7/3?",
+        "query": "SELECT T2.`Sub-product` FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.first = 'Diesel' AND T1.last = 'Galloway' AND T2.`Date received` = '2014-07-03'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Was the tag in the complaint filed by Matthew Pierce on 2016/10/28 approved by himself?",
+        "query": "SELECT CASE WHEN T2.`Consumer consent provided?` IN (NULL, 'N/A', 'Empty') THEN 'No' ELSE 'Yes' END FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.first = 'Matthew' AND T1.last = 'Pierce' AND T2.`Date received` = '2016-10-28'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "For how long was the complaint filed by Matthew Pierce on 2016/10/28 delayed?",
+        "query": "SELECT 365 * (strftime('%Y', T2.`Date sent to company`) - strftime('%Y', T2.`Date received`)) + 30 * (strftime('%M', T2.`Date sent to company`) - strftime('%M', T2.`Date received`)) + (strftime('%d', T2.`Date sent to company`) - strftime('%d', T2.`Date received`)) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.first = 'Matthew' AND T1.last = 'Pierce' AND T2.`Date received` = '2016-10-28'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the full name of the client whose complaint on 2017/3/27 was received by MICHAL?",
+        "query": "SELECT T1.first, T1.middle, T1.last FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE T2.`Date received` = '2017-03-27' AND T2.server = 'MICHAL'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "For how long did the complaint filed on 2017/3/27 by Rachel Hicks last?",
+        "query": "SELECT T2.ser_time FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE T1.first = 'Rachel' AND T1.last = 'Hicks' AND T2.`Date received` = '2017-03-27'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Among all the clients from the New York city, how many of them have filed a complaint on the issue of Deposits and withdrawals?",
+        "query": "SELECT COUNT(T2.Issue) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.Issue = 'Deposits and withdrawals' AND T1.city = 'New York City'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Please list the full names of all the clients whose complaints are still in progress.",
+        "query": "SELECT T1.first, T1.middle, T1.last FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Company response to consumer` = 'In progress'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Among the clients who did receive a timely response for their complaint, how many of them are from New York?",
+        "query": "SELECT COUNT(T1.city) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Timely response?` = 'No' AND T1.city = 'New York City'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many complaints on credit cards in the year 2016 were filed by male clients?",
+        "query": "SELECT COUNT(T1.sex) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE strftime('%Y', T2.`Date received`) = '2016' AND T1.sex = 'Male' AND T2.Product = 'Credit card'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Which division is Diesel Galloway in?",
+        "query": "SELECT T2.division FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T1.first = 'Diesel' AND T1.last = 'Galloway'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Please list the full names of all the male clients in the Pacific division.",
+        "query": "SELECT T1.first, T1.middle, T1.last FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.division = 'Pacific' AND T1.sex = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the average number of complaints on credit cards filed by clients from New York in the 3 consecutive years starting from 2015?",
+        "query": "SELECT CAST(COUNT(T2.`Complaint ID`) AS REAL) / 3 AS average FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE strftime('%Y', T2.`Date received`) BETWEEN '2015' AND '2017' AND T1.city = 'New York City' AND T2.Product = 'Credit card'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the percentage of the increase of complaints filed by the clients from New York from the year 2016 to the year 2017?",
+        "query": "SELECT 100.0 * (SUM(CASE WHEN strftime('%Y', T2.`Date received`) = '2017' THEN 1 ELSE 0 END) - SUM(CASE WHEN strftime('%Y', T2.`Date received`) = '2016' THEN 1 ELSE 0 END)) / SUM(CASE WHEN strftime('%Y', T2.`Date received`) = '2016' THEN 1 ELSE 0 END) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.city = 'New York City'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What was the serve time for the complaint call from client \"C00007127\" on 2017/2/22?",
+        "query": "SELECT T1.ser_time FROM callcenterlogs AS T1 INNER JOIN events AS T2 ON T1.`Complaint ID` = T2.`Complaint ID` WHERE T2.Client_ID = 'C00007127' AND T1.`Date received` = '2017-02-22'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Which state does the owner of \"wyatt.collins@gmail.com\" live in? Give the full name of the state.",
+        "query": "SELECT T1.state FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T1.email = 'wyatt.collins@gmail.com'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Which detailed product did Mr Lennox Oliver Drake complain about?",
+        "query": "SELECT DISTINCT T2.`Sub-product` FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.first = 'Lennox' AND T1.middle = 'Oliver' AND T1.last = 'Drake' AND T1.sex = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What was the detailed issue did Mr Gunner Omer Fuller complain about?",
+        "query": "SELECT T2.`Sub-issue` FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.first = 'Gunner' AND T1.middle = 'Omer' AND T1.last = 'Fuller' AND T1.sex = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Did Ms. Lyric Emely Taylor provide the consent for result of the complaint call on 2016/5/20?",
+        "query": "SELECT CASE WHEN T2.`Consumer consent provided?` IN (NULL, 'N/A', '') THEN 'No' ELSE 'Yes' END FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.first = 'Lyric' AND T1.middle = 'Emely' AND T1.last = 'Taylor' AND T1.sex = 'Female' AND T2.`Date received` = '2016-05-20'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many days delay for the complaint call from Mr. Brantley Julian Stanley on 2012/5/18?",
+        "query": "SELECT 365 * (strftime('%Y', T2.`Date sent to company`) - strftime('%Y', T2.`Date received`)) + 30 * (strftime('%M', T2.`Date sent to company`) - strftime('%M', T2.`Date received`)) + (strftime('%d', T2.`Date sent to company`) - strftime('%d', T2.`Date received`)) AS days FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Date received` = '2012-05-18' AND T1.sex = 'Male' AND T1.first = 'Brantley' AND T1.middle = 'Julian' AND T1.last = 'Stanley'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Which district did the review on 2018/9/11 come from? Give the name of the city.",
+        "query": "SELECT T2.district_id, T2.city FROM reviews AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T1.Date = '2018-09-11'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What was the review context from Jacksonville on 2017/7/22?",
+        "query": "SELECT T1.Reviews FROM reviews AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.city = 'Jacksonville' AND T1.Date = '2017-07-22'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Which product received a review from Indianapolis on 2016/10/7?",
+        "query": "SELECT T1.Product FROM reviews AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.city = 'Indianapolis' AND T1.Date = '2016-10-07'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many stars did \"Eagle Capital\" received from Little Rock on 2013/4/4?",
+        "query": "SELECT COUNT(T1.Stars) FROM reviews AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T1.Product = 'Eagle Capital' AND T2.city = 'Little Rock' AND T1.Date = '2013-04-04'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "For the client who made the complaint call \"CR0217298\", what was his/her birthday\uff1f",
+        "query": "SELECT T1.month, T1.day FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Complaint ID` = 'CR0217298'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What was the phone of number of the client who made the complaint call \"CR0100432\" \uff1f",
+        "query": "SELECT T1.phone FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Complaint ID` = 'CR0100432'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "For all the complaint callers on 2017/3/27, what percentage of the clients are females?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.sex = 'Female' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.sex) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Date received` = '2017-03-27'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the percentage of the complaint calls from Mr Mason Javen Lopez has got the consent provided by the customer?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.`Consumer consent provided?` = 'Consent provided' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.`Consumer consent provided?`) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.sex = 'Male' AND T1.first = 'Mason' AND T1.middle = 'Javen' AND T1.last = 'Lopez'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many priority urgent complaints were received in march of 2017? List the complaint ID of these complaints.",
+        "query": "SELECT COUNT(`Complaint ID`) FROM callcenterlogs WHERE `Date received` LIKE '2017-01%' AND priority = ( SELECT MAX(priority) FROM callcenterlogs )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Please list the full name, date of birth, and email id of the elderly clients in descending order of age.",
+        "query": "SELECT first, middle, last, year, month , day, email FROM client WHERE age > 65 ORDER BY age DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Which product got the most five stars, and how many?",
+        "query": "SELECT T.Product, MAX(T.num) FROM ( SELECT Product, COUNT(Stars) AS num FROM reviews WHERE Stars = 5 GROUP BY Product ) T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List all the states in the South region.",
+        "query": "SELECT state FROM state WHERE Region = 'South'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the email id of clients whose calls were hung?",
+        "query": "SELECT T1.email FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE T2.outcome = 'HANG'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Calculate the average age of clients from the Midwest region.",
+        "query": "SELECT CAST(SUM(T1.age) AS REAL) / COUNT(T3.Region) AS average FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id INNER JOIN state AS T3 ON T2.state_abbrev = T3.StateCode WHERE T3.Region = 'Midwest'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List the full name and phone number of clients who submitted the complaint via fax.",
+        "query": "SELECT T1.first, T1.middle, T1.last, T1.phone FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Submitted via` = 'Fax'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Find and list the names of districts which has below-average stars for Eagle Capital.",
+        "query": "SELECT T2.division FROM reviews AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T1.Product = 'Eagle Capital' AND T1.Stars > ( SELECT AVG(Stars) FROM reviews AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "In the calls from the mountain division, how many are from teenage clients?",
+        "query": "SELECT COUNT(T1.age) FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T1.age BETWEEN 12 AND 20 AND T2.division = 'Mountain'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the number of complaints related to Credit cards came from female clients?",
+        "query": "SELECT COUNT(T1.sex) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.sex = 'Female' AND T2.Product = 'Credit card'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Among the clients born between 1980 and 2000, list the name of male clients who complained through referral.",
+        "query": "SELECT T1.first, T1.middle, T1.last FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.year BETWEEN 1980 AND 2000 AND T1.sex = 'Male' AND T2.`Submitted via` = 'Referral'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the medium through which most complaints are registered in Florida?",
+        "query": "SELECT T3.`Submitted via` FROM callcenterlogs AS T1 INNER JOIN client AS T2 ON T1.`rand client` = T2.client_id INNER JOIN events AS T3 ON T1.`Complaint ID` = T3.`Complaint ID` WHERE T2.state = 'FL' GROUP BY T1.`Complaint ID` ORDER BY COUNT(T1.`Complaint ID`) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Calculate the average number of complaints received from New Bedford each year which are closed with explanation.",
+        "query": "SELECT STRFTIME('%Y', T3.`Date received`) , CAST(SUM(CASE WHEN T3.`Company response to consumer` = 'Closed with explanation' THEN 1 ELSE 0 END) AS REAL) / COUNT(T3.`Complaint ID`) AS average FROM callcenterlogs AS T1 INNER JOIN client AS T2 ON T1.`rand client` = T2.client_id INNER JOIN events AS T3 ON T1.`Complaint ID` = T3.`Complaint ID` WHERE T2.city = 'New Bedford' GROUP BY strftime('%Y', T3.`Date received`)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What percentage of consumers from Houston disputed complaints?",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.`Consumer disputed?` = 'Yes' AND T1.city = 'Houston' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.client_id) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Find the number of service members who complained in Syracuse.",
+        "query": "SELECT COUNT(T1.client_id) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.Tags = 'Servicemember' AND T1.city = 'Syracuse'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Among the calls from California, what percentage are priority 1?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.priority = 1 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.priority) FROM callcenterlogs AS T1 INNER JOIN client AS T2 ON T1.`rand client` = T2.client_id INNER JOIN district AS T3 ON T2.district_id = T3.district_id INNER JOIN state AS T4 ON T3.state_abbrev = T4.StateCode WHERE T4.State = 'California'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Calculate the difference in the average age of elderly and middle-aged clients in the Northeast region.",
+        "query": "SELECT (CAST(SUM(CASE WHEN T1.age BETWEEN 35 AND 55 THEN T1.age ELSE 0 END) AS REAL) / SUM(CASE WHEN T1.age BETWEEN 35 AND 55 THEN 1 ELSE 0 END)) - (CAST(SUM(CASE WHEN T1.age > 65 THEN T1.age ELSE 0 END) AS REAL) / SUM(CASE WHEN T1.age > 65 THEN 1 ELSE 0 END)) AS difference FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id INNER JOIN state AS T3 ON T2.state_abbrev = T3.StateCode WHERE T3.Region = 'Northeast'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List by their ID number the 3 longest complaints.",
+        "query": "SELECT `Complaint ID` FROM callcenterlogs ORDER BY ser_time DESC LIMIT 3"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many clients have an email account other than gmail.com?",
+        "query": "SELECT COUNT(email) FROM client WHERE email NOT LIKE '%@gmail.com'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Identify by their ID all clients who did not give their consent permission.",
+        "query": "SELECT Client_ID FROM events WHERE `Consumer consent provided?` = 'N/A' OR 'Consumer consent provided?' IS NULL OR 'Consumer consent provided?' = ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List by their ID the complaints received by the company on 25/09/2014 that took the longest.",
+        "query": "SELECT `Complaint ID` FROM events WHERE strftime('%J', `Date sent to company`) - strftime('%J', `Date received`) = ( SELECT MAX(strftime('%J', `Date sent to company`) - strftime('%J', `Date received`)) FROM events WHERE `Date sent to company` = '2014-09-25' ) AND `Date sent to company` = '2014-09-25'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List priority 2 complaints by date received.",
+        "query": "SELECT DISTINCT `Complaint ID` FROM callcenterlogs WHERE priority = 2 ORDER BY `Date received` DESC"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many complaints are not in process with an agent?",
+        "query": "SELECT COUNT(outcome) FROM callcenterlogs WHERE outcome != 'AGENT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many Credit Card complaints did Sharon handle?",
+        "query": "SELECT COUNT(T1.`Complaint ID`) FROM callcenterlogs AS T1 INNER JOIN events AS T2 ON T1.`Complaint ID` = T2.`Complaint ID` WHERE T2.Product = 'Credit card' AND T1.server = 'SHARON'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "In which region have the most 1-star reviews been done?",
+        "query": "SELECT T3.Region FROM reviews AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id INNER JOIN state AS T3 ON T2.state_abbrev = T3.StateCode WHERE T1.Stars = 1 GROUP BY T3.Region ORDER BY COUNT(T3.Region) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "In what years were the clients who demanded more problems with Certificate of deposit born?",
+        "query": "SELECT T1.year FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Sub-product` = '(CD) Certificate of deposit' GROUP BY T1.year ORDER BY COUNT(T1.year) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many cases of billing dispute issues occurred in the Mountain division?",
+        "query": "SELECT COUNT(T1.Issue) FROM events AS T1 INNER JOIN client AS T2 ON T1.Client_ID = T2.client_id INNER JOIN district AS T3 ON T2.district_id = T3.district_id WHERE T1.Issue = 'Billing disputes' AND T3.division = 'Mountain'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many male clients are from the state of Massachusetts?",
+        "query": "SELECT COUNT(T3.sex) FROM state AS T1 INNER JOIN district AS T2 ON T1.StateCode = T2.state_abbrev INNER JOIN client AS T3 ON T2.district_id = T3.district_id WHERE T1.state = 'Massachusetts' AND T3.sex = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Lists the last name of all clients who made a PS-type complaint and were served by TOVA.",
+        "query": "SELECT t1.last FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE T2.type = 'PS' AND T2.server = 'TOVA'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many clients under the age of 35 gave Eagle National Mortgage 1 star?",
+        "query": "SELECT COUNT(T2.age) FROM reviews AS T1 INNER JOIN client AS T2 ON T1.district_id = T2.district_id WHERE T1.Product = 'Eagle National Mortgage' AND T1.Stars = 1 AND T2.age < 35"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many male clients born in the year 1977 were given priority 0 in their complaints?",
+        "query": "SELECT COUNT(T1.sex) FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE T1.sex = 'Male' AND T2.priority = 0 AND T1.year = 1997"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List by name all customers who provided consent for the tag Older American.",
+        "query": "SELECT T1.first, T1.middle, T1.last FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.Tags = 'Older American' AND T2.`Consumer consent provided?` != 'N/A' AND T2.`Consumer consent provided?` IS NOT NULL AND T2.`Consumer consent provided?` != ''"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the name of the state in which there have been the largest number of complaints with priority 0?",
+        "query": "SELECT T2.state FROM callcenterlogs AS T1 INNER JOIN client AS T2 ON T1.`rand client` = T2.client_id INNER JOIN district AS T3 ON T2.district_id = T3.district_id INNER JOIN state AS T4 ON T3.state_abbrev = T4.StateCode WHERE T1.priority = 0 GROUP BY T2.state ORDER BY COUNT(T2.state) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many complaints made by women and served after 3 pm received a timely response from the company?",
+        "query": "SELECT COUNT(T1.`Complaint ID`) FROM callcenterlogs AS T1 INNER JOIN client AS T2 ON T1.`rand client` = T2.client_id INNER JOIN events AS T3 ON T1.`Complaint ID` = T3.`Complaint ID` WHERE T2.sex = 'Female' AND T1.ser_start BETWEEN '15:00:01' AND '23:59:59' AND T3.`Timely response?` = 'Yes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many complaints were served in 5 minutes or less by DORIT and responded to the customer with an explanation, were made by phone?",
+        "query": "SELECT COUNT(T1.`Complaint ID`) FROM callcenterlogs AS T1 INNER JOIN events AS T2 ON T1.`Complaint ID` = T2.`Complaint ID` WHERE T1.ser_time < '00:05:00' AND T1.server = 'DORIT' AND T2.`Submitted via` = 'Phone' AND T2.`Company response to consumer` = 'Closed with explanation'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many clients with the last name Alvarado are from Maryland?",
+        "query": "SELECT COUNT(T2.client_id) FROM district AS T1 INNER JOIN client AS T2 ON T1.district_id = T2.district_id INNER JOIN state AS T3 ON T1.state_abbrev = T3.StateCode WHERE T2.last = 'Alvarado' AND T2.state = 'MD'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many reviews by people between 30 and 50 years include the word 'great'?",
+        "query": "SELECT COUNT(T1.Reviews) FROM reviews AS T1 INNER JOIN client AS T2 ON T1.district_id = T2.district_id WHERE T2.age BETWEEN 30 AND 50 AND T1.Reviews LIKE '%great%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the full address of the customers who, having received a timely response from the company, have dispute about that response?",
+        "query": "SELECT T1.address_1, T1.address_2 FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Timely response?` = 'Yes' AND T2.`Consumer disputed?` = 'Yes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many complaints from female clients born in the year 2000 were not sent through the web?",
+        "query": "SELECT COUNT(T2.`Submitted via`) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.sex = 'Female' AND T1.year = 2000 AND T2.`Submitted via` != 'Web'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List all the complaints narratives made by the customer named Brenda and last name Mayer.",
+        "query": "SELECT T2.`Consumer complaint narrative` FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.first = 'Brenda' AND T1.last = 'Mayer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many complaints from customers with a gmail.com email were received by the company in February 2017?",
+        "query": "SELECT COUNT(T1.email) FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE (T2.`Date received` LIKE '2017-02%' OR T2.`Date received` LIKE '2017-01%') AND T1.email LIKE '%@gmail.com'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the average number of stars given by Oregon clients in their reviews?",
+        "query": "SELECT CAST(SUM(T3.Stars) AS REAL) / COUNT(T3.Stars) AS average FROM state AS T1 INNER JOIN district AS T2 ON T1.StateCode = T2.state_abbrev INNER JOIN reviews AS T3 ON T2.district_id = T3.district_id WHERE T1.State = 'Oregon'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What percentage of clients who sent their complaints by postal mail are age 50 and older?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.age > 50 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T2.`Submitted via`) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Submitted via` = 'Postal mail'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the average age of Norwalk clients?",
+        "query": "SELECT CAST(SUM(T1.age) AS REAL) / COUNT(T1.age) AS average FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.city = 'Norwalk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many clients who live in Kansas City provided a 1-star review?",
+        "query": "SELECT COUNT(T1.Stars) FROM reviews AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.city = 'Kansas City' AND T1.Stars = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Which state has the highest number of clients who gave a 5-star review?",
+        "query": "SELECT T2.state_abbrev FROM reviews AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T1.Stars = 5 GROUP BY T2.state_abbrev ORDER BY COUNT(T2.state_abbrev) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Which region does Noah Thompson live in?",
+        "query": "SELECT T2.division FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T1.first = 'Noah' AND T1.last = 'Thompson'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How did Kyran Muller submit his complaint?",
+        "query": "SELECT DISTINCT T2.`Submitted via` FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.first = 'Kyran' AND T1.last = 'Muller'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What are the products that people who were born after 2005 complain about?",
+        "query": "SELECT DISTINCT T2.Product FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.year > 2005"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How long was Kendall Allen's complaint about her credit card?",
+        "query": "SELECT T3.ser_time FROM events AS T1 INNER JOIN client AS T2 ON T1.Client_ID = T2.client_id INNER JOIN callcenterlogs AS T3 ON T1.`Complaint ID` = T3.`Complaint ID` WHERE T2.first = 'Kendall' AND T2.last = 'Allen' AND T2.sex = 'Female' AND T1.Product = 'Credit card'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What was the issue that the client with the longest server time faced?",
+        "query": "SELECT T2.Issue FROM callcenterlogs AS T1 INNER JOIN events AS T2 ON T1.`Complaint ID` = T2.`Complaint ID` WHERE T1.ser_time = ( SELECT MAX(ser_time) FROM callcenterlogs )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many clients who live in New York City submitted their complaints via fax?",
+        "query": "SELECT COUNT(T1.client_id) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.city = 'New York City' AND T2.`Submitted via` = 'Fax'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the percentage of male clients complaining about their credit cards?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.sex = 'Male' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.sex) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.Product = 'Credit card'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Please list any two clients with their full names who have been tagged as \"Older American\" by the company without seeking their permission.",
+        "query": "SELECT T1.first, T1.middle, T1.last FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.Tags = 'Older American' AND T2.`Consumer consent provided?` IN (NULL, 'N/A', '') LIMIT 2"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the birth date of the youngest client?",
+        "query": "SELECT day, month, year FROM client ORDER BY year DESC, month DESC, day DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many times does the consumer have no dispute over a non-timely response from the company?",
+        "query": "SELECT COUNT(`Timely response?`) FROM events WHERE `Timely response?` = 'No' AND `Consumer disputed?` = 'No'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many of the complaints are longer than 15 minutes?",
+        "query": "SELECT COUNT(ser_time) FROM callcenterlogs WHERE strftime('%M', ser_time) > '15'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the most common issue for the highest priority complaints?",
+        "query": "SELECT T1.Issue FROM events AS T1 INNER JOIN callcenterlogs AS T2 ON T1.`Complaint ID` = T2.`Complaint ID` WHERE T2.priority = 2 GROUP BY T1.Issue ORDER BY COUNT(T1.Issue) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List the full names of all clients who live in the Pacific division.",
+        "query": "SELECT T2.first, T2.middle, T2.last FROM district AS T1 INNER JOIN client AS T2 ON T1.district_id = T2.district_id WHERE T1.division = 'Pacific'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the social number of the person who made the most complaints?",
+        "query": "SELECT T1.social FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID GROUP BY T1.client_id ORDER BY COUNT(T1.client_id) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Which is the city where most of the 1 star reviews come from?",
+        "query": "SELECT T2.city FROM reviews AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T1.Stars = 1 GROUP BY T2.city ORDER BY COUNT(T2.city) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the address of the client who made a complaint via postal mail on March 14, 2012?",
+        "query": "SELECT T1.address_1, T1.address_2 FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Date received` = '2012-03-14' AND T2.`Submitted via` = 'Postal mail'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Among the female clients, how many of them have a complaint with a priority of 1?",
+        "query": "SELECT COUNT(T1.client_id) FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE T1.sex = 'Female' AND T2.priority = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List all the server of the phone complaints with a late response from the company.",
+        "query": "SELECT DISTINCT T2.server FROM events AS T1 INNER JOIN callcenterlogs AS T2 ON T1.`Complaint ID` = T2.`Complaint ID` WHERE T1.`Submitted via` = 'Phone' AND T1.`Timely response?` = 'No'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List all the issues of the complaints made by Kaitlyn Eliza Elliott.",
+        "query": "SELECT DISTINCT T2.Issue FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.first = 'Kaitlyn' AND T1.middle = 'Eliza' AND T1.last = 'Elliott'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the name of the state that the client with the email \"skylar.ramirez@gmail.com\" lives in?",
+        "query": "SELECT T3.state FROM state AS T1 INNER JOIN district AS T2 ON T1.StateCode = T2.state_abbrev INNER JOIN client AS T3 ON T2.district_id = T3.district_id WHERE T3.email = 'skylar.ramirez@gmail.com'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Which region has the second most clients?",
+        "query": "SELECT T2.division FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id GROUP BY T2.division ORDER BY COUNT(T2.division) DESC LIMIT 1, 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Who is the owner of the final phone number for the complaints on server \"MORIAH\" on 9/11/2013?",
+        "query": "SELECT T1.first, T1.middle, T1.last FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE T2.server = 'MORIAH' AND T2.`Date received` = '2013-09-11'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Compute the average time in minute for each age group",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.age > 13 AND T1.age <= 19 THEN 60 * strftime('%H', ser_time) + strftime('%M', ser_time) + strftime('%S', ser_time) / 60 ELSE 0 END) AS REAL) / SUM(CASE WHEN T1.age > 13 AND T1.age <= 19 THEN 1 ELSE 0 END) AS teenagerAverageMins, CAST(SUM(CASE WHEN T1.age > 19 AND T1.age <= 65 THEN 60 * strftime('%H', ser_time) + strftime('%M', ser_time) + strftime('%S', ser_time) / 60 ELSE 0 END) AS REAL) / SUM(CASE WHEN T1.age > 19 AND T1.age <= 65 THEN 1 ELSE 0 END) AS adultAverageMins , CAST(SUM(CASE WHEN T1.age > 65 THEN 60 * strftime('%H', ser_time) + strftime('%M', ser_time) + strftime('%S', ser_time) / 60 ELSE 0 END) AS REAL) / SUM(CASE WHEN T1.age > 65 THEN 1 ELSE 0 END) AS elderAverageMins FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client`"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What percentage of complaints are from the elderly?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.age > 65 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.age) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Calculate the percentage of male clients from Indianapolis City.",
+        "query": "SELECT CAST(SUM(CASE WHEN sex = 'Male' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(client_id) FROM client WHERE city = 'Indianapolis'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Among the teenager clients who use Google account and Microsoft account, which group of client is more than the other?",
+        "query": "SELECT CASE WHEN SUM(CASE WHEN email LIKE '%@gmail.com' THEN 1 ELSE 0 END) > SUM(CASE WHEN email LIKE '%@outlook.com' THEN 1 ELSE 0 END) THEN 'Google account' ELSE 'Microsoft account' END FROM client WHERE age BETWEEN 13 AND 19"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the full name of client whose email address is emily.garcia43@outlook.com?",
+        "query": "SELECT first, middle, last FROM client WHERE email = 'emily.garcia43@outlook.com'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the first name of clients who have the highest priority?",
+        "query": "SELECT T1.first FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE T2.priority = ( SELECT MAX(priority) FROM callcenterlogs )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List down the email of client whose complaint is type \"PS\".",
+        "query": "SELECT T1.email FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE T2.type = 'PS'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Among the elderlies, state the last name of whose complaint is handled in server YIFAT?",
+        "query": "SELECT T1.last FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE T1.age > 65 AND T2.server = 'YIFAT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many clients who live in New York City have the complaint outcome as \"AGENT\"?",
+        "query": "SELECT COUNT(T2.`rand client`) FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE T1.city = 'New York City' AND T2.outcome = 'AGENT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List down the full name of clients who have disputed the response from company.",
+        "query": "SELECT T1.first, T1.middle, T1.last FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Consumer disputed?` = 'Yes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What are the complaint id of client who were born in 1931?",
+        "query": "SELECT T2.`Complaint ID` FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE T1.year = 1931"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Calculate the percentage of complaints made by Google account client in server ZOHARI.",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.email LIKE '%@gmail.com' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.email) FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE T2.server = 'ZOHARI'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "State the full name of clients with server time of 20 minutes and above.",
+        "query": "SELECT T1.first, T1.middle, T1.last FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE strftime('%M', T2.ser_time) > '20'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Pick 5 clients with 0 priority and write down their last name.",
+        "query": "SELECT T1.last FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE T2.priority = 0 LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Write down the call id of clients whose first name start with alphabet \"B\".",
+        "query": "SELECT T2.call_id FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE T1.first LIKE 'B%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the product complained by Alexander Bronx Lewis?",
+        "query": "SELECT DISTINCT T2.Product FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.first = 'Alexander' AND T1.middle = 'Bronx' AND T1.last = 'Lewis'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "State the first name of male clients who did not receive timely response from the call center.",
+        "query": "SELECT T1.first FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Timely response?` = 'No' AND T1.sex = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Which product received the most complaints from elder clients?",
+        "query": "SELECT T2.Product FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.age > 65 ORDER BY T1.client_id DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Complaint about Credit Card mostly came from clients of which age group?",
+        "query": "SELECT SUM(CASE WHEN T1.age > 13 AND T1.age <= 19 THEN 1 ELSE 0 END), SUM(CASE WHEN T1.age > 19 AND T1.age <= 65 THEN 1 ELSE 0 END) AS adult , SUM(CASE WHEN T1.age > 65 THEN 1 ELSE 0 END) AS elder FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.Product = 'Credit card'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List down the issues for complaint with server time of below 10 minutes.",
+        "query": "SELECT T2.Issue FROM callcenterlogs AS T1 INNER JOIN events AS T2 ON T1.`Complaint ID` = T2.`Complaint ID` WHERE strftime('%M', T1.ser_time) < '10'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Write down the date received of complaints sent via Fax.",
+        "query": "SELECT T1.`Date received` FROM callcenterlogs AS T1 INNER JOIN events AS T2 ON T1.`Complaint ID` = T2.`Complaint ID` WHERE T2.`Submitted via` = 'Fax'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the full name of clients who have issue about balance transfer?",
+        "query": "SELECT T1.first, T1.middle, T1.last FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.Issue = 'Balance transfer'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the email address of clients who submitted their complaints via postal mail?",
+        "query": "SELECT T1.email FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Submitted via` = 'Postal mail'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Calculate the average age of clients whose response is \"Closed with relief\".",
+        "query": "SELECT AVG(T1.age) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Company response to consumer` = 'Closed with relief'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the average age of clients whose complaint type is \"TT\"?",
+        "query": "SELECT AVG(T1.age) FROM client AS T1 INNER JOIN callcenterlogs AS T2 ON T1.client_id = T2.`rand client` WHERE T2.type = 'TT'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Write the complaint ID, call ID, and final phone number of complaints through AVIDAN server from 1/1/2014 to 12/30/2014.",
+        "query": "SELECT `Complaint ID`, call_id, phonefinal FROM callcenterlogs WHERE strftime('%Y', `Date received`) = '2014' AND server = 'AVIDAN'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Between 1/1/2017 and 4/1/2017, what is the average server time of calls under the server DARMON?",
+        "query": "SELECT AVG(CAST(SUBSTR(ser_time, 4, 2) AS REAL)) FROM callcenterlogs WHERE `Date received` BETWEEN '2017-01-01' AND '2017-04-01'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many times per year does a credit card customer complain about overlimit fees?",
+        "query": "SELECT strftime('%Y', `Date received`), COUNT(`Date received`) FROM events WHERE product = 'Credit card' AND issue = 'Overlimit fee' GROUP BY strftime('%Y', `Date received`) HAVING COUNT(`Date received`)"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Among the clients in Middle Atlantic, how many are them are female and no more than 18 years old?",
+        "query": "SELECT COUNT(T1.sex) FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.division = 'Middle Atlantic' AND T1.sex = 'Female' AND T1.age < 18"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Give me the full birthdate, email and phone number of the youngest client in Indianapolis .",
+        "query": "SELECT T1.year, T1.month, T1.day, T1.email, T1.phone FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.city = 'Indianapolis' ORDER BY T1.year DESC, T1.month DESC, T1.day DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List the top five cities in terms of the number of 5-star ratings in 2016 reviews, in descending order.",
+        "query": "SELECT T2.city FROM reviews AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T1.Stars = 5 AND T1.Date LIKE '2016%' ORDER BY T1.Date DESC LIMIT 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the longest server time when the call is about the issue of arbitration?",
+        "query": "SELECT MAX(T1.ser_time) FROM callcenterlogs AS T1 INNER JOIN events AS T2 ON T1.`Complaint ID` = T2.`Complaint ID` WHERE T2.issue = 'Arbitration'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Give me the social number and state of the client whose phone number is 100-121-8371.",
+        "query": "SELECT T1.social, T1.state FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id INNER JOIN state AS T3 ON T2.state_abbrev = T3.StateCode WHERE T1.phone = '100-121-8371'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List the full names and phone numbers of clients that were from the Pacific.",
+        "query": "SELECT T1.first, T1.middle, T1.last, T1.phone FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.division = 'Pacific'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the social number of the client who has the longest delay in his/her complaint? Calculate the days of delay and state the company's response to the consumer.",
+        "query": "SELECT T1.social , 365 * (strftime('%Y', T2.`Date sent to company`) - strftime('%Y', T2.`Date received`)) + 30 * (strftime('%M', T2.`Date sent to company`) - strftime('%M', T2.`Date received`)) + (strftime('%d', T2.`Date sent to company`) - strftime('%d', T2.`Date received`)), T2.`Company response to consumer` FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID ORDER BY 365 * (strftime('%Y', T2.`Date sent to company`) - strftime('%Y', T2.`Date received`)) + 30 * (strftime('%M', T2.`Date sent to company`) - strftime('%M', T2.`Date received`)) + (strftime('%d', T2.`Date sent to company`) - strftime('%d', T2.`Date received`)) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many female clients are there older than 30?",
+        "query": "SELECT COUNT(sex) FROM client WHERE sex = 'Female' AND age > 30"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Please list all first and last names of clients who live in New York city.",
+        "query": "SELECT first, last FROM client WHERE city = 'New York City'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the oldest age of male clients?",
+        "query": "SELECT MAX(age) FROM client WHERE sex = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Please calculate the number of clients by each division.",
+        "query": "SELECT T2.division, COUNT(T2.division) FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id GROUP BY T2.division"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the percentage of female clients in the Middle Atlantic?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.sex = 'Female' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.sex) FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.division = 'South Atlantic'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the average age of clients in South Atlantic?",
+        "query": "SELECT AVG(T1.age) FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.division = 'South Atlantic'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Which city in the Midwest region has the least number of clients?",
+        "query": "SELECT T2.city FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id INNER JOIN state AS T3 ON T2.state_abbrev = T3.StateCode WHERE T3.Region = 'Midwest' GROUP BY T2.city ORDER BY COUNT(T2.city) LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "How many customers in the Northeast use Microsoft email?",
+        "query": "SELECT COUNT(T1.email) FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id INNER JOIN state AS T3 ON T2.state_abbrev = T3.StateCode WHERE T3.Region = 'Northeast' AND T1.email LIKE '%@outlook.com'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Which city in West North Central has the highest number of customers over the age of 60?",
+        "query": "SELECT T2.city FROM client AS T1 INNER JOIN district AS T2 ON T1.district_id = T2.district_id WHERE T2.division = 'West North Central' AND T1.age > 60 GROUP BY T2.city ORDER BY COUNT(T2.city) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the percentage of complaints about the late fee issue whose priority is 2 in 2017?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.priority = 2 THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.`Complaint ID`) FROM callcenterlogs AS T1 INNER JOIN events AS T2 ON T1.`Complaint ID` = T2.`Complaint ID` WHERE strftime('%Y', T1.`Date received`) = '2017'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Which state has the most cities?",
+        "query": "SELECT state_abbrev FROM district GROUP BY state_abbrev ORDER BY COUNT(city) DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Please give the first name and phone number of the client whose complaint id is CR0922485.",
+        "query": "SELECT T1.first, T1.phone FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Complaint ID` = 'CR0922485'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Please list the emails of the clients whose complaint date received is 7/3/2014.",
+        "query": "SELECT T1.email FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Date received` = '2014-07-03'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "In 2012, how many complaints about Credit card product came from clients in Omaha?",
+        "query": "SELECT COUNT(T1.client_id) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.city = 'Omaha' AND strftime('%Y', T2.`Date received`) = '2012' AND T2.Product = 'Credit card'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "From 2012 to 2015, how many complaints were submitted via email from female clients?",
+        "query": "SELECT COUNT(T1.client_id) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE strftime('%Y', T2.`Date received`) BETWEEN '2012' AND '2015' AND T2.`Submitted via` = 'Email' AND T1.sex = 'Male'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Please list all clients' phone numbers and complaint IDs which are still in progress.",
+        "query": "SELECT T1.phone, T2.`Complaint ID` FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.`Company response to consumer` = 'In progress'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "In 2015, how many complaints about Billing disputes were sent by clients in Portland?",
+        "query": "SELECT COUNT(T1.client_id) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.city = 'Portland' AND T2.`Date received` LIKE '2015%' AND T2.Issue = 'Billing disputes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "In 2014, what is the percentage of complaints from consumers in Houston that the delay was over 5 days?",
+        "query": "SELECT CAST((SUM(CASE WHEN strftime('%J', T2.`Date sent to company`) - strftime('%J', T2.`Date received`) > 5 THEN 1 ELSE 0 END)) AS REAL) * 100 / COUNT(T1.client_id) FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.city = 'Houston' AND strftime('%Y', T2.`Date received`) = '2014'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "In the complains received in 2012, how many of them are submitted through email?",
+        "query": "SELECT COUNT(`Submitted via`) FROM events WHERE strftime('%Y', `Date received`) = '2012' AND `Submitted via` = 'Email'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Give the client ID of the complaint received on April 16, 2014 and submitted through fax.",
+        "query": "SELECT T2.Client_ID FROM callcenterlogs AS T1 INNER JOIN events AS T2 ON T1.`Complaint ID` = T2.`Complaint ID` WHERE T2.`Submitted via` = 'Fax' AND T1.`Date received` = '2014-04-16'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List date of the review of the Eagle Capital from Indianapolis, Indiana.",
+        "query": "SELECT T2.Date FROM district AS T1 INNER JOIN reviews AS T2 ON T1.district_id = T2.district_id WHERE T2.Product = 'Eagle Capital' AND T1.city = 'Indianapolis' AND T1.state_abbrev = 'IN'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Among the complaints received in year 2015, what is total number of complaints timely response and closed with an explanation?",
+        "query": "SELECT COUNT(T1.`Complaint ID`) FROM callcenterlogs AS T1 INNER JOIN events AS T2 ON T1.`Complaint ID` = T2.`Complaint ID` WHERE strftime('%Y', T1.`Date received`) = '2015' AND T2.`Timely response?` = 'Yes' AND T2.`Company response to consumer` = 'Closed with explanation'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Among the female clients that age between 20 to 40, list the date when their complaints were received.",
+        "query": "SELECT DISTINCT T3.`Date received` FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID INNER JOIN callcenterlogs AS T3 ON T2.`Complaint ID` = T3.`Complaint ID` WHERE T1.age BETWEEN 20 AND 40 AND T1.sex = 'Female'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List the product reviewed with 1 star on March 14, 2016 from Newton, Massachusetts.",
+        "query": "SELECT T2.Product FROM district AS T1 INNER JOIN reviews AS T2 ON T1.district_id = T2.district_id WHERE T1.city = 'Newton' AND T1.state_abbrev = 'MA' AND T2.Date = '2016-03-14' AND T2.Stars = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "In reviews for the Eagle National Bank product, how many of the 5 star reviews where from Nashville, Tennessee?",
+        "query": "SELECT COUNT(T2.Stars) FROM district AS T1 INNER JOIN reviews AS T2 ON T1.district_id = T2.district_id WHERE T1.city = 'Nashville' AND T1.state_abbrev = 'TN' AND T2.Product = 'Eagle National Mortgage' AND T2.Stars = 5"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What are the issues of the complains of male clients and products from age 25 and below?",
+        "query": "SELECT DISTINCT T2.Issue FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.sex = 'Male' AND T1.age < 25"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "Among the reviews from midwest region, what are the products that received 1 star?",
+        "query": "SELECT DISTINCT T3.Product FROM state AS T1 INNER JOIN district AS T2 ON T1.StateCode = T2.state_abbrev INNER JOIN reviews AS T3 ON T2.district_id = T3.district_id WHERE T1.Region = 'Midwest' AND T3.Stars = 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List the products involved in the complaints received on March 2017 via TOVA server.",
+        "query": "SELECT DISTINCT T2.Product FROM callcenterlogs AS T1 INNER JOIN events AS T2 ON T1.`Complaint ID` = T2.`Complaint ID` WHERE T1.server = 'TOVA' AND T2.`Date received` LIKE '2017-03%'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "What is the division of the review of 5 stars received on December 17, 2017 for the product Eagle National Mortgage?",
+        "query": "SELECT T1.division FROM district AS T1 INNER JOIN reviews AS T2 ON T1.district_id = T2.district_id WHERE T2.Stars = 5 AND T2.Date = '2017-12-17' AND T2.Product = 'Eagle National Mortgage'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "In complaints about the credit card product, list the phone number of the oldest client.",
+        "query": "SELECT T1.phone FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T2.Product = 'Credit card' ORDER BY T1.age DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "In complaints received in 2014, how many of them were submitted via call?",
+        "query": "SELECT COUNT(T2.`Complaint ID`) FROM callcenterlogs AS T1 INNER JOIN events AS T2 ON T1.`Complaint ID` = T2.`Complaint ID` WHERE T2.`Submitted via` = 'Phone' AND strftime('%Y', T1.`Date received`) = '2014'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "List the product and its issues of the complains of clients with age greater than the 60% of average age of all clients.",
+        "query": "SELECT DISTINCT T2.Product, T2.Issue FROM client AS T1 INNER JOIN events AS T2 ON T1.client_id = T2.Client_ID WHERE T1.age * 100 > ( SELECT AVG(age) * 60 FROM client )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "retail_complains",
+        "question": "In reviews of product with 5 stars, what is the percentage of the reviews coming from the division of East North Central?",
+        "query": "SELECT CAST(SUM(CASE WHEN T1.division = 'East North Central' THEN 1 ELSE 0 END) AS REAL) * 100 / COUNT(T1.division) FROM district AS T1 INNER JOIN reviews AS T2 ON T1.district_id = T2.district_id WHERE T2.Stars = 5"
+    }
+]

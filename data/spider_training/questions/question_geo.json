@@ -1,0 +1,3386 @@
+[
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the biggest city in wyoming",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name  =  \"wyoming\" ) AND state_name  =  \"wyoming\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what wyoming city has the largest population",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name  =  \"wyoming\" ) AND state_name  =  \"wyoming\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest city in wyoming",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name  =  \"wyoming\" ) AND state_name  =  \"wyoming\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "where is the most populated area of wyoming",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name  =  \"wyoming\" ) AND state_name  =  \"wyoming\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which city in wyoming has the largest population",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name  =  \"wyoming\" ) AND state_name  =  \"wyoming\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what cities in wyoming have the highest number of citizens",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name  =  \"wyoming\" ) AND state_name  =  \"wyoming\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what cities in wyoming have the highest populations",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name  =  \"wyoming\" ) AND state_name  =  \"wyoming\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the most populous city in wyoming",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name  =  \"wyoming\" ) AND state_name  =  \"wyoming\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest city in wyoming by population",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name  =  \"wyoming\" ) AND state_name  =  \"wyoming\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest city of wyoming",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name  =  \"wyoming\" ) AND state_name  =  \"wyoming\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the city in wyoming with the largest population",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name  =  \"wyoming\" ) AND state_name  =  \"wyoming\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which rivers run through the state with the largest city in the us",
+        "query": "SELECT river_name FROM river WHERE traverse IN ( SELECT state_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how big is new mexico",
+        "query": "SELECT area FROM state WHERE state_name  =  \"new mexico\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the area of new mexico",
+        "query": "SELECT area FROM state WHERE state_name  =  \"new mexico\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how large is new mexico",
+        "query": "SELECT area FROM state WHERE state_name  =  \"new mexico\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the area of the new mexico state",
+        "query": "SELECT area FROM state WHERE state_name  =  \"new mexico\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the size of new mexico",
+        "query": "SELECT area FROM state WHERE state_name  =  \"new mexico\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the area of new mexico in square kilometers",
+        "query": "SELECT area FROM state WHERE state_name  =  \"new mexico\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many people live in california",
+        "query": "SELECT population FROM state WHERE state_name  =  \"california\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many people reside in california",
+        "query": "SELECT population FROM state WHERE state_name  =  \"california\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many residents live in california",
+        "query": "SELECT population FROM state WHERE state_name  =  \"california\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how much population does california have",
+        "query": "SELECT population FROM state WHERE state_name  =  \"california\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the population of california",
+        "query": "SELECT population FROM state WHERE state_name  =  \"california\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population of california",
+        "query": "SELECT population FROM state WHERE state_name  =  \"california\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many people are in the state of california",
+        "query": "SELECT population FROM state WHERE state_name  =  \"california\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what can you tell me about the population of california",
+        "query": "SELECT population FROM state WHERE state_name  =  \"california\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many people are there in california",
+        "query": "SELECT population FROM state WHERE state_name  =  \"california\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many citizens in california",
+        "query": "SELECT population FROM state WHERE state_name  =  \"california\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many people stay in california",
+        "query": "SELECT population FROM state WHERE state_name  =  \"california\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many citizens live in california",
+        "query": "SELECT population FROM state WHERE state_name  =  \"california\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the smallest population",
+        "query": "SELECT state_name FROM state WHERE population  =  ( SELECT MIN ( population ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the least populous state",
+        "query": "SELECT state_name FROM state WHERE population  =  ( SELECT MIN ( population ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the state with the lowest population",
+        "query": "SELECT state_name FROM state WHERE population  =  ( SELECT MIN ( population ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "give me the cities in texas",
+        "query": "SELECT city_name FROM city WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "tell me what cities are in texas",
+        "query": "SELECT city_name FROM city WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what cities are located in texas",
+        "query": "SELECT city_name FROM city WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the cities in texas",
+        "query": "SELECT city_name FROM city WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what cities in texas",
+        "query": "SELECT city_name FROM city WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "give me the cities which are in texas",
+        "query": "SELECT city_name FROM city WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the area of the state with the capital albany",
+        "query": "SELECT area FROM state WHERE capital  =  \"albany\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "give me the lakes in california",
+        "query": "SELECT lake_name FROM lake WHERE state_name  =  \"california\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "name the major lakes in michigan",
+        "query": "SELECT lake_name FROM lake WHERE area  >  750 AND state_name  =  \"michigan\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the states",
+        "query": "SELECT state_name FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "list the states",
+        "query": "SELECT state_name FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "give me all the states of usa",
+        "query": "SELECT state_name FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states do ohio river flow through",
+        "query": "SELECT traverse FROM river WHERE river_name  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states does the ohio river run through",
+        "query": "SELECT traverse FROM river WHERE river_name  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states border the ohio river",
+        "query": "SELECT traverse FROM river WHERE river_name  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states border the ohio river",
+        "query": "SELECT traverse FROM river WHERE river_name  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states does the ohio run through",
+        "query": "SELECT traverse FROM river WHERE river_name  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "where is the ohio river",
+        "query": "SELECT traverse FROM river WHERE river_name  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states does the ohio river run through",
+        "query": "SELECT traverse FROM river WHERE river_name  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states does the ohio run through",
+        "query": "SELECT traverse FROM river WHERE river_name  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states does the ohio river pass through",
+        "query": "SELECT traverse FROM river WHERE river_name  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the states that the ohio run through",
+        "query": "SELECT traverse FROM river WHERE river_name  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the ohio river",
+        "query": "SELECT traverse FROM river WHERE river_name  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states have rivers named ohio",
+        "query": "SELECT traverse FROM river WHERE river_name  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "through which states does the ohio flow",
+        "query": "SELECT traverse FROM river WHERE river_name  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states are next to the ohio",
+        "query": "SELECT traverse FROM river WHERE river_name  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "through which states does the ohio run",
+        "query": "SELECT traverse FROM river WHERE river_name  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states does the ohio river go through",
+        "query": "SELECT traverse FROM river WHERE river_name  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the largest population",
+        "query": "SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the most populous state",
+        "query": "SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state is the largest in population",
+        "query": "SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the biggest population",
+        "query": "SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the greatest population",
+        "query": "SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the most population",
+        "query": "SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the most people",
+        "query": "SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the most people",
+        "query": "SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the most populous state in the us",
+        "query": "SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the highest population",
+        "query": "SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the lowest elevation in pennsylvania",
+        "query": "SELECT lowest_elevation FROM highlow WHERE state_name  =  \"pennsylvania\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest point in each state whose lowest point is sea level",
+        "query": "SELECT highest_point  ,  state_name FROM highlow WHERE lowest_elevation  =  0;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the length of the longest river in the usa",
+        "query": "SELECT LENGTH FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how long is the longest river in the usa",
+        "query": "SELECT LENGTH FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the longest river flowing through texas",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river WHERE traverse  =  \"texas\" ) AND traverse  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest river in texas state",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river WHERE traverse  =  \"texas\" ) AND traverse  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the longest river in texas",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river WHERE traverse  =  \"texas\" ) AND traverse  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the biggest river in texas",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river WHERE traverse  =  \"texas\" ) AND traverse  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the longest river that flows through texas",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river WHERE traverse  =  \"texas\" ) AND traverse  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the biggest rivers in texas",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river WHERE traverse  =  \"texas\" ) AND traverse  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many rivers are in idaho",
+        "query": "SELECT COUNT ( river_name ) FROM river WHERE traverse  =  \"idaho\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "give me the number of rivers in idaho",
+        "query": "SELECT COUNT ( river_name ) FROM river WHERE traverse  =  \"idaho\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many rivers does idaho have",
+        "query": "SELECT COUNT ( river_name ) FROM river WHERE traverse  =  \"idaho\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many rivers are there in idaho",
+        "query": "SELECT COUNT ( river_name ) FROM river WHERE traverse  =  \"idaho\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many rivers run through idaho",
+        "query": "SELECT COUNT ( river_name ) FROM river WHERE traverse  =  \"idaho\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many rivers are found in idaho",
+        "query": "SELECT COUNT ( river_name ) FROM river WHERE traverse  =  \"idaho\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many rivers in idaho",
+        "query": "SELECT COUNT ( river_name ) FROM river WHERE traverse  =  \"idaho\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states neighbor kentucky",
+        "query": "SELECT border FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states border kentucky",
+        "query": "SELECT border FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states border kentucky",
+        "query": "SELECT border FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "give me the states that border kentucky",
+        "query": "SELECT border FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state borders kentucky",
+        "query": "SELECT border FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states are next to kentucky",
+        "query": "SELECT border FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states surround kentucky",
+        "query": "SELECT border FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state borders kentucky",
+        "query": "SELECT border FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the neighboring states for kentucky",
+        "query": "SELECT border FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states adjoin kentucky",
+        "query": "SELECT border FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "states bordering kentucky",
+        "query": "SELECT border FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state border kentucky",
+        "query": "SELECT border FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the adjacent state of kentucky",
+        "query": "SELECT border FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "name all the rivers in illinois",
+        "query": "SELECT river_name FROM river WHERE traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "rivers in illinois",
+        "query": "SELECT river_name FROM river WHERE traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are all the rivers in illinois",
+        "query": "SELECT river_name FROM river WHERE traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the rivers in illinois",
+        "query": "SELECT river_name FROM river WHERE traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what rivers are in illinois",
+        "query": "SELECT river_name FROM river WHERE traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what rivers are there in illinois",
+        "query": "SELECT river_name FROM river WHERE traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what rivers run through illinois",
+        "query": "SELECT river_name FROM river WHERE traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what rivers flow through illinois",
+        "query": "SELECT river_name FROM river WHERE traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what river flows through illinois",
+        "query": "SELECT river_name FROM river WHERE traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the rivers in the state of illinois",
+        "query": "SELECT river_name FROM river WHERE traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "name the rivers in illinois",
+        "query": "SELECT river_name FROM river WHERE traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the rivers of illinois",
+        "query": "SELECT river_name FROM river WHERE traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which rivers are in illinois",
+        "query": "SELECT river_name FROM river WHERE traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which rivers flow through illinois",
+        "query": "SELECT river_name FROM river WHERE traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the river that cross over illinois",
+        "query": "SELECT river_name FROM river WHERE traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what river runs through illinois",
+        "query": "SELECT river_name FROM river WHERE traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state is springfield in",
+        "query": "SELECT state_name FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "where is springfield",
+        "query": "SELECT state_name FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "springfield is in what state",
+        "query": "SELECT state_name FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states have cities named springfield",
+        "query": "SELECT state_name FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states have cities named springfield",
+        "query": "SELECT state_name FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state is springfield in",
+        "query": "SELECT state_name FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states have a city named springfield",
+        "query": "SELECT state_name FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the city springfield",
+        "query": "SELECT state_name FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states have towns named springfield",
+        "query": "SELECT state_name FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state is springfield located in",
+        "query": "SELECT state_name FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "in which state is springfield",
+        "query": "SELECT state_name FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state is the city springfield located in",
+        "query": "SELECT state_name FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states in the united states have a city of springfield",
+        "query": "SELECT state_name FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population of the state with the largest area",
+        "query": "SELECT population FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population of the largest state",
+        "query": "SELECT population FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many people live in boulder",
+        "query": "SELECT population FROM city WHERE city_name  =  \"boulder\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population of boulder",
+        "query": "SELECT population FROM city WHERE city_name  =  \"boulder\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many people lived in boulder",
+        "query": "SELECT population FROM city WHERE city_name  =  \"boulder\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "number of people in boulder",
+        "query": "SELECT population FROM city WHERE city_name  =  \"boulder\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population of boulder city",
+        "query": "SELECT population FROM city WHERE city_name  =  \"boulder\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how big is the city of boulder",
+        "query": "SELECT population FROM city WHERE city_name  =  \"boulder\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "population of boulder",
+        "query": "SELECT population FROM city WHERE city_name  =  \"boulder\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population in boulder",
+        "query": "SELECT population FROM city WHERE city_name  =  \"boulder\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "people in boulder",
+        "query": "SELECT population FROM city WHERE city_name  =  \"boulder\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many people in boulder",
+        "query": "SELECT population FROM city WHERE city_name  =  \"boulder\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many inhabitants does boulder have",
+        "query": "SELECT population FROM city WHERE city_name  =  \"boulder\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "number of citizens in boulder",
+        "query": "SELECT population FROM city WHERE city_name  =  \"boulder\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many citizens in boulder",
+        "query": "SELECT population FROM city WHERE city_name  =  \"boulder\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the smallest city in alaska",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MIN ( population ) FROM city WHERE state_name  =  \"alaska\" ) AND state_name  =  \"alaska\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states lie on the largest river in the united states",
+        "query": "SELECT traverse FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states does the longest river run through",
+        "query": "SELECT traverse FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the longest river",
+        "query": "SELECT traverse FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the states through which the longest river runs",
+        "query": "SELECT traverse FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states does the longest river cross",
+        "query": "SELECT traverse FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population density of the state with the smallest area",
+        "query": "SELECT density FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population density of the smallest state",
+        "query": "SELECT density FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states have points higher than the highest point in colorado",
+        "query": "SELECT state_name FROM highlow WHERE highest_elevation  >  ( SELECT highest_elevation FROM highlow WHERE state_name  =  \"colorado\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states have points that are higher than the highest point in colorado",
+        "query": "SELECT state_name FROM highlow WHERE highest_elevation  >  ( SELECT highest_elevation FROM highlow WHERE state_name  =  \"colorado\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states high point are higher than that of colorado",
+        "query": "SELECT state_name FROM highlow WHERE highest_elevation  >  ( SELECT highest_elevation FROM highlow WHERE state_name  =  \"colorado\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest elevation in delaware",
+        "query": "SELECT highest_elevation FROM highlow WHERE state_name  =  \"delaware\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how high is the highest point of delaware",
+        "query": "SELECT highest_elevation FROM highlow WHERE state_name  =  \"delaware\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how tall is the highest point in delaware",
+        "query": "SELECT highest_elevation FROM highlow WHERE state_name  =  \"delaware\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest point in delaware in meters",
+        "query": "SELECT highest_elevation FROM highlow WHERE state_name  =  \"delaware\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how high is the highest point in delaware",
+        "query": "SELECT highest_elevation FROM highlow WHERE state_name  =  \"delaware\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "give me the longest river that passes through the us",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which is the longest river in usa",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the longest river in america",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "name the longest river in us",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what river is the longest one in the united states",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the longest river in the us",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the longest river",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the longest river in the united states",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the city with the largest population",
+        "query": "SELECT state_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the largest city",
+        "query": "SELECT state_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the largest city",
+        "query": "SELECT state_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the city with the most population",
+        "query": "SELECT state_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the smallest city in the largest state",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MIN ( population ) FROM city WHERE state_name IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state ) ) ) AND state_name IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state is the biggest",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the state with the largest area",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the largest area",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the biggest state in continental us",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "state the state with the largest area",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest state in usa",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the biggest state",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the biggest state in the usa",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "give me the largest state",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest state in the us",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest state",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the highest points of states surrounding mississippi",
+        "query": "SELECT highest_point FROM highlow WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the high points of states surrounding mississippi",
+        "query": "SELECT highest_point FROM highlow WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest point in states bordering colorado",
+        "query": "SELECT highest_point FROM highlow WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"colorado\" ) ORDER BY highest_elevation DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest point in the states bordering colorado",
+        "query": "SELECT highest_point FROM highlow WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"colorado\" ) ORDER BY highest_elevation DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the state with the lowest population density",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MIN ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the lowest population density",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MIN ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the lowest population density",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MIN ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the smallest population density",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MIN ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the sparsest population density",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MIN ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the sparsest population density",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MIN ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the least population density",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MIN ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the least population density",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MIN ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the smallest population density",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MIN ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "where is the highest point in texas",
+        "query": "SELECT highest_point FROM highlow WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest point in texas",
+        "query": "SELECT highest_point FROM highlow WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the high point of texas",
+        "query": "SELECT highest_point FROM highlow WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest mountain in texas",
+        "query": "SELECT highest_point FROM highlow WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "could you tell me what is the highest point in the state of texas",
+        "query": "SELECT highest_point FROM highlow WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states have no bordering state",
+        "query": "SELECT state_name FROM state WHERE state_name NOT IN ( SELECT state_name FROM border_info );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "name the states which have no surrounding states",
+        "query": "SELECT state_name FROM state WHERE state_name NOT IN ( SELECT state_name FROM border_info );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states border no other states",
+        "query": "SELECT state_name FROM state WHERE state_name NOT IN ( SELECT state_name FROM border_info );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the area of the state with the smallest population density",
+        "query": "SELECT area FROM state WHERE density  =  ( SELECT MIN ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "count the states which have elevations lower than what alabama has",
+        "query": "SELECT COUNT ( state_name ) FROM highlow WHERE lowest_elevation  <  ( SELECT lowest_elevation FROM highlow WHERE state_name  =  \"alabama\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how high is guadalupe peak",
+        "query": "SELECT highest_elevation FROM highlow WHERE highest_point  =  \"guadalupe peak\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how tall is guadalupe peak",
+        "query": "SELECT highest_elevation FROM highlow WHERE highest_point  =  \"guadalupe peak\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the maximum elevation of guadalupe peak",
+        "query": "SELECT highest_elevation FROM highlow WHERE highest_point  =  \"guadalupe peak\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how high is the highest point in america",
+        "query": "SELECT MAX ( highest_elevation ) FROM highlow;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest elevation in the united states",
+        "query": "SELECT MAX ( highest_elevation ) FROM highlow;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the elevation of the highest point in the usa",
+        "query": "SELECT MAX ( highest_elevation ) FROM highlow;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the height of the highest point in the usa",
+        "query": "SELECT MAX ( highest_elevation ) FROM highlow;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how long is the rio grande river",
+        "query": "SELECT LENGTH FROM river WHERE river_name  =  \"rio grande\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the length of the rio grande river",
+        "query": "SELECT LENGTH FROM river WHERE river_name  =  \"rio grande\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what length is the rio grande",
+        "query": "SELECT LENGTH FROM river WHERE river_name  =  \"rio grande\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how long is the rio grande",
+        "query": "SELECT LENGTH FROM river WHERE river_name  =  \"rio grande\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how long is the rio grande river in miles",
+        "query": "SELECT LENGTH FROM river WHERE river_name  =  \"rio grande\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how long is rio grande",
+        "query": "SELECT LENGTH FROM river WHERE river_name  =  \"rio grande\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how long is the longest river in texas",
+        "query": "SELECT LENGTH FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river WHERE traverse  =  \"texas\" ) AND traverse  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the length of the longest river that runs through texas",
+        "query": "SELECT LENGTH FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river WHERE traverse  =  \"texas\" ) AND traverse  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many capitals does rhode island have",
+        "query": "SELECT COUNT ( capital ) FROM state WHERE state_name  =  \"rhode island\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many cities are there in the united states",
+        "query": "SELECT COUNT ( city_name ) FROM city;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many cities does the usa have",
+        "query": "SELECT COUNT ( city_name ) FROM city;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many cities are there in the us",
+        "query": "SELECT COUNT ( city_name ) FROM city;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many cities are there in usa",
+        "query": "SELECT COUNT ( city_name ) FROM city;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many cities are there in us",
+        "query": "SELECT COUNT ( city_name ) FROM city;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many major cities are there",
+        "query": "SELECT COUNT ( city_name ) FROM city WHERE population  >  150000;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many citizens does the biggest city have in the usa",
+        "query": "SELECT population FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many colorado rivers are there",
+        "query": "SELECT COUNT ( river_name ) FROM river WHERE river_name  =  \"colorado\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many rivers are called colorado",
+        "query": "SELECT COUNT ( river_name ) FROM river WHERE river_name  =  \"colorado\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population of seattle washington",
+        "query": "SELECT population FROM city WHERE city_name  =  \"seattle\" AND state_name  =  \"washington\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many people live in seattle washington",
+        "query": "SELECT population FROM city WHERE city_name  =  \"seattle\" AND state_name  =  \"washington\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many people live in the biggest city in alaska state",
+        "query": "SELECT population FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name  =  \"alaska\" ) AND state_name  =  \"alaska\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how large is the largest city in alaska",
+        "query": "SELECT population FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name  =  \"alaska\" ) AND state_name  =  \"alaska\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many people live in the capital of texas",
+        "query": "SELECT population FROM city WHERE city_name  =  ( SELECT capital FROM state WHERE state_name  =  \"texas\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the size of the capital of texas",
+        "query": "SELECT population FROM city WHERE city_name  =  ( SELECT capital FROM state WHERE state_name  =  \"texas\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many people live in the united states",
+        "query": "SELECT SUM ( population ) FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the combined population of all 50 states",
+        "query": "SELECT SUM ( population ) FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states are in the usa",
+        "query": "SELECT COUNT ( state_name ) FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states are there",
+        "query": "SELECT COUNT ( state_name ) FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states are there in the usa",
+        "query": "SELECT COUNT ( state_name ) FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states does usa have",
+        "query": "SELECT COUNT ( state_name ) FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states are in the united states",
+        "query": "SELECT COUNT ( state_name ) FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states are there in united states",
+        "query": "SELECT COUNT ( state_name ) FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states border kentucky",
+        "query": "SELECT COUNT ( border ) FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states does kentucky border",
+        "query": "SELECT COUNT ( border ) FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "kentucky borders how many states",
+        "query": "SELECT COUNT ( border ) FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "number of states bordering kentucky",
+        "query": "SELECT COUNT ( border ) FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the number of neighboring states for kentucky",
+        "query": "SELECT COUNT ( border ) FROM border_info WHERE state_name  =  \"kentucky\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states border the state with the largest population",
+        "query": "SELECT COUNT ( border ) FROM border_info WHERE state_name IN ( SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states do not have rivers",
+        "query": "SELECT COUNT ( DISTINCT state_name ) FROM state WHERE state_name NOT IN ( SELECT traverse FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states have a higher point than the highest point of the state with the largest capital city in the us",
+        "query": "SELECT COUNT ( state_name ) FROM highlow WHERE highest_elevation  >  ( SELECT highest_elevation FROM highlow WHERE state_name  =  ( SELECT state_name FROM state WHERE capital  =  ( SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city ) ) ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "name the major rivers in illinois",
+        "query": "SELECT river_name FROM river WHERE LENGTH  >  750 AND traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the major rivers in illinois",
+        "query": "SELECT river_name FROM river WHERE LENGTH  >  750 AND traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are major rivers in illinois",
+        "query": "SELECT river_name FROM river WHERE LENGTH  >  750 AND traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what major rivers run through illinois",
+        "query": "SELECT river_name FROM river WHERE LENGTH  >  750 AND traverse  =  \"illinois\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "through which states does the longest river in texas run",
+        "query": "SELECT traverse FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river WHERE traverse  =  \"texas\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the capital city in texas",
+        "query": "SELECT capital FROM state WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the capital of texas",
+        "query": "SELECT capital FROM state WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the capital of the texas state",
+        "query": "SELECT capital FROM state WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is capital of texas",
+        "query": "SELECT capital FROM state WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the capital of the state texas",
+        "query": "SELECT capital FROM state WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "can you tell me the capital of texas",
+        "query": "SELECT capital FROM state WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the capitals of states that border texas",
+        "query": "SELECT t2.capital FROM state AS t2 JOIN border_info AS t1 ON t2.state_name  =  t1.border WHERE t1.state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the capital cities of the states which border texas",
+        "query": "SELECT t2.capital FROM state AS t2 JOIN border_info AS t1 ON t2.state_name  =  t1.border WHERE t1.state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the capitals of the states that border texas",
+        "query": "SELECT t2.capital FROM state AS t2 JOIN border_info AS t1 ON t2.state_name  =  t1.border WHERE t1.state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which capitals are in the states that border texas",
+        "query": "SELECT t2.capital FROM state AS t2 JOIN border_info AS t1 ON t2.state_name  =  t1.border WHERE t1.state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the cities in states through which the mississippi runs",
+        "query": "SELECT city_name FROM city WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the cities of the state with the highest point",
+        "query": "SELECT city_name FROM city WHERE state_name IN ( SELECT state_name FROM highlow WHERE highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the highest points of all the states",
+        "query": "SELECT highest_point FROM highlow;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the major cities in kansas",
+        "query": "SELECT city_name FROM city WHERE population  >  150000 AND state_name  =  \"kansas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the major cities in the state of kansas",
+        "query": "SELECT city_name FROM city WHERE population  >  150000 AND state_name  =  \"kansas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what major cities are located in kansas",
+        "query": "SELECT city_name FROM city WHERE population  >  150000 AND state_name  =  \"kansas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "show major cities in kansas",
+        "query": "SELECT city_name FROM city WHERE population  >  150000 AND state_name  =  \"kansas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the names of the major cities in kansas",
+        "query": "SELECT city_name FROM city WHERE population  >  150000 AND state_name  =  \"kansas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the major cities of kansas",
+        "query": "SELECT city_name FROM city WHERE population  >  150000 AND state_name  =  \"kansas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the major cities in kansas",
+        "query": "SELECT city_name FROM city WHERE population  >  150000 AND state_name  =  \"kansas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the major cities in states through which the mississippi runs",
+        "query": "SELECT city_name FROM city WHERE population  >  150000 AND state_name IN ( SELECT traverse FROM river WHERE LENGTH  >  750 AND river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the major cities in the usa",
+        "query": "SELECT city_name FROM city WHERE population  >  150000;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the major cities of the united states",
+        "query": "SELECT city_name FROM city WHERE population  >  150000;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the major cities of the us",
+        "query": "SELECT city_name FROM city WHERE population  >  150000;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the population densities of each us state",
+        "query": "SELECT density FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the populations of states through which the mississippi river run",
+        "query": "SELECT population FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the populations of states through which the mississippi runs",
+        "query": "SELECT population FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the populations of the states through which the mississippi runs",
+        "query": "SELECT population FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the populations of states through which the mississippi river runs",
+        "query": "SELECT population FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the populations of the states through which the mississippi run",
+        "query": "SELECT population FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the populations of the states through which the mississippi river run",
+        "query": "SELECT population FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the populations of states through which the mississippi run",
+        "query": "SELECT population FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the populations of the states through which the mississippi river runs",
+        "query": "SELECT population FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the populations of states which border texas",
+        "query": "SELECT t2.population FROM state AS t2 JOIN border_info AS t1 ON t2.state_name  =  t1.border WHERE t1.state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the populations of the major cities of wisconsin",
+        "query": "SELECT population FROM city WHERE population  >  150000 AND state_name  =  \"wisconsin\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the populations of all the major cities in wisconsin",
+        "query": "SELECT population FROM city WHERE population  >  150000 AND state_name  =  \"wisconsin\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population of the major cities in wisconsin",
+        "query": "SELECT population FROM city WHERE population  >  150000 AND state_name  =  \"wisconsin\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what city has the most people",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what city in the united states has the highest population density",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the most populous city",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which us city has the highest population density",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the biggest city in the usa",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "whats the largest city",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what city has the largest population",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the biggest city in the us",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the biggest city in usa",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the biggest capital city in the us",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( t1.population ) FROM state AS t2 JOIN city AS t1 ON t2.capital  =  t1.city_name );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest capital city in the usa",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( t1.population ) FROM state AS t2 JOIN city AS t1 ON t2.capital  =  t1.city_name );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest state capital in population",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( t1.population ) FROM state AS t2 JOIN city AS t1 ON t2.capital  =  t1.city_name );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest capital",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( t1.population ) FROM state AS t2 JOIN city AS t1 ON t2.capital  =  t1.city_name );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the most populated capital in the usa",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( t1.population ) FROM state AS t2 JOIN city AS t1 ON t2.capital  =  t1.city_name );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what capital is the largest in the us",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( t1.population ) FROM state AS t2 JOIN city AS t1 ON t2.capital  =  t1.city_name );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what capital has the largest population",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( t1.population ) FROM state AS t2 JOIN city AS t1 ON t2.capital  =  t1.city_name );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is largest capital",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( t1.population ) FROM state AS t2 JOIN city AS t1 ON t2.capital  =  t1.city_name );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the capital of states that have cities named durham",
+        "query": "SELECT t2.capital FROM state AS t2 JOIN city AS t1 ON t2.state_name  =  t1.state_name WHERE t1.city_name  =  \"durham\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the capital of the smallest state",
+        "query": "SELECT capital FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the capital of the state with the largest population density",
+        "query": "SELECT DISTINCT capital FROM state WHERE density  =  ( SELECT MAX ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the capital of the state with the largest population",
+        "query": "SELECT capital FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the capital of the state with the most inhabitants",
+        "query": "SELECT capital FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the capital of the state with the longest river",
+        "query": "SELECT capital FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the combined area of all 50 states",
+        "query": "SELECT SUM ( area ) FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the area of all the states combined",
+        "query": "SELECT SUM ( area ) FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many square kilometers in the us",
+        "query": "SELECT SUM ( area ) FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the total area of the usa",
+        "query": "SELECT SUM ( area ) FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the density of the wyoming",
+        "query": "SELECT density FROM state WHERE state_name  =  \"wyoming\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population density of wyoming",
+        "query": "SELECT density FROM state WHERE state_name  =  \"wyoming\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the density of wyoming",
+        "query": "SELECT density FROM state WHERE state_name  =  \"wyoming\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest mountain in the us",
+        "query": "SELECT mountain_name FROM mountain WHERE mountain_altitude  =  ( SELECT MAX ( mountain_altitude ) FROM mountain );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest mountain in us",
+        "query": "SELECT mountain_name FROM mountain WHERE mountain_altitude  =  ( SELECT MAX ( mountain_altitude ) FROM mountain );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the tallest mountain in america",
+        "query": "SELECT mountain_name FROM mountain WHERE mountain_altitude  =  ( SELECT MAX ( mountain_altitude ) FROM mountain );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the tallest mountain in the united states",
+        "query": "SELECT mountain_name FROM mountain WHERE mountain_altitude  =  ( SELECT MAX ( mountain_altitude ) FROM mountain );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest point in the state with capital des moines",
+        "query": "SELECT highest_point FROM highlow WHERE state_name IN ( SELECT state_name FROM state WHERE capital  =  \"des moines\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest point in the state with the capital des moines",
+        "query": "SELECT highest_point FROM highlow WHERE state_name IN ( SELECT state_name FROM state WHERE capital  =  \"des moines\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest point in the usa",
+        "query": "SELECT highest_point FROM highlow WHERE highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest point of the usa",
+        "query": "SELECT highest_point FROM highlow WHERE highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest point in the country",
+        "query": "SELECT highest_point FROM highlow WHERE highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest point in the us",
+        "query": "SELECT highest_point FROM highlow WHERE highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest point in the united states",
+        "query": "SELECT highest_point FROM highlow WHERE highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest point of the state with the smallest population density",
+        "query": "SELECT highest_point FROM highlow WHERE state_name IN ( SELECT state_name FROM state WHERE density  =  ( SELECT MIN ( density ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest city in smallest state through which the mississippi runs",
+        "query": "SELECT city_name FROM city WHERE state_name IN ( SELECT state_name FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" ) AND area  =  ( SELECT MIN ( area ) FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" ) ) ) ORDER BY population DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest city in the smallest state in the usa",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state ) ) ) AND state_name IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the biggest city in the smallest state",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state ) ) ) AND state_name IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest state bordering california",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"california\" ) ) AND state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"california\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest state that borders california",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"california\" ) ) AND state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"california\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state that borders california is the largest",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"california\" ) ) AND state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"california\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the longest river in the largest state",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river WHERE traverse IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state ) ) ) AND traverse IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the longest river in the states that border tennessee",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river WHERE traverse IN ( SELECT border FROM border_info WHERE state_name  =  \"tennessee\" ) ) AND traverse IN ( SELECT border FROM border_info WHERE state_name  =  \"tennessee\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the longest river that flows through a state that borders tennessee",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river WHERE traverse IN ( SELECT border FROM border_info WHERE state_name  =  \"tennessee\" ) ) AND traverse IN ( SELECT border FROM border_info WHERE state_name  =  \"tennessee\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the longest river that runs through a state that borders tennessee",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river WHERE traverse IN ( SELECT border FROM border_info WHERE state_name  =  \"tennessee\" ) ) AND traverse IN ( SELECT border FROM border_info WHERE state_name  =  \"tennessee\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the longest river in the state with the most major cities",
+        "query": "SELECT river_name FROM river WHERE traverse  =  ( SELECT state_name FROM city WHERE population  >  150000 GROUP BY state_name ORDER BY COUNT ( city_name ) DESC LIMIT 1 ) ORDER BY LENGTH DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the lowest point in iowa",
+        "query": "SELECT lowest_point FROM highlow WHERE state_name  =  \"iowa\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the lowest point in iowa in meters",
+        "query": "SELECT lowest_point FROM highlow WHERE state_name  =  \"iowa\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the lowest point in the state of iowa",
+        "query": "SELECT lowest_point FROM highlow WHERE state_name  =  \"iowa\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "where is the lowest point in iowa",
+        "query": "SELECT lowest_point FROM highlow WHERE state_name  =  \"iowa\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the lowest point of iowa",
+        "query": "SELECT lowest_point FROM highlow WHERE state_name  =  \"iowa\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "where is the lowest spot in iowa",
+        "query": "SELECT lowest_point FROM highlow WHERE state_name  =  \"iowa\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the lowest point in usa",
+        "query": "SELECT lowest_point FROM highlow WHERE lowest_elevation  =  ( SELECT MIN ( lowest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the lowest point in the united states",
+        "query": "SELECT lowest_point FROM highlow WHERE lowest_elevation  =  ( SELECT MIN ( lowest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "where is the lowest point in the us",
+        "query": "SELECT lowest_point FROM highlow WHERE lowest_elevation  =  ( SELECT MIN ( lowest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the lowest point of the us",
+        "query": "SELECT lowest_point FROM highlow WHERE lowest_elevation  =  ( SELECT MIN ( lowest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the lowest point of all states through which the mississippi river runs through",
+        "query": "SELECT lowest_point FROM highlow WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" ) ORDER BY lowest_elevation LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which is the lowest point of the states that the mississippi runs through",
+        "query": "SELECT lowest_point FROM highlow WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" ) ORDER BY lowest_elevation LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the most dense state in the usa",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MAX ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the highest population density",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MAX ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the greatest density",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MAX ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the highest population density",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MAX ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the greatest population density",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MAX ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the largest population density",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MAX ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the state with the largest density in usa",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MAX ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the state with the largest population density",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MAX ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the largest density",
+        "query": "SELECT state_name FROM state WHERE density  =  ( SELECT MAX ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the most populous state through which the mississippi runs",
+        "query": "SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" ) ) AND state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state which the mississippi runs through has the largest population",
+        "query": "SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" ) ) AND state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population density of the largest state",
+        "query": "SELECT density FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population of the largest city in the state with the largest area",
+        "query": "SELECT population FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state ) ) ) AND state_name IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population of the smallest state",
+        "query": "SELECT population FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population of the state with the highest population density",
+        "query": "SELECT population FROM state WHERE density  =  ( SELECT MAX ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many people live in the state with the largest population density",
+        "query": "SELECT population FROM state WHERE density  =  ( SELECT MAX ( density ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the smallest city in the usa",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MIN ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the smallest city in the us",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MIN ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what city has the least population",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MIN ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the city with the smallest population",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MIN ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the smallest state bordering texas",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"texas\" ) ) AND state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"texas\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the smallest state that borders texas",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"texas\" ) ) AND state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"texas\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the smallest area that borders texas",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"texas\" ) ) AND state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"texas\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the smallest state that the mississippi river runs through",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" ) ) AND state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the state with the smallest area",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which is the smallest state",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state is the smallest",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the smallest state in the usa",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the smallest state by area",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the smallest area",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the total length of all rivers in the usa",
+        "query": "SELECT SUM ( LENGTH ) FROM river;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what river flows through the most states",
+        "query": "SELECT river_name FROM river GROUP BY ( river_name ) ORDER BY COUNT ( DISTINCT traverse ) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which river goes through the most states",
+        "query": "SELECT river_name FROM river GROUP BY ( river_name ) ORDER BY COUNT ( DISTINCT traverse ) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which river runs through most states",
+        "query": "SELECT river_name FROM river GROUP BY ( river_name ) ORDER BY COUNT ( DISTINCT traverse ) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which river traverses most states",
+        "query": "SELECT river_name FROM river GROUP BY ( river_name ) ORDER BY COUNT ( DISTINCT traverse ) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what river traverses the most states",
+        "query": "SELECT river_name FROM river GROUP BY ( river_name ) ORDER BY COUNT ( DISTINCT traverse ) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which river runs through the most states",
+        "query": "SELECT river_name FROM river GROUP BY ( river_name ) ORDER BY COUNT ( DISTINCT traverse ) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what river runs through the most states",
+        "query": "SELECT river_name FROM river GROUP BY ( river_name ) ORDER BY COUNT ( DISTINCT traverse ) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what rivers are in states that border alabama",
+        "query": "SELECT river_name FROM river WHERE traverse IN ( SELECT border FROM border_info WHERE state_name  =  \"alabama\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which rivers run through states bordering alabama",
+        "query": "SELECT river_name FROM river WHERE traverse IN ( SELECT border FROM border_info WHERE state_name  =  \"alabama\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what rivers flow through states that alabama borders",
+        "query": "SELECT river_name FROM river WHERE traverse IN ( SELECT border FROM border_info WHERE state_name  =  \"alabama\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state bordering oklahoma has the largest population",
+        "query": "SELECT state_name FROM state WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"oklahoma\" ) ORDER BY population DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which of the states bordering oklahoma has the largest population",
+        "query": "SELECT state_name FROM state WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"oklahoma\" ) ORDER BY population DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state that borders oklahoma has the highest population",
+        "query": "SELECT state_name FROM state WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"oklahoma\" ) ORDER BY population DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the most populated state bordering oklahoma",
+        "query": "SELECT state_name FROM state WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"oklahoma\" ) ORDER BY population DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state contains the highest point of those the colorado river traverses",
+        "query": "SELECT state_name FROM highlow WHERE highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"colorado\" ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the largest capital",
+        "query": "SELECT state_name FROM city WHERE population  =  ( SELECT MAX ( t1.population ) FROM state AS t2 JOIN city AS t1 ON t2.capital  =  t1.city_name );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state 's capital city is the largest",
+        "query": "SELECT state_name FROM city WHERE population  =  ( SELECT MAX ( t1.population ) FROM state AS t2 JOIN city AS t1 ON t2.capital  =  t1.city_name );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the longest river",
+        "query": "SELECT DISTINCT traverse FROM river WHERE LENGTH  =  ( SELECT MAX ( DISTINCT LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the smallest urban population",
+        "query": "SELECT state_name FROM city GROUP BY state_name ORDER BY SUM ( population ) LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states border states that border colorado",
+        "query": "SELECT border FROM border_info WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"colorado\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states border states that the mississippi runs through",
+        "query": "SELECT border FROM border_info WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states border states through which the mississippi traverses",
+        "query": "SELECT border FROM border_info WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states border states which the mississippi runs through",
+        "query": "SELECT border FROM border_info WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states border texas and have a major river",
+        "query": "SELECT state_name FROM border_info WHERE border  =  \"texas\" AND state_name IN ( SELECT traverse FROM river WHERE LENGTH  >  750 );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states border the most populous state",
+        "query": "SELECT border FROM border_info WHERE state_name  =  ( SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the states that border the state with the greatest population",
+        "query": "SELECT border FROM border_info WHERE state_name  =  ( SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states border the state with the smallest area",
+        "query": "SELECT border FROM border_info WHERE state_name  =  ( SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states border the state with the smallest area",
+        "query": "SELECT border FROM border_info WHERE state_name  =  ( SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states contain at least one major rivers",
+        "query": "SELECT traverse FROM river WHERE LENGTH  >  750;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "where are mountains",
+        "query": "SELECT state_name FROM mountain;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "where is the highest mountain of the united states",
+        "query": "SELECT state_name FROM mountain WHERE mountain_altitude  =  ( SELECT MAX ( mountain_altitude ) FROM mountain );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the highest peak in the country",
+        "query": "SELECT state_name FROM mountain WHERE mountain_altitude  =  ( SELECT MAX ( mountain_altitude ) FROM mountain );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "where is the smallest city",
+        "query": "SELECT state_name FROM city WHERE population  =  ( SELECT MIN ( population ) FROM city );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which is the density of the state that the largest river in the united states runs through",
+        "query": "SELECT density FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which is the highest peak not in alaska",
+        "query": "SELECT mountain_name FROM mountain WHERE mountain_altitude  =  ( SELECT MAX ( mountain_altitude ) FROM mountain WHERE state_name != \"alaska\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which rivers do not run through tennessee",
+        "query": "SELECT river_name FROM river WHERE river_name NOT IN ( SELECT river_name FROM river WHERE traverse  =  \"tennessee\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what rivers do not run through tennessee",
+        "query": "SELECT river_name FROM river WHERE river_name NOT IN ( SELECT river_name FROM river WHERE traverse  =  \"tennessee\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which rivers do not run through usa",
+        "query": "SELECT river_name FROM river WHERE country_name != \"usa\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which rivers run through states that border the state with the capital atlanta",
+        "query": "SELECT river_name FROM river WHERE traverse IN ( SELECT border FROM border_info WHERE state_name IN ( SELECT state_name FROM state WHERE capital  =  \"atlanta\" ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what rivers run through the states that border the state with the capital atlanta",
+        "query": "SELECT river_name FROM river WHERE traverse IN ( SELECT border FROM border_info WHERE state_name IN ( SELECT state_name FROM state WHERE capital  =  \"atlanta\" ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state capital has the smallest population",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MIN ( t1.population ) FROM state AS t2 JOIN city AS t1 ON t2.capital  =  t1.city_name );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the highest elevation",
+        "query": "SELECT state_name FROM highlow WHERE highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the highest point",
+        "query": "SELECT state_name FROM highlow WHERE highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the highest elevation",
+        "query": "SELECT state_name FROM highlow WHERE highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "in which state does the highest point in usa exist",
+        "query": "SELECT state_name FROM highlow WHERE highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has highest elevation",
+        "query": "SELECT state_name FROM highlow WHERE highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the state with the highest elevation in the united states",
+        "query": "SELECT state_name FROM highlow WHERE highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the state that contains the highest point",
+        "query": "SELECT state_name FROM highlow WHERE highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state contains the highest point in the us",
+        "query": "SELECT state_name FROM highlow WHERE highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the lowest elevation",
+        "query": "SELECT state_name FROM highlow WHERE lowest_elevation  =  ( SELECT MIN ( lowest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the name of the state with the lowest point",
+        "query": "SELECT state_name FROM highlow WHERE lowest_elevation  =  ( SELECT MIN ( lowest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the state with the lowest point",
+        "query": "SELECT state_name FROM highlow WHERE lowest_elevation  =  ( SELECT MIN ( lowest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the lowest point that borders idaho",
+        "query": "SELECT state_name FROM highlow WHERE lowest_elevation  =  ( SELECT MIN ( lowest_elevation ) FROM highlow WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"idaho\" ) ) AND state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"idaho\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state has the smallest average urban population",
+        "query": "SELECT state_name FROM city GROUP BY state_name ORDER BY AVG ( population ) LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state is mount whitney in",
+        "query": "SELECT state_name FROM mountain WHERE mountain_name  =  \"whitney\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "in what state is mount whitney",
+        "query": "SELECT state_name FROM mountain WHERE mountain_name  =  \"whitney\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "where is mount whitney",
+        "query": "SELECT state_name FROM mountain WHERE mountain_name  =  \"whitney\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "where is mount whitney located",
+        "query": "SELECT state_name FROM mountain WHERE mountain_name  =  \"whitney\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states have a river",
+        "query": "SELECT traverse FROM river;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states have rivers running through them",
+        "query": "SELECT traverse FROM river;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states have a major city named austin",
+        "query": "SELECT state_name FROM city WHERE city_name  =  \"austin\" AND population  >  150000;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest city in a state that borders california",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"california\" ) ) AND state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"california\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest city in states that border california",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"california\" ) ) AND state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"california\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many rivers do not traverse the state with the capital albany",
+        "query": "SELECT COUNT ( river_name ) FROM river WHERE traverse NOT IN ( SELECT state_name FROM state WHERE capital  =  \"albany\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the shortest river in texas",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MIN ( LENGTH ) FROM river WHERE traverse  =  \"texas\" ) AND traverse  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the major cities in the smallest state in the us",
+        "query": "SELECT city_name FROM city WHERE population  >  150000 AND state_name  =  ( SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population of the capital of the largest state through which the mississippi runs",
+        "query": "SELECT population FROM city WHERE city_name  =  ( SELECT capital FROM state WHERE area  =  ( SELECT MAX ( t1.area ) FROM state AS t1 JOIN river AS t2 ON t1.state_name  =  t2.traverse WHERE t2.river_name  =  \"mississippi\" ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the shortest river in the usa",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MIN ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the shortest river",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MIN ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the shortest river in the us",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MIN ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the shortest river in the united states",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MIN ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which is the shortest river",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MIN ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the capital of the state that borders the state that borders texas",
+        "query": "SELECT capital FROM state WHERE state_name IN ( SELECT border FROM border_info WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"texas\" ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the smallest city of the smallest state in the us",
+        "query": "SELECT city_name FROM city WHERE population  =  ( SELECT MIN ( population ) FROM city WHERE state_name IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state ) ) ) AND state_name IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population of the largest state that borders texas",
+        "query": "SELECT population FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"texas\" ) ) AND state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"texas\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state is salem the capital of",
+        "query": "SELECT state_name FROM state WHERE capital  =  \"salem\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states capital is salem",
+        "query": "SELECT state_name FROM state WHERE capital  =  \"salem\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "salem is the capital of which state",
+        "query": "SELECT state_name FROM state WHERE capital  =  \"salem\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the capital salem",
+        "query": "SELECT state_name FROM state WHERE capital  =  \"salem\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what rivers flow through the state with the largest population",
+        "query": "SELECT river_name FROM river WHERE traverse IN ( SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest state that borders the state with the highest population",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state WHERE state_name IN ( SELECT state_name FROM border_info WHERE border IN ( SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state ) ) ) ) AND state_name IN ( SELECT state_name FROM border_info WHERE border IN ( SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state ) ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many rivers are there in us",
+        "query": "SELECT COUNT ( river_name ) FROM river;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "name the 50 capitals in the usa",
+        "query": "SELECT DISTINCT capital FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states have a city named springfield",
+        "query": "SELECT COUNT ( state_name ) FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states have a city called springfield",
+        "query": "SELECT COUNT ( state_name ) FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states have cities named springfield",
+        "query": "SELECT COUNT ( state_name ) FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states have cities or towns named springfield",
+        "query": "SELECT COUNT ( state_name ) FROM city WHERE city_name  =  \"springfield\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state borders the state with the smallest population",
+        "query": "SELECT border FROM border_info WHERE state_name IN ( SELECT state_name FROM state WHERE population  =  ( SELECT MIN ( population ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the lakes in states bordering texas",
+        "query": "SELECT lake_name FROM lake WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"texas\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many major cities are in texas",
+        "query": "SELECT COUNT ( city_name ) FROM city WHERE population  >  150000 AND state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many big cities are in texas",
+        "query": "SELECT COUNT ( city_name ) FROM city WHERE population  >  150000 AND state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many major cities are there in texas",
+        "query": "SELECT COUNT ( city_name ) FROM city WHERE population  >  150000 AND state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how high are the highest points of all the states",
+        "query": "SELECT highest_elevation FROM highlow;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states does the missouri run through",
+        "query": "SELECT COUNT ( traverse ) FROM river WHERE river_name  =  \"missouri\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states does the missouri river flow through",
+        "query": "SELECT COUNT ( traverse ) FROM river WHERE river_name  =  \"missouri\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states does the missouri river run through",
+        "query": "SELECT COUNT ( traverse ) FROM river WHERE river_name  =  \"missouri\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the longest river in the smallest state in the usa",
+        "query": "SELECT river_name FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river WHERE traverse IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state ) ) ) AND traverse IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the average population per square km in pennsylvania",
+        "query": "SELECT population / area FROM state WHERE state_name  =  \"pennsylvania\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states border states that border states that border florida",
+        "query": "SELECT border FROM border_info WHERE state_name IN ( SELECT border FROM border_info WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"florida\" ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states border at least one other state",
+        "query": "SELECT COUNT ( DISTINCT state_name ) FROM border_info;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the height of the highest mountain in texas",
+        "query": "SELECT MAX ( DISTINCT highest_elevation ) FROM highlow WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states border colorado and border new mexico",
+        "query": "SELECT COUNT ( border ) FROM border_info WHERE border IN ( SELECT border FROM border_info WHERE state_name  =  \"new mexico\" ) AND state_name  =  \"colorado\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many major cities are in states bordering nebraska",
+        "query": "SELECT COUNT ( city_name ) FROM city WHERE population  >  150000 AND state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"nebraska\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the total population of the states that border texas",
+        "query": "SELECT SUM ( t2.population ) FROM state AS t2 JOIN border_info AS t1 ON t2.state_name  =  t1.border WHERE t1.state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the major lakes in united states",
+        "query": "SELECT lake_name FROM lake WHERE area  >  750;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "show me all the major lakes in the us",
+        "query": "SELECT lake_name FROM lake WHERE area  >  750;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "name all the lakes of us",
+        "query": "SELECT lake_name FROM lake;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many major rivers cross ohio",
+        "query": "SELECT COUNT ( river_name ) FROM river WHERE LENGTH  >  750 AND traverse  =  \"ohio\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the shortest river",
+        "query": "SELECT DISTINCT traverse FROM river WHERE LENGTH  =  ( SELECT MIN ( DISTINCT LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states are next to major rivers",
+        "query": "SELECT COUNT ( DISTINCT traverse ) FROM river WHERE LENGTH  >  750;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the height of mount mckinley",
+        "query": "SELECT mountain_altitude FROM mountain WHERE mountain_name  =  \"mckinley\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states does the shortest river run through",
+        "query": "SELECT traverse FROM river WHERE LENGTH  =  ( SELECT MIN ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest point in the state with the smallest population",
+        "query": "SELECT t2.highest_point FROM state AS t1 JOIN highlow AS t2 ON t1.state_name  =  t2.state_name WHERE t1.state_name IN ( SELECT state_name FROM state WHERE population  =  ( SELECT MIN ( population ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which rivers run through the state with the lowest elevation in the usa",
+        "query": "SELECT river_name FROM river WHERE traverse IN ( SELECT state_name FROM highlow WHERE lowest_elevation  =  ( SELECT MIN ( lowest_elevation ) FROM highlow ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what rivers run through the state with the lowest point in the usa",
+        "query": "SELECT river_name FROM river WHERE traverse IN ( SELECT state_name FROM highlow WHERE lowest_elevation  =  ( SELECT MIN ( lowest_elevation ) FROM highlow ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what mountains are in alaska",
+        "query": "SELECT mountain_name FROM mountain WHERE state_name  =  \"alaska\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states have major rivers",
+        "query": "SELECT COUNT ( traverse ) FROM river WHERE LENGTH  >  750;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the smallest state through which the longest river runs",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river ) ) ) AND state_name IN ( SELECT traverse FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest state traversed by the rio grande river",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"rio grande\" ) ) AND state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"rio grande\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest of the state that the rio grande runs through",
+        "query": "SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"rio grande\" ) ) AND state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"rio grande\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many rivers run through the states bordering colorado",
+        "query": "SELECT COUNT ( river_name ) FROM river WHERE traverse IN ( SELECT border FROM border_info WHERE state_name  =  \"colorado\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has no rivers",
+        "query": "SELECT state_name FROM state WHERE state_name NOT IN ( SELECT traverse FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the capital of the largest state",
+        "query": "SELECT capital FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the capital city of the largest state in the us",
+        "query": "SELECT capital FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many cities are in texas",
+        "query": "SELECT COUNT ( city_name ) FROM city WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many cities does texas have",
+        "query": "SELECT COUNT ( city_name ) FROM city WHERE state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the area of the states",
+        "query": "SELECT area FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states in the us does the shortest river run through",
+        "query": "SELECT COUNT ( DISTINCT traverse ) FROM river WHERE LENGTH  =  ( SELECT MIN ( DISTINCT LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what rivers flow through states that border the state with the largest population",
+        "query": "SELECT river_name FROM river WHERE traverse IN ( SELECT border FROM border_info WHERE state_name IN ( SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state ) ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the major cities in the largest state",
+        "query": "SELECT city_name FROM city WHERE population  >  150000 AND state_name  =  ( SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the area of the smallest state",
+        "query": "SELECT area FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states border the longest river in the usa",
+        "query": "SELECT border FROM border_info WHERE state_name IN ( SELECT traverse FROM river WHERE LENGTH  =  ( SELECT MAX ( LENGTH ) FROM river ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population density of the state with the smallest population",
+        "query": "SELECT density FROM state WHERE population  =  ( SELECT MIN ( population ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states border the mississippi river",
+        "query": "SELECT COUNT ( DISTINCT border ) FROM border_info WHERE state_name IN ( SELECT traverse FROM river WHERE river_name  =  \"mississippi\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states have a capital that is the highest point in the state",
+        "query": "SELECT t1.state_name FROM state AS t1 JOIN highlow AS t2 ON t1.capital  =  t2.highest_point;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population of the capital of the smallest state",
+        "query": "SELECT population FROM city WHERE city_name  =  ( SELECT capital FROM state WHERE area  =  ( SELECT MIN ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population of the capital of the largest state",
+        "query": "SELECT population FROM city WHERE city_name  =  ( SELECT capital FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the lowest point of the state with the largest area",
+        "query": "SELECT t2.lowest_point FROM state AS t1 JOIN highlow AS t2 ON t1.state_name  =  t2.state_name WHERE t1.state_name IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states border states that border the state with the largest population",
+        "query": "SELECT t1.border FROM border_info AS t2 JOIN border_info AS t1 ON t2.border  =  t1.state_name WHERE t2.state_name IN ( SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the size of the largest state in the usa",
+        "query": "SELECT MAX ( area ) FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the area of the largest state",
+        "query": "SELECT MAX ( area ) FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which capitals are not major cities",
+        "query": "SELECT t2.capital FROM state AS t2 JOIN city AS t1 ON t2.capital  =  t1.city_name WHERE t1.population  <=  150000;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "give me the cities in usa",
+        "query": "SELECT city_name FROM city;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest point of the state with the largest area",
+        "query": "SELECT t2.highest_point FROM state AS t1 JOIN highlow AS t2 ON t1.state_name  =  t2.state_name WHERE t1.state_name IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "where is massachusetts",
+        "query": "SELECT country_name FROM state WHERE state_name  =  \"massachusetts\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what state has the largest urban population",
+        "query": "SELECT state_name FROM city GROUP BY state_name ORDER BY SUM ( population ) DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the major rivers in the us",
+        "query": "SELECT river_name FROM river;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many cities named austin are there in the usa",
+        "query": "SELECT COUNT ( city_name ) FROM city WHERE city_name  =  \"austin\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many people live in the smallest state bordering wyoming",
+        "query": "SELECT population FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state WHERE state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"wyoming\" ) ) AND state_name IN ( SELECT border FROM border_info WHERE state_name  =  \"wyoming\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the length of the colorado river in texas",
+        "query": "SELECT LENGTH FROM river WHERE river_name  =  \"colorado\" AND traverse  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the population density in the state with capital austin",
+        "query": "SELECT density FROM state WHERE capital  =  \"austin\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how long is the shortest river in the usa",
+        "query": "SELECT LENGTH FROM river WHERE LENGTH  =  ( SELECT MIN ( LENGTH ) FROM river );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the elevation of death valley",
+        "query": "SELECT lowest_elevation FROM highlow WHERE lowest_point  =  \"death valley\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the average population of the us by state",
+        "query": "SELECT AVG ( population ) FROM state;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what rivers flow through the largest state",
+        "query": "SELECT river_name FROM river WHERE traverse IN ( SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what states border states that border states that border states that border texas",
+        "query": "SELECT t1.border FROM border_info AS t2 JOIN border_info AS t1 ON t2.border  =  t1.state_name JOIN border_info AS t3 ON t3.border  =  t2.state_name JOIN border_info AS t4 ON t4.border  =  t3.state_name WHERE t4.state_name  =  \"texas\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states border on the state whose capital is boston",
+        "query": "SELECT COUNT ( border ) FROM border_info WHERE state_name  =  ( SELECT state_name FROM state WHERE capital  =  \"boston\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what are the major cities in the states through which the major river in virginia runs",
+        "query": "SELECT city_name FROM city WHERE population  >  150000 AND state_name IN ( SELECT traverse FROM river WHERE river_name IN ( SELECT river_name FROM river WHERE LENGTH  >  750 AND traverse  =  \"virginia\" ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which states does not border texas",
+        "query": "SELECT state_name FROM state WHERE state_name NOT IN ( SELECT border FROM border_info WHERE state_name  =  \"texas\" );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many states border the largest state",
+        "query": "SELECT COUNT ( border ) FROM border_info WHERE state_name  =  ( SELECT state_name FROM state WHERE area  =  ( SELECT MAX ( area ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "which state is the largest city in montana in",
+        "query": "SELECT state_name FROM city WHERE population  =  ( SELECT MAX ( population ) FROM city WHERE state_name  =  \"montana\" ) AND state_name  =  \"montana\";"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is capital of the state with the lowest point",
+        "query": "SELECT t1.capital FROM highlow AS t2 JOIN state AS t1 ON t1.state_name  =  t2.state_name WHERE t2.lowest_elevation  =  ( SELECT MIN ( lowest_elevation ) FROM highlow ) ;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the biggest american city in a state with a river",
+        "query": "SELECT DISTINCT t1.city_name FROM city AS t1 JOIN river AS t2 ON t2.traverse  =  t1.state_name WHERE t1.population  =  ( SELECT MAX ( t1.population ) FROM river AS t2 JOIN city AS t1 ON t2.traverse  =  t1.state_name );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many rivers are in the state with the largest population",
+        "query": "SELECT COUNT ( t2.river_name ) FROM river AS t2 JOIN state AS t1 ON t1.state_name  =  t2.traverse WHERE t1.state_name  =  ( SELECT state_name FROM state WHERE population  =  ( SELECT MAX ( population ) FROM state ) );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the largest state that borders the state with the lowest point in the usa",
+        "query": "SELECT t1.state_name FROM highlow AS t3 JOIN border_info AS t1 ON t3.state_name  =  t1.border JOIN state AS t2 ON t2.state_name  =  t1.border WHERE t3.lowest_elevation  =  ( SELECT MIN ( lowest_elevation ) FROM highlow ) ORDER BY t2.area DESC LIMIT 1;"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the capital of the state with the highest point",
+        "query": "SELECT t1.capital FROM highlow AS t2 JOIN state AS t1 ON t1.state_name  =  t2.state_name WHERE t2.highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the capital of the state with the highest elevation",
+        "query": "SELECT t1.capital FROM highlow AS t2 JOIN state AS t1 ON t1.state_name  =  t2.state_name WHERE t2.highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the highest point in the smallest state",
+        "query": "SELECT t2.highest_point FROM highlow AS t2 JOIN state AS t1 ON t1.state_name  =  t2.state_name WHERE t1.area  =  ( SELECT MIN ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how many rivers are in the state with the highest point.",
+        "query": "SELECT COUNT ( t1.river_name ) FROM highlow AS t2 JOIN river AS t1 ON t1.traverse  =  t2.state_name WHERE t2.highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "how high is the highest point in the largest state",
+        "query": "SELECT t2.highest_elevation FROM highlow AS t2 JOIN state AS t1 ON t1.state_name  =  t2.state_name WHERE t1.area  =  ( SELECT MAX ( area ) FROM state );"
+    },
+    {
+        "dataset": "spider_training",
+        "db_id": "geo",
+        "question": "what is the longest river in the state with the highest point",
+        "query": "SELECT t1.river_name FROM highlow AS t2 JOIN river AS t1 ON t1.traverse  =  t2.state_name WHERE t2.highest_elevation  =  ( SELECT MAX ( highest_elevation ) FROM highlow ) ORDER BY t1.length DESC LIMIT 1;"
+    }
+]

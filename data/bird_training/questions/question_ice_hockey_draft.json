@@ -1,0 +1,506 @@
+[
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What is the height of David Bornhammar in inches?",
+        "query": "SELECT T2.height_in_inch FROM PlayerInfo AS T1 INNER JOIN height_info AS T2 ON T1.height = T2.height_id WHERE T1.PlayerName = 'David Bornhammar'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Please list the names of all the players with a height of over 6'2\" inches.",
+        "query": "SELECT DISTINCT T1.PlayerName FROM PlayerInfo AS T1 INNER JOIN height_info AS T2 ON T1.height = T2.height_id WHERE T2.height_in_inch > '6''2\"'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Among the players with a height of over 6'2\" inches, how many of them were born in Sweden?",
+        "query": "SELECT COUNT(T1.ELITEID) FROM PlayerInfo AS T1 INNER JOIN height_info AS T2 ON T1.height = T2.height_id WHERE T2.height_in_inch > '6''2\"' AND T1.nation = 'Sweden'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What is the name of the tallest player?",
+        "query": "SELECT T1.PlayerName FROM PlayerInfo AS T1 INNER JOIN height_info AS T2 ON T1.height = T2.height_id ORDER BY T2.height_in_cm DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "How much does David Bornhammar weigh in kilograms?",
+        "query": "SELECT T2.weight_in_kg FROM PlayerInfo AS T1 INNER JOIN weight_info AS T2 ON T1.weight = T2.weight_id WHERE T1.PlayerName = 'David Bornhammar'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "How many players weigh more than 90 kg?",
+        "query": "SELECT COUNT(T1.ELITEID) FROM PlayerInfo AS T1 INNER JOIN weight_info AS T2 ON T1.weight = T2.weight_id WHERE T2.weight_in_kg > 90"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Among the players that weigh more than 90 kg, how many of them have a position of defense?",
+        "query": "SELECT COUNT(T1.ELITEID) FROM PlayerInfo AS T1 INNER JOIN weight_info AS T2 ON T1.weight = T2.weight_id WHERE T2.weight_in_kg > 90 AND T1.position_info = 'D'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Among the players that weigh more than 90 kg, what is the name of the player that has the most attendance in the player's first 7 years of NHL career?",
+        "query": "SELECT T1.PlayerName FROM PlayerInfo AS T1 INNER JOIN weight_info AS T2 ON T1.weight = T2.weight_id WHERE T2.weight_in_kg > 90 AND T1.sum_7yr_GP = ( SELECT MAX(T1.sum_7yr_GP) FROM PlayerInfo AS T1 INNER JOIN weight_info AS T2 ON T1.weight = T2.weight_id WHERE T2.weight_in_kg > 90 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What is the weight of the player with the longest time on ice in the player\u2019s first 7 years of NHL career in kilograms?",
+        "query": "SELECT T2.weight_in_kg FROM PlayerInfo AS T1 INNER JOIN weight_info AS T2 ON T1.weight = T2.weight_id WHERE T1.sum_7yr_TOI = ( SELECT MAX(t.sum_7yr_TOI) FROM PlayerInfo t )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "How much taller is David Bornhammar than Pauli Levokari in centimeters?",
+        "query": "SELECT ( SELECT T2.height_in_cm FROM PlayerInfo AS T1 INNER JOIN height_info AS T2 ON T1.height = T2.height_id WHERE T1.PlayerName = 'David Bornhammar' ) - ( SELECT T2.height_in_cm FROM PlayerInfo AS T1 INNER JOIN height_info AS T2 ON T1.height = T2.height_id WHERE T1.PlayerName = 'Pauli Levokari' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Among all the players that are right-shooted, how many of them weigh over 90 kg?",
+        "query": "SELECT COUNT(T1.ELITEID) FROM PlayerInfo AS T1 INNER JOIN weight_info AS T2 ON T1.weight = T2.weight_id WHERE T2.weight_in_kg > 90 AND T1.shoots = 'R'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Please list the names of all the players that are over 90 kg and are right-shooted.",
+        "query": "SELECT T1.PlayerName FROM PlayerInfo AS T1 INNER JOIN weight_info AS T2 ON T1.weight = T2.weight_id WHERE T2.weight_in_kg > 90 AND T1.shoots = 'R'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What is the BMI of David Bornhammar?",
+        "query": "SELECT CAST(T2.weight_in_kg AS REAL) / (CAST(T3.height_in_cm AS REAL) / 100 * (CAST(T3.height_in_cm AS REAL) / 100)) FROM PlayerInfo AS T1 INNER JOIN weight_info AS T2 ON T1.weight = T2.weight_id INNER JOIN height_info AS T3 ON T1.height = T3.height_id WHERE T1.PlayerName = 'David Bornhammar'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What is the average height in centimeters of all the players in the position of defense?",
+        "query": "SELECT CAST(SUM(T2.height_in_cm) AS REAL) / COUNT(T1.ELITEID) FROM PlayerInfo AS T1 INNER JOIN height_info AS T2 ON T1.height = T2.height_id WHERE T1.position_info = 'D'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What is the weight in pounds of the heaviest player?",
+        "query": "SELECT MAX(T2.weight_in_lbs) FROM PlayerInfo AS T1 INNER JOIN weight_info AS T2 ON T1.weight = T2.weight_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "How many right-shooted players have a height of 5'7''?",
+        "query": "SELECT COUNT(T1.ELITEID) FROM PlayerInfo AS T1 INNER JOIN height_info AS T2 ON T1.height = T2.height_id WHERE T2.height_in_inch = '5''7\"' AND T1.shoots = 'R'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Among the players whose total NHL games played in their first 7 years of NHL career is no less than 500, what is the name of the player who committed the most rule violations?",
+        "query": "SELECT T1.PlayerName FROM PlayerInfo AS T1 INNER JOIN SeasonStatus AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.sum_7yr_GP > 500 ORDER BY T2.PIM DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What is the height in centimeter of the tallest player born in Edmonton, Alberta, Canada?",
+        "query": "SELECT T2.height_in_cm FROM PlayerInfo AS T1 INNER JOIN height_info AS T2 ON T1.height = T2.height_id WHERE T1.birthplace = 'Edmonton, AB, CAN' ORDER BY T2.height_in_cm DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "How many players, who were drafted by Anaheim Ducks in 2008, have played for U.S. National U18 Team?",
+        "query": "SELECT COUNT(DISTINCT T1.ELITEID) FROM PlayerInfo AS T1 INNER JOIN SeasonStatus AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.overallby = 'Anaheim Ducks' AND T1.draftyear = 2008 AND T2.TEAM = 'U.S. National U18 Team'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What is the weight in kilograms of the player with the highest number of goal differential of all time?",
+        "query": "SELECT T3.weight_in_kg FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID INNER JOIN weight_info AS T3 ON T2.weight = T3.weight_id ORDER BY T1.PLUSMINUS DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Who is the most valuable player in QMJHL league during the 2004-2005 season?",
+        "query": "SELECT T2.PlayerName FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.SEASON BETWEEN '2004' AND '2005' AND T1.LEAGUE = 'QMJHL' ORDER BY T1.P DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What are the names of the players who played for Acadie-Bathurst Titan during the regular season in 1998-1999?",
+        "query": "SELECT T2.PlayerName FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.SEASON = '1998-1999' AND T1.GAMETYPE = 'Regular Season' AND T1.TEAM = 'Acadie-Bathurst Titan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "How many games did the tallest player have ever played?",
+        "query": "SELECT T1.GP FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T2.ELITEID = ( SELECT t.ELITEID FROM PlayerInfo t ORDER BY t.height DESC LIMIT 1 )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Who is the youngest player to have played during the 1997-1998 season for OHL League?",
+        "query": "SELECT DISTINCT T2.PlayerName FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.SEASON = '1997-1998' AND T1.LEAGUE = 'OHL' ORDER BY T2.birthdate DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Among the players who played 72 games, how many are left-shooters?",
+        "query": "SELECT COUNT(T2.ELITEID) FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.GP = 72 AND T2.shoots = 'L'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What is the difference in the number of goals scored by Pavel Brendl during the regular season versus the playoffs in the 1998-1999 season?",
+        "query": "SELECT T3.Rs_G - T4.Pf_G AS diff FROM ( SELECT T2.PlayerName, T1.G AS Rs_G FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T2.PlayerName = 'Pavel Brendl' AND T1.SEASON = '1998-1999' AND T1.GAMETYPE = 'Regular Season' ) AS T3 INNER JOIN ( SELECT T2.PlayerName, T1.G AS Pf_G FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T2.PlayerName = 'Pavel Brendl' AND T1.SEASON = '1998-1999' AND T1.GAMETYPE = 'Playoffs' ) AS T4 ON T3.PlayerName = T4.PlayerName"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What is the average weight in pounds of all the players with the highest prospects for the draft?",
+        "query": "SELECT CAST(SUM(T2.weight_in_lbs) AS REAL) / COUNT(T1.ELITEID) FROM PlayerInfo AS T1 INNER JOIN weight_info AS T2 ON T1.weight = T2.weight_id WHERE T1.CSS_rank = ( SELECT MAX(CSS_rank) FROM PlayerInfo )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Among all the teams that made the playoffs in the 2007-2008 season, identify the percentage that played over 20 games.",
+        "query": "SELECT CAST(COUNT(CASE WHEN GP > 20 THEN TEAM ELSE NULL END) AS REAL) * 100 / COUNT(TEAM) FROM SeasonStatus WHERE SEASON = '2007-2008' AND GAMETYPE = 'Playoffs'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Name the player who scored the most goals in a single game in the 2007-2008 season of WHL?",
+        "query": "SELECT T2.PlayerName FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.SEASON = '2007-2008' AND T1.LEAGUE = 'WHL' ORDER BY T1.G DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Name the Chilliwack Chiefs players who have scored 100 points or more in the NHL.",
+        "query": "SELECT T2.PlayerName FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.TEAM = 'Chilliwack Chiefs' AND T1.P >= 100"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Identify the players who weigh 120 kg.",
+        "query": "SELECT T2.PlayerName FROM weight_info AS T1 INNER JOIN PlayerInfo AS T2 ON T1.weight_id = T2.weight WHERE T1.weight_in_kg = 120"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Identify the players with the same height as Brian Gionta. How tall are they?",
+        "query": "SELECT T2.PlayerName, T1.height_in_cm FROM height_info AS T1 INNER JOIN PlayerInfo AS T2 ON T1.height_id = T2.height WHERE T2.height = ( SELECT height FROM PlayerInfo WHERE PlayerName = 'Brian Gionta' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Identify the name and position of the player who has committed the most rule violations.",
+        "query": "SELECT T2.PlayerName, T2.position_info FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.PIM = ( SELECT MAX(PIM) FROM SeasonStatus )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Name the player who has the most NHL points in draft year.",
+        "query": "SELECT T2.PlayerName FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.P = ( SELECT MAX(P) FROM SeasonStatus )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Among all players drafted by the Toronto Maple Leafs, identify the percentage who are from Eastern Europe.",
+        "query": "SELECT CAST(COUNT(CASE WHEN nation IN ('Belarus', 'Czech Rep.', 'Slovakia', 'Ukraine') THEN ELITEID ELSE NULL END) AS REAL) * 100 / COUNT(ELITEID) FROM PlayerInfo WHERE overallby = 'Toronto Maple Leafs'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Among all players drafted by the Toronto Maple Leafs in 2008, identify the player with the highest prospects for the draft.",
+        "query": "SELECT PlayerName FROM PlayerInfo WHERE overallby = 'Toronto Maple Leafs' AND draftyear = '2008' ORDER BY CSS_rank DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Name the player and his team who made the playoffs in the 2006-2007 season of SuperElit league with the highest points.",
+        "query": "SELECT T2.PlayerName, T1.TEAM FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.SEASON = '2006-2007' AND T1.GAMETYPE = 'Playoffs' AND T1.LEAGUE = 'SuperElit' ORDER BY T1.P DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "How many players who were drafted by the Toronto Maple Leafs have played over 300 games in their first 7 years of the NHL career?",
+        "query": "SELECT COUNT(ELITEID) FROM PlayerInfo WHERE overallby = 'Toronto Maple Leafs' AND sum_7yr_GP > 300"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "How tall is the player from Yale University who picked up 28 penalty minutes in the 2005-2006 season?",
+        "query": "SELECT T3.height_in_cm FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID INNER JOIN height_info AS T3 ON T2.height = T3.height_id WHERE T1.SEASON = '2005-2006' AND T1.TEAM = 'Yale Univ.' AND T1.PIM = 28"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Among all goals scored by Calgary Hitmen in the 2007-2008 season, identify the percentage scored by Ian Schultz.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.PlayerName = 'Ian Schultz' THEN T1.G ELSE 0 END) AS REAL) * 100 / SUM(T1.G) FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.SEASON = '2007-2008' AND T1.TEAM = 'Calgary Hitmen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Among all penalty minutes picked up by Ak Bars Kazan in the 1999-2000 season, identify the percentage picked up by Yevgeni Muratov.",
+        "query": "SELECT CAST(SUM(CASE WHEN T2.PlayerName = 'Yevgeni Muratov' THEN T1.PIM ELSE 0 END) AS REAL) * 100 / SUM(T1.PIM) FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.SEASON = '1999-2000' AND T1.TEAM = 'Ak Bars Kazan'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What is the birthplace of Aaron Gagnon?",
+        "query": "SELECT birthplace FROM PlayerInfo WHERE PlayerName = 'Aaron Gagnon'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What is the weight in kg of Tony Martensson?",
+        "query": "SELECT T2.weight_in_kg FROM PlayerInfo AS T1 INNER JOIN weight_info AS T2 ON T1.weight = T2.weight_id WHERE T1.PlayerName = 'Tony Martensson'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "List out the name of players who weight 190 lbs.",
+        "query": "SELECT T1.PlayerName FROM PlayerInfo AS T1 INNER JOIN weight_info AS T2 ON T1.weight = T2.weight_id WHERE T2.weight_in_lbs = 190"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Who has the heaviest weight?",
+        "query": "SELECT T1.PlayerName FROM PlayerInfo AS T1 INNER JOIN weight_info AS T2 ON T1.weight = T2.weight_id ORDER BY T2.weight_in_kg DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What is the percentage of players who were born in Denmark and weight above 154 lbs?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.nation = 'Denmark' AND T2.weight_in_lbs > 154 THEN T1.ELITEID ELSE NULL END) AS REAL) * 100 / COUNT(T1.ELITEID) FROM PlayerInfo AS T1 INNER JOIN weight_info AS T2 ON T1.weight = T2.weight_id"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Which team does Andreas Jamtin belong to?",
+        "query": "SELECT DISTINCT T1.TEAM FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T2.PlayerName = 'Andreas Jamtin'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "List out the seasons that Niklas Eckerblom played.",
+        "query": "SELECT DISTINCT T1.SEASON FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T2.PlayerName = 'Niklas Eckerblom'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Mention the type of game that Matthias Trattnig played.",
+        "query": "SELECT DISTINCT T1.GAMETYPE FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T2.PlayerName = 'Matthias Trattnig'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "List out the nation of players who played for the 1997-1998 season .",
+        "query": "SELECT DISTINCT T2.nation FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.SEASON = '1997-1998'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What is the highest point highest point of Per Mars in the draft year?",
+        "query": "SELECT T1.P FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T2.PlayerName = 'Per Mars' ORDER BY T1.P DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Among the Italian players, who has the shortest height?",
+        "query": "SELECT T2.PlayerName FROM height_info AS T1 INNER JOIN PlayerInfo AS T2 ON T1.height_id = T2.height WHERE T2.nation = 'Italy' ORDER BY T1.height_in_cm ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "List out the name of players who have a height of 5'8\".",
+        "query": "SELECT T2.PlayerName FROM height_info AS T1 INNER JOIN PlayerInfo AS T2 ON T1.height_id = T2.height WHERE T1.height_in_inch = '5''8\"'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "How many players were born in 1982 and have a height above 182cm?",
+        "query": "SELECT COUNT(T2.ELITEID) FROM height_info AS T1 INNER JOIN PlayerInfo AS T2 ON T1.height_id = T2.height WHERE T1.height_in_cm > 182 AND strftime('%Y', T2.birthdate) = '1982'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What is the percentage of Russian players who have a height of under 200 inch?",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.height_in_cm < 200 AND T2.nation = 'Russia' THEN T2.ELITEID ELSE NULL END) AS REAL) * 100 / COUNT(T2.ELITEID) FROM height_info AS T1 INNER JOIN PlayerInfo AS T2 ON T1.height_id = T2.height"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Among the USA players, who has the lightest weight?",
+        "query": "SELECT T2.PlayerName FROM weight_info AS T1 INNER JOIN PlayerInfo AS T2 ON T1.weight_id = T2.weight WHERE T2.nation = 'USA' ORDER BY T1.weight_in_lbs ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Who among the players in season 2000-2001 has committed the highest rule violations or penalty minutes?",
+        "query": "SELECT T2.PlayerName FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.SEASON = '2000-2001' ORDER BY T1.PIM DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "List the names of all players in team Avangard Omsk in season 2000-2001.",
+        "query": "SELECT DISTINCT T2.PlayerName FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.SEASON = '2000-2001' AND T1.TEAM = 'Avangard Omsk'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Who among the players drafted by Arizona Coyotes in 2000 has committed the highest rule violations?",
+        "query": "SELECT T2.PlayerName FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T2.overallby = 'Arizona Coyotes' AND T2.draftyear = 2000 ORDER BY T1.PIM DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "How many players were drafted by Arizona Coyotes whose height reaches 195 centimeters?",
+        "query": "SELECT COUNT(T2.ELITEID) FROM height_info AS T1 INNER JOIN PlayerInfo AS T2 ON T1.height_id = T2.height WHERE T2.overallby = 'Arizona Coyotes' AND T1.height_in_cm = 195"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "List the names of all players from Avangard Omsk that have played for playoffs in season 2000-2001.",
+        "query": "SELECT DISTINCT T2.PlayerName FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.SEASON = '2000-2001' AND T1.TEAM = 'Avangard Omsk' AND T1.GAMETYPE = 'Playoffs'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Who is the most valuable player who played in the 2000-2001 season of the International league?",
+        "query": "SELECT DISTINCT T2.PlayerName FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.SEASON = '2000-2001' AND T1.LEAGUE = 'International' ORDER BY T1.P DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "How many players who were born in 1980 weigh 185 in pounds?",
+        "query": "SELECT COUNT(T2.ELITEID) FROM weight_info AS T1 INNER JOIN PlayerInfo AS T2 ON T1.weight_id = T2.weight WHERE T1.weight_in_lbs = 185 AND strftime('%Y', T2.birthdate) = '1980'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Who has played the most game plays in the 2000-2001 season of the International league?",
+        "query": "SELECT DISTINCT T2.PlayerName FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.SEASON = '2000-2001' AND T1.LEAGUE = 'International' ORDER BY T1.GP DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "List the names of all players from Avangard Omsk who played in the 2000-2001 season of the International league that have no goals in draft year.",
+        "query": "SELECT T2.PlayerName FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.SEASON = '2000-2001' AND T1.LEAGUE = 'International' AND T1.TEAM = 'Czech Republic (all)' AND T1.G = 0"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Who is the oldest player who played for Avangard Omsk during the regular season in 2000-2001?",
+        "query": "SELECT T2.PlayerName FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.SEASON = '2000-2001' AND T1.GAMETYPE = 'Regular Season' AND T1.TEAM = 'Avangard Omsk' ORDER BY T2.birthdate ASC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Among the players who played in OHL league during the regular season in 2007-2008, who is the player that attained the most number of assist?",
+        "query": "SELECT T2.PlayerName FROM SeasonStatus AS T1 INNER JOIN PlayerInfo AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.SEASON = '2007-2008' AND T1.LEAGUE = 'OHL' AND T1.GAMETYPE = 'Regular Season' ORDER BY T1.A DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "How many teams did the heaviest player drafted by Arizona Coyotes have played for?",
+        "query": "SELECT COUNT(T2.TEAM) FROM PlayerInfo AS T1 INNER JOIN SeasonStatus AS T2 ON T1.ELITEID = T2.ELITEID INNER JOIN weight_info AS T3 ON T1.weight = T3.weight_id WHERE T1.overallby = 'Arizona Coyotes' ORDER BY T3.weight_in_lbs DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Calculate the average weight in pounds of all players drafted by Arizona Coyotes.",
+        "query": "SELECT CAST(SUM(T1.weight_in_lbs) AS REAL) / COUNT(T2.ELITEID) FROM weight_info AS T1 INNER JOIN PlayerInfo AS T2 ON T1.weight_id = T2.weight WHERE T2.overallby = 'Arizona Coyotes'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Calculate the average height in centimeter of all players who played in Acadie-Bathurst Titan during regular season.",
+        "query": "SELECT CAST(SUM(T1.height_in_cm) AS REAL) / COUNT(T2.ELITEID) FROM height_info AS T1 INNER JOIN PlayerInfo AS T2 ON T1.height_id = T2.height INNER JOIN SeasonStatus AS T3 ON T2.ELITEID = T3.ELITEID WHERE T3.TEAM = 'Acadie-Bathurst Titan' AND T3.GAMETYPE = 'Regular Season'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "How many games did Per Mars play in the 1997-1998 season?",
+        "query": "SELECT T2.GP FROM PlayerInfo AS T1 INNER JOIN SeasonStatus AS T2 ON T1.ELITEID = T2.ELITEID WHERE T2.SEASON = '1997-1998' AND T1.PlayerName = 'Pavel Patera'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "How heavy is Matthias Trattnig in kilograms?",
+        "query": "SELECT T2.weight_in_kg FROM PlayerInfo AS T1 INNER JOIN weight_info AS T2 ON T1.weight = T2.weight_id WHERE T1.PlayerName = 'Pavel Patera'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "List the name of players who have a height over 5'9.",
+        "query": "SELECT T1.PlayerName FROM PlayerInfo AS T1 INNER JOIN height_info AS T2 ON T1.height = T2.height_id WHERE T2.height_in_inch > '5''9\"'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What team did Niklas Eckerblom play in the 1997-1998 season?",
+        "query": "SELECT T2.TEAM FROM PlayerInfo AS T1 INNER JOIN SeasonStatus AS T2 ON T1.ELITEID = T2.ELITEID WHERE T2.SEASON = '1997-1998' AND T1.PlayerName = 'Niko Kapanen'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Which team has the most Swedish?",
+        "query": "SELECT T.TEAM FROM ( SELECT T2.TEAM, COUNT(DISTINCT T1.ELITEID) FROM PlayerInfo AS T1 INNER JOIN SeasonStatus AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.nation = 'Sweden' GROUP BY T2.TEAM ORDER BY COUNT(DISTINCT T1.ELITEID) DESC LIMIT 1 ) AS T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "How many playoffs did Per Mars participate in?",
+        "query": "SELECT SUM(T2.GP) FROM PlayerInfo AS T1 INNER JOIN SeasonStatus AS T2 ON T1.ELITEID = T2.ELITEID WHERE T1.PlayerName = 'Per Mars' AND T2.GAMETYPE = 'Playoffs'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Name the player who had the most goals for team Rimouski Oceanic in playoff.",
+        "query": "SELECT T1.PlayerName FROM PlayerInfo AS T1 INNER JOIN SeasonStatus AS T2 ON T1.ELITEID = T2.ELITEID WHERE T2.TEAM = 'Rimouski Oceanic' AND T2.GAMETYPE = 'Playoffs' ORDER BY T2.G DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Which country do most players of team Plymouth Whalers come from?",
+        "query": "SELECT T.nation FROM ( SELECT T1.nation, COUNT(T1.ELITEID) FROM PlayerInfo AS T1 INNER JOIN SeasonStatus AS T2 ON T1.ELITEID = T2.ELITEID WHERE T2.TEAM = 'Plymouth Whalers' GROUP BY T1.nation ORDER BY COUNT(T1.ELITEID) DESC LIMIT 1 ) AS T"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Who had the most assists of team Plymouth Whalers in the 1999-2000 season?",
+        "query": "SELECT T1.PlayerName FROM PlayerInfo AS T1 INNER JOIN SeasonStatus AS T2 ON T1.ELITEID = T2.ELITEID WHERE T2.TEAM = 'Plymouth Whalers' AND T2.SEASON = '1999-2000' ORDER BY T2.A DESC LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Indicate the height of all players from team Oshawa Generals in inches.",
+        "query": "SELECT T3.height_in_inch FROM PlayerInfo AS T1 INNER JOIN SeasonStatus AS T2 ON T1.ELITEID = T2.ELITEID INNER JOIN height_info AS T3 ON T1.height = T3.height_id WHERE T2.TEAM = 'Oshawa Generals'"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Who is the oldest player that participated in OHL league in the 1997 - 2000 season?",
+        "query": "SELECT T1.PlayerName FROM PlayerInfo AS T1 INNER JOIN SeasonStatus AS T2 ON T1.ELITEID = T2.ELITEID WHERE T2.LEAGUE = 'OHL' AND T2.SEASON = '1999-2000' ORDER BY T1.birthdate LIMIT 1"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Who is the tallest player in team USA U20?",
+        "query": "SELECT T.PlayerName FROM ( SELECT T1.PlayerName, T3.height_in_cm FROM PlayerInfo AS T1 INNER JOIN SeasonStatus AS T2 ON T1.ELITEID = T2.ELITEID INNER JOIN height_info AS T3 ON T1.height = T3.height_id WHERE T2.TEAM = 'USA U20' ORDER BY T3.height_in_cm DESC ) AS T WHERE T.height_in_cm = ( SELECT MAX(T3.height_in_cm) FROM PlayerInfo AS T1 INNER JOIN SeasonStatus AS T2 ON T1.ELITEID = T2.ELITEID INNER JOIN height_info AS T3 ON T1.height = T3.height_id WHERE T2.TEAM = 'USA U20' )"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "What is the percentage of Swedish players in playoffs games in the 1997 - 2000 season?",
+        "query": "SELECT DISTINCT CAST(COUNT(CASE WHEN T1.nation = 'Sweden' THEN T1.ELITEID ELSE NULL END) OVER (PARTITION BY T2.SEASON) AS REAL) * 100 / COUNT(T1.ELITEID) OVER (PARTITION BY T2.SEASON) FROM PlayerInfo AS T1 INNER JOIN SeasonStatus AS T2 ON T1.ELITEID = T2.ELITEID WHERE T2.SEASON IN ('1997-1998', '1998-1999', '1999-2000')"
+    },
+    {
+        "dataset": "bird_training",
+        "db_id": "ice_hockey_draft",
+        "question": "Calculate the percentage of penalty minutes of Swedish players in OHL league among all players.",
+        "query": "SELECT CAST(COUNT(CASE WHEN T1.nation = 'Sweden' THEN T2.PIM ELSE NULL END) AS REAL) * 100 / COUNT(*) FROM PlayerInfo AS T1 INNER JOIN SeasonStatus AS T2 ON T1.ELITEID = T2.ELITEID WHERE T2.LEAGUE = 'OHL'"
+    }
+]
