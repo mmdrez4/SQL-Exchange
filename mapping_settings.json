@@ -1,0 +1,64 @@
+{
+    "model": {
+        "model_origin": "google",
+        "model_name": "gemini-1.5-flash",
+        "input_token_limit": null,
+        "use_system_instruction": true,
+        "temperature": 0,
+        "top_p": 1,
+        "google": {
+            "top_k": 0
+        }
+    },
+
+    "generation": {
+        "copy_settings_to_output": true,
+        "max_question_length_per_prompt": 10,
+        "max_retry_per_prompt": 3,
+        "max_fail_limit": 100,
+        "validation": {
+            "fields_checking": true,
+            "db_id_matching": true
+        },
+        "prompt_directory": "prompts",
+        "base_prompt_file": "mapping_base.txt",
+        "system_instruction_file": "mapping_system.txt",
+        "output_directory": "mappings_full_analysis",
+        "json_only_output_directory": "mappings",
+        "fields_to_check": [
+            "source_dataset",
+            "source_db_id",
+            "source_query",
+            "source_question",
+            "tables_columns_replacement",
+            "thought",
+            "target_db_id",
+            "target_query",
+            "target_question"
+        ]
+    },
+
+    "data": [
+        {
+            "source_dataset": "data/bird_training",
+            "source_db_ids": [
+                "address",
+                "app_store"
+            ],
+            "source_questions_shuffle_seed": 12,
+            "source_questions_limit": 20,
+            "target_dataset": "data/bird_dev",
+            "target_db_id": "california_schools"
+        },
+        {
+            "source_dataset": "data/bird_training",
+            "source_db_ids": [
+                "beer_factory"
+            ],
+            "source_questions_shuffle_seed": 12,
+            "source_questions_limit": 20,
+            "target_dataset": "data/bird_dev",
+            "target_db_id": "student_club"
+        }
+    ]
+}

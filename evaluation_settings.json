@@ -1,0 +1,35 @@
+{
+    "model": {
+        "model_name": "gemini",
+        "model_version": "gemini-2.0-flash",
+        "input_token_limit": null,
+        "use_system_instruction": true,
+        "temperature": 0,
+        "top_p": 1,
+        "google": {
+            "top_k": 0
+        }
+    },
+
+    "data": {
+        "source_databases": [],
+        "target_databases": ["california_schools"]
+    },
+
+
+    "evaluation": {
+        "dataset_name": "bird_dev",
+        "model_dir": "gemini-1.5-flash",
+        "generated_queries_directory": "mappings",               
+        "result_directory": "evaluated_mappings",          
+        "summary_directory": "evaluated_mappings_summary",
+        "llm_response_directory": "llm_responses",
+        "response_directory": "responses",
+        "max_retry_per_prompt": 5,
+        "sleep_time": 4,
+        "raw_datasets_directory": "raw_datasets",
+        "prompt_directory": "prompts",                                   
+        "examples_file": "evaluation_examples.txt",                                 
+        "prompt_file": "evaluation_base.txt"                          
+    }
+}
