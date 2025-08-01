@@ -49,7 +49,16 @@ def check_query_templates(data, sqlite_keywords, sqlite_functions):
     }
 
 def check_if_query_is_generated(data):
-    return all(data.get(field) for field in ["target_query", "target_question"])
+    if data["target_query"] is None or data["source_query"] is None:
+        return False
+
+    if data["target_query"].lower().strip() == 'select null' or data["target_query"].strip().lower == 'null':
+        return False
+    
+    if "Unable to translate this query" in data.get("target_question", "") or "Unable to translate this query" in data.get("target_query", ""):
+        return False
+
+    return True
 
 def main():
     sqlite_keywords = [
