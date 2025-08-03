@@ -548,6 +548,6 @@ We use training databases as sources and development databases as targets, gener
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 📢 Notice
+<!-- ## 📢 Notice
 
-**Code and data will be made publicly available upon acceptance.**
+**Code and data will be made publicly available upon acceptance.** -->
