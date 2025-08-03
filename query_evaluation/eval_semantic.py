@@ -22,6 +22,13 @@ MODEL_CONFIG = SETTINGS['model']
 DATABASE_NAME = EVAL_CONFIG['dataset_name']
 MODEL_NAME = EVAL_CONFIG['model_dir']
 
+METHOD = EVAL_CONFIG["method"]
+
+if METHOD == "zeroshot":
+    EVAL_CONFIG['result_directory'] = EVAL_CONFIG['result_directory_zeroshot']
+    EVAL_CONFIG['summary_directory'] = EVAL_CONFIG['summary_directory_zeroshot']
+    
+
 INPUT_DIR = f"{EVAL_CONFIG['result_directory']}/{DATABASE_NAME}/{MODEL_NAME}/"
 SCHEMA_FILE = join('data', f'{DATABASE_NAME}/schemas.json')
 PROMPT_DIR = join(EVAL_CONFIG["prompt_directory"], '')

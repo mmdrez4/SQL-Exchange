@@ -14,6 +14,11 @@ EVAL_CONFIG = SETTINGS['evaluation']
 DATASET_NAME = EVAL_CONFIG['dataset_name']
 MODEL_NAME = EVAL_CONFIG['model_dir']
 
+if EVAL_CONFIG["method"] == "zeroshot":
+    EVAL_CONFIG['generated_queries_directory'] = EVAL_CONFIG['generated_queries_directory_zeroshot']
+    EVAL_CONFIG['result_directory'] = EVAL_CONFIG['result_directory_zeroshot']
+    EVAL_CONFIG['summary_directory'] = EVAL_CONFIG['summary_directory_zeroshot']
+
 BASE_DIR = dirname(abspath(__file__)) + '/'
 GENERATED_QUERIES_DIRECTORY = f"{EVAL_CONFIG['generated_queries_directory']}/{DATASET_NAME}/{MODEL_NAME}/"
 RESULT_DIRECTORY = f"{EVAL_CONFIG['result_directory']}/{DATASET_NAME}/{MODEL_NAME}/"

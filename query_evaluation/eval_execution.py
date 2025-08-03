@@ -5,6 +5,8 @@ from copy import deepcopy
 from os import listdir, makedirs
 from os.path import join, isdir, isfile, dirname, abspath
 from tqdm import tqdm
+from func_timeout import func_timeout, FunctionTimedOut
+
 
 
 settings_path = 'evaluation_settings.json'
@@ -14,6 +16,11 @@ with open(settings_path, 'r') as f:
 EVAL_CONFIG = SETTINGS['evaluation']
 DATASET_NAME = EVAL_CONFIG['dataset_name']
 MODEL_NAME = EVAL_CONFIG['model_dir']
+
+if EVAL_CONFIG["method"] == "zeroshot":
+    EVAL_CONFIG['generated_queries_directory'] = EVAL_CONFIG['generated_queries_directory_zeroshot']
+    EVAL_CONFIG['result_directory'] = EVAL_CONFIG['result_directory_zeroshot']
+    EVAL_CONFIG['summary_directory'] = EVAL_CONFIG['summary_directory_zeroshot']
 
 DATABASES_DIR = f"{EVAL_CONFIG['raw_datasets_directory']}/{DATASET_NAME}/dev_databases/"
 print(f"Databases Directory: {DATABASES_DIR}")
@@ -29,6 +36,27 @@ SOURCE_DATABASES = DATA_CONFIG['source_databases']
 
 makedirs(OUTPUT_DIR, exist_ok=True)
 makedirs(SUMMARY_DIR, exist_ok=True)
+
+def safe_execute_sql(sql, db_path):
+    conn = sqlite3.connect(db_path, timeout=180)
+    cur = conn.cursor()
+    cur.execute(sql)
+    result = cur.fetchmany(51)
+    conn.close()
+    return result
+
+def check_execution_validity_with_result(sql, db_path, db_id, query_file, timeout=30):
+    try:
+        result = func_timeout(timeout, safe_execute_sql, args=(sql, db_path))
+        return ("Success", result)
+    except FunctionTimedOut as e:
+        return ("Timeout", f"Timeout in {db_id}/{query_file}: {e}")
+    except Exception as e:
+        return ("Error", f"Error in {db_id}/{query_file}: {e}")
+
+def get_target_db_path(db_id):
+    return join(DATABASES_DIR, f'{db_id}/{db_id}.sqlite')
+
 
 def get_target_db(db_id):
     return sqlite3.connect(join(DATABASES_DIR, f'{db_id}/{db_id}.sqlite'), timeout=180)
@@ -74,29 +102,36 @@ def main():
 
                     if sql:
                         try:
-                            conn = get_target_db(db_id)
+                            # conn = get_target_db(db_id)
+                            db_path = get_target_db_path(db_id)
+                            status, result = check_execution_validity_with_result(sql, db_path, db_id, query_file, timeout=30)
                         except Exception as e:
                             print(isdir(DATABASES_DIR))
                             print(isdir(join(DATABASES_DIR, f'{db_id}/{db_id}.sqlite')))
                             tqdm.write(f"Error connecting to database {db_id}: {e}")
                             exit(1)
                         try:
-                            cur = conn.cursor()
-                            cur.execute(sql)
-                            current_data['execution_result'] = cur.fetchmany(51)
-                            row_count = len(current_data['execution_result'])
-                            conn.close()
 
-                            if row_count == 0:
-                                current_data['result_status'] = 'Empty'
-                                summary_1['empty'] += 1
-                            elif row_count > 50:
-                                current_data['execution_result'] = current_data['execution_result'][:50]
-                                current_data['result_status'] = 'Success (more than 50 rows)'
-                                summary_1['success'] += 1
+                            if status == "Timeout":
+                                current_data['execution_result'] = result
+                                current_data['result_status'] = 'Error (Timeout)'
+                                summary_1['error'] += 1
+                            elif status == "Error":
+                                current_data['execution_result'] = result
+                                current_data['result_status'] = 'Error'
+                                summary_1['error'] += 1
                             else:
-                                current_data['result_status'] = 'Success'
-                                summary_1['success'] += 1
+                                row_count = len(result)
+                                current_data['execution_result'] = result[:50] if row_count > 50 else result
+                                if row_count == 0:
+                                    current_data['result_status'] = 'Empty'
+                                    summary_1['empty'] += 1
+                                elif row_count > 50:
+                                    current_data['result_status'] = 'Success (more than 50 rows)'
+                                    summary_1['success'] += 1
+                                else:
+                                    current_data['result_status'] = 'Success'
+                                    summary_1['success'] += 1
 
                         except Exception as e:
                             current_data['execution_result'] = f"Error in {db_id}/{query_file}: {e}"
