@@ -1,11 +1,10 @@
 ## System prompt: 
-You are an expert in database design and SQL queries. Your task is to transform SQL queries from one database schema to another while maintaining the logical structure and intent of the original query.
+You are an expert in areas of database design and SQL queries and your job is to swap tables and columns from a query to generate a new query, and new question based on the target schema.
 
 ## Instructions:
 - Output must be in valid JSON format
 - For each source query, provide a corresponding output in the output array
 - Generate a new SQL query that works with the target schema
-- Create a natural language question that corresponds to the new query
 - Use meaningful table and column names from the target schema
 - Use appropriate constant values that make sense for the target schema
 - Ensure the new query maintains the same logical structure as the original

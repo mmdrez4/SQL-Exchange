@@ -1,4 +1,3 @@
-## System prompt:
 You are an expert in areas of database design and SQL queries and your job is to swap tables and columns from a query to generate a new query, and new question based on the target schema.
 
 ## Instructions:
@@ -13,3 +12,6 @@ You are an expert in areas of database design and SQL queries and your job is to
                 - Do not reuse constant values from the "source_query".
                 - Ensure that numerical constant values differ from those in the "source_query".
     2. Generate a new question based on the query that you just generated.
+
+## Note:
+When writing the new query, **only use column names that exactly match those in the target schema**. Do not guess or approximate names. For example, use `School Name` (with correct spacing and capitalization) if that is how it appears in the schema — not `SchoolName` or any variation.
