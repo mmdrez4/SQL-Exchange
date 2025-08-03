@@ -59,28 +59,38 @@ def load_prompts(generation_settings: json) -> tuple:
         "base": "",
         "system": "",
     }
+    method_type = generation_settings["method"]
     prompts_dir = abspath(f'{BASE_DIRECTORY}../{generation_settings["prompt_directory"]}')
-    base_prompt_dir = join(prompts_dir, generation_settings["base_prompt_file"])
-    system_prompt_dir = join(prompts_dir, generation_settings["system_instruction_file"])
+    if method_type == "sql-exchange":
+        base_prompt_dir = join(prompts_dir, generation_settings["base_prompt_file"])
+        system_prompt_dir = join(prompts_dir, generation_settings["system_instruction_file"])
+    elif method_type == "zeroshot":
+        base_prompt_dir = ""
+        system_prompt_dir = join(prompts_dir, generation_settings["system_instruction_file_zeroshot"])
+    else:
+        return None, f"Unknown method type: {method_type}. Please set it to 'sql-exchange' or 'zeroshot'."
 
     # Validate if file exists
-    if not exists(prompts_dir) or not exists(base_prompt_dir):
-        return None, f"{prompts_dir} or {base_prompt_dir} not found"
-    if generation_settings["system_instruction_file"] != "" and not exists(system_prompt_dir):
+    if not exists(prompts_dir):
+        return None, f"{prompts_dir} not found"
+    elif method_type != "zeroshot" and not exists(system_prompt_dir):
+        return None, f"{base_prompt_dir} not found"
+
+    if not exists(system_prompt_dir):
         return None, f"{system_prompt_dir} not found but 'system instruction file' is set in mapping_settings.json. Please set it to empty string if not used."
     
     # Read the base prompt and validate if it is empty
-    with open(base_prompt_dir, 'r', encoding='utf-8') as f:
-        prompts["base"] = f.read()
-    if prompts["base"] == "":
-        return None, "base prompt file is empty. Please add a space in the file if intended to be empty."
+    if method_type != "zeroshot" and base_prompt_dir != "":
+        with open(base_prompt_dir, 'r', encoding='utf-8') as f:
+            prompts["base"] = f.read()
+        if prompts["base"] == "":
+            return None, "base prompt file is empty. Please add a space in the file if intended to be empty."
     
     # Read the system prompt and validate if it is empty
-    if generation_settings["system_instruction_file"] != "":
-        with open(system_prompt_dir, 'r', encoding='utf-8') as f:
-            prompts["system"] = f.read()
-        if prompts["system"] == "":
-            return None, "system instruction file is empty. Please add a space in the file if intended to be empty."
+    with open(system_prompt_dir, 'r', encoding='utf-8') as f:
+        prompts["system"] = f.read()
+    if prompts["system"] == "":
+        return None, "system instruction file is empty. Please add a space in the file if intended to be empty."
     
     return prompts, None
 
@@ -187,7 +197,6 @@ def prepare_questions(directory: str, questions_settings: dict) -> list:
     Returns:
         questions (list): The list of questions
     """
-    # Check if the directory exists
     if not exists(directory):
         return None
     
@@ -198,7 +207,6 @@ def prepare_questions(directory: str, questions_settings: dict) -> list:
     except json.JSONDecodeError:
         return None
     
-    # Check if the file is empty
     if not isinstance(question_data, list) or len(question_data) == 0:
         return None
 
@@ -215,7 +223,6 @@ def prepare_questions(directory: str, questions_settings: dict) -> list:
     match questions_settings["source_questions_limit"]:
         case -1:
             pass
-        # If the limit is 0, return None
         case 0:
             return None
         case _:
@@ -353,8 +360,14 @@ def run():
     )
     if not exists(OUTPUT_DIRECTORY):
         makedirs(OUTPUT_DIRECTORY)
-    if GENERATION_SETTINGS["json_only_output_directory"]:
-        OUTPUT_DIRECTORY_JSON_ONLY = abspath(f'{BASE_DIRECTORY}../{GENERATION_SETTINGS["json_only_output_directory"]}')
+    
+    if GENERATION_SETTINGS["method"] == "zeroshot":
+        json_only_output = GENERATION_SETTINGS["json_only_output_directory_zeroshot"]
+    else:
+        json_only_output = GENERATION_SETTINGS["json_only_output_directory"]
+
+    if json_only_output:
+        OUTPUT_DIRECTORY_JSON_ONLY = abspath(f'{BASE_DIRECTORY}../{json_only_output}')
         if not exists(OUTPUT_DIRECTORY_JSON_ONLY):
             makedirs(OUTPUT_DIRECTORY_JSON_ONLY)
     else:
@@ -473,7 +486,6 @@ def run():
                     current_stats.add_stats({"request": 1})
                     try:
                         response_dict = model.generate(base_questions_prompt, prompts['system'])
-                        # {"response": str, "prompt_token_count": int, "response_token_count": int, "time_taken": float, "finish_reason"}
                     except Exception as e:
                         unexpected_error = str(e)
                         tqdm.write(current_time_text(unexpected_error, title=f"Source DB: {current_db}", color="fail"))
@@ -523,10 +535,16 @@ def run():
                     # Validate and make the response into json if there's no special errors
                     if not errors['unexpected'] and check_special_errors(errors, response_dict['response'], response_dict['finish_reason']):
                         json_bracket = response_dict['response'][response_dict['response'].find("["):response_dict['response'].rfind("]") + 1]
+
+                        if GENERATION_SETTINGS['method'] == "zeroshot":
+                            fields_to_check = GENERATION_SETTINGS['fields_to_check_zeroshot']
+                        else:
+                            fields_to_check = GENERATION_SETTINGS['fields_to_check']
+                            
                         response_dict['json'], fixed = validate_json_response(errors, json_bracket)
                         if response_dict['json'] != None:
                             # Check if the response has all the fields required if set
-                            if GENERATION_SETTINGS['validation']["fields_checking"] and (check_fields(response_dict['json'], GENERATION_SETTINGS['fields_to_check']) == False):
+                            if GENERATION_SETTINGS['validation']["fields_checking"] and (check_fields(response_dict['json'], fields_to_check) == False):
                                 errors['fields_mismatch'] = True
                             # Check if the response has the desired source and target db id
                             if (not errors['fields_mismatch'] == True) and GENERATION_SETTINGS['validation']["db_id_matching"] and (check_db_id(current_db, response_dict['json'], current_data_setting['target_db_id']) > 0):
