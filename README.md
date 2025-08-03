@@ -237,7 +237,7 @@ schemas.json
 
 #### 1. Run LLM-Based Query Mapping
 
-* Edit the configuration file: [`mapping_settings.json`](#)
+* Edit the configuration file: [`mapping_settings.json`](./mapping_settings.json)
 * Run the mapping process:
 
   ```bash
@@ -254,7 +254,7 @@ mappings/{dataset_name}/{model_name}/target_db/response_{source_db}.json
 
 #### 2. Evaluate Structural Alignment
 
-* Edit evaluation configuration: [`evaluation_settings.json`](#)
+* Edit evaluation configuration: [`evaluation_settings.json`](./evaluation_settings.json)
 * Run structural (template-based) evaluation:
 
   ```bash
