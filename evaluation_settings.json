@@ -18,11 +18,15 @@
 
 
     "evaluation": {
+        "method": "sql-exchange",
         "dataset_name": "bird_dev",
         "model_dir": "gemini-1.5-flash",
-        "generated_queries_directory": "mappings",               
+        "generated_queries_directory": "mappings",
+        "generated_queries_directory_zeroshot": "mappings_zeroshot",
         "result_directory": "evaluated_mappings",          
         "summary_directory": "evaluated_mappings_summary",
+        "result_directory_zeroshot": "evaluated_mappings_zeroshot",
+        "summary_directory_zeroshot": "evaluated_mappings_summary_zeroshot",
         "llm_response_directory": "llm_responses",
         "response_directory": "responses",
         "max_retry_per_prompt": 5,

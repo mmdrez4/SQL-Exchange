@@ -20,11 +20,15 @@
             "fields_checking": true,
             "db_id_matching": true
         },
+        "method": "sql-exchange", 
         "prompt_directory": "prompts",
         "base_prompt_file": "mapping_base.txt",
         "system_instruction_file": "mapping_system.txt",
+        "system_instruction_file_zeroshot": "zeroshot_system.txt",
+        "prompt_file": "mapping_prompt.txt",
         "output_directory": "mappings_full_analysis",
         "json_only_output_directory": "mappings",
+        "json_only_output_directory_zeroshot": "mappings_zeroshot",
         "fields_to_check": [
             "source_dataset",
             "source_db_id",
@@ -35,15 +39,25 @@
             "target_db_id",
             "target_query",
             "target_question"
+        ],
+        "fields_to_check_zeroshot": [
+            "source_dataset",
+            "source_db_id",
+            "source_query",
+            "source_question",
+            "target_db_id",
+            "target_query",
+            "target_question"
         ]
     },
+
 
     "data": [
         {
             "source_dataset": "data/bird_training",
             "source_db_ids": [
                 "address",
-                "app_store"
+                "books"
             ],
             "source_questions_shuffle_seed": 12,
             "source_questions_limit": 20,
