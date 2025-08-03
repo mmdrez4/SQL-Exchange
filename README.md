@@ -88,12 +88,17 @@ Each dataset (`bird_dev`, `bird_training`, `spider_training`, `spider_dev`) incl
 Outputs from SQL-Exchange are organized into the following main directories:
 
 ```
-├── mappings/                                      # Generated mappings before evaluation  
+├── mappings/                                      # Generated mappings before evaluation for sql-exchange method
 │   ├── bird_dev/                 # development set used as target databases for mapping queries
 │   │   ├── gemini-1.5-flash/         # model used to generate the mappings
 │   │   └── gpt-4o-mini/              # model used to generate the mappings
 │   └── spider_dev/  
 │       └── gemini-1.5-flash/  
+
+```
+
+```
+├── mappings_zeroshot/                             # Generated mappings before evaluation for zeroshot method
 ```
 
 ```
@@ -109,7 +114,7 @@ Outputs from SQL-Exchange are organized into the following main directories:
 ```
 
 ```
-├── evaluated_mappings/                            # Stores detailed mapping outputs with model responses  
+├── evaluated_mappings/                            # Stores detailed mapping outputs with model responses for sql-exchange
 │   ├── bird_dev/  
 │   └── spider_dev/  
 │       └── gemini-1.5-flash/                 # Model used to generate the mappings
@@ -120,6 +125,10 @@ Outputs from SQL-Exchange are organized into the following main directories:
 │           │    ├── response_academic.json       # Evaluated json file for mapping between academic and car_1
 │           │    └── response_device.json         # Evaluated json file for mapping between device and car_1
 │           └── orchestra/
+```
+
+```
+├── evaluated_mappings_zeroshot/                             # Stores detailed mapping outputs with model responses for zeroshot method
 ```
 
 ```
@@ -134,6 +143,10 @@ Outputs from SQL-Exchange are organized into the following main directories:
 │           │     └── orchestra.json                  # Summary for orchestra queries  
 │           ├── semantic_summary/                   # Semantic quality evaluations  
 │           └── template_summary/                   # Structural similarity evaluations  
+```
+
+```
+├── evaluated_mappings_summary_zeroshot/                             # Stores detailed mapping outputs with model responses for zeroshot method
 ```
 
 > 💡 **Note:**
