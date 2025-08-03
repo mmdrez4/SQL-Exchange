@@ -2,7 +2,7 @@
 
 # SQL-Exchange: Transforming SQL Queries Across Domains
 
-This repository contains the code and data for our paper: 
+This repository contains the artifacts for our paper: 
 
 **SQL-Exchange: Transforming SQL Queries Across Domains**
 
@@ -258,7 +258,7 @@ mappings/{dataset_name}/{model_name}/{source_db}_to_{target_db}/
 * Run structural (template-based) evaluation:
 
   ```bash
-  python evaluation/eval_template.py
+  python query_evaluation/eval_template.py
   ```
 
 Results are saved in the `evaluated_mappings/` directory under the respective dataset and model folders. Each subfolder corresponds to a target database, containing evaluated mappings with structural labels.
@@ -290,7 +290,7 @@ raw_datasets/
 2. Run execution evaluation:
 
    ```bash
-   python evaluation/eval_execution.py
+   python query_evaluation/eval_execution.py
    ```
 
 This adds execution correctness labels to previously evaluated files in `evaluated_mappings/`.
@@ -304,7 +304,7 @@ To assess the quality of the natural language (NL) and SQL alignment:
 * Run the semantic evaluator (uses `gemini-1.5-flash` or `gemini-2.0-flash`):
 
   ```bash
-  python evaluation/eval_semantic.py
+  python query_evaluation/eval_semantic.py
   ```
 
 This step evaluates:
@@ -416,7 +416,7 @@ Results are added to `evaluated_mappings/`, along with LLM-generated reasoning p
       "source_questions_limit": 20,
 
       // Dataset that contains the target schema
-      "target_dataset": "data/bird_dev",
+      "target_dataset": "data/BIRD",
 
       // Target database ID for mapping
       "target_db_id": "california_schools"
@@ -428,7 +428,7 @@ Results are added to `evaluated_mappings/`, along with LLM-generated reasoning p
       ],
       "source_questions_shuffle_seed": 12,
       "source_questions_limit": 20,
-      "target_dataset": "data/bird_dev",
+      "target_dataset": "data/BIRD",
       "target_db_id": "student_club"
     }
   ]
