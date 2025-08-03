@@ -247,7 +247,7 @@ schemas.json
 This generates mapped SQL queries for each target database, stored under:
 
 ```
-mappings/{dataset_name}/{model_name}/{source_db}_to_{target_db}/
+mappings/{dataset_name}/{model_name}/target_db/response_{source_db}.json
 ```
 
 ---
@@ -369,20 +369,29 @@ Results are added to `evaluated_mappings/`, along with LLM-generated reasoning p
       "db_id_matching": true
     },
 
+    // Method use to map queries: sql-exchange or zeroshot
+    "method": "sql-exchange",
+
     // Directory where prompt templates are stored
     "prompt_directory": "prompts",
 
     // Base prompt template file for few-shot prompting
     "base_prompt_file": "mapping_base.txt",
 
-    // System message file to be prepended to prompts (if enabled)
+    // System message file to be prepended to prompts for SQL-Exchange method (if enabled)
     "system_instruction_file": "mapping_system.txt",
+
+    // System message file to be prepended to prompts for zeroshot method (if enabled)
+    "system_instruction_file_zeroshot": "zeroshot_system.txt",
 
     // Output folder for full mapping logs (includes intermediate metadata and errors)
     "output_directory": "mappings_full_analysis",
 
-    // Output folder storing only the final JSON results
+    // Output folder storing only the final JSON results for SQL-Exchange
     "json_only_output_directory": "mappings",
+
+    // Output folder storing only the final JSON results for zeroshot method
+    "json_only_output_directory_zeroshot": "mappings_zeroshot",
 
     // Fields required to be present in the LLM's structured output
     "fields_to_check": [
@@ -395,7 +404,16 @@ Results are added to `evaluated_mappings/`, along with LLM-generated reasoning p
       "target_db_id",
       "target_query",
       "target_question"
-    ]
+    ],
+    "fields_to_check_zeroshot": [
+            "source_dataset",
+            "source_db_id",
+            "source_query",
+            "source_question",
+            "target_db_id",
+            "target_query",
+            "target_question"
+        ]
   },
 
   "data": [
@@ -406,7 +424,7 @@ Results are added to `evaluated_mappings/`, along with LLM-generated reasoning p
       // Subset of source database IDs to sample from
       "source_db_ids": [
         "address",
-        "app_store"
+        "books"
       ],
 
       // Seed for shuffling questions inside each source database
@@ -416,7 +434,7 @@ Results are added to `evaluated_mappings/`, along with LLM-generated reasoning p
       "source_questions_limit": 20,
 
       // Dataset that contains the target schema
-      "target_dataset": "data/BIRD",
+      "target_dataset": "data/bird_dev",
 
       // Target database ID for mapping
       "target_db_id": "california_schools"
@@ -428,7 +446,7 @@ Results are added to `evaluated_mappings/`, along with LLM-generated reasoning p
       ],
       "source_questions_shuffle_seed": 12,
       "source_questions_limit": 20,
-      "target_dataset": "data/BIRD",
+      "target_dataset": "data/bird_dev",
       "target_db_id": "student_club"
     }
   ]
@@ -467,6 +485,10 @@ Results are added to `evaluated_mappings/`, along with LLM-generated reasoning p
   },
 
   "evaluation": {
+
+    // The method which you want to evaluate
+    "method": "sql-exchange",
+
     // Dataset where target databases are taken from (e.g., bird_dev, spider_dev)
     "dataset_name": "bird_dev",
 
@@ -476,11 +498,17 @@ Results are added to `evaluated_mappings/`, along with LLM-generated reasoning p
     // Input folder for mapped SQLs
     "generated_queries_directory": "mappings",
 
-    // Output folder for storing evaluated results
+    // Output folder for storing evaluated results for SQL-Exchange method
     "result_directory": "evaluated_mappings",
 
-    // Output folder for aggregated summary metrics
+    // Output folder for aggregated summary metrics for SQL-Exchange method
     "summary_directory": "evaluated_mappings_summary",
+
+    // Output folder for storing evaluated results for zeroshot method
+    "result_directory_zeroshot": "evaluated_mappings_zeroshot",
+
+    // Output folder for aggregated summary metrics for zeroshot method
+    "summary_directory_zeroshot": "evaluated_mappings_summary_zeroshot",
 
     // Folder name where LLM semantic evaluation responses are saved (subfolder of each db_id)
     "llm_response_directory": "llm_responses",
