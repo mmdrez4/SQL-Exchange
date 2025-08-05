@@ -6,7 +6,6 @@
 - For each input pair (NL question and SQL query):
 	- Evaluate if the NL question is clear and meaningful based on the schema and explain your thought process in 5 sentences or fewer.
 	- Evaluate if the SQL query is a correct mapping of NL question and explain your thought process in 5 sentences or fewer.
-	- If the SQL query contains redundant or unnecessary elements that do not affect the final result, ignore them and consider the query correct.
 
 ## Expected JSON Output Template:
 [
