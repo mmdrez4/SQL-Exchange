@@ -14,4 +14,4 @@ You are an expert in areas of database design and SQL queries and your job is to
     2. Generate a new question based on the query that you just generated.
 
 ## Note:
-When writing the new query, **only use column names that exactly match those in the target schema**. Do not guess or approximate names. For example, use `School Name` (with correct spacing and capitalization) if that is how it appears in the schema — not `SchoolName` or any variation.
+When writing the new query, only use column names that exactly match those in the target schema. Do not guess or approximate names. For example, use `First Name` (with correct spacing and capitalization) if that is how it appears in the schema, not `FirstName` or any variation.
