@@ -559,7 +559,21 @@ Results are added to `evaluated_mappings/`, along with LLM-generated reasoning p
 
 We use training databases as sources and development databases as targets, generating over 100K SQL-NL pairs.
 
+---
+
+## 📖 Citation
+
+If you use this repository or the SQL-Exchange framework in your research, please cite:
+
+@article{daviran2025sql,
+  title={SQL-Exchange: Transforming SQL Queries Across Domains},
+  author={Daviran, Mohammadreza and Lin, Brian and Rafiei, Davood},
+  journal={arXiv preprint arXiv:2508.07087},
+  year={2025}
+}
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 <!-- ## 📢 Notice
 
