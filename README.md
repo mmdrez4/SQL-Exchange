@@ -8,36 +8,28 @@ This repository contains the artifacts for our paper:
 
 ---
 
-<!-- TABLE OF CONTENTS -->
-<!-- <details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li><a href="#🔍-overview">Overview</a></li>
-    <li>
-      <a href="#📁-repository-structure">Repository Structure</a>
-      <ul>
-        <li><a href="#top-level-structure">Top Level Structure</a></li>
-        <li><a href="#dataset-structure">Dataset Structure</a></li>
-        <li><a href="#output-structure">Output Structure</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#📋-data-structure">Data Structure</a>
-      <ul>
-        <li><a href="#questions-json">Questions Json</a></li>
-        <li><a href="#samples-json">Samples Json</a></li>
-        <li><a href="#schemas-json">Schemas Json</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#🧪-reproducing-results">Reproducing Results</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-  </ol>
-</details> -->
+## 📑 Table of Contents
+- [🔍 Overview](#-overview)
+- [📁 Repository Structure](#-repository-structure)
+  - [Top Level Structure](#top-level-structure)
+  - [Dataset Structure](#dataset-structure)
+  - [📤 Output Structure](#-output-structure)
+- [📋 Data Structure](#-data-structure)
+  - [Questions Json](#questions-json)
+  - [Samples Json](#samples-json)
+  - [Schemas Json](#schemas-json)
+- [🧪 Reproducing Results](#-reproducing-results)
+  - [✅ Prerequisites](#-prerequisites)
+  - [⚙️ Installation](#️-installation)
+  - [🚀 Running the Mapping and Evaluation Pipeline](#-running-the-mapping-and-evaluation-pipeline)
+  - [⚙️ Mapping Settings](#️-mapping-settings)
+  - [⚙️ Evaluation Settings](#️-evaluation-settings)
+- [📊 Dataset](#-dataset)
+- [📖 Citation](#-citation)
+
+---
+
+
 
 ## 🔍 Overview
 
