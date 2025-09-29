@@ -565,12 +565,14 @@ We use training databases as sources and development databases as targets, gener
 
 If you use this repository or the SQL-Exchange framework in your research, please cite:
 
+```bash
 @article{daviran2025sql,
   title={SQL-Exchange: Transforming SQL Queries Across Domains},
   author={Daviran, Mohammadreza and Lin, Brian and Rafiei, Davood},
   journal={arXiv preprint arXiv:2508.07087},
   year={2025}
 }
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
